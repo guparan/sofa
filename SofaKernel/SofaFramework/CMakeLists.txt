@@ -92,7 +92,10 @@ if(NOT SOFA_NO_OPENGL)
         list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${GLEW_Target})
         list(APPEND SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES ${GLEW_INCLUDE_DIRS})
 
-        sofa_install_get_libraries(${GLEW_LIBRARIES})
+        if(WIN32)
+            sofa_copy_extlib(GLEW::GLEW) # Windows dependency pack
+        endif()
+        sofa_install_extlib(GLEW::GLEW)
     else()
         message("OpenGL advanced functions (e.g shaders, FBO) are disabled.")
     endif()
@@ -130,7 +133,10 @@ if(ZLIB_FOUND)
     sofa_create_target(ZLIB SofaFramework "${ZLIB_LIBRARIES}" "${ZLIB_INCLUDE_DIRS}")
     list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${ZLIB_Target})
 
-    sofa_install_get_libraries(${ZLIB_LIBRARIES})
+    if(WIN32)
+        sofa_copy_extlib(ZLIB::ZLIB) # Windows dependency pack
+    endif()
+    sofa_install_extlib(ZLIB::ZLIB)
 endif()
 set(SOFA_HAVE_ZLIB ${ZLIB_FOUND})
 
@@ -140,8 +146,10 @@ if(PNG_FOUND)
     sofa_create_target(PNG SofaFramework "${PNG_LIBRARY}" "${PNG_INCLUDE_DIRS}")
         list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${PNG_Target})
 
-
-    sofa_install_get_libraries("${PNG_LIBRARY}")
+    if(WIN32)
+        sofa_copy_extlib(PNG::PNG) # Windows dependency pack
+    endif()
+    sofa_install_extlib(PNG::PNG)
 endif()
 set(SOFA_HAVE_PNG ${PNG_FOUND})
 
@@ -155,7 +163,11 @@ set(SOFA_HAVE_BOOST_FILESYSTEM ${Boost_FILESYSTEM_FOUND})
 set(SOFA_HAVE_BOOST_LOCALE ${Boost_LOCALE_FOUND})
 
 list(APPEND Boost_INCLUDE_DIRS ${Boost_INCLUDE_DIR})
+list(APPEND SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIRS})
 
+foreach(target Boost::system Boost::thread Boost::date_time Boost::filesystem Boost::locale)
+    sofa_install_extlib(${target})
+endforeach()
 
 
 # if(SOFA_HAVE_BOOST_SYSTEM
@@ -178,7 +190,7 @@ list(APPEND Boost_INCLUDE_DIRS ${Boost_INCLUDE_DIR})
 #     list(APPEND SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIRS})
 # endif()
 
-list(APPEND SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIRS})
+
 
 ## Eigen
 find_package(Eigen3 REQUIRED)
