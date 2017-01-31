@@ -170,7 +170,7 @@ AspectBuffer::~AspectBuffer()
     // we rely on the code using this buffer to call clear at the right place.
     //clear();
 }
-
+/*
 void AspectBuffer::clear()
 {
     int id = latestID.exchange(-1);
@@ -237,7 +237,7 @@ bool AspectBuffer::pop(AspectRef& id)
     id->release(); // remove the ref token that was implicitly held by latestID
     return true;
 }
-
+*/
 } // namespace objectmodel
 
 } // namespace core

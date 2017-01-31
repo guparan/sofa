@@ -142,7 +142,7 @@ class SOFA_CORE_API AspectBuffer
 public:
     AspectBuffer(AspectPool& pool);
     ~AspectBuffer();
-
+/*
     /// Allocate an aspect ID to prepare the next version, reusing a recent one if possible
     AspectRef allocate();
     /// Send a new version, overriding the latest if it was not already received (in which case it can be "recycled" using allocate)
@@ -153,7 +153,7 @@ public:
     /// Clear the buffers
     /// This must be called before either the AspectPool or this buffer is deleted
     void clear();
-
+*/
 protected:
     typedef helper::system::atomic<int> AtomicInt;
 

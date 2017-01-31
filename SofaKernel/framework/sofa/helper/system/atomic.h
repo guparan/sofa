@@ -31,7 +31,7 @@
 // custom ASM code, no include
 #elif defined(__GNUC__) && !(defined(PS3))
 // Fall-back mode: stdc++ atomic operations (should be available on all gcc-supported platforms)
-#include <bits/atomicity.h>
+#include <ext/atomicity.h>
 #elif defined(WIN32)
 #include <windows.h>
 #elif defined(_XBOX)
