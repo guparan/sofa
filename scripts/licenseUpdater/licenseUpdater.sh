@@ -1,21 +1,27 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: licenseUpdater.sh <src-dir> <license> <year> <version>"
+    echo "Usage: licenseUpdater.sh <src-dir> <license> <year> <version> <application> <copyright>"
     echo "  src-dir: all files in this folder will be affected"
-    echo "  license: choose in ['auto', 'LGPL', 'GPL']"
+    echo "  license: choose in ['auto', 'LGPL', 'GPL', 'LGPL-app', 'GPL-app', 'ZLIB-app']"
     echo "  year: YYYY formatted year for the copyright"
-    echo "  version: SOFA version"
+    echo "  version (ignored in applications): SOFA version"
+    echo "  application (applications only): name of your application"
+    echo "  copyright (applications only): copyright including year ; e.g. '2017 John Smith, Martin Dupond'"
 }
 
-if [[ "$#" = 4 ]]; then
+if [[ "$#" -ge 4 ]]; then
     SRC_DIR="$1"
     LICENSE="$2"
     YEAR="$3"
     VERSION="$4"
+    APPLICATION="$5"
+    COPYRIGHT="$6"
 
     VERSION_TAG="____VERSION_NUMBER____"
     YEAR_TAG="YYYY"
+    APPLICATION_TAG="______________________APPLICATION______________________"
+    COPYRIGHT_TAG="______________________COPYRIGHT______________________"
 else
     usage; exit 1
 fi
@@ -24,6 +30,10 @@ if [ ${#VERSION} -gt ${#VERSION_TAG} ]; then
     echo "ERROR: <version> length can be ${#VERSION_TAG} chars max."; exit 1
 elif [ ${#YEAR} -gt ${#YEAR_TAG} ]; then
     echo "ERROR: <year> length can be ${#YEAR_TAG} chars max."; exit 1
+elif [ ${#APPLICATION} -gt ${#APPLICATION_TAG} ]; then
+    echo "ERROR: <application> length can be ${#APPLICATION_TAG} chars max."; exit 1
+elif [ ${#COPYRIGHT} -gt ${#COPYRIGHT_TAG} ]; then
+    echo "ERROR: <copyright> length can be ${#COPYRIGHT_TAG} chars max."; exit 1
 fi
 
 if [ ! -d "$SRC_DIR" ]; then
@@ -36,7 +46,7 @@ files-to-update() {
 
 get-license() {
     file="$1"
-    if grep -q "*       SOFA, Simulation Open-Framework Architecture," "$file"; then
+    if grep -q "^\*[ ]*SOFA, Simulation Open-Framework Architecture" "$file"; then
         if grep -q "GNU Lesser General Public License" "$file" && grep -q "GNU General Public License" "$file"; then
             echo "multiple";
         elif grep -q "GNU Lesser General Public License" "$file"; then
@@ -68,12 +78,54 @@ set-version() {
     echo "$(perl -p -e "s/$VERSION_TAG/$version/g" $1)"
 }
 
+set-application() {
+    local tag_size=${#APPLICATION_TAG}
+    local application="$APPLICATION"
+    local application_size=${#application}
+
+    if [ -z "$application" ]; then
+        echo "WARNING: no application given." >&2
+    fi
+
+    while [ $application_size -lt $tag_size ]; do
+        if [ $(($application_size % 2)) = 0 ]; then
+            application="$application "
+        else
+            application=" $application"
+        fi
+        application_size=${#application}
+    done
+    
+    echo "$(perl -p -e "s/$APPLICATION_TAG/$application/g" $1)"
+}
+
+set-copyright() {
+    local tag_size=${#COPYRIGHT_TAG}
+    local copyright="$COPYRIGHT"
+    local copyright_size=${#copyright}
+    
+    if [ -z "$copyright" ]; then
+        echo "WARNING: no copyright given." >&2
+    fi
+
+    while [ $copyright_size -lt $tag_size ]; do
+        if [ $(($copyright_size % 2)) = 0 ]; then
+            copyright="$copyright "
+        else
+            copyright=" $copyright"
+        fi
+        copyright_size=${#copyright}
+    done
+
+    echo "$(perl -p -e "s/$COPYRIGHT_TAG/$copyright/g" $1)"
+}
+
 # prepare-header <file>
 prepare-header() {
     if [ ! -e "$1" ]; then
         echo "$1: file not found."; exit 1
     fi
-    set-year "$1" | set-version
+    set-year "$1" | set-version | set-application | set-copyright
 }
 
 escape-for-perl() {
@@ -85,8 +137,8 @@ update-header() {
     header="$1"
     file="$2"
     escaped_header="$(echo "$header" | escape-for-perl)"
-    # search for /***(78)***...is free software...***(78)***/ and replace with escaped header
-    perl -0777 -i -pe "s/(\/)(\*){78}(.*?)is free software(.*?)(\*){78}(\/)/$escaped_header/s" "$file"
+    # search for /***(78)***...SOFA, Simulation Open-Framework Architecture...***(78)***/ and replace with escaped header
+    perl -0777 -i -pe "s/(\/)(\*){78}(.*?)SOFA, Simulation Open-Framework Architecture(.*?)(\*){78}(\/)/$escaped_header/s" "$file"
     rm "$file.bak" 2> /dev/null # Created by Windows only
 }
 
@@ -127,7 +179,7 @@ main() {
                     echo "$file updated with GPL"
                     ;;
                 *)
-                    echo "WARNING: $file not changed. Licence detected: $current_license"
+                    echo "WARNING: $file not changed. License detected: $current_license"
                     ;;
             esac
         else # [ $LICENSE != "auto" ]
@@ -137,7 +189,7 @@ main() {
                     printf "$LICENSE_HEADER\n$(cat "$file")" > "$file"
                     ;;
                 "multiple")
-                    echo "WARNING: $file not changed. Licence detected: multiple"
+                    echo "WARNING: $file not changed. License detected: multiple"
                     ;;
                 *)
                     update-header "$LICENSE_HEADER" "$file"
