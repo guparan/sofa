@@ -145,19 +145,6 @@ SofaTutorialsManager::SofaTutorialsManager(QWidget* parent, const char* name)
     this->menuBar()->addMenu(settingsMenu);
 }
 
-SofaTutorialsManager::~SofaTutorialsManager()
-{
-    std::cout << "destructor: runSofaProcesses.size() = " << runSofaProcesses.size() << std::endl;
-    for (QProcess* process : runSofaProcesses)
-    {
-        if (process->state() == QProcess::ProcessState::Running)
-        {
-            std::cout << "Problem" << std::endl;
-        }
-    }
-}
-
-
 
 
 void SofaTutorialsManager::openTutorial(const std::string& filename)
@@ -297,10 +284,8 @@ void SofaTutorialsManager::runInSofa(const std::string &sceneFilename, Node* roo
     // Init the scene
     sofa::gui::GUIManager::Init("Modeler");
 
-    QString messageLaunch;
     QStringList argv;
-    //=======================================
-    // Run Sofa
+
     if (sofaBinary.empty()) //If no specific binary is specified, we use runSofa
     {
         std::string binaryName="runSofa";
@@ -322,17 +307,11 @@ void SofaTutorialsManager::runInSofa(const std::string &sceneFilename, Node* roo
     p->setWorkingDirectory(QString(binPath.c_str()) );
     p->setObjectName(QString(sceneFilename.c_str()) );
 
-//    connect(this, SIGNAL(destroyed()), p, SLOT(kill()));
-//    connect(p, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(childProcessExited(int, QProcess::ExitStatus)));
+    connect(p, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(childProcessExited(int, QProcess::ExitStatus)));
     connect(p, SIGNAL(readyReadStandardOutput()), this, SLOT(redirectStdout()) );
     connect(p, SIGNAL(readyReadStandardError()), this, SLOT(redirectStderr()) );
 
     p->start(QString(sofaBinary.c_str()), argv);
-
-    runSofaProcesses.push_back(p);
-    std::cout << "runInModeler: runSofaProcesses.size() = " << runSofaProcesses.size() << std::endl;
-
-//    statusBar()->showMessage(messageLaunch,5000);
 }
 
 void SofaTutorialsManager::runInModeler(const std::string &sceneFilename, Node* root)
@@ -340,9 +319,6 @@ void SofaTutorialsManager::runInModeler(const std::string &sceneFilename, Node* 
     if (!root) return;
     if (sceneFilename.empty()) return;
 
-    QStringList argv;
-    //=======================================
-    // Run Sofa
     if (modelerBinary.empty())
     {
         std::string binaryName="Modeler";
@@ -357,26 +333,16 @@ void SofaTutorialsManager::runInModeler(const std::string &sceneFilename, Node* 
 #endif
     }
 
-    argv << QString::fromStdString(sceneFilename);
-//    argv << "-g" << "default";
-//    argv << "-t";
-
     QProcess *p = new QProcess(this);
 
     p->setWorkingDirectory(QString(binPath.c_str()) );
     p->setObjectName(QString(sceneFilename.c_str()) );
 
-    std::cout << "runInModeler: runSofaProcesses.size() = " << runSofaProcesses.size() << std::endl;
-    connect(this, SIGNAL(destroyed()), p, SLOT(terminate()));
-//    connect(p, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(childProcessExited(int, QProcess::ExitStatus)));
+    connect(p, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(childProcessExited(int, QProcess::ExitStatus)));
     connect(p, SIGNAL(readyReadStandardOutput()), this, SLOT(redirectStdout()) );
     connect(p, SIGNAL(readyReadStandardError()), this, SLOT(redirectStderr()) );
 
-    p->start(QString(modelerBinary.c_str()), argv);
-
-//    runSofaProcesses.push_back(p);
-
-//    statusBar()->showMessage(messageLaunch,5000);
+    p->start(QString(modelerBinary.c_str()));
 }
 
 
@@ -419,16 +385,6 @@ void SofaTutorialsManager::childProcessExited(int exitCode, QProcess::ExitStatus
             std::cout << "Chelou." << std::endl;
         p->kill();
         return;
-    }
-    for (QProcess* process : runSofaProcesses)
-    {
-        if (process == p)
-        {
-            const QString caption("Problem");
-            const QString warning("Error running Sofa, error code ");
-            QMessageBox::critical( this, caption,warning + QString(exitCode), QMessageBox::Ok | QMessageBox::Escape, QMessageBox::NoButton );
-            return;
-        }
     }
 }
 

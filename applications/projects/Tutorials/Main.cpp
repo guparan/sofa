@@ -61,8 +61,8 @@ int main(int argc, char** argv)
 
     // TODO: create additionnal handlers depending on command-line parameters
 
-    QApplication* application = new QApplication(argc, argv);
-    (void)application;
+    QApplication application(argc, argv);
+//    (void)application;
 
     sofa::simulation::setSimulation(new sofa::simulation::tree::TreeSimulation());
 
@@ -98,15 +98,14 @@ int main(int argc, char** argv)
 
 
 
-    sofa::gui::qt::SofaTutorialsManager* tuto = new sofa::gui::qt::SofaTutorialsManager();
+    sofa::gui::qt::SofaTutorialsManager tuto;
 //    connect(tuto, SIGNAL(runInSofa(const std::string&, Node*)), this, SLOT(runInSofa(const std::string&, Node*)));
 //    connect(tuto, SIGNAL(editInModeler(const std::string&)), this, SLOT(editTutorial(const std::string& ) ));
 //    GraphModeler *graphTuto=tuto->getGraph();
 //    graphTuto->setSofaLibrary(library);
 //    graphTuto->setPreset(preset);
 //    connect(graphTuto, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(changeInformation(QTreeWidgetItem *,QTreeWidgetItem*)));
-    tuto->show();
-
+    tuto.show();
 
 
 
@@ -130,7 +129,7 @@ int main(int argc, char** argv)
 //    }
 //    if (argc <= 1 ) sofaModeler->newTab();
 
-    int appReturnCode = application->exec();
+    int appReturnCode = application.exec();
     sofa::simulation::tree::cleanup();
     return appReturnCode;
 }

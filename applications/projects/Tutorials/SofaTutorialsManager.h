@@ -49,7 +49,6 @@ class SofaTutorialsManager : public QMainWindow
     Q_OBJECT
 public:
     SofaTutorialsManager(QWidget* parent = 0, const char *name = "");
-    SofaTutorialsManager::~SofaTutorialsManager();
     GraphModeler *getGraph() {return graph;}
 
     void keyPressEvent ( QKeyEvent * e );
@@ -79,8 +78,6 @@ protected:
     QPushButton* buttonEditInModeler;
     QPushButton *buttonHome;
 
-    std::list<QProcess*> runSofaProcesses;
-
 protected slots:
     void redirectStderr();
     void redirectStdout();
@@ -88,7 +85,6 @@ protected slots:
 signals:
     void undo();
     void redo();
-    void editInModeler(const std::string& sceneFilename);
 
 private:
     std::string sofaBinary;
