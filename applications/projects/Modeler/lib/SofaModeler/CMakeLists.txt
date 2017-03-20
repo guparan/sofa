@@ -6,7 +6,7 @@ set(SOFAMODELER_MINOR_VERSION 1)
 set(SOFAMODELER_VERSION ${SOFAMODELER_MAJOR_VERSION}.${SOFAMODELER_MINOR_VERSION})
 
 set(HEADER_FILES
-    ../../../sofa/gui/qt/SofaPluginManager.h
+    ../../../../sofa/gui/qt/SofaPluginManager.h
     AddPreset.h
     FilterLibrary.h
     GlobalModification.h
@@ -23,7 +23,7 @@ set(HEADER_FILES
 )
 
 set(SOURCE_FILES
-    ../../../sofa/gui/qt/SofaPluginManager.cpp
+    ../../../../sofa/gui/qt/SofaPluginManager.cpp
     AddPreset.cpp
     FilterLibrary.cpp
     GlobalModification.cpp
@@ -39,7 +39,7 @@ set(SOURCE_FILES
     TutorialSelector.cpp
 )
 
-set(UI_FILES ../../../sofa/gui/qt/PluginManager.ui)
+set(UI_FILES ../../../../sofa/gui/qt/PluginManager.ui)
 
 find_package(Qt5 COMPONENTS Core QUIET)
 
