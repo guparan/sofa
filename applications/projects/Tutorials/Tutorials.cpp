@@ -20,7 +20,7 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 
-#include "SofaTutorialsManager.h"
+#include "Tutorials.h"
 
 #include <sofa/helper/system/FileRepository.h>
 #include <sofa/helper/system/SetDirectory.h>
@@ -53,8 +53,8 @@ namespace gui
 namespace qt
 {
 
-SofaTutorialsManager::SofaTutorialsManager(QWidget* parent, const char* name)
-    :QMainWindow(parent), tutorialList(0)
+Tutorials::Tutorials(QWidget* parent, const char* name)
+    : QMainWindow(parent), tutorialList(0)
 {
     this->setObjectName(name);
 
@@ -64,17 +64,17 @@ SofaTutorialsManager::SofaTutorialsManager(QWidget* parent, const char* name)
 
     this->setCentralWidget(mainWidget);
     this->setAcceptDrops(true);
-    this->setWindowTitle(QString("Sofa Tutorials"));
+    this->setWindowTitle("");
 
     //Add list of tutorials
     tutorialList = new QComboBox(mainWidget);
 
     //Add button to launch a scene in runSofa
-    buttonRunInSofa = new QPushButton(QString("Launch scene in Sofa"), mainWidget);
+    buttonRunInSofa = new QPushButton(QString("Open with runSofa"), mainWidget);
     connect(buttonRunInSofa, SIGNAL(clicked()), this, SLOT(launchScene()));
 
     //Add button to edit a scene in Modeler
-    buttonEditInModeler = new QPushButton(QString("Edit in Modeler"), mainWidget);
+    buttonEditInModeler = new QPushButton(QString("Open with Modeler"), mainWidget);
     connect(buttonEditInModeler, SIGNAL(clicked()), this, SLOT(editScene()));
 
     //Add home button
@@ -146,8 +146,19 @@ SofaTutorialsManager::SofaTutorialsManager(QWidget* parent, const char* name)
 }
 
 
+void Tutorials::setWindowTitle(const QString &title)
+{
+    QString suffix;
+    if(!title.isEmpty())
+    {
+        suffix = QString(" - ") + title;
+    }
+    QMainWindow::setWindowTitle(QString("Sofa Tutorials") + suffix);
+}
 
-void SofaTutorialsManager::openTutorial(const std::string& filename)
+
+
+void Tutorials::openTutorial(const std::string& filename)
 {
     graph->closeDialogs();
 
@@ -166,7 +177,8 @@ void SofaTutorialsManager::openTutorial(const std::string& filename)
     std::string::size_type found=filename.find(dirSofa);
     if (found == 0) file = filename.substr(dirSofa.size()+1);
 
-    buttonRunInSofa->setText( QString(" Launch ") + QString(file.c_str()) + QString(" in Sofa ") );
+//    buttonRunInSofa->setText( QString(" Open ") + QString(file.c_str()) + QString(" in runSofa ") );
+    this->setWindowTitle( QString(file.c_str()) );
 
     //Set the Graph
     xml::BaseElement* newXML = xml::loadFromFile ( filename.c_str() );
@@ -178,7 +190,7 @@ void SofaTutorialsManager::openTutorial(const std::string& filename)
     selector->usingScene(filename);
 }
 
-void SofaTutorialsManager::openHTML(const std::string &filename)
+void Tutorials::openHTML(const std::string &filename)
 {
     if (filename.empty())
     {
@@ -194,7 +206,7 @@ void SofaTutorialsManager::openHTML(const std::string &filename)
 #endif
 }
 
-void SofaTutorialsManager::openMainCategory()
+void Tutorials::openMainCategory()
 {
     if (tutorialList)
     {
@@ -202,15 +214,16 @@ void SofaTutorialsManager::openMainCategory()
     }
 }
 
-void SofaTutorialsManager::openCategory(const std::string& filename)
+void Tutorials::openCategory(const std::string& filename)
 {
+    this->setWindowTitle("");
     if (tutorialList)
     {
         tutorialList->setCurrentIndex(tutorialList->findText(QString(filename.c_str())));
     }
 }
 
-void SofaTutorialsManager::dynamicChangeOfScene( const QUrl& u)
+void Tutorials::dynamicChangeOfScene( const QUrl& u)
 {
     std::string path=u.path().toStdString();
 #ifdef WIN32
@@ -229,45 +242,17 @@ void SofaTutorialsManager::dynamicChangeOfScene( const QUrl& u)
     }
 }
 
-void SofaTutorialsManager::keyPressEvent ( QKeyEvent * e )
-{
-    if (e->modifiers() == Qt::ControlModifier )
-    {
-        switch(e->key())
-        {
-        case Qt::Key_R:
-        {
-            //Pressed CTRL+R
-            launchScene();
-            return;
-        }
-        case Qt::Key_Y:
-        {
-            emit redo();
-            return;
-        }
-        case Qt::Key_Z:
-        {
-            emit undo();
-            return;
-        }
-        default: ;
-        }
-    }
-    e->ignore();
-}
 
 
 
-
-void SofaTutorialsManager::editScene()
+void Tutorials::editScene()
 {
 //    emit( editInModeler(graph->getFilename() ) );
     Node* root=graph->getRoot();
     runInModeler(graph->getFilename(), root);
 }
 
-void SofaTutorialsManager::launchScene()
+void Tutorials::launchScene()
 {
 //    if (sceneTab->count() == 0) return;
     Node* root=graph->getRoot();
@@ -276,7 +261,7 @@ void SofaTutorialsManager::launchScene()
 
 
 
-void SofaTutorialsManager::runInSofa(const std::string &sceneFilename, Node* root)
+void Tutorials::runInSofa(const std::string &sceneFilename, Node* root)
 {
     if (!root) return;
     if (sceneFilename.empty()) return;
@@ -284,7 +269,6 @@ void SofaTutorialsManager::runInSofa(const std::string &sceneFilename, Node* roo
     // Init the scene
     sofa::gui::GUIManager::Init("Modeler");
 
-    QStringList argv;
 
     if (sofaBinary.empty()) //If no specific binary is specified, we use runSofa
     {
@@ -300,12 +284,13 @@ void SofaTutorialsManager::runInSofa(const std::string &sceneFilename, Node* roo
 #endif
     }
 
-    argv << QString(sceneFilename.c_str());
 
     QProcess *p = new QProcess(this);
+    QStringList argv;
 
     p->setWorkingDirectory(QString(binPath.c_str()) );
     p->setObjectName(QString(sceneFilename.c_str()) );
+    argv << QString(sceneFilename.c_str());
 
     connect(p, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(childProcessExited(int, QProcess::ExitStatus)));
     connect(p, SIGNAL(readyReadStandardOutput()), this, SLOT(redirectStdout()) );
@@ -314,7 +299,7 @@ void SofaTutorialsManager::runInSofa(const std::string &sceneFilename, Node* roo
     p->start(QString(sofaBinary.c_str()), argv);
 }
 
-void SofaTutorialsManager::runInModeler(const std::string &sceneFilename, Node* root)
+void Tutorials::runInModeler(const std::string &sceneFilename, Node* root)
 {
     if (!root) return;
     if (sceneFilename.empty()) return;
@@ -334,19 +319,21 @@ void SofaTutorialsManager::runInModeler(const std::string &sceneFilename, Node* 
     }
 
     QProcess *p = new QProcess(this);
+    QStringList argv;
 
     p->setWorkingDirectory(QString(binPath.c_str()) );
     p->setObjectName(QString(sceneFilename.c_str()) );
+    argv << QString(sceneFilename.c_str());
 
     connect(p, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(childProcessExited(int, QProcess::ExitStatus)));
     connect(p, SIGNAL(readyReadStandardOutput()), this, SLOT(redirectStdout()) );
     connect(p, SIGNAL(readyReadStandardError()), this, SLOT(redirectStderr()) );
 
-    p->start(QString(modelerBinary.c_str()));
+    p->start(QString(modelerBinary.c_str()), argv);
 }
 
 
-void SofaTutorialsManager::redirectStdout()
+void Tutorials::redirectStdout()
 {
     QProcess* p = ((QProcess*) sender());
     if( p && p->waitForStarted(-1) )
@@ -355,7 +342,7 @@ void SofaTutorialsManager::redirectStdout()
     }
 }
 
-void SofaTutorialsManager::redirectStderr()
+void Tutorials::redirectStderr()
 {
     QProcess* p = ((QProcess*) sender());
     if( p && p->waitForStarted(-1))
@@ -365,7 +352,7 @@ void SofaTutorialsManager::redirectStderr()
 }
 
 
-void SofaTutorialsManager::childProcessExited(int exitCode, QProcess::ExitStatus exitStatus)
+void Tutorials::childProcessExited(int exitCode, QProcess::ExitStatus exitStatus)
 {
     QProcess *p = ((QProcess*) sender());
     std::string programName;
@@ -390,7 +377,7 @@ void SofaTutorialsManager::childProcessExited(int exitCode, QProcess::ExitStatus
 
 /*****************************************************************************************************************/
 //runSofa Options
-void SofaTutorialsManager::changeSofaBinary()
+void Tutorials::changeSofaBinary()
 {
 
     QString s = getOpenFileName ( this, QString(binPath.c_str()),

@@ -19,14 +19,19 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#ifndef SOFA_FILTERLIBRARY_H
-#define SOFA_FILTERLIBRARY_H
+#ifndef SOFA_TUTORIALS_H
+#define SOFA_TUTORIALS_H
 
-#include <iostream>
-#include <sofa/core/ComponentLibrary.h>
+#include <SofaModeler/TutorialSelector.h>
+#include <SofaModeler/GraphModeler.h>
 
-
-#include <QLineEdit>
+#include <QMainWindow>
+#include <QTextBrowser>
+#include <QAction>
+#include <QKeyEvent>
+#include <QUrl>
+#include <QComboBox>
+#include <QProcess>
 
 
 namespace sofa
@@ -38,41 +43,52 @@ namespace gui
 namespace qt
 {
 
-using sofa::core::ComponentLibrary;
 
-
-class FilterQuery
-{
-public:
-    FilterQuery( const std::string &query);
-
-    bool isValid( const ComponentLibrary* component) const ;
-
-protected:
-    void decodeQuery();
-
-    std::string query;
-
-    std::vector< QString > components;
-    std::vector< QString > templates;
-    std::vector< QString > licenses;
-    std::vector< QString > authors;
-};
-
-//***************************************************************
-class FilterLibrary : public QLineEdit
+class Tutorials : public QMainWindow
 {
     Q_OBJECT
 public:
-    FilterLibrary( QWidget* parent);
+    Tutorials(QWidget* parent = 0, const char *name = "");
+    GraphModeler *getGraph() {return graph;}
 
 public slots:
-    void searchText(const QString&);
-    void clearText();
+    void setWindowTitle(const QString &);
+
+    void openMainCategory();
+    void openCategory(const std::string &);
+    void openTutorial(const std::string &filename);
+    void openHTML(const std::string &filename);
+    void dynamicChangeOfScene( const QUrl&);
+
+    void launchScene();
+    void editScene();
+
+    void runInSofa(const std::string& sceneFilename, Node *root);
+    void runInModeler(const std::string &sceneFilename, Node* root);
+
+    void changeSofaBinary();
+    void childProcessExited(int exitCode, QProcess::ExitStatus exitStatus);
+
 protected:
-    std::string help;
-signals:
-    void filterList(const FilterQuery&);
+    TutorialSelector *selector;
+    GraphModeler *graph;
+    QTextBrowser* descriptionPage;
+    QPushButton *buttonRunInSofa;
+    QComboBox *tutorialList;
+    QPushButton* buttonEditInModeler;
+    QPushButton *buttonHome;
+
+protected slots:
+    void redirectStderr();
+    void redirectStdout();
+
+private:
+    std::string sofaBinary;
+    std::string modelerBinary;
+    std::string binPath;
+    char count;
+    bool debug;
+
 };
 
 }

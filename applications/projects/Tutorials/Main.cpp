@@ -19,61 +19,32 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#include "SofaTutorials.h"
-#include "SofaTutorialsManager.h"
-
-#include <sofa/helper/system/SetDirectory.h>
-#include <sofa/helper/system/PluginManager.h>
 #include <sofa/helper/system/FileSystem.h>
 #include <sofa/helper/Utils.h>
 
 #include <SofaSimulationTree/init.h>
 #include <SofaSimulationTree/TreeSimulation.h>
 
-#include <sofa/helper/logging/Messaging.h>
-
-#include <SofaComponentBase/initComponentBase.h>
-#include <SofaComponentCommon/initComponentCommon.h>
-#include <SofaComponentGeneral/initComponentGeneral.h>
-#include <SofaComponentAdvanced/initComponentAdvanced.h>
-#include <SofaComponentMisc/initComponentMisc.h>
-
 #include <QApplication>
 
-#include <iostream>
-#include <fstream>
+#include "Tutorials.h"
 
-using sofa::helper::system::FileSystem;
-using sofa::helper::Utils;
-
-// ---------------------------------------------------------------------
-// ---
-// ---------------------------------------------------------------------
 
 int main(int argc, char** argv)
 {
-    sofa::simulation::tree::init();
-    sofa::component::initComponentBase();
-    sofa::component::initComponentCommon();
-    sofa::component::initComponentGeneral();
-    sofa::component::initComponentAdvanced();
-    sofa::component::initComponentMisc();
-
-    // TODO: create additionnal handlers depending on command-line parameters
-
     QApplication application(argc, argv);
-//    (void)application;
 
+    sofa::simulation::tree::init();
     sofa::simulation::setSimulation(new sofa::simulation::tree::TreeSimulation());
 
-    const std::string etcDir = Utils::getSofaPathPrefix() + "/etc";
+    const std::string etcDir = sofa::helper::Utils::getSofaPathPrefix() + "/etc";
     const std::string sofaIniFilePath = etcDir + "/sofa.ini";
-    std::map<std::string, std::string> iniFileValues = Utils::readBasicIniFile(sofaIniFilePath);
+    std::map<std::string, std::string> iniFileValues = sofa::helper::Utils::readBasicIniFile(sofaIniFilePath);
 
     if (iniFileValues.find("SHARE_DIR") != iniFileValues.end())
     {
         std::string shareDir = iniFileValues["SHARE_DIR"];
-        if (!FileSystem::isAbsolute(shareDir))
+        if (!sofa::helper::system::FileSystem::isAbsolute(shareDir))
             shareDir = etcDir + "/" + shareDir;
         sofa::helper::system::DataRepository.addFirstPath(shareDir);
     }
@@ -81,53 +52,15 @@ int main(int argc, char** argv)
     if (iniFileValues.find("EXAMPLES_DIR") != iniFileValues.end())
     {
         std::string examplesDir = iniFileValues["EXAMPLES_DIR"];
-        if (!FileSystem::isAbsolute(examplesDir))
+        if (!sofa::helper::system::FileSystem::isAbsolute(examplesDir))
             examplesDir = etcDir + "/" + examplesDir;
         sofa::helper::system::DataRepository.addFirstPath(examplesDir);
     }
 
-#ifdef WIN32
-    const std::string pluginDir = Utils::getExecutableDirectory();
-#else
-    const std::string pluginDir = Utils::getSofaPathPrefix() + "/lib";
-#endif
-    sofa::helper::system::PluginRepository.addFirstPath(pluginDir);
+    Q_INIT_RESOURCE(icons);
 
-	Q_INIT_RESOURCE(icons);
-//    sofa::gui::qt::SofaTutorials* sofaModeler = new sofa::gui::qt::SofaTutorials();
-
-
-
-    sofa::gui::qt::SofaTutorialsManager tuto;
-//    connect(tuto, SIGNAL(runInSofa(const std::string&, Node*)), this, SLOT(runInSofa(const std::string&, Node*)));
-//    connect(tuto, SIGNAL(editInModeler(const std::string&)), this, SLOT(editTutorial(const std::string& ) ));
-//    GraphModeler *graphTuto=tuto->getGraph();
-//    graphTuto->setSofaLibrary(library);
-//    graphTuto->setPreset(preset);
-//    connect(graphTuto, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(changeInformation(QTreeWidgetItem *,QTreeWidgetItem*)));
+    sofa::gui::qt::Tutorials tuto;
     tuto.show();
-
-
-
-    //application->setMainWidget(sofaModeler);
-//    sofaModeler->show();
-
-//    std::string binaryName=argv[0];
-//#ifdef WIN32
-//    const std::string exe=".exe";
-//    if (binaryName.size() > exe.size()) binaryName = binaryName.substr(0, binaryName.size()-exe.size());
-//#endif
-//    if (!binaryName.empty() && binaryName[binaryName.size()-1] == 'd') sofaModeler->setDebugBinary(true);
-
-//    QString pathIcon=(sofa::helper::system::DataRepository.getFirstPath() + std::string( "/icons/MODELER.png" )).c_str();
-//    application->setWindowIcon(QIcon(pathIcon));
-
-//    for (int i=1; i<argc; ++i)
-//    {
-//        //Try to open the simulations passed in command line
-//        sofaModeler->fileOpen(std::string(argv[i]));
-//    }
-//    if (argc <= 1 ) sofaModeler->newTab();
 
     int appReturnCode = application.exec();
     sofa::simulation::tree::cleanup();
