@@ -7,6 +7,8 @@ else()
     set(RC_FILES "sofa.rc")
 endif()
 
+
+find_package(SofaModeler REQUIRED)
 find_package(Qt5 COMPONENTS Core QUIET)
 
 if(Qt5Core_FOUND)
