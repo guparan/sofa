@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.1)
 project(Tutorials)
 
 if(APPLE)
-    set(RC_FILES "../Modeler.icns")
+    set(RC_FILES "TUTORIALS.icns")
 else()
-    set(RC_FILES "sofa.rc")
+    set(RC_FILES "icons.rc")
 endif()
 
 set(HEADER_FILES
