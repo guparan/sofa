@@ -1,0 +1,9 @@
+# CMake package configuration file for the SofaModeler library
+
+@PACKAGE_INIT@
+
+if(NOT TARGET SofaModeler)
+	include("${CMAKE_CURRENT_LIST_DIR}/SofaModelerTargets.cmake")
+endif()
+
+check_required_components(SofaModeler)
