@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -479,7 +479,7 @@ void UniformMass<VecTypes, MassType>::addMDxToVectorVecImpl(defaulttype::BaseVec
 
     ReadAccessor<Data<vector<int> > > indices = d_indices;
 
-    const double* g = getContext()->getGravity().ptr();
+    const SReal* g = getContext()->getGravity().ptr();
 
     for (unsigned int i=0; i<indices.size(); i++)
         for (unsigned int j=0; j<derivDim; j++)
@@ -604,7 +604,7 @@ void UniformMass<Rigid3fTypes, Rigid3fMass>::draw(const VisualParams* vparams)
 template <> SOFA_BASE_MECHANICS_API
 void UniformMass<Rigid2fTypes, Rigid2fMass>::draw(const VisualParams* vparams)
 {
-    drawRigid2DImpl<Rigid2dTypes>(vparams) ;
+    drawRigid2DImpl<Rigid2fTypes>(vparams) ;
 }
 
 template <> SOFA_BASE_MECHANICS_API

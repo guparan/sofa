@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -19,6 +19,7 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
+#ifndef SOFA_COMPONENT_ENGINE_DILATEENGINE_CPP
 #define SOFA_COMPONENT_ENGINE_DILATEENGINE_CPP
 #include <SofaGeneralEngine/DilateEngine.inl>
 #include <sofa/core/ObjectFactory.h>
@@ -59,4 +60,6 @@ template class SOFA_GENERAL_ENGINE_API DilateEngine<Vec3dTypes>;
 } // namespace component
 
 } // namespace sofa
+
+#endif
 

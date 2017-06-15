@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -74,8 +74,17 @@ struct QuaternionIntegrationTest : Sofa_test< typename Rigid3Types::Real > {
 // Define the list of types to instanciate. We do not necessarily need to test all combinations.
 using testing::Types;
 typedef Types<
-    defaulttype::Rigid3dTypes,
+#ifndef SOFA_FLOAT
+    defaulttype::Rigid3dTypes
+#endif
+#ifndef SOFA_FLOAT
+#ifndef SOFA_DOUBLE
+    ,
+#endif
+#endif
+#ifndef SOFA_DOUBLE
     defaulttype::Rigid3fTypes
+#endif
 > DataTypes; // the types to instanciate.
 
 // Test suite for all the instanciations

@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -104,10 +104,10 @@ struct DilateEngine_test : public Sofa_test<typename _DataTypes::Real>,
 };
 
 using testing::Types;
+#ifdef SOFA_WITH_DOUBLE
 typedef Types<Vec3Types> DataTypes;
 
 TYPED_TEST_CASE(DilateEngine_test, DataTypes);
-
 TYPED_TEST(DilateEngine_test, NormalBehavior) {
     EXPECT_MSG_NOEMIT(Error) ;
     ASSERT_NO_THROW(this->normalTests()) ;
@@ -117,5 +117,6 @@ TYPED_TEST(DilateEngine_test, UpdateTest) {
     EXPECT_MSG_NOEMIT(Error) ;
     ASSERT_NO_THROW(this->updateTest()) ;
 }
+#endif
 
 }

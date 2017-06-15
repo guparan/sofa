@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -31,7 +31,7 @@ using namespace sofa::defaulttype;
 using sofa::core::objectmodel::New;
 
 namespace sofa{
-struct TestOBB : public Sofa_test<double>{
+struct TestOBB : public Sofa_test<>{
     bool faceVertex();
     bool vertexVertex();
     bool faceFace();

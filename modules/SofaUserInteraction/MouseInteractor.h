@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -44,7 +44,7 @@ namespace collision
  */
 struct BodyPicked
 {
-    BodyPicked():body(NULL), mstate(NULL) {}
+    BodyPicked():body(NULL), mstate(NULL), dist(0) {}
     sofa::core::CollisionModel *body;
     sofa::core::behavior::BaseMechanicalState *mstate;
     unsigned int indexCollisionElement;

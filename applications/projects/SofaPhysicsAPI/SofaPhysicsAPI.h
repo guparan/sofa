@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -47,7 +47,7 @@ class SOFA_SOFAPHYSICSAPI_API SofaPhysicsAPI
 {
 public:
     SofaPhysicsAPI(bool useGUI = false, int GUIFramerate = 0);
-    ~SofaPhysicsAPI();
+    virtual ~SofaPhysicsAPI();
 
     /// Load an XML file containing the main scene description
     bool load(const char* filename);

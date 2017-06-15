@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -21,7 +21,7 @@
 ******************************************************************************/
 
 #include <sofa/core/behavior/BaseController.h>
-#include <SofaOpenglVisual//OglModel.h>
+#include <SofaOpenglVisual/OglModel.h>
 #include <SofaUserInteraction/Controller.h>
 //#include <sofa/core/behavior/MechanicalState.h>
 #include <sofa/core/visual/VisualParams.h>

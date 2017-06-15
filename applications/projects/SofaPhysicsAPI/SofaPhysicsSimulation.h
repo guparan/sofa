@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -109,7 +109,6 @@ protected:
     bool useGUI;
     int GUIFramerate;
     sofa::core::visual::VisualParams* vparams;
-    sofa::core::visual::DrawToolGL   drawTool;
 
     sofa::helper::system::thread::ctime_t stepTime[10];
     sofa::helper::system::thread::ctime_t timeTicks;

@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -49,12 +49,19 @@ public:
     typedef sofa::defaulttype::BoundingBox BoundingBox;
     SOFA_CLASS(RegularGridTopology,GridTopology);
 protected:
-    /// Default constructor
+    /// Delegated constructor
+    RegularGridTopology(const Vec3i &dimXYZ);
+
+    /// Base constructor
     RegularGridTopology();
+
     /// Constructor for regular grid defined using number of vertices
     RegularGridTopology(int nx, int ny, int nz);
+
     /// Constructor for regular grid defined using number of vertices and size
-    RegularGridTopology( Vec3i numVertices, BoundingBox box );
+    RegularGridTopology(const Vec3i &numVertices, BoundingBox box );
+
+    virtual void changeGridResolutionPostProcess();
 public:
     /// BaseObject method should be overwritten by children
     virtual void init();

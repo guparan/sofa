@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -89,7 +89,6 @@ public:
 
 class SOFA_TestPlugin_API GtestMessageHandler : public MessageHandler
 {
-    Message::Class m_class ;
     std::vector<std::vector<GtestMessageFrame*> > m_gtestframes;
 
 public:
@@ -168,7 +167,7 @@ GtestMessageFrameIgnore::GtestMessageFrameIgnore(Message::Type type)
 
 
 
-GtestMessageHandler::GtestMessageHandler(Message::Class mclass) : m_class(mclass)
+GtestMessageHandler::GtestMessageHandler(Message::Class mclass)
 {
     for(unsigned int i=0; i < Message::TypeCount ; ++i)
     {

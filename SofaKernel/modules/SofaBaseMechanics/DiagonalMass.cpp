@@ -1,5 +1,5 @@
 /******************************************************************************
-*       SOFA, Simulation Open-Framework Architecture, development version     *
+*       SOFA, Simulation Open-Framework Architecture, v17.06                  *
 *                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
@@ -192,14 +192,14 @@ Vector6 DiagonalMass<RigidTypes,RigidMass>::getMomentumRigid3Impl ( const Mechan
 
     const MassVector &masses = d_mass.getValue();
 
-    defaulttype::Vec6d momentum;
+    defaulttype::Vector6 momentum;
 
     for ( unsigned int i=0 ; i<v.size() ; i++ )
     {
-        Rigid3dTypes::Vec3 linearMomentum = v[i].getLinear() * masses[i].mass;
+        typename RigidTypes::Vec3 linearMomentum = v[i].getLinear() * masses[i].mass;
         for( int j=0 ; j<3 ; ++j ) momentum[j] += linearMomentum[j];
 
-        Rigid3dTypes::Vec3 angularMomentum = cross( x[i].getCenter(), linearMomentum ) + ( masses[i].inertiaMassMatrix * v[i].getAngular() );
+        typename RigidTypes::Vec3 angularMomentum = cross( x[i].getCenter(), linearMomentum ) + ( masses[i].inertiaMassMatrix * v[i].getAngular() );
         for( int j=0 ; j<3 ; ++j ) momentum[3+j] += angularMomentum[j];
     }
 
