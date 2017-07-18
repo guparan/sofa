@@ -5,14 +5,14 @@ set(EIGEN3_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH "Include directo
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/Eigen
         COMPONENT Eigen_headers
-        DESTINATION include
+        DESTINATION include/sofa
         PATTERN "*.in" EXCLUDE
         PATTERN "*.txt" EXCLUDE
         PATTERN "*.cpp" EXCLUDE)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/unsupported/Eigen
         COMPONENT Eigen_headers
-        DESTINATION include
+        DESTINATION include/sofa
         PATTERN "*.in" EXCLUDE
         PATTERN "*.txt" EXCLUDE
         PATTERN "*.cpp" EXCLUDE)

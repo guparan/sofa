@@ -9,7 +9,7 @@ set(SOFABASE_VERSION ${SofaFramework_VERSION})
 
 ## SofaBase/config.h
 configure_file(config.h.in "${CMAKE_BINARY_DIR}/include/SofaBase/config.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/SofaBase/config.h" DESTINATION "include/SofaBase" COMPONENT headers)
+install(FILES "${CMAKE_BINARY_DIR}/include/SofaBase/config.h" DESTINATION "include/sofa/SofaBase" COMPONENT headers)
 
 ### Subdirectories
 

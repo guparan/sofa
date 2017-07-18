@@ -42,7 +42,7 @@ file(REMOVE_RECURSE ${CMAKE_BINARY_DIR}/cmake)
 # adding paths to disabled plugins.
 file(REMOVE_RECURSE ${CMAKE_BINARY_DIR}/etc/sofa/python.d)
 
-set(ARCHIVE_OUTPUT_DIRECTORY lib)
+set(ARCHIVE_OUTPUT_DIRECTORY lib/sofa)
 set(RUNTIME_OUTPUT_DIRECTORY bin)
 
 if(WIN32)
@@ -85,7 +85,7 @@ if(UNIX)
     # the need to play with LD_LIBRARY_PATH to get applications to run.
 
     # see https://cmake.org/Wiki/CMake_RPATH_handling for $ORIGIN doc
-    set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib:$$ORIGIN/../lib")
+    set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib/sofa:$$ORIGIN/../lib/sofa")
 
     if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
         set(CMAKE_MACOSX_RPATH ON)
@@ -265,12 +265,12 @@ endif()
 ## when installing, keep an eye on options/params/sources used for compilation
 ## this should be internal and not delivered, but this is definitively useful
 sofa_install_git_version( "sofa" ${CMAKE_CURRENT_SOURCE_DIR} )
-#install(FILES "${CMAKE_BINARY_DIR}/CMakeCache.txt" DESTINATION . COMPONENT headers)
-install(FILES "${CMAKE_SOURCE_DIR}/README.md" DESTINATION . COMPONENT applications)
-install(FILES "${CMAKE_SOURCE_DIR}/CHANGELOG.md" DESTINATION . COMPONENT applications)
-install(FILES "${CMAKE_SOURCE_DIR}/LICENSE.LGPL.txt" DESTINATION . COMPONENT applications)
-install(FILES "${CMAKE_SOURCE_DIR}/Authors.txt" DESTINATION . COMPONENT applications)
-install(DIRECTORY ${DEPENDENCY_PACK_DIR}/licenses/ DESTINATION licenses COMPONENT applications)
+#install(FILES "${CMAKE_BINARY_DIR}/CMakeCache.txt" DESTINATION etc/sofa COMPONENT headers)
+install(FILES "${CMAKE_SOURCE_DIR}/README.md" DESTINATION etc/sofa COMPONENT applications)
+install(FILES "${CMAKE_SOURCE_DIR}/CHANGELOG.md" DESTINATION etc/sofa COMPONENT applications)
+install(FILES "${CMAKE_SOURCE_DIR}/LICENSE.LGPL.txt" DESTINATION etc/sofa COMPONENT applications)
+install(FILES "${CMAKE_SOURCE_DIR}/Authors.txt" DESTINATION etc/sofa COMPONENT applications)
+install(DIRECTORY ${DEPENDENCY_PACK_DIR}/licenses/ DESTINATION etc/sofa/licenses COMPONENT applications)
 
 ## Create etc/installedSofa.ini: it contains the paths to share/ and examples/. Compare to the Sofa.ini in the
 ## build directory, this one contains relative paths to the installed resource directory.

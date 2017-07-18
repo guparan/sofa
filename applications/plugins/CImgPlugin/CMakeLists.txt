@@ -79,7 +79,7 @@ if(SOFA_BUILD_TESTS)
 endif()
 
 configure_file(CImgPlugin.h.in CImgPlugin/CImgPlugin.h)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/CImgPlugin.h DESTINATION "include/CImgPlugin")
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/CImgPlugin.h DESTINATION "include/sofa/CImgPlugin")
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 
@@ -93,6 +93,6 @@ install(TARGETS ${PROJECT_NAME}
         COMPONENT CImgPlugin_libraries
         EXPORT CImgPluginTargets
         RUNTIME DESTINATION bin
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib)
+        LIBRARY DESTINATION lib/sofa
+        ARCHIVE DESTINATION lib/sofa)
 

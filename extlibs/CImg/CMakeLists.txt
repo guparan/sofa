@@ -5,12 +5,12 @@ project(CImg)
 install(FILES
         CImg.h
         SOFACImg.h
-        DESTINATION include/CImg
+        DESTINATION include/sofa/CImg
         COMPONENT CImg_headers)
 
 install(DIRECTORY
         plugins
-        DESTINATION include/CImg
+        DESTINATION include/sofa/CImg
         COMPONENT CImg_headers)
 
 
@@ -30,5 +30,5 @@ configure_package_config_file(CImgConfig.cmake.in
                               INSTALL_DESTINATION lib/cmake/CImg
                               PATH_VARS CIMG_INCLUDE_DIR)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/InstalledCImgConfig.cmake
-        DESTINATION lib/cmake/CImg
+        DESTINATION lib/sofa/cmake/CImg
         RENAME CImgConfig.cmake)

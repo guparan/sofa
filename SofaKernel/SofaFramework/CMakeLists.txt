@@ -216,10 +216,10 @@ sofa_write_package_config_files(SofaFramework ${SOFAFRAMEWORK_VERSION})
 # Build tree
 configure_file(CMakeParseLibraryList.cmake ${CMAKE_BINARY_DIR}/cmake/CMakeParseLibraryList.cmake COPYONLY)
 # Install tree
-install(FILES CMakeParseLibraryList.cmake DESTINATION lib/cmake/SofaFramework COMPONENT headers)
+install(FILES CMakeParseLibraryList.cmake DESTINATION lib/sofa/cmake/SofaFramework COMPONENT headers)
 
 ## SofaMacros.cmake
 # Build tree
 configure_file(SofaMacros.cmake ${CMAKE_BINARY_DIR}/cmake/SofaMacros.cmake COPYONLY)
 # Install tree
-install(FILES SofaMacros.cmake DESTINATION lib/cmake/SofaFramework COMPONENT headers)
+install(FILES SofaMacros.cmake DESTINATION lib/sofa/cmake/SofaFramework COMPONENT headers)

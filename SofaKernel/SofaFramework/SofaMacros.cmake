@@ -33,21 +33,21 @@ include(CMakeParseLibraryList)
 macro(sofa_write_package_config_files package_name version)
 
     ## <package_name>Targets.cmake
-    install(EXPORT ${package_name}Targets DESTINATION lib/cmake/${package_name} COMPONENT headers)
+    install(EXPORT ${package_name}Targets DESTINATION lib/sofa/cmake/${package_name} COMPONENT headers)
 
     ## <package_name>ConfigVersion.cmake
     set(filename ${package_name}ConfigVersion.cmake)
     write_basic_package_version_file(${filename} VERSION ${version} COMPATIBILITY ExactVersion)
     configure_file("${CMAKE_CURRENT_BINARY_DIR}/${filename}"
                    "${CMAKE_BINARY_DIR}/cmake/${filename}" COPYONLY)
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${filename}" DESTINATION lib/cmake/${package_name} COMPONENT headers)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${filename}" DESTINATION lib/sofa/cmake/${package_name} COMPONENT headers)
 
     ### <package_name>Config.cmake
     configure_package_config_file(${package_name}Config.cmake.in
                                   "${CMAKE_BINARY_DIR}/cmake/${package_name}Config.cmake"
-                                  INSTALL_DESTINATION lib/cmake/${package_name})
+                                  INSTALL_DESTINATION lib/sofa/cmake/${package_name})
     install(FILES "${CMAKE_BINARY_DIR}/cmake/${package_name}Config.cmake"
-            DESTINATION lib/cmake/${package_name} COMPONENT headers)
+            DESTINATION lib/sofa/cmake/${package_name} COMPONENT headers)
 
 endmacro()
 
@@ -236,9 +236,9 @@ macro(sofa_install_targets package_name the_targets install_include_subdir)
     install(TARGETS ${the_targets}
             EXPORT ${package_name}Targets
             RUNTIME DESTINATION bin COMPONENT applications
-            LIBRARY DESTINATION lib COMPONENT libraries
-            ARCHIVE DESTINATION lib COMPONENT libraries
-            PUBLIC_HEADER DESTINATION include/${install_include_subdir} COMPONENT headers)
+            LIBRARY DESTINATION lib/sofa COMPONENT libraries
+            ARCHIVE DESTINATION lib/sofa COMPONENT libraries
+            PUBLIC_HEADER DESTINATION include/sofa/${install_include_subdir} COMPONENT headers)
 endmacro()
 
 
@@ -281,9 +281,9 @@ macro(sofa_install_files_from_library library)
     if(WIN32)
         install(FILES ${SHARED_LIBS} DESTINATION bin COMPONENT applications)
     else()
-        install(FILES ${SHARED_LIBS} DESTINATION lib COMPONENT applications)
+        install(FILES ${SHARED_LIBS} DESTINATION lib/sofa COMPONENT applications)
     endif()
-    install(FILES ${STATIC_LIBS} DESTINATION lib COMPONENT libraries)
+    install(FILES ${STATIC_LIBS} DESTINATION lib/sofa COMPONENT libraries)
 endmacro()
 
 

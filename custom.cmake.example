@@ -21,11 +21,13 @@ macro(setSofaFilePath name value)
 endmacro()
 ######################
 
-# Set custom options for builds (i.e for example, share between debug/release builds)
-# After checking/unchecking options, save this file as "custom.cmake"
 
-# OFF
-# setSofaOption(APPLICATION_MODELER OFF)
+if(NOT DEFINED CUSTOM_PRECONFIGURE_DONE)
+    set(CUSTOM_PRECONFIGURE_DONE 1 CACHE INTERNAL "")
 
-# ON
-# setSofaOption(SOFAGUI_QGLVIEWER ON)
+    # OFF
+    setSofaOption(APPLICATION_MODELER OFF)
+    setSofaOption(SOFA_BUILD_TESTS OFF)
+    setSofaOption(SOFA_BUILD_TUTORIALS OFF)
+    setSofaOption(PLUGIN_SOFAPYTHON OFF)
+endif()

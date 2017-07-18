@@ -202,7 +202,7 @@ int GUIManager::Init(const char* argv0, const char* name)
     }
 
     // Read the paths to the share/ and examples/ directories from etc/sofa.ini,
-    const std::string etcDir = Utils::getSofaPathPrefix() + "/etc";
+    const std::string etcDir = Utils::getSofaPathPrefix() + "/etc/sofa";
     const std::string sofaIniFilePath = etcDir + "/sofa.ini";
     std::map<std::string, std::string> iniFileValues = Utils::readBasicIniFile(sofaIniFilePath);
 
