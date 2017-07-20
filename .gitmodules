@@ -1,0 +1,3 @@
+[submodule "applications/plugins/HighOrder"]
+	path = applications/plugins/HighOrder
+	url = https://github.com/sofa-framework/plugin.HighOrder
