@@ -164,6 +164,8 @@ macro(sofa_add_generic directory name type)
     if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/${directory}" AND IS_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/${directory}")
 
         string(TOUPPER ${type}_${name} option)
+        set(option_ver "${option}_VERSION")
+        set(option_ver_copy "${option_ver}_COPY")
 
         # optional parameter to activate/desactivate the option
         #  e.g.  sofa_add_application( path/MYAPP MYAPP APPLICATION ON)
@@ -173,6 +175,66 @@ macro(sofa_add_generic directory name type)
                 set(active ON)
             endif()
         endif()
+
+        # Handle submodules
+
+        ## Count files in directory
+        file(GLOB children RELATIVE "${CMAKE_CURRENT_LIST_DIR}/${directory}" "${CMAKE_CURRENT_LIST_DIR}/${directory}/*")
+        list(LENGTH children children_len)
+
+        ## Check if directory is a submodule
+        file(READ "${PROJECT_SOURCE_DIR}/.git/config" git_config)
+        string(REPLACE "${PROJECT_SOURCE_DIR}/" "" relative_dir "${CMAKE_CURRENT_LIST_DIR}/${directory}")
+        string(FIND "${git_config}" "[submodule \"${relative_dir}\"]" is_submodule)
+
+        ## Checkout what user needs (none, stable, dev)
+        if(${is_submodule} GREATER -1)
+            set(${option_ver} stable CACHE STRING "Version of submodule to checkout.")
+            set_property(CACHE ${option_ver} PROPERTY STRINGS none stable dev)
+
+            if(children_len EQUAL 0 OR NOT DEFINED ${option_ver_copy} OR (NOT ${option_ver} STREQUAL ${option_ver_copy}) ) # ${option_ver} changed or first configure
+                if(children_len GREATER 0) # ${CMAKE_CURRENT_LIST_DIR}/${directory} is NOT empty
+                    execute_process(
+                        COMMAND             git diff
+                        WORKING_DIRECTORY   ${CMAKE_CURRENT_LIST_DIR}/${directory}
+                        RESULT_VARIABLE diff_result
+                        OUTPUT_VARIABLE diff_output
+                    )
+                endif()
+
+                if(children_len EQUAL 0 OR (DEFINED diff_output AND "${diff_output}" STREQUAL "")) # No changes in ${CMAKE_CURRENT_LIST_DIR}/${directory}
+                    if (${option_ver} STREQUAL none)
+                        if(children_len GREATER 0)
+                            message("Remove directory ${CMAKE_CURRENT_LIST_DIR}/${directory}")
+                            file(REMOVE_RECURSE "${CMAKE_CURRENT_LIST_DIR}/${directory}")
+                            file(MAKE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/${directory}")
+                        endif()
+                    else()
+                        # Always update the submodule
+                        execute_process(
+                            COMMAND             git submodule update --checkout ${CMAKE_CURRENT_LIST_DIR}/${directory}
+                            WORKING_DIRECTORY   ${PROJECT_SOURCE_DIR}
+                            RESULT_VARIABLE update_result
+                            OUTPUT_VARIABLE update_output
+                        )
+                        if (${option_ver} STREQUAL dev)
+                            # Checkout master if asked
+                            execute_process(
+                                COMMAND             git checkout master
+                                WORKING_DIRECTORY   ${CMAKE_CURRENT_LIST_DIR}/${directory}
+                                RESULT_VARIABLE update_result
+                                OUTPUT_VARIABLE update_output
+                            )
+                        endif()
+                    endif()
+                    set(${option_ver_copy} "${${option_ver}}" CACHE INTERNAL "Copy of ${option_ver}")
+                else()
+                    message(WARNING
+                        "Cannot set ${option_ver} to \"${${option_ver}}\": modifications were made in ${CMAKE_CURRENT_LIST_DIR}/${directory}.\n"
+                        "Choose another version or fix the submodule manually.")
+                endif()
+            endif()
+        endif(${is_submodule} GREATER -1)
 
         option(${option} "Build the ${name} ${type}." ${active})
         if(${option})

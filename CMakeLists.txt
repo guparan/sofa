@@ -337,6 +337,12 @@ if(NOT "${SOFA_EXTERNAL_DIRECTORIES}" STREQUAL "")
     endforeach()
 endif()
 
+# Init submodules
+execute_process(
+    COMMAND             git submodule init
+    WORKING_DIRECTORY   ${CMAKE_SOURCE_DIR}
+)
+
 
 ## Custom
 if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/custom.cmake")
