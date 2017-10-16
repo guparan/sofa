@@ -361,7 +361,7 @@ if(APPLE)
     # on macOS, -framework CoreServices is needed for FileMonitor
     list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK "-framework CoreServices")
 endif()
-target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFAFRAMEWORK_DEPENDENCY_LINK} ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFAFRAMEWORK_DEPENDENCY_LINK})
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../..>")
@@ -374,7 +374,6 @@ if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
 endif()
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "${SOFAHELPER_COMPILE_FLAGS}")
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "_d")
-set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${SOFAFRAMEWORK_VERSION}")
 
-sofa_install_targets(SofaFramework SofaHelper "")
+sofa_install_targets(SofaFramework ${PROJECT_NAME} "sofa/helper")
