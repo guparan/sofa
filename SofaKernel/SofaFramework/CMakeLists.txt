@@ -98,7 +98,7 @@ if(NOT SOFA_NO_OPENGL)
             list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK "${ACTUAL_GLUT_LIBRARIES}")
         endif()
     endif()
-    set(SOFA_HAVE_GLUT ${GLUT_FOUND})
+    set(SOFA_HAVE_GLEW (${GLUT_FOUND} AND ${SOFAGUI_GLUT}) )
 
 endif()
 
@@ -138,12 +138,15 @@ set(SOFA_HAVE_PNG ${PNG_FOUND})
 # optional boost libraries
 find_package(Boost REQUIRED system filesystem locale
                    OPTIONAL_COMPONENTS thread date_time chrono atomic)
+
+set(SOFA_HAVE_BOOST_DATE_TIME ${Boost_DATE_TIME_FOUND})
 set(SOFA_HAVE_BOOST_SYSTEM ${Boost_SYSTEM_FOUND})
 set(SOFA_HAVE_BOOST_LOCALE ${Boost_LOCALE_FOUND})
 set(SOFA_HAVE_BOOST_FILESYSTEM ${Boost_FILESYSTEM_FOUND})
 set(SOFA_HAVE_BOOST_THREAD ${Boost_THREAD_FOUND})
 
 list(APPEND Boost_INCLUDE_DIRS ${Boost_INCLUDE_DIR})
+list(APPEND SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIRS})
 
 if(SOFA_HAVE_BOOST_SYSTEM
    AND SOFA_HAVE_BOOST_FILESYSTEM
@@ -155,36 +158,39 @@ if(SOFA_HAVE_BOOST_SYSTEM
     sofa_create_target(BoostLocale SofaFramework "${Boost_LOCALE_LIBRARY}" "${Boost_INCLUDE_DIRS}")
     sofa_create_target(BoostFileSystem SofaFramework "${Boost_FILESYSTEM_LIBRARY}" "${Boost_INCLUDE_DIRS}")
 
-	list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${BoostSystem_Target})
+    list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${BoostSystem_Target})
     list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${BoostLocale_Target})
     list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${BoostFileSystem_Target})
 
-    sofa_install_get_libraries(${Boost_SYSTEM_LIBRARY})
-    sofa_install_get_libraries(${Boost_LOCALE_LIBRARY})
-    sofa_install_get_libraries(${Boost_FILESYSTEM_LIBRARY})
+    sofa_install_files_from_library(${Boost_SYSTEM_LIBRARY})
+    sofa_install_files_from_library(${Boost_LOCALE_LIBRARY})
+    sofa_install_files_from_library(${Boost_FILESYSTEM_LIBRARY})
+
+    if(WIN32)
+        sofa_copy_files_from_library(${Boost_SYSTEM_LIBRARY})
+        sofa_copy_files_from_library(${Boost_LOCALE_LIBRARY})
+        sofa_copy_files_from_library(${Boost_FILESYSTEM_LIBRARY})
+    endif()
 
     if(SOFA_HAVE_BOOST_DATE_TIME)
         sofa_create_target(BoostDateTime SofaFramework "${Boost_DATE_TIME_LIBRARY}" "${Boost_INCLUDE_DIRS}")
         list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${BoostDateTime_Target})
-        sofa_install_get_libraries(${Boost_DATE_TIME_LIBRARY})
+        sofa_install_files_from_library(${Boost_DATE_TIME_LIBRARY})
+        if(WIN32)
+            sofa_copy_files_from_library(${Boost_DATE_TIME_LIBRARY})
+        endif()
     endif()
 
     if(SOFA_HAVE_BOOST_THREAD)
         sofa_create_target(BoostThread SofaFramework "${Boost_THREAD_LIBRARY}" "${Boost_INCLUDE_DIRS}")
         list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${BoostThread_Target})
-        sofa_install_get_libraries(${Boost_THREAD_LIBRARY})
+        sofa_install_files_from_library(${Boost_THREAD_LIBRARY})
+        if(WIN32)
+            sofa_copy_files_from_library(${Boost_THREAD_LIBRARY})
+        endif()
     endif()
-
-else()
-    list(APPEND SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIRS})
 endif()
 
-foreach(target Boost::system Boost::thread Boost::date_time Boost::filesystem Boost::locale Boost::chrono Boost::atomic)
-    if(WIN32)
-        sofa_copy_files_from_target(${target})
-    endif()
-    sofa_install_files_from_target(${target})
-endforeach()
 
 ## Eigen
 find_package(Eigen3 REQUIRED)
