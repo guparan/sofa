@@ -72,28 +72,42 @@ class MyListener : public Listener {
     virtual void onFocusLost(const Controller&);
     void update( Leap::Frame frame );
 
-    int64_t     getFrameID() { return frame.id(); }
-    Vector      getPalmPosition() { return hand.palmPosition(); }
-    Vector      getStabilizedPalmPosition() { return hand.palmPosition(); }// hand.stabilizedPalmPosition(); }
-    Vector      getPalmNormal() { return hand.palmNormal(); }
-    Quat        getPalmRotation() { return palmOrientation; }
-    FingerList  getFingers() { return hand.fingers(); }
-    FingerList  getSecondHandFingers() { return secondHand.fingers(); }
-    Hand        getHand() { return hand; }
-    Hand        getSecondHand() { return secondHand; }
-    Vector      getHandSphereCenter() { return hand.sphereCenter(); }
-    float       getHandSphereRadius() { return hand.sphereRadius(); }
-    GestureList getGestures() { return gestures; }
-    Vector      getTranslation() { return translation; }
-    InteractionBox getInteractionBox() { return interactionBox; }
-    float	getFPS() { return fUpdateFPS;}
-    float	getCurrentFramesPerSecond() {	return currentFramesPerSecond; }
+//    int64_t     getFrameID() { return frame.id(); }
+//    Vector      getPalmPosition() { return hand.palmPosition(); }
+//    Vector      getStabilizedPalmPosition() { return hand.palmPosition(); }// hand.stabilizedPalmPosition(); }
+//    Vector      getPalmNormal() { return hand.palmNormal(); }
+//    Quat        getPalmRotation() { return palmOrientation; }
+//    FingerList  getFingers() { return hand.fingers(); }
+//    FingerList  getSecondHandFingers() { return secondHand.fingers(); }
+//    Hand        getHand() { return hand; }
+//    Hand        getSecondHand() { return secondHand; }
+
+//    Vector      getRightToolPosition() { return rightTool.tipPosition(); }
+//    Quat        getRightToolRotation() { return rightToolOrientation; }
+
+
+    Hand        getRightHand() { return frame.hands().rightmost(); }
+    Hand        getLeftHand() { return frame.hands().leftmost(); }
+    Tool        getRightTool() { return frame.tools().rightmost(); }
+    Tool        getLeftTool() { return frame.tools().leftmost(); }
+
+    Quat        computeRotation(Hand hand);
+
+
+//    Vector      getHandSphereCenter() { return hand.sphereCenter(); }
+//    float       getHandSphereRadius() { return hand.sphereRadius(); }
+//    GestureList getGestures() { return gestures; }
+//    Vector      getTranslation() { return translation; }
+    InteractionBox getInteractionBox() { return frame.interactionBox(); }
+//    float	getFPS() { return fUpdateFPS;}
+//    float	getCurrentFramesPerSecond() {	return currentFramesPerSecond; }
 
 protected:
     Frame frame;
     float currentFramesPerSecond;
     InteractionBox interactionBox;
     Hand hand, secondHand;
+    Tool leftTool, rightTool;
     Quat palmOrientation;
     GestureList gestures;
     Vector translation;

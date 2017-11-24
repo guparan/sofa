@@ -49,10 +49,16 @@ LeapMotionDriver::LeapMotionDriver()
     : scale(initData(&scale, 1.0, "scale","Default scale applied to the Leap Motion Coordinates. "))
     , translation(initData(&translation, Vec3d(0,0,0), "translation","Position of the tool/hand in the Leap Motion reference frame"))
     , rotation(initData(&rotation, sofa::defaulttype::Vector3(), "rotation", "Rotation of the DOFs of the hand"))
+
     , handPalmCoordinate(initData(&handPalmCoordinate, "handPalmCoordinate","Coordinate of the hand detected by the Leap Motion"))
+    , rightToolCoordinates(initData(&rightToolCoordinates, "rightToolCoordinates","Coordinate of the tool detected by the Leap Motion"))
+
     , sphereCenter(initData(&sphereCenter, "sphereCenter","Center of the sphere of the hand detected by the Leap Motion"))
     , sphereRadius(initData(&sphereRadius, "sphereRadius","Radius of the sphere of the hand detected by the Leap Motion"))
+
     , fingersCoordinates(initData(&fingersCoordinates, sofa::helper::vector<Rigid3dTypes::Coord>(1,Rigid3dTypes::Coord(sofa::defaulttype::Vector3(0,0,0),Quat(0,0,0,1))), "fingersCoordinates","Coordinate of the fingers detected by the Leap Motion"))
+    , indexCoordinates(initData(&indexCoordinates, sofa::helper::vector<Rigid3dTypes::Coord>(0,Rigid3dTypes::Coord(sofa::defaulttype::Vector3(0,0,0),Quat(0,0,0,1))), "indexCoordinates","Coordinate of the index detected by the Leap Motion"))
+
     , gestureType(initData(&gestureType, int(-1) ,"gestureType","Type of the current gesture detected by the Leap Motion"))
     , gesturePosition(initData(&gesturePosition, "gesturePosition","Position of the current gesture detected by the Leap Motion"))
     , gestureDirection(initData(&gestureDirection, "gestureDirection","Direction of the current gesture detected by the Leap Motion"))
@@ -84,53 +90,57 @@ void LeapMotionDriver::init()
 	bool leapEnabled = true;
 	
 	leapConnected = false;
-        if (leapEnabled)
+    if (leapEnabled)
+    {
+        std::cout << "[LeapMotion] Connecting";
+        for (unsigned int n=0; n<15 && !leapConnected; n++)
         {
-            std::cout << "[LeapMotion] Connecting";
-            for (unsigned int n=0; n<15 && !leapConnected; n++)
-            {
-                std::cout << ".";
-                sofa::helper::system::thread::CTime::sleep(0.1);
-                leapConnected = getLeapController()->isConnected();
-            }
-            std::cout << "." << std::endl;
-	}
-
-        if (leapConnected)
-        {
-            leapConfig = getLeapController()->config();
-            leapConfig.setFloat("Gesture.ScreenTap.MinForwardVelocity",50);
-            leapConfig.setFloat("Gesture.ScreenTap.HistorySeconds",0.1);
-            leapConfig.setFloat("Gesture.ScreenTap.MinDistance",3.0);
-
-            leapConfig.setFloat("Gesture.KeyTap.MinDownVelocity",10);
-            leapConfig.setFloat("Gesture.KeyTap.HistorySeconds",0.1);
-            leapConfig.setFloat("Gesture.KeyTap.MinDistance",5.0);
-
-            leapConfig.setFloat("Gesture.Swipe.MinLength",120);
-            leapConfig.setFloat("Gesture.Swipe.MinVelocity",SWIPE_MIN_VELOCITY);
-
-            leapConfig.setFloat("Gesture.Circle.MinArc", 2*M_PI);
-            leapConfig.setFloat("Gesture.Circle.MinRadius", 25.0);
-            leapConfig.save();
-            getLeapController()->addListener(myListener);
-            drawInteractionBox = false;
+            std::cout << ".";
+            sofa::helper::system::thread::CTime::sleep(0.1);
+            leapConnected = getLeapController()->isConnected();
         }
-        else if (leapEnabled)
-		serr << "Device not detected" << sendl;
+        std::cout << "." << std::endl;
+    }
+
+    if (leapConnected)
+    {
+        leapConfig = getLeapController()->config();
+        leapConfig.setFloat("Gesture.ScreenTap.MinForwardVelocity",50);
+        leapConfig.setFloat("Gesture.ScreenTap.HistorySeconds",0.1);
+        leapConfig.setFloat("Gesture.ScreenTap.MinDistance",3.0);
+
+        leapConfig.setFloat("Gesture.KeyTap.MinDownVelocity",10);
+        leapConfig.setFloat("Gesture.KeyTap.HistorySeconds",0.1);
+        leapConfig.setFloat("Gesture.KeyTap.MinDistance",5.0);
+
+        leapConfig.setFloat("Gesture.Swipe.MinLength",120);
+        leapConfig.setFloat("Gesture.Swipe.MinVelocity",SWIPE_MIN_VELOCITY);
+
+        leapConfig.setFloat("Gesture.Circle.MinArc", 2*M_PI);
+        leapConfig.setFloat("Gesture.Circle.MinRadius", 25.0);
+        leapConfig.save();
+        getLeapController()->addListener(myListener);
+        drawInteractionBox = false;
+    }
+    else if (leapEnabled)
+    serr << "Device not detected" << sendl;
 
 
 	//initialisation of the fingers coordinates array
-        helper::WriteAccessor<Data<sofa::helper::vector<RigidCoord<3,double> > > > fingerCoords = fingersCoordinates;
-        for (int i=0; i<14; i++)
-            fingerCoords.push_back(fingerCoords[i]);
-	
-	scrollDirection.setValue(0);
+    helper::WriteAccessor<Data<sofa::helper::vector<RigidCoord<3,double> > > > fingerCoords = fingersCoordinates;
+    for (int i=0; i<14; i++)
+        fingerCoords.push_back(fingerCoords[i]);
 
-        lastGestureType = TYPE_SWIPE;
-        for (int i=0; i<TYPES_COUNT; i++)
-        {
-            lastGesturesFrameIds.push_back(std::make_pair(i,0));
+    helper::WriteAccessor<Data<helper::vector<RigidCoord<3,double> > > > indexCoords = indexCoordinates;
+    indexCoords.push_back(handPalmCoordinate.getValue());
+    indexCoords.push_back(fingerCoords[3]);
+
+    scrollDirection.setValue(0);
+
+    lastGestureType = TYPE_SWIPE;
+    for (int i=0; i<TYPES_COUNT; i++)
+    {
+        lastGesturesFrameIds.push_back(std::make_pair(i,0));
 	}
 	lastGestureFrameId = 0;
 }
@@ -245,6 +255,7 @@ void LeapMotionDriver::draw(const sofa::core::visual::VisualParams* vparams)
                 //draw palm as a torus
                 handPalmCoordinate.getValue().writeOpenGlMatrix(coordMatrix);
                 helper::gl::drawTorus( coordMatrix, 2.5*scale.getValue(), 28*scale.getValue(), 30, Vec3i(255,215,180) );
+
                 //helper::gl::drawTorus( coordMatrix, 2.5*scale.getValue(), 23*scale.getValue(), 30, Vec3i(255,215,180) );
                 //helper::gl::drawTorus( coordMatrix, 4*scale.getValue(), 16.5*scale.getValue(), 30, Vec3i(255,215,180) );
                 //helper::gl::drawTorus( coordMatrix, 4*scale.getValue(), 8.5*scale.getValue(), 30, Vec3i(255,215,180) );
@@ -301,6 +312,7 @@ void LeapMotionDriver::computeBBox(const core::ExecParams * params, bool /*onlyV
 
     Mat3x3d matrix;
     handPalmCoordinate.getValue().writeRotationMatrix(matrix);
+    rightToolCoordinates.getValue().writeRotationMatrix(matrix);
     Vec3d toFrontHandPalmDirection = Vec3d(matrix.col(0));
     double palmDiag = toFrontHandPalmDirection.mulscalar(20.0*scale.getValue()).norm() * sqrt(2.0);
 
@@ -323,47 +335,88 @@ void LeapMotionDriver::applyRotation (Rigid3dTypes::Coord* rigidToRotate)
 
 void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
 {
-    if (sofa::core::objectmodel::KeypressedEvent* ev = dynamic_cast<sofa::core::objectmodel::KeypressedEvent*>(event))
+    if (sofa::core::objectmodel::KeypressedEvent::checkEventType(event))
     {
-        if (ev->getKey() == 'I' || ev->getKey() == 'i')
+        sofa::core::objectmodel::KeypressedEvent *ev = static_cast<sofa::core::objectmodel::KeypressedEvent *> (event);
+        if (ev->getKey() == 67) // c
         {
             drawInteractionBox = !drawInteractionBox;
+            std::cout << "Interaction box toggled" << std::endl;
         }
 
-        /*Does it work ?*/
-        else if (ev->getKey() == 'Q' || ev->getKey() == 'q')
-        {
-            gestureType.setValue(TYPE_V_SIGN_AND_2ND_HAND);
-            gesturePosition.setValue(Vec3d(currentFrame,0,0));
-            gestureDirection.setValue(Vec3d(0,0,0));
+//        if (ev->getKey() == 'I' || ev->getKey() == 'i')
+//        {
+//            drawInteractionBox = !drawInteractionBox;
+//        }
 
-            lastGestureType = TYPE_V_SIGN_AND_2ND_HAND;
-            lastGestureFrameId = currentFrame;
-            lastGesturesFrameIds.at(TYPE_V_SIGN_AND_2ND_HAND).second = currentFrame;
-        }
+//        /*Does it work ?*/
+//        else if (ev->getKey() == 'Q' || ev->getKey() == 'q')
+//        {
+//            gestureType.setValue(TYPE_V_SIGN_AND_2ND_HAND);
+//            gesturePosition.setValue(Vec3d(currentFrame,0,0));
+//            gestureDirection.setValue(Vec3d(0,0,0));
+
+//            lastGestureType = TYPE_V_SIGN_AND_2ND_HAND;
+//            lastGestureFrameId = currentFrame;
+//            lastGesturesFrameIds.at(TYPE_V_SIGN_AND_2ND_HAND).second = currentFrame;
+//        }
     }
 
 
     if (dynamic_cast<sofa::simulation::AnimateBeginEvent *>(event))
     {
+//        std::cout << "Hand Palm = " << handPalmCoordinate.getValue()
+//                  << " ; Tool = " << rightToolCoordinates.getValue()
+//                  << std::endl;
 
 //----- Get hand palm coordinates
+//        if (leapConnected )
+//        {
+//            Hand rightHand = myListener.getRightHand();
+//            Vector3 handPalmPosition = Vector3(rightHand.palmPosition().toFloatPointer());
+//            Quat handPalmRotation = myListener.computeRotation(rightHand);
+
+//            Rigid3dTypes::Coord tmpHandPalmCoord = Rigid3dTypes::Coord(scale.getValue()*handPalmPosition, handPalmRotation);
+//            applyRotation(&tmpHandPalmCoord);
+//            tmpHandPalmCoord.getCenter() += translation.getValue();
+//            handPalmCoordinate.setValue(tmpHandPalmCoord);
+//        }
+
+//----- Get tool coordinates
         if (leapConnected )
         {
-            Vector3 handPalmPosition = Vector3(myListener.getStabilizedPalmPosition().toFloatPointer());
-            Quat handPalmRotation = myListener.getPalmRotation();
+            Tool rightTool = myListener.getRightTool();
+            if(rightTool.isValid())
+            {
+                Vector3 rightToolPosition = Vector3(myListener.getRightTool().tipPosition().toFloatPointer());
+                Vector3 rightToolDirection = Vector3(myListener.getRightTool().direction().toFloatPointer());
 
-            Rigid3dTypes::Coord tmpHandPalmCoord = Rigid3dTypes::Coord(scale.getValue()*handPalmPosition, handPalmRotation);
-            applyRotation(&tmpHandPalmCoord);
-            tmpHandPalmCoord.getCenter() += translation.getValue();
-            handPalmCoordinate.setValue(tmpHandPalmCoord);
+//                rightToolPosition[0] = -rightToolPosition[0];
+//                rightToolPosition[2] = -rightToolPosition[2];
+                rightToolDirection -= Vector3(0.0, 0.0, 0.785398);
+//                rightToolDirection = Vector3(rightToolDirection[0], -rightToolDirection[1], rightToolDirection[2]);
+//                rightToolDirection[1] = -rightToolDirection[1];
+//                rightToolDirection[0] = -rightToolDirection[0];
+
+                Quat rightToolRotation = Quat::createQuaterFromEuler( rightToolDirection );
+//                rightToolRotation += Quat(0.707, -0.038, 0.477+0.707, -0.877);
+//                Quat rightToolRotation = Quat(0,0,0,1);
+
+//                std::cout << "POSITION = " << myListener.getRightTool().tipPosition().toString() << " ; DIRECTION = " << myListener.getRightTool().direction().toString() << std::endl;
+
+                Rigid3dTypes::Coord tmpRightToolCoord = Rigid3dTypes::Coord(scale.getValue()*rightToolPosition, rightToolRotation);
+                applyRotation(&tmpRightToolCoord);
+                tmpRightToolCoord.getCenter() += translation.getValue();
+                rightToolCoordinates.setValue(tmpRightToolCoord);
+            }
         }
 
 //----- Get hand sphere
         if (leapConnected )
         {
-            Vector3 handSphereCenter = Vector3(myListener.getHandSphereCenter().toFloatPointer());
-            float handSphereRadius = myListener.getHandSphereRadius();
+            Hand rightHand = myListener.getRightHand();
+            Vector3 handSphereCenter = Vector3(rightHand.sphereCenter().toFloatPointer());
+            float handSphereRadius = rightHand.sphereRadius();
             Quat q = Quat().createQuaterFromEuler(rotation.getValue().mulscalar(M_PI / 180.0));
             Vec3d tmpHandSphereCenter = q.rotate(scale.getValue()*handSphereCenter);
             tmpHandSphereCenter += translation.getValue();
@@ -374,7 +427,7 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
 
 //----- Get fingers coordinates
 
-        int fingerCount = std::min(myListener.getFingers().count(),5);
+        int fingerCount = std::min(myListener.getRightHand().fingers().count(),5);
 
         //----begin finger registration init
         int registeredFingersCount = 0;
@@ -390,6 +443,7 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
         //----end finger registration init
 
         helper::WriteAccessor<Data<helper::vector<RigidCoord<3,double> > > > fingerCoords = fingersCoordinates;
+
         for(int i=0; i<15; i++)
         {
             fingerCoords[i] = handPalmCoordinate.getValue();
@@ -399,7 +453,7 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
         {
             nbFrame++;
 
-            Vec3d xAxis = Vec3d(myListener.getFingers()[i].direction().toFloatPointer());
+            Vec3d xAxis = Vec3d(myListener.getRightHand().fingers()[i].direction().toFloatPointer());
             xAxis.normalize();
             Vector3 yAxis;
             Vector3 zAxis(1.0, 0.0, 0.0);
@@ -411,18 +465,18 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
             zAxis = xAxis.cross(yAxis);
             zAxis.normalize();
 
-            Vec3d fingerPosition = Vec3d(myListener.getFingers()[i].stabilizedTipPosition().toFloatPointer());
+            Vec3d fingerPosition = Vec3d(myListener.getRightHand().fingers()[i].tipPosition().toFloatPointer());
             Quat fingerOrientation = Quat().createQuaterFromFrame(yAxis, zAxis, xAxis);
 
             Rigid3dTypes::Coord tmpFingerCoord = Rigid3dTypes::Coord(scale.getValue()*fingerPosition, fingerOrientation);
             applyRotation(&tmpFingerCoord);
             tmpFingerCoord.getCenter() += translation.getValue();
             fingerCoords[3*i] = tmpFingerCoord;
-            computeFingerJoints(i, &fingerCoords);
+//            computeFingerJoints(i, &fingerCoords);
 
             bool alreadyRegistered=false;
             int32_t fingerId;
-            fingerId = myListener.getFingers()[i].id();
+            fingerId = myListener.getRightHand().fingers()[i].id();
 
 
             //----begin finger registration
@@ -442,6 +496,10 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
                 tmpIds.insert(tmpIds.end(),fingerId);
 
         }//foreach finger
+
+        helper::WriteAccessor<Data<helper::vector<RigidCoord<3,double> > > > indexCoords = indexCoordinates;
+        indexCoords[0] = handPalmCoordinate.getValue();
+        indexCoords[1] = fingerCoords[3];
 
         for(size_t j=0; j<tmpIds.size(); j++)
         {
@@ -464,7 +522,7 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
 
 
 
-
+/*
 
 //--------------------------------  OUR Handle Gestures ----------------------------
 
@@ -520,6 +578,7 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
             }
         }
 
+
         // -------------------------- TYPE_V_SIGN_ Gesture ----------------------------
         static int lastFingerCount = 0, beginVSignFrame = 0, lastSecondHandFingerCount = 0, beginSecondHandFrame = 0;
         double distance;
@@ -549,7 +608,6 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
         }
 
         lastFingerCount = fingerCount;
-
 
         //2ND HAND
         if(myListener.getSecondHand().isValid() && myListener.getSecondHandFingers().count()>=4)
@@ -728,8 +786,12 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
                 } // isValid & stateSTOP
             } // for loop
         }
+*/
     } // AnimatedBeginEvent
 }
+
+
+
 
 int LeapMotionDriverClass = core::RegisterObject("LeapMotion device driver")
 .add< LeapMotionDriver >();

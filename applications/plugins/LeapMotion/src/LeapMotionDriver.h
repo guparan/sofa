@@ -84,10 +84,16 @@ public:
     Data< double > scale;
     Data< Vec3d > translation;
     Data< sofa::defaulttype::Vector3 > rotation;
+
     Data< Rigid3dTypes::Coord > handPalmCoordinate;
+    Data< Rigid3dTypes::Coord > rightToolCoordinates;
+
     Data< Vec3d > sphereCenter;
     Data< double > sphereRadius;
+
     Data< sofa::helper::vector< Rigid3dTypes::Coord > > fingersCoordinates;
+    Data< sofa::helper::vector< Rigid3dTypes::Coord > > indexCoordinates;
+
     Data< int > gestureType;
     Data< Vec3d > gesturePosition;
     Data< Vec3d > gestureDirection;

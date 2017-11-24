@@ -53,41 +53,72 @@ void MyListener::update( Leap::Frame /*frame*/ )
     fUpdateFPS = (fUpdateDT > 0) ? 1.0f/fUpdateDT : 0.0f;
 }
 
+Quat MyListener::computeRotation(Hand hand)
+{
+    Vec3d palmNormal  = Vec3d(hand.palmNormal().toFloatPointer());
+    palmNormal.normalize();
+
+    Vec3d palmToTipDirection = Vec3d(hand.direction().toFloatPointer());
+    palmToTipDirection.normalize();
+
+    Vec3d vecForFrameCreation = Vec3d(palmNormal).cross(palmToTipDirection);
+    vecForFrameCreation.normalize();
+
+    Quat palmOrientation = Quat();
+    palmOrientation.fromFrame(palmToTipDirection, vecForFrameCreation, palmNormal);
+    palmOrientation.normalize();
+
+    return palmOrientation;
+}
+
 void MyListener::onFrame(const Controller& controller)
 {
     frame = controller.frame();
     update( frame );
     currentFramesPerSecond = fUpdateFPS;//100.0;//frame.currentFramesPerSecond();
 
-    if (!frame.hands().isEmpty())
-    {
-	//Store Hands
-	hand = frame.hands()[0];
-	interactionBox = frame.interactionBox();
+//    if (!frame.hands().isEmpty())
+//    {
+//        //Store Hands
+//        hand = frame.hands()[0];
+//        interactionBox = frame.interactionBox();
 
-	//Store palm hand orientation from Leap Motion
-	Vec3d palmNormal  = Vec3d(hand.palmNormal().toFloatPointer());
-	palmNormal.normalize();
-	Vec3d palmToTipDirection = Vec3d(hand.direction().toFloatPointer());
-	palmToTipDirection.normalize();
-	Vec3d vecForFrameCreation = Vec3d(palmNormal).cross(palmToTipDirection);
-	vecForFrameCreation.normalize();
-	palmOrientation = Quat();
-	palmOrientation.fromFrame(palmToTipDirection, vecForFrameCreation, palmNormal);
-	palmOrientation.normalize();
-    }
+//        //Store palm hand orientation from Leap Motion
+//        Vec3d palmNormal  = Vec3d(hand.palmNormal().toFloatPointer());
+//        palmNormal.normalize();
 
-    gestures = frame.gestures();
-    translation = hand.translation(controller.frame(10));
+//        Vec3d palmToTipDirection = Vec3d(hand.direction().toFloatPointer());
+//        palmToTipDirection.normalize();
 
-    if(frame.hands().count()>1)
-    {
-            secondHand = frame.hands()[1];
-    }
-    else
-    {
-            secondHand = Hand().invalid();
-    }
+//        Vec3d vecForFrameCreation = Vec3d(palmNormal).cross(palmToTipDirection);
+//        vecForFrameCreation.normalize();
+
+//        palmOrientation = Quat();
+//        palmOrientation.fromFrame(palmToTipDirection, vecForFrameCreation, palmNormal);
+//        palmOrientation.normalize();
+//    }
+
+//    gestures = frame.gestures();
+//    translation = hand.translation(controller.frame(10));
+
+//    if(frame.hands().count()>1)
+//    {
+//        secondHand = frame.hands()[1];
+//    }
+//    else
+//    {
+//        secondHand = Hand().invalid();
+//    }
+
+//    if(!frame.hands().isEmpty())
+//    {
+//        std::cout << "[LEAP] HAND DETECTED: " << frame.hands().rightmost().palmPosition().toString() << std::endl;
+//    }
+
+//    if (!frame.tools().isEmpty())
+//    {
+//        std::cout << "[LEAP] RIGHT TOOL DETECTED: " << frame.tools().rightmost().tipPosition().toString() << std::endl;
+//    }
 }
 
 void MyListener::onFocusGained(const Controller& ) {
