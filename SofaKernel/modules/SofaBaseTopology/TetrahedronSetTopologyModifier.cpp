@@ -78,6 +78,10 @@ void TetrahedronSetTopologyModifier::addTetrahedra(const sofa::helper::vector<Te
 
     // inform other objects that the edges are already added
     propagateTopologicalChanges();
+
+    m_container->clearTetrahedraAroundEdge();
+    m_container->clearTetrahedraAroundTriangle();
+    m_container->clearTetrahedraAroundVertex();
 }
 
 
@@ -604,6 +608,10 @@ void TetrahedronSetTopologyModifier::removeTetrahedra(const sofa::helper::vector
     m_container->checkTopology();
 
     m_container->addRemovedTetraIndex(tetrahedraIds_filtered);
+
+    m_container->clearTetrahedraAroundEdge();
+    m_container->clearTetrahedraAroundTriangle();
+    m_container->clearTetrahedraAroundVertex();
 }
 
 void TetrahedronSetTopologyModifier::removeItems(const sofa::helper::vector< unsigned int >& items)

@@ -191,7 +191,6 @@ void TetrahedronSetTopologyAlgorithms< DataTypes >::subDivideTetrahedronsWithPla
 
     //To be added components
     sofa::helper::vector<Tetra>			toBeAddedTetra;
-    sofa::helper::vector<TetraID>		toBeAddedTetraIndex;
 
     //To be removed components
     sofa::helper::vector<TetraID>		toBeRemovedTetraIndex;
@@ -252,21 +251,15 @@ void TetrahedronSetTopologyAlgorithms< DataTypes >::subDivideTetrahedronsWithPla
         toBeRemovedTetraIndex.push_back(intersectedTetras[i]);
     }
 
-    for(int i=0; i<nbTobeAddedTetras; i++)
-        toBeAddedTetraIndex.push_back(nbTetra+i);
-
-    //tetrahedron addition
-    m_modifier->addTetrahedraProcess(toBeAddedTetra);
-    m_modifier->addTetrahedraWarning((unsigned int)toBeAddedTetra.size(), (const sofa::helper::vector< Tetra >&) toBeAddedTetra, toBeAddedTetraIndex);
-
-    m_modifier->propagateTopologicalChanges();
 
     //tetrahedron removal
     m_modifier->removeTetrahedra(toBeRemovedTetraIndex);
-    m_modifier->notifyEndingEvent();
+
+    //tetrahedron addition
+    m_modifier->addTetrahedra(toBeAddedTetra);
     m_modifier->propagateTopologicalChanges();
 
-    sout << "NbCutElement=" << toBeRemovedTetraIndex.size() << " NbAddedElement=" << toBeAddedTetraIndex.size() << sendl;
+    m_modifier->notifyEndingEvent();
 }
 
 template<class DataTypes>
