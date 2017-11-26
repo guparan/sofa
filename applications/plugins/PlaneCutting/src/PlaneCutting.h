@@ -32,7 +32,8 @@ private:
     sofa::core::objectmodel::Data<sofa::defaulttype::Vec3d> m_plane_corner_1;
     sofa::core::objectmodel::Data<sofa::defaulttype::Vec3d> m_plane_corner_2;
     sofa::core::objectmodel::Data<sofa::defaulttype::Vec3d> m_plane_corner_3;
-
+    sofa::core::objectmodel::Data<sofa::defaulttype::Vec3d> m_plane_center;
+    sofa::core::objectmodel::Data<sofa::defaulttype::Vec3d> m_plane_normal;
 
     sofa::core::topology::BaseMeshTopology *m_topology;
     sofa::component::topology::TetrahedronSetTopologyModifier *m_topology_modifier;
@@ -40,9 +41,8 @@ private:
     sofa::component::topology::TetrahedronSetTopologyCuttingAlgorithms<DataTypes> *m_topology_algorithms;
     sofa::core::behavior::MechanicalState<DataTypes> *m_state;
 
-    sofa::defaulttype::Vec3d m_plane_center;
-    sofa::defaulttype::Vec3d m_plane_normal;
     sofa::defaulttype::Vec3d m_plane_corner_4;
+    sofa::defaulttype::Vec3d m_plane_normal_initial;
 
     sofa::helper::vector<sofa::defaulttype::Vector3> intersections_points;
 };

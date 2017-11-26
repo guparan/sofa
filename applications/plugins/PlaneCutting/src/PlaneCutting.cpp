@@ -9,9 +9,13 @@ PlaneCutting::PlaneCutting()
     : m_plane_corner_1(initData(&m_plane_corner_1, sofa::defaulttype::Vector3(1, 0, 0), "plane_corner_1",
                                 "Plane's first corner position. The diagonal must be between this point and the third."))
     , m_plane_corner_2(initData(&m_plane_corner_2, sofa::defaulttype::Vector3(0, 0, 0), "plane_corner_2",
-                                "Plane's second corner position.")), m_plane_corner_3(
-        initData(&m_plane_corner_3, sofa::defaulttype::Vector3(0, 1, 0), "plane_corner_3",
+                                "Plane's second corner position."))
+    , m_plane_corner_3(initData(&m_plane_corner_3, sofa::defaulttype::Vector3(0, 1, 0), "plane_corner_3",
                  "Plane's third corner position. The diagonal must be between this point and the first."))
+    , m_plane_center(initData(&m_plane_center, sofa::defaulttype::Vector3(0.5, 0.5, 0), "plane_center",
+                 "Plane's center"))
+    , m_plane_normal(initData(&m_plane_normal, sofa::defaulttype::Vector3(1.0, 1.0, 1.0), "plane_normal",
+                 "Plane's normal"))
 {
     this->f_listening.setValue(true);
 }
@@ -66,19 +70,20 @@ void PlaneCutting::reinit()
         goto error;
     }
     // Locate the center of the plane
-    m_plane_center = m_plane_corner_1.getValue() + (m_plane_corner_3.getValue() - m_plane_corner_1.getValue()) / 2;
-    m_plane_corner_4 = m_plane_corner_2.getValue() + (m_plane_center - m_plane_corner_2.getValue()) * 2;
-    m_plane_normal = (m_plane_corner_3.getValue() - m_plane_corner_2.getValue()).cross(
-        m_plane_corner_1.getValue() - m_plane_corner_2.getValue());
-
-    m_plane_normal.normalize();
+    m_plane_center.setValue(m_plane_corner_1.getValue() + (m_plane_corner_3.getValue() - m_plane_corner_1.getValue()) / 2);
+    m_plane_corner_4 = m_plane_corner_2.getValue() + (m_plane_center.getValue() - m_plane_corner_2.getValue()) * 2;
+    m_plane_normal.setValue((m_plane_corner_3.getValue() - m_plane_corner_2.getValue()).cross(
+        m_plane_corner_1.getValue() - m_plane_corner_2.getValue()));
+    m_plane_normal_initial = m_plane_normal.getValue();
+    m_plane_normal_initial.normalize();
+    m_plane_normal.setValue(m_plane_normal_initial);
 
     std::cout << "Corner 1 : " << m_plane_corner_1.getValue() << std::endl;
     std::cout << "Corner 2 : " << m_plane_corner_2.getValue() << std::endl;
     std::cout << "Corner 3 : " << m_plane_corner_3.getValue() << std::endl;
     std::cout << "Corner 4 : " << m_plane_corner_4 << std::endl;
-    std::cout << "Center   : " << m_plane_center << std::endl;
-    std::cout << "Normal   : " << m_plane_normal << std::endl;
+    std::cout << "Center   : " << m_plane_center.getValue() << std::endl;
+    std::cout << "Normal   : " << m_plane_normal.getValue() << std::endl;
 
     goto success;
 
@@ -138,8 +143,8 @@ void PlaneCutting::handleEvent(sofa::core::objectmodel::Event *event)
                 m_plane_corner_3.setValue(m_plane_corner_3.getValue() + sofa::defaulttype::Vector3(0, 0, 0.1));
                 break;
         }
-        m_plane_center = m_plane_corner_1.getValue() + (m_plane_corner_3.getValue() - m_plane_corner_1.getValue()) / 2;
-        m_plane_corner_4 = m_plane_corner_2.getValue() + (m_plane_center - m_plane_corner_2.getValue()) * 2;
+        m_plane_center.setValue(m_plane_corner_1.getValue() + (m_plane_corner_3.getValue() - m_plane_corner_1.getValue()) / 2);
+        m_plane_corner_4 = m_plane_corner_2.getValue() + (m_plane_center.getValue() - m_plane_corner_2.getValue()) * 2;
     }
 
 }
@@ -152,7 +157,7 @@ void PlaneCutting::draw(const sofa::core::visual::VisualParams *vparams)
     vparams->drawTool()->drawQuads(
         {m_plane_corner_1.getValue(), m_plane_corner_2.getValue(), m_plane_corner_3.getValue(), m_plane_corner_4},
         sofa::defaulttype::Vec<4, float>(1, 0, 0, 1));
-    vparams->drawTool()->drawArrow(m_plane_center, m_plane_center + m_plane_normal * size / 4.0, (float) (size * 0.01),
+    vparams->drawTool()->drawArrow(m_plane_center.getValue(), m_plane_center.getValue() + m_plane_normal.getValue() * size / 4.0, (float) (size * 0.01),
                                    sofa::defaulttype::Vec<4, float>(0, 0, 1, 1));
 
     vparams->drawTool()->drawPoints(intersections_points, 10.f, sofa::defaulttype::Vec4f(0, 1, 0, 1));
