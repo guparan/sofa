@@ -13,6 +13,14 @@ namespace component
 namespace topology
 {
 
+
+template<class DataTypes>
+TetrahedronSetTopologyCuttingAlgorithms<DataTypes>::TetrahedronSetTopologyCuttingAlgorithms() :
+    m_removeTetra(initData(&m_removeTetra, (bool)false, "removeTetra", "Remove tetra method, else cut"))
+{
+
+}
+
 template<class DataTypes>
 void TetrahedronSetTopologyCuttingAlgorithms<DataTypes>::init()
 {
@@ -22,6 +30,7 @@ void TetrahedronSetTopologyCuttingAlgorithms<DataTypes>::init()
         serr << "No mechanical state found while initialize the TetrahedronSetTopologyCuttingAlgorithms component"
              << sendl;
     }
+    listTetrasCount.clear();
 }
 
 template<class DataTypes>
@@ -106,6 +115,9 @@ unsigned int TetrahedronSetTopologyCuttingAlgorithms<DataTypes>::subDivideTetrah
     sofa::helper::vector<sofa::core::topology::Topology::EdgeID> intersectedEdges;
     const auto &positions = m_state->readPositions();
 
+    listTetrasCount.clear();
+    listTetrasCount.resize(this->m_container->getNbTetrahedra());
+
     for (unsigned int edge_id = 0; edge_id < this->m_container->getNumberOfEdges(); ++edge_id) {
 
         const Coord
@@ -117,13 +129,73 @@ unsigned int TetrahedronSetTopologyCuttingAlgorithms<DataTypes>::subDivideTetrah
         if (RayIntersectsParallelogram(p0, p1, p2, edge_p0, edge_p1, intersection)) {
             intersections.push_back(intersection);
             intersectedEdges.push_back(edge_id);
+
+            if(m_removeTetra.getValue())
+            {
+                sofa::core::topology::BaseMeshTopology::TetrahedraAroundEdge tetrasIdx = this->m_container->getTetrahedraAroundEdge(edge_id);
+                for( unsigned int j=0; j<tetrasIdx.size(); j++)
+                {
+                    listTetrasCount[tetrasIdx[j]] ++;
+                }
+
+            }
         }
     }
 
-    if (intersections.size() > 0 && intersections.size() == intersectedEdges.size()) {
-        this->subDivideTetrahedronsWithPlane(intersections, intersectedEdges, p1, n);
-        return 1;
-    } else {
+    if (intersections.size() > 0 && intersections.size() == intersectedEdges.size())
+    {
+        if(!m_removeTetra.getValue())
+        {
+            this->subDivideTetrahedronsWithPlane(intersections, intersectedEdges, p1, n);
+            return 1;
+        }
+        else
+        {
+            sofa::helper::vector<sofa::core::topology::BaseMeshTopology::TetraID> listOfTetra;
+            sofa::helper::vector<sofa::core::topology::BaseMeshTopology::PointID> listOfPoints;
+
+            for( unsigned int j=0; j<listTetrasCount.size(); j++)
+            {
+                if(listTetrasCount[j] > 1)
+                    listOfTetra.push_back(j);
+            }
+
+            for( unsigned int j=0; j<listOfTetra.size(); j++)
+            {
+                Tetra tet =this->m_container->getTetra(listOfTetra[j]);
+
+                for( unsigned int k=0; k<4; k++)
+                {
+                    sofa::core::topology::BaseMeshTopology::TetrahedraAroundVertex vTetras = this->m_container->getTetrahedraAroundVertex( tet[k] );
+                    if(vTetras.size()<2)
+                    {
+                        for( unsigned int l=0; l<vTetras.size(); l++)
+                        {
+                            listOfPoints.push_back(vTetras[l]);
+                        }
+                    }
+                }
+            }
+
+
+            this->m_modifier->propagateTopologicalChanges();
+
+            this->m_modifier->removeTetrahedra(listOfTetra);
+
+            this->m_modifier->propagateTopologicalChanges();
+
+            //this->m_modifier->removePointsWarning(listOfPoints);
+            //this->m_modifier->propagateTopologicalChanges();
+            //this->m_modifier->removePointsProcess(listOfPoints);
+            //renumberPoints
+
+            this->m_modifier->notifyEndingEvent();
+
+            return 1;
+        }
+    }
+    else
+    {
         msg_error() << "Mismatch";
         return 0;
     }

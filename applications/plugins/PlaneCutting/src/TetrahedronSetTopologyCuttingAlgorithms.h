@@ -26,10 +26,12 @@ public:
     typedef typename DataTypes::VecCoord VecCoord;
     typedef core::topology::BaseMeshTopology::Tetra Tetra;
 
-    TetrahedronSetTopologyCuttingAlgorithms() : TetrahedronSetTopologyAlgorithms<DataTypes>()
-    {}
+    TetrahedronSetTopologyCuttingAlgorithms();
 
     void init() override;
+
+    sofa::core::objectmodel::Data<bool> m_removeTetra;
+    sofa::helper::vector<int> listTetrasCount;
 
 /**
  * @brief Subdivide tetrahedron #tetra_id with the intersection of the parallelogram defined by the triangle p0 p1 p2. The triangle's hypotenuse must be the vector p0p2.

@@ -16,6 +16,8 @@ PlaneCutting::PlaneCutting()
                  "Plane's center"))
     , m_plane_normal(initData(&m_plane_normal, sofa::defaulttype::Vector3(1.0, 1.0, 1.0), "plane_normal",
                  "Plane's normal"))
+    , m_removeTetra(initData(&m_removeTetra, (bool) false, "removeTetra", "Remove tetra method, else cut"))
+    , m_showCutting(initData(&m_showCutting, (bool) true, "showCutting", "Show plane and intersected points"))
 {
     this->f_listening.setValue(true);
 }
@@ -85,6 +87,7 @@ void PlaneCutting::reinit()
     std::cout << "Center   : " << m_plane_center.getValue() << std::endl;
     std::cout << "Normal   : " << m_plane_normal.getValue() << std::endl;
 
+    m_trigger = false;
     goto success;
 
     error:
@@ -97,6 +100,20 @@ void PlaneCutting::reinit()
 
 void PlaneCutting::handleEvent(sofa::core::objectmodel::Event *event)
 {
+    if (dynamic_cast<sofa::simulation::AnimateBeginEvent *>(event))
+    {
+        if(m_trigger)
+        {
+            sofa::component::topology::TetrahedronSetTopologyCuttingAlgorithms<sofa::defaulttype::Vec3dTypes> *algo =
+                static_cast<sofa::component::topology::TetrahedronSetTopologyCuttingAlgorithms<sofa::defaulttype::Vec3dTypes> *>(m_topology_algorithms);
+            intersections_points.clear();
+            algo->subDivideTetrahedronsWithParallelogram(
+                m_plane_corner_1.getValue(),
+                m_plane_corner_2.getValue(),
+                m_plane_corner_3.getValue(),
+                intersections_points);
+        }
+    }
     // If the event is an KeypressedEvent
     if (sofa::core::objectmodel::KeypressedEvent::checkEventType(event)) {
         sofa::component::topology::TetrahedronSetTopologyCuttingAlgorithms<sofa::defaulttype::Vec3dTypes> *algo =
@@ -125,12 +142,24 @@ void PlaneCutting::handleEvent(sofa::core::objectmodel::Event *event)
                 m_plane_corner_3.setValue(m_plane_corner_3.getValue() + sofa::defaulttype::Vector3(0, -0.1, 0));
                 break;
             case 67: // c
-                intersections_points.clear();
-                algo->subDivideTetrahedronsWithParallelogram(
-                    m_plane_corner_1.getValue(),
-                    m_plane_corner_2.getValue(),
-                    m_plane_corner_3.getValue(),
-                    intersections_points);
+                if(m_removeTetra.getValue())
+                {
+                    if(m_trigger==true)
+                        m_trigger=false;
+                    else
+                        m_trigger=true;
+                }
+                else
+                {
+                    sofa::component::topology::TetrahedronSetTopologyCuttingAlgorithms<sofa::defaulttype::Vec3dTypes> *algo =
+                        static_cast<sofa::component::topology::TetrahedronSetTopologyCuttingAlgorithms<sofa::defaulttype::Vec3dTypes> *>(m_topology_algorithms);
+                    intersections_points.clear();
+                    algo->subDivideTetrahedronsWithParallelogram(
+                        m_plane_corner_1.getValue(),
+                        m_plane_corner_2.getValue(),
+                        m_plane_corner_3.getValue(),
+                        intersections_points);
+                }
                 break;
             case 74: // j
                 m_plane_corner_1.setValue(m_plane_corner_1.getValue() + sofa::defaulttype::Vector3(0, 0, -0.1));
@@ -151,18 +180,21 @@ void PlaneCutting::handleEvent(sofa::core::objectmodel::Event *event)
 
 void PlaneCutting::draw(const sofa::core::visual::VisualParams *vparams)
 {
-    double size = (m_plane_corner_1.getValue() - m_plane_corner_2.getValue()).norm();
+    if(m_showCutting.getValue())
+    {
+        double size = (m_plane_corner_1.getValue() - m_plane_corner_2.getValue()).norm();
 
-    vparams->drawTool()->setLightingEnabled(true); //Enable lightning
-    vparams->drawTool()->drawQuads(
-        {m_plane_corner_1.getValue(), m_plane_corner_2.getValue(), m_plane_corner_3.getValue(), m_plane_corner_4},
-        sofa::defaulttype::Vec<4, float>(1, 0, 0, 1));
-    vparams->drawTool()->drawArrow(m_plane_center.getValue(), m_plane_center.getValue() + m_plane_normal.getValue() * size / 4.0, (float) (size * 0.01),
-                                   sofa::defaulttype::Vec<4, float>(0, 0, 1, 1));
+        vparams->drawTool()->setLightingEnabled(true); //Enable lightning
+        vparams->drawTool()->drawQuads(
+            {m_plane_corner_1.getValue(), m_plane_corner_2.getValue(), m_plane_corner_3.getValue(), m_plane_corner_4},
+            sofa::defaulttype::Vec<4, float>(1, 0, 0, 1));
+        vparams->drawTool()->drawArrow(m_plane_center.getValue(), m_plane_center.getValue() + m_plane_normal.getValue() * size / 4.0, (float) (size * 0.01),
+                                       sofa::defaulttype::Vec<4, float>(0, 0, 1, 1));
 
-    vparams->drawTool()->drawPoints(intersections_points, 10.f, sofa::defaulttype::Vec4f(0, 1, 0, 1));
+        vparams->drawTool()->drawPoints(intersections_points, 10.f, sofa::defaulttype::Vec4f(0, 1, 0, 1));
 
-    vparams->drawTool()->setLightingEnabled(false); //Disable lightning
+        vparams->drawTool()->setLightingEnabled(false); //Disable lightning
+    }
 }
 
 SOFA_DECL_CLASS(PlaneCutting)
