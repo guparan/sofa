@@ -156,7 +156,7 @@ unsigned int TetrahedronSetTopologyCuttingAlgorithms<DataTypes>::subDivideTetrah
 
             for( unsigned int j=0; j<listTetrasCount.size(); j++)
             {
-                if(listTetrasCount[j] > 1)
+                if(listTetrasCount[j] > 0)
                     listOfTetra.push_back(j);
             }
 
