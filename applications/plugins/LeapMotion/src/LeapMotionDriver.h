@@ -94,6 +94,10 @@ public:
     Data< sofa::helper::vector< Rigid3dTypes::Coord > > fingersCoordinates;
     Data< sofa::helper::vector< Rigid3dTypes::Coord > > indexCoordinates;
 
+    Data< Vec3d > plane_corner_1;
+    Data< Vec3d > plane_corner_2;
+    Data< Vec3d > plane_corner_3;
+
     Data< int > gestureType;
     Data< Vec3d > gesturePosition;
     Data< Vec3d > gestureDirection;

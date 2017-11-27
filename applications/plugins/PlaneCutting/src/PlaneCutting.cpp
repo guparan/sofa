@@ -102,6 +102,8 @@ void PlaneCutting::handleEvent(sofa::core::objectmodel::Event *event)
 {
     if (dynamic_cast<sofa::simulation::AnimateBeginEvent *>(event))
     {
+        m_plane_center.setValue(m_plane_corner_1.getValue() + (m_plane_corner_3.getValue() - m_plane_corner_1.getValue()) / 2);
+        m_plane_corner_4 = m_plane_corner_2.getValue() + (m_plane_center.getValue() - m_plane_corner_2.getValue()) * 2;
         if(m_trigger)
         {
             sofa::component::topology::TetrahedronSetTopologyCuttingAlgorithms<sofa::defaulttype::Vec3dTypes> *algo =
