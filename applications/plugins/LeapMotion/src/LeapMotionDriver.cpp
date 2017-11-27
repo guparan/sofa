@@ -415,9 +415,9 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
 
 //                std::cout << "POSITION = " << rightToolPosition << " ; DIRECTION = " << rightToolDirection << " ; QUAT = " << rightToolRotation << " ; COORD = " << rightToolCoordinates.getValue() << std::endl;
 
-                Vector3 pc1 = rightToolCoordinates.getValue().projectPoint(Vector3(0, -0.1, -0.2));
-                Vector3 pc2 = rightToolCoordinates.getValue().projectPoint(Vector3(0, 0.1, -0.2));
-                Vector3 pc3 = rightToolCoordinates.getValue().projectPoint(Vector3(0, 0.1, 0.2));
+                Vector3 pc1 = rightToolCoordinates.getValue().projectPoint(Vector3(-0.2, 0, -0.4));
+                Vector3 pc2 = rightToolCoordinates.getValue().projectPoint(Vector3(0.2, 0, -0.4));
+                Vector3 pc3 = rightToolCoordinates.getValue().projectPoint(Vector3(0.2, 0, 0.4));
 
 //                Vector3 pc1 = rightToolCoordinates.getValue().projectPoint(Vector3(0, -1, -2));
 //                Vector3 pc2 = rightToolCoordinates.getValue().projectPoint(Vector3(0, 1, -2));
