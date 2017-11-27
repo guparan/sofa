@@ -59,6 +59,10 @@ LeapMotionDriver::LeapMotionDriver()
     , fingersCoordinates(initData(&fingersCoordinates, sofa::helper::vector<Rigid3dTypes::Coord>(1,Rigid3dTypes::Coord(sofa::defaulttype::Vector3(0,0,0),Quat(0,0,0,1))), "fingersCoordinates","Coordinate of the fingers detected by the Leap Motion"))
     , indexCoordinates(initData(&indexCoordinates, sofa::helper::vector<Rigid3dTypes::Coord>(0,Rigid3dTypes::Coord(sofa::defaulttype::Vector3(0,0,0),Quat(0,0,0,1))), "indexCoordinates","Coordinate of the index detected by the Leap Motion"))
 
+    , plane_corner_1(initData(&plane_corner_1, "plane_corner_1","Radius of the sphere of the hand detected by the Leap Motion"))
+    , plane_corner_2(initData(&plane_corner_2, "plane_corner_2","Radius of the sphere of the hand detected by the Leap Motion"))
+    , plane_corner_3(initData(&plane_corner_3, "plane_corner_3","Radius of the sphere of the hand detected by the Leap Motion"))
+
     , gestureType(initData(&gestureType, int(-1) ,"gestureType","Type of the current gesture detected by the Leap Motion"))
     , gesturePosition(initData(&gesturePosition, "gesturePosition","Position of the current gesture detected by the Leap Motion"))
     , gestureDirection(initData(&gestureDirection, "gestureDirection","Direction of the current gesture detected by the Leap Motion"))
@@ -390,7 +394,7 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
             {
                 Vector3 rightToolPosition = Vector3(myListener.getRightTool().tipPosition().toFloatPointer());
                 Vector3 rightToolDirection = Vector3(myListener.getRightTool().direction().toFloatPointer());
-
+                rightToolDirection.normalize();
 //                rightToolPosition[0] = -rightToolPosition[0];
 //                rightToolPosition[2] = -rightToolPosition[2];
                 rightToolDirection -= Vector3(0.0, 0.0, 0.785398);
@@ -408,6 +412,24 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
                 applyRotation(&tmpRightToolCoord);
                 tmpRightToolCoord.getCenter() += translation.getValue();
                 rightToolCoordinates.setValue(tmpRightToolCoord);
+
+//                std::cout << "POSITION = " << rightToolPosition << " ; DIRECTION = " << rightToolDirection << " ; QUAT = " << rightToolRotation << " ; COORD = " << rightToolCoordinates.getValue() << std::endl;
+
+                Vector3 pc1 = rightToolCoordinates.getValue().projectPoint(Vector3(0, -0.1, -0.2));
+                Vector3 pc2 = rightToolCoordinates.getValue().projectPoint(Vector3(0, 0.1, -0.2));
+                Vector3 pc3 = rightToolCoordinates.getValue().projectPoint(Vector3(0, 0.1, 0.2));
+
+//                Vector3 pc1 = rightToolCoordinates.getValue().projectPoint(Vector3(0, -1, -2));
+//                Vector3 pc2 = rightToolCoordinates.getValue().projectPoint(Vector3(0, 1, -2));
+//                Vector3 pc3 = rightToolCoordinates.getValue().projectPoint(Vector3(0, 1, 2));
+
+//                pc1.normalize();
+//                pc2.normalize();
+//                pc3.normalize();
+
+                plane_corner_1.setValue(pc1);
+                plane_corner_2.setValue(pc2);
+                plane_corner_3.setValue(pc3);
             }
         }
 
