@@ -143,7 +143,7 @@ void PlaneCutting::handleEvent(sofa::core::objectmodel::Event *event)
                 m_plane_corner_2.setValue(m_plane_corner_2.getValue() + sofa::defaulttype::Vector3(0, -0.1, 0));
                 m_plane_corner_3.setValue(m_plane_corner_3.getValue() + sofa::defaulttype::Vector3(0, -0.1, 0));
                 break;
-            case 67: // c
+            case 76: // L
                 if(m_removeTetra.getValue())
                 {
                     if(m_trigger==true)
