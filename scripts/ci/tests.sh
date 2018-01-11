@@ -4,7 +4,7 @@
 # to be the executables in bin/ that match *_test, and saves the results in XML
 # files, that can be understood by Jenkins.
 
-set -o errexit
+#set -o errexit
 
 # Disable colored output to avoid dirtying the log
 export GTEST_COLOR=no
@@ -59,11 +59,15 @@ initialize-testing() {
 }
 
 fix-test-report() {
+    report_file="$1"
+
     # Little fix: Googletest marks skipped tests with a 'status="notrun"' attribute,
     # but the JUnit XML understood by Jenkins requires a '<skipped/>' element instead.
     # source: http://stackoverflow.com/a/14074664
     sed -i'.bak' 's:\(<testcase [^>]*status="notrun".*\)/>:\1><skipped/></testcase>:' "$1"
     rm -f "$1.bak"
+    
+    # TODO: search for CDATA on failed test and replace with right piece of output
 }
 
 
@@ -83,11 +87,11 @@ run-single-test-subtests() {
     rm -f "$output_dir/$test/subtests.tmp.txt"
 
     # Run the subtests
-    printf "\n\nRunning $test subtests\n"
+    echo "- $test subtests"
     local i=1;
     while read subtest; do
         local output_file="$output_dir/$test/$subtest/report.xml"
-        local test_cmd="$build_dir/bin/$test --gtest_output=xml:$output_file --gtest_filter=$subtest 2>&1"
+        local test_cmd="$build_dir/bin/$test --gtest_output=xml:$output_file --gtest_filter=$subtest"
         mkdir -p "$output_dir/$test/$subtest"
         echo "$test_cmd" >> "$output_dir/$test/$subtest/command.txt"
 
@@ -102,24 +106,25 @@ run-single-test-subtests() {
         fi
 
         begin_millisec="$(($(bash -c $date_nanosec_cmd)/1000000))"
-        bash -c "$test_cmd" | tee "$output_dir/$test/$subtest/output.txt" ; pipestatus="${PIPESTATUS[0]}"
+        echo "    - $test.$subtest"
+        $test_cmd > "$output_dir/$test/$subtest/output.txt" 2>&1 ; status=$?
         end_millisec="$(($(bash -c $date_nanosec_cmd)/1000000))"
 
         elapsed_millisec="$(($end_millisec - $begin_millisec))"
         elapsed_sec="$(($elapsed_millisec/1000)).$(printf "%03d" $elapsed_millisec)"
 
-        echo "$pipestatus" > "$output_dir/$test/$subtest/status.txt"
-        if [ $pipestatus -gt 1 ]; then # this subtest crashed (0:OK 1:failure >1:crash)
+        echo "$status" > "$output_dir/$test/$subtest/status.txt"
+        if [ $status -gt 1 ]; then # this subtest crashed (0:OK 1:failure >1:crash)
             IFS='.' read -r -a array <<< "$subtest"
             test_name="${array[0]}"
             subtest_name="${array[1]}"
-            echo "$0: error: $subtest ended with code $pipestatus" >&2
+            echo "$0: error: $subtest ended with code $status" >&2
             # Write the XML output by hand
             echo '<?xml version="1.0" encoding="UTF-8"?>
 <testsuites tests="1" failures="0" disabled="0" errors="1" time="-'"$elapsed_sec"'" name="AllTests">
     <testsuite name="'"$test_name"'" tests="1" failures="0" disabled="0" errors="1" time="-'"$elapsed_sec"'">
         <testcase name="'"$subtest_name"'" type_param="" status="run" time="-'"$elapsed_sec"'" classname="'"$test_name"'">
-            <error message="[CRASH] '"$subtest"' ended with code '"$pipestatus"'">
+            <error message="[CRASH] '"$subtest"' ended with code '"$status"'">
 <![CDATA['"$(cat $output_dir/$test/$subtest/output.txt)"']]>
             </error>
         </testcase>
@@ -140,16 +145,14 @@ run-single-test-subtests() {
 run-single-test() {
     local test=$1
     local output_file="$output_dir/$test/report.xml"
-    local test_cmd="$build_dir/bin/$test --gtest_output=xml:$output_file 2>&1"
+    local test_cmd="$build_dir/bin/$test --gtest_output=xml:$output_file"
     # local timeout=900
 
     echo "$test_cmd" > "$output_dir/$test/command.txt"
     # echo "Running $test with a timeout of $timeout seconds"
-    printf "\n\nRunning $test\n"
-    rm -f report.xml
+    # rm -f report.xml
     # "$src_dir/scripts/ci/timeout.sh" test "$test_cmd" $timeout | tee $output_dir/$test/output.txt
-    bash -c "$test_cmd" | tee $output_dir/$test/output.txt
-    status="${PIPESTATUS[0]}"
+    $test_cmd > "$output_dir/$test/output.txt" 2>&1 ; status=$?
     echo "$status" > "$output_dir/$test/status.txt"
     # if [[ -e test.timeout ]]; then
     #     echo 'Timeout!'
@@ -175,7 +178,9 @@ run-single-test() {
 }
 
 run-all-tests() {
+    echo "Unit testing in progress..."
     while read test; do
+        echo "- $test"
         run-single-test "$test"
     done < "$output_dir/tests.txt"
 }
