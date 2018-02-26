@@ -20,6 +20,9 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 #include "deprecated.h"
+
+#include <sstream>
+
 namespace sofa
 {
 
@@ -44,6 +47,35 @@ std::map<std::string, std::string>  messages =
                       " reconsider this component for future re-integration. "
     },
 } ;
+
+
+const std::string getMessage(const std::vector<std::string>& infos)
+{
+    if(infos.empty()) return "";
+    std::stringstream output;
+
+    if(infos[0] == "removed")
+    {
+        output << "This component has been removed. Please consider updating your scene."
+                  "If this component is crucial to you please report that to sofa-dev@ so that we can  "
+                  "reconsider this component for future re-integration. ";
+    }
+    else if(infos[0] == "pluginized")
+    {
+        output << "This component has been moved into a plugin. To continue using this component you need "
+                  "to update you scene and add " << infos[1]?infos[1]:"";
+    }
+    else if(infos[0] == "deprecated")
+    {
+        output << "This component has been deprecated since SOFA " << infos[1]?infos[1]:"" << "."
+                  "Please consider updating your scene as using "
+                  "deprecated component may result in poor performance and undefined behavior."
+                  "If this component is crucial to you please report that to sofa-dev@ so we can  "
+                  "reconsider this component for future re-integration. ";
+    }
+
+    return output.str();
+}
 
 
 

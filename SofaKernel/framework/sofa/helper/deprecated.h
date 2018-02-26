@@ -43,6 +43,7 @@ extern SOFA_HELPER_API std::map<std::string, std::string>  messages ;
 extern SOFA_HELPER_API std::map<std::string, std::vector<std::string>> components ;
 extern SOFA_HELPER_API std::map<std::string, std::vector<std::string>> uncreateablecomponents ;
 
+extern SOFA_HELPER_API const std::string getMessage(const std::vector<std::string>& infos);
 
 } /// namespace deprecated
 
