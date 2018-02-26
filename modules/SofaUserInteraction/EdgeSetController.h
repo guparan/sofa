@@ -61,7 +61,7 @@ namespace controller
  * Provides a Mouse & Keyboard user control on an EdgeSet Topology.
  */
 template<class DataTypes>
-class EdgeSetController : public MechanicalStateController<DataTypes>
+class SOFA_DEPRECATED_CLASS EdgeSetController : public MechanicalStateController<DataTypes>
 {
 public:
     SOFA_CLASS(SOFA_TEMPLATE(EdgeSetController,DataTypes),SOFA_TEMPLATE(MechanicalStateController,DataTypes));

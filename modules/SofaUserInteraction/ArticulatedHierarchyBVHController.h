@@ -53,7 +53,7 @@ namespace controller
  * articulations of an articulated hierarchy container.
  * .bvh files are controlling the value.
  */
-class SOFA_USER_INTERACTION_API ArticulatedHierarchyBVHController : public ArticulatedHierarchyController
+class SOFA_DEPRECATED_CLASS SOFA_USER_INTERACTION_API ArticulatedHierarchyBVHController : public ArticulatedHierarchyController
 {
 public:
     SOFA_CLASS(ArticulatedHierarchyBVHController,ArticulatedHierarchyController);

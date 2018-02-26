@@ -41,7 +41,7 @@ namespace controller
 
 /// Apply constant forces to given degrees of freedom.
 template<class DataTypes>
-class InterpolationController : public Controller
+class SOFA_DEPRECATED_CLASS InterpolationController : public Controller
 {
 public:
   SOFA_CLASS(SOFA_TEMPLATE(InterpolationController,DataTypes),Controller);
