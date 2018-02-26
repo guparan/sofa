@@ -58,7 +58,7 @@ namespace controller
  * Provides a Mouse & Keyboard user control on a Mechanical State.
  * On a Rigid Particle, relative and absolute control is available.
  */
-class NodeToggleController : public Controller
+class SOFA_DEPRECATED_CLASS NodeToggleController : public Controller
 {
 public:
     SOFA_CLASS(NodeToggleController, Controller);

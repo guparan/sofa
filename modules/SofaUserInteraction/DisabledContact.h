@@ -36,7 +36,7 @@ namespace collision
 {
 
 template<class CM1, class CM2>
-class DisabledContact : public core::collision::Contact
+class SOFA_DEPRECATED_CLASS DisabledContact : public core::collision::Contact
 {
 public:
     typedef CM1 CollisionModel1;

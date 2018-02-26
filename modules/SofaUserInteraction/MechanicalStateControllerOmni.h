@@ -46,7 +46,7 @@ namespace controller
  * On a Rigid Particle, relative and absolute control is available.
  */
 template<class DataTypes>
-class MechanicalStateControllerOmni : public Controller
+class SOFA_DEPRECATED_CLASS MechanicalStateControllerOmni : public Controller
 {
 public:
     SOFA_CLASS(SOFA_TEMPLATE(MechanicalStateControllerOmni,DataTypes),Controller);
