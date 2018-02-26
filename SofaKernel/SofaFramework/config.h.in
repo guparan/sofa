@@ -126,4 +126,16 @@ typedef double SReal;
 #	define SOFA_SIMULATION_CORE_API SOFA_IMPORT_DYNAMIC_LIBRARY
 #endif
 
+#if defined(__has_cpp_attribute)
+    #if __has_cpp_attribute(deprecated)
+        #define SOFA_DEPRECATED_CLASS [[deprecated]]
+    #endif
+#else
+    #ifdef __GNUC__
+        #define SOFA_DEPRECATED_CLASS __attribute__ ((deprecated))
+    #elif defined(_MSC_VER)
+        #define SOFA_DEPRECATED_CLASS __declspec(deprecated)
+    #endif
+#endif
+
 #endif
