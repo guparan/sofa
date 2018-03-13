@@ -23,11 +23,7 @@ set(SOFABASE_TARGETS
 )
 
 foreach(TARGET ${SOFABASE_TARGETS})
-    if(EXISTS ${CMAKE_SOURCE_DIR}/packages/${TARGET})
-        add_subdirectory(../packages/${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
-    else()
-        add_subdirectory(../modules/${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
-    endif()
+    add_subdirectory(../modules/${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
     target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../modules>")
     target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
     set_target_properties(${TARGET} PROPERTIES DEBUG_POSTFIX _d)
