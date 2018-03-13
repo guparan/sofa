@@ -19,6 +19,7 @@ set(SOFABASE_TARGETS
     SofaBaseMechanics
     SofaBaseTopology
     SofaBaseVisual
+    SofaBaseUtils
 #    SofaComponentBase
 )
 
