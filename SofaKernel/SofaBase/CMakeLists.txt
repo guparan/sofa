@@ -19,7 +19,7 @@ set(SOFABASE_TARGETS
     SofaBaseMechanics
     SofaBaseTopology
     SofaBaseVisual
-    SofaComponentBase
+#    SofaComponentBase
 )
 
 foreach(TARGET ${SOFABASE_TARGETS})
