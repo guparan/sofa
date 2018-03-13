@@ -173,7 +173,7 @@ add_subdirectory(../../applications/sofa/gui/SofaGuiMain ${CMAKE_CURRENT_BINARY_
 foreach(TARGET ${SOFAGUI_TARGETS})
     set_target_properties(${TARGET} PROPERTIES FOLDER "SofaGui")
     target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
-    target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../applications>")
+    target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../applications>")
     # target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${QT_INCLUDES}>")
     set_target_properties(${TARGET} PROPERTIES DEBUG_POSTFIX "_d")
     set_target_properties(${TARGET} PROPERTIES VERSION ${SOFAGUI_VERSION})
