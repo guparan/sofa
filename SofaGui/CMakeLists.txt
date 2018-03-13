@@ -75,7 +75,7 @@ endif()
 ### Sub-projects
 
 ## SofaGuiCommon
-add_subdirectory(../../applications/sofa/gui/SofaGuiCommon ${CMAKE_CURRENT_BINARY_DIR}/SofaGuiCommon)
+add_subdirectory(../applications/sofa/gui/SofaGuiCommon ${CMAKE_CURRENT_BINARY_DIR}/SofaGuiCommon)
 list(APPEND SOFAGUI_TARGETS SofaGuiCommon)
 
 ## OpenGL-based GUIs
@@ -86,7 +86,7 @@ if(NOT SOFA_NO_OPENGL)
         if(SOFAGUI_GLUT)
             set(SOFA_GUI_GLUT 1) # cmakedefine
             list(APPEND SOFAGUI_TARGETS SofaGuiGlut)
-            add_subdirectory(../../applications/sofa/gui/glut ${CMAKE_CURRENT_BINARY_DIR}/SofaGuiGlut)
+            add_subdirectory(../applications/sofa/gui/glut ${CMAKE_CURRENT_BINARY_DIR}/SofaGuiGlut)
         endif()
     endif()
 	
@@ -95,7 +95,7 @@ if(NOT SOFA_NO_OPENGL)
 		if(SOFAGUI_HEADLESS_RECORDER)
 			set(SOFA_GUI_HEADLESS_RECORDER 1) # cmakedefine
 			list(APPEND SOFAGUI_TARGETS SofaHeadlessRecorder)
-			add_subdirectory(../../applications/sofa/gui/headlessRecorder ${CMAKE_CURRENT_BINARY_DIR}/SofaHeadlessRecorder)
+			add_subdirectory(../applications/sofa/gui/headlessRecorder ${CMAKE_CURRENT_BINARY_DIR}/SofaHeadlessRecorder)
 		endif()
     else()
         message("HeadlessRecorder is not available on windows/mac")
@@ -158,7 +158,7 @@ if(NOT SOFA_NO_OPENGL)
 
             set(SOFA_GUI_QT 1) # cmakedefine
             list(APPEND SOFAGUI_TARGETS SofaGuiQt)
-            add_subdirectory(../../applications/sofa/gui/qt ${CMAKE_CURRENT_BINARY_DIR}/SofaGuiQt)
+            add_subdirectory(../applications/sofa/gui/qt ${CMAKE_CURRENT_BINARY_DIR}/SofaGuiQt)
         endif()
     else()
         message("Cannot find any Qt libraries on your system, please set Qt5_DIR or Qt4_DIR if you want to compile GUIs using Qt")
@@ -167,7 +167,7 @@ endif()
 
 ## SofaGuiMain
 list(APPEND SOFAGUI_TARGETS SofaGuiMain)
-add_subdirectory(../../applications/sofa/gui/SofaGuiMain ${CMAKE_CURRENT_BINARY_DIR}/SofaGuiMain)
+add_subdirectory(../applications/sofa/gui/SofaGuiMain ${CMAKE_CURRENT_BINARY_DIR}/SofaGuiMain)
 
 ## IDE folder
 foreach(TARGET ${SOFAGUI_TARGETS})

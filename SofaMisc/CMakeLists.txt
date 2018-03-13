@@ -26,7 +26,7 @@ set(SOFAMISC_TARGETS
 )
 
 foreach(TARGET ${SOFAMISC_TARGETS})
-    add_subdirectory(../../modules/${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
+    add_subdirectory(../modules/${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
     target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../modules>")
     target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
     set_target_properties(${TARGET} PROPERTIES DEBUG_POSTFIX _d)
