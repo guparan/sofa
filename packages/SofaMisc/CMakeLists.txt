@@ -15,7 +15,7 @@ install(FILES "${CMAKE_BINARY_DIR}/include/SofaMisc/config.h" DESTINATION "inclu
 ### Subdirectories
 
 set(SOFAMISC_TARGETS
-    SofaComponentMisc
+#    SofaComponentMisc
     SofaMisc
     SofaMiscEngine
     SofaMiscFem
@@ -26,13 +26,8 @@ set(SOFAMISC_TARGETS
 )
 
 foreach(TARGET ${SOFAMISC_TARGETS})
-    if(${TARGET} STREQUAL "SofaComponentMisc")
-        # We have to explicitly check target name because SofaMisc is both a package AND a module...
-        add_subdirectory(../../packages/${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
-    else()
-        add_subdirectory(../../modules/${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
-    endif()
-    target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../modules>")
+    add_subdirectory(../../modules/${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
+    target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../modules>")
     target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
     set_target_properties(${TARGET} PROPERTIES DEBUG_POSTFIX _d)
     set_target_properties(${TARGET} PROPERTIES FOLDER SofaMisc) # IDE folder

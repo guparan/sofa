@@ -18,17 +18,13 @@ install(FILES "${CMAKE_BINARY_DIR}/include/SofaAdvanced/config.h" DESTINATION "i
 ### Subdirectories
 
 set(SOFAADVANCED_TARGETS
-    SofaComponentAdvanced
+#    SofaComponentAdvanced
     SofaNonUniformFem
 )
 
 foreach(TARGET ${SOFAADVANCED_TARGETS})
-    if(EXISTS ${CMAKE_SOURCE_DIR}/packages/${TARGET})
-        add_subdirectory(../../packages/${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
-    else()
-        add_subdirectory(../../modules/${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
-    endif()
-    target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../modules>")
+    add_subdirectory(../../modules/${TARGET} ${CMAKE_CURRENT_BINARY_DIR}/${TARGET})
+    target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../modules>")
     target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
     set_target_properties(${TARGET} PROPERTIES DEBUG_POSTFIX _d)
     set_target_properties(${TARGET} PROPERTIES FOLDER SofaAdvanced) # IDE folder
@@ -38,3 +34,4 @@ endforeach()
 
 ## CMake package configurations files
 sofa_write_package_config_files(SofaAdvanced ${SOFAADVANCED_VERSION})
+#sofa_create_package(${PROJECT_NAME} ${SOFAADVANCED_VERSION} ${PROJECT_NAME} ${PROJECT_NAME})
