@@ -36,10 +36,10 @@ using sofa::simulation::Node ;
 #include <SofaSimulationCommon/SceneLoaderXML.h>
 using sofa::simulation::SceneLoaderXML ;
 
-#include <SofaComponentBase/messageHandlerComponent.h>
+#include <SofaBaseUtils/messageHandlerComponent.h>
 using sofa::component::logging::MessageHandlerComponent ;
 
-#include <SofaComponentBase/initComponentBase.h>
+#include <SofaBaseUtils/initBaseUtils.h>
 
 #include <SofaTest/TestMessageHandler.h>
 using sofa::helper::logging::MainGtestMessageHandler ;
@@ -58,7 +58,7 @@ bool inited = perTestInit() ;
 
 TEST(MessageHandlerComponent, simpleInit)
 {
-    sofa::component::initComponentBase();
+    sofa::component::initBaseUtils();
 
     string scene =
         "<?xml version='1.0'?>                                               "
