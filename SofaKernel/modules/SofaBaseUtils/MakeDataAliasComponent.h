@@ -43,7 +43,7 @@ namespace makedataaliascomponent
 {
 
 /// A component to add alias to other components.
-class SOFA_COMPONENT_BASE_API MakeDataAliasComponent : public core::objectmodel::BaseObject
+class SOFA_BASE_UTILS_API MakeDataAliasComponent : public core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(MakeDataAliasComponent, core::objectmodel::BaseObject);
