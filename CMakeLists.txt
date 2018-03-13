@@ -277,6 +277,9 @@ add_subdirectory(packages/SofaAdvanced)
 add_subdirectory(packages/SofaMisc)
 add_subdirectory(packages/SofaGui)
 
+## Packages
+add_subdirectory(applications/packages)
+
 # SofaTest depends on SofaPython, so we add SofaPython before SofaTest.
 sofa_add_plugin( applications/plugins/SofaPython SofaPython )
 
@@ -314,9 +317,6 @@ endif()
 
 ## Plugins
 add_subdirectory(applications/plugins)
-
-## Packages
-add_subdirectory(applications/packages)
 
 ## Applications
 add_subdirectory(applications/projects)
