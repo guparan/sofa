@@ -18,7 +18,6 @@ set(SOFABASE_TARGETS
     SofaBaseLinearSolver
     SofaBaseMechanics
     SofaBaseTopology
-    SofaBaseUtils
     SofaBaseVisual
 )
 
