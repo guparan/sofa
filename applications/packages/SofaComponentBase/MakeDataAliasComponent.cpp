@@ -25,7 +25,7 @@ using sofa::core::ObjectFactory ;
 
 using sofa::core::objectmodel::ComponentState ;
 
-#include <SofaBaseUtils/MakeDataAliasComponent.h>
+#include <SofaComponentBase/MakeDataAliasComponent.h>
 
 using std::string;
 
