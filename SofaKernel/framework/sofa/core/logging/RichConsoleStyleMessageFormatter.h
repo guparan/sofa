@@ -56,7 +56,7 @@ namespace richconsolestylemessageformater
 class SOFA_CORE_API RichConsoleStyleMessageFormatter : public MessageFormatter
 {
 public:
-    virtual void formatMessage(const Message& m,std::ostream& out);
+    void formatMessage(const Message& m,std::ostream& out) override;
 
     RichConsoleStyleMessageFormatter();
 private:

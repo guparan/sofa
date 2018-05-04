@@ -67,7 +67,7 @@ public:
     /**
      * @brief Destructor.
      */
-    virtual ~HapticDeviceEvent();
+    ~HapticDeviceEvent() override;
 
     /**
      * @brief Get the device X coordinate
@@ -106,7 +106,7 @@ public:
      */
     unsigned int getDeviceId() const {return m_deviceId;}
 
-    virtual const char* getClassName() const { return "HapticDeviceEvent"; }
+    const char* getClassName() const override { return "HapticDeviceEvent"; }
 private:
 
     unsigned int	m_deviceId;

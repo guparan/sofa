@@ -146,12 +146,12 @@ public:
     {
         Factory::getInstance()->registerCreator(key, this, multi);
     }
-    ObjectPtr createInstance(Argument arg)
+    ObjectPtr createInstance(Argument arg) override
     {
         RealObject* instance = NULL;
         return RealObject::create(instance, arg);
     }
-    const std::type_info& type()
+    const std::type_info& type() override
     {
         return typeid(RealObject);
     }

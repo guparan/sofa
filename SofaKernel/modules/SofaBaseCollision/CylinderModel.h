@@ -111,13 +111,13 @@ protected:
     TCylinderModel();
     TCylinderModel(core::behavior::MechanicalState<DataTypes>* mstate );
 public:
-    virtual void init() override;
+    void init() override;
 
     // -- CollisionModel interface
 
-    virtual void resize(int size) override;
+    void resize(int size) override;
 
-    virtual void computeBoundingTree(int maxDepth=0) override;
+    void computeBoundingTree(int maxDepth=0) override;
 
     //virtual void computeContinuousBoundingTree(SReal dt, int maxDepth=0);
 
@@ -160,7 +160,7 @@ public:
         return BaseObject::canCreate(obj, context, arg);
     }
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

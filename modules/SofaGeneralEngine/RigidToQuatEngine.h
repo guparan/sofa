@@ -56,7 +56,7 @@ public:
     typedef typename sofa::defaulttype::StdRigidTypes<3,Real>::Coord RigidVec3;
 protected:
     RigidToQuatEngine();
-    virtual ~RigidToQuatEngine();
+    ~RigidToQuatEngine() override;
 public:
     void update() override;
     void init() override;
@@ -69,7 +69,7 @@ public:
         return core::objectmodel::BaseObject::create(tObj, context, arg);
     }
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

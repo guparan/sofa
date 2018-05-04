@@ -71,7 +71,7 @@ protected:
     /**
      * @brief Default Destructor.
      */
-    virtual ~NodeToggleController() {};
+    ~NodeToggleController() override {};
 public:
     /**
      * @brief SceneGraph callback initialization method.

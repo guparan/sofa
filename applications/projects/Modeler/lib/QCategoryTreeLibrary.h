@@ -51,16 +51,16 @@ public:
     typedef QGridLayout CategoryLayout;
 public:
     QCategoryTreeLibrary(QWidget *parent, const std::string &categoryName, unsigned int numCom);
-    ~QCategoryTreeLibrary();
+    ~QCategoryTreeLibrary() override;
 
-    ComponentLibrary *addComponent(const std::string &componentName, ClassEntry::SPtr entry, const std::vector< std::string > &exampleFiles);
-    void endConstruction();
+    ComponentLibrary *addComponent(const std::string &componentName, ClassEntry::SPtr entry, const std::vector< std::string > &exampleFiles) override;
+    void endConstruction() override;
 
     void setDisplayed(bool b);
 
     QTreeWidgetItem *getQWidget() { return categoryTree;};
 protected:
-    ComponentLibrary *createComponent(const std::string &componentName, ClassEntry::SPtr entry, const std::vector< std::string > &exampleFiles);
+    ComponentLibrary *createComponent(const std::string &componentName, ClassEntry::SPtr entry, const std::vector< std::string > &exampleFiles) override;
 
     QTreeWidgetItem *categoryTree;
     QTreeWidget *tree;

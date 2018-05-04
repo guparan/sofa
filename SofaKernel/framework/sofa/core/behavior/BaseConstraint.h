@@ -100,7 +100,7 @@ public:
 
 protected:
     BaseConstraint() {}
-    virtual ~BaseConstraint() {}
+    ~BaseConstraint() override {}
 
 private:
     BaseConstraint(const BaseConstraint& n) ;

@@ -97,7 +97,7 @@ protected:
 
     HermiteSplineConstraint(core::behavior::MechanicalState<DataTypes>* mstate);
 
-    ~HermiteSplineConstraint();
+    ~HermiteSplineConstraint() override;
 public:
     void clearConstraints();
     void addConstraint(unsigned index );

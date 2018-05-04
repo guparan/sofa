@@ -76,10 +76,10 @@ protected:
 
 
     /// Destructor
-    virtual ~TopologyAlgorithms()
+    ~TopologyAlgorithms() override
     {}
 public:
-    virtual void init() override;
+    void init() override;
 
 protected:
     /** \brief Adds a TopologyChange object to the list of the topology this object describes.
@@ -106,10 +106,10 @@ protected:
 
 
     /// Destructor
-    virtual ~GeometryAlgorithms()
+    ~GeometryAlgorithms() override
     {}
 public:
-    virtual void init() override;
+    void init() override;
 
     /** \brief Called by the MechanicalObject state change callback to initialize added
     * points according to the topology (topology element & local coordinates)
@@ -136,10 +136,10 @@ protected:
 
 
     /// Destructor
-    virtual ~TopologyModifier()
+    ~TopologyModifier() override
     { }
 public:
-    virtual void init() override;
+    void init() override;
 
     /** \brief Called by a topology to warn the Mechanical Object component that points have been added or will be removed.
     *
@@ -204,23 +204,23 @@ protected:
 
 
     /// Destructor
-    virtual ~TopologyContainer();
+    ~TopologyContainer() override;
 public:
-    virtual void init() override;
+    void init() override;
 
     /// BaseMeshTopology API
     /// @{
-    virtual const SeqEdges& getEdges()         override { static SeqEdges     empty; return empty; }
-    virtual const SeqTriangles& getTriangles() override { static SeqTriangles empty; return empty; }
-    virtual const SeqQuads& getQuads()         override { static SeqQuads     empty; return empty; }
-    virtual const SeqTetrahedra& getTetrahedra()       override { static SeqTetrahedra    empty; return empty; }
-    virtual const SeqHexahedra& getHexahedra()         override { static SeqHexahedra     empty; return empty; }
+    const SeqEdges& getEdges()         override { static SeqEdges     empty; return empty; }
+    const SeqTriangles& getTriangles() override { static SeqTriangles empty; return empty; }
+    const SeqQuads& getQuads()         override { static SeqQuads     empty; return empty; }
+    const SeqTetrahedra& getTetrahedra()       override { static SeqTetrahedra    empty; return empty; }
+    const SeqHexahedra& getHexahedra()         override { static SeqHexahedra     empty; return empty; }
 
     /** \brief Get the current revision of this mesh.
     *
     * This can be used to detect changes, however topological changes event should be used whenever possible.
     */
-    virtual int getRevision() const override { return m_changeList.getCounter(); }
+    int getRevision() const override { return m_changeList.getCounter(); }
 
     /// @}
 
@@ -283,7 +283,7 @@ public:
 
     /** \brief Adds a TopologyEngine to the list.
     */
-    virtual void addTopologyEngine(TopologyEngine* _topologyEngine) override;
+    void addTopologyEngine(TopologyEngine* _topologyEngine) override;
 
 
     /** \brief Provides an iterator on the first element in the list of TopologyEngine objects.
@@ -318,8 +318,8 @@ protected:
 public:
 
 
-    virtual bool insertInNode( objectmodel::BaseNode* node ) override { Inherit1::insertInNode(node); Inherit2::insertInNode(node); return true; }
-    virtual bool removeInNode( objectmodel::BaseNode* node ) override { Inherit1::removeInNode(node); Inherit2::removeInNode(node); return true; }
+    bool insertInNode( objectmodel::BaseNode* node ) override { Inherit1::insertInNode(node); Inherit2::insertInNode(node); return true; }
+    bool removeInNode( objectmodel::BaseNode* node ) override { Inherit1::removeInNode(node); Inherit2::removeInNode(node); return true; }
 
 };
 

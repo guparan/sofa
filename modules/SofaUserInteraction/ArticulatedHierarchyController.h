@@ -81,12 +81,12 @@ protected:
     /**
      * @brief Default Destructor.
      */
-    virtual ~ArticulatedHierarchyController() {};
+    ~ArticulatedHierarchyController() override {};
 public:
     /**
      * @brief Init method called during the scene graph initialization.
      */
-    virtual void init() override;
+    void init() override;
 
     /**
      * @name Controller Interface

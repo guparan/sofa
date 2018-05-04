@@ -64,7 +64,7 @@ protected:
     /**
      * @brief Default Destructor.
      */
-    virtual ~MechanicalStateControllerOmni() {};
+    ~MechanicalStateControllerOmni() override {};
 public:
     /**
      * @brief SceneGraph callback initialization method.
@@ -135,7 +135,7 @@ public:
      */
     void applyController(const double dt);
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

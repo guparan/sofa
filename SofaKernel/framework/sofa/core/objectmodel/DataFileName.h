@@ -75,7 +75,7 @@ public:
         updatePath();
     }
 
-    virtual ~DataFileName()
+    ~DataFileName() override
     {
     }
 
@@ -90,9 +90,9 @@ public:
         *beginEdit()=v;
         endEdit();
     }
-    virtual void virtualEndEdit() { endEdit(); }
-    virtual void virtualSetValue(const std::string& v) { setValue(v); }
-    virtual bool read(const std::string& s );
+    void virtualEndEdit() override { endEdit(); }
+    void virtualSetValue(const std::string& v) override { setValue(v); }
+    bool read(const std::string& s ) override;
 
     virtual const std::string& getRelativePath() const
     {
@@ -111,7 +111,7 @@ public:
         return m_fullpath;
     }
 
-    virtual void update()
+    void update() override
     {
         this->Inherit::update();
         this->updatePath();
@@ -163,7 +163,7 @@ public:
         updatePath();
     }
 
-    virtual ~DataFileNameVector()
+    ~DataFileNameVector() override
     {
     }
 
@@ -178,7 +178,7 @@ public:
         *beginEdit() = v;
         endEdit();
     }
-    virtual void virtualEndEdit() { endEdit(); }
+    void virtualEndEdit() override { endEdit(); }
 
     void addPath(const std::string& v, bool clear = false)
     {
@@ -197,7 +197,7 @@ public:
     }
     virtual void virtualSetValueAsString(const std::string& v) { setValueAsString(v); }
 
-    virtual bool read(const std::string& s )
+    bool read(const std::string& s ) override
     {
         bool ret = Inherit::read(s);
         if (ret || fullpath.empty()) updatePath();
@@ -216,7 +216,7 @@ public:
         return fullpath[i];
     }
 
-    virtual void update()
+    void update() override
     {
         this->Inherit::update();
         this->updatePath();

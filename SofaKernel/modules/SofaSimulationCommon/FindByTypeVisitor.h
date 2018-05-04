@@ -47,7 +47,7 @@ public:
     FindByTypeVisitor(const core::ExecParams* params) : Visitor(params) {}
 
     /// For each component, if it is of the given type, then put it in the list
-    virtual Result processNodeTopDown(simulation::Node* node)
+    Result processNodeTopDown(simulation::Node* node) override
     {
         for( simulation::Node::ObjectIterator i=node->object.begin(), iend=node->object.end(); i!=iend; i++ )
         {
@@ -56,8 +56,8 @@ public:
         }
         return RESULT_CONTINUE;
     }
-    virtual const char* getClassName() const { return "FindByTypeVisitor"; }
-    virtual std::string getInfos() const { std::string name="["+sofa::helper::gettypename(typeid(T))+"]"; return name; }
+    const char* getClassName() const override { return "FindByTypeVisitor"; }
+    std::string getInfos() const override { std::string name="["+sofa::helper::gettypename(typeid(T))+"]"; return name; }
 
 };
 

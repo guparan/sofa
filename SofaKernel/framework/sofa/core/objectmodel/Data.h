@@ -53,7 +53,7 @@ public:
     /// @{
     typedef TClass<TData<T>,BaseData> MyClass;
     static const MyClass* GetClass() { return MyClass::get(); }
-    virtual const BaseClass* getClass() const
+    const BaseClass* getClass() const override
     { return GetClass(); }
 
     static std::string templateName(const TData<T>* = NULL)
@@ -73,15 +73,15 @@ public:
     {
     }
 
-    virtual ~TData()
+    ~TData() override
     {}
 
-    inline void printValue(std::ostream& out) const;
-    inline std::string getValueString() const;
-    inline std::string getValueTypeString() const; // { return std::string(typeid(m_value).name()); }
+    inline void printValue(std::ostream& out) const override;
+    inline std::string getValueString() const override;
+    inline std::string getValueTypeString() const override; // { return std::string(typeid(m_value).name()); }
 
     /// Get info about the value type of the associated variable
-    virtual const sofa::defaulttype::AbstractTypeInfo* getValueTypeInfo() const
+    const sofa::defaulttype::AbstractTypeInfo* getValueTypeInfo() const override
     {
         return sofa::defaulttype::VirtualTypeInfo<T>::get();
     }
@@ -93,19 +93,19 @@ public:
     virtual void virtualEndEdit() = 0;
 
     /// Get current value as a void pointer (use getValueTypeInfo to find how to access it)
-    virtual const void* getValueVoidPtr() const
+    const void* getValueVoidPtr() const override
     {
         return &(virtualGetValue());
     }
 
     /// Begin edit current value as a void pointer (use getValueTypeInfo to find how to access it)
-    virtual void* beginEditVoidPtr()
+    void* beginEditVoidPtr() override
     {
         return virtualBeginEdit();
     }
 
     /// End edit current value as a void pointer (use getValueTypeInfo to find how to access it)
-    virtual void endEditVoidPtr()
+    void endEditVoidPtr() override
     {
         virtualEndEdit();
     }
@@ -113,7 +113,7 @@ public:
     /** Try to read argument value from an input stream.
     Return false if failed
      */
-    virtual bool read( const std::string& s )
+    bool read( const std::string& s ) override
     {
         if (s.empty())
         {
@@ -135,7 +135,7 @@ public:
         }
     }
 
-    virtual bool isCounterValid() const {return true;}
+    bool isCounterValid() const override {return true;}
 
     bool copyValue(const TData<T>* parent)
     {
@@ -143,7 +143,7 @@ public:
         return true;
     }
 
-    virtual bool copyValue(const BaseData* parent)
+    bool copyValue(const BaseData* parent) override
     {
         const TData<T>* p = dynamic_cast<const TData<T>*>(parent);
         if (p)
@@ -155,7 +155,7 @@ public:
     }
 
 
-    virtual bool validParent(BaseData* parent)
+    bool validParent(BaseData* parent) override
     {
         if (dynamic_cast<TData<T>*>(parent))
             return true;
@@ -170,13 +170,13 @@ protected:
         return BaseLink::InitLink<TData<T> >(this, name, help);
     }
 
-    void doSetParent(BaseData* parent)
+    void doSetParent(BaseData* parent) override
     {
         parentData.set(dynamic_cast<TData<T>*>(parent));
         BaseData::doSetParent(parent);
     }
 
-    bool updateFromParentValue(const BaseData* parent)
+    bool updateFromParentValue(const BaseData* parent) override
     {
         if (parent == parentData.get())
         {
@@ -361,7 +361,7 @@ public:
     /// @{
     typedef TClass<Data<T>, TData<T> > MyClass;
     static const MyClass* GetClass() { return MyClass::get(); }
-    virtual const BaseClass* getClass() const
+    const BaseClass* getClass() const override
     { return GetClass(); }
 
     static std::string templateName(const Data<T>* = NULL)
@@ -423,7 +423,7 @@ public:
     }
 
     /// Destructor.
-    virtual ~Data()
+    ~Data() override
     {}
 
     /// @}
@@ -476,13 +476,13 @@ public:
         return m_values[DDGNode::currentAspect(params)].getValue();
     }
 
-    void copyAspect(int destAspect, int srcAspect)
+    void copyAspect(int destAspect, int srcAspect) override
     {
         m_values[destAspect] = m_values[srcAspect];
         BaseData::copyAspect(destAspect, srcAspect);
     }
 
-    void releaseAspect(int aspect)
+    void releaseAspect(int aspect) override
     {
         m_values[aspect].release();
     }
@@ -491,10 +491,10 @@ public:
     /// @name Virtual edition and retrieval API (for generic TData parent API, deprecated)
     /// @{
 
-    virtual const T& virtualGetValue() const { return getValue(); }
-    virtual void virtualSetValue(const T& v) { setValue(v); }
+    const T& virtualGetValue() const override { return getValue(); }
+    void virtualSetValue(const T& v) override { setValue(v); }
 
-    virtual void virtualSetLink(const BaseData& bd)
+    void virtualSetLink(const BaseData& bd) override
     {
         const Data<T>* d = dynamic_cast< const Data<T>* >(&bd);
         if (d)
@@ -508,8 +508,8 @@ public:
         }
     }
 
-    virtual T* virtualBeginEdit() { return beginEdit(); }
-    virtual void virtualEndEdit() { endEdit(); }
+    T* virtualBeginEdit() override { return beginEdit(); }
+    void virtualEndEdit() override { endEdit(); }
 
 
     /// @}

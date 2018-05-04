@@ -52,57 +52,57 @@ public:
     }
 
     /// Accessor to the input model of this mapping
-    virtual  helper::vector<core::BaseState*> getFrom() override
+     helper::vector<core::BaseState*> getFrom() override
     {
         helper::vector<core::BaseState*> vec(1,fromModel);
         return vec;
     }
 
     /// Accessor to the output model of this mapping
-    virtual helper::vector<core::BaseState*> getTo() override
+    helper::vector<core::BaseState*> getTo() override
     {
         helper::vector<core::BaseState*> vec(1,toModel);
         return vec;
     }
 
     /// Disable the mapping to get the original coordinates of the mapped model.
-    virtual void disable() override
+    void disable() override
     {
     }
 
     /// Get the source (upper) model.
-    virtual helper::vector<sofa::core::behavior::BaseMechanicalState*> getMechFrom() override
+    helper::vector<sofa::core::behavior::BaseMechanicalState*> getMechFrom() override
     {
         helper::vector<sofa::core::behavior::BaseMechanicalState*> vec(1, fromModel);
         return vec;
     }
 
     /// Get the destination (lower, mapped) model.
-    virtual helper::vector<sofa::core::behavior::BaseMechanicalState*> getMechTo() override
+    helper::vector<sofa::core::behavior::BaseMechanicalState*> getMechTo() override
     {
         helper::vector<sofa::core::behavior::BaseMechanicalState*> vec(1, toModel);
         return vec;
     }
 
-    virtual void apply (const core::MechanicalParams* /* mparams = core::MechanicalParams::defaultInstance() */, core::MultiVecCoordId /* outPos */, core::ConstMultiVecCoordId /* inPos */) override
+    void apply (const core::MechanicalParams* /* mparams = core::MechanicalParams::defaultInstance() */, core::MultiVecCoordId /* outPos */, core::ConstMultiVecCoordId /* inPos */) override
     {
     }
 
-    virtual void applyJ(const core::MechanicalParams* /* mparams = core::MechanicalParams::defaultInstance() */, core::MultiVecDerivId /* outVel */, core::ConstMultiVecDerivId /* inVel */) override
+    void applyJ(const core::MechanicalParams* /* mparams = core::MechanicalParams::defaultInstance() */, core::MultiVecDerivId /* outVel */, core::ConstMultiVecDerivId /* inVel */) override
     {
     }
 
-    virtual void applyJT(const core::MechanicalParams* /* mparams = core::MechanicalParams::defaultInstance() */, core::MultiVecDerivId /* inForce */, core::ConstMultiVecDerivId /* outForce */) override
+    void applyJT(const core::MechanicalParams* /* mparams = core::MechanicalParams::defaultInstance() */, core::MultiVecDerivId /* inForce */, core::ConstMultiVecDerivId /* outForce */) override
     {
     }
 
-    virtual void applyDJT(const core::MechanicalParams* /*mparams*/, core::MultiVecDerivId /*inForce*/, core::ConstMultiVecDerivId /*outForce*/) override {}
+    void applyDJT(const core::MechanicalParams* /*mparams*/, core::MultiVecDerivId /*inForce*/, core::ConstMultiVecDerivId /*outForce*/) override {}
 
-    virtual void applyJT(const core::ConstraintParams * /*cparams*/, core::MultiMatrixDerivId /* inConst */, core::ConstMultiMatrixDerivId /* outConst */) override
+    void applyJT(const core::ConstraintParams * /*cparams*/, core::MultiMatrixDerivId /* inConst */, core::ConstMultiMatrixDerivId /* outConst */) override
     {
     }
 
-    virtual void computeAccFromMapping(const core::MechanicalParams* /*mparams = core::MechanicalParams::defaultInstance() */, core::MultiVecDerivId /* outAcc */, core::ConstMultiVecDerivId /* inVel */, core::ConstMultiVecDerivId /* inAcc */) override
+    void computeAccFromMapping(const core::MechanicalParams* /*mparams = core::MechanicalParams::defaultInstance() */, core::MultiVecDerivId /* outAcc */, core::ConstMultiVecDerivId /* inVel */, core::ConstMultiVecDerivId /* inAcc */) override
     {
     }
 
@@ -117,11 +117,11 @@ protected:
         this->f_mapMasses.setValue(false);
     }
 
-    virtual ~VoidMapping()
+    ~VoidMapping() override
     {
     }
 
-    virtual void updateForceMask() override { fromModel->forceMask.assign(fromModel->getSize(),true); }
+    void updateForceMask() override { fromModel->forceMask.assign(fromModel->getSize(),true); }
 };
 
 } // namespace mapping

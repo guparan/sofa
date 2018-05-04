@@ -65,7 +65,7 @@ protected:
         , _drawColor(initData(&_drawColor, sofa::defaulttype::Vec3f(0.0f,0.4f,0.4f), "drawColorQuads", "RGB code color used to draw quads."))
     { }
 
-    virtual ~QuadSetGeometryAlgorithms() {}
+    ~QuadSetGeometryAlgorithms() override {}
 public:
     void computeQuadAABB(const QuadID i, Coord& minCoord, Coord& maxCoord) const;
 
@@ -108,7 +108,7 @@ public:
     */
     void writeMSHfile(const char *filename) const;
 
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
 protected:
     Data<bool> showQuadIndices; ///< Debug : view Quad indices

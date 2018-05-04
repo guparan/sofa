@@ -90,7 +90,7 @@ public:
 protected:
     PartialFixedConstraint();
 
-    virtual ~PartialFixedConstraint();
+    ~PartialFixedConstraint() override;
 public:
     void clearConstraints();
     void addConstraint(unsigned int index);
@@ -107,13 +107,13 @@ public:
     using core::behavior::ProjectiveConstraintSet<DataTypes>::applyConstraint;
     void applyConstraint(defaulttype::BaseMatrix *mat, unsigned int offset);
     void applyConstraint(defaulttype::BaseVector *vect, unsigned int offset);
-    virtual void applyConstraint(const core::MechanicalParams* mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
+    void applyConstraint(const core::MechanicalParams* mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
 
 
-    virtual void projectMatrix( sofa::defaulttype::BaseMatrix* /*M*/, unsigned /*offset*/ ) override;
+    void projectMatrix( sofa::defaulttype::BaseMatrix* /*M*/, unsigned /*offset*/ ) override;
 
 
-    virtual void draw(const core::visual::VisualParams*) override;
+    void draw(const core::visual::VisualParams*) override;
 
     bool fixAllDOFs() const { return d_fixAll.getValue(); }
 
@@ -128,12 +128,12 @@ public:
 
 
 
-        void applyDestroyFunction(unsigned int /*index*/, value_type& /*T*/);
+        void applyDestroyFunction(unsigned int /*index*/, value_type& /*T*/) override;
 
 
         bool applyTestCreateFunction(unsigned int /*index*/,
                 const sofa::helper::vector< unsigned int > & /*ancestors*/,
-                const sofa::helper::vector< double > & /*coefs*/);
+                const sofa::helper::vector< double > & /*coefs*/) override;
     protected:
         PartialFixedConstraint<DataTypes> *fc;
     };

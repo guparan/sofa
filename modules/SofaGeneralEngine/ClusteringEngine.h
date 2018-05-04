@@ -78,7 +78,7 @@ public:
 
     ClusteringEngine();
 
-    virtual ~ClusteringEngine() {}
+    ~ClusteringEngine() override {}
 
     void init() override;
     void update() override;
@@ -98,7 +98,7 @@ public:
     sofa::core::objectmodel::DataFileName input_filename; ///< import precomputed clusters
     sofa::core::objectmodel::DataFileName output_filename; ///< export clusters
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const ClusteringEngine<DataTypes>* = NULL) {   return DataTypes::Name(); }
 
 private:

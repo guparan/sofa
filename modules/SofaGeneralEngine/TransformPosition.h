@@ -82,7 +82,7 @@ protected:
 
     TransformPosition();
 
-    ~TransformPosition() {}
+    ~TransformPosition() override {}
 
     void getTransfoFromTxt();//read a transformation in a txt or xfm file
     void getTransfoFromTrm();//read a transformation in a trm file
@@ -115,7 +115,7 @@ public:
         return core::objectmodel::BaseObject::create(tObj, context, arg);
     }
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

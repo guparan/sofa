@@ -165,7 +165,7 @@ public:
 #endif
 
 protected:
-    bool event(QEvent *event)
+    bool event(QEvent *event) override
     {
         switch (event->type())
         {
@@ -194,9 +194,9 @@ public:
     RealGUIFileListener(RealGUI* realgui){
         m_realgui = realgui ;
     }
-    virtual ~RealGUIFileListener(){}
+    ~RealGUIFileListener() override{}
 
-    virtual void fileHasChanged(const std::string& filename) override
+    void fileHasChanged(const std::string& filename) override
     {
         m_realgui->fileOpen(filename, false, true);
     }

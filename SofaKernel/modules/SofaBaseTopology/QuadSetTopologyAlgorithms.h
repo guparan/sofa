@@ -53,9 +53,9 @@ protected:
         : EdgeSetTopologyAlgorithms<DataTypes>()
     { };
 
-    virtual ~QuadSetTopologyAlgorithms() {}
+    ~QuadSetTopologyAlgorithms() override {}
 public:
-    virtual void init() override;
+    void init() override;
 
 private:
     QuadSetTopologyContainer*					m_container;

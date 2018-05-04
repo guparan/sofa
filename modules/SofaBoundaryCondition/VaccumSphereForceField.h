@@ -138,12 +138,12 @@ protected:
         damping.setValue( damp );
     }
 
-    virtual void init() override;
+    void init() override;
 
-    virtual void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
-    virtual void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
+    void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
 
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
+    SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
     {
         serr << "Get potentialEnergy not implemented" << sendl;
         return 0.0;
@@ -151,7 +151,7 @@ protected:
 
     virtual void updateStiffness( const VecCoord& x );
 
-    virtual void handleEvent(sofa::core::objectmodel::Event* event) override;
+    void handleEvent(sofa::core::objectmodel::Event* event) override;
 
     void draw(const core::visual::VisualParams* vparams) override;
 };

@@ -61,7 +61,7 @@ protected:
 
     ExtrudeQuadsAndGenerateHexas();
 
-    ~ExtrudeQuadsAndGenerateHexas() {}
+    ~ExtrudeQuadsAndGenerateHexas() override {}
 public:
     void init() override;
 
@@ -71,7 +71,7 @@ public:
 
     void draw( const core::visual::VisualParams* ) override;
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

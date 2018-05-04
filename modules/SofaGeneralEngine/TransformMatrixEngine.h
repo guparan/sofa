@@ -47,16 +47,16 @@ public:
 
 protected:
     AbstractTransformMatrixEngine();
-    ~AbstractTransformMatrixEngine() {}
+    ~AbstractTransformMatrixEngine() override {}
 
     /**
      * Update the transformation, to be implemented in herited classes
      */
-    virtual void update() override = 0;
+    void update() override = 0;
 
 public:
-    virtual void init() override;
-    virtual void reinit() override;
+    void init() override;
+    void reinit() override;
 
 protected:
     Data<defaulttype::Matrix4> d_inT; ///< input transformation
@@ -74,8 +74,8 @@ public:
 
 protected:
     InvertTransformMatrixEngine() {}
-    ~InvertTransformMatrixEngine() {}
-    virtual void update() override;
+    ~InvertTransformMatrixEngine() override {}
+    void update() override;
 };
 
 /**
@@ -89,11 +89,11 @@ public:
 
 protected:
     TranslateTransformMatrixEngine();
-    ~TranslateTransformMatrixEngine() {}
-    virtual void update() override;
+    ~TranslateTransformMatrixEngine() override {}
+    void update() override;
 
 public:
-    virtual void init() override;
+    void init() override;
 
 protected:
     /// translation
@@ -112,11 +112,11 @@ public:
 
 protected:
     RotateTransformMatrixEngine();
-    ~RotateTransformMatrixEngine() {}
-    virtual void update() override;
+    ~RotateTransformMatrixEngine() override {}
+    void update() override;
 
 public:
-    virtual void init() override;
+    void init() override;
 
 protected:
     /// rotation
@@ -135,11 +135,11 @@ public:
 
 protected:
     ScaleTransformMatrixEngine();
-    ~ScaleTransformMatrixEngine() {}
-    virtual void update() override;
+    ~ScaleTransformMatrixEngine() override {}
+    void update() override;
 
 public:
-    virtual void init() override;
+    void init() override;
 
 protected:
     Data<defaulttype::Vector3> d_scale; ///< scale

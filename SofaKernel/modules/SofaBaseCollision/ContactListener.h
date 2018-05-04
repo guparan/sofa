@@ -56,7 +56,7 @@ namespace sofa
 
 				ContactListener( CollisionModel* collModel1 = NULL, CollisionModel* collModel2 = NULL );
 
-				virtual ~ContactListener();
+				~ContactListener() override;
 
 				// DetectionOutput iterators
 				typedef helper::vector<const helper::vector<DetectionOutput>* >::const_iterator ContactVectorsIterator;
@@ -88,9 +88,9 @@ namespace sofa
 
 			public:				
 
-                virtual void init(void) override;
+                void init(void) override;
 
-				virtual void handleEvent( core::objectmodel::Event* event ) override;
+				void handleEvent( core::objectmodel::Event* event ) override;
 
 
 

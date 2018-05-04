@@ -51,7 +51,7 @@ public:
 
     DifferenceEngine();
 
-    virtual ~DifferenceEngine() {}
+    ~DifferenceEngine() override {}
 
     void init() override;
 
@@ -59,7 +59,7 @@ public:
 
     void update() override;
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

@@ -84,7 +84,7 @@ public:
 protected:
     ProjectDirectionConstraint();
 
-    virtual ~ProjectDirectionConstraint();
+    ~ProjectDirectionConstraint() override;
 
 public:
     IndexSubsetData f_indices;  ///< the particles to project
@@ -105,8 +105,8 @@ public:
     void removeConstraint(unsigned int index);
 
     // -- Constraint interface
-    virtual void init() override;
-    virtual void reinit() override;
+    void init() override;
+    void reinit() override;
 
     void projectResponse(const core::MechanicalParams* mparams, DataVecDeriv& resData) override;
     void projectVelocity(const core::MechanicalParams* mparams, DataVecDeriv& vData) override;
@@ -118,10 +118,10 @@ public:
     void applyConstraint(defaulttype::BaseVector *vect, unsigned int offset);
 
     /// Project the the given matrix (Experimental API, see the spec in sofa::core::behavior::BaseProjectiveConstraintSet).
-    virtual void projectMatrix( sofa::defaulttype::BaseMatrix* /*M*/, unsigned /*offset*/ ) override;
+    void projectMatrix( sofa::defaulttype::BaseMatrix* /*M*/, unsigned /*offset*/ ) override;
 
 
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
 
     class FCPointHandler : public component::topology::TopologySubsetDataHandler<core::topology::BaseMeshTopology::Point, Indices >
@@ -139,7 +139,7 @@ public:
 
         bool applyTestCreateFunction(unsigned int /*index*/,
                 const sofa::helper::vector< unsigned int > & /*ancestors*/,
-                const sofa::helper::vector< double > & /*coefs*/);
+                const sofa::helper::vector< double > & /*coefs*/) override;
     protected:
         ProjectDirectionConstraint<DataTypes> *fc;
     };

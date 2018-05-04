@@ -101,7 +101,7 @@ protected:
         this->addAlias(&tetrahedraStiffness,"tetrasStiffness"); this->addAlias(&tetrahedraDamping, "tetrasDamping");
     }
 
-    virtual ~MeshSpringForceField();
+    ~MeshSpringForceField() override;
 public:
     Real getStiffness() const { return linesStiffness.getValue(); }
     Real getLinesStiffness() const { return linesStiffness.getValue(); }
@@ -173,7 +173,7 @@ public:
         cubesDamping.setValue(val);
     }
 
-    virtual void init() override;
+    void init() override;
 
     void draw(const core::visual::VisualParams* vparams) override;
 };

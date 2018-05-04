@@ -78,7 +78,7 @@ protected:
     void setTreeWidgetNodeCheckable(QTreeWidgetItem* w, const char* name);
     void setTreeWidgetCheckable(QTreeWidgetItem* w, const char* name);
 
-    virtual void mouseReleaseEvent ( QMouseEvent * e );
+    void mouseReleaseEvent ( QMouseEvent * e ) override;
 
     void findChildren(QTreeWidgetItem *, std::vector<QTreeWidgetItem* > &children);
 
@@ -98,15 +98,15 @@ public:
     {
     }
 
-    virtual bool createWidgets();
-    virtual void setDataReadOnly(bool readOnly);
+    bool createWidgets() override;
+    void setDataReadOnly(bool readOnly) override;
 
 protected:
 
-    virtual void readFromData();
-    virtual void writeToData();
-    virtual unsigned int sizeWidget() {return 8;}
-    virtual unsigned int numColumnWidget() {return 1;}
+    void readFromData() override;
+    void writeToData() override;
+    unsigned int sizeWidget() override {return 8;}
+    unsigned int numColumnWidget() override {return 1;}
 
     DisplayFlagWidget* flags;
     bool isRoot;

@@ -49,7 +49,7 @@ public:
     SOFA_CLASS(DevMonitorManager, SOFA_TEMPLATE(DevMonitor,sofa::defaulttype::Vec3Types));
 protected:
     DevMonitorManager();
-    virtual ~DevMonitorManager();
+    ~DevMonitorManager() override;
 public:
     void init() override;
     void eval() override;

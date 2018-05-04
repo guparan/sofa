@@ -104,7 +104,7 @@ public :
 protected:
     LinearMovementConstraint();
 
-    virtual ~LinearMovementConstraint();
+    ~LinearMovementConstraint() override;
 public:
     ///methods to add/remove some indices, keyTimes, keyMovement
     void clearIndices();
@@ -128,13 +128,13 @@ public:
     void projectPosition(const core::MechanicalParams* mparams, DataVecCoord& xData) override;
     void projectJacobianMatrix(const core::MechanicalParams* mparams, DataMatrixDeriv& cData) override;
 
-    virtual void projectMatrix( sofa::defaulttype::BaseMatrix* /*M*/, unsigned /*offset*/ ) override;
+    void projectMatrix( sofa::defaulttype::BaseMatrix* /*M*/, unsigned /*offset*/ ) override;
 
     using core::behavior::ProjectiveConstraintSet<TDataTypes>::applyConstraint;
     void applyConstraint(defaulttype::BaseMatrix *mat, unsigned int offset);
     void applyConstraint(defaulttype::BaseVector *vect, unsigned int offset);
 
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
     class FCPointHandler : public sofa::component::topology::TopologySubsetDataHandler<core::topology::BaseMeshTopology::Point, SetIndexArray >
     {
@@ -146,12 +146,12 @@ public:
 
 
 
-        void applyDestroyFunction(unsigned int /*index*/, value_type& /*T*/);
+        void applyDestroyFunction(unsigned int /*index*/, value_type& /*T*/) override;
 
 
         bool applyTestCreateFunction(unsigned int /*index*/,
                 const sofa::helper::vector< unsigned int > & /*ancestors*/,
-                const sofa::helper::vector< double > & /*coefs*/);
+                const sofa::helper::vector< double > & /*coefs*/) override;
     protected:
         LinearMovementConstraint<DataTypes> *lc;
     };

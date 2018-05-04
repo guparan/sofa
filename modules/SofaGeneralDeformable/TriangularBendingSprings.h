@@ -135,7 +135,7 @@ protected:
         void applyCreateFunction(unsigned int edgeIndex,
                 EdgeInformation &ei,
                 const core::topology::BaseMeshTopology::Edge& ,  const sofa::helper::vector< unsigned int > &,
-                const sofa::helper::vector< double >&);
+                const sofa::helper::vector< double >&) override;
 
         void applyTriangleCreation(const helper::vector<unsigned int> &triangleAdded,
                 const helper::vector<core::topology::BaseMeshTopology::Triangle> & ,
@@ -150,14 +150,14 @@ protected:
 
         using topology::TopologyDataHandler<core::topology::BaseMeshTopology::Edge, helper::vector<EdgeInformation> >::ApplyTopologyChange;
         /// Callback to add triangles elements.
-        void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/) override;
         /// Callback to remove triangles elements.
-        void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/) override;
 
         /// Callback to remove points elements.
-        void ApplyTopologyChange(const core::topology::PointsRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::PointsRemoved* /*event*/) override;
         /// Callback to renumbering on points elements.
-        void ApplyTopologyChange(const core::topology::PointsRenumbering* /*event*/);
+        void ApplyTopologyChange(const core::topology::PointsRenumbering* /*event*/) override;
 
     protected:
         TriangularBendingSprings<DataTypes>* ff;
@@ -175,16 +175,16 @@ protected:
     TriangularBendingSprings(/*double _ks, double _kd*/);
     //TriangularBendingSprings(); //MechanicalState<DataTypes> *mm1 = NULL, MechanicalState<DataTypes> *mm2 = NULL);
 
-    virtual ~TriangularBendingSprings();
+    ~TriangularBendingSprings() override;
 public:
     /// Searches triangle topology and creates the bending springs
-    virtual void init() override;
+    void init() override;
 
-    virtual void reinit() override;
+    void reinit() override;
 
-    virtual void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
-    virtual void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* mparams, const DataVecCoord& d_x) const override;
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
+    void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
+    SReal getPotentialEnergy(const core::MechanicalParams* mparams, const DataVecCoord& d_x) const override;
 
     virtual double getKs() const { return f_ks.getValue();}
     virtual double getKd() const { return f_kd.getValue();}

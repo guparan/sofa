@@ -55,7 +55,7 @@ protected:
 
     HausdorffDistance();
 
-    virtual ~HausdorffDistance() {}
+    ~HausdorffDistance() override {}
 
     void handleEvent(core::objectmodel::Event *event) override;
     void onBeginAnimationStep(const double /*dt*/);
@@ -78,7 +78,7 @@ public:
 
     Data<bool> f_update; ///< Recompute every time step
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

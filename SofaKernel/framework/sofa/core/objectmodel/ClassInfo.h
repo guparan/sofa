@@ -98,7 +98,7 @@ public:
         return inst;
     }
 
-    virtual void* dynamicCast(Base* obj) const
+    void* dynamicCast(Base* obj) const override
     {
         return dynamic_cast<T*>(obj);
     }

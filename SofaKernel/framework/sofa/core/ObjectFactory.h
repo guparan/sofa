@@ -198,26 +198,26 @@ template<class RealObject>
 class ObjectCreator : public ObjectFactory::Creator
 {
 public:
-    bool canCreate(objectmodel::BaseContext* context, objectmodel::BaseObjectDescription* arg)
+    bool canCreate(objectmodel::BaseContext* context, objectmodel::BaseObjectDescription* arg) override
     {
         RealObject* instance = NULL;
         return RealObject::canCreate(instance, context, arg);
     }
-    objectmodel::BaseObject::SPtr createInstance(objectmodel::BaseContext* context, objectmodel::BaseObjectDescription* arg)
+    objectmodel::BaseObject::SPtr createInstance(objectmodel::BaseContext* context, objectmodel::BaseObjectDescription* arg) override
     {
         RealObject* instance = NULL;
         return RealObject::create(instance, context, arg);
     }
-    const std::type_info& type()
+    const std::type_info& type() override
     {
         return typeid(RealObject);
     }
-    virtual const objectmodel::BaseClass* getClass()
+    const objectmodel::BaseClass* getClass() override
     {
         return RealObject::GetClass();
     }
     /// The name of the library or executable containing the binary code for this component
-    virtual const char* getTarget()
+    const char* getTarget() override
     {
 #ifdef SOFA_TARGET
         return sofa_tostring(SOFA_TARGET);
@@ -226,12 +226,12 @@ public:
 #endif
     }
 
-    virtual const char* getHeaderFileLocation()
+    const char* getHeaderFileLocation() override
     {
         return RealObject::HeaderFileLocation();
     }
 
-    virtual std::string shortName(objectmodel::BaseObjectDescription* arg)
+    std::string shortName(objectmodel::BaseObjectDescription* arg) override
     {
         RealObject* instance = NULL;
         return RealObject::shortName(instance,arg);

@@ -75,7 +75,7 @@ public:
     void draw(const core::visual::VisualParams* vparams) override;
 protected:
     TriangularAnisotropicFEMForceField();
-    ~TriangularAnisotropicFEMForceField();
+    ~TriangularAnisotropicFEMForceField() override;
 public:
     void computeMaterialStiffness(int i, Index& a, Index& b, Index& c) override;
     void getFiberDir(int element, Deriv& dir);

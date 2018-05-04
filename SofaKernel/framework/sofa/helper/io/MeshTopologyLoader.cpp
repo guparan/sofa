@@ -616,8 +616,8 @@ class VTKDataIO : public BaseVTKDataIO
 public:
     T* data;
     VTKDataIO() : data(NULL) {}
-    ~VTKDataIO() { if (data) delete[] data; }
-    virtual void resize(int n)
+    ~VTKDataIO() override { if (data) delete[] data; }
+    void resize(int n) override
     {
         if (dataSize != n)
         {
@@ -626,7 +626,7 @@ public:
         }
         dataSize = n;
     }
-    virtual bool read(std::ifstream& in, int n, int binary)
+    bool read(std::ifstream& in, int n, int binary) override
     {
         resize(n);
         if (binary)
@@ -672,7 +672,7 @@ public:
         }
         return true;
     }
-    virtual bool write(std::ofstream& out, int n, int groups, int binary)
+    bool write(std::ofstream& out, int n, int groups, int binary) override
     {
         if (n > dataSize && !data) return false;
         if (binary)
@@ -695,7 +695,7 @@ public:
             return false;
         return true;
     }
-    virtual void addPoints(MeshTopologyLoader* dest)
+    void addPoints(MeshTopologyLoader* dest) override
     {
         if (!data) return;
         for (int i=0; i < dataSize; i+=3)

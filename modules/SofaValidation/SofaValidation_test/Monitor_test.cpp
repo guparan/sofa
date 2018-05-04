@@ -133,7 +133,7 @@ struct Monitor_test : public sofa::Sofa_test<>
         std::remove(std::string(monitor->d_fileName.getFullPath() + "_f.txt").c_str());
         std::remove(std::string(monitor->d_fileName.getFullPath() + "_v.txt").c_str());
     }
-    void SetUp()
+    void SetUp() override
     {
         std::string scene =
                 "<Node name='root' gravity='0 -9.81 0'>"
@@ -167,7 +167,7 @@ struct Monitor_test : public sofa::Sofa_test<>
         EXPECT_FALSE(mo == 0);
     }
 
-    void TearDown()
+    void TearDown() override
     {
     }
 };

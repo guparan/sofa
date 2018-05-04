@@ -66,13 +66,13 @@ struct BilateralInteractionConstraint_test : public Sofa_test<typename _DataType
     simulation::Simulation* simulation {nullptr}; ///< created by the constructor an re-used in the tests
 
     /// Create the context for the tests.
-    void SetUp()
+    void SetUp() override
     {
         if(simulation==nullptr)
             sofa::simulation::setSimulation(simulation = new sofa::simulation::graph::DAGSimulation());
     }
 
-    void TearDown(){
+    void TearDown() override{
         if(root)
             simulation->unload(root);
     }

@@ -81,12 +81,12 @@ protected:
     /**
      * @brief Default Destructor.
      */
-    virtual ~EdgeSetController() {};
+    ~EdgeSetController() override {};
 public:
     /**
      * @brief SceneGraph callback initialization method.
      */
-    virtual void init() override;
+    void init() override;
 
     /**
      * @name Controller Interface
@@ -96,18 +96,18 @@ public:
     /**
      * @brief Mouse event callback.
      */
-    virtual void onMouseEvent(core::objectmodel::MouseEvent *) override;
+    void onMouseEvent(core::objectmodel::MouseEvent *) override;
 
     /**
      * @brief Keyboard key pressed event callback.
      */
-    virtual void onKeyPressedEvent(core::objectmodel::KeypressedEvent *) override;
+    void onKeyPressedEvent(core::objectmodel::KeypressedEvent *) override;
 
 
     /**
      * @brief Begin Animation event callback.
      */
-    virtual void onBeginAnimationStep(const double dt) override;
+    void onBeginAnimationStep(const double dt) override;
 
     //@}
 
@@ -116,7 +116,7 @@ public:
      */
     //@{
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }
@@ -141,7 +141,7 @@ public:
     /**
      * @brief
      */
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
 protected:
     Data<Real> step; ///< base step when changing beam length

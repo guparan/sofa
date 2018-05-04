@@ -88,7 +88,7 @@ public :
 protected:
     LinearVelocityConstraint();
 
-    virtual ~LinearVelocityConstraint();
+    ~LinearVelocityConstraint() override;
 public:
     ///methods to add/remove some indices, keyTimes, keyVelocity
     void clearIndices();
@@ -111,7 +111,7 @@ public:
     void projectPosition(const core::MechanicalParams* mparams, DataVecCoord& xData) override;
     void projectJacobianMatrix(const core::MechanicalParams* mparams, DataMatrixDeriv& cData) override;
 
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
     class FCPointHandler : public sofa::component::topology::TopologySubsetDataHandler<core::topology::BaseMeshTopology::Point, SetIndexArray >
     {
@@ -123,12 +123,12 @@ public:
 
 
 
-        void applyDestroyFunction(unsigned int /*index*/, value_type& /*T*/);
+        void applyDestroyFunction(unsigned int /*index*/, value_type& /*T*/) override;
 
 
         bool applyTestCreateFunction(unsigned int /*index*/,
                 const sofa::helper::vector< unsigned int > & /*ancestors*/,
-                const sofa::helper::vector< double > & /*coefs*/);
+                const sofa::helper::vector< double > & /*coefs*/) override;
     protected:
         LinearVelocityConstraint<DataTypes> *lc;
     };

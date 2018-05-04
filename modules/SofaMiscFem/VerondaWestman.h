@@ -59,7 +59,7 @@ class VerondaWestman : public HyperelasticMaterial<DataTypes>{
   typedef defaulttype::Mat<6,6,Real> Matrix6;
   typedef defaulttype::MatSym<3,Real> MatrixSym;
 
-	virtual Real getStrainEnergy(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param) {
+	Real getStrainEnergy(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param) override {
 		MatrixSym C=sinfo->deformationTensor;
 		Real I1=sinfo->trC;
 		Real I1square=(Real)(C[0]*C[0] + C[2]*C[2]+ C[5]*C[5]+2*(C[1]*C[1] + C[3]*C[3] + C[4]*C[4]));
@@ -71,7 +71,7 @@ class VerondaWestman : public HyperelasticMaterial<DataTypes>{
 
 	}
 
-	  virtual void deriveSPKTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,MatrixSym &SPKTensorGeneral){
+	  void deriveSPKTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,MatrixSym &SPKTensorGeneral) override{
 		MatrixSym inversematrix;
 		MatrixSym C=sinfo->deformationTensor;
 		invertMatrix(inversematrix,C);
@@ -88,7 +88,7 @@ class VerondaWestman : public HyperelasticMaterial<DataTypes>{
 	}
 	
 
-    virtual void applyElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,const MatrixSym& inputTensor, MatrixSym &outputTensor)  {
+    void applyElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,const MatrixSym& inputTensor, MatrixSym &outputTensor) override  {
 		MatrixSym inversematrix;
 		MatrixSym C=sinfo->deformationTensor;
 		invertMatrix(inversematrix,C);
@@ -119,7 +119,7 @@ class VerondaWestman : public HyperelasticMaterial<DataTypes>{
 			+Firstmatrix*(Real)(-k0)*log(sinfo->J)+inversematrix*k0*_trHC/(Real)2.0; 
 	
 	}
-	virtual void ElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,Matrix6 &outputTensor)  {
+	void ElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,Matrix6 &outputTensor) override  {
 		MatrixSym _C;
 		MatrixSym ID;
 		ID.identity();

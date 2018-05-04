@@ -62,7 +62,7 @@ public:
     /// outputs
     Data< SetIndex > d_indices;
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const MeshBoundaryROI* = NULL) { return std::string();    }
 
 protected:
@@ -75,10 +75,10 @@ protected:
     {
     }
 
-    virtual ~MeshBoundaryROI() {}
+    ~MeshBoundaryROI() override {}
 
 public:
-    virtual void init() override
+    void init() override
     {
         addInput(&d_triangles);
         addInput(&d_quads);
@@ -88,7 +88,7 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit()    override { update();  }
+    void reinit()    override { update();  }
     void update() override
     {
         helper::ReadAccessor<Data< SeqTriangles > > triangles(this->d_triangles);

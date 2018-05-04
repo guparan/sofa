@@ -66,7 +66,7 @@ public:
 protected:
     BaseMouseInteractor(): isAttached(false),distanceFromMouse(0) {}
 public:
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
     void cleanup() override;
 
@@ -119,14 +119,14 @@ public:
     typedef typename DataTypes::Coord Coord;
 public:
     MouseInteractor():mouseInSofa(NULL) {}
-    ~MouseInteractor() {}
+    ~MouseInteractor() override {}
 
     void init() override;
 
     core::behavior::BaseMechanicalState *getMouseContainer() override {return mouseInSofa;}
 
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

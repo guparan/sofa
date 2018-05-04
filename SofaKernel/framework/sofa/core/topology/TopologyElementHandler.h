@@ -62,32 +62,32 @@ public:
 
     TopologyElementHandler() : TopologyHandler() {}
 
-    virtual ~TopologyElementHandler() {}
+    ~TopologyElementHandler() override {}
 
 
     using TopologyHandler::ApplyTopologyChange;
 
     /// Apply swap between indices elements.
-    virtual void ApplyTopologyChange(const EIndicesSwap* event);
+    void ApplyTopologyChange(const EIndicesSwap* event) override;
     /// Apply adding elements.
-    virtual void ApplyTopologyChange(const EAdded* event);
+    void ApplyTopologyChange(const EAdded* event) override;
     /// Apply removing elements.
-    virtual void ApplyTopologyChange(const ERemoved* event);
+    void ApplyTopologyChange(const ERemoved* event) override;
     /// Apply renumbering on elements.
-    virtual void ApplyTopologyChange(const ERenumbering* event);
+    void ApplyTopologyChange(const ERenumbering* event) override;
     /// Apply moving elements.
-    virtual void ApplyTopologyChange(const EMoved* event);
+    void ApplyTopologyChange(const EMoved* event) ;
     /// Apply adding function on moved elements.
-    virtual void ApplyTopologyChange(const EMoved_Adding* event);
+    void ApplyTopologyChange(const EMoved_Adding* event) ;
     /// Apply removing function on moved elements.
-    virtual void ApplyTopologyChange(const EMoved_Removing* event);
+    void ApplyTopologyChange(const EMoved_Removing* event) ;
 
 protected:
     /// Swaps values at indices i1 and i2.
-    virtual void swap( unsigned int /*i1*/, unsigned int /*i2*/ ) {}
+    void swap( unsigned int /*i1*/, unsigned int /*i2*/ ) override {}
 
     /// Reorder the values.
-    virtual void renumber( const sofa::helper::vector<unsigned int> &/*index*/ ) {}
+    void renumber( const sofa::helper::vector<unsigned int> &/*index*/ ) override {}
 
     /// Add some values. Values are added at the end of the vector.
     /// This is the (old) version, to be deprecated in favor of the next method

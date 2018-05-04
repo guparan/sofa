@@ -57,7 +57,7 @@ public:
     SOFA_BASE_CAST_IMPLEMENTATION(VisualModel)
 protected:
     /// Destructor
-    virtual ~VisualModel() { }
+    ~VisualModel() override { }
 public:
     /**
      *  \brief Initialize the textures, or other graphical resources.
@@ -172,8 +172,8 @@ public:
     {
     }
 
-    virtual bool insertInNode( objectmodel::BaseNode* node ) override;
-    virtual bool removeInNode( objectmodel::BaseNode* node ) override;
+    bool insertInNode( objectmodel::BaseNode* node ) override;
+    bool removeInNode( objectmodel::BaseNode* node ) override;
 };
 
 } // namespace visual

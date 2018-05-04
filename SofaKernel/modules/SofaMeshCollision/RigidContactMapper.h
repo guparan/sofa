@@ -90,11 +90,11 @@ public:
         this->model = model;
     }
 
-    void cleanup();
+    void cleanup() override;
 
-    MMechanicalState* createMapping(const char* name="contactPoints");
+    MMechanicalState* createMapping(const char* name="contactPoints") override;
 
-    void resize(int size)
+    void resize(int size) override
     {
         if (mapping!=NULL)
             mapping->clear(size);
@@ -103,7 +103,7 @@ public:
         nbp = 0;
     }
 
-    int addPoint(const Coord& P, int index, Real&)
+    int addPoint(const Coord& P, int index, Real&) override
     {
         int i = nbp++;
         if ((int)outmodel->getSize() <= i)
@@ -120,7 +120,7 @@ public:
         return i;
     }
 
-    void update()
+    void update() override
     {
         if (mapping!=NULL)
         {
@@ -130,7 +130,7 @@ public:
         }
     }
 
-    void updateXfree()
+    void updateXfree() override
     {
         if (mapping!=NULL)
         {
@@ -144,7 +144,7 @@ public:
 template <class TVec3Types>
 class ContactMapper<RigidSphereModel,TVec3Types > : public RigidContactMapper<RigidSphereModel, TVec3Types >{
     public:
-        int addPoint(const typename TVec3Types::Coord & P, int index,typename TVec3Types::Real & r)
+        int addPoint(const typename TVec3Types::Coord & P, int index,typename TVec3Types::Real & r) override
         {
             RigidSphere e(this->model, index);
             const typename RigidSphereModel::DataTypes::Coord & rCenter = e.rigidCenter();
@@ -161,7 +161,7 @@ class ContactMapper<RigidSphereModel,TVec3Types > : public RigidContactMapper<Ri
 template <class TVec3Types>
 class ContactMapper<OBBModel,TVec3Types > : public RigidContactMapper<OBBModel, TVec3Types >{
     public:
-        int addPoint(const typename TVec3Types::Coord & P, int index,typename TVec3Types::Real & r)
+        int addPoint(const typename TVec3Types::Coord & P, int index,typename TVec3Types::Real & r) override
         {
             const typename TVec3Types::Coord & cP = P - this->model->center(index);
             const defaulttype::Quaternion & ori = this->model->orientation(index);
@@ -173,7 +173,7 @@ class ContactMapper<OBBModel,TVec3Types > : public RigidContactMapper<OBBModel, 
 template <class TVec3Types>
 class ContactMapper<RigidCapsuleModel,TVec3Types > : public RigidContactMapper<RigidCapsuleModel, TVec3Types >{
     public:
-        int addPoint(const typename TVec3Types::Coord & P, int index,typename TVec3Types::Real & r)
+        int addPoint(const typename TVec3Types::Coord & P, int index,typename TVec3Types::Real & r) override
         {
             const typename TVec3Types::Coord & cP = P - this->model->center(index);
             const defaulttype::Quaternion & ori = this->model->orientation(index);
@@ -185,7 +185,7 @@ class ContactMapper<RigidCapsuleModel,TVec3Types > : public RigidContactMapper<R
 template <class TVec3Types>
 class ContactMapper<CylinderModel,TVec3Types > : public RigidContactMapper<CylinderModel, TVec3Types >{
     public:
-        int addPoint(const typename TVec3Types::Coord & P, int index,typename TVec3Types::Real & r)
+        int addPoint(const typename TVec3Types::Coord & P, int index,typename TVec3Types::Real & r) override
         {
             const typename TVec3Types::Coord & cP = P - this->model->center(index);
             const defaulttype::Quaternion & ori = this->model->orientation(index);

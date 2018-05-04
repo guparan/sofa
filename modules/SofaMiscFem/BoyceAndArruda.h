@@ -60,7 +60,7 @@ class BoyceAndArruda : public HyperelasticMaterial<DataTypes>{
     typedef defaulttype::Mat<6,6,Real> Matrix6;
     typedef defaulttype::MatSym<3,Real> MatrixSym;
 
-  virtual Real getStrainEnergy(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param) {
+  Real getStrainEnergy(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param) override {
 		Real I1=sinfo->trC;
 		Real mu=param.parameterArray[0];
 		Real k0=param.parameterArray[1];
@@ -70,7 +70,7 @@ class BoyceAndArruda : public HyperelasticMaterial<DataTypes>{
 			+k0*log(sinfo->J)*log(sinfo->J)/2;
 
   }
-  virtual void deriveSPKTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,MatrixSym &SPKTensorGeneral){
+  void deriveSPKTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,MatrixSym &SPKTensorGeneral) override{
 		MatrixSym inversematrix;
 		MatrixSym C=sinfo->deformationTensor;
 		invertMatrix(inversematrix,C);
@@ -85,7 +85,7 @@ class BoyceAndArruda : public HyperelasticMaterial<DataTypes>{
 	}
 	
 
-    virtual void applyElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,const MatrixSym& inputTensor, MatrixSym &outputTensor)  {
+    void applyElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,const MatrixSym& inputTensor, MatrixSym &outputTensor) override  {
 		MatrixSym inversematrix;
 		MatrixSym C=sinfo->deformationTensor;
 		invertMatrix(inversematrix,C);
@@ -110,7 +110,7 @@ class BoyceAndArruda : public HyperelasticMaterial<DataTypes>{
 			((inversematrix*(Real)(-5.0/3.0)*pow(I1,(Real)5.0)+ID*(Real)5.0*pow(I1,(Real)4))*(Real)(-5.0/3.0)*_trHC-inversematrix*(Real)(25.0/3.0)*pow(I1,(Real)4.0)*trH+Firstmatrix*(Real)(5.0/3.0)*pow(I1,(Real)5.0)+ID*(Real)20.0*pow(I1,(Real)3.0)*trH)*(Real)(519.0/(673750.0*8.0*8.0*8.0*8.0))*pow(sinfo->J,(Real)(-10.0/3.0)))*2.0*mu
 			+inversematrix*(Real)(k0/(Real)2.0)*_trHC-Firstmatrix*(Real)(k0*log(sinfo->J));
 	}
-	virtual void ElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,Matrix6 &outputTensor)  {
+	void ElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,Matrix6 &outputTensor) override  {
 		MatrixSym ID;
 		ID.identity();
 		MatrixSym _C;

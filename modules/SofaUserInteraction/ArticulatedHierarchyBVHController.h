@@ -71,22 +71,22 @@ protected:
     /**
      * @brief Default Destructor.
      */
-    virtual ~ArticulatedHierarchyBVHController() {};
+    ~ArticulatedHierarchyBVHController() override {};
 public:
     /**
      * @brief Init method called during the scene graph initialization.
      */
-    virtual void init() override;
+    void init() override;
 
     /**
      * @brief Reset to initial state
      */
-    virtual void reset() override;
+    void reset() override;
 
     /**
      * @brief Apply the controller current modifications to its controled component.
      */
-    virtual void applyController(void) override;
+    void applyController(void) override;
 
 protected:
     Data< bool > useExternalTime; ///< use the external time line

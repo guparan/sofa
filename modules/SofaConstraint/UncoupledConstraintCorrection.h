@@ -63,33 +63,33 @@ public:
 protected:
     UncoupledConstraintCorrection(sofa::core::behavior::MechanicalState<DataTypes> *mm = NULL);
 
-    virtual ~UncoupledConstraintCorrection();
+    ~UncoupledConstraintCorrection() override;
 public:
-    virtual void init() override;
+    void init() override;
 
     void reinit() override;
 
     /// Handle Topological Changes.
     void handleTopologyChange() override;
 
-    virtual void addComplianceInConstraintSpace(const sofa::core::ConstraintParams *cparams, sofa::defaulttype::BaseMatrix *W) override;
+    void addComplianceInConstraintSpace(const sofa::core::ConstraintParams *cparams, sofa::defaulttype::BaseMatrix *W) override;
 
-    virtual void getComplianceMatrix(defaulttype::BaseMatrix* ) const override;
+    void getComplianceMatrix(defaulttype::BaseMatrix* ) const override;
 
     // for multigrid approach => constraints are merged
-    virtual void getComplianceWithConstraintMerge(defaulttype::BaseMatrix* Wmerged, std::vector<int> &constraint_merge) override;
+    void getComplianceWithConstraintMerge(defaulttype::BaseMatrix* Wmerged, std::vector<int> &constraint_merge) override;
 
 
     /// @name Correction API
     /// @{
 
-    virtual void computeAndApplyMotionCorrection(const sofa::core::ConstraintParams *cparams, Data< VecCoord > &x, Data< VecDeriv > &v, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
+    void computeAndApplyMotionCorrection(const sofa::core::ConstraintParams *cparams, Data< VecCoord > &x, Data< VecDeriv > &v, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
 
-    virtual void computeAndApplyPositionCorrection(const sofa::core::ConstraintParams *cparams, Data< VecCoord > &x, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
+    void computeAndApplyPositionCorrection(const sofa::core::ConstraintParams *cparams, Data< VecCoord > &x, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
 
-    virtual void computeAndApplyVelocityCorrection(const sofa::core::ConstraintParams *cparams, Data< VecDeriv > &v, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
+    void computeAndApplyVelocityCorrection(const sofa::core::ConstraintParams *cparams, Data< VecDeriv > &v, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
 
-    virtual void applyPredictiveConstraintForce(const sofa::core::ConstraintParams *cparams, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
+    void applyPredictiveConstraintForce(const sofa::core::ConstraintParams *cparams, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
 
     /// @}
 
@@ -97,9 +97,9 @@ public:
     /// @name Deprecated API
     /// @{
 
-    virtual void applyContactForce(const defaulttype::BaseVector *f) override;
+    void applyContactForce(const defaulttype::BaseVector *f) override;
 
-    virtual void resetContactForce() override;
+    void resetContactForce() override;
 
     /// @}
 
@@ -107,15 +107,15 @@ public:
     /// @name Unbuilt constraint system during resolution
     /// @{
 
-    virtual bool hasConstraintNumber(int index) override;  // virtual ???
+    bool hasConstraintNumber(int index) override;  // virtual ???
 
-    virtual void resetForUnbuiltResolution(double * f, std::list<unsigned int>& /*renumbering*/) override;
+    void resetForUnbuiltResolution(double * f, std::list<unsigned int>& /*renumbering*/) override;
 
-    virtual void addConstraintDisplacement(double *d, int begin,int end) override;
+    void addConstraintDisplacement(double *d, int begin,int end) override;
 
-    virtual void setConstraintDForce(double *df, int begin, int end, bool update) override;
+    void setConstraintDForce(double *df, int begin, int end, bool update) override;
 
-    virtual void getBlockDiagonalCompliance(defaulttype::BaseMatrix* W, int begin, int end) override;
+    void getBlockDiagonalCompliance(defaulttype::BaseMatrix* W, int begin, int end) override;
 
     /// @}
 

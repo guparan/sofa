@@ -183,23 +183,23 @@ protected:
 
     TTriangleModel();
 public:
-    virtual void init() override;
+    void init() override;
 
     // -- CollisionModel interface
 
-    virtual void resize(int size) override;
+    void resize(int size) override;
 
-    virtual void computeBoundingTree(int maxDepth=0) override;
+    void computeBoundingTree(int maxDepth=0) override;
 
-    virtual void computeContinuousBoundingTree(double dt, int maxDepth=0) override;
+    void computeContinuousBoundingTree(double dt, int maxDepth=0) override;
 
     void draw(const core::visual::VisualParams*,int index) override;
 
     void draw(const core::visual::VisualParams* vparams) override;
 
-    virtual bool canCollideWithElement(int index, CollisionModel* model2, int index2) override;
+    bool canCollideWithElement(int index, CollisionModel* model2, int index2) override;
 
-    virtual void handleTopologyChange() override;
+    void handleTopologyChange() override;
 
     core::behavior::MechanicalState<DataTypes>* getMechanicalState() { return mstate; }
     const core::behavior::MechanicalState<DataTypes>* getMechanicalState() const { return mstate; }
@@ -234,7 +234,7 @@ public:
         return BaseObject::canCreate(obj, context, arg);
     }
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }
@@ -244,7 +244,7 @@ public:
         return DataTypes::Name();
     }
 
-    virtual void computeBBox(const core::ExecParams* params, bool onlyVisible=false) override;
+    void computeBBox(const core::ExecParams* params, bool onlyVisible=false) override;
 };
 
 template<class DataTypes>

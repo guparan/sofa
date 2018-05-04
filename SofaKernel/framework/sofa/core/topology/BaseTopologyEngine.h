@@ -45,7 +45,7 @@ public:
 protected:
     TopologyEngine() {}//m_topologicalData(NULL)  {}
 
-    virtual ~TopologyEngine()
+    ~TopologyEngine() override
     {
         //if (this->m_topologicalData != NULL)
         //    this->removeTopologicalData();
@@ -53,7 +53,7 @@ protected:
 
 public:
 
-    virtual void init() override
+    void init() override
     {
         sofa::core::DataEngine::init();
         // TODO: see if necessary or not....
@@ -65,7 +65,7 @@ public:
         this->createEngineName();
     }
 
-    virtual void handleTopologyChange() override {}
+    void handleTopologyChange() override {}
 
 
 public:

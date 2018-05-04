@@ -142,13 +142,13 @@ protected:
 
     TriangularQuadraticSpringsForceField();
 
-    virtual ~TriangularQuadraticSpringsForceField();
+    ~TriangularQuadraticSpringsForceField() override;
 public:
-    virtual void init() override;
+    void init() override;
 
-    virtual void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
-    virtual void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
+    void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
+    SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
     {
         serr << "Get potentialEnergy not implemented" << sendl;
         return 0.0;
@@ -184,9 +184,9 @@ public:
         void applyCreateFunction(unsigned int triangleIndex, TriangleRestInformation& ,
                 const core::topology::BaseMeshTopology::Triangle & t,
                 const sofa::helper::vector< unsigned int > &,
-                const sofa::helper::vector< double > &);
+                const sofa::helper::vector< double > &) override;
 
-        void applyDestroyFunction(unsigned int, TriangleRestInformation &);
+        void applyDestroyFunction(unsigned int, TriangleRestInformation &) override;
 
     protected:
         TriangularQuadraticSpringsForceField<DataTypes>* ff;
@@ -201,7 +201,7 @@ public:
         void applyCreateFunction(unsigned int edgeIndex, EdgeRestInformation& ,
                 const core::topology::BaseMeshTopology::Edge & t,
                 const sofa::helper::vector< unsigned int > &,
-                const sofa::helper::vector< double > &);
+                const sofa::helper::vector< double > &) override;
 
     protected:
         TriangularQuadraticSpringsForceField<DataTypes>* ff;

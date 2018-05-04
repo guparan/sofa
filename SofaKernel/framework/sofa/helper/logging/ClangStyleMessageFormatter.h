@@ -43,7 +43,7 @@ namespace logging
 class SOFA_HELPER_API ClangStyleMessageFormatter : public MessageFormatter
 {
 public:
-    virtual void formatMessage(const Message& m,std::ostream& out);
+    void formatMessage(const Message& m,std::ostream& out) override;
     static ClangStyleMessageFormatter& getInstance() { return s_instance; }
 
 private:

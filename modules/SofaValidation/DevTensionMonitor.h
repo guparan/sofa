@@ -50,7 +50,7 @@ public:
     typedef typename DataTypes::Coord Coord;
 protected:
     DevTensionMonitor() { };
-    virtual ~DevTensionMonitor() { };
+    ~DevTensionMonitor() override { };
 public:
     void init() override;
     void eval() override;
@@ -87,7 +87,7 @@ public:
         return obj;
     }
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

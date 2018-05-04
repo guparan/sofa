@@ -61,7 +61,7 @@ class Costa: public HyperelasticMaterial<DataTypes>{
  
   public:
 
-	 virtual Real getStrainEnergy(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param) {
+	 Real getStrainEnergy(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param) override {
 		Real a=param.parameterArray[0];
 		Real k0=param.parameterArray[1];
 		Real bff=param.parameterArray[2];
@@ -77,7 +77,7 @@ class Costa: public HyperelasticMaterial<DataTypes>{
 				Real Qbar= pow(sinfo->J,(Real)(-4.0/3.0))*Q;
 				return a*(exp(Qbar)-1)/2+k0*(sinfo->J*log(sinfo->J)-sinfo->J-1);
 	 }
-	virtual void deriveSPKTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,MatrixSym &SPKTensorGeneral){
+	void deriveSPKTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,MatrixSym &SPKTensorGeneral) override{
 		MatrixSym inversematrix;
 		invertMatrix(inversematrix,sinfo->deformationTensor);
 		Real a=param.parameterArray[0];
@@ -98,7 +98,7 @@ class Costa: public HyperelasticMaterial<DataTypes>{
 	}
 	
 
-    virtual void applyElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,const MatrixSym& inputTensor, MatrixSym &outputTensor)  {
+    void applyElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,const MatrixSym& inputTensor, MatrixSym &outputTensor) override  {
 		MatrixSym inversematrix;
 		invertMatrix(inversematrix,sinfo->deformationTensor);
 		Real a=param.parameterArray[0];
@@ -131,7 +131,7 @@ class Costa: public HyperelasticMaterial<DataTypes>{
 
 	}
 
-	virtual void ElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,Matrix6 &outputTensor)  {
+	void ElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,Matrix6 &outputTensor) override  {
 		Real a=param.parameterArray[0];
 		Real k0=param.parameterArray[1];
 		Real bff=param.parameterArray[2];

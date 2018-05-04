@@ -122,13 +122,13 @@ public:
         damping.setValue( damp );
     }
 
-    virtual void addForce(const sofa::core::MechanicalParams* /*mparams*/, DataVecDeriv &  dataF, const DataVecCoord &  dataX , const DataVecDeriv & dataV ) override;
+    void addForce(const sofa::core::MechanicalParams* /*mparams*/, DataVecDeriv &  dataF, const DataVecCoord &  dataX , const DataVecDeriv & dataV ) override;
     ///SOFA_DEPRECATED_ForceField <<<virtual void addForce (VecDeriv& f, const VecCoord& x, const VecDeriv& v);
 
-    virtual void addDForce(const sofa::core::MechanicalParams* /*mparams*/, DataVecDeriv&   datadF , const DataVecDeriv&   datadX ) override;
+    void addDForce(const sofa::core::MechanicalParams* /*mparams*/, DataVecDeriv&   datadF , const DataVecDeriv&   datadX ) override;
     ///SOFA_DEPRECATED_ForceField <<<virtual void addDForce (VecDeriv& df, const VecDeriv& dx, SReal kFactor, SReal bFactor);
 
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
+    SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
     {
         serr << "Get potentialEnergy not implemented" << sendl;
         return 0.0;

@@ -82,7 +82,7 @@ protected:
     DataEngine();
 
     /// Destructor. Do nothing
-    virtual ~DataEngine();
+    ~DataEngine() override;
 
 private:
 	DataEngine(const DataEngine& n) ;

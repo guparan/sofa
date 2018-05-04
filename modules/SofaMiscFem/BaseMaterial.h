@@ -43,9 +43,9 @@ public:
     SOFA_CLASS(BaseMaterial,core::objectmodel::BaseObject);
 
     BaseMaterial() {}
-    virtual ~BaseMaterial() {}
+    ~BaseMaterial() override {}
 
-    virtual void init() override
+    void init() override
     {
         this->core::objectmodel::BaseObject::init();
     }
@@ -60,7 +60,7 @@ public:
     virtual void computeDStress (defaulttype::Vector3 & ,defaulttype::Vector3 &) {}
 
     virtual void computeStress (unsigned int /*iElement*/)=0;//to be pure virtual
-    virtual void handleTopologyChange() override
+    void handleTopologyChange() override
     {
         serr<<"ERROR(BaseMaterial) this method handleTopologyChange() is not already implemented in base class"<<sendl;
     }

@@ -42,7 +42,7 @@ namespace constraintset
 class UnilateralConstraintResolution : public core::behavior::ConstraintResolution
 {
 public:
-    virtual void resolution(int line, double** w, double* d, double* force, double *dfree)
+    void resolution(int line, double** w, double* d, double* force, double *dfree) override
     {
         SOFA_UNUSED(dfree);
         force[line] -= d[line] / w[line][line];
@@ -93,9 +93,9 @@ public:
         this->nbLines=3;
     }
 
-    virtual void init(int line, double** w, double* force);
-    virtual void resolution(int line, double** w, double* d, double* force, double *dFree);
-    virtual void store(int line, double* force, bool /*convergence*/);
+    void init(int line, double** w, double* force) override;
+    void resolution(int line, double** w, double* d, double* force, double *dFree) override;
+    void store(int line, double* force, bool /*convergence*/) override;
 
 protected:
     double _mu;
@@ -193,7 +193,7 @@ protected:
     {
     }
 
-    virtual ~UnilateralInteractionConstraint()
+    ~UnilateralInteractionConstraint() override
     {
         if(contactsStatus)
             delete[] contactsStatus;
@@ -236,9 +236,9 @@ public:
             , const DataVecDeriv &v1, const DataVecDeriv &v2) override;
 
 
-    virtual void getConstraintInfo(const core::ConstraintParams* cParams, VecConstraintBlockInfo& blocks, VecPersistentID& ids, VecConstCoord& positions, VecConstDeriv& directions, VecConstArea& areas) override;
+    void getConstraintInfo(const core::ConstraintParams* cParams, VecConstraintBlockInfo& blocks, VecPersistentID& ids, VecConstCoord& positions, VecConstDeriv& directions, VecConstArea& areas) override;
 
-    virtual void getConstraintResolution(const core::ConstraintParams *,std::vector<core::behavior::ConstraintResolution*>& resTab, unsigned int& offset) override;
+    void getConstraintResolution(const core::ConstraintParams *,std::vector<core::behavior::ConstraintResolution*>& resTab, unsigned int& offset) override;
     bool isActive() const override;
 
     void draw(const core::visual::VisualParams* vparams) override;

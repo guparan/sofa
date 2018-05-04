@@ -56,7 +56,7 @@ public:
 protected:
 
     GroupFilterYoungModulus();
-    ~GroupFilterYoungModulus() {}
+    ~GroupFilterYoungModulus() override {}
 public:
     void init() override;
     void reinit() override;
@@ -73,7 +73,7 @@ public:
     Data<Real> p_defaultModulus; ///< Default value if the primitive is not in a group
     Data<helper::vector<Real> > p_groupMod; ///< list of young modulus for each group
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

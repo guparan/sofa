@@ -53,7 +53,7 @@ public:
 protected:
     MergeMeshes();
 
-    ~MergeMeshes();
+    ~MergeMeshes() override;
 public:
     /// Parse the given description to assign values to this object's fields and potentially other parameters
     void parse ( sofa::core::objectmodel::BaseObjectDescription* arg ) override;
@@ -67,7 +67,7 @@ public:
 
     void update() override;
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

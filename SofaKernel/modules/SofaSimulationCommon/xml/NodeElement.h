@@ -41,15 +41,15 @@ class SOFA_SIMULATION_COMMON_API NodeElement : public Element<core::objectmodel:
 public:
     NodeElement(const std::string& name, const std::string& type, BaseElement* parent=NULL);
 
-    virtual ~NodeElement();
+    ~NodeElement() override;
 
-    virtual bool setParent(BaseElement* newParent);
+    bool setParent(BaseElement* newParent) override;
 
-    virtual bool initNode();
+    bool initNode() override;
 
-    virtual bool init();
+    bool init() override;
 
-    virtual const char* getClass() const;
+    const char* getClass() const override;
 
     typedef Element<core::objectmodel::BaseNode>::Factory Factory;
 };

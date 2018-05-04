@@ -56,13 +56,13 @@ public:
 protected:
 
     Indices2ValuesMapper();
-    ~Indices2ValuesMapper() {}
+    ~Indices2ValuesMapper() override {}
 public:
     void init() override;
     void reinit() override;
     void update() override;
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

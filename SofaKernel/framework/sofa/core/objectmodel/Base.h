@@ -559,7 +559,7 @@ namespace logging
         }
 
         const std::string& name() const { return m_name; }
-        std::ostream& toStream(std::ostream &out) const
+        std::ostream& toStream(std::ostream &out) const override
         {
             out << m_sender << "(" << m_name << ")" ;
             return out ;

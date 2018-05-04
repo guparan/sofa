@@ -91,7 +91,7 @@ protected:
 
     ParabolicConstraint(core::behavior::MechanicalState<DataTypes>* mstate);
 
-    ~ParabolicConstraint();
+    ~ParabolicConstraint() override;
 public:
     void addConstraint(unsigned index );
 

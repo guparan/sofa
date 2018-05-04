@@ -64,7 +64,7 @@ public:
     //Output
     Data<helper::vector<Index> > d_indices; ///< selected point/cell indices
 
-    virtual std::string getTemplateName() const    override {        return templateName(this);    }
+    std::string getTemplateName() const    override {        return templateName(this);    }
     static std::string templateName(const SelectConnectedLabelsROI* = NULL)    {       return sofa::defaulttype::DataTypeName<T>::name();    }
 
     SelectConnectedLabelsROI(): Inherited()
@@ -76,9 +76,9 @@ public:
         d_labels.resize(d_nbLabels.getValue());
     }
 
-    virtual ~SelectConnectedLabelsROI() {}
+    ~SelectConnectedLabelsROI() override {}
 
-    virtual void init() override
+    void init() override
     {
         addInput(&d_nbLabels);
         d_labels.resize(d_nbLabels.getValue());
@@ -87,7 +87,7 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit() override
+    void reinit() override
     {
         d_labels.resize(d_nbLabels.getValue());
         update();
@@ -111,7 +111,7 @@ public:
 protected:
 
 
-    virtual void update() override
+    void update() override
     {
         updateAllInputsIfDirty();
         cleanDirty();

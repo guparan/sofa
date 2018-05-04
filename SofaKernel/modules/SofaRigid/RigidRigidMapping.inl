@@ -50,14 +50,14 @@ class RigidRigidMapping<TIn, TOut>::Loader : public helper::io::MassSpringLoader
 public:
     RigidRigidMapping<TIn, TOut>* dest;
     Loader(RigidRigidMapping<TIn, TOut>* dest) : dest(dest) {}
-    virtual void addMass(SReal px, SReal py, SReal pz, SReal, SReal, SReal, SReal, SReal, bool, bool)
+    void addMass(SReal px, SReal py, SReal pz, SReal, SReal, SReal, SReal, SReal, bool, bool) override
     {
         OutCoord c;
         Out::set(c,px,py,pz);
         dest->points.beginEdit()->push_back(c); //Coord((Real)px,(Real)py,(Real)pz));
         dest->points.endEdit();
     }
-    virtual void addSphere(SReal px, SReal py, SReal pz, SReal)
+    void addSphere(SReal px, SReal py, SReal pz, SReal) override
     {
         OutCoord c;
         Out::set(c,px,py,pz);

@@ -59,7 +59,7 @@ public:
     Deprecated(std::string sinceVersion, std::string untilVersion)
         : ComponentChange(sinceVersion), m_untilVersion(untilVersion) {}
 
-    std::string getMessage()
+    std::string getMessage() override
     {
         std::stringstream output;
         output << "This component has been deprecated since SOFA " << m_sinceVersion << " "
@@ -80,7 +80,7 @@ public:
     Pluginized(std::string sinceVersion, std::string plugin)
         : ComponentChange(sinceVersion), m_plugin(plugin) {}
 
-    std::string getMessage()
+    std::string getMessage() override
     {
         std::stringstream output;
         output << "This component has been pluginized to " << m_plugin << " "
@@ -97,7 +97,7 @@ public:
     Removed(std::string sinceVersion)
         : ComponentChange(sinceVersion) {}
 
-    std::string getMessage()
+    std::string getMessage() override
     {
         std::stringstream output;
         output << "This component has been removed since SOFA " << m_sinceVersion << ". "

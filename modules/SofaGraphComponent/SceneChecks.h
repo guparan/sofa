@@ -56,11 +56,11 @@ class SOFA_GRAPH_COMPONENT_API SceneCheckDuplicatedName : public SceneCheck
 public:
     typedef std::shared_ptr<SceneCheckDuplicatedName> SPtr ;
     static SPtr newSPtr() { return SPtr(new SceneCheckDuplicatedName()); }
-    virtual const std::string getName() override ;
-    virtual const std::string getDesc() override ;
-    virtual void doInit(Node* node) override ;
-    virtual void doCheckOn(Node* node) override ;
-    virtual void doPrintSummary() override ;
+    const std::string getName() override ;
+    const std::string getDesc() override ;
+    void doInit(Node* node) override ;
+    void doCheckOn(Node* node) override ;
+    void doPrintSummary() override ;
 
 private:
     bool m_hasDuplicates ;
@@ -72,11 +72,11 @@ class SOFA_GRAPH_COMPONENT_API SceneCheckMissingRequiredPlugin : public SceneChe
 public:
     typedef std::shared_ptr<SceneCheckMissingRequiredPlugin > SPtr ;
     static SPtr newSPtr() { return SPtr(new SceneCheckMissingRequiredPlugin()); }
-    virtual const std::string getName() override ;
-    virtual const std::string getDesc() override ;
-    virtual void doInit(Node* node) override ;
-    virtual void doCheckOn(Node* node) override ;
-    virtual void doPrintSummary() override ;
+    const std::string getName() override ;
+    const std::string getDesc() override ;
+    void doInit(Node* node) override ;
+    void doCheckOn(Node* node) override ;
+    void doPrintSummary() override ;
 
 private:    
     std::map<std::string, bool > m_loadedPlugins ;

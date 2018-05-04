@@ -57,13 +57,13 @@ public:
 protected:
 
     JoinPoints();
-    ~JoinPoints() {}
+    ~JoinPoints() override {}
 public:
     void init() override;
     void reinit() override;
     void update() override;
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

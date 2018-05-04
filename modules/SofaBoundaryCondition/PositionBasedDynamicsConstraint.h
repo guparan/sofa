@@ -88,11 +88,11 @@ public:
 
     PositionBasedDynamicsConstraint();
 
-    virtual ~PositionBasedDynamicsConstraint();
+    ~PositionBasedDynamicsConstraint() override;
 
     // -- Constraint interface
-    virtual void init() override;
-    virtual void reset() override;
+    void init() override;
+    void reset() override;
 
     void projectResponse(const core::MechanicalParams* , DataVecDeriv& ) override {}
     void projectVelocity(const core::MechanicalParams* mparams, DataVecDeriv& vData) override;
@@ -103,7 +103,7 @@ public:
 //    void applyConstraint(defaulttype::BaseVector *, unsigned int ) {}
 
     // Handle topological changes
-    virtual void handleTopologyChange() override;
+    void handleTopologyChange() override;
 
 protected :
 

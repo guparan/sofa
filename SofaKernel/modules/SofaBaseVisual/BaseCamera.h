@@ -99,11 +99,11 @@ public:
     Data<helper::vector<float> > p_projectionMatrix; ///< Projection Matrix
 
     BaseCamera();
-    virtual ~BaseCamera();
+    ~BaseCamera() override;
 
-    virtual void init() override;
-    virtual void reinit() override;
-    virtual void bwdInit() override;
+    void init() override;
+    void reinit() override;
+    void bwdInit() override;
 
     void activate();
     void desactivate();

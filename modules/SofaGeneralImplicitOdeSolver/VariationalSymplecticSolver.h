@@ -72,7 +72,7 @@ public:
    ///
    /// This method is used to compute the compliance for contact corrections
    /// For Euler methods, it is typically dt.
-   virtual double getVelocityIntegrationFactor() const override
+   double getVelocityIntegrationFactor() const override
    {
        return 0; // getContext()->getDt();
    }
@@ -81,7 +81,7 @@ public:
    ///
    /// This method is used to compute the compliance for contact corrections
    /// For Euler methods, it is typically dt².
-   virtual double getPositionIntegrationFactor() const override
+   double getPositionIntegrationFactor() const override
    {
        return 0; //*getContext()->getDt());
    }

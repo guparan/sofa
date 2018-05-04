@@ -53,7 +53,7 @@ public:
     Data<std::string> responseParams; ///< contact response parameters (syntax: name1=value1    Data<std::string> responseParams;name2=value2    Data<std::string> responseParams;...)
 protected:
     DefaultContactManager();
-    ~DefaultContactManager();
+    ~DefaultContactManager() override;
     void setContactTags(core::CollisionModel* model1, core::CollisionModel* model2, core::collision::Contact::SPtr contact);
 
 public:
@@ -87,14 +87,14 @@ public:
     void reset() override;
     void cleanup() override;
 
-    virtual std::string getContactResponse(core::CollisionModel* model1, core::CollisionModel* model2) override;
+    std::string getContactResponse(core::CollisionModel* model1, core::CollisionModel* model2) override;
 
     /// virtual methods used for cleaning the pipeline after a dynamic graph node deletion.
     /**
      * Contacts can be attached to a deleted node and their deletion is a problem for the pipeline.
      * @param c is the list of deleted contacts.
      */
-    virtual void removeContacts(const ContactVector &/*c*/) override;
+    void removeContacts(const ContactVector &/*c*/) override;
     void setDefaultResponseType(const std::string &responseT)
     {
         if (response.getValue().size() == 0)
@@ -120,7 +120,7 @@ protected:
 
     std::map<Instance,ContactMap> storedContactMap;
 
-    virtual void changeInstance(Instance inst) override
+    void changeInstance(Instance inst) override
     {
         core::collision::ContactManager::changeInstance(inst);
         storedContactMap[instance].swap(contactMap);

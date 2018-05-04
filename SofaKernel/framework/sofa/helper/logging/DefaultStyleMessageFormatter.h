@@ -49,7 +49,7 @@ class SOFA_HELPER_API DefaultStyleMessageFormatter : public MessageFormatter
 {
 public:
     static MessageFormatter& getInstance() { return s_instance; }
-    virtual void formatMessage(const Message& m,std::ostream& out);
+    void formatMessage(const Message& m,std::ostream& out) override;
 
 private:
         // singleton API

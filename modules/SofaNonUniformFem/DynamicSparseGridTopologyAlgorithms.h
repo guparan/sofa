@@ -62,7 +62,7 @@ protected:
         : HexahedronSetTopologyAlgorithms<DataTypes>()
     { }
 
-    virtual ~DynamicSparseGridTopologyAlgorithms() {}
+    ~DynamicSparseGridTopologyAlgorithms() override {}
 public:
 };
 

@@ -182,7 +182,7 @@ public:
     Data<bool> multiGroup; ///< activate multiple system solve, one for each child node
 
     MatrixLinearSolver();
-    virtual ~MatrixLinearSolver();
+    ~MatrixLinearSolver() override;
 
     /// Reset the current linear system.
     void resetSystem() override;
@@ -198,7 +198,7 @@ public:
     void setSystemMBKMatrix(const core::MechanicalParams* mparams) override;
 
     /// Rebuild the system using a mass and force factor
-    virtual void rebuildSystem(double massFactor, double forceFactor) override;
+    void rebuildSystem(double massFactor, double forceFactor) override;
 
     /// Set the linear system matrix (only use for bench)
     void setSystemMatrix(Matrix* matrix);
@@ -233,10 +233,10 @@ public:
     defaulttype::BaseVector* getSystemLHBaseVector() override { return currentGroup->systemLHVector; }
 
     /// Solve the system as constructed using the previous methods
-    virtual void solveSystem() override;
+    void solveSystem() override;
 
     /// Invert the system, this method is optional because it's call when solveSystem() is called for the first time
-    virtual void invertSystem() override;
+    void invertSystem() override;
 
     void prepareVisitor(simulation::Visitor* v)
     {
@@ -267,34 +267,34 @@ public:
         return ThreadManager::Name()+Matrix::Name();
     }
 
-    virtual bool isAsyncSolver() override
+    bool isAsyncSolver() override
     {
         return ThreadManager::isAsyncSolver();
     }
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }
 
 
-    virtual void invert(Matrix& /*M*/) override {}
+    void invert(Matrix& /*M*/) override {}
 
-    virtual void solve(Matrix& M, Vector& solution, Vector& rh) override = 0;
+    void solve(Matrix& M, Vector& solution, Vector& rh) override = 0;
 
     virtual bool addJMInvJtLocal(Matrix * /*M*/,ResMatrixType * result,const JMatrixType * J, double fact);
 
     virtual bool addMInvJtLocal(Matrix * /*M*/,ResMatrixType * result,const  JMatrixType * J, double fact);
 
-    virtual bool addJMInvJt(defaulttype::BaseMatrix* result, defaulttype::BaseMatrix* J, double fact) override;
+    bool addJMInvJt(defaulttype::BaseMatrix* result, defaulttype::BaseMatrix* J, double fact) override;
 
-    virtual bool addMInvJt(defaulttype::BaseMatrix* result, defaulttype::BaseMatrix* J, double fact) override;
+    bool addMInvJt(defaulttype::BaseMatrix* result, defaulttype::BaseMatrix* J, double fact) override;
 
-    virtual bool buildComplianceMatrix(defaulttype::BaseMatrix* result, double fact) override;
+    bool buildComplianceMatrix(defaulttype::BaseMatrix* result, double fact) override;
 
-    virtual void applyContactForce(const defaulttype::BaseVector* f,double positionFactor,double velocityFactor) override;
+    void applyContactForce(const defaulttype::BaseVector* f,double positionFactor,double velocityFactor) override;
 
-    virtual void computeResidual(const core::ExecParams* params, defaulttype::BaseVector* f) override;
+    void computeResidual(const core::ExecParams* params, defaulttype::BaseVector* f) override;
 
 public :
     bool isMultiGroup() const override

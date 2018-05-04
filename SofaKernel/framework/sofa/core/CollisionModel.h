@@ -108,12 +108,12 @@ protected:
     {
     }
     /// Destructor
-    virtual ~CollisionModel()
+    ~CollisionModel() override
     {
 
     }
 public:
-    virtual void bwdInit() override
+    void bwdInit() override
     {
         getColor4f(); //init the color to default value
     }
@@ -320,7 +320,7 @@ public:
     virtual void draw(const core::visual::VisualParams* /*vparams*/,int /*index*/) {}
 
     /// Render the whole collision model.
-    virtual void draw(const core::visual::VisualParams* ) override
+    void draw(const core::visual::VisualParams* ) override
     {
     }
 
@@ -496,8 +496,8 @@ protected:
 
 public:
 
-    virtual bool insertInNode( objectmodel::BaseNode* node ) override;
-    virtual bool removeInNode( objectmodel::BaseNode* node ) override;
+    bool insertInNode( objectmodel::BaseNode* node ) override;
+    bool removeInNode( objectmodel::BaseNode* node ) override;
 
 };
 

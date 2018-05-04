@@ -47,8 +47,8 @@ public:
     typedef sofa::core::objectmodel::Data<T> MyData;
 public:
     TableDataWidget(QWidget* parent,const char* name, MyData* d) : Inherit(parent,name,d) {}
-    virtual unsigned int sizeWidget() {return 8;}
-    virtual unsigned int numColumnWidget() { return 1; }
+    unsigned int sizeWidget() override {return 8;}
+    unsigned int numColumnWidget() override { return 1; }
 };
 
 

@@ -92,7 +92,7 @@ public:
 
 protected:
     OrderIndependentTransparencyManager();
-    virtual ~OrderIndependentTransparencyManager();
+    ~OrderIndependentTransparencyManager() override;
 
 public:
     void init() override;

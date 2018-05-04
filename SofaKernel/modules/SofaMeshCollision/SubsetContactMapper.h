@@ -82,11 +82,11 @@ public:
         this->model = model;
     }
 
-    void cleanup();
+    void cleanup() override;
 
-    MMechanicalState* createMapping(const char* name="contactPoints");
+    MMechanicalState* createMapping(const char* name="contactPoints") override;
 
-    void resize(int size)
+    void resize(int size) override
     {
         if (mapping!=NULL)
             mapping->clear(size);
@@ -95,7 +95,7 @@ public:
         nbp = 0;
     }
 
-    int addPoint(const Coord& P, int index, Real&)
+    int addPoint(const Coord& P, int index, Real&) override
     {
         int i = nbp++;
         if ((int)outmodel->getSize() <= i)
@@ -114,7 +114,7 @@ public:
         return i;
     }
 
-    void update()
+    void update() override
     {
         if (mapping!=NULL)
         {
@@ -129,7 +129,7 @@ public:
         }
     }
 
-    void updateXfree()
+    void updateXfree() override
     {
         if (mapping!=NULL)
         {

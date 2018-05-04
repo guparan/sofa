@@ -76,28 +76,28 @@ public:
 protected:
     PrecomputedConstraintCorrection(sofa::core::behavior::MechanicalState<DataTypes> *mm = NULL);
 
-    virtual ~PrecomputedConstraintCorrection();
+    ~PrecomputedConstraintCorrection() override;
 public:
-    virtual void bwdInit() override;
+    void bwdInit() override;
 
-    virtual void addComplianceInConstraintSpace(const sofa::core::ConstraintParams *cparams, sofa::defaulttype::BaseMatrix* W) override;
+    void addComplianceInConstraintSpace(const sofa::core::ConstraintParams *cparams, sofa::defaulttype::BaseMatrix* W) override;
 
-    virtual void getComplianceMatrix(defaulttype::BaseMatrix* m) const override;
+    void getComplianceMatrix(defaulttype::BaseMatrix* m) const override;
 
-    virtual void computeAndApplyMotionCorrection(const sofa::core::ConstraintParams *cparams, sofa::core::objectmodel::Data< VecCoord > &x, sofa::core::objectmodel::Data< VecDeriv > &v, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
+    void computeAndApplyMotionCorrection(const sofa::core::ConstraintParams *cparams, sofa::core::objectmodel::Data< VecCoord > &x, sofa::core::objectmodel::Data< VecDeriv > &v, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
 
-    virtual void computeAndApplyPositionCorrection(const sofa::core::ConstraintParams *cparams, sofa::core::objectmodel::Data< VecCoord > &x, sofa::core::objectmodel::Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
+    void computeAndApplyPositionCorrection(const sofa::core::ConstraintParams *cparams, sofa::core::objectmodel::Data< VecCoord > &x, sofa::core::objectmodel::Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
 
-    virtual void computeAndApplyVelocityCorrection(const sofa::core::ConstraintParams *cparams, sofa::core::objectmodel::Data< VecDeriv > &v, sofa::core::objectmodel::Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
+    void computeAndApplyVelocityCorrection(const sofa::core::ConstraintParams *cparams, sofa::core::objectmodel::Data< VecDeriv > &v, sofa::core::objectmodel::Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
 
-    virtual void applyPredictiveConstraintForce(const sofa::core::ConstraintParams *cparams, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
+    void applyPredictiveConstraintForce(const sofa::core::ConstraintParams *cparams, Data< VecDeriv > &f, const sofa::defaulttype::BaseVector *lambda) override;
 
     /// @name Deprecated API
     /// @{
 
-    virtual void applyContactForce(const defaulttype::BaseVector *f) override;
+    void applyContactForce(const defaulttype::BaseVector *f) override;
 
-    virtual void resetContactForce() override;
+    void resetContactForce() override;
 
     /// @}
 
@@ -105,20 +105,20 @@ public:
 
     virtual void rotateResponse();
 
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
     /// @name Unbuilt constraint system during resolution
     /// @{
 
-    virtual void resetForUnbuiltResolution(double * f, std::list<unsigned int>& /*renumbering*/) override;
+    void resetForUnbuiltResolution(double * f, std::list<unsigned int>& /*renumbering*/) override;
 
-    virtual bool hasConstraintNumber(int index) override;  // virtual ???
+    bool hasConstraintNumber(int index) override;  // virtual ???
 
-    virtual void addConstraintDisplacement(double *d, int begin,int end) override;
+    void addConstraintDisplacement(double *d, int begin,int end) override;
 
-    virtual void setConstraintDForce(double *df, int begin, int end, bool update) override;
+    void setConstraintDForce(double *df, int begin, int end, bool update) override;
 
-    virtual void getBlockDiagonalCompliance(defaulttype::BaseMatrix* W, int begin, int end) override;
+    void getBlockDiagonalCompliance(defaulttype::BaseMatrix* W, int begin, int end) override;
 
     /// @}
 

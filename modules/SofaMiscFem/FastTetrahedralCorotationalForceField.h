@@ -130,7 +130,7 @@ protected:
         void applyCreateFunction(unsigned int, TetrahedronRestInformation &t,
                                  const core::topology::BaseMeshTopology::Tetrahedron&,
                                  const sofa::helper::vector<unsigned int> &,
-                                 const sofa::helper::vector<double> &);
+                                 const sofa::helper::vector<double> &) override;
 
     protected:
         FastTetrahedralCorotationalForceField<DataTypes>* ff;
@@ -165,23 +165,23 @@ protected:
 
     FastTetrahedralCorotationalForceField();
 
-    virtual ~FastTetrahedralCorotationalForceField();
+    ~FastTetrahedralCorotationalForceField() override;
 
 public:
 
-    virtual void init() override;
+    void init() override;
 
 
-    virtual void addForce(const sofa::core::MechanicalParams* /*mparams*/, DataVecDeriv &  dataF, const DataVecCoord &  dataX , const DataVecDeriv & dataV ) override;
-    virtual void addDForce(const sofa::core::MechanicalParams* /*mparams*/, DataVecDeriv&   datadF , const DataVecDeriv&   datadX ) override;
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
+    void addForce(const sofa::core::MechanicalParams* /*mparams*/, DataVecDeriv &  dataF, const DataVecCoord &  dataX , const DataVecDeriv & dataV ) override;
+    void addDForce(const sofa::core::MechanicalParams* /*mparams*/, DataVecDeriv&   datadF , const DataVecDeriv&   datadX ) override;
+    SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
     {
         serr << "Get potentialEnergy not implemented" << sendl;
         return 0.0;
     }
 
-    virtual void addKToMatrix(sofa::defaulttype::BaseMatrix *m, SReal kFactor, unsigned int &offset) override;
-    virtual void addKToMatrix(const core::MechanicalParams* /*mparams*/, const sofa::core::behavior::MultiMatrixAccessor* /*matrix*/ ) override;
+    void addKToMatrix(sofa::defaulttype::BaseMatrix *m, SReal kFactor, unsigned int &offset) override;
+    void addKToMatrix(const core::MechanicalParams* /*mparams*/, const sofa::core::behavior::MultiMatrixAccessor* /*matrix*/ ) override;
 
     void updateTopologyInformation();
 

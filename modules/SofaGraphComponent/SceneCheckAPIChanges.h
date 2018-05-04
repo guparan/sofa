@@ -52,10 +52,10 @@ public:
 
     typedef std::shared_ptr<SceneCheckAPIChange> SPtr ;
     static SPtr newSPtr() { return SPtr(new SceneCheckAPIChange()); }
-    virtual const std::string getName() override ;
-    virtual const std::string getDesc() override ;
-    virtual void doInit(Node* node) override ;
-    virtual void doCheckOn(Node* node) override ;
+    const std::string getName() override ;
+    const std::string getDesc() override ;
+    void doInit(Node* node) override ;
+    void doCheckOn(Node* node) override ;
 
     void installDefaultChangeSets() ;
     void addHookInChangeSet(const std::string& version, ChangeSetHookFunction fct) ;

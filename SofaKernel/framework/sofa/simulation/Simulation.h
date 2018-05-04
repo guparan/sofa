@@ -49,7 +49,7 @@ public:
     typedef sofa::core::visual::DisplayFlags DisplayFlags;
 // protected:
     Simulation();
-    virtual ~Simulation();
+    ~Simulation() override;
 	
 private:
 	Simulation(const Simulation& n) ;

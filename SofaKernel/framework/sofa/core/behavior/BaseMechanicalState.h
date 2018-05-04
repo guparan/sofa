@@ -79,7 +79,7 @@ public:
 protected:
     BaseMechanicalState();
 
-    virtual ~BaseMechanicalState();
+    ~BaseMechanicalState() override;
 private:
 	BaseMechanicalState(const BaseMechanicalState& n);
 	BaseMechanicalState& operator=(const BaseMechanicalState& n);
@@ -388,8 +388,8 @@ public:
 
     /// @}getPotent
 
-    virtual bool insertInNode( objectmodel::BaseNode* node ) override;
-    virtual bool removeInNode( objectmodel::BaseNode* node ) override;
+    bool insertInNode( objectmodel::BaseNode* node ) override;
+    bool removeInNode( objectmodel::BaseNode* node ) override;
 
 };
 

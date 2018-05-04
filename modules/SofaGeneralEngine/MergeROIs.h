@@ -60,10 +60,10 @@ public:
     //Output
     Data<helper::vector<helper::SVector<Index> > > f_outputIndices; ///< Vector of ROIs
 
-    virtual std::string getTemplateName() const    override {        return templateName(this);    }
+    std::string getTemplateName() const    override {        return templateName(this);    }
     static std::string templateName(const MergeROIs* = NULL)    {        return std::string();    }
 
-    virtual void init() override
+    void init() override
     {
         addInput(&nbROIs);
         f_indices.resize(nbROIs.getValue());
@@ -71,7 +71,7 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit() override
+    void reinit() override
     {
         f_indices.resize(nbROIs.getValue());
         update();
@@ -101,9 +101,9 @@ protected:
     {
     }
 
-    virtual ~MergeROIs() {}
+    ~MergeROIs() override {}
 
-    virtual void update() override
+    void update() override
     {
         size_t nb = nbROIs.getValue();
         f_indices.resize(nb);

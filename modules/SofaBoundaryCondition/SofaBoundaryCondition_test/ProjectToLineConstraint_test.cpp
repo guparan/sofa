@@ -66,7 +66,7 @@ struct ProjectToLineConstraint_test : public Sofa_test<typename _DataTypes::Real
     typename MechanicalObject::SPtr dofs;
 
     /// Create the context for the tests.
-    void SetUp()
+    void SetUp() override
     {
 //        if( sofa::simulation::getSimulation()==NULL )
         sofa::simulation::setSimulation(simulation = new sofa::simulation::graph::DAGSimulation());
@@ -202,7 +202,7 @@ struct ProjectToLineConstraint_test : public Sofa_test<typename _DataTypes::Real
        return succeed;
     }
 
-    void TearDown()
+    void TearDown() override
     {
         if (root!=NULL)
             sofa::simulation::getSimulation()->unload(root);

@@ -76,12 +76,12 @@ public:
     /**
      * @brief Default destructor.
      */
-    virtual ~LineInfo() {}
+    ~LineInfo() override {}
 
     /**
      * @brief Returns the validity of a detected contact according to this LineInfo.
      */
-    virtual bool validate(const unsigned int edge_index, const defaulttype::Vector3& PQ);
+    bool validate(const unsigned int edge_index, const defaulttype::Vector3& PQ) override;
 
     /**
      * @brief Output stream.
@@ -103,7 +103,7 @@ public:
     /**
      * @brief Computes the region of interest cone of the Line primitive.
      */
-    virtual void buildFilter(unsigned int /*e*/);
+    void buildFilter(unsigned int /*e*/) override;
 
 protected:
 
@@ -129,7 +129,7 @@ public:
 
 protected:
     LineLocalMinDistanceFilter();
-    virtual ~LineLocalMinDistanceFilter();
+    ~LineLocalMinDistanceFilter() override;
 
 public:
 
@@ -170,7 +170,7 @@ public:
         PointInfoHandler(LineLocalMinDistanceFilter* _f, topology::PointData<helper::vector<PointInfo> >* _data) : topology::TopologyDataHandler<core::topology::BaseMeshTopology::Point, helper::vector<PointInfo> >(_data), f(_f) {}
 
         void applyCreateFunction(unsigned int pointIndex, PointInfo& m, const sofa::helper::vector< unsigned int > &,
-                const sofa::helper::vector< double > &);
+                const sofa::helper::vector< double > &) override;
     protected:
         LineLocalMinDistanceFilter* f;
     };
@@ -184,7 +184,7 @@ public:
         LineInfoHandler(LineLocalMinDistanceFilter* _f, topology::EdgeData<helper::vector<LineInfo> >* _data) : topology::TopologyDataHandler<core::topology::BaseMeshTopology::Edge, helper::vector<LineInfo> >(_data), f(_f) {}
 
         void applyCreateFunction(unsigned int edgeIndex, LineInfo& m, const core::topology::BaseMeshTopology::Edge&, const sofa::helper::vector< unsigned int > &,
-                const sofa::helper::vector< double > &);
+                const sofa::helper::vector< double > &) override;
     protected:
         LineLocalMinDistanceFilter* f;
     };

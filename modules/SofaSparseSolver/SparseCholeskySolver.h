@@ -56,7 +56,7 @@ public:
     Data<bool> f_verbose; ///< Dump system state at each iteration
 
     SparseCholeskySolver();
-    ~SparseCholeskySolver();
+    ~SparseCholeskySolver() override;
     void solve (Matrix& M, Vector& x, Vector& b) override;
     void invert(Matrix& M) override;
 

@@ -85,7 +85,7 @@ public:
 
 protected:
     BaseContext();
-    virtual ~BaseContext();
+    ~BaseContext() override;
 
 private:
     BaseContext(const BaseContext&);
@@ -365,7 +365,7 @@ public:
     public:
         Container* dest;
         GetObjectsCallBackT(Container* d) : dest(d) {}
-        virtual void operator()(void* ptr)
+        void operator()(void* ptr) override
         {
             dest->push_back(reinterpret_cast<T*>(ptr));
         }

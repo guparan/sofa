@@ -72,7 +72,7 @@ public:
 
     QuadularBendingSprings();
 
-    ~QuadularBendingSprings();
+    ~QuadularBendingSprings() override;
 
 protected:
 
@@ -116,12 +116,12 @@ protected:
 
 public:
     /// Searches quad topology and creates the bending springs
-    virtual void init() override;
+    void init() override;
 
-    virtual void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
-    virtual void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
+    void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
 
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* /* mparams */, const DataVecCoord& /* d_x */) const override;
+    SReal getPotentialEnergy(const core::MechanicalParams* /* mparams */, const DataVecCoord& /* d_x */) const override;
 
     virtual double getKs() const { return f_ks.getValue();}
     virtual double getKd() const { return f_kd.getValue();}
@@ -157,7 +157,7 @@ public:
         void applyCreateFunction(unsigned int edgeIndex, EdgeInformation& ei,
                 const core::topology::BaseMeshTopology::Edge &,
                 const sofa::helper::vector< unsigned int > &,
-                const sofa::helper::vector< double > &);
+                const sofa::helper::vector< double > &) override;
 
         void applyQuadCreation(const sofa::helper::vector<unsigned int> & quadAdded,
                 const sofa::helper::vector<core::topology::BaseMeshTopology::Quad> &,
@@ -169,18 +169,18 @@ public:
         using topology::TopologyDataHandler<core::topology::BaseMeshTopology::Edge, helper::vector<EdgeInformation> >::ApplyTopologyChange;
 
         /// Callback to add quads elements.
-        void ApplyTopologyChange(const core::topology::QuadsAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::QuadsAdded* /*event*/) override;
         /// Callback to remove quads elements.
-        void ApplyTopologyChange(const core::topology::QuadsRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::QuadsRemoved* /*event*/) override;
 
         void applyPointDestruction(const sofa::helper::vector<unsigned int> &pointIndices);
 
         void applyPointRenumbering(const sofa::helper::vector<unsigned int> &pointToRenumber);
 
         /// Callback to remove points elements.
-        void ApplyTopologyChange(const core::topology::PointsRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::PointsRemoved* /*event*/) override;
         /// Callback to renumbering on points elements.
-        void ApplyTopologyChange(const core::topology::PointsRenumbering* /*event*/);
+        void ApplyTopologyChange(const core::topology::PointsRenumbering* /*event*/) override;
 
     protected:
         QuadularBendingSprings<DataTypes>* ff;

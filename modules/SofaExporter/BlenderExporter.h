@@ -85,13 +85,13 @@ namespace sofa
 
                 BlenderExporter();
 
-                virtual ~BlenderExporter(){}
+                ~BlenderExporter() override{}
 
             public:
 
                 static const char* Name(){return "Blender exporter";}
 
-                virtual std::string getTemplateName() const override
+                std::string getTemplateName() const override
                 {
                     return templateName(this);
                 }

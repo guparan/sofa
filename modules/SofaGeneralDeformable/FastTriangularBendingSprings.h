@@ -96,14 +96,14 @@ public:
 
 
     /// Searches triangle topology and creates the bending springs
-    virtual void init() override;
+    void init() override;
 
-    virtual void reinit() override;
+    void reinit() override;
 
-    virtual void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
-    virtual void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
-    virtual void addKToMatrix(sofa::defaulttype::BaseMatrix *mat, SReal k, unsigned int &offset) override; // compute and add all the element stiffnesses to the global stiffness matrix
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* mparams, const DataVecCoord& d_x) const override;
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
+    void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
+    void addKToMatrix(sofa::defaulttype::BaseMatrix *mat, SReal k, unsigned int &offset) override; // compute and add all the element stiffnesses to the global stiffness matrix
+    SReal getPotentialEnergy(const core::MechanicalParams* mparams, const DataVecCoord& d_x) const override;
 
     void draw(const core::visual::VisualParams* vparams) override;
 
@@ -262,7 +262,7 @@ protected:
         void applyCreateFunction(unsigned int edgeIndex,
                 EdgeSpring &ei,
                 const core::topology::BaseMeshTopology::Edge& ,  const sofa::helper::vector< unsigned int > &,
-                const sofa::helper::vector< double >&);
+                const sofa::helper::vector< double >&) override;
 
         void applyTriangleCreation(const sofa::helper::vector<unsigned int> &triangleAdded,
                 const sofa::helper::vector<core::topology::BaseMeshTopology::Triangle> & ,
@@ -277,14 +277,14 @@ protected:
 
         using topology::TopologyDataHandler<core::topology::BaseMeshTopology::Edge, helper::vector<EdgeSpring> >::ApplyTopologyChange;
         /// Callback to add triangles elements.
-        void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/) override;
         /// Callback to remove triangles elements.
-        void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/) override;
 
         /// Callback to remove points elements.
-        void ApplyTopologyChange(const core::topology::PointsRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::PointsRemoved* /*event*/) override;
         /// Callback to renumbering on points elements.
-        void ApplyTopologyChange(const core::topology::PointsRenumbering* /*event*/);
+        void ApplyTopologyChange(const core::topology::PointsRenumbering* /*event*/) override;
 
     protected:
         FastTriangularBendingSprings<DataTypes>* ff;
@@ -295,7 +295,7 @@ protected:
 
     FastTriangularBendingSprings();
 
-    virtual ~FastTriangularBendingSprings();
+    ~FastTriangularBendingSprings() override;
 
     sofa::component::topology::EdgeData<helper::vector<EdgeSpring> > &getEdgeInfo() {return edgeSprings;}
 

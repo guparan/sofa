@@ -140,7 +140,7 @@ protected:
     {
     }
 
-    virtual ~CurveMapping()
+    ~CurveMapping() override
     {
     }
 };

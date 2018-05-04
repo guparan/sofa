@@ -56,7 +56,7 @@ protected:
     {
     }
 
-    ~LULinearSolver()
+    ~LULinearSolver() override
     {
         if (solver != NULL)
             delete solver;

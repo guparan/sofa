@@ -39,13 +39,13 @@ class SOFA_SIMULATION_COMMON_API ObjectElement : public Element<core::objectmode
 public:
     ObjectElement(const std::string& name, const std::string& type, BaseElement* parent=NULL);
 
-    virtual ~ObjectElement();
+    ~ObjectElement() override;
 
-    virtual bool initNode();
+    bool initNode() override;
 
-    virtual bool init();
+    bool init() override;
 
-    virtual const char* getClass() const;
+    const char* getClass() const override;
 };
 
 } // namespace xml

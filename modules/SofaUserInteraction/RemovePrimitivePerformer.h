@@ -76,13 +76,13 @@ class SOFA_USER_INTERACTION_API RemovePrimitivePerformer: public       TInteract
 
 public:
     RemovePrimitivePerformer(BaseMouseInteractor *i);
-    ~RemovePrimitivePerformer() {}
+    ~RemovePrimitivePerformer() override {}
 
     /// Functions called by TopologicalOperation performer
-    void start();
-    void execute();
+    void start() override;
+    void execute() override;
     void end();
-    void draw(const core::visual::VisualParams* vparams);
+    void draw(const core::visual::VisualParams* vparams) override;
 
 protected:
 

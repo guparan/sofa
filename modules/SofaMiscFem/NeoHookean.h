@@ -58,14 +58,14 @@ class NeoHookean : public HyperelasticMaterial<DataTypes>{
   typedef defaulttype::Mat<6,6,Real> Matrix6;
   typedef defaulttype::MatSym<3,Real> MatrixSym;
  
-  virtual Real getStrainEnergy(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param) {
+  Real getStrainEnergy(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param) override {
 		Real mu=param.parameterArray[0];
 		Real k=param.parameterArray[1];
 		Real I1=sinfo->trC;
 		return (Real)mu*(Real)(1.0/2.0)*(I1-3)-mu*log(sinfo->J)+k*log(sinfo->J)*log(sinfo->J)/2;
   }
 
-	virtual void deriveSPKTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,MatrixSym &SPKTensorGeneral){
+	void deriveSPKTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,MatrixSym &SPKTensorGeneral) override{
 		MatrixSym inversematrix;
 		invertMatrix(inversematrix,sinfo->deformationTensor);
 		Real mu=param.parameterArray[0];
@@ -76,7 +76,7 @@ class NeoHookean : public HyperelasticMaterial<DataTypes>{
 	}
 	
 
-    virtual void applyElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,const MatrixSym& inputTensor, MatrixSym &outputTensor)  {
+    void applyElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,const MatrixSym& inputTensor, MatrixSym &outputTensor) override  {
 		Real mu=param.parameterArray[0];
 		Real k=param.parameterArray[1];
 		MatrixSym inversematrix;
@@ -91,7 +91,7 @@ class NeoHookean : public HyperelasticMaterial<DataTypes>{
 	
 	}
 
-	virtual void ElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,Matrix6 &outputTensor)  {
+	void ElasticityTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,Matrix6 &outputTensor) override  {
 		Real mu=param.parameterArray[0];
 		Real k=param.parameterArray[1];
 		MatrixSym _C;

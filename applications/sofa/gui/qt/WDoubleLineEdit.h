@@ -51,7 +51,7 @@ protected:
     double            m_bInternal;
 
     void              checkValue();
-    virtual void      keyPressEvent(QKeyEvent *);
+    void      keyPressEvent(QKeyEvent *) override;
 public:
 
     WDoubleLineEdit(QWidget *parent,const char *name);

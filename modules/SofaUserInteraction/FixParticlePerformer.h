@@ -56,9 +56,9 @@ public:
 
     FixParticlePerformer(BaseMouseInteractor *i);
 
-    void start();
-    void execute();
-    void draw(const core::visual::VisualParams* vparams);
+    void start() override;
+    void execute() override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
 protected:
     MouseContainer* getFixationPoints(const BodyPicked &b, helper::vector<unsigned int> &points, typename DataTypes::Coord &fixPoint);

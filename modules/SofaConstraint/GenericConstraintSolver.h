@@ -72,11 +72,11 @@ public:
 	GenericConstraintProblem() : scaleTolerance(true), allVerified(false), sor(1.0)
         , sceneTime(0.0), currentError(0.0), currentIterations(0)
 		, change_sequence(false) {}
-	~GenericConstraintProblem() { freeConstraintResolutions(); }
+	~GenericConstraintProblem() override { freeConstraintResolutions(); }
 
-	void clear(int nbConstraints);
+	void clear(int nbConstraints) override;
 	void freeConstraintResolutions();
-	void solveTimed(double tol, int maxIt, double timeout);
+	void solveTimed(double tol, int maxIt, double timeout) override;
 
 	void gaussSeidel(double timeout=0, GenericConstraintSolver* solver = NULL);
 	void unbuiltGaussSeidel(double timeout=0, GenericConstraintSolver* solver = NULL);
@@ -95,7 +95,7 @@ public:
 	SOFA_CLASS(GenericConstraintSolver, sofa::core::behavior::ConstraintSolver);
 protected:
 	GenericConstraintSolver();
-	virtual ~GenericConstraintSolver();
+	~GenericConstraintSolver() override;
 public:
 	void init() override;
 
@@ -131,7 +131,7 @@ public:
 	ConstraintProblem* getConstraintProblem() override;
 	void lockConstraintProblem(sofa::core::objectmodel::BaseObject* from, ConstraintProblem* p1, ConstraintProblem* p2=0) override;
 
-    virtual void removeConstraintCorrection(core::behavior::BaseConstraintCorrection *s) override;
+    void removeConstraintCorrection(core::behavior::BaseConstraintCorrection *s) override;
 
 protected:
     enum { CP_BUFFER_SIZE = 10 };
@@ -168,7 +168,7 @@ public:
 #endif
     }
 
-    virtual Result fwdConstraintSet(simulation::Node* node, core::behavior::BaseConstraintSet* cSet)
+    Result fwdConstraintSet(simulation::Node* node, core::behavior::BaseConstraintSet* cSet) override
     {
       if (core::behavior::BaseConstraint *c=cSet->toBaseConstraint())
       {
@@ -181,18 +181,18 @@ public:
 
     /// Return a class name for this visitor
     /// Only used for debugging / profiling purposes
-    virtual const char* getClassName() const
+    const char* getClassName() const override
     {
         return "MechanicalGetConstraintResolutionVisitor";
     }
 
-    virtual bool isThreadSafe() const
+    bool isThreadSafe() const override
     {
         return false;
     }
 
     // This visitor must go through all mechanical mappings, even if isMechanical flag is disabled
-    virtual bool stopAtMechanicalMapping(simulation::Node* /*node*/, core::BaseMapping* /*map*/)
+    bool stopAtMechanicalMapping(simulation::Node* /*node*/, core::BaseMapping* /*map*/) override
     {
         return false; // !map->isMechanical();
     }

@@ -91,7 +91,7 @@ protected:
     {
     }
 
-    virtual ~BeamLinearMapping()
+    ~BeamLinearMapping() override
     {
     }
 

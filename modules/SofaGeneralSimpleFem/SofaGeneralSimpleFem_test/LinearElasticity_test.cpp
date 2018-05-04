@@ -79,7 +79,7 @@ struct LinearElasticity_test : public Elasticity_test<_DataTypes>
     size_t vIndex;
 
     // Create the context for the scene
-    void SetUp()
+    void SetUp() override
     {
         // Init simulation
         sofa::simulation::setSimulation(simulation = new sofa::simulation::graph::DAGSimulation());
@@ -166,7 +166,7 @@ struct LinearElasticity_test : public Elasticity_test<_DataTypes>
         }
         return true;
     }
-    void TearDown()
+    void TearDown() override
     {
         if (tractionStruct.root!=NULL)
             sofa::simulation::getSimulation()->unload(tractionStruct.root);

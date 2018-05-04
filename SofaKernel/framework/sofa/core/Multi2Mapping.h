@@ -91,7 +91,7 @@ protected:
     /// Constructor
     Multi2Mapping();
     /// Destructor
-    virtual ~Multi2Mapping() {}
+    ~Multi2Mapping() override {}
 public:
 
     virtual void addInputModel1(State<In1>*, const std::string& path = "");
@@ -111,17 +111,17 @@ public:
     helper::vector<BaseState*> getTo() override;
 
     /// Get the source (upper) model.
-    virtual helper::vector<behavior::BaseMechanicalState*> getMechFrom() override;
+    helper::vector<behavior::BaseMechanicalState*> getMechFrom() override;
 
     /// Get the destination (lower, mapped) model.
-    virtual helper::vector<behavior::BaseMechanicalState*> getMechTo() override;
+    helper::vector<behavior::BaseMechanicalState*> getMechTo() override;
 
     /// Apply ///
     /// Apply the mapping to position vectors.
     ///
     /// If the Mapping can be represented as a matrix J, this method computes
     /// $ out = J in $
-    virtual void apply (const MechanicalParams* mparams, MultiVecCoordId outPos, ConstMultiVecCoordId inPos ) override
+    void apply (const MechanicalParams* mparams, MultiVecCoordId outPos, ConstMultiVecCoordId inPos ) override
     {
         helper::vector<OutDataVecCoord*> vecOutPos;
         getVecOutCoord(outPos, vecOutPos);
@@ -149,7 +149,7 @@ public:
     /// This method computes
     /// $ out = J in $
     /// where J is the tangent operator (the linear approximation) of the mapping
-    virtual void applyJ (const MechanicalParams* mparams, MultiVecDerivId outVel, ConstMultiVecDerivId inVel ) override
+    void applyJ (const MechanicalParams* mparams, MultiVecDerivId outVel, ConstMultiVecDerivId inVel ) override
     {
         helper::vector<OutDataVecDeriv*> vecOutVel;
         getVecOutDeriv(outVel, vecOutVel);
@@ -197,7 +197,7 @@ public:
 
     /// ApplyJT (Force)///
     /// Apply the mapping to Force vectors.
-    virtual void applyJT (const MechanicalParams* mparams, MultiVecDerivId inForce, ConstMultiVecDerivId outForce ) override
+    void applyJT (const MechanicalParams* mparams, MultiVecDerivId inForce, ConstMultiVecDerivId outForce ) override
     {
         helper::vector<In1DataVecDeriv*> vecOut1Force;
         getVecIn1Deriv(inForce, vecOut1Force);
@@ -226,7 +226,7 @@ public:
         const helper::vector<const OutDataVecDeriv*>& dataVecInForce) = 0;
 
     /// ApplyJT (Constraint)///
-    virtual void applyJT(const ConstraintParams* cparams, MultiMatrixDerivId inConst, ConstMultiMatrixDerivId outConst ) override
+    void applyJT(const ConstraintParams* cparams, MultiMatrixDerivId inConst, ConstMultiMatrixDerivId outConst ) override
     {
         helper::vector<In1DataMatrixDeriv*> matOut1Const;
         getMatIn1Deriv(inConst, matOut1Const);
@@ -247,7 +247,7 @@ public:
     }
 
     /// computeAccFromMapping
-    virtual void computeAccFromMapping(const MechanicalParams* mparams, MultiVecDerivId outAcc, ConstMultiVecDerivId inVel, ConstMultiVecDerivId inAcc ) override
+    void computeAccFromMapping(const MechanicalParams* mparams, MultiVecDerivId outAcc, ConstMultiVecDerivId inVel, ConstMultiVecDerivId inAcc ) override
     {
         helper::vector<OutDataVecDeriv*> vecOutAcc;
         getVecOutDeriv(outAcc, vecOutAcc);
@@ -274,14 +274,14 @@ public:
     {
     }
 
-    virtual void init() override;
+    void init() override;
 
     /// Disable the mapping to get the original coordinates of the mapped model.
     ///
     /// It is for instance used in RigidMapping to get the local coordinates of the object.
-    virtual void disable() override;
+    void disable() override;
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }
@@ -374,7 +374,7 @@ protected:
     ///
     /// That way, we can optimize Jacobian sparsity.
     /// Every Dofs are inserted by default. The mappings using only a subset of dofs should only insert these dofs in the mask.
-    virtual void updateForceMask() override;
+    void updateForceMask() override;
 
     /// keep pointers on the masks
     helper::vector<helper::StateMask*> maskFrom1, maskFrom2, maskTo;

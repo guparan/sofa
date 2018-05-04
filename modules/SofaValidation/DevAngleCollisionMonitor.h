@@ -57,7 +57,7 @@ public:
     Data < Real > maxDist; ///< alarm distance for proximity detection
 protected:
     DevAngleCollisionMonitor();
-    virtual ~DevAngleCollisionMonitor() { };
+    ~DevAngleCollisionMonitor() override { };
 public:
     void init() override;
     void eval() override;
@@ -106,7 +106,7 @@ public:
         return obj;
     }
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

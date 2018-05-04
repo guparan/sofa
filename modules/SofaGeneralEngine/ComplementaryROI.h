@@ -56,22 +56,22 @@ public:
 
 
     ComplementaryROI();
-    ~ComplementaryROI();
+    ~ComplementaryROI() override;
 
     /// Update
-    virtual void update() override;
+    void update() override;
 
     /// Parse the given description to assign values to this object's fields and potentially other parameters
-    virtual void parse ( sofa::core::objectmodel::BaseObjectDescription* arg ) override;
+    void parse ( sofa::core::objectmodel::BaseObjectDescription* arg ) override;
 
     /// Assign the field values stored in the given map of name -> value pairs
-    virtual void parseFields ( const std::map<std::string,std::string*>& str ) override;
+    void parseFields ( const std::map<std::string,std::string*>& str ) override;
 
 
-    virtual void init() override;
-    virtual void reinit() override;
+    void init() override;
+    void reinit() override;
 
-    virtual std::string getTemplateName() const override;
+    std::string getTemplateName() const override;
 
     static std::string templateName(const ComplementaryROI<DataTypes>* = NULL);
 

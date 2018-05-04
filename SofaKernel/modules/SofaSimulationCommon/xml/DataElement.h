@@ -40,11 +40,11 @@ class SOFA_SIMULATION_COMMON_API DataElement : public Element<core::objectmodel:
 public:
     DataElement(const std::string& name, const std::string& type, BaseElement* parent=NULL);
 
-    virtual ~DataElement();
+    ~DataElement() override;
 
-    virtual bool initNode();
+    bool initNode() override;
 
-    virtual const char* getClass() const;
+    const char* getClass() const override;
 };
 
 } // namespace xml

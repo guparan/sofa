@@ -88,7 +88,7 @@ protected:
         pointHandler = new FCPointHandler(this, &f_indices);
     }
 
-    ~FixedLMConstraint()
+    ~FixedLMConstraint() override
     {
         if (pointHandler)
             delete pointHandler;
@@ -138,12 +138,12 @@ public:
 
 
 
-        void applyDestroyFunction(unsigned int /*index*/, value_type& /*T*/);
+        void applyDestroyFunction(unsigned int /*index*/, value_type& /*T*/) override;
 
 
         bool applyTestCreateFunction(unsigned int /*index*/,
                 const sofa::helper::vector< unsigned int > & /*ancestors*/,
-                const sofa::helper::vector< double > & /*coefs*/);
+                const sofa::helper::vector< double > & /*coefs*/) override;
     protected:
         FixedLMConstraint<DataTypes> *fc;
     };

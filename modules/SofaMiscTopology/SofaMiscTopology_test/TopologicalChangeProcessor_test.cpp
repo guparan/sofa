@@ -46,7 +46,7 @@ struct TopologicalChangeProcessor_test: public Sofa_test<>
    /// Simulation
    simulation::Simulation* simulation;
 
-   void SetUp()
+   void SetUp() override
    {
        // Init Sofa
        sofa::component::initComponentBase();
@@ -93,7 +93,7 @@ struct TopologicalChangeProcessor_test: public Sofa_test<>
    }
 
    /// Unload the scene
-   void TearDown()
+   void TearDown() override
    {
        if (root!=NULL)
            sofa::simulation::getSimulation()->unload(root);

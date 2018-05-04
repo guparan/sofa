@@ -40,10 +40,10 @@ class SOFA_GRAPH_COMPONENT_API SceneCheckerVisitor : public Visitor
 {
 public:
     SceneCheckerVisitor(const sofa::core::ExecParams* params) ;
-    virtual ~SceneCheckerVisitor() ;
+    ~SceneCheckerVisitor() override ;
 
     void validate(Node* node) ;
-    virtual Result processNodeTopDown(Node* node) override ;
+    Result processNodeTopDown(Node* node) override ;
 
     void addCheck(SceneCheck::SPtr check) ;
     void removeCheck(SceneCheck::SPtr check) ;

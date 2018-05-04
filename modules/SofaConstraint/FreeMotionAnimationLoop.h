@@ -43,13 +43,13 @@ public:
     SOFA_CLASS(FreeMotionAnimationLoop, sofa::simulation::CollisionAnimationLoop);
 protected:
     FreeMotionAnimationLoop(simulation::Node* gnode);
-    virtual ~FreeMotionAnimationLoop();
+    ~FreeMotionAnimationLoop() override;
 public:
-    virtual void step (const sofa::core::ExecParams* params, SReal dt) override;
+    void step (const sofa::core::ExecParams* params, SReal dt) override;
 
-    virtual void init() override;
+    void init() override;
 
-    virtual void parse ( sofa::core::objectmodel::BaseObjectDescription* arg ) override;
+    void parse ( sofa::core::objectmodel::BaseObjectDescription* arg ) override;
 
     /// Construction method called by ObjectFactory.
     template<class T>

@@ -159,13 +159,13 @@ protected:
 
     TriangularBiquadraticSpringsForceField();
 
-    virtual ~TriangularBiquadraticSpringsForceField();
+    ~TriangularBiquadraticSpringsForceField() override;
 public:
-    virtual void init() override;
+    void init() override;
 
-    virtual void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
-    virtual void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
+    void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
+    SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
     {
         serr << "Get potentialEnergy not implemented" << sendl;
         return 0.0;
@@ -199,7 +199,7 @@ public:
         {
         }
         void applyCreateFunction(unsigned int, EdgeRestInformation &t, const core::topology::BaseMeshTopology::Edge &,
-                const sofa::helper::vector<unsigned int> &, const sofa::helper::vector<double> &);
+                const sofa::helper::vector<unsigned int> &, const sofa::helper::vector<double> &) override;
 
     protected:
         TriangularBiquadraticSpringsForceField<DataTypes>* ff;
@@ -220,8 +220,8 @@ public:
         void applyCreateFunction(unsigned int, TriangleRestInformation &t,
                 const core::topology::BaseMeshTopology::Triangle &,
                 const sofa::helper::vector<unsigned int> &,
-                const sofa::helper::vector<double> &);
-        void applyDestroyFunction(unsigned int, TriangleRestInformation &);
+                const sofa::helper::vector<double> &) override;
+        void applyDestroyFunction(unsigned int, TriangleRestInformation &) override;
 
 
     protected:

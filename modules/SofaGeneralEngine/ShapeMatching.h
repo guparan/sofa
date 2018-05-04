@@ -69,7 +69,7 @@ public:
 
     ShapeMatching();
 
-    virtual ~ShapeMatching() {}
+    ~ShapeMatching() override {}
 
     void init() override;
 
@@ -88,7 +88,7 @@ public:
     Data< VVI > cluster; ///< input2 (clusters)
     Data< VecCoord > targetPosition;       ///< result
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const ShapeMatching<DataTypes>* = NULL)    {    return DataTypes::Name();    }
 
 private:

@@ -118,16 +118,16 @@ protected:
 
     TetrahedralTensorMassForceField();
 
-    virtual ~TetrahedralTensorMassForceField();
+    ~TetrahedralTensorMassForceField() override;
 
 public:
 
-    virtual void init() override;
+    void init() override;
     void initNeighbourhoodPoints();
 
-    virtual void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
-    virtual void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
+    void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
+    SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
     {
         serr << "Get potentialEnergy not implemented" << sendl;
         return 0.0;
@@ -136,7 +136,7 @@ public:
     virtual Real getLambda() const { return lambda;}
     virtual Real getMu() const { return mu;}
 
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* mparams) const override;
+    SReal getPotentialEnergy(const core::MechanicalParams* mparams) const override;
     void setYoungModulus(const double modulus)
     {
         f_youngModulus.setValue((Real)modulus);
@@ -159,7 +159,7 @@ public:
         void applyCreateFunction(unsigned int edgeIndex, EdgeRestInformation& ei,
                 const core::topology::BaseMeshTopology::Edge &,
                 const sofa::helper::vector< unsigned int > &,
-                const sofa::helper::vector< double > &);
+                const sofa::helper::vector< double > &) override;
 
         void applyTetrahedronCreation(const sofa::helper::vector<unsigned int> &edgeAdded,
                 const sofa::helper::vector<core::topology::BaseMeshTopology::Tetrahedron> &,
@@ -170,9 +170,9 @@ public:
 
         using topology::TopologyDataHandler<core::topology::BaseMeshTopology::Edge,edgeRestInfoVector >::ApplyTopologyChange;
         /// Callback to add tetrahedron elements.
-        void ApplyTopologyChange(const core::topology::TetrahedraAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::TetrahedraAdded* /*event*/) override;
         /// Callback to remove tetrahedron elements.
-        void ApplyTopologyChange(const core::topology::TetrahedraRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::TetrahedraRemoved* /*event*/) override;
 
     protected:
         TetrahedralTensorMassForceField<DataTypes>* ff;

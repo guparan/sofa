@@ -86,14 +86,14 @@ public:
     typename MechanicalObject<DataTypes>::SPtr mstate;
     typename DiagonalMass<DataTypes, MassType>::SPtr mass;
 
-    virtual void SetUp()
+    void SetUp() override
     {
         component::initBaseMechanics();
         simulation::setSimulation(simulation = new simulation::graph::DAGSimulation());
         root = simulation::getSimulation()->createNewGraph("root");
     }
 
-    void TearDown()
+    void TearDown() override
     {
         if (root!=NULL)
             simulation::getSimulation()->unload(root);

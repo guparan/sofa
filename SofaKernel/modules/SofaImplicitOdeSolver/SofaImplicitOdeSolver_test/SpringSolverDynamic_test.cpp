@@ -63,7 +63,7 @@ struct SpringSolverDynamic_test : public Sofa_test<typename _DataTypes::Real>
 
 
     /// Create the context for the scene
-    void SetUp()
+    void SetUp() override
     {
         // Init simulation
         sofa::simulation::setSimulation(simulation = new sofa::simulation::graph::DAGSimulation());

@@ -75,7 +75,7 @@ public:
           m_topologyHandler(NULL)
     {}
 
-    virtual ~TopologyDataImpl();
+    ~TopologyDataImpl() override;
 
 
     /** Public functions to handle topological engine creation */

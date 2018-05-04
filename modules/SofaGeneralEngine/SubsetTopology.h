@@ -70,7 +70,7 @@ protected:
 
     SubsetTopology();
 
-    ~SubsetTopology() {}
+    ~SubsetTopology() override {}
 public:
     void init() override;
 
@@ -104,7 +104,7 @@ public:
         return core::objectmodel::BaseObject::create(tObj, context, arg);
     }
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

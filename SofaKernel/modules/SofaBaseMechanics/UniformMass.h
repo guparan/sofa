@@ -91,7 +91,7 @@ public:
 protected:
     UniformMass();
 
-    ~UniformMass();
+    ~UniformMass() override;
 
     /// @internal fonction called in the constructor that can be specialized
     void constructor_message() ;

@@ -81,36 +81,36 @@ public:
     Data< SReal >            d_drawScale; ///< drawing scale
     Data< defaulttype::RGBAColor >  d_drawColor; ///< drawing color
 
-    virtual void init() override;
-    virtual void reinit() override;
+    void init() override;
+    void reinit() override;
 
-    virtual void apply(const core::MechanicalParams *mparams, Data<OutVecCoord>& out, const Data<InVecCoord>& in) override;
+    void apply(const core::MechanicalParams *mparams, Data<OutVecCoord>& out, const Data<InVecCoord>& in) override;
 
-    virtual void applyJ(const core::MechanicalParams *mparams, Data<OutVecDeriv>& out, const Data<InVecDeriv>& in) override;
+    void applyJ(const core::MechanicalParams *mparams, Data<OutVecDeriv>& out, const Data<InVecDeriv>& in) override;
 
-    virtual void applyJT(const core::MechanicalParams *mparams, Data<InVecDeriv>& out, const Data<OutVecDeriv>& in) override;
+    void applyJT(const core::MechanicalParams *mparams, Data<InVecDeriv>& out, const Data<OutVecDeriv>& in) override;
 
-    virtual void applyJT(const core::ConstraintParams *cparams, Data<InMatrixDeriv>& out, const Data<OutMatrixDeriv>& in) override;
-
-
-    virtual const sofa::defaulttype::BaseMatrix* getJ() override;
-    virtual const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs() override;
+    void applyJT(const core::ConstraintParams *cparams, Data<InMatrixDeriv>& out, const Data<OutMatrixDeriv>& in) override;
 
 
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    const sofa::defaulttype::BaseMatrix* getJ() override;
+    const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs() override;
+
+
+    void draw(const core::visual::VisualParams* vparams) override;
 
 
     // no geometric stiffness
-    virtual void applyDJT(const core::MechanicalParams* /*mparams*/, core::MultiVecDerivId /*parentForce*/, core::ConstMultiVecDerivId /*childForce*/ ) override {}
-    virtual void updateK(const core::MechanicalParams* /*mparams*/, core::ConstMultiVecDerivId /*childForce*/ ) override {}
-    virtual const defaulttype::BaseMatrix* getK() override { return NULL; }
+    void applyDJT(const core::MechanicalParams* /*mparams*/, core::MultiVecDerivId /*parentForce*/, core::ConstMultiVecDerivId /*childForce*/ ) override {}
+    void updateK(const core::MechanicalParams* /*mparams*/, core::ConstMultiVecDerivId /*childForce*/ ) override {}
+    const defaulttype::BaseMatrix* getK() override { return NULL; }
 
-    virtual void updateForceMask() override;
+    void updateForceMask() override;
 
 
 protected:
     ProjectionToTargetLineMapping();
-    virtual ~ProjectionToTargetLineMapping() override {}
+    ~ProjectionToTargetLineMapping() override {}
 
     SparseMatrixEigen jacobian;                      ///< Jacobian of the mapping
     helper::vector<defaulttype::BaseMatrix*> baseMatrices;   ///< Jacobian of the mapping, in a vector
@@ -175,34 +175,34 @@ public:
     Data< SReal >            d_drawScale; ///< drawing scale
     Data< defaulttype::RGBAColor >  d_drawColor; ///< drawing color
 
-    virtual void init() override;
-    virtual void reinit() override;
+    void init() override;
+    void reinit() override;
 
-    virtual void apply(const core::MechanicalParams *mparams, const helper::vector<OutDataVecCoord*>& dataVecOutPos, const helper::vector<const InDataVecCoord*>& dataVecInPos) override;
-    virtual void applyJ(const core::MechanicalParams *mparams, const helper::vector<OutDataVecDeriv*>& dataVecOutVel, const helper::vector<const InDataVecDeriv*>& dataVecInVel) override;
-    virtual void applyJT(const core::MechanicalParams *mparams, const helper::vector<InDataVecDeriv*>& dataVecOutForce, const helper::vector<const OutDataVecDeriv*>& dataVecInForce) override;
-
-
-    virtual const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs() override;
+    void apply(const core::MechanicalParams *mparams, const helper::vector<OutDataVecCoord*>& dataVecOutPos, const helper::vector<const InDataVecCoord*>& dataVecInPos) override;
+    void applyJ(const core::MechanicalParams *mparams, const helper::vector<OutDataVecDeriv*>& dataVecOutVel, const helper::vector<const InDataVecDeriv*>& dataVecInVel) override;
+    void applyJT(const core::MechanicalParams *mparams, const helper::vector<InDataVecDeriv*>& dataVecOutForce, const helper::vector<const OutDataVecDeriv*>& dataVecInForce) override;
 
 
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs() override;
+
+
+    void draw(const core::visual::VisualParams* vparams) override;
 
 
     // no geometric stiffness
-    virtual void applyDJT(const core::MechanicalParams* /*mparams*/, core::MultiVecDerivId /*parentForce*/, core::ConstMultiVecDerivId /*childForce*/ ) override {}
-    virtual void updateK(const core::MechanicalParams* /*mparams*/, core::ConstMultiVecDerivId /*childForce*/ ) override {}
-    virtual const defaulttype::BaseMatrix* getK() override { return NULL; }
-    virtual void applyJT( const core::ConstraintParams* /* cparams */, const helper::vector< InDataMatrixDeriv* >& /* dataMatOutConst */, const helper::vector< const OutDataMatrixDeriv* >& /* dataMatInConst */ ) override {}
+    void applyDJT(const core::MechanicalParams* /*mparams*/, core::MultiVecDerivId /*parentForce*/, core::ConstMultiVecDerivId /*childForce*/ ) override {}
+    void updateK(const core::MechanicalParams* /*mparams*/, core::ConstMultiVecDerivId /*childForce*/ ) override {}
+    const defaulttype::BaseMatrix* getK() override { return NULL; }
+    void applyJT( const core::ConstraintParams* /* cparams */, const helper::vector< InDataMatrixDeriv* >& /* dataMatOutConst */, const helper::vector< const OutDataMatrixDeriv* >& /* dataMatInConst */ ) override {}
 
 
 
-    virtual void updateForceMask() override;
+    void updateForceMask() override;
 
 
 protected:
     ProjectionToLineMultiMapping();
-    virtual ~ProjectionToLineMultiMapping() override {}
+    ~ProjectionToLineMultiMapping() override {}
 
     SparseMatrixEigen jacobian0, jacobian1;                      ///< Jacobians of the mapping
     helper::vector<defaulttype::BaseMatrix*> baseMatrices;   ///< Jacobians of the mapping, in a vector

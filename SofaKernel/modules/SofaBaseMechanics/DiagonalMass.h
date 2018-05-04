@@ -113,7 +113,7 @@ public:
         DMassPointHandler(DiagonalMass<DataTypes,TMassType>* _dm, sofa::component::topology::PointData<MassVector>* _data) : topology::TopologyDataHandler<Point,MassVector>(_data), dm(_dm) {}
 
         void applyCreateFunction(unsigned int pointIndex, TMassType& m, const Point&, const sofa::helper::vector< unsigned int > &,
-                                 const sofa::helper::vector< double > &);
+                                 const sofa::helper::vector< double > &) override;
 
         using topology::TopologyDataHandler<Point,MassVector>::ApplyTopologyChange;
 
@@ -127,9 +127,9 @@ public:
         void applyEdgeDestruction(const sofa::helper::vector<unsigned int> & /*indices*/);
 
         /// Callback to add edges elements.
-        virtual void ApplyTopologyChange(const core::topology::EdgesAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::EdgesAdded* /*event*/) override;
         /// Callback to remove edges elements.
-        virtual void ApplyTopologyChange(const core::topology::EdgesRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::EdgesRemoved* /*event*/) override;
 
         ///////////////////////// Functions on Triangles //////////////////////////////////////
         /// Apply adding triangles elements.
@@ -141,9 +141,9 @@ public:
         void applyTriangleDestruction(const sofa::helper::vector<unsigned int> & /*indices*/);
 
         /// Callback to add triangles elements.
-        virtual void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/) override;
         /// Callback to remove triangles elements.
-        virtual void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/) override;
 
         ///////////////////////// Functions on Tetrahedron //////////////////////////////////////
         /// Apply adding tetrahedron elements.
@@ -155,9 +155,9 @@ public:
         void applyTetrahedronDestruction(const sofa::helper::vector<unsigned int> & /*indices*/);
 
         /// Callback to add tetrahedron elements.
-        virtual void ApplyTopologyChange(const core::topology::TetrahedraAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::TetrahedraAdded* /*event*/) override;
         /// Callback to remove tetrahedron elements.
-        virtual void ApplyTopologyChange(const core::topology::TetrahedraRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::TetrahedraRemoved* /*event*/) override;
 
         ///////////////////////// Functions on Hexahedron //////////////////////////////////////
         /// Apply adding hexahedron elements.
@@ -168,9 +168,9 @@ public:
         /// Apply removing hexahedron elements.
         void applyHexahedronDestruction(const sofa::helper::vector<unsigned int> & /*indices*/);
         /// Callback to add hexahedron elements.
-        virtual void ApplyTopologyChange(const core::topology::HexahedraAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::HexahedraAdded* /*event*/) override;
         /// Callback to remove hexahedron elements.
-        virtual void ApplyTopologyChange(const core::topology::HexahedraRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::HexahedraRemoved* /*event*/) override;
 
     protected:
         DiagonalMass<DataTypes,TMassType>* dm;
@@ -225,8 +225,8 @@ public:
 
     void clear();
 
-    virtual void reinit() override;
-    virtual void init() override;
+    void reinit() override;
+    void init() override;
 
 
     TopologyType getMassTopologyType() const
@@ -284,7 +284,7 @@ public:
     void draw(const core::visual::VisualParams* vparams) override;
 
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

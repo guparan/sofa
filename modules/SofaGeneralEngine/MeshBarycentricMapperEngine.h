@@ -61,7 +61,7 @@ protected:
 
     MeshBarycentricMapperEngine();
 
-    ~MeshBarycentricMapperEngine() {}
+    ~MeshBarycentricMapperEngine() override {}
 public:
     void init() override;
 
@@ -82,7 +82,7 @@ public:
     void addPointInCube(const int /*cubeIndex*/, const SReal* /*baryCoords*/);
 
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

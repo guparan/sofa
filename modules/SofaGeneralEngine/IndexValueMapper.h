@@ -54,13 +54,13 @@ public:
 protected:
 
     IndexValueMapper();
-    ~IndexValueMapper() {}
+    ~IndexValueMapper() override {}
 public:
-    virtual void init() override;
-    virtual void reinit() override;
-    virtual void update() override;
+    void init() override;
+    void reinit() override;
+    void update() override;
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

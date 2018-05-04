@@ -67,7 +67,7 @@ public:
     {
     }
 
-    void processVisualModel(simulation::Node* node, core::visual::VisualModel* vm);
+    void processVisualModel(simulation::Node* node, core::visual::VisualModel* vm) override;
 
 public:
     GLSLShader* shader;

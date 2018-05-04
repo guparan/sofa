@@ -78,7 +78,7 @@ public:
     /// @{
     typedef TClass<BaseData,DDGNode> MyClass;
     static const MyClass* GetClass() { return MyClass::get(); }
-    virtual const BaseClass* getClass() const
+    const BaseClass* getClass() const override
     { return GetClass(); }
     /// @}
 
@@ -114,7 +114,7 @@ public:
     BaseData(const char* helpMsg, bool isDisplayed=true, bool isReadOnly=false);
 
     /// Destructor.
-    virtual ~BaseData();
+    ~BaseData() override;
 
     /// Assign a value to this %Data from a string representation.
     /// \return true on success.
@@ -159,7 +159,7 @@ public:
     virtual bool copyValue(const BaseData* parent);
 
     /// Copy the value of an aspect into another one.
-    virtual void copyAspect(int destAspect, int srcAspect) = 0;
+    void copyAspect(int destAspect, int srcAspect) override = 0;
 
     /// Release memory allocated for the specified aspect.
     virtual void releaseAspect(int aspect) = 0;
@@ -244,18 +244,18 @@ public:
     virtual bool canBeLinked() const { return true; }
 
     /// Return the Base component owning this %Data.
-    Base* getOwner() const { return m_owner; }
+    Base* getOwner() const override { return m_owner; }
     /// Set the owner of this %Data.
     void setOwner(Base* o) { m_owner=o; }
 
     /// This method is needed by DDGNode
-    BaseData* getData() const
+    BaseData* getData() const override
     {
         return const_cast<BaseData*>(this);
     }
 
     /// Return the name of this %Data within the Base component
-    const std::string& getName() const { return m_name; }
+    const std::string& getName() const override { return m_name; }
     /// Set the name of this %Data.
     ///
     /// This method should not be called directly, the %Data registration methods in Base should be used instead.
@@ -296,7 +296,7 @@ public:
     BaseData* getParent() const { return parentBaseData.get(); }
 
     /// Update the value of this %Data
-    void update();
+    void update() override;
 
     /// @name Links management
     /// @{
@@ -305,7 +305,7 @@ public:
     /// Accessor to the vector containing all the fields of this object
     const VecLink& getLinks() const { return m_vecLink; }
 
-    virtual bool findDataLinkDest(DDGNode*& ptr, const std::string& path, const BaseLink* link);
+    bool findDataLinkDest(DDGNode*& ptr, const std::string& path, const BaseLink* link) override;
 
     virtual bool findDataLinkDest(BaseData*& ptr, const std::string& path, const BaseLink* link);
 
@@ -336,7 +336,7 @@ protected:
 
     virtual void doSetParent(BaseData* parent);
 
-    virtual void doDelInput(DDGNode* n);
+    void doDelInput(DDGNode* n) override;
 
     /// Update this %Data from the value of its parent
     virtual bool updateFromParentValue(const BaseData* parent);

@@ -95,19 +95,19 @@ protected:
 
     }
 
-    virtual ~LMConstraint();
+    ~LMConstraint() override;
 public:
-    virtual void init() override;
+    void init() override;
 
     /// get Mechanical State 1 where the constraint will be expressed (can be a Mapped mechanical state)
-    virtual BaseMechanicalState* getConstrainedMechModel1() const override {return constrainedObject1;}
+    BaseMechanicalState* getConstrainedMechModel1() const override {return constrainedObject1;}
     /// get Mechanical State 2 where the constraint will be expressed (can be a Mapped mechanical state)
-    virtual BaseMechanicalState* getConstrainedMechModel2() const override {return constrainedObject2;}
+    BaseMechanicalState* getConstrainedMechModel2() const override {return constrainedObject2;}
 
     /// get Mechanical State 1 where the constraint will be solved
-    virtual BaseMechanicalState* getSimulatedMechModel1() const override {return simulatedObject1;}
+    BaseMechanicalState* getSimulatedMechModel1() const override {return simulatedObject1;}
     /// get Mechanical State 2 where the constraint will be solved
-    virtual BaseMechanicalState* getSimulatedMechModel2() const override {return simulatedObject2;}
+    BaseMechanicalState* getSimulatedMechModel2() const override {return simulatedObject2;}
 
     /// Pre-construction check method called by ObjectFactory.
     template<class T>
@@ -149,7 +149,7 @@ public:
         return obj;
     }
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }
@@ -168,7 +168,7 @@ protected:
 
 
     /// Mask are handled manually in LMConstraints (MUST be setted in buildConstaintMatrix)
-    virtual void updateForceMask() override {}
+    void updateForceMask() override {}
 };
 
 #if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_CORE_BEHAVIOR_LMCONSTRAINT_CPP)

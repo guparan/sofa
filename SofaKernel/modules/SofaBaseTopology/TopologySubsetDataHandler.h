@@ -77,7 +77,7 @@ public:
         : core::topology::TopologyElementHandler < TopologyElementType >()
         , m_topologyData(_topologyData), m_defaultValue(defaultValue) {}
 
-    bool isTopologyDataRegistered() {return m_topologyData != 0;}
+    bool isTopologyDataRegistered() override {return m_topologyData != 0;}
 
     /** Public fonction to apply creation and destruction functions */
     /// Apply removing current elementType elements
@@ -90,37 +90,37 @@ public:
 
 protected:
     /// Swaps values at indices i1 and i2.
-    virtual void swap( unsigned int i1, unsigned int i2 );
+    void swap( unsigned int i1, unsigned int i2 ) override;
 
     using core::topology::TopologyElementHandler< TopologyElementType >::add;
 
     /// Add some values. Values are added at the end of the vector.
-    virtual void add( unsigned int nbElements,
+    void add( unsigned int nbElements,
             const sofa::helper::vector< TopologyElementType >& ,
             const sofa::helper::vector< sofa::helper::vector< unsigned int > > &ancestors,
-            const sofa::helper::vector< sofa::helper::vector< double > >& coefs);
+            const sofa::helper::vector< sofa::helper::vector< double > >& coefs) override;
 
     virtual void add( unsigned int nbElements,
             const sofa::helper::vector< sofa::helper::vector< unsigned int > > &ancestors,
             const sofa::helper::vector< sofa::helper::vector< double > >& coefs);
 
     /// Remove the values corresponding to the Edges removed.
-    virtual void remove( const sofa::helper::vector<unsigned int> &index );
+    void remove( const sofa::helper::vector<unsigned int> &index ) override;
 
     /// Reorder the values.
-    virtual void renumber( const sofa::helper::vector<unsigned int> &index );
+    void renumber( const sofa::helper::vector<unsigned int> &index ) override;
 
     /// Move a list of points
-    virtual void move( const sofa::helper::vector<unsigned int> &indexList,
+    void move( const sofa::helper::vector<unsigned int> &indexList,
             const sofa::helper::vector< sofa::helper::vector< unsigned int > >& ancestors,
-            const sofa::helper::vector< sofa::helper::vector< double > >& coefs);
+            const sofa::helper::vector< sofa::helper::vector< double > >& coefs) override;
 
     /// Add Element after a displacement of vertices, ie. add element based on previous position topology revision.
-    virtual void addOnMovedPosition(const sofa::helper::vector<unsigned int> &indexList,
-            const sofa::helper::vector< TopologyElementType > & elems);
+    void addOnMovedPosition(const sofa::helper::vector<unsigned int> &indexList,
+            const sofa::helper::vector< TopologyElementType > & elems) override;
 
     /// Remove Element after a displacement of vertices, ie. add element based on previous position topology revision.
-    virtual void removeOnMovedPosition(const sofa::helper::vector<unsigned int> &indices);
+    void removeOnMovedPosition(const sofa::helper::vector<unsigned int> &indices) override;
 
 
 

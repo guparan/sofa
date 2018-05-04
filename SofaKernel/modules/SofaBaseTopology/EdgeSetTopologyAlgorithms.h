@@ -60,9 +60,9 @@ protected:
         : PointSetTopologyAlgorithms<DataTypes>()
     {}
 
-    virtual ~EdgeSetTopologyAlgorithms() {}
+    ~EdgeSetTopologyAlgorithms() override {}
 public:
-    virtual void init() override;
+    void init() override;
 
 private:
     EdgeSetTopologyContainer*					m_container;

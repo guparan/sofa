@@ -134,7 +134,7 @@ protected:
     /**
      * @brief Default destructor.
      */
-    virtual ~LocalMinDistanceFilter();
+    ~LocalMinDistanceFilter() override;
 public:
     //virtual void init(){}
 

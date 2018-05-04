@@ -89,13 +89,13 @@ protected:
     }
 
 
-    ~WashingMachineForceField()
+    ~WashingMachineForceField() override
     {
     }
 
 public:
 
-    virtual void init() override
+    void init() override
     {
         _alreadyInit=true;
 
@@ -128,7 +128,7 @@ public:
         _planes[5]->setDrawColor( defaulttype::RGBAColor( 0.4f,0.5f,0.5f,1.0f ) );
     }
 
-    virtual void reinit() override
+    void reinit() override
     {
         Inherit::reinit();
 
@@ -158,9 +158,9 @@ public:
 
     }
 
-    virtual void addForce(const core::MechanicalParams* mparams, DataVecDeriv& f, const DataVecCoord& x, const DataVecDeriv& v) override;
-    virtual void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& df, const DataVecDeriv& dx) override;
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& f, const DataVecCoord& x, const DataVecDeriv& v) override;
+    void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& df, const DataVecDeriv& dx) override;
+    SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
     {
         serr << "Get potentialEnergy not implemented" << sendl;
         return 0.0;

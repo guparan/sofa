@@ -67,7 +67,7 @@ struct ProjectDirectionConstraint_test : public Sofa_test<typename _DataTypes::R
     typename MechanicalObject::SPtr dofs;
 
      /// Create the context for the tests.
-    void SetUp()
+    void SetUp() override
     {
         //Init
         sofa::simulation::setSimulation(simulation = new sofa::simulation::graph::DAGSimulation());
@@ -216,7 +216,7 @@ struct ProjectDirectionConstraint_test : public Sofa_test<typename _DataTypes::R
        return succeed;
     }
 
-    void TearDown()
+    void TearDown() override
     {
         if (root!=NULL)
             sofa::simulation::getSimulation()->unload(root);

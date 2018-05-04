@@ -89,14 +89,14 @@ public:
     {
         IntersectorFactory<TIntersectionClass>::getInstance()->registerCreator(this);
     }
-    virtual ~IntersectorCreator() {}
+    ~IntersectorCreator() override {}
 
-    virtual void addIntersectors(TIntersectionClass* object)
+    void addIntersectors(TIntersectionClass* object) override
     {
         new TIntersectorClass(object);
     }
 
-    virtual std::string name() const { return m_name; }
+    std::string name() const override { return m_name; }
 protected:
     std::string m_name;
 };

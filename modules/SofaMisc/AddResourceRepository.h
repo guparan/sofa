@@ -51,7 +51,7 @@ protected:
     /** Default constructor
     */
     AddResourceRepository();
-    virtual ~AddResourceRepository();
+    ~AddResourceRepository() override;
 public:
     //cannot be a DataFilename
     Data<std::string> d_repositoryPath; ///< Path to add to the pool of resources

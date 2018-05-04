@@ -55,9 +55,9 @@ protected:
         : QuadSetTopologyAlgorithms<DataTypes>()
     { }
 
-    virtual ~HexahedronSetTopologyAlgorithms() {}
+    ~HexahedronSetTopologyAlgorithms() override {}
 public:
-    virtual void init() override;
+    void init() override;
 
 private:
     HexahedronSetTopologyContainer*						m_container;

@@ -65,9 +65,9 @@ protected:
         : TriangleSetTopologyAlgorithms<DataTypes>()
     {}
 
-    virtual ~TetrahedronSetTopologyAlgorithms() {}
+    ~TetrahedronSetTopologyAlgorithms() override {}
 public:
-    virtual void init() override;
+    void init() override;
 
     void removeTetra(sofa::helper::vector<TetraID>& ind_ta);
 

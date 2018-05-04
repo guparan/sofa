@@ -179,7 +179,7 @@ public:
     SimpleDataWidget(QWidget* parent,const char* name, MyTData* d):
         TDataWidget<T>(parent,name,d)
     {}
-    virtual bool createWidgets()
+    bool createWidgets() override
     {
         const data_type& d = this->getData()->virtualGetValue();
         if (!container.createWidgets(this, d, ! this->isEnabled() ) )
@@ -190,12 +190,12 @@ public:
 
         return true;
     }
-    virtual void setDataReadOnly(bool readOnly)
+    void setDataReadOnly(bool readOnly) override
     {
         container.setReadOnly(readOnly);
     }
 
-    virtual void readFromData()
+    void readFromData() override
     {
         container.readFromData(this->getData()->getValue());
     }
@@ -205,13 +205,13 @@ public:
         container.setReadOnly(readOnly);
     }
 
-    virtual void writeToData()
+    void writeToData() override
     {
         data_type& d = *this->getData()->beginEdit();
         container.writeToData(d);
         this->getData()->endEdit();
     }
-    virtual unsigned int numColumnWidget() { return 5; }
+    unsigned int numColumnWidget() override { return 5; }
 };
 
 ////////////////////////////////////////////////////////////////
@@ -955,15 +955,15 @@ public :
         : TDataWidget<sofa::helper::OptionsGroup >(parent,name,m_data) {};
 
     ///In this method we  create the widgets and perform the signal / slots connections.
-    virtual bool createWidgets();
-    virtual void setDataReadOnly(bool readOnly);
+    bool createWidgets() override;
+    void setDataReadOnly(bool readOnly) override;
 
 protected:
     ///Implements how update the widgets knowing the data value.
-    virtual void readFromData();
+    void readFromData() override;
 
     ///Implements how to update the data, knowing the widget value.
-    virtual void writeToData();
+    void writeToData() override;
 
     QButtonGroup *buttonList;
     QComboBox    *comboList;

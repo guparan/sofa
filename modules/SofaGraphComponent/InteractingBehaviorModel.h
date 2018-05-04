@@ -75,7 +75,7 @@ public:
 
 
     /// call when initializing the simulation
-    virtual void init()
+    void init() override
     {
         Inherited::init();
         m_exposedDofs = dynamic_cast<Dofs*>( this->getMState() );
@@ -89,7 +89,7 @@ protected:
         this->f_listening.setValue(true); // to call handleEvent at each event
     }
 
-    virtual ~InteractingBehaviorModel() {}
+    ~InteractingBehaviorModel() override {}
 
 
     /// get an access to the exposed sofa dofs (useful to get object translation, rotation, rest positions...)

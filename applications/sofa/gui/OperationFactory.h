@@ -46,8 +46,8 @@ template<class RealOperation>
 class TOperationCreator: public OperationCreator
 {
 public:
-    Operation* create() const {return new RealOperation();};
-    std::string getDescription() const { return RealOperation::getDescription();};
+    Operation* create() const override {return new RealOperation();};
+    std::string getDescription() const override { return RealOperation::getDescription();};
 };
 
 

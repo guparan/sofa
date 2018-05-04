@@ -65,13 +65,13 @@ public:
         TDataWidget<Material>(parent,name,data)
     {}
 
-    virtual bool createWidgets();
-    virtual void setDataReadOnly(bool readOnly);
-    virtual unsigned int numColumnWidget() {return 1;}
+    bool createWidgets() override;
+    void setDataReadOnly(bool readOnly) override;
+    unsigned int numColumnWidget() override {return 1;}
 
 protected:
-    virtual void readFromData();
-    virtual void writeToData();
+    void readFromData() override;
+    void writeToData() override;
     QLineEdit* _nameEdit;
     QRGBAColorPicker* _ambientPicker;
     QRGBAColorPicker* _emissivePicker;
@@ -102,14 +102,14 @@ public:
 
     }
 
-    virtual bool createWidgets();
-    virtual void setDataReadOnly(bool readOnly);
-    virtual unsigned int numColumnWidget() {return 1;}
+    bool createWidgets() override;
+    void setDataReadOnly(bool readOnly) override;
+    unsigned int numColumnWidget() override {return 1;}
 
 
 protected:
-    virtual void readFromData();
-    virtual void writeToData();
+    void readFromData() override;
+    void writeToData() override;
 
     MaterialDataWidget* _materialDataWidget;
     VectorMaterial _vectorEditedMaterial;

@@ -111,13 +111,13 @@ class QDataSimpleEdit : public DataWidget
     } QSimpleEdit;
 public :
     QDataSimpleEdit(QWidget*, const char* name, core::objectmodel::BaseData*);
-    virtual unsigned int numColumnWidget() {return 3;}
-    virtual unsigned int sizeWidget() {return 6;}
-    virtual bool createWidgets();
-    virtual void setDataReadOnly(bool readOnly);
+    unsigned int numColumnWidget() override {return 3;}
+    unsigned int sizeWidget() override {return 6;}
+    bool createWidgets() override;
+    void setDataReadOnly(bool readOnly) override;
 protected:
-    virtual void readFromData();
-    virtual void writeToData();
+    void readFromData() override;
+    void writeToData() override;
     QSimpleEdit innerWidget_;
 };
 
@@ -126,16 +126,16 @@ class QPoissonRatioWidget : public TDataWidget<double>
     Q_OBJECT
 public :
     QPoissonRatioWidget(QWidget*, const char*, core::objectmodel::Data<double>*);
-    virtual bool createWidgets();
-    virtual void setDataReadOnly(bool readOnly);
+    bool createWidgets() override;
+    void setDataReadOnly(bool readOnly) override;
 
 protected slots :
     void changeLineEditValue();
     void changeSliderValue();
 
 protected:
-    virtual void readFromData();
-    virtual void writeToData();
+    void readFromData() override;
+    void writeToData() override;
     QSlider* slider;
     QLineEdit* lineEdit;
 

@@ -80,7 +80,7 @@ public:
 protected:
     CenterPointMechanicalMapping();
 
-    virtual ~CenterPointMechanicalMapping();
+    ~CenterPointMechanicalMapping() override;
 
     core::topology::BaseMeshTopology* inputTopo;
     core::topology::BaseMeshTopology* outputTopo;

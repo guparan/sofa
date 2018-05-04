@@ -50,18 +50,18 @@ public:
     typedef sofa::core::behavior::BaseForceField              MouseForceField;
 
     AttachBodyPerformer(BaseMouseInteractor *i);
-    virtual ~AttachBodyPerformer();
+    ~AttachBodyPerformer() override;
 
-    void start();
-    void execute();
-    void draw(const core::visual::VisualParams* vparams);
+    void start() override;
+    void execute() override;
+    void draw(const core::visual::VisualParams* vparams) override;
     void clear();
 
     void setStiffness(SReal s) {stiffness=s;}
     void setArrowSize(float s) {size=s;}
     void setShowFactorSize(float s) {showFactorSize = s;}
 
-    virtual void configure(configurationsetting::MouseButtonSetting* setting)
+    void configure(configurationsetting::MouseButtonSetting* setting) override
     {
         configurationsetting::AttachBodyButtonSetting* s = dynamic_cast<configurationsetting::AttachBodyButtonSetting*>(setting);
         if (s)

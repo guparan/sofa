@@ -65,7 +65,7 @@ public:
 protected:
     OdeSolver();
 
-    virtual ~OdeSolver();
+    ~OdeSolver() override;
 	
 private:
 	OdeSolver(const OdeSolver& n) ;
@@ -135,8 +135,8 @@ public:
     }
 
 
-    virtual bool insertInNode( objectmodel::BaseNode* node ) override;
-    virtual bool removeInNode( objectmodel::BaseNode* node ) override;
+    bool insertInNode( objectmodel::BaseNode* node ) override;
+    bool removeInNode( objectmodel::BaseNode* node ) override;
 
 };
 

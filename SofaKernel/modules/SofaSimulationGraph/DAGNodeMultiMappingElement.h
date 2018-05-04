@@ -40,14 +40,14 @@ public:
             const std::string& type,
             BaseElement* parent =NULL);
 
-    const char* getClass() const;
+    const char* getClass() const override;
 
 protected:
     void updateSceneGraph(
         sofa::core::BaseMapping* multiMapping,
         const helper::vector<simulation::Node*>& ancestorInputs,
         helper::vector<simulation::Node*>& otherInputs,
-        helper::vector<simulation::Node*>& outputs);
+        helper::vector<simulation::Node*>& outputs) override;
 };
 
 

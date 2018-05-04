@@ -101,7 +101,7 @@ public:
 protected:
     AttachConstraint(core::behavior::MechanicalState<DataTypes> *mm1, core::behavior::MechanicalState<DataTypes> *mm2);
     AttachConstraint();
-    virtual ~AttachConstraint();
+    ~AttachConstraint() override;
 public:
     void clearConstraints();
     void addConstraint(unsigned int index1, unsigned int index2);
@@ -120,7 +120,7 @@ public:
     void applyConstraint(const core::MechanicalParams *mparams, defaulttype::BaseVector* vector, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
 
 
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
 protected :
 

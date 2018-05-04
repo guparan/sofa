@@ -42,7 +42,7 @@ struct AddResourceRepository_test : public Sofa_test<>
     sofa::simulation::Node::SPtr m_root;
     std::string m_testRepoDir;
 
-    void SetUp()
+    void SetUp() override
     {
         m_testRepoDir = std::string(MISC_TEST_RESOURCES_DIR) + std::string("/repo");
     }

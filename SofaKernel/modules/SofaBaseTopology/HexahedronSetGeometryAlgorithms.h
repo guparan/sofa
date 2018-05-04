@@ -73,7 +73,7 @@ protected:
         core::objectmodel::Base::addAlias(&d_drawHexahedra, "drawHexahedron");
     }
 
-    virtual ~HexahedronSetGeometryAlgorithms() {}
+    ~HexahedronSetGeometryAlgorithms() override {}
 
 	void defineHexahedronCubaturePoints();
 public:
@@ -154,7 +154,7 @@ public:
     */
     void writeMSHfile(const char *filename) const;
 
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
 protected:
     Data<bool> d_showHexaIndices; ///< Debug : view Hexa indices

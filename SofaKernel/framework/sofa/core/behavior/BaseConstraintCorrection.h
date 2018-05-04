@@ -57,7 +57,7 @@ public:
     SOFA_ABSTRACT_CLASS(BaseConstraintCorrection, objectmodel::BaseObject);
 protected:
     BaseConstraintCorrection() {};
-    virtual ~BaseConstraintCorrection() {}
+    ~BaseConstraintCorrection() override {}
 
 private:
     BaseConstraintCorrection(const BaseConstraintCorrection& n) ;

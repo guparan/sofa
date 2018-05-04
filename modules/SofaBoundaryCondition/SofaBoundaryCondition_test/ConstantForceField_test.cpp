@@ -68,8 +68,8 @@ struct ConstantForceField_test : public Sofa_test<>
     typedef ConstantForceField<DataTypes> TheConstantForceField ;
     typedef MechanicalObject<DataTypes>   TheMechanicalObject;
 
-    void SetUp() {}
-    void TearDown(){}
+    void SetUp() override {}
+    void TearDown() override{}
 
     void testSimpleBehavior()
     {

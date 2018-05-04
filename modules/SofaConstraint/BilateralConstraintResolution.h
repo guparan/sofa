@@ -58,23 +58,23 @@ class BilateralConstraintResolution : public ConstraintResolution
 {
 public:
     BilateralConstraintResolution(double* initF=NULL) : _f(initF) {}
-    virtual void resolution(int line, double** w, double* d, double* force, double *dfree)
+    void resolution(int line, double** w, double* d, double* force, double *dfree) override
     {
         SOFA_UNUSED(dfree);
         force[line] -= d[line] / w[line][line];
     }
 
-    virtual void init(int line, double** /*w*/, double* force)
+    void init(int line, double** /*w*/, double* force) override
     {
         if(_f) { force[line] = *_f; }
     }
 
-    virtual void initForce(int line, double* force)
+    void initForce(int line, double* force) override
     {
         if(_f) { force[line] = *_f; }
     }
 
-    void store(int line, double* force, bool /*convergence*/)
+    void store(int line, double* force, bool /*convergence*/) override
     {
         if(_f) *_f = force[line];
     }
@@ -88,7 +88,7 @@ class BilateralConstraintResolution3Dof : public ConstraintResolution
 public:
 
     BilateralConstraintResolution3Dof(sofa::defaulttype::Vec3d* vec=NULL) : _f(vec) { nbLines=3; }
-    virtual void init(int line, double** w, double *force)
+    void init(int line, double** w, double *force) override
     {
         sofa::defaulttype::Mat<3,3,double> temp;
         temp[0][0] = w[line][line];
@@ -110,7 +110,7 @@ public:
         }
     }
 
-    virtual void initForce(int line, double* force)
+    void initForce(int line, double* force) override
     {
         if(_f)
         {
@@ -119,7 +119,7 @@ public:
         }
     }
 
-    virtual void resolution(int line, double** /*w*/, double* d, double* force, double * dFree)
+    void resolution(int line, double** /*w*/, double* d, double* force, double * dFree) override
     {
         SOFA_UNUSED(dFree);
         for(int i=0; i<3; i++)
@@ -129,7 +129,7 @@ public:
         }
     }
 
-    void store(int line, double* force, bool /*convergence*/)
+    void store(int line, double* force, bool /*convergence*/) override
     {
         if(_f)
         {
@@ -148,7 +148,7 @@ class BilateralConstraintResolutionNDof : public ConstraintResolution
 {
 public:
     BilateralConstraintResolutionNDof(sofa::defaulttype::Vec<N, double>* vec=NULL) : _f(vec) { nbLines=N; }
-    virtual void init(int line, double** w, double *force)
+    void init(int line, double** w, double *force) override
     {
         sofa::defaulttype::Mat<N,N,double> temp;
         for(int i=0; i<N; i++)
@@ -164,7 +164,7 @@ public:
         }
     }
 
-    virtual void initForce(int line, double* force)
+    void initForce(int line, double* force) override
     {
         if(_f)
         {
@@ -173,7 +173,7 @@ public:
         }
     }
 
-    virtual void resolution(int line, double** /*w*/, double* d, double* force, double* /*dFree*/)
+    void resolution(int line, double** /*w*/, double* d, double* force, double* /*dFree*/) override
     {
         for(int i=0; i<N; i++)
         {
@@ -182,7 +182,7 @@ public:
         }
     }
 
-    void store(int line, double* force, bool /*convergence*/)
+    void store(int line, double* force, bool /*convergence*/) override
     {
         if(_f)
         {

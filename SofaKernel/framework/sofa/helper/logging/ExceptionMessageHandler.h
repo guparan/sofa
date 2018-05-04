@@ -50,7 +50,7 @@ public:
     {
         ErrorMessageException(/*could take some parameters to get Message's infos*/){}
 
-        virtual const char* what() const throw()
+        const char* what() const throw() override
         {
             return "An error Message has been written.";
         }
@@ -58,7 +58,7 @@ public:
 
 
 
-    virtual void process(Message &m);
+    void process(Message &m) override;
 
 };
 

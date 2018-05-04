@@ -370,12 +370,12 @@ class DefaultAllocator : public ExtVectorAllocator<T>
 public:
     typedef typename ExtVectorAllocator<T>::value_type value_type;
     typedef typename ExtVectorAllocator<T>::size_type size_type;
-    virtual void close(value_type*& data)
+    void close(value_type*& data) override
     {
         delete[] data;
         data = 0;
     }
-    virtual void resize(value_type*& data, size_type size, size_type& maxsize, size_type& cursize)
+    void resize(value_type*& data, size_type size, size_type& maxsize, size_type& cursize) override
     {
         if (size > maxsize)
         {
@@ -390,7 +390,7 @@ public:
         }
         cursize = size;
     }
-   virtual void cloneTo( std::unique_ptr< ExtVectorAllocator<T> >& clone )
+   void cloneTo( std::unique_ptr< ExtVectorAllocator<T> >& clone ) override
     {
         clone.reset( new DefaultAllocator<T> );
     }

@@ -45,7 +45,7 @@ template <class Object>
 struct InstrumentedObject : public Object
 {
     InstrumentedObject()  { objectCounter++; }
-    ~InstrumentedObject() { objectCounter--; }
+    ~InstrumentedObject() override { objectCounter--; }
 };
 
 /// Component with a sub-component

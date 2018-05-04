@@ -60,7 +60,7 @@ struct TriangleNumericalIntegration_test : public Sofa_test<typename _DataTypes:
     typename sofa::component::topology::TriangleSetGeometryAlgorithms<DataTypes>::SPtr geo;
 
     // Create the context for the scene
-    void SetUp()
+    void SetUp() override
     {
         // Init simulation
         sofa::simulation::setSimulation(simulation = new sofa::simulation::graph::DAGSimulation());
@@ -128,7 +128,7 @@ struct TriangleNumericalIntegration_test : public Sofa_test<typename _DataTypes:
     }
 
 
-    void TearDown()
+    void TearDown() override
     {
         if (root != NULL)
             sofa::simulation::getSimulation()->unload(root);

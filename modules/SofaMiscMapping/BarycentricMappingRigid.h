@@ -91,7 +91,7 @@ protected:
           updateJ(true)
     {}
 
-    virtual ~BarycentricMapperTetrahedronSetTopologyRigid() {}
+    ~BarycentricMapperTetrahedronSetTopologyRigid() override {}
 
 public:
     void clear(int reserve=0) override;
@@ -106,10 +106,10 @@ public:
     void applyJT( typename In::VecDeriv& out, const typename Out::VecDeriv& in ) override;
     void applyJT( typename In::MatrixDeriv& out, const typename Out::MatrixDeriv& in ) override;
 
-    virtual const sofa::defaulttype::BaseMatrix* getJ(int outSize, int inSize) override;
+    const sofa::defaulttype::BaseMatrix* getJ(int outSize, int inSize) override;
 
     void draw(const core::visual::VisualParams*,const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
-    virtual void resize( core::State<Out>* toModel ) override;
+    void resize( core::State<Out>* toModel ) override;
 
     //virtual int addContactPointFromInputMapping(const typename In::VecDeriv& in, const sofa::defaulttype::Vector3& /*pos*/, std::vector< std::pair<int, double> > & /*baryCoords*/);
 };

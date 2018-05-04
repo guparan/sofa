@@ -85,7 +85,7 @@ struct Scale : public TransformOperation<DataTypes>
     typedef typename DataTypes::Real Real;
     Scale():sx(0),sy(0),sz(0) {}
 
-    void execute(typename DataTypes::Coord &p) const
+    void execute(typename DataTypes::Coord &p) const override
     {
         Real x,y,z;
         DataTypes::get(x,y,z,p);
@@ -115,7 +115,7 @@ struct RotationSpecialized : public TransformOperation<DataTypes>
 {
 	typedef typename DataTypes::Real Real;
 
-    void execute(typename DataTypes::Coord &p) const
+    void execute(typename DataTypes::Coord &p) const override
     {
         defaulttype::Vector3 pos;
         DataTypes::get(pos[0],pos[1],pos[2],p);
@@ -146,7 +146,7 @@ struct RotationSpecialized<DataTypes, 2, false> : public TransformOperation<Data
 {
     typedef typename DataTypes::Real Real;
 
-    void execute(typename DataTypes::Coord &p) const
+    void execute(typename DataTypes::Coord &p) const override
     {
         defaulttype::Vector3 pos;
         DataTypes::get(pos[0],pos[1],pos[2],p);
@@ -181,7 +181,7 @@ struct RotationSpecialized<DataTypes, 3, false> : public TransformOperation<Data
 {
     typedef typename DataTypes::Real Real;
 
-    void execute(typename DataTypes::Coord &p) const
+    void execute(typename DataTypes::Coord &p) const override
     {
 		p.getCenter() = q.rotate(p.getCenter());
 		p.getOrientation() = q*p.getOrientation();
@@ -215,7 +215,7 @@ struct Translation : public TransformOperation<DataTypes>
 {
     typedef typename DataTypes::Real Real;
     Translation():tx(0),ty(0),tz(0) {}
-    void execute(typename DataTypes::Coord &p) const
+    void execute(typename DataTypes::Coord &p) const override
     {
         Real x,y,z;
         DataTypes::get(x,y,z,p);

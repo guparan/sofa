@@ -69,13 +69,13 @@ protected:
     /** Default constructor
     */
     EvalSurfaceDistance();
-    virtual ~EvalSurfaceDistance();
+    ~EvalSurfaceDistance() override;
 public:
     /// Compute the error metric between two surfaces
-    virtual SReal  eval() override;
+    SReal  eval() override;
     /// Init the computation
-    virtual void init() override;
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    void init() override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
 protected:
 

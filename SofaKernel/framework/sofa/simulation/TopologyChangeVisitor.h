@@ -40,22 +40,22 @@ public:
         : Visitor(params), /*root(NULL),*/ source(source)
     {}
 
-    virtual ~TopologyChangeVisitor() {}
+    ~TopologyChangeVisitor() override {}
 
     virtual void processTopologyChangeNoCheck(simulation::Node* node, core::objectmodel::BaseObject* obj);
     virtual void processTopologyChange(simulation::Node* node, core::objectmodel::BaseObject* obj);
 
-    virtual Result processNodeTopDown(simulation::Node* node);
-    virtual void processNodeBottomUp(simulation::Node* node);
+    Result processNodeTopDown(simulation::Node* node) override;
+    void processNodeBottomUp(simulation::Node* node) override;
 
     /// Specify whether this action can be parallelized.
-    virtual bool isThreadSafe() const { return true; }
+    bool isThreadSafe() const override { return true; }
 
     /// Return a category name for this action.
     /// Only used for debugging / profiling purposes
-    virtual const char* getCategoryName() const { return "topologyChange"; }
-    virtual const char* getClassName() const { return "TopologyChangeVisitor"; }
-    virtual std::string getInfos() const { return "Topology:" + source->getName(); }
+    const char* getCategoryName() const override { return "topologyChange"; }
+    const char* getClassName() const override { return "TopologyChangeVisitor"; }
+    std::string getInfos() const override { return "Topology:" + source->getName(); }
 
 protected:
     /// Flag to know the number of iterations of the overloaded method processNodeTopDown
@@ -72,12 +72,12 @@ public:
         : Visitor(params)
     {}
 
-    virtual Result processNodeTopDown(simulation::Node* node);
+    Result processNodeTopDown(simulation::Node* node) override;
 
     /// Return a category name for this action.
     /// Only used for debugging / profiling purposes
-    virtual const char* getCategoryName() const { return "topologyChange"; }
-    virtual const char* getClassName() const { return "HandleTopologyChangeVisitor"; }
+    const char* getCategoryName() const override { return "topologyChange"; }
+    const char* getClassName() const override { return "HandleTopologyChangeVisitor"; }
 };
 
 

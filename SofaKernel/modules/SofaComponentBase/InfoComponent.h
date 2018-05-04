@@ -51,7 +51,7 @@ public:
     SOFA_CLASS(InfoComponent, BaseObject);
 
     InfoComponent() {}
-    virtual ~InfoComponent(){}
+    ~InfoComponent() override{}
 };
 
 }

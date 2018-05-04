@@ -67,10 +67,10 @@ public:
 
     MeshSampler();
 
-    virtual ~MeshSampler() {}
+    ~MeshSampler() override {}
 
-    virtual void reinit()    override { update();  }
-    virtual void init() override;
+    void reinit()    override { update();  }
+    void init() override;
     void update() override;
 
     void draw(const core::visual::VisualParams* vparams) override;
@@ -84,7 +84,7 @@ public:
     Data< VI > outputIndices;       ///< selected point indices
     Data< VecCoord > outputPosition;       ///< selected point coordinates
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const MeshSampler<DataTypes>* = NULL) {   return DataTypes::Name(); }
 
 private:

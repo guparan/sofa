@@ -47,23 +47,23 @@ class ForceMaskOff: public sofa::core::behavior::BaseForceField
 public:
     SOFA_CLASS(ForceMaskOff, BaseForceField);
 
-    virtual void init() override
+    void init() override
     {
         BaseForceField::init();
         mstate = getContext()->getMechanicalState();
     }
 
-    virtual void updateForceMask() override
+    void updateForceMask() override
     {
         mstate->forceMask.assign( mstate->getSize(), true );
     }
 
 
     // other virtual functions do nothing
-    virtual void addForce(const core::MechanicalParams*, core::MultiVecDerivId ) override {}
-    virtual void addDForce(const core::MechanicalParams*, core::MultiVecDerivId ) override {}
-    virtual SReal getPotentialEnergy( const core::MechanicalParams* = core::MechanicalParams::defaultInstance() ) const override { return 0; }
-    virtual void addKToMatrix(const core::MechanicalParams*, const core::behavior::MultiMatrixAccessor* ) override {}
+    void addForce(const core::MechanicalParams*, core::MultiVecDerivId ) override {}
+    void addDForce(const core::MechanicalParams*, core::MultiVecDerivId ) override {}
+    SReal getPotentialEnergy( const core::MechanicalParams* = core::MechanicalParams::defaultInstance() ) const override { return 0; }
+    void addKToMatrix(const core::MechanicalParams*, const core::behavior::MultiMatrixAccessor* ) override {}
 
 protected:
 

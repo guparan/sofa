@@ -72,11 +72,11 @@ public:
 
     // methods
     DisplacementTransformEngine();
-    virtual void init() override;   // compute the inverse matrices
-    virtual void update() override; // compute the displacements wrt original positions
+    void init() override;   // compute the inverse matrices
+    void update() override; // compute the displacements wrt original positions
 
     // To simplify the template name in the xml file
-    virtual std::string getTemplateName() const override { return templateName(this); }
+    std::string getTemplateName() const override { return templateName(this); }
     static std::string templateName(const DisplacementTransformEngine<DataTypes,OutputType>* = NULL) { return DataTypes::Name()+std::string(",")+defaulttype::DataTypeInfo<OutputType>::name(); }
 
 protected:
@@ -121,12 +121,12 @@ public:
     // Method
     DisplacementMatrixEngine();
 
-    virtual void init() override;   // compute the inverse matrices
-    virtual void reinit() override; // compute S*inverse and store it once and for all.
-    virtual void update() override; // compute the displacements wrt original positions
+    void init() override;   // compute the inverse matrices
+    void reinit() override; // compute S*inverse and store it once and for all.
+    void update() override; // compute the displacements wrt original positions
 
     // To simplify the template name in the xml file
-    virtual std::string getTemplateName() const override { return templateName(this); }
+    std::string getTemplateName() const override { return templateName(this); }
     static std::string templateName(const DisplacementMatrixEngine<DataTypes>* = NULL) { return DataTypes::Name(); }
 
     // inputs

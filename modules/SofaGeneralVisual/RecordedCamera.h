@@ -44,15 +44,15 @@ public:
     typedef BaseCamera::Quat Quat;
 protected:
     RecordedCamera();
-    virtual ~RecordedCamera() {}
+    ~RecordedCamera() override {}
 public:
-    virtual void init() override;
+    void init() override;
 
-    virtual void reinit() override;
+    void reinit() override;
 
-    virtual void reset() override;
+    void reset() override;
 
-    virtual void handleEvent(sofa::core::objectmodel::Event *) override;
+    void handleEvent(sofa::core::objectmodel::Event *) override;
 
     //virtual void rotateWorldAroundPoint(Quat &rotation, const Vec3 &point);
 

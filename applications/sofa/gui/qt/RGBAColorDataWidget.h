@@ -64,13 +64,13 @@ public:
                         Data<RGBAColor>* data):
         TDataWidget<RGBAColor>(parent,name,data) {}
 
-    virtual bool createWidgets();
-    virtual void setDataReadOnly(bool readOnly);
-    virtual unsigned int numColumnWidget() {return 1;}
+    bool createWidgets() override;
+    void setDataReadOnly(bool readOnly) override;
+    unsigned int numColumnWidget() override {return 1;}
 
 protected:
-    virtual void readFromData();
-    virtual void writeToData();
+    void readFromData() override;
+    void writeToData() override;
     QLineEdit* m_nameEdit;
     QRGBAColorPicker* m_colorPicker;
 };

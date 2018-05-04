@@ -74,8 +74,8 @@ protected:
     inline void cgstep_alpha(const core::ExecParams* params, Vector& x, Vector& r, Vector& p, Vector& q, SReal alpha);
 
 public:
-    virtual void init() override;
-    virtual void reinit() override;
+    void init() override;
+    void reinit() override;
 
     void resetSystem() override;
 

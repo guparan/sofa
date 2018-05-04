@@ -80,11 +80,11 @@ public:
         this->model = model;
     }
 
-    void cleanup();
+    void cleanup() override;
 
-    MMechanicalState* createMapping(const char* name="contactPoints");
+    MMechanicalState* createMapping(const char* name="contactPoints") override;
 
-    void resize(int size)
+    void resize(int size) override
     {
         if (mapping!=NULL)
         {
@@ -93,7 +93,7 @@ public:
         }
     }
 
-    void update()
+    void update() override
     {
         if (mapping!=NULL)
         {
@@ -103,7 +103,7 @@ public:
         }
     }
 
-    void updateXfree()
+    void updateXfree() override
     {
         if (mapping!=NULL)
         {
@@ -130,11 +130,11 @@ class ContactMapper<LineModel, DataTypes> : public BarycentricContactMapper<Line
 public:
     typedef typename DataTypes::Real Real;
     typedef typename DataTypes::Coord Coord;
-    int addPoint(const Coord& P, int index, Real&)
+    int addPoint(const Coord& P, int index, Real&) override
     {
         return this->mapper->createPointInLine(P, this->model->getElemEdgeIndex(index), &this->model->getMechanicalState()->read(core::ConstVecCoordId::position())->getValue());
     }
-    int addPointB(const Coord& /*P*/, int index, Real& /*r*/, const defaulttype::Vector3& baryP)
+    int addPointB(const Coord& /*P*/, int index, Real& /*r*/, const defaulttype::Vector3& baryP) override
     {
         return this->mapper->addPointInLine(this->model->getElemEdgeIndex(index), baryP.ptr());
     }
@@ -149,7 +149,7 @@ class ContactMapper<TriangleModel, DataTypes> : public BarycentricContactMapper<
 public:
     typedef typename DataTypes::Real Real;
     typedef typename DataTypes::Coord Coord;
-    int addPoint(const Coord& P, int index, Real&)
+    int addPoint(const Coord& P, int index, Real&) override
     {
         int nbt = this->model->getMeshTopology()->getNbTriangles();
         if (index < nbt)
@@ -168,7 +168,7 @@ public:
             }
         }
     }
-    int addPointB(const Coord& P, int index, Real& /*r*/, const defaulttype::Vector3& baryP)
+    int addPointB(const Coord& P, int index, Real& /*r*/, const defaulttype::Vector3& baryP) override
     {
 
         int nbt = this->model->getMeshTopology()->getNbTriangles();
@@ -201,7 +201,7 @@ class ContactMapper<CapsuleModel, DataTypes> : public BarycentricContactMapper<C
     typedef typename DataTypes::Coord Coord;
 
 public:
-    int addPoint(const Coord& P, int index, Real& r){
+    int addPoint(const Coord& P, int index, Real& r) override{
         r = this->model->radius(index);
 
         SReal baryCoords[1];

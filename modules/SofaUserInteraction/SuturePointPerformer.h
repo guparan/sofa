@@ -61,10 +61,10 @@ public:
     typedef sofa::component::projectiveconstraintset::FixedConstraint<DataTypes> FixObjectType;
 
     SuturePointPerformer(BaseMouseInteractor *i);
-    ~SuturePointPerformer();
+    ~SuturePointPerformer() override;
 
-    void start();
-    void execute() {}
+    void start() override;
+    void execute() override {}
 
 protected:
     bool first;

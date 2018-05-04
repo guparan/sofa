@@ -470,13 +470,13 @@ void DAGNode::precomputeTraversalOrder( const core::ExecParams* params )
             _orderList.clear();
         }
 
-        virtual Result processNodeTopDown(Node* node)
+        Result processNodeTopDown(Node* node) override
         {
             _orderList.push_back( static_cast<DAGNode*>(node) );
             return RESULT_CONTINUE;
         }
 
-        virtual const char* getClassName() const {return "TraversalOrderVisitor";}
+        const char* getClassName() const override {return "TraversalOrderVisitor";}
     };
 
     TraversalOrderVisitor tov( params, _precomputedTraversalOrder );

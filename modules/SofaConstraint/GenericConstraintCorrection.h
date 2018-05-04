@@ -44,38 +44,38 @@ public:
 
 protected:
     GenericConstraintCorrection();
-    virtual ~GenericConstraintCorrection();
+    ~GenericConstraintCorrection() override;
 
 public:
-    virtual void bwdInit() override;
+    void bwdInit() override;
 
-    virtual void cleanup() override;
+    void cleanup() override;
 
-    virtual void addConstraintSolver(core::behavior::ConstraintSolver *s) override;
-    virtual void removeConstraintSolver(core::behavior::ConstraintSolver *s) override;
+    void addConstraintSolver(core::behavior::ConstraintSolver *s) override;
+    void removeConstraintSolver(core::behavior::ConstraintSolver *s) override;
 private:
     std::list<core::behavior::ConstraintSolver*> constraintsolvers;
 
 public:
-    virtual void addComplianceInConstraintSpace(const core::ConstraintParams *cparams, defaulttype::BaseMatrix* W) override;
+    void addComplianceInConstraintSpace(const core::ConstraintParams *cparams, defaulttype::BaseMatrix* W) override;
 
-    virtual void getComplianceMatrix(defaulttype::BaseMatrix* ) const override;
+    void getComplianceMatrix(defaulttype::BaseMatrix* ) const override;
 
-    virtual void computeAndApplyMotionCorrection(const core::ConstraintParams *cparams, core::MultiVecCoordId x, core::MultiVecDerivId v, core::MultiVecDerivId f, const defaulttype::BaseVector * lambda) override;
+    void computeAndApplyMotionCorrection(const core::ConstraintParams *cparams, core::MultiVecCoordId x, core::MultiVecDerivId v, core::MultiVecDerivId f, const defaulttype::BaseVector * lambda) override;
 
-    virtual void computeAndApplyPositionCorrection(const core::ConstraintParams *cparams, core::MultiVecCoordId xId, core::MultiVecDerivId fId, const defaulttype::BaseVector *lambda) override;
+    void computeAndApplyPositionCorrection(const core::ConstraintParams *cparams, core::MultiVecCoordId xId, core::MultiVecDerivId fId, const defaulttype::BaseVector *lambda) override;
 
-    virtual void computeAndApplyVelocityCorrection(const core::ConstraintParams *cparams, core::MultiVecDerivId vId, core::MultiVecDerivId fId, const defaulttype::BaseVector *lambda) override;
+    void computeAndApplyVelocityCorrection(const core::ConstraintParams *cparams, core::MultiVecDerivId vId, core::MultiVecDerivId fId, const defaulttype::BaseVector *lambda) override;
 
-    virtual void applyPredictiveConstraintForce(const core::ConstraintParams *cparams, core::MultiVecDerivId f, const defaulttype::BaseVector *lambda) override;
+    void applyPredictiveConstraintForce(const core::ConstraintParams *cparams, core::MultiVecDerivId f, const defaulttype::BaseVector *lambda) override;
 
-    virtual void rebuildSystem(double massFactor, double forceFactor) override;
+    void rebuildSystem(double massFactor, double forceFactor) override;
 
-    virtual void applyContactForce(const defaulttype::BaseVector *f) override;
+    void applyContactForce(const defaulttype::BaseVector *f) override;
 
-    virtual void resetContactForce() override;
+    void resetContactForce() override;
 
-    virtual void computeResidual(const core::ExecParams* params, defaulttype::BaseVector *lambda) override;
+    void computeResidual(const core::ExecParams* params, defaulttype::BaseVector *lambda) override;
 
     Data< helper::vector< std::string > >  d_linearSolversName; ///< name of the constraint solver
     Data< std::string >                    d_ODESolverName; ///< name of the ode solver

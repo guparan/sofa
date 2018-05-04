@@ -64,7 +64,7 @@ public:
 protected:
     Mesh2PointMechanicalMapping(core::State<In>* from = NULL, core::State<Out>* to = NULL);
 
-    virtual ~Mesh2PointMechanicalMapping();
+    ~Mesh2PointMechanicalMapping() override;
 
 public:
 

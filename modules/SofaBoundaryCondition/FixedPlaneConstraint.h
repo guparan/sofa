@@ -85,7 +85,7 @@ protected:
 
     FixedPlaneConstraint();
 
-    ~FixedPlaneConstraint();
+    ~FixedPlaneConstraint() override;
 public:
     void addConstraint(int index);
 
@@ -97,15 +97,15 @@ public:
     void projectVelocity(const core::MechanicalParams* mparams, DataVecDeriv& vData) override;
     void projectPosition(const core::MechanicalParams* mparams, DataVecCoord& xData) override;
     // Implement projectMatrix for assembled solver of compliant
-    virtual void projectMatrix( sofa::defaulttype::BaseMatrix* /*M*/, unsigned /*offset*/ ) override;
+    void projectMatrix( sofa::defaulttype::BaseMatrix* /*M*/, unsigned /*offset*/ ) override;
     void projectJacobianMatrix(const core::MechanicalParams* mparams, DataMatrixDeriv& cData) override;
 
 	// Implement applyConstraint for direct solvers
-    virtual void applyConstraint(const core::MechanicalParams* mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
-    virtual void applyConstraint(const core::MechanicalParams* mparams, defaulttype::BaseVector* vector, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
+    void applyConstraint(const core::MechanicalParams* mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
+    void applyConstraint(const core::MechanicalParams* mparams, defaulttype::BaseVector* vector, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
 
 
-    virtual void init() override;
+    void init() override;
 
     void setDirection (Coord dir);
     void selectVerticesAlongPlane();
@@ -123,12 +123,12 @@ public:
 
 
 
-        void applyDestroyFunction(unsigned int /*index*/, value_type& /*T*/);
+        void applyDestroyFunction(unsigned int /*index*/, value_type& /*T*/) override;
 
 
         bool applyTestCreateFunction(unsigned int /*index*/,
                 const sofa::helper::vector< unsigned int > & /*ancestors*/,
-                const sofa::helper::vector< double > & /*coefs*/);
+                const sofa::helper::vector< double > & /*coefs*/) override;
     protected:
         FixedPlaneConstraint<DataTypes> *fc;
     };

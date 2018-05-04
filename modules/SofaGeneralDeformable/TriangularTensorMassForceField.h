@@ -117,7 +117,7 @@ protected:
         void applyCreateFunction(unsigned int edgeIndex, EdgeRestInformation&,
                 const core::topology::BaseMeshTopology::Edge& e,
                 const sofa::helper::vector<unsigned int> &,
-                const sofa::helper::vector<double> &);
+                const sofa::helper::vector<double> &) override;
 
         void applyTriangleCreation(const sofa::helper::vector<unsigned int> &triangleAdded,
                 const sofa::helper::vector<core::topology::BaseMeshTopology::Triangle> & ,
@@ -128,9 +128,9 @@ protected:
 
         using topology::TopologyDataHandler<core::topology::BaseMeshTopology::Edge,helper::vector<EdgeRestInformation> >::ApplyTopologyChange;
         /// Callback to add triangles elements.
-        void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/) override;
         /// Callback to remove triangles elements.
-        void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/) override;
     protected:
         TriangularTensorMassForceField<DataTypes>* ff;
     };
@@ -153,14 +153,14 @@ protected:
 
     TriangularTensorMassForceField();
 
-    virtual ~TriangularTensorMassForceField();
+    ~TriangularTensorMassForceField() override;
 public:
-    virtual void init() override;
+    void init() override;
 
-    virtual void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
-    virtual void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& d_f, const DataVecCoord& d_x, const DataVecDeriv& d_v) override;
+    void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& d_df, const DataVecDeriv& d_dx) override;
 
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
+    SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const override
     {
         serr << "Get potentialEnergy not implemented" << sendl;
         return 0.0;

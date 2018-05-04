@@ -61,7 +61,7 @@ class STVenantKirchhoff : public HyperelasticMaterial<DataTypes>{
 
 public:
 
-	virtual Real getStrainEnergy(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param) {
+	Real getStrainEnergy(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param) override {
 		Real I1=sinfo->trC;
 			MatrixSym C=sinfo->deformationTensor;
 			Real I1square=(Real)(C[0]*C[0] + C[2]*C[2]+ C[5]*C[5]+2*(C[1]*C[1] + C[3]*C[3] + C[4]*C[4]));
@@ -72,7 +72,7 @@ public:
 
 
 	}
-	void deriveSPKTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,MatrixSym &SPKTensorGeneral){
+	void deriveSPKTensor(StrainInformation<DataTypes> *sinfo, const MaterialParameters<DataTypes> &param,MatrixSym &SPKTensorGeneral) override{
 		MatrixSym C=sinfo->deformationTensor;
 		Real I1=sinfo->trC;
 		Real mu=param.parameterArray[0];
@@ -82,7 +82,7 @@ public:
         SPKTensorGeneral=(C-ID)*mu+ID*lambda/(Real)2.0*(I1-(Real)3.0);
 	}
 
-   void applyElasticityTensor(StrainInformation<DataTypes> *, const MaterialParameters<DataTypes> &param,const MatrixSym& inputTensor, MatrixSym &outputTensor)  {
+   void applyElasticityTensor(StrainInformation<DataTypes> *, const MaterialParameters<DataTypes> &param,const MatrixSym& inputTensor, MatrixSym &outputTensor) override  {
 		Real mu=param.parameterArray[0];
         Real lambda=param.parameterArray[1];
 		MatrixSym ID;
@@ -91,7 +91,7 @@ public:
         outputTensor=ID*trH*lambda/2.0+inputTensor*mu;
 	
 	}
-   virtual void ElasticityTensor(StrainInformation<DataTypes> *, const MaterialParameters<DataTypes> &param,Matrix6 &outputTensor)  {
+   void ElasticityTensor(StrainInformation<DataTypes> *, const MaterialParameters<DataTypes> &param,Matrix6 &outputTensor) override  {
 		Real mu=param.parameterArray[0];
         Real lambda=param.parameterArray[1];
 		MatrixSym ID;

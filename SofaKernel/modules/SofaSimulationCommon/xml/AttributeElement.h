@@ -39,13 +39,13 @@ class SOFA_SIMULATION_COMMON_API AttributeElement : public Element<core::objectm
 public:
     AttributeElement(const std::string& name, const std::string& type, BaseElement* parent=NULL);
 
-    virtual ~AttributeElement();
+    ~AttributeElement() override;
 
-    virtual bool init();
+    bool init() override;
 
-    virtual bool initNode();
+    bool initNode() override;
 
-    virtual const char* getClass() const;
+    const char* getClass() const override;
 
     void setValue(const std::string _value) {value=_value;}
     std::string getValue() {return value;}

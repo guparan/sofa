@@ -57,7 +57,7 @@ protected:
 
     AverageCoord();
 
-    virtual ~AverageCoord() {}
+    ~AverageCoord() override {}
 public:
     void init() override;
 
@@ -72,7 +72,7 @@ public:
     void handleEvent(core::objectmodel::Event *event) override;
     void onBeginAnimationStep(const double /*dt*/);
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

@@ -146,7 +146,7 @@ protected:
     Real savedMass;
 
     MeshMatrixMass();
-    ~MeshMatrixMass();
+    ~MeshMatrixMass() override;
 
     /// Internal data required for Cuda computation (copy of vertex mass for deviceRead)
     MeshMatrixMassInternalData<DataTypes, MassType> data;
@@ -165,8 +165,8 @@ public:
 
     virtual void clear();
 
-    virtual void reinit() override;
-    virtual void init() override;
+    void reinit() override;
+    void init() override;
 
     TopologyType getMassTopologyType() const
     {
@@ -194,31 +194,31 @@ public:
 
 
     // -- Mass interface
-    virtual void addMDx(const core::MechanicalParams*, DataVecDeriv& f, const DataVecDeriv& dx, SReal factor) override;
+    void addMDx(const core::MechanicalParams*, DataVecDeriv& f, const DataVecDeriv& dx, SReal factor) override;
 
-    virtual void accFromF(const core::MechanicalParams*, DataVecDeriv& a, const DataVecDeriv& f) override; // This function can't be used as it use M^-1
+    void accFromF(const core::MechanicalParams*, DataVecDeriv& a, const DataVecDeriv& f) override; // This function can't be used as it use M^-1
 
-    virtual void addForce(const core::MechanicalParams*, DataVecDeriv& f, const DataVecCoord& x, const DataVecDeriv& v) override;
+    void addForce(const core::MechanicalParams*, DataVecDeriv& f, const DataVecCoord& x, const DataVecDeriv& v) override;
 
-    virtual SReal getKineticEnergy(const core::MechanicalParams*, const DataVecDeriv& v) const override;  ///< vMv/2 using dof->getV() override
+    SReal getKineticEnergy(const core::MechanicalParams*, const DataVecDeriv& v) const override;  ///< vMv/2 using dof->getV() override
 
-    virtual SReal getPotentialEnergy(const core::MechanicalParams*, const DataVecCoord& x) const override;   ///< Mgx potential in a uniform gravity field, null at origin
+    SReal getPotentialEnergy(const core::MechanicalParams*, const DataVecCoord& x) const override;   ///< Mgx potential in a uniform gravity field, null at origin
 
-    virtual defaulttype::Vector6 getMomentum(const core::MechanicalParams* mparams, const DataVecCoord& x, const DataVecDeriv& v) const override;  ///< (Mv,cross(x,Mv)) override
+    defaulttype::Vector6 getMomentum(const core::MechanicalParams* mparams, const DataVecCoord& x, const DataVecDeriv& v) const override;  ///< (Mv,cross(x,Mv)) override
 
-    virtual void addGravityToV(const core::MechanicalParams* mparams, DataVecDeriv& d_v) override;
+    void addGravityToV(const core::MechanicalParams* mparams, DataVecDeriv& d_v) override;
 
-    virtual bool isDiagonal() override {return false;}
+    bool isDiagonal() override {return false;}
 
 
 
     /// Add Mass contribution to global Matrix assembling
-    virtual void addMToMatrix(const core::MechanicalParams *mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
+    void addMToMatrix(const core::MechanicalParams *mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
 
-    virtual SReal getElementMass(unsigned int index) const override;
-    virtual void getElementMass(unsigned int index, defaulttype::BaseMatrix *m) const override;
+    SReal getElementMass(unsigned int index) const override;
+    void getElementMass(unsigned int index, defaulttype::BaseMatrix *m) const override;
 
-    virtual void draw(const core::visual::VisualParams* vparams) override;
+    void draw(const core::visual::VisualParams* vparams) override;
 
     /// Answer wether mass matrix is lumped or not
     bool isLumped() { return lumping.getValue(); }
@@ -235,7 +235,7 @@ protected:
         /// Vertex mass coefficient matrix creation function
         void applyCreateFunction(unsigned int pointIndex, TMassType & VertexMass,
                 const sofa::helper::vector< unsigned int > &,
-                const sofa::helper::vector< double >&);
+                const sofa::helper::vector< double >&) override;
 
 
         ///////////////////////// Functions on Triangles //////////////////////////////////////
@@ -252,9 +252,9 @@ protected:
 
         using topology::TopologyDataHandler<core::topology::BaseMeshTopology::Point,MassVector>::ApplyTopologyChange;
         /// Callback to add triangles elements.
-        void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/) override;
         /// Callback to remove triangles elements.
-        void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/) override;
 
 
         ///////////////////////// Functions on Quads //////////////////////////////////////
@@ -270,9 +270,9 @@ protected:
         void applyQuadDestruction(const sofa::helper::vector<unsigned int> & /*indices*/);
 
         /// Callback to add quads elements.
-        void ApplyTopologyChange(const core::topology::QuadsAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::QuadsAdded* /*event*/) override;
         /// Callback to remove quads elements.
-        void ApplyTopologyChange(const core::topology::QuadsRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::QuadsRemoved* /*event*/) override;
 
 
         ///////////////////////// Functions on Tetrahedron //////////////////////////////////////
@@ -288,9 +288,9 @@ protected:
         void applyTetrahedronDestruction(const sofa::helper::vector<unsigned int> & /*indices*/);
 
         /// Callback to add tetrahedron elements.
-        void ApplyTopologyChange(const core::topology::TetrahedraAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::TetrahedraAdded* /*event*/) override;
         /// Callback to remove tetrahedron elements.
-        void ApplyTopologyChange(const core::topology::TetrahedraRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::TetrahedraRemoved* /*event*/) override;
 
 
         ///////////////////////// Functions on Hexahedron //////////////////////////////////////
@@ -306,9 +306,9 @@ protected:
         void applyHexahedronDestruction(const sofa::helper::vector<unsigned int> & /*indices*/);
 
         /// Callback to add hexahedron elements.
-        virtual void ApplyTopologyChange(const core::topology::HexahedraAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::HexahedraAdded* /*event*/) override;
          /// Callback to remove hexahedron elements.
-        virtual void ApplyTopologyChange(const core::topology::HexahedraRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::HexahedraRemoved* /*event*/) override;
 
     protected:
         MeshMatrixMass<DataTypes,TMassType>* m;
@@ -324,7 +324,7 @@ protected:
         void applyCreateFunction(unsigned int edgeIndex, MassType & EdgeMass,
                 const core::topology::BaseMeshTopology::Edge&,
                 const sofa::helper::vector< unsigned int > &,
-                const sofa::helper::vector< double >&);
+                const sofa::helper::vector< double >&) override;
 
         using topology::TopologyDataHandler<core::topology::BaseMeshTopology::Edge,MassVector>::ApplyTopologyChange;
 
@@ -340,9 +340,9 @@ protected:
         void applyTriangleDestruction(const sofa::helper::vector<unsigned int> & /*indices*/);
 
         /// Callback to add triangles elements.
-        void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesAdded* /*event*/) override;
         /// Callback to remove triangles elements.
-        void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::TrianglesRemoved* /*event*/) override;
 
 
         ///////////////////////// Functions on Quads //////////////////////////////////////
@@ -357,9 +357,9 @@ protected:
         void applyQuadDestruction(const sofa::helper::vector<unsigned int> & /*indices*/);
 
         /// Callback to add quads elements.
-        void ApplyTopologyChange(const core::topology::QuadsAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::QuadsAdded* /*event*/) override;
         /// Callback to remove quads elements.
-        void ApplyTopologyChange(const core::topology::QuadsRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::QuadsRemoved* /*event*/) override;
 
 
         ///////////////////////// Functions on Tetrahedron //////////////////////////////////////
@@ -374,9 +374,9 @@ protected:
         void applyTetrahedronDestruction(const sofa::helper::vector<unsigned int> & /*indices*/);
 
         /// Callback to add tetrahedron elements.
-        void ApplyTopologyChange(const core::topology::TetrahedraAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::TetrahedraAdded* /*event*/) override;
         /// Callback to remove tetrahedron elements.
-        void ApplyTopologyChange(const core::topology::TetrahedraRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::TetrahedraRemoved* /*event*/) override;
 
 
         ///////////////////////// Functions on Hexahedron //////////////////////////////////////
@@ -391,9 +391,9 @@ protected:
         void applyHexahedronDestruction(const sofa::helper::vector<unsigned int> & /*indices*/);
 
         /// Callback to add hexahedron elements.
-        void ApplyTopologyChange(const core::topology::HexahedraAdded* /*event*/);
+        void ApplyTopologyChange(const core::topology::HexahedraAdded* /*event*/) override;
          /// Callback to remove hexahedron elements.
-        void ApplyTopologyChange(const core::topology::HexahedraRemoved* /*event*/);
+        void ApplyTopologyChange(const core::topology::HexahedraRemoved* /*event*/) override;
 
     protected:
         MeshMatrixMass<DataTypes,TMassType>* m;
@@ -411,7 +411,7 @@ protected:
         void applyCreateFunction(unsigned int tetrahedronIndex, MassVector & tetrahedronMass,
                 const core::topology::BaseMeshTopology::Tetrahedron&,
                 const sofa::helper::vector< unsigned int > &,
-                const sofa::helper::vector< double >&);
+                const sofa::helper::vector< double >&) override;
 
                /// Edge coefficient of mass matrix destruction function to handle creation of new tetrahedra
 //        void applyDestructionFunction(const sofa::helper::vector<unsigned int> & /*indices*/);

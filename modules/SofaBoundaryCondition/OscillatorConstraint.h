@@ -102,7 +102,7 @@ public:
 
     OscillatorConstraint(core::behavior::MechanicalState<TDataTypes>* mstate);
 
-    ~OscillatorConstraint();
+    ~OscillatorConstraint() override;
 public:
     OscillatorConstraint<TDataTypes>* addConstraint(unsigned index, const Coord& mean, const Deriv& amplitude, Real pulsation, Real phase);
 

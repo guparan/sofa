@@ -139,30 +139,30 @@ public:
         this->model = model;
     }
 
-    void cleanup()
+    void cleanup() override
     {
     }
 
-    MMechanicalState* createMapping(const char* /*name*/="contactPoints")
+    MMechanicalState* createMapping(const char* /*name*/="contactPoints") override
     {
         if (model==NULL) return NULL;
         return model->getMechanicalState();
     }
 
-    void resize(int /*size*/)
+    void resize(int /*size*/) override
     {
     }
 
-    int addPoint(const Coord& /*P*/, int index, Real&)
+    int addPoint(const Coord& /*P*/, int index, Real&) override
     {
         return index;
     }
 
-    void update()
+    void update() override
     {
     }
 
-    void updateXfree()
+    void updateXfree() override
     {
     }
 
@@ -186,7 +186,7 @@ class ContactMapper<SphereModel, DataTypes> : public IdentityContactMapper<Spher
 public:
     typedef typename DataTypes::Real Real;
     typedef typename DataTypes::Coord Coord;
-    int addPoint(const Coord& /*P*/, int index, Real& r)
+    int addPoint(const Coord& /*P*/, int index, Real& r) override
     {
         Sphere e(this->model, index);
         r = e.r();

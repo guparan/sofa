@@ -74,7 +74,7 @@ public:
     Data< SeqTriangles > triangles; ///< Triangles of mesh subset
     Data< SeqQuads > quads; ///< Quads of mesh subset
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const MeshSubsetEngine<DataTypes>* = NULL) { return DataTypes::Name();    }
 
 protected:
@@ -92,10 +92,10 @@ protected:
     {
     }
 
-    virtual ~MeshSubsetEngine() {}
+    ~MeshSubsetEngine() override {}
 
 public:
-    virtual void init() override
+    void init() override
     {
         addInput(&inputPosition);
         addInput(&inputEdges);
@@ -109,7 +109,7 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit()    override { update();  }
+    void reinit()    override { update();  }
     void update() override;
 };
 

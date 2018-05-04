@@ -87,11 +87,11 @@ public:
     typedef typename DataTypes::Coord Coord;
     VectorSpringForceField<DataTypes>* dest;
     Loader(VectorSpringForceField<DataTypes>* dest) : dest(dest) {}
-    virtual void addVectorSpring(int m1, int m2, SReal ks, SReal kd, SReal /*initpos*/, SReal restx, SReal resty, SReal restz)
+    void addVectorSpring(int m1, int m2, SReal ks, SReal kd, SReal /*initpos*/, SReal restx, SReal resty, SReal restz) override
     {
         dest->addSpring(m1,m2,ks,kd,Coord((Real)restx,(Real)resty,(Real)restz));
     }
-    virtual void setNumSprings(int /*n*/)
+    void setNumSprings(int /*n*/) override
     {
         //dest->resizeArray((unsigned int )n);
     }

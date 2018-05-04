@@ -76,7 +76,7 @@ struct UniformMassTest :  public ::testing::Test
     typename MechanicalObject<DataTypes>::SPtr m_mecaobject;
     bool todo  {true} ;
 
-    virtual void SetUp()
+    void SetUp() override
     {
         todo = true ;
         initBaseMechanics();
@@ -84,7 +84,7 @@ struct UniformMassTest :  public ::testing::Test
         m_root = m_simu->createNewGraph("root");
     }
 
-    void TearDown()
+    void TearDown() override
     {
         if (m_root != NULL){
             m_simu->unload(m_root);

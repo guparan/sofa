@@ -719,7 +719,7 @@ public:
 
     void applyCreateFunction(unsigned int /*pointIndex*/, Coord& dest, const sofa::core::topology::Point &,
                              const sofa::helper::vector< unsigned int > &ancestors,
-                             const sofa::helper::vector< double > &coefs)
+                             const sofa::helper::vector< double > &coefs) override
     {
         const VecCoord& x = this->m_topologyData->getValue();
         if (!ancestors.empty())
@@ -747,7 +747,7 @@ public:
         this->m_topologyData->setParent(NULL);
     }
 
-    void applyDestroyFunction(unsigned int, Coord& )
+    void applyDestroyFunction(unsigned int, Coord& ) override
     {
     }
 

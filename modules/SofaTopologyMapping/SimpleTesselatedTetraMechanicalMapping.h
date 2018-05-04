@@ -72,19 +72,19 @@ protected:
 
     SimpleTesselatedTetraMechanicalMapping();
 
-    virtual ~SimpleTesselatedTetraMechanicalMapping();
+    ~SimpleTesselatedTetraMechanicalMapping() override;
 
 public:
 
     void init() override;
 
-    virtual void apply(const core::MechanicalParams* mparams, OutDataVecCoord& dOut, const InDataVecCoord& dIn) override;
+    void apply(const core::MechanicalParams* mparams, OutDataVecCoord& dOut, const InDataVecCoord& dIn) override;
 
-    virtual void applyJ(const core::MechanicalParams* mparams, OutDataVecDeriv& dOut, const InDataVecDeriv& dIn) override;
+    void applyJ(const core::MechanicalParams* mparams, OutDataVecDeriv& dOut, const InDataVecDeriv& dIn) override;
 
-    virtual void applyJT(const core::MechanicalParams* mparams, InDataVecDeriv& dOut, const OutDataVecDeriv& dIn) override;
+    void applyJT(const core::MechanicalParams* mparams, InDataVecDeriv& dOut, const OutDataVecDeriv& dIn) override;
 
-    virtual void applyJT(const core::ConstraintParams* cparams, InDataMatrixDeriv& dOut, const OutDataMatrixDeriv& dIn) override;
+    void applyJT(const core::ConstraintParams* cparams, InDataMatrixDeriv& dOut, const OutDataMatrixDeriv& dIn) override;
 
 protected:
     topology::SimpleTesselatedTetraTopologicalMapping* topoMap;
