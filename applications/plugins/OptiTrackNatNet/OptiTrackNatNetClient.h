@@ -51,7 +51,7 @@ class OptiTrackNatNetDataReceiver : public sofa::component::controller::Controll
 public:
     SOFA_ABSTRACT_CLASS(OptiTrackNatNetDataReceiver, sofa::component::controller::Controller);
 protected:
-    virtual ~OptiTrackNatNetDataReceiver() {}
+    ~OptiTrackNatNetDataReceiver() override {}
 public:
     virtual void processModelDef(const ModelDef* data) = 0;
     virtual void processFrame(const FrameData* data) = 0;
@@ -64,7 +64,7 @@ public:
 
 protected:
     bool connect();
-    void handleEvent(sofa::core::objectmodel::Event *);
+    void handleEvent(sofa::core::objectmodel::Event *) override;
 
     virtual void update();
 
@@ -79,12 +79,12 @@ public:
     sofa::core::objectmodel::MultiLink<OptiTrackNatNetClient, OptiTrackNatNetDataReceiver, 0> natNetReceivers;
 
     OptiTrackNatNetClient();
-    virtual ~OptiTrackNatNetClient();
+    ~OptiTrackNatNetClient() override;
 
-    virtual void init();
-    virtual void reinit();
+    void init() override;
+    void reinit() override;
 
-    virtual void draw(const sofa::core::visual::VisualParams* vparams);
+    void draw(const sofa::core::visual::VisualParams* vparams) override;
 
     sofa::core::objectmodel::Data<float> drawTrackedMarkersSize; ///< Size of displayed markers
     sofa::core::objectmodel::Data<sofa::defaulttype::Vec4f> drawTrackedMarkersColor; ///< Color of displayed markers

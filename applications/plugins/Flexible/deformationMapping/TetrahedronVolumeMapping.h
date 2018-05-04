@@ -60,7 +60,7 @@ public:
     /// inspired from "Volume Conserving Finite Element Simulations of Deformable Models", Irving, Schroeder, Fedkiw, SIGGRAPH 2007
     Data<bool> d_volumePerNodes;
 
-    virtual void init()
+    void init() override
     {
         m_topology = this->getContext()->getMeshTopology();
         if( !m_topology ) { serr<<"No MeshTopology found."<<sendl; return; }
@@ -83,7 +83,7 @@ public:
     }
 
 
-    virtual void apply(const core::MechanicalParams*, Data<OutVecCoord>& dOut, const Data<InVecCoord>& dIn)
+    void apply(const core::MechanicalParams*, Data<OutVecCoord>& dOut, const Data<InVecCoord>& dIn) override
     {
         if( !m_topology ) return;
 
@@ -135,11 +135,11 @@ public:
         jacobian.compress();
     }
 
-    virtual void applyJ(const core::MechanicalParams* /* mparams */, Data<OutVecDeriv>& dOut, const Data<InVecDeriv>& dIn)    { if( jacobian.rowSize() > 0 ) jacobian.mult(dOut,dIn);    }
-    virtual void applyJT(const core::MechanicalParams* /* mparams */, Data<InVecDeriv>& dIn, const Data<OutVecDeriv>& dOut)    { if( jacobian.rowSize() > 0 ) jacobian.addMultTranspose(dIn,dOut);    }
-    virtual void applyJT(const core::ConstraintParams* /* cparams */, Data<InMatrixDeriv>& /*dIn*/, const Data<OutMatrixDeriv>& /*dOut*/) {}
+    void applyJ(const core::MechanicalParams* /* mparams */, Data<OutVecDeriv>& dOut, const Data<InVecDeriv>& dIn) override    { if( jacobian.rowSize() > 0 ) jacobian.mult(dOut,dIn);    }
+    void applyJT(const core::MechanicalParams* /* mparams */, Data<InVecDeriv>& dIn, const Data<OutVecDeriv>& dOut) override    { if( jacobian.rowSize() > 0 ) jacobian.addMultTranspose(dIn,dOut);    }
+    void applyJT(const core::ConstraintParams* /* cparams */, Data<InMatrixDeriv>& /*dIn*/, const Data<OutMatrixDeriv>& /*dOut*/) override {}
 
-    virtual void applyDJT(const core::MechanicalParams* mparams, core::MultiVecDerivId parentDfId, core::ConstMultiVecDerivId )
+    void applyDJT(const core::MechanicalParams* mparams, core::MultiVecDerivId parentDfId, core::ConstMultiVecDerivId ) override
     {
         Data<InVecDeriv>& parentForceData = *parentDfId[this->fromModel.get(mparams)].write();
         const Data<InVecDeriv>& parentDisplacementData = *mparams->readDx(this->fromModel);
@@ -147,7 +147,7 @@ public:
     }
 
 
-    virtual void updateK( const core::MechanicalParams* mparams, core::ConstMultiVecDerivId childForceId )
+    void updateK( const core::MechanicalParams* mparams, core::ConstMultiVecDerivId childForceId ) override
     {
         size_t size = this->fromModel->getSize();
         geometricStiffness.resizeBlocks( size, size );
@@ -187,13 +187,13 @@ public:
         if( d_volumePerNodes.getValue() ) delete cf;
     }
 
-    virtual const defaulttype::BaseMatrix* getK()
+    const defaulttype::BaseMatrix* getK() override
     {
         return &geometricStiffness;
     }
 
-    virtual const sofa::defaulttype::BaseMatrix* getJ() { return &jacobian; }
-    virtual const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs()    { return &baseMatrices; }
+    const sofa::defaulttype::BaseMatrix* getJ() override { return &jacobian; }
+    const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs() override    { return &baseMatrices; }
 
 protected:
     TetrahedronVolumeMapping (core::State<TIn>* from = NULL, core::State<TOut>* to= NULL)
@@ -203,7 +203,7 @@ protected:
     {
     }
 
-    virtual ~TetrahedronVolumeMapping()     { }
+    ~TetrahedronVolumeMapping() override     { }
 
 
     sofa::core::topology::BaseMeshTopology* m_topology;  ///< where the triangles/quads are defined

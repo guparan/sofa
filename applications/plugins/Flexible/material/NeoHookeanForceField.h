@@ -57,7 +57,7 @@ public:
     Data<bool > f_PSDStabilization; ///< project stiffness matrix to its nearest symmetric, positive semi-definite matrix
     //@}
 
-    virtual void reinit()
+    void reinit() override
     {
         Real ym=0,pr=0;
         for(unsigned int i=0; i<this->material.size(); i++)
@@ -84,7 +84,7 @@ protected:
     {
     }
 
-    virtual ~NeoHookeanForceField()     {    }
+    ~NeoHookeanForceField() override     {    }
 
 };
 

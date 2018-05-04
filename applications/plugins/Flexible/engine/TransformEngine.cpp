@@ -43,7 +43,7 @@ struct Translation <defaulttype::Affine3Types> : public TransformOperation<defau
     typedef DataTypes::SpatialCoord SpatialCoord;
 
     Translation() { t.clear(); }
-    void execute(DataTypes::Coord &p) const
+    void execute(DataTypes::Coord &p) const override
     {
         p.getCenter()+=t;
     }
@@ -68,7 +68,7 @@ struct Scale<defaulttype::Affine3Types> : public TransformOperation<defaulttype:
 
     Scale() { for(unsigned int i=0;i<DataTypes::spatial_dimensions;i++)  s[i]=1.; }
 
-    void execute(DataTypes::Coord &p) const
+    void execute(DataTypes::Coord &p) const override
     {
         SpatialCoord c = p.getCenter();
         Frame affine = p.getAffine();
@@ -95,7 +95,7 @@ struct RotationSpecialized<defaulttype::Affine3Types, 3, false> : public Transfo
     typedef DataTypes::SpatialCoord SpatialCoord;
     typedef DataTypes::Frame Frame;
 
-    void execute(DataTypes::Coord &p) const
+    void execute(DataTypes::Coord &p) const override
     {
         p.getCenter() = q.rotate(p.getCenter());
         Frame R; q.toMatrix(R);

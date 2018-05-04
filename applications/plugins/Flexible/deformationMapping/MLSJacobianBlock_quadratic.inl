@@ -99,23 +99,23 @@ public:
         C=SPos*Pt-p1;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result +=  data.getCenter() * Pt + data.getQuadratic() * Pa + C;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += data.getVCenter() * Pt + data.getVQuadratic() * Pa;
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data * Pt ;
         for (unsigned int j = 0; j < dim; ++j) result.getVQuadratic()[j] += Pa * data[j];
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -124,8 +124,8 @@ public:
     }
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -189,23 +189,23 @@ public:
         C=SPos*Pt-p1;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result +=  data.getCenter() * Pt + data.getQuadratic() * Pa + C;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += data.getVCenter() * Pt + data.getVQuadratic() * Pa;
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data * Pt ;
         for (unsigned int j = 0; j < dim; ++j) result.getVQuadratic()[j] += Pa * data[j];
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -214,8 +214,8 @@ public:
     }
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -288,17 +288,17 @@ public:
         C.getF()=covMN(SPos,Ft) + (wI-gradps1)*F0 ;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result.getF() +=  covMN(data.getCenter(),Ft) + data.getQuadratic()*PFa + C.getF();
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getF() += covMN(data.getVCenter(),Ft) + data.getVQuadratic()*PFa;
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data.getF() * Ft ;
 
@@ -308,7 +308,7 @@ public:
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -318,8 +318,8 @@ public:
 
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 

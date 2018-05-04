@@ -112,7 +112,7 @@ namespace sofa
 			//InitPerThreadDataTask(volatile long* atomicCounter, boost::mutex* mutex, TaskStatus* pStatus );
             ThreadSpecificTask(helper::system::atomic<int>* atomicCounter, boost::mutex* mutex, Task::Status* pStatus );
 
-			virtual ~ThreadSpecificTask();
+			~ThreadSpecificTask() override;
 
 			virtual bool runThreadSpecific()  {return true;}
 
@@ -120,7 +120,7 @@ namespace sofa
 
 		private:
 
-			virtual bool run(WorkerThread* );
+			bool run(WorkerThread* ) override;
 
 			//volatile long* mAtomicCounter;
 			helper::system::atomic<int>* mAtomicCounter;

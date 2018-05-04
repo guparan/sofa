@@ -40,7 +40,7 @@ public:
 
 
     // To simplify the template name in the xml file
-    virtual std::string getTemplateName() const
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }
@@ -53,7 +53,7 @@ public:
     }
 
     // Update the engine
-    void update();
+    void update() override;
 
     // First position
     Data< VecCoord > d_x0; ///< Rest position

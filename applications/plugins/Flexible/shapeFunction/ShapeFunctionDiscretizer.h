@@ -90,7 +90,7 @@ public:
     //@}
 
 
-    virtual std::string getTemplateName() const    { return templateName(this);    }
+    std::string getTemplateName() const override    { return templateName(this);    }
     static std::string templateName(const ShapeFunctionDiscretizer<ImageTypes>* = NULL) { return ImageTypes::Name(); }
 
     ShapeFunctionDiscretizer()    :   Inherited()
@@ -104,9 +104,9 @@ public:
         f_transform.setReadOnly(true);
     }
 
-    virtual ~ShapeFunctionDiscretizer() {}
+    ~ShapeFunctionDiscretizer() override {}
 
-    virtual void init()
+    void init() override
     {
         if( !_shapeFunction ) this->getContext()->get(_shapeFunction,core::objectmodel::BaseContext::SearchUp);
         if ( !_shapeFunction ) serr << "ShapeFunction<"<<ShapeFunctionType::Name()<<"> component not found" << sendl;
@@ -118,11 +118,11 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit() { update(); }
+    void reinit() override { update(); }
 
 protected:
 
-    virtual void update()
+    void update() override
     {
         if( !_shapeFunction ) return;
 

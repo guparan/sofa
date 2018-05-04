@@ -93,23 +93,23 @@ class MLSJacobianBlock< Affine3(InReal) , V3(OutReal) > :
         C=SPos*Pt-BasisToCoord(p);
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result +=  data.getCenter() * Pt + data.getAffine() * Pa + C;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += data.getVCenter() * Pt + data.getVAffine() * Pa;
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data * Pt ;
         for (unsigned int j = 0; j < dim; ++j) result.getVAffine()[j] += Pa * data[j];
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -118,8 +118,8 @@ class MLSJacobianBlock< Affine3(InReal) , V3(OutReal) > :
     }
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -180,23 +180,23 @@ class MLSJacobianBlock< Affine3(InReal) , EV3(OutReal) > :
         C=SPos*Pt-BasisToCoord(p);
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result +=  data.getCenter() * Pt + data.getAffine() * Pa + C;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += data.getVCenter() * Pt + data.getVAffine() * Pa;
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data * Pt ;
         for (unsigned int j = 0; j < dim; ++j) result.getVAffine()[j] += Pa * data[j];
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -205,8 +205,8 @@ class MLSJacobianBlock< Affine3(InReal) , EV3(OutReal) > :
     }
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -274,17 +274,17 @@ class MLSJacobianBlock< Affine3(InReal) , F331(OutReal) > :
         C.getF()=covMN(SPos,Ft) + (wI-gradps)*F0 ;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result.getF() +=  covMN(data.getCenter(),Ft) + data.getAffine()*PFa.getF() + C.getF();
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getF() += covMN(data.getVCenter(),Ft) + data.getVAffine()*PFa.getF();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data.getF() * Ft ;
 
@@ -294,7 +294,7 @@ class MLSJacobianBlock< Affine3(InReal) , F331(OutReal) > :
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -304,8 +304,8 @@ class MLSJacobianBlock< Affine3(InReal) , F331(OutReal) > :
 
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -590,19 +590,19 @@ class MLSJacobianBlock< Affine3(InReal) , F332(OutReal) > :
         }
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result.getF() +=  covMN(data.getCenter(),Ft) + data.getAffine()*PFdFa.getF() + C.getF();
         for (unsigned int k = 0; k < dim; ++k) result.getGradientF(k) += covMN( data.getCenter(), dFt[k]) + data.getAffine() * PFdFa.getGradientF(k) + C.getGradientF(k) ;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getF() += covMN(data.getVCenter(),Ft) + data.getVAffine()*PFdFa.getF();
         for (unsigned int k = 0; k < dim; ++k) result.getGradientF(k) += covMN(data.getVCenter(),dFt[k]) + data.getVAffine() * PFdFa.getGradientF(k);
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data.getF() * Ft ;
         for (unsigned int k = 0; k < dim; ++k) result.getVCenter() += data.getGradientF(k) * dFt[k] ;
@@ -614,7 +614,7 @@ class MLSJacobianBlock< Affine3(InReal) , F332(OutReal) > :
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -630,8 +630,8 @@ class MLSJacobianBlock< Affine3(InReal) , F332(OutReal) > :
     }
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 

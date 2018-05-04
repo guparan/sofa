@@ -51,9 +51,9 @@ protected:
     {
     }
 
-    virtual ~CauchyStrainMapping()     { }
+    ~CauchyStrainMapping() override     { }
 
-    virtual void applyDJT(const core::MechanicalParams* /*mparams*/, core::MultiVecDerivId /*parentDfId*/, core::ConstMultiVecDerivId /*childForce*/)    {}
+    void applyDJT(const core::MechanicalParams* /*mparams*/, core::MultiVecDerivId /*parentDfId*/, core::ConstMultiVecDerivId /*childForce*/) override    {}
 };
 
 

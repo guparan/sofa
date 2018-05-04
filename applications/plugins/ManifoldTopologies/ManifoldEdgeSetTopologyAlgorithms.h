@@ -55,9 +55,9 @@ public:
         : EdgeSetTopologyAlgorithms<DataTypes>()
     {}
 
-    virtual ~ManifoldEdgeSetTopologyAlgorithms() {}
+    ~ManifoldEdgeSetTopologyAlgorithms() override {}
 
-    virtual void init();
+    void init() override;
 
 private:
     ManifoldEdgeSetTopologyContainer*					m_container;

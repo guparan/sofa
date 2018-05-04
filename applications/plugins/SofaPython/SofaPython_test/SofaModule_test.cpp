@@ -47,11 +47,11 @@ struct SofaModule_test : public Sofa_test<>,
         public ::testing::WithParamInterface<std::string>
 {
 protected:
-    virtual void SetUp() override
+    void SetUp() override
     {
     }
 
-    virtual void TearDown() override
+    void TearDown() override
     {
     }
 

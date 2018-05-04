@@ -78,13 +78,13 @@ protected:
 
     CarvingManager();
 
-    virtual ~CarvingManager();
+    ~CarvingManager() override;
 public:
-    virtual void init() override;
+    void init() override;
 
-    virtual void reset() override;
+    void reset() override;
     
-    virtual void handleEvent(sofa::core::objectmodel::Event* event) override;
+    void handleEvent(sofa::core::objectmodel::Event* event) override;
 
     virtual void doCarve();
 

@@ -76,7 +76,7 @@ public:
     }
 
 
-    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) {}
+    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) override {}
 
     void addapply_multiplication( OutCoord& result, const InCoord& data, Real max, Real squaredYield, Real creep )
     {
@@ -131,27 +131,27 @@ public:
         result += elasticStrain;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += data;
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result += data;
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         return MatBlock::s_identity;
     }
 
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false)
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override
     {
         return KBlock();
     }
 
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */)
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override
     {
     }
 

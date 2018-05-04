@@ -56,7 +56,7 @@ public:
     Data<helper::vector<Real> > f_lambdaL; ///< stretch above which behavior becomes linear
     //@}
 
-    virtual void reinit()
+    void reinit() override
     {
         Real L1=0,L2=0,lambdaL=0;
         for(unsigned int i=0; i<this->material.size(); i++)
@@ -80,7 +80,7 @@ protected:
     {
     }
 
-    virtual ~TendonMaterialForceField()     {    }
+    ~TendonMaterialForceField() override     {    }
 
 };
 

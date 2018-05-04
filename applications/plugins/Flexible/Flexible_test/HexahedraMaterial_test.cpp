@@ -87,7 +87,7 @@ struct HexahedraMaterial_test : public Sofa_test<typename Vec3Types::Real>
    
 
     // Create the context for the scene
-    void SetUp()
+    void SetUp() override
     { 
         // Init simulation
         sofa::simulation::setSimulation(simulation = new sofa::simulation::graph::DAGSimulation());
@@ -249,7 +249,7 @@ struct HexahedraMaterial_test : public Sofa_test<typename Vec3Types::Real>
         }
 		return true;
 	}
-    void TearDown()
+    void TearDown() override
     {
         if (tractionStruct.root!=NULL)
             sofa::simulation::getSimulation()->unload(tractionStruct.root);

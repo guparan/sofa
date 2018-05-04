@@ -127,7 +127,7 @@ public:
     Data<bool> worldGridAligned; ///< perform rasterization on a world aligned grid using nbVoxels and voxelSize
 
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const MeshToImageEngine<ImageTypes>* = NULL) { return ImageTypes::Name();    }
 
     MeshToImageEngine()    :   Inherited()
@@ -170,11 +170,11 @@ public:
         this->addAlias(vf_roiValue[0], "roiValue");
     }
 
-    virtual ~MeshToImageEngine()
+    ~MeshToImageEngine() override
     {
     }
 
-    virtual void init() override
+    void init() override
     {
         // backward compatibility (if InsideValue is not set: use first value)
         for( size_t meshId=0; meshId<vf_InsideValues.size() ; ++meshId )
@@ -208,7 +208,7 @@ public:
         im.fill((T)0);
     }
 
-    virtual void reinit() override
+    void reinit() override
     {
         vf_positions.resize(f_nbMeshes.getValue());
         vf_edges.resize(f_nbMeshes.getValue());
@@ -251,7 +251,7 @@ public:
 
 protected:
 
-    virtual void update() override
+    void update() override
     {
         updateAllInputsIfDirty();
         cleanDirty();
@@ -541,7 +541,7 @@ protected:
 
 
 
-    virtual void draw(const core::visual::VisualParams* /*vparams*/) override
+    void draw(const core::visual::VisualParams* /*vparams*/) override
     {
     }
 

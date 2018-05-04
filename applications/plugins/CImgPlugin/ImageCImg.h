@@ -38,8 +38,8 @@ public:
 
     static void setCimgCreators();
 
-    bool load(std::string filename);
-    bool save(std::string filename, int compression_level = -1);
+    bool load(std::string filename) override;
+    bool save(std::string filename, int compression_level = -1) override;
 };
 
 } // namespace io

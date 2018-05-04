@@ -59,7 +59,7 @@ public:
     Data<helper::vector<Real> > _viscosity; ///< Viscosity (stress/strainRate)
     //@}
 
-    virtual void reinit()
+    void reinit() override
     {
         Real youngModulus=0,viscosity=0;
         for(unsigned int i=0; i<this->material.size(); i++)
@@ -88,7 +88,7 @@ protected:
     {
     }
 
-    virtual ~ProjectiveForceField()     {    }
+    ~ProjectiveForceField() override     {    }
 };
 
 

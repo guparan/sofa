@@ -90,7 +90,7 @@ class PolynomialMaterialBlock< I331(_Real) >:
             bulkVol = bulk * vol;
         }
 
-        Real getPotentialEnergy(const Coord& x) const
+        Real getPotentialEnergy(const Coord& x) const override
         {
             Real Jm23=pow(x.getStrain()[2],-(Real)2./(Real)3.);
             Real Jm43=Jm23*Jm23;
@@ -105,7 +105,7 @@ class PolynomialMaterialBlock< I331(_Real) >:
                    bulkVol*(Real)0.5*(x.getStrain()[2]-1.0)*(x.getStrain()[2]-1.0);
         }
 
-        void addForce( Deriv& f , const Coord& x , const Deriv& /*v*/) const
+        void addForce( Deriv& f , const Coord& x , const Deriv& /*v*/) const override
         {
             Real Jm13=pow(x.getStrain()[2],-(Real)1./(Real)3.);
             Real Jm23=Jm13*Jm13;
@@ -134,24 +134,24 @@ class PolynomialMaterialBlock< I331(_Real) >:
             f.getStrain()[2] += 2./3.*C10Vol*x.getStrain()[0]*Jm53 + 4./3.*C01Vol*x.getStrain()[1]*Jm73 + 4./3.*C20Vol*x.getStrain()[0]*x.getStrain()[0]*Jm73 - 4.*C20Vol*x.getStrain()[0]*Jm53 + 8./3.*C02Vol*x.getStrain()[1]*x.getStrain()[1]*Jm113 - 8.*C02Vol*x.getStrain()[1]*Jm73 + 2.*C30Vol*x.getStrain()[0]*x.getStrain()[0]*x.getStrain()[0]*Jm3 - 12.*C30Vol*x.getStrain()[0]*x.getStrain()[0]*Jm73 + 18.*C30Vol*x.getStrain()[0]*Jm53 + 4.*C03Vol*x.getStrain()[1]*x.getStrain()[1]*x.getStrain()[1]*Jm5 - 24.*C03Vol*x.getStrain()[1]*x.getStrain()[1]*Jm113 + 36.*C03Vol*x.getStrain()[1]*Jm73 + 2.*C11Vol*x.getStrain()[0]*Jm3*x.getStrain()[1] - 2.*C11Vol*x.getStrain()[0]*Jm53 - 4.*C11Vol*x.getStrain()[1]*Jm73 - bulkVol*x.getStrain()[2] + bulkVol;
         }
 
-        void addDForce( Deriv&   df, const Deriv&   dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const
+        void addDForce( Deriv&   df, const Deriv&   dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const override
         {
             df.getStrain()+=K*dx.getStrain()*kfactor;
         }
 
-        MatBlock getK() const
+        MatBlock getK() const override
         {
             return K;
         }
 
-        MatBlock getC() const
+        MatBlock getC() const override
         {
             MatBlock C = MatBlock();
             //C.invert(-K);
             return C;
         }
 
-        MatBlock getB() const
+        MatBlock getB() const override
         {
             return MatBlock();
         }

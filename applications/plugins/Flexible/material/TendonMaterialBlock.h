@@ -99,13 +99,13 @@ class TendonMaterialBlock< E311(_Real) >:
         C = - vol;
     }
 
-    Real getPotentialEnergy(const Coord& /*x*/) const
+    Real getPotentialEnergy(const Coord& /*x*/) const override
     {
         // TODO
         return 0;
     }
 
-    void addForce( Deriv& f , const Coord& x , const Deriv& /*v*/) const
+    void addForce( Deriv& f , const Coord& x , const Deriv& /*v*/) const override
     {
         Real lambda = x.getStrain()[0]+1.;
 
@@ -126,19 +126,19 @@ class TendonMaterialBlock< E311(_Real) >:
         else K=0;
     }
 
-    void addDForce( Deriv&   df, const Deriv&   dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const
+    void addDForce( Deriv&   df, const Deriv&   dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const override
     {
         df.getStrain()+=K*dx.getStrain()*kfactor;
     }
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         MatBlock mK;
         mK[0][0]=K;
         return mK;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C;
         if(K) C[0][0]=-1./K;
@@ -146,7 +146,7 @@ class TendonMaterialBlock< E311(_Real) >:
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         return MatBlock();
     }

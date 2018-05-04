@@ -57,7 +57,7 @@ public:
     Data<helper::vector<Real> > f_k; ///< bulk modulus: weight ln(J)^2/2 term in energy 
     //@}
 
-    virtual void reinit()
+    void reinit() override
     {
         Real k=0;
         for(unsigned int i=0; i<this->material.size(); i++)
@@ -69,7 +69,7 @@ public:
     }
 
 
-    virtual SReal getPotentialEnergy( const core::MechanicalParams* /*mparams*/, const typename Inherit::DataVecCoord& x ) const
+    SReal getPotentialEnergy( const core::MechanicalParams* /*mparams*/, const typename Inherit::DataVecCoord& x ) const override
     {
         SReal e = 0;
         const typename Inherit::VecCoord& _x = x.getValue();
@@ -108,11 +108,11 @@ protected:
         f_method.setValue(Options);
     }
 
-    virtual ~VolumePreservationForceField() {}
+    ~VolumePreservationForceField() override {}
 
 
 
-    virtual void addForce(const core::MechanicalParams* /*mparams*/, typename Inherit::DataVecDeriv& _f , const typename Inherit::DataVecCoord& _x , const typename Inherit::DataVecDeriv& _v)
+    void addForce(const core::MechanicalParams* /*mparams*/, typename Inherit::DataVecDeriv& _f , const typename Inherit::DataVecCoord& _x , const typename Inherit::DataVecDeriv& _v) override
     {
         typename Inherit::VecDeriv&  f = *_f.beginEdit();
         const typename Inherit::VecCoord&  x = _x.getValue();

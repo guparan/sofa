@@ -109,13 +109,13 @@ protected:
 
     TetrahedronModel();
 public:
-    virtual void init() override;
+    void init() override;
 
     // -- CollisionModel interface
 
-    virtual void resize(int size) override;
+    void resize(int size) override;
 
-    virtual void computeBoundingTree(int maxDepth=0) override;
+    void computeBoundingTree(int maxDepth=0) override;
 
     //virtual void computeContinuousBoundingTree(double dt, int maxDepth=0);
 
@@ -123,7 +123,7 @@ public:
 
     void draw(const core::visual::VisualParams* vparams) override;
 
-    virtual void handleTopologyChange() override;
+    void handleTopologyChange() override;
 
     core::behavior::MechanicalState<defaulttype::Vec3Types>* getMechanicalState() { return mstate; }
 
@@ -169,7 +169,7 @@ class ContactMapper<TetrahedronModel, DataTypes> : public BarycentricContactMapp
 public:
     typedef typename DataTypes::Real Real;
     typedef typename DataTypes::Coord Coord;
-    int addPoint(const Coord& P, int index, Real&)
+    int addPoint(const Coord& P, int index, Real&) override
     {
         Tetrahedron t(this->model, index);
         defaulttype::Vector3 b = t.getBary(P);

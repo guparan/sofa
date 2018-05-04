@@ -79,7 +79,7 @@ public:
         muVol = vol * 0.5 * youngM/(1+poissonR);
     }
 
-    Real getPotentialEnergy(const Coord& x) const
+    Real getPotentialEnergy(const Coord& x) const override
     {
         const Real& U1 = x.getStrain()[0];
         const Real& U2 = x.getStrain()[1];
@@ -92,7 +92,7 @@ public:
         return muVol*0.5*(squareU[0]+squareU[1]+squareU[2]-3) - muVol*logJ + 0.5*lambdaVol*logJ*logJ;
     }
 
-    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const
+    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const override
     {
         const Real& U1 = x.getStrain()[0];
         const Real& U2 = x.getStrain()[1];
@@ -132,24 +132,24 @@ public:
         helper::Decompose<Real>::PSDProjection( _K );
     }
 
-    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const
+    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const override
     {
         df.getStrain() -= _K * dx.getStrain() * kfactor;
     }
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         return -_K;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C = MatBlock();
         C.invert( _K );
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         return MatBlock();
     }
@@ -198,7 +198,7 @@ public:
         muVol = vol * 0.5 * youngM/(1+poissonR);
     }
 
-    Real getPotentialEnergy(const Coord& x) const
+    Real getPotentialEnergy(const Coord& x) const override
     {
         const Real& U1 = x.getStrain()[0];
         const Real& U2 = x.getStrain()[1];
@@ -210,7 +210,7 @@ public:
         return muVol*0.5*(squareU[0]+squareU[1]-2) - muVol*logJ + 0.5*lambdaVol*logJ*logJ;
     }
 
-    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const
+    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const override
     {
         const Real& U1 = x.getStrain()[0];
         const Real& U2 = x.getStrain()[1];
@@ -238,24 +238,24 @@ public:
         helper::Decompose<Real>::PSDProjection( _K );
     }
 
-    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const
+    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const override
     {
         df.getStrain() -= _K * dx.getStrain() * kfactor;
     }
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         return -_K;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C = MatBlock();
         C.invert( _K );
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         return MatBlock();
     }

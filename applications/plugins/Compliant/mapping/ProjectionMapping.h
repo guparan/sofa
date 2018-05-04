@@ -50,7 +50,7 @@ public:
 	}
 	
 
-    virtual void init()
+    void init() override
     {
         this->getToModel()->resize( set.getValue().size() );
         AssembledMapping<TIn, TOut>::init();
@@ -59,7 +59,7 @@ public:
 
 protected:
 	
-	virtual void assemble( const typename self::in_pos_type& in) {
+	void assemble( const typename self::in_pos_type& in) override {
 		
         const helper::vector<set_type>& s = set.getValue();
 		
@@ -87,8 +87,8 @@ protected:
 		
 	}
 	
-	virtual void apply(typename self::out_pos_type& out, 
-					   const typename self::in_pos_type& in ) {
+	void apply(typename self::out_pos_type& out, 
+					   const typename self::in_pos_type& in ) override {
         const helper::vector<set_type>& s = set.getValue();
         const helper::vector<SReal>& off = offset.getValue();
 		
@@ -103,7 +103,7 @@ protected:
 		
 	}
 
-    virtual void updateForceMask()
+    void updateForceMask() override
     {
         const helper::vector<set_type>& s = set.getValue();
 

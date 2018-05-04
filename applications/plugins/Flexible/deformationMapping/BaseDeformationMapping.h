@@ -221,7 +221,7 @@ public:
 //    void updateIndex();
 //    void updateIndex(const size_t parentSize, const size_t childSize);
     void resizeOut(); /// automatic resizing (of output model and jacobian blocks) when input samples have changed. Recomputes weights from shape function component.
-    virtual void resizeOut(const helper::vector<Coord>& position0, helper::vector<helper::vector<unsigned int> > index,helper::vector<helper::vector<Real> > w, helper::vector<helper::vector<defaulttype::Vec<spatial_dimensions,Real> > > dw, helper::vector<helper::vector<defaulttype::Mat<spatial_dimensions,spatial_dimensions,Real> > > ddw, helper::vector<defaulttype::Mat<spatial_dimensions,spatial_dimensions,Real> > F0); /// resizing given custom positions and weights
+    void resizeOut(const helper::vector<Coord>& position0, helper::vector<helper::vector<unsigned int> > index,helper::vector<helper::vector<Real> > w, helper::vector<helper::vector<defaulttype::Vec<spatial_dimensions,Real> > > dw, helper::vector<helper::vector<defaulttype::Mat<spatial_dimensions,spatial_dimensions,Real> > > ddw, helper::vector<defaulttype::Mat<spatial_dimensions,spatial_dimensions,Real> > F0) override; /// resizing given custom positions and weights
 
     /*!
      * \brief Resize all required data and initialize jacobian blocks
@@ -238,37 +238,37 @@ public:
 
     /** @name Mapping functions */
     //@{
-    virtual void init();
-    virtual void reinit();
+    void init() override;
+    void reinit() override;
 
     using Inherit::apply;
     using Inherit::applyJ;
     using Inherit::applyJT;
 
     virtual void apply(OutVecCoord& out, const InVecCoord& in);
-    virtual void apply(const core::MechanicalParams * /*mparams*/ , Data<OutVecCoord>& dOut, const Data<InVecCoord>& dIn);
+    void apply(const core::MechanicalParams * /*mparams*/ , Data<OutVecCoord>& dOut, const Data<InVecCoord>& dIn) override;
     virtual void applyJ(OutVecDeriv& out, const InVecDeriv& in);
-    virtual void applyJ(const core::MechanicalParams * /*mparams*/ , Data<OutVecDeriv>& dOut, const Data<InVecDeriv>& dIn);
-    virtual void applyJT(const core::MechanicalParams * /*mparams*/ , Data<InVecDeriv>& dIn, const Data<OutVecDeriv>& dOut);
-    virtual void applyDJT(const core::MechanicalParams* mparams, core::MultiVecDerivId parentDfId, core::ConstMultiVecDerivId );
-    virtual void applyJT(const core::ConstraintParams * /*cparams*/ , Data<InMatrixDeriv>& /*out*/, const Data<OutMatrixDeriv>& /*in*/);
+    void applyJ(const core::MechanicalParams * /*mparams*/ , Data<OutVecDeriv>& dOut, const Data<InVecDeriv>& dIn) override;
+    void applyJT(const core::MechanicalParams * /*mparams*/ , Data<InVecDeriv>& dIn, const Data<OutVecDeriv>& dOut) override;
+    void applyDJT(const core::MechanicalParams* mparams, core::MultiVecDerivId parentDfId, core::ConstMultiVecDerivId ) override;
+    void applyJT(const core::ConstraintParams * /*cparams*/ , Data<InMatrixDeriv>& /*out*/, const Data<OutMatrixDeriv>& /*in*/) override;
 
-    const defaulttype::BaseMatrix* getJ(const core::MechanicalParams * /*mparams*/);
+    const defaulttype::BaseMatrix* getJ(const core::MechanicalParams * /*mparams*/) override;
 
     // Compliant plugin experimental API
-    virtual const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs();
+    const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs() override;
 
-    virtual void updateK( const core::MechanicalParams* mparams, core::ConstMultiVecDerivId childForceId );
-    virtual const defaulttype::BaseMatrix* getK();
+    void updateK( const core::MechanicalParams* mparams, core::ConstMultiVecDerivId childForceId ) override;
+    const defaulttype::BaseMatrix* getK() override;
 
-    void draw(const core::visual::VisualParams* vparams);
+    void draw(const core::visual::VisualParams* vparams) override;
 
     //@}
 
     ///@brief Get parent state size
-    virtual size_t getFromSize() const { return this->fromModel->getSize(); }
+    size_t getFromSize() const override { return this->fromModel->getSize(); }
     ///@brief Get child state size
-    virtual size_t getToSize()  const { return this->toModel->getSize(); }
+    size_t getToSize()  const override { return this->toModel->getSize(); }
     ///@brief Get child to parent indices as a const reference
     virtual const VecVRef& getChildToParentIndex() { return  f_index.getValue(); }
     ///@brief Get parent indices of the i-th child
@@ -291,9 +291,9 @@ public:
 
     /** @name PointMapper functions */
     //@{
-    virtual void ForwardMapping(Coord& p,const Coord& p0);
-    virtual void BackwardMapping(Coord& p0,const Coord& p,const Real Thresh=1e-5, const size_t NbMaxIt=10);
-    virtual unsigned int getClosestMappedPoint(const Coord& p, Coord& x0,Coord& x, bool useKdTree=false);
+    void ForwardMapping(Coord& p,const Coord& p0) override;
+    void BackwardMapping(Coord& p0,const Coord& p,const Real Thresh=1e-5, const size_t NbMaxIt=10) override;
+    unsigned int getClosestMappedPoint(const Coord& p, Coord& x0,Coord& x, bool useKdTree=false) override;
 
     virtual void mapPosition(Coord& p,const Coord &p0, const VRef& ref, const VReal& w)=0;
     virtual void mapDeformationGradient(MaterialToSpatial& F, const Coord &p0, const MaterialToSpatial& M, const VRef& ref, const VReal& w, const VGradient& dw)=0;
@@ -336,7 +336,7 @@ public:
 
 protected:
     BaseDeformationMappingT (core::State<In>* from = NULL, core::State<Out>* to= NULL);
-    virtual ~BaseDeformationMappingT() { }
+    ~BaseDeformationMappingT() override { }
 
 public:
 
@@ -372,7 +372,7 @@ protected :
     const defaulttype::ResizableExtVector<core::topology::BaseMeshTopology::Triangle> *extTriangles;
     const defaulttype::ResizableExtVector<int> *extvertPosIdx;
 
-    void updateForceMask();
+    void updateForceMask() override;
 
 public:
 

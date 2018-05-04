@@ -75,7 +75,7 @@ public:
     typedef typename Inherit::MMechanicalState MMechanicalState;
     typedef typename Inherit::MCollisionModel MCollisionModel;
 
-    int addPoint(const Coord& P, int index, Real& r)
+    int addPoint(const Coord& P, int index, Real& r) override
     {
         int i = this->Inherit::addPoint(P, index, r);
         if (!this->mapping)
@@ -143,7 +143,7 @@ public:
     typedef typename Inherit::MCollisionModel MCollisionModel;
     typedef typename Inherit::MMapping MMapping;
 
-    int addPoint(const Coord& P, int index, Real& r)
+    int addPoint(const Coord& P, int index, Real& r) override
     {
         int i = Inherit::addPoint(P, index, r);
         return i;
@@ -175,7 +175,7 @@ public:
     typedef typename Inherit::MCollisionModel MCollisionModel;
     typedef typename Inherit::MMapping MMapping;
 
-    int addPoint(const Coord& P, int index, Real& r)
+    int addPoint(const Coord& P, int index, Real& r) override
     {
         int i = this->Inherit::addPoint(P, index, r);
         return i;

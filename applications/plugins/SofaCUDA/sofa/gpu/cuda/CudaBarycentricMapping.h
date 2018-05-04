@@ -59,20 +59,20 @@ public:
     void setMaskFrom(helper::StateMask *) {}
     void setMaskTo  (helper::StateMask *) {}
 
-    void clear(int reserve=0);
+    void clear(int reserve=0) override;
 
-    int addPointInCube(const int cubeIndex, const SReal* baryCoords);
+    int addPointInCube(const int cubeIndex, const SReal* baryCoords) override;
 
     bool isEmpty() { return map.size() == 0; }
     void setTopology(topology::RegularGridTopology* _topology) { topology = _topology; }
 
-    void init(const typename Out::VecCoord& out, const typename In::VecCoord& in);
-    void apply( typename Out::VecCoord& out, const typename In::VecCoord& in );
-    void applyJ( typename Out::VecDeriv& out, const typename In::VecDeriv& in );
-    void applyJT( typename In::VecDeriv& out, const typename Out::VecDeriv& in );
-    void applyJT( typename In::MatrixDeriv& out, const typename Out::MatrixDeriv& in );
-    void draw(const core::visual::VisualParams*,const typename Out::VecCoord& out, const typename In::VecCoord& in);
-    void resize( core::State<Out>* toModel );
+    void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
+    void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;
+    void applyJ( typename Out::VecDeriv& out, const typename In::VecDeriv& in ) override;
+    void applyJT( typename In::VecDeriv& out, const typename Out::VecDeriv& in ) override;
+    void applyJT( typename In::MatrixDeriv& out, const typename Out::MatrixDeriv& in ) override;
+    void draw(const core::visual::VisualParams*,const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
+    void resize( core::State<Out>* toModel ) override;
 
     inline friend std::istream& operator >> ( std::istream& in, BarycentricMapperRegularGridTopology<In, Out> &b )
     {
@@ -119,20 +119,20 @@ public:
     void setMaskFrom(helper::StateMask *) {}
     void setMaskTo  (helper::StateMask *) {}
 
-    void clear(int reserve=0);
+    void clear(int reserve=0) override;
 
-    int addPointInCube(const int cubeIndex, const SReal* baryCoords);
+    int addPointInCube(const int cubeIndex, const SReal* baryCoords) override;
 
     bool isEmpty() { return map.size() == 0; }
     void setTopology(topology::RegularGridTopology* _topology) { topology = _topology; }
 
-    void init(const typename Out::VecCoord& out, const typename In::VecCoord& in);
-    void apply( typename Out::VecCoord& out, const typename In::VecCoord& in );
-    void applyJ( typename Out::VecDeriv& out, const typename In::VecDeriv& in );
-    void applyJT( typename In::VecDeriv& out, const typename Out::VecDeriv& in );
-    void applyJT( typename In::MatrixDeriv& out, const typename Out::MatrixDeriv& in );
-    void draw(const core::visual::VisualParams*,const typename Out::VecCoord& out, const typename In::VecCoord& in);
-    void resize( core::State<Out>* toModel );
+    void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
+    void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;
+    void applyJ( typename Out::VecDeriv& out, const typename In::VecDeriv& in ) override;
+    void applyJT( typename In::VecDeriv& out, const typename Out::VecDeriv& in ) override;
+    void applyJT( typename In::MatrixDeriv& out, const typename Out::MatrixDeriv& in ) override;
+    void draw(const core::visual::VisualParams*,const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
+    void resize( core::State<Out>* toModel ) override;
 
     inline friend std::istream& operator >> ( std::istream& in, BarycentricMapperSparseGridTopology<In, Out> &b )
     {
@@ -192,28 +192,28 @@ public:
     void setMaskFrom(helper::StateMask *) {}
     void setMaskTo  (helper::StateMask *) {}
 
-    void clear(int reserve=0);
+    void clear(int reserve=0) override;
 
-    int addPointInLine(const int lineIndex, const SReal* baryCoords);
-    int createPointInLine(const typename Out::Coord& p, int lineIndex, const typename In::VecCoord* points);
+    int addPointInLine(const int lineIndex, const SReal* baryCoords) override;
+    int createPointInLine(const typename Out::Coord& p, int lineIndex, const typename In::VecCoord* points) override;
 
-    int addPointInTriangle(const int triangleIndex, const SReal* baryCoords);
-    int createPointInTriangle(const typename Out::Coord& p, int triangleIndex, const typename In::VecCoord* points);
+    int addPointInTriangle(const int triangleIndex, const SReal* baryCoords) override;
+    int createPointInTriangle(const typename Out::Coord& p, int triangleIndex, const typename In::VecCoord* points) override;
 
-    int addPointInQuad(const int quadIndex, const SReal* baryCoords);
-    int createPointInQuad(const typename Out::Coord& p, int quadIndex, const typename In::VecCoord* points);
+    int addPointInQuad(const int quadIndex, const SReal* baryCoords) override;
+    int createPointInQuad(const typename Out::Coord& p, int quadIndex, const typename In::VecCoord* points) override;
 
-    int addPointInTetra(const int tetraIndex, const SReal* baryCoords);
+    int addPointInTetra(const int tetraIndex, const SReal* baryCoords) override;
 
-    int addPointInCube(const int cubeIndex, const SReal* baryCoords);
+    int addPointInCube(const int cubeIndex, const SReal* baryCoords) override;
 
-    void init(const typename Out::VecCoord& out, const typename In::VecCoord& in);
-    void apply( typename Out::VecCoord& out, const typename In::VecCoord& in );
-    void applyJ( typename Out::VecDeriv& out, const typename In::VecDeriv& in );
-    void applyJT( typename In::VecDeriv& out, const typename Out::VecDeriv& in );
-    void applyJT( typename In::MatrixDeriv& out, const typename Out::MatrixDeriv& in );
-    void draw(const core::visual::VisualParams*,const typename Out::VecCoord& out, const typename In::VecCoord& in);
-    void resize( core::State<Out>* toModel );
+    void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
+    void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;
+    void applyJ( typename Out::VecDeriv& out, const typename In::VecDeriv& in ) override;
+    void applyJT( typename In::VecDeriv& out, const typename Out::VecDeriv& in ) override;
+    void applyJT( typename In::MatrixDeriv& out, const typename Out::MatrixDeriv& in ) override;
+    void draw(const core::visual::VisualParams*,const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
+    void resize( core::State<Out>* toModel ) override;
 
     inline friend std::istream& operator >> ( std::istream& in, BarycentricMapperMeshTopology<In, Out> &b )
     {
@@ -249,41 +249,41 @@ public:
           internalMapper(fromTopology,_toTopology)
     {}
 
-    virtual ~BarycentricMapperTetrahedronSetTopology() {}
+    ~BarycentricMapperTetrahedronSetTopology() override {}
 
-    void clear(int reserve=0) {
+    void clear(int reserve=0) override {
         internalMapper.clear(reserve);
     }
 
-    int addPointInTetra(const int index, const SReal* baryCoords) {
+    int addPointInTetra(const int index, const SReal* baryCoords) override {
         return internalMapper.addPointInTetra(index,baryCoords);
     }
 
-    void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) {
+    void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override {
         internalMapper.init(out,in);
     }
 
-    void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) {
+    void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override {
         internalMapper.apply(out,in);
     }
 
-    void applyJ( typename Out::VecDeriv& out, const typename In::VecDeriv& in ) {
+    void applyJ( typename Out::VecDeriv& out, const typename In::VecDeriv& in ) override {
         internalMapper.applyJ(out,in);
     }
 
-    void applyJT( typename In::VecDeriv& out, const typename Out::VecDeriv& in ) {
+    void applyJT( typename In::VecDeriv& out, const typename Out::VecDeriv& in ) override {
         internalMapper.applyJT(out,in);
     }
 
-    void applyJT( typename In::MatrixDeriv& out, const typename Out::MatrixDeriv& in ) {
+    void applyJT( typename In::MatrixDeriv& out, const typename Out::MatrixDeriv& in ) override {
         internalMapper.applyJT(out,in);
     }
 
-    void draw(const core::visual::VisualParams* vp,const typename Out::VecCoord& out, const typename In::VecCoord& in) {
+    void draw(const core::visual::VisualParams* vp,const typename Out::VecCoord& out, const typename In::VecCoord& in) override {
         internalMapper.draw(vp,out,in);
     }
 
-    void resize( core::State<Out>* toModel ) {
+    void resize( core::State<Out>* toModel ) override {
         internalMapper.resize(toModel);
     }
 };

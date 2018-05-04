@@ -82,7 +82,7 @@ public:
         stabilization = _stabilization;
     }
 
-    Real getPotentialEnergy(const Coord& x) const
+    Real getPotentialEnergy(const Coord& x) const override
     {
         const Real& U1 = x.getStrain()[0];
         const Real& U2 = x.getStrain()[1];
@@ -96,7 +96,7 @@ public:
                 0.5*bulkVol*Jm1*Jm1;
     }
 
-    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const
+    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const override
     {
         const Real& U1 = x.getStrain()[0];
         const Real& U2 = x.getStrain()[1];
@@ -181,24 +181,24 @@ public:
         if( stabilization ) helper::Decompose<Real>::PSDProjection( _K );
     }
 
-    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const
+    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const override
     {
         df.getStrain() -= _K * dx.getStrain() * kfactor;
     }
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         return -_K;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C = MatBlock();
         C.invert( _K );
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         return MatBlock();
     }
@@ -251,7 +251,7 @@ public:
         stabilization = _stabilization;
     }
 
-    Real getPotentialEnergy(const Coord& x) const
+    Real getPotentialEnergy(const Coord& x) const override
     {
         const Real& U1 = x.getStrain()[0];
         const Real& U2 = x.getStrain()[1];
@@ -264,7 +264,7 @@ public:
                 0.5*bulkVol*Jm1*Jm1;
     }
 
-    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const
+    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const override
     {
         const Real& U1 = x.getStrain()[0];
         const Real& U2 = x.getStrain()[1];
@@ -316,24 +316,24 @@ public:
         if( stabilization ) helper::Decompose<Real>::PSDProjection( _K );
     }
 
-    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const
+    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const override
     {
         df.getStrain() -= _K * dx.getStrain() * kfactor;
     }
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         return -_K;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C = MatBlock();
         C.invert( _K );
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         return MatBlock();
     }
@@ -392,7 +392,7 @@ public:
         bulkVol = bulk * vol;
     }
 
-    Real getPotentialEnergy(const Coord& x) const
+    Real getPotentialEnergy(const Coord& x) const override
     {
         Real Jm23=pow(x.getStrain()[2],-(Real)2./(Real)3.);
         Real Jm43=Jm23*Jm23;
@@ -402,7 +402,7 @@ public:
                bulkVol*(Real)0.5*(x.getStrain()[2]-1.0)*(x.getStrain()[2]-1.0);
     }
 
-    void addForce( Deriv& f , const Coord& x , const Deriv& /*v*/) const
+    void addForce( Deriv& f , const Coord& x , const Deriv& /*v*/) const override
     {
         Real Jm13=pow(x.getStrain()[2],-(Real)1./(Real)3.);
         Real Jm23=Jm13*Jm13;
@@ -421,14 +421,14 @@ public:
         f.getStrain()[2]+=K02*x.getStrain()[0] + K12*x.getStrain()[1] - bulkVol*(x.getStrain()[2]-1.);
     }
 
-    void addDForce( Deriv&   df, const Deriv&   dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const
+    void addDForce( Deriv&   df, const Deriv&   dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const override
     {
         df.getStrain()[0]+=K02*dx.getStrain()[2]*kfactor;
         df.getStrain()[1]+=K12*dx.getStrain()[2]*kfactor;
         df.getStrain()[2]+=(K02*dx.getStrain()[0]+K12*dx.getStrain()[1]+K22*dx.getStrain()[2])*kfactor;
     }
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         MatBlock K = MatBlock();
         K[0][2]=K[2][0]=K02;
@@ -437,14 +437,14 @@ public:
         return K;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C = MatBlock();
         // singular K!!
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         return MatBlock();
     }

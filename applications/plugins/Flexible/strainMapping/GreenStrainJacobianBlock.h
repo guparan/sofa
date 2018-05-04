@@ -80,7 +80,7 @@ public:
 
     InCoord F;   ///< =  store deformation gradient to compute J
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         F=data;
         // order 0
@@ -117,7 +117,7 @@ public:
         }
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         // order 0
         result.getStrain() += StrainMatToVoigt( F.getF().multTranspose( data.getF() ) );
@@ -144,7 +144,7 @@ public:
         }
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         // order 0
         result.getF() += F.getF()*StressVoigtToMat( data.getStrain() );
@@ -173,7 +173,7 @@ public:
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock B = MatBlock();
         typedef Eigen::Map<Eigen::Matrix<Real,Out::deriv_total_size,In::deriv_total_size,Eigen::RowMajor> > EigenMap;
@@ -211,7 +211,7 @@ public:
         return B;
     }
 
-    KBlock getK(const OutDeriv& childForce, bool /*stabilization*/=false)
+    KBlock getK(const OutDeriv& childForce, bool /*stabilization*/=false) override
     {
         KBlock K = KBlock();
         typedef Eigen::Map<Eigen::Matrix<Real,In::deriv_total_size,In::deriv_total_size,Eigen::RowMajor> > EigenMap;
@@ -254,7 +254,7 @@ public:
         }
         return K;
     }
-    void addDForce( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor )
+    void addDForce( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor ) override
     {
         // order 0
         df.getF() += dx.getF()*StressVoigtToMat( childForce.getStrain() )*kfactor;

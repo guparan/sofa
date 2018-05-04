@@ -56,7 +56,7 @@ class AssembledMultiMapping : public core::MultiMapping<TIn, TOut>
 	typedef typename helper::vector<OutVecCoord*> vecOutVecCoord;
 
 
-	virtual void init() {
+	void init() override {
 		assert( (this->getTo().size() == 1) && 
 		        "sorry, multi mapping to multiple output dofs unimplemented" );
 		
@@ -74,13 +74,13 @@ class AssembledMultiMapping : public core::MultiMapping<TIn, TOut>
     typedef linearsolver::EigenSparseMatrix<In, In> geometric_type;
     geometric_type geometric;
     
-    virtual const defaulttype::BaseMatrix* getK() {
+    const defaulttype::BaseMatrix* getK() override {
         if( geometric.compressedMatrix.nonZeros() ) return &geometric;
         else return NULL;
     }
 
 
-    virtual void updateK( const core::MechanicalParams* /*mparams*/, core::ConstMultiVecDerivId force ) {
+    void updateK( const core::MechanicalParams* /*mparams*/, core::ConstMultiVecDerivId force ) override {
 
 		const unsigned n = this->getFrom().size();
 
@@ -101,9 +101,9 @@ class AssembledMultiMapping : public core::MultiMapping<TIn, TOut>
     }
 
 	
-	virtual void apply(const core::MechanicalParams* , 
+	void apply(const core::MechanicalParams* , 
 	                   const helper::vector<OutDataVecCoord*>& dataVecOutPos,
-	                   const helper::vector<const InDataVecCoord*>& dataVecInPos) {
+	                   const helper::vector<const InDataVecCoord*>& dataVecInPos) override {
 		alloc();
 	
 		const unsigned n = this->getFrom().size();
@@ -122,7 +122,7 @@ class AssembledMultiMapping : public core::MultiMapping<TIn, TOut>
 
 
 
-    virtual void applyJ(const core::MechanicalParams*, const helper::vector<OutDataVecDeriv*>& outDeriv, const helper::vector<const InDataVecDeriv*>& inDeriv)
+    void applyJ(const core::MechanicalParams*, const helper::vector<OutDataVecDeriv*>& outDeriv, const helper::vector<const InDataVecDeriv*>& inDeriv) override
     {
         unsigned n = js.size();
         unsigned i = 0;
@@ -158,9 +158,9 @@ class AssembledMultiMapping : public core::MultiMapping<TIn, TOut>
 		std::cerr << std::endl;
 	}
 
-	virtual void applyJT(const core::MechanicalParams*,
+	void applyJT(const core::MechanicalParams*,
 						 const helper::vector< InDataVecDeriv*>& outDeriv, 
-	                     const helper::vector<const OutDataVecDeriv*>& inDeriv) {
+	                     const helper::vector<const OutDataVecDeriv*>& inDeriv) override {
 		for( unsigned i = 0, n = js.size(); i < n; ++i) {
 			if( jacobian(i).rowSize() > 0 ) {
 				jacobian(i).addMultTranspose(*outDeriv[i], *inDeriv[0]);
@@ -168,9 +168,9 @@ class AssembledMultiMapping : public core::MultiMapping<TIn, TOut>
 		}
 	}
 
-    virtual void applyDJT(const core::MechanicalParams* mparams,
+    void applyDJT(const core::MechanicalParams* mparams,
                           core::MultiVecDerivId inForce,
-                          core::ConstMultiVecDerivId /*outForce*/)
+                          core::ConstMultiVecDerivId /*outForce*/) override
     {
         if( geometric.compressedMatrix.nonZeros() )
         {
@@ -207,14 +207,14 @@ class AssembledMultiMapping : public core::MultiMapping<TIn, TOut>
         }
     }
 
-    virtual void applyJT( const core::ConstraintParams*,
+    void applyJT( const core::ConstraintParams*,
 						  const helper::vector< typename self::InDataMatrixDeriv* >& , 
-						  const helper::vector< const typename self::OutDataMatrixDeriv* >&  ) {
+						  const helper::vector< const typename self::OutDataMatrixDeriv* >&  ) override {
 		// throw std::logic_error("not implemented");
 	}
 
 	
-    virtual const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs() {
+    const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs() override {
 
         if( js.empty() )
         {
@@ -325,7 +325,7 @@ class AssembledMultiMapping : public core::MultiMapping<TIn, TOut>
 	
   public:
 	
-    virtual ~AssembledMultiMapping() {
+    ~AssembledMultiMapping() override {
 		release();
 	}
 

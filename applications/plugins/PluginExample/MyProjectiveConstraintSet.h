@@ -55,17 +55,17 @@ public:
 
 protected:
     MyProjectiveConstraintSet();
-    ~MyProjectiveConstraintSet();
+    ~MyProjectiveConstraintSet() override;
 
 public:
-    void init();
+    void init() override;
 
-    void reinit();
+    void reinit() override;
 
-    void projectResponse(const core::MechanicalParams* /* mparams */, DataVecDeriv& /* dx */) {};
-    void projectVelocity(const core::MechanicalParams* /* mparams */, DataVecDeriv& /* v */) {};
-    void projectPosition(const core::MechanicalParams* /* mparams */, DataVecCoord& /* x */) {};
-    void projectJacobianMatrix(const core::MechanicalParams* /* mparams */, DataMatrixDeriv& /* cData */) {};
+    void projectResponse(const core::MechanicalParams* /* mparams */, DataVecDeriv& /* dx */) override {};
+    void projectVelocity(const core::MechanicalParams* /* mparams */, DataVecDeriv& /* v */) override {};
+    void projectPosition(const core::MechanicalParams* /* mparams */, DataVecCoord& /* x */) override {};
+    void projectJacobianMatrix(const core::MechanicalParams* /* mparams */, DataMatrixDeriv& /* cData */) override {};
 };
 
 

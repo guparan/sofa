@@ -92,23 +92,23 @@ public:
         Pa=In::inverse(InPos).pointToParent(SPos)*Pt;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result +=  data.getCenter() * Pt + data.getAffine() * Pa;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += data.getVCenter() * Pt + data.getVAffine() * Pa;
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data * Pt ;
         for (unsigned int j = 0; j < dim; ++j) result.getVAffine()[j] += Pa * data[j];
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -117,8 +117,8 @@ public:
     }
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -178,23 +178,23 @@ public:
         Pa=In::inverse(InPos).pointToParent(SPos)*Pt;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result +=  data.getCenter() * Pt + data.getAffine() * Pa;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += data.getVCenter() * Pt + data.getVAffine() * Pa;
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data * Pt ;
         for (unsigned int j = 0; j < dim; ++j) result.getVAffine()[j] += Pa * data[j];
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -203,8 +203,8 @@ public:
     }
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -270,17 +270,17 @@ public:
         PFa.getF()=covMN(vectorInLocalCoordinates,Ft) + inverseInitialTransform.getAffine() * F0 * w;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result.getF() +=  covMN(data.getCenter(),Ft) + data.getAffine()*PFa.getF();
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getF() += covMN(data.getVCenter(),Ft) + data.getVAffine()*PFa.getF();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data.getF() * Ft ;
 
@@ -290,7 +290,7 @@ public:
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -300,8 +300,8 @@ public:
 
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -367,17 +367,17 @@ public:
         PFa.getF()=covMN(vectorInLocalCoordinates,Ft) + inverseInitialTransform.getAffine() * F0 * w;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result.getF() +=  covMN(data.getCenter(),Ft) + data.getAffine()*PFa.getF();
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getF() += covMN(data.getVCenter(),Ft) + data.getVAffine()*PFa.getF();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data.getF() * Ft ;
 
@@ -387,7 +387,7 @@ public:
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -397,8 +397,8 @@ public:
 
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -465,17 +465,17 @@ public:
         PFa.getF()=covMN(vectorInLocalCoordinates,Ft) + inverseInitialTransform.getAffine() * F0 * w;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result.getF() +=  covMN(data.getCenter(),Ft) + data.getAffine()*PFa.getF();
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getF() += covMN(data.getVCenter(),Ft) + data.getVAffine()*PFa.getF();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data.getF() * Ft ;
 
@@ -485,7 +485,7 @@ public:
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -495,8 +495,8 @@ public:
 
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -574,19 +574,19 @@ public:
         for (unsigned int k = 0; k < dim; ++k) PFdFa.getGradientF(k) = covMN( vectorInLocalCoordinates, dFt[k]) + AOinvM * dw[k] + covMN(AOinvT[k],Ft);
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result.getF() +=  covMN(data.getCenter(),Ft) + data.getAffine()*PFdFa.getF();
         for (unsigned int k = 0; k < dim; ++k) result.getGradientF(k) += covMN( data.getCenter(), dFt[k]) + data.getAffine() * PFdFa.getGradientF(k);
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getF() += covMN(data.getVCenter(),Ft) + data.getVAffine()*PFdFa.getF();
         for (unsigned int k = 0; k < dim; ++k) result.getGradientF(k) += covMN(data.getVCenter(),dFt[k]) + data.getVAffine() * PFdFa.getGradientF(k);
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data.getF() * Ft ;
         for (unsigned int k = 0; k < dim; ++k) result.getVCenter() += data.getGradientF(k) * dFt[k] ;
@@ -598,7 +598,7 @@ public:
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -614,8 +614,8 @@ public:
     }
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -679,26 +679,26 @@ public:
         Pa.getAffine()=inverseInitialTransform.getAffine()*OutPos.getAffine()*w;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result.getCenter() +=  data.getCenter() * Pt + data.getAffine() * Pa.getCenter();
         result.getAffine() +=  data.getAffine() * Pa.getAffine() ;
         for (unsigned int j = 0; j < dim; ++j) result.getAffine()[j][j] -= Pt; // this term cancels the initial identity affine matrix
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getVCenter() += data.getVCenter() * Pt + data.getVAffine() * Pa.getCenter();
         result.getVAffine() += data.getVAffine() * Pa.getAffine();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getVCenter() += data.getVCenter() * Pt ;
         for (unsigned int j = 0; j < dim; ++j) result.getVAffine()[j] += Pa.getCenter() * (data.getVCenter())[j] + Pa.getAffine() * (data.getVAffine()[j]);
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -712,8 +712,8 @@ public:
 
 
     // no geometric striffness (constant J)
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 } // namespace defaulttype

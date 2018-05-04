@@ -35,16 +35,16 @@ public:
     Data< Real > d_complianceMin; ///< Minimum compliance
     Data< Real > d_errorMin; ///< complianceMin is reached for this error value
 
-    virtual void init();
+    void init() override;
 
 //    virtual SReal getPotentialEnergy( const core::MechanicalParams* mparams, const typename Inherit::DataVecCoord& x ) const;
-    virtual const sofa::defaulttype::BaseMatrix* getComplianceMatrix(const core::MechanicalParams*);
+    const sofa::defaulttype::BaseMatrix* getComplianceMatrix(const core::MechanicalParams*) override;
 
-    virtual void addKToMatrix( sofa::defaulttype::BaseMatrix * matrix, SReal kFact, unsigned int &offset );
-    virtual void addBToMatrix( sofa::defaulttype::BaseMatrix * matrix, SReal bFact, unsigned int &offset );
-    virtual void addForce(const core::MechanicalParams *, typename Inherit::DataVecDeriv &, const typename Inherit::DataVecCoord &, const typename Inherit::DataVecDeriv &);
-    virtual void addDForce(const core::MechanicalParams *, typename Inherit::DataVecDeriv &, const typename Inherit::DataVecDeriv &);
-    virtual void addClambda(const core::MechanicalParams *, typename Inherit::DataVecDeriv &, const typename Inherit::DataVecDeriv &, SReal);
+    void addKToMatrix( sofa::defaulttype::BaseMatrix * matrix, SReal kFact, unsigned int &offset ) override;
+    void addBToMatrix( sofa::defaulttype::BaseMatrix * matrix, SReal bFact, unsigned int &offset ) override;
+    void addForce(const core::MechanicalParams *, typename Inherit::DataVecDeriv &, const typename Inherit::DataVecCoord &, const typename Inherit::DataVecDeriv &) override;
+    void addDForce(const core::MechanicalParams *, typename Inherit::DataVecDeriv &, const typename Inherit::DataVecDeriv &) override;
+    void addClambda(const core::MechanicalParams *, typename Inherit::DataVecDeriv &, const typename Inherit::DataVecDeriv &, SReal) override;
 
 protected:
     LinearDiagonalCompliance( core::behavior::MechanicalState<DataTypes> *mm = NULL);

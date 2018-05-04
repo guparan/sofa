@@ -50,7 +50,7 @@ struct ImageEngine_test : public Sofa_test<>
     simulation::Node::SPtr root;
 
     // Unload scene
-    void TearDown()
+    void TearDown() override
     {
         if (root!=NULL)
             sofa::simulation::getSimulation()->unload(root);
@@ -284,7 +284,7 @@ struct ImageDataEngine_test : public DataEngine_test<DataEngineType>
     typedef core::objectmodel::DDGNode DDGNode;
     typedef DDGNode::DDGLinkContainer DDGLinkContainer;
 
-    virtual void init()
+    void init() override
     {
         DataEngine_test<DataEngineType>::init();
 

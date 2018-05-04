@@ -58,7 +58,7 @@ public:
         : EdgeSetGeometryAlgorithms<DataTypes>()
     {}
 
-    virtual ~ManifoldEdgeSetGeometryAlgorithms() {}
+    ~ManifoldEdgeSetGeometryAlgorithms() override {}
 };
 
 } // namespace topology

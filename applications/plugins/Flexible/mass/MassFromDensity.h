@@ -137,7 +137,7 @@ public:
     enum { NO_LUMPING=0, BLOCK_LUMPING=1, DIAGONAL_LUMPING=2 };
     Data< int > f_lumping; ///< is the mass matrix lumped? (copy each non-diagonal term on the diagonal term of the same line)  0->no, 1->by bloc, 2->diagonal matrix
 
-    virtual std::string getTemplateName() const    { return templateName(this);    }
+    std::string getTemplateName() const override    { return templateName(this);    }
     static std::string templateName(const MassFromDensity<DataTypes,ImageTypes>* = NULL) { return DataTypes::Name()+std::string(",")+ImageTypes::Name();  }
 
     MassFromDensity()    :   Inherited()
@@ -154,9 +154,9 @@ public:
         transform.setReadOnly(true);
     }
 
-    virtual ~MassFromDensity() {}
+    ~MassFromDensity() override {}
 
-    virtual void init()
+    void init() override
     {
         addInput(&image);
         addInput(&transform);
@@ -168,11 +168,11 @@ public:
         this->getContext()->get( dofs, core::objectmodel::BaseContext::Local);
     }
 
-    virtual void reinit() { update(); }
+    void reinit() override { update(); }
 
 protected:
 
-    virtual void update()
+    void update() override
     {
         if(!deformationMapping) { serr<<SOFA_CLASS_METHOD<<"can't compute the mass : no mapping found"<<sendl; return; }
         if(!dofs) { serr<<SOFA_CLASS_METHOD<<"can't compute the mass : no MechanicalObject<Vec3> found"<<sendl; return; }
@@ -240,7 +240,7 @@ protected:
         deformationMapping->init();
     }
 
-    void handleEvent(sofa::core::objectmodel::Event *event)
+    void handleEvent(sofa::core::objectmodel::Event *event) override
     {
         if (simulation::AnimateEndEvent::checkEventType(event))
         {

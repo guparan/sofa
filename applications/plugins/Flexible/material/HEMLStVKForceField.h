@@ -86,13 +86,13 @@ public:
 
 
 
-    virtual void bwdInit()
+    void bwdInit() override
     {
         Inherit1::bwdInit();
         reinit();
     }
 
-    virtual void reinit()
+    void reinit() override
     {
         Inherit1::reinit();
 
@@ -172,7 +172,7 @@ public:
 
 
     // W = (l-l0)^T M (l-l0)
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord& _x) const
+    SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord& _x) const override
     {
         const VecCoord& x = _x.getValue();
         const VecCoord& x0 = this->getMState()->read(core::ConstVecCoordId::restPosition())->getValue();
@@ -193,7 +193,7 @@ public:
 
 
     // f += -2 (l-l0)^T M == K (l-l0)
-    virtual void addForce(const core::MechanicalParams* /*mparams*/, DataVecDeriv& _f, const DataVecCoord& _x, const DataVecDeriv& /*_v*/)
+    void addForce(const core::MechanicalParams* /*mparams*/, DataVecDeriv& _f, const DataVecCoord& _x, const DataVecDeriv& /*_v*/) override
     {
         VecDeriv& f = *_f.beginEdit();
         const VecCoord& x = _x.getValue();
@@ -212,14 +212,14 @@ public:
 
 
     // df += -2 M dx == K dx
-    virtual void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& df, const DataVecDeriv& dx )
+    void addDForce(const core::MechanicalParams* mparams, DataVecDeriv& df, const DataVecDeriv& dx ) override
     {
         m_K.addMult( df, dx, mparams->kFactor()  );
     }
 
 
     // K = -2 M
-    void addKToMatrix( sofa::defaulttype::BaseMatrix * matrix, SReal kFact, unsigned int &offset )
+    void addKToMatrix( sofa::defaulttype::BaseMatrix * matrix, SReal kFact, unsigned int &offset ) override
     {
         m_K.addToBaseMatrix( matrix, kFact, offset );
     }
@@ -233,7 +233,7 @@ protected:
         , d_poissonRatio(initData(&d_poissonRatio,(Real)0,"poissonRatio","Poisson Ratio ]-1,0.5["))
     {}
 
-    virtual ~HEMLStVKForceField() {}
+    ~HEMLStVKForceField() override {}
 
 
     linearsolver::EigenSparseMatrix<DataTypes,DataTypes> m_K; ///< assembled stiffness matrix (per edge)

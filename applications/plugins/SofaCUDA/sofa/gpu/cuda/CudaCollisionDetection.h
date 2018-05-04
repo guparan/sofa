@@ -91,7 +91,7 @@ struct GPUDetectionOutput
 class GPUDetectionOutputVector : public DetectionOutputVector
 {
 public:
-    ~GPUDetectionOutputVector()
+    ~GPUDetectionOutputVector() override
     {
     }
 
@@ -108,7 +108,7 @@ public:
     };
     sofa::gpu::cuda::CudaVector< TestEntry > tests;
 
-    unsigned int size() const
+    unsigned int size() const override
     {
         if (results.empty()) return 0;
         int s = 0;
@@ -117,7 +117,7 @@ public:
         return s;
     }
 
-    void clear()
+    void clear() override
     {
         results1.clear();
         results2.clear();
@@ -125,7 +125,7 @@ public:
         tests.clear();
     }
 
-    void release()
+    void release() override
     {
         // GPU vectors are stored in other data structures, they should not be deleted by the pipeline
     }
@@ -267,9 +267,9 @@ public:
     {
     public:
         CPUTest() {}
-        bool useGPU() { return false; }
-        int init() { return 0; }
-        void fillInfo(GPUTest* /*tests*/) {}
+        bool useGPU() override { return false; }
+        int init() override { return 0; }
+        void fillInfo(GPUTest* /*tests*/) override {}
         //void fillContacts(DetectionOutputVector& /*contacts*/, const int* /*nresults*/) {}
     };
 
@@ -279,11 +279,11 @@ public:
         CudaRigidDistanceGridCollisionModel* model1;
         CudaRigidDistanceGridCollisionModel* model2;
         RigidRigidTest(CudaRigidDistanceGridCollisionModel* model1, CudaRigidDistanceGridCollisionModel* model2);
-        bool useGPU() { return true; }
+        bool useGPU() override { return true; }
         /// Returns how many tests are required
-        virtual int init();
+        int init() override;
         /// Fill the info to send to the graphics card
-        virtual void fillInfo(GPUTest* tests);
+        void fillInfo(GPUTest* tests) override;
         /// Create the list of SOFA contacts from the contacts detected by the GPU
         //void fillContacts(DetectionOutputVector& contacts, const int* nresults);
 
@@ -298,11 +298,11 @@ public:
         CudaSphereModel* model1;
         CudaRigidDistanceGridCollisionModel* model2;
         SphereRigidTest(CudaSphereModel* model1, CudaRigidDistanceGridCollisionModel* model2);
-        bool useGPU() { return true; }
+        bool useGPU() override { return true; }
         /// Returns how many tests are required
-        virtual int init();
+        int init() override;
         /// Fill the info to send to the graphics card
-        virtual void fillInfo(GPUTest* tests);
+        void fillInfo(GPUTest* tests) override;
         /// Create the list of SOFA contacts from the contacts detected by the GPU
         //void fillContacts(DetectionOutputVector& contacts, const int* nresults);
     };
@@ -313,11 +313,11 @@ public:
         CudaPointModel* model1;
         CudaRigidDistanceGridCollisionModel* model2;
         PointRigidTest(CudaPointModel* model1, CudaRigidDistanceGridCollisionModel* model2);
-        bool useGPU() { return true; }
+        bool useGPU() override { return true; }
         /// Returns how many tests are required
-        virtual int init();
+        int init() override;
         /// Fill the info to send to the graphics card
-        virtual void fillInfo(GPUTest* tests);
+        void fillInfo(GPUTest* tests) override;
         /// Create the list of SOFA contacts from the contacts detected by the GPU
         //void fillContacts(DetectionOutputVector& contacts, const int* nresults);
 
@@ -338,9 +338,9 @@ public:
 
     TestMap tests;
 
-    virtual void beginNarrowPhase() override;
-    virtual void addCollisionPair (const std::pair<core::CollisionModel*, core::CollisionModel*>& cmPair) override;
-    virtual void endNarrowPhase() override;
+    void beginNarrowPhase() override;
+    void addCollisionPair (const std::pair<core::CollisionModel*, core::CollisionModel*>& cmPair) override;
+    void endNarrowPhase() override;
 
 protected:
     Test* createTest(core::CollisionModel* model1, core::CollisionModel* model2);

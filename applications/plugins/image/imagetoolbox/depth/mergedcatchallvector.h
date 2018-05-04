@@ -56,7 +56,7 @@ public:
 
     }
 
-    ~MergedCatchAllVector() {}
+    ~MergedCatchAllVector() override {}
 
     void init() override
     {
@@ -90,7 +90,7 @@ public:
 
 protected:
 
-    virtual void update() override
+    void update() override
     {
     }
 

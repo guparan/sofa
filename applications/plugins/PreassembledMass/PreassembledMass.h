@@ -67,7 +67,7 @@ protected:
         _instanciationNumber = s_instanciationCounter++;
     }
 
-    virtual ~PreassembledMass()
+    ~PreassembledMass() override
     {
         --s_instanciationCounter;
     }
@@ -79,28 +79,28 @@ protected:
 
 public:
 
-    virtual void init();
+    void init() override;
 
-    virtual void bwdInit();
+    void bwdInit() override;
 
     static std::string templateName(const PreassembledMass<DataTypes>* = NULL)
     {
         return DataTypes::Name();
     }
-	virtual std::string getTemplateName() const
+	std::string getTemplateName() const override
 	{
 		return templateName(this);
 	}
 
 
     // -- Mass interface (employed only if d_massOnIndependents==true)
-    void addMDx(const core::MechanicalParams* mparams, DataVecDeriv& f, const DataVecDeriv& dx, double factor);
-    void accFromF(const core::MechanicalParams* mparams, DataVecDeriv& a, const DataVecDeriv& f);
-    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& f, const DataVecCoord& x, const DataVecDeriv& v);
-    double getKineticEnergy(const core::MechanicalParams* mparams, const DataVecDeriv& v) const;
-    double getPotentialEnergy(const core::MechanicalParams* mparams, const DataVecCoord& x) const;
-    void addGravityToV(const core::MechanicalParams* mparams, DataVecDeriv& d_v);
-    void addMToMatrix(const core::MechanicalParams *mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix);
+    void addMDx(const core::MechanicalParams* mparams, DataVecDeriv& f, const DataVecDeriv& dx, double factor) override;
+    void accFromF(const core::MechanicalParams* mparams, DataVecDeriv& a, const DataVecDeriv& f) override;
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& f, const DataVecCoord& x, const DataVecDeriv& v) override;
+    double getKineticEnergy(const core::MechanicalParams* mparams, const DataVecDeriv& v) const override;
+    double getPotentialEnergy(const core::MechanicalParams* mparams, const DataVecCoord& x) const override;
+    void addGravityToV(const core::MechanicalParams* mparams, DataVecDeriv& d_v) override;
+    void addMToMatrix(const core::MechanicalParams *mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
 
 
 

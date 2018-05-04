@@ -519,7 +519,7 @@ struct Mapping_test: public Sofa_test<typename _Mapping::Real>
         return runTest( parent, childInit, parent, expectedChild );
     }
 
-    virtual ~Mapping_test()
+    ~Mapping_test() override
     {
         if (root!=NULL)
             sofa::simulation::getSimulation()->unload(root);

@@ -62,7 +62,7 @@ protected:
 	
 
     typedef RigidRestJointMapping self;
-	virtual void assemble( const typename self::in_pos_type& in_pos ) {
+	void assemble( const typename self::in_pos_type& in_pos ) override {
         typename self::jacobian_type& J = this->jacobian;
 
         const size_t size = in_pos.size();
@@ -133,8 +133,8 @@ protected:
 
 	} 
 	
-	virtual void apply(typename self::out_pos_type& out,
-                       const typename self::in_pos_type& in ) {
+	void apply(typename self::out_pos_type& out,
+                       const typename self::in_pos_type& in ) override {
 
         const size_t size = in.size();
 

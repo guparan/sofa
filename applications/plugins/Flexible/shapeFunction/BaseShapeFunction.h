@@ -94,12 +94,12 @@ public:
 	InternalData m_internalData;
     //@}
 
-    virtual std::string getTemplateName() const    { return templateName(this); }
+    std::string getTemplateName() const override    { return templateName(this); }
     static std::string templateName(const BaseShapeFunction<ShapeFunctionTypes>* = NULL) { return ShapeFunctionTypes::Name(); }
 
     BaseMechanicalState* _state;
 
-    virtual void init()
+    void init() override
     {
         if(!f_position.isSet())   // node positions are not given, so we retrieve them from the local mechanical state
         {
@@ -186,7 +186,7 @@ protected:
     {
     }
 
-    virtual ~BaseShapeFunction() {}
+    ~BaseShapeFunction() override {}
 
 };
 

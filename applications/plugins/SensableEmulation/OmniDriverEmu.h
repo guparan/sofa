@@ -122,23 +122,23 @@ public:
 
     // changement NewOmni -> omni
     OmniDriverEmu();
-    virtual ~OmniDriverEmu();
+    ~OmniDriverEmu() override;
 
-    virtual void init();
-    virtual void bwdInit();
-    virtual void reset();
-    void reinit();
+    void init() override;
+    void bwdInit() override;
+    void reset() override;
+    void reinit() override;
 
     int initDevice(OmniData& data);
 
-    void cleanup();
-    virtual void draw(const core::visual::VisualParams*);
+    void cleanup() override;
+    void draw(const core::visual::VisualParams*) override;
 
     //ajout
     void setForceFeedbacks(helper::vector<ForceFeedback*> ffs);
 
-    void onKeyPressedEvent(core::objectmodel::KeypressedEvent *);
-    void onKeyReleasedEvent(core::objectmodel::KeyreleasedEvent *);
+    void onKeyPressedEvent(core::objectmodel::KeypressedEvent *) override;
+    void onKeyReleasedEvent(core::objectmodel::KeyreleasedEvent *) override;
 
     void setDataValue();
     void reinitVisual();
@@ -161,7 +161,7 @@ public:
     Data<helper::vector<double> > trajTim; ///< Trajectory timing
 
     int getCurrentToolIndex() { return currentToolIndex;}
-    void handleEvent(core::objectmodel::Event *);
+    void handleEvent(core::objectmodel::Event *) override;
 
 private:
 

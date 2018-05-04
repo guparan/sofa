@@ -51,9 +51,9 @@ namespace simulation
 	public:
 		StepTask(core::behavior::BaseAnimationLoop* aloop, const double t, Task::Status* pStatus);
 		
-		virtual ~StepTask();
+		~StepTask() override;
 
-		virtual bool run(WorkerThread* );
+		bool run(WorkerThread* ) override;
 
 
 	private:
@@ -74,9 +74,9 @@ namespace simulation
 		//InitPerThreadDataTask(volatile long* atomicCounter, boost::mutex* mutex, TaskStatus* pStatus );
 		InitPerThreadDataTask(helper::system::atomic<int>* atomicCounter, boost::mutex* mutex, Task::Status* pStatus );
 		
-		virtual ~InitPerThreadDataTask();
+		~InitPerThreadDataTask() override;
 
-		virtual bool run(WorkerThread* );
+		bool run(WorkerThread* ) override;
 
 
 	private:

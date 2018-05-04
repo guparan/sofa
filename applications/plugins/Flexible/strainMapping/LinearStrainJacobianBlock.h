@@ -76,7 +76,7 @@ public:
         w=_w;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         result.getStrain() += data.getStrain()*w;
 
@@ -89,7 +89,7 @@ public:
         }
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getStrain() +=  data.getStrain()*w;
 
@@ -102,7 +102,7 @@ public:
         }
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getStrain() +=  data.getStrain()*w;
 
@@ -115,13 +115,13 @@ public:
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         return MatBlock::s_identity*w;
     }
 
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false)    { return KBlock(); }
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */)    { }
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override    { return KBlock(); }
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override    { }
 
 };
 

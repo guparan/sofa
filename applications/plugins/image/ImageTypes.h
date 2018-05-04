@@ -105,7 +105,7 @@ public:
 
 
     void clear() { img.assign(); }
-    ~Image() { clear(); }
+    ~Image() override { clear(); }
 
     //accessors
     cimg_library::CImgList<T>& getCImgList() { return img; }
@@ -158,14 +158,14 @@ public:
     }
 
     //affectors
-    void setDimensions(const imCoord& dim)
+    void setDimensions(const imCoord& dim) override
     {
         cimglist_for(img,l) img(l).resize(dim[0],dim[1],dim[2],dim[3]);
         if(img.size()>dim[4]) img.remove(dim[4],img.size()-1);
         else if(img.size()<dim[4]) img.insert(dim[4]-img.size(),cimg_library::CImg<T>(dim[0],dim[1],dim[2],dim[3]));
     }
 
-    void fill(const SReal val)
+    void fill(const SReal val) override
     {
         cimglist_for(img,l) img(l).fill((T)val);
     }
@@ -504,11 +504,11 @@ protected:
 
 public:
     Coord& getTranslation() { return *reinterpret_cast<Coord*>(&this->P[0]); }
-    const Coord& getTranslation() const { return *reinterpret_cast<const Coord*>(&this->P[0]); }
+    const Coord& getTranslation() const override { return *reinterpret_cast<const Coord*>(&this->P[0]); }
     Coord& getRotation() { return *reinterpret_cast<Coord*>(&this->P[3]); }
-    const Coord& getRotation() const { return *reinterpret_cast<const Coord*>(&this->P[3]); }
+    const Coord& getRotation() const override { return *reinterpret_cast<const Coord*>(&this->P[3]); }
     Coord& getScale() { return *reinterpret_cast<Coord*>(&this->P[6]); }
-    const Coord& getScale() const { return *reinterpret_cast<const Coord*>(&this->P[6]); }
+    const Coord& getScale() const override { return *reinterpret_cast<const Coord*>(&this->P[6]); }
     Real& getOffsetT() { return *reinterpret_cast<Real*>(&this->P[9]); }
     const Real& getOffsetT() const { return *reinterpret_cast<const Real*>(&this->P[9]); }
     Real& getScaleT() { return *reinterpret_cast<Real*>(&this->P[10]); }
@@ -531,7 +531,7 @@ public:
     void setCamPos(const Real& cx,const Real& cy) {this->camx=cx;  this->camy=cy; }
 
     //internal data update
-    virtual void update()
+    void update() override
     {
         Coord rot=getRotation() * (Real)M_PI / (Real)180.0;
         qrotation = helper::Quater< Real >::createQuaterFromEuler(rot);
@@ -541,7 +541,7 @@ public:
 
     //transform functions
     // note: for perpective transforms (f_x and f_y pinhole camera intrinsic parameters are scalez/2*scalex and scalez/2*scaley)
-    virtual Coord fromImage(const Coord& ip) const
+    Coord fromImage(const Coord& ip) const override
     {
         if(isPerspective()==0) return qrotation.rotate( ip.linearProduct(getScale()) ) + getTranslation();
         else if(isPerspective()==1)
@@ -564,8 +564,8 @@ public:
             return qrotation.rotate( sp ) + getTranslation();
         }
     }
-    virtual Real fromImage(const Real& ip) const	{ return ip*getScaleT() + getOffsetT(); }
-    virtual Coord toImage(const Coord& p) const
+    Real fromImage(const Real& ip) const override	{ return ip*getScaleT() + getOffsetT(); }
+    Coord toImage(const Coord& p) const override
     {
         if(isPerspective()==0) return qrotation.inverseRotate( p-getTranslation() ).linearDivision(getScale());
         else if(isPerspective()==1)
@@ -594,7 +594,7 @@ public:
         }
     }
 
-    virtual Real toImage(const Real& p) const		{ return (p - getOffsetT())/getScaleT(); }
+    Real toImage(const Real& p) const override		{ return (p - getOffsetT())/getScaleT(); }
 
 };
 

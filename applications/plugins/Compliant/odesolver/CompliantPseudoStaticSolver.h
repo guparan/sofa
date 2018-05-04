@@ -35,16 +35,16 @@ class CompliantPseudoStaticSolver : public CompliantOdeSolver {
     Data<SReal> d_lastVelocity; ///< output, last velocity square norm
 
     CompliantPseudoStaticSolver();
-    virtual ~CompliantPseudoStaticSolver(){}
+    ~CompliantPseudoStaticSolver() override{}
 
-    virtual void init();
+    void init() override;
 
-    virtual void solve(const core::ExecParams* params,
+    void solve(const core::ExecParams* params,
                        SReal dt,
                        core::MultiVecCoordId posId,
-                       core::MultiVecDerivId velId);
+                       core::MultiVecDerivId velId) override;
 
-    virtual std::string getTemplateName() const { return templateName(this); }
+    std::string getTemplateName() const override { return templateName(this); }
     static std::string templateName(const CompliantPseudoStaticSolver<CompliantOdeSolver>* x= NULL) { return CompliantOdeSolver::className( (CompliantOdeSolver*)x ); }
 };
 

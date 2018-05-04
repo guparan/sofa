@@ -66,7 +66,7 @@ class SOFA_Compliant_API AffineMultiMapping : public AssembledMultiMapping<TIn, 
 	}
 
 
-    virtual void assemble( const helper::vector<typename self::in_pos_type>& in )  {
+    void assemble( const helper::vector<typename self::in_pos_type>& in ) override  {
 		// initialize jacobians
 
 		typedef typename self::jacobian_type::CompressedMatrix jack_type;
@@ -134,8 +134,8 @@ class SOFA_Compliant_API AffineMultiMapping : public AssembledMultiMapping<TIn, 
 	}
 
 
-    virtual void apply(typename self::out_pos_type& out, 
-                       const helper::vector<typename self::in_pos_type>& in ) {
+    void apply(typename self::out_pos_type& out, 
+                       const helper::vector<typename self::in_pos_type>& in ) override {
 		
 		// let's be paranoid
 		assert( out.size() == value.getValue().size() );

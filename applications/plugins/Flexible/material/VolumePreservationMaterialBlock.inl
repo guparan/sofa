@@ -76,7 +76,7 @@ public:
         KVol=k*vol;
     }
 
-    Real getPotentialEnergy( const Coord& ) const { assert(false); return 0; }
+    Real getPotentialEnergy( const Coord& ) const override { assert(false); return 0; }
 
     Real getPotentialEnergy_method0(const Coord& x) const
     {
@@ -90,7 +90,7 @@ public:
         return KVol*(J-(Real)1.)*(J-(Real)1.)*(Real)0.5;
     }
 
-    void addForce( Deriv& , const Coord& , const Deriv& ) const { assert(false); }
+    void addForce( Deriv& , const Coord& , const Deriv& ) const override { assert(false); }
 
     void addForce_method0( Deriv& f , const Coord& x , const Deriv& /*v*/)  const
     {
@@ -106,26 +106,26 @@ public:
         dfdJ=-KVol;
     }
 
-    void addDForce( Deriv&   df , const Deriv&   dx, const SReal& kfactor, const SReal& /*bfactor*/ )  const
+    void addDForce( Deriv&   df , const Deriv&   dx, const SReal& kfactor, const SReal& /*bfactor*/ )  const override
     {
         df.getStrain()[2]+=dfdJ*dx.getStrain()[2]*kfactor;
     }
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         MatBlock K = MatBlock();
         K(2,2)=dfdJ;
         return K;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C = MatBlock();
         C(2,2)=-1./dfdJ;
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         return MatBlock();
     }
@@ -177,7 +177,7 @@ public:
         KVol=k*vol;
     }
 
-    Real getPotentialEnergy( const Coord& ) const { assert(false); return 0; }
+    Real getPotentialEnergy( const Coord& ) const override { assert(false); return 0; }
 
     Real getPotentialEnergy_method0(const Coord& x) const
     {
@@ -196,7 +196,7 @@ public:
         return KVol*Jm1*Jm1*(Real)0.5;
     }
 
-    void addForce( Deriv&, const Coord&, const Deriv& ) const { assert(false); }
+    void addForce( Deriv&, const Coord&, const Deriv& ) const override { assert(false); }
 
     void addForce_method0( Deriv& f , const Coord& x , const Deriv& /*v*/)  const
     {
@@ -246,24 +246,24 @@ public:
         }
     }
 
-    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ )  const
+    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ )  const override
     {
         df.getStrain() -= _K * dx.getStrain() * kfactor;
     }
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         return _K;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C;
         C.invert( _K );
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         return MatBlock();
     }

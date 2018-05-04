@@ -71,34 +71,34 @@ public:
             multfactor=inverted?(Real)-1.:(Real)1.;
     }
 
-    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) {}
+    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) override {}
 
     void addapply_diff( OutCoord& result, const InCoord& data, const InCoord& offset)
     {
         result.getStrain() += (data.getStrain() - offset.getStrain())*multfactor;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += data*multfactor;
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result += data*multfactor;
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         return MatBlock::s_identity*multfactor;
     }
 
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false)
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override
     {
         return KBlock();
     }
 
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */)
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override
     {
     }
 

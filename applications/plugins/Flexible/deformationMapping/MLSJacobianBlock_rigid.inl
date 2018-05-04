@@ -102,24 +102,24 @@ public:
         Pa= InPos.rotate(Pa0);
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         Pa= data.rotate(Pa0);
         result +=  data.getCenter() * Pt + Pa + C;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += getLinear(data) * Pt + cross(getAngular(data), Pa);
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data * Pt ;
         getAngular(result) += cross(Pa, data);
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -130,8 +130,8 @@ public:
     }
 
     // TO DO : implement this !!
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -198,24 +198,24 @@ public:
         Pa= InPos.rotate(Pa0);
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         Pa= data.rotate(Pa0);
         result +=  data.getCenter() * Pt + Pa + C;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += getLinear(data) * Pt + cross(getAngular(data), Pa);
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data * Pt ;
         getAngular(result) += cross(Pa, data);
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -226,8 +226,8 @@ public:
     }
 
     // TO DO : implement this !!
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -301,7 +301,7 @@ public:
         PFa.getF()= A0 * PFa0.getF();
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         rotMat A; data.getOrientation().toMatrix(A);
         PFa.getF()= A * PFa0.getF();  // = update of J according to current transform
@@ -309,20 +309,20 @@ public:
         result.getF() +=  covMN(data.getCenter(),Ft) + PFa.getF() + C.getF();;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         const cpMatrix W=crossProductMatrix(getAngular(data));
         result.getF() += covMN(getLinear(data),Ft) + W * PFa.getF();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data.getF() * Ft ;
 
         for(unsigned int i=0; i<mdim; ++i) getAngular(result) += cross(PFa.getF().col(i),data.getF().col(i));
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -337,8 +337,8 @@ public:
 
 
     // TO DO : implement this !!
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -412,7 +412,7 @@ public:
         PFa.getF()= A0 * PFa0.getF();
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         rotMat A; data.getOrientation().toMatrix(A);
         PFa.getF()= A * PFa0.getF();  // = update of J according to current transform
@@ -420,20 +420,20 @@ public:
         result.getF() +=  covMN(data.getCenter(),Ft) + PFa.getF() + C.getF();;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         const cpMatrix W=crossProductMatrix(getAngular(data));
         result.getF() += covMN(getLinear(data),Ft) + W * PFa.getF();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data.getF() * Ft ;
 
         for(unsigned int i=0; i<mdim; ++i) getAngular(result) += cross(PFa.getF().col(i),data.getF().col(i));
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -448,8 +448,8 @@ public:
 
 
     // TO DO : implement this !!
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -523,7 +523,7 @@ public:
         PFa.getF()= A0 * PFa0.getF();
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         rotMat A; data.getOrientation().toMatrix(A);
         PFa.getF()= A * PFa0.getF();  // = update of J according to current transform
@@ -531,20 +531,20 @@ public:
         result.getF() +=  covMN(data.getCenter(),Ft) + PFa.getF() + C.getF();;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         const cpMatrix W=crossProductMatrix(getAngular(data));
         result.getF() += covMN(getLinear(data),Ft) + W * PFa.getF();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data.getF() * Ft ;
 
         for(unsigned int i=0; i<mdim; ++i) getAngular(result) += cross(PFa.getF().col(i),data.getF().col(i));
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -559,8 +559,8 @@ public:
 
 
     // TO DO : implement this !!
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 
@@ -654,7 +654,7 @@ public:
         }
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         // = update of J according to current transform
         rotMat A; data.getOrientation().toMatrix(A);
@@ -666,7 +666,7 @@ public:
         for (unsigned int k = 0; k < dim; ++k) result.getGradientF(k) += covMN( data.getCenter(), dFt[k]) + PFdFa.getGradientF(k) + C.getGradientF(k) ;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         const cpMatrix W=crossProductMatrix(getAngular(data));
 
@@ -674,7 +674,7 @@ public:
         for (unsigned int k = 0; k < dim; ++k) result.getGradientF(k) += covMN(getLinear(data),dFt[k]) + W * PFdFa.getGradientF(k);
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data.getF() * Ft ;
         for (unsigned int k = 0; k < dim; ++k) getLinear(result) += data.getGradientF(k) * dFt[k] ;
@@ -686,7 +686,7 @@ public:
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -710,8 +710,8 @@ public:
     }
 
     // TO DO : implement this !!
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false) {return KBlock();}
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override {return KBlock();}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/,  const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
 };
 
 

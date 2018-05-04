@@ -96,7 +96,7 @@ public:
     typedef helper::WriteOnlyAccessor<Data< SeqTriangles > > waTriangles;
     Data< SeqTriangles > triangles; ///< output triangles
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const DepthMapToMeshEngine<ImageTypes>* = NULL) { return ImageTypes::Name();    }
 
     DepthMapToMeshEngine()    :   Inherited()
@@ -120,14 +120,14 @@ public:
         f_listening.setValue(true);
     }
 
-    virtual ~DepthMapToMeshEngine()
+    ~DepthMapToMeshEngine() override
     {
 #ifndef SOFA_NO_OPENGL
         if(texture) delete texture;
 #endif /* SOFA_NO_OPENGL */
     }
 
-    virtual void init() override
+    void init() override
     {
         addInput(&image);
         addInput(&transform);
@@ -137,7 +137,7 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit() override { update(); }
+    void reinit() override { update(); }
 
 protected:
 
@@ -147,7 +147,7 @@ protected:
     static const unsigned texture_res=256;
 #endif /* SOFA_NO_OPENGL */
 
-    virtual void update() override
+    void update() override
     {
         raImage in(this->image);
         raTransform inT(this->transform);
@@ -236,7 +236,7 @@ protected:
         }
     }
 
-    virtual void draw(const core::visual::VisualParams* vparams) override
+    void draw(const core::visual::VisualParams* vparams) override
     {
 #ifndef SOFA_NO_OPENGL
 

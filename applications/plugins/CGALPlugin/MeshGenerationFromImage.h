@@ -117,16 +117,16 @@ public:
 
 public:
     MeshGenerationFromImage();
-    virtual ~MeshGenerationFromImage() { }
+    ~MeshGenerationFromImage() override { }
 
-    void init();
-    void reinit();
+    void init() override;
+    void reinit() override;
 
-    void update();
+    void update() override;
 
-    void draw(const sofa::core::visual::VisualParams* vparams);
+    void draw(const sofa::core::visual::VisualParams* vparams) override;
 
-    virtual std::string getTemplateName() const
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

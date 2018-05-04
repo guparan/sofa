@@ -299,7 +299,7 @@ public:
         _PSDStabilization = PSDStabilization;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         StrainVec S; // principal stretches
         _degenerated = helper::Decompose<Real>::SVD_stable( data.getF(), _U, S, _V );
@@ -323,7 +323,7 @@ public:
         computeJ();
     }
 
-    void addmult( OutDeriv& result, const InDeriv& data )
+    void addmult( OutDeriv& result, const InDeriv& data ) override
     {
         for( int i=0 ; i<spatial_dimensions ; ++i )
             for( int j=0 ; j<material_dimensions ; ++j )
@@ -331,7 +331,7 @@ public:
                     result.getStrain()[k] += _J[k][i*material_dimensions+j] * data.getF()[i][j];
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         for( int i=0 ; i<spatial_dimensions ; ++i )
             for( int j=0 ; j<material_dimensions ; ++j )
@@ -347,13 +347,13 @@ public:
                     _J[k][i*material_dimensions+j] = _U[i][k]*_V[j][k];
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         return _J;
     }
 
     // write (dU/dp.dp.fc.V+U.fc.dV/dp.dp) as a matrix-vector product K.dp
-    KBlock getK( const OutDeriv& childForce, bool=false )
+    KBlock getK( const OutDeriv& childForce, bool=false ) override
     {
         KBlock K;
 
@@ -363,7 +363,7 @@ public:
         return K;
     }
 
-    void addDForce( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor )
+    void addDForce( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor ) override
     {
         if( _degenerated ) return;
 

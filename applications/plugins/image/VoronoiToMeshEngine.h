@@ -90,7 +90,7 @@ public:
 
     Data< Real > minLength; ///< minimun edge length in pixels
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const VoronoiToMeshEngine<ImageTypes>* = NULL) { return ImageTypes::Name();    }
 
     VoronoiToMeshEngine()    :   Inherited()
@@ -109,7 +109,7 @@ public:
         f_listening.setValue(true);
     }
 
-    virtual void init() override
+    void init() override
     {
         addInput(&image);
         addInput(&background);
@@ -121,7 +121,7 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit() override { update(); }
+    void reinit() override { update(); }
 
 protected:
 
@@ -228,7 +228,7 @@ protected:
     }
 
 
-    virtual void update() override
+    void update() override
     {
         raImage in(this->image);
         raImage inb(this->background);
@@ -409,7 +409,7 @@ protected:
         }
     }
 
-    virtual void draw(const core::visual::VisualParams* vparams) override
+    void draw(const core::visual::VisualParams* vparams) override
     {
 #ifndef SOFA_NO_OPENGL
 

@@ -48,9 +48,9 @@ public:
     static std::string getDescription() {return "CompliantAttach";}
 
 protected:
-    virtual std::string defaultPerformerType() { return "CompliantAttach"; }
+    std::string defaultPerformerType() override { return "CompliantAttach"; }
 
-    virtual void setSetting(component::configurationsetting::MouseButtonSetting* s) { Operation::setSetting(s); setting = down_cast<component::configurationsetting::CompliantAttachButtonSetting>(s); }
+    void setSetting(component::configurationsetting::MouseButtonSetting* s) override { Operation::setSetting(s); setting = down_cast<component::configurationsetting::CompliantAttachButtonSetting>(s); }
     component::configurationsetting::CompliantAttachButtonSetting::SPtr setting;
 };
 }
@@ -107,12 +107,12 @@ class SOFA_Compliant_gui_API CompliantAttachPerformer: public TInteractionPerfor
 
 public:
     CompliantAttachPerformer(BaseMouseInteractor *i);
-    ~CompliantAttachPerformer();
-    virtual void configure(configurationsetting::MouseButtonSetting* setting);
+    ~CompliantAttachPerformer() override;
+    void configure(configurationsetting::MouseButtonSetting* setting) override;
 
 
-    void start();
-    void execute();
+    void start() override;
+    void execute() override;
 
 };
 

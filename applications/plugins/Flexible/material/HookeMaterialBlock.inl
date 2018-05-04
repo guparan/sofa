@@ -63,7 +63,7 @@ template<typename Real,int dim,unsigned int size>
 class IsotropicHookeLaw: public HookeLaw<Real,dim,size>
 {
 public:
-    virtual void set(const std::vector<Real> &cparams)
+    void set(const std::vector<Real> &cparams) override
     {
         Real youngM=cparams[0] , poissonR=cparams[1];
 
@@ -74,7 +74,7 @@ public:
         this->Kparams.resize(2); this->Kparams[0]=lamd; this->Kparams[1]=mu;
     }
 
-    virtual Eigen::Matrix<Real,size,size,Eigen::RowMajor> assembleK(const Real &vol) const
+    Eigen::Matrix<Real,size,size,Eigen::RowMajor> assembleK(const Real &vol) const override
     {
         typedef Eigen::Matrix<Real,size,size,Eigen::RowMajor> block;
         block K=block::Zero();
@@ -86,7 +86,7 @@ public:
         return K;
     }
 
-    virtual void applyK(Vec<size,Real> &out, const Vec<size,Real> &in, const Real &vol) const
+    void applyK(Vec<size,Real> &out, const Vec<size,Real> &in, const Real &vol) const override
     {
         if(!vol) return;
         Real muVol = this->Kparams[1]*vol;
@@ -99,7 +99,7 @@ public:
         }
     }
 
-    virtual Eigen::Matrix<Real,size,size,Eigen::RowMajor> assembleC(const Real &vol) const
+    Eigen::Matrix<Real,size,size,Eigen::RowMajor> assembleC(const Real &vol) const override
     {
         typedef Eigen::Matrix<Real,size,size,Eigen::RowMajor> block;
         block C=block::Zero();
@@ -119,13 +119,13 @@ template<class Real,unsigned int dim,unsigned int size>
 class ViscosityHookeLaw: public HookeLaw<Real,dim,size>
 {
 public:
-    virtual void set(const std::vector<Real> &cparams)
+    void set(const std::vector<Real> &cparams) override
     {
         this->Cparams.clear(); this->Cparams.push_back(cparams[0]);
         this->Kparams.clear(); this->Kparams.push_back(0.5*cparams[0]);
     }
 
-    virtual Eigen::Matrix<Real,size,size,Eigen::RowMajor> assembleK(const Real &vol) const
+    Eigen::Matrix<Real,size,size,Eigen::RowMajor> assembleK(const Real &vol) const override
     {
         static_assert( dim<=size, "" );
         typedef Eigen::Matrix<Real,size,size,Eigen::RowMajor> block;
@@ -137,7 +137,7 @@ public:
         return K;
     }
 
-    virtual void applyK(Vec<size,Real> &out, const Vec<size,Real> &in, const Real &vol) const
+    void applyK(Vec<size,Real> &out, const Vec<size,Real> &in, const Real &vol) const override
     {
         if(!vol) return;
         Real muVol = this->Kparams[0]*vol;
@@ -145,7 +145,7 @@ public:
         for(unsigned int i=dim; i<size; i++)          out[i]-=in[i]*muVol;
     }
 
-    virtual Eigen::Matrix<Real,size,size,Eigen::RowMajor> assembleC(const Real &vol) const
+    Eigen::Matrix<Real,size,size,Eigen::RowMajor> assembleC(const Real &vol) const override
     {
         typedef Eigen::Matrix<Real,size,size,Eigen::RowMajor> block;
         block C=block::Zero();
@@ -168,7 +168,7 @@ template<class Real>
 class OrthotropicHookeLaw<Real,3,6>: public HookeLaw<Real,3,6>
 {
 public:
-    virtual void set(const std::vector<Real> &cparams)
+    void set(const std::vector<Real> &cparams) override
     {
         Real youngMx=cparams[0]     ,youngMy=cparams[1]     ,youngMz=cparams[2] ,
              poissonRxy=cparams[3]  ,poissonRyz=cparams[4]  ,poissonRzx=cparams[5] ,
@@ -192,7 +192,7 @@ public:
         this->Kparams[6]=C44; this->Kparams[7]=C55; this->Kparams[8]=C66;
     }
 
-    virtual Eigen::Matrix<Real,6,6,Eigen::RowMajor> assembleK(const Real &vol) const
+    Eigen::Matrix<Real,6,6,Eigen::RowMajor> assembleK(const Real &vol) const override
     {
         Eigen::Matrix<Real,6,6,Eigen::RowMajor> K;
         K<<    -vol*this->Kparams[0] ,-vol*this->Kparams[3] ,-vol*this->Kparams[5] , 0                      , 0                     , 0,
@@ -204,7 +204,7 @@ public:
         return K;
     }
 
-    virtual void applyK(Vec<6,Real> &out, const Vec<6,Real> &in, const Real &vol) const
+    void applyK(Vec<6,Real> &out, const Vec<6,Real> &in, const Real &vol) const override
     {
         if(!vol) return;
         out[0]-=vol*(this->Kparams[0]*in[0]+this->Kparams[3]*in[1]+this->Kparams[5]*in[2]);
@@ -215,7 +215,7 @@ public:
         out[5]-=vol*this->Kparams[8]*in[5];
     }
 
-    virtual Eigen::Matrix<Real,6,6,Eigen::RowMajor> assembleC(const Real &vol) const
+    Eigen::Matrix<Real,6,6,Eigen::RowMajor> assembleC(const Real &vol) const override
     {
         Eigen::Matrix<Real,6,6,Eigen::RowMajor> C;
         C<<    -1./(vol*this->Cparams[0])                   ,  this->Cparams[3]/(vol*this->Cparams[0])  ,  this->Cparams[5]/(vol*this->Cparams[2])  , 0                    , 0                 , 0,
@@ -238,7 +238,7 @@ template<typename Real>
 class TransverseHookeLaw<Real,3,6>: public HookeLaw<Real,3,6>
 {
 public:
-    virtual void set(const std::vector<Real> &cparams)
+    void set(const std::vector<Real> &cparams) override
     {
         Real youngMx=cparams[0]     ,youngMy=cparams[1]     ,
              poissonRxy=cparams[2]  ,poissonRyz=cparams[3]  ,
@@ -259,7 +259,7 @@ public:
         this->Kparams[4]=C55;
     }
 
-    virtual Eigen::Matrix<Real,6,6,Eigen::RowMajor> assembleK(const Real &vol) const
+    Eigen::Matrix<Real,6,6,Eigen::RowMajor> assembleK(const Real &vol) const override
     {
         Eigen::Matrix<Real,6,6,Eigen::RowMajor> K;
         K<<    -vol*this->Kparams[0] ,-vol*this->Kparams[2] ,-vol*this->Kparams[2]  , 0                                               , 0                        , 0,
@@ -271,7 +271,7 @@ public:
         return K;
     }
 
-    virtual void applyK(Vec<6,Real> &out, const Vec<6,Real> &in, const Real &vol) const
+    void applyK(Vec<6,Real> &out, const Vec<6,Real> &in, const Real &vol) const override
     {
         if(!vol) return;
         out[0]-=vol*(this->Kparams[0]*in[0]+this->Kparams[2]*(in[1]+in[2]) ) ;
@@ -282,7 +282,7 @@ public:
         out[5]-=vol*this->Kparams[4]*in[5];
     }
 
-    virtual Eigen::Matrix<Real,6,6,Eigen::RowMajor> assembleC(const Real &vol) const
+    Eigen::Matrix<Real,6,6,Eigen::RowMajor> assembleC(const Real &vol) const override
     {
         Eigen::Matrix<Real,6,6,Eigen::RowMajor> C;
         C<<    -1./(vol*this->Cparams[0])              ,  this->Cparams[2]/(vol*this->Cparams[0])  ,  this->Cparams[2]/(vol*this->Cparams[0])  , 0             , 0           , 0,
@@ -302,7 +302,7 @@ template<typename Real>
 class OrthotropicHookeLaw<Real,2,3>: public HookeLaw<Real,2,3>
 {
 public:
-    virtual void set(const std::vector<Real> &cparams)
+    void set(const std::vector<Real> &cparams) override
     {
         Real youngMx=cparams[0]     ,youngMy=cparams[1],
              poissonRxy=cparams[2]  ,shearMxy=cparams[3];
@@ -319,7 +319,7 @@ public:
         this->Kparams[2]=C12; this->Kparams[3]=C33;
     }
 
-    virtual Eigen::Matrix<Real,3,3,Eigen::RowMajor> assembleK(const Real &vol) const
+    Eigen::Matrix<Real,3,3,Eigen::RowMajor> assembleK(const Real &vol) const override
     {
         Eigen::Matrix<Real,3,3,Eigen::RowMajor> K;
         K<<    -vol*this->Kparams[0] ,-vol*this->Kparams[2] , 0,
@@ -328,7 +328,7 @@ public:
         return K;
     }
 
-    virtual void applyK(Vec<3,Real> &out, const Vec<3,Real> &in, const Real &vol) const
+    void applyK(Vec<3,Real> &out, const Vec<3,Real> &in, const Real &vol) const override
     {
         if(!vol) return;
         out[0]-=vol*(this->Kparams[0]*in[0]+this->Kparams[2]*in[1]);
@@ -336,7 +336,7 @@ public:
         out[2]-=vol*this->Kparams[3]*in[2];
     }
 
-    virtual Eigen::Matrix<Real,3,3,Eigen::RowMajor> assembleC(const Real &vol) const
+    Eigen::Matrix<Real,3,3,Eigen::RowMajor> assembleC(const Real &vol) const override
     {
         Eigen::Matrix<Real,3,3,Eigen::RowMajor> C;
         C<<    -1./(vol*this->Cparams[0])               ,  this->Cparams[2]/(vol*this->Cparams[0]) , 0,
@@ -486,7 +486,7 @@ public:
     }
 
 
-    Real getPotentialEnergy(const Coord& x) const
+    Real getPotentialEnergy(const Coord& x) const override
     {
         Deriv f; const Deriv v;
         addForce( f , x , v );
@@ -505,7 +505,7 @@ public:
         return W;
     }
 
-    void addForce( Deriv& f , const Coord& x , const Deriv& v) const
+    void addForce( Deriv& f , const Coord& x , const Deriv& v) const override
     {
         // order 0
         hooke.applyK(f.getStrain(),x.getStrain(),factors.vol());
@@ -601,7 +601,7 @@ public:
         }
     }
 
-    void addDForce( Deriv&   df , const Deriv&   dx, const SReal& kfactor, const SReal& bfactor ) const
+    void addDForce( Deriv&   df , const Deriv&   dx, const SReal& kfactor, const SReal& bfactor ) const override
     {
         // order 0
         hooke.applyK(df.getStrain(),dx.getStrain(),factors.vol()*kfactor);
@@ -697,7 +697,7 @@ public:
 
 
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         MatBlock K = MatBlock();
         EigenMap eK(&K[0][0],MatBlock::nbLines,MatBlock::nbCols);
@@ -749,7 +749,7 @@ public:
         return K;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C ;
         if( order > 0 ) C.invert(-getK());
@@ -761,7 +761,7 @@ public:
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         MatBlock B = MatBlock();
         EigenMap eB(&B[0][0]);

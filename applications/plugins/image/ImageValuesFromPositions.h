@@ -153,7 +153,7 @@ public:
     Data< Real > outValue; ///< default value outside image
 
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const ImageValuesFromPositions<ImageTypes>* = NULL) { return ImageTypes::Name();    }
 
     ImageValuesFromPositions()    :   Inherited()
@@ -174,7 +174,7 @@ public:
         f_listening.setValue(true);
     }
 
-    virtual void init() override
+    void init() override
     {
         addInput(&image);
         addInput(&transform);
@@ -183,13 +183,13 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit() override { update(); }
+    void reinit() override { update(); }
 
 protected:
 
     unsigned int time;
 
-    virtual void update() override
+    void update() override
     {
         ImageValuesFromPositionsSpecialization<ImageTypes>::update( *this );
         cleanDirty();

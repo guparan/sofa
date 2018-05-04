@@ -83,7 +83,7 @@ struct PythonFactory_test : public Sofa_test<>,
 {
 protected:
 
-    virtual void SetUp() override
+    void SetUp() override
     {
         /// ADDING new component in the python Factory
         /// of course its binding must be defined!
@@ -91,7 +91,7 @@ protected:
         SP_ADD_CLASS_IN_FACTORY( ExternalComponent, sofa::ExternalComponent )
     }
 
-    virtual void TearDown() override
+    void TearDown() override
     {
     }
 

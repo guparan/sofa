@@ -364,7 +364,7 @@ public:
     Data<unsigned int> nFrames; ///< The number of frames of the sequence to be loaded. Default is the entire sequence.
 
 
-    virtual std::string getTemplateName() const	override { return templateName(this); }
+    std::string getTemplateName() const	override { return templateName(this); }
     static std::string templateName(const ImageContainer<ImageTypes>* = NULL) {	return ImageTypes::Name(); }
 
     ImageContainer() : Inherited()
@@ -392,11 +392,11 @@ public:
         wimage->clear();
     }
 
-    virtual ~ImageContainer() {clear();}
+    ~ImageContainer() override {clear();}
 
     bool transformIsSet;
 
-    virtual void parse(sofa::core::objectmodel::BaseObjectDescription *arg) override
+    void parse(sofa::core::objectmodel::BaseObjectDescription *arg) override
     {
         Inherited::parse(arg);
 
@@ -412,7 +412,7 @@ public:
         ImageContainerSpecialization<ImageTypes>::parse( this, arg );
     }
 
-    virtual void init() override
+    void init() override
     {
         ImageContainerSpecialization<ImageTypes>::init( this );
 
@@ -531,7 +531,7 @@ protected:
         for(unsigned int i=0;i<p.size();i++) c[i]=rtransform->fromImage(p[i]);
     }
 
-    virtual void computeBBox(const core::ExecParams*  params, bool onlyVisible=false ) override
+    void computeBBox(const core::ExecParams*  params, bool onlyVisible=false ) override
     {
         if( onlyVisible && !drawBB.getValue()) return;
 

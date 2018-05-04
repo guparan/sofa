@@ -49,7 +49,7 @@ public:
 protected:
     DefaultCollisionGroupManager();
 
-    virtual ~DefaultCollisionGroupManager();
+    ~DefaultCollisionGroupManager() override;
 	
 private:
 	DefaultCollisionGroupManager(const DefaultCollisionGroupManager& n) ;
@@ -57,16 +57,16 @@ private:
 
 public:
 
-    virtual void createGroups(core::objectmodel::BaseContext* scene, const sofa::helper::vector<core::collision::Contact::SPtr>& contacts) override;
+    void createGroups(core::objectmodel::BaseContext* scene, const sofa::helper::vector<core::collision::Contact::SPtr>& contacts) override;
 
-    virtual void clearGroups(core::objectmodel::BaseContext* scene) override;
+    void clearGroups(core::objectmodel::BaseContext* scene) override;
 
 protected:
 
     //Find the node containing the ode solver used to animate the mechanical model associated to the collision model
     virtual simulation::Node* getIntegrationNode(core::CollisionModel* model);
 
-    virtual void changeInstance(Instance inst) override
+    void changeInstance(Instance inst) override
     {
         core::collision::CollisionGroupManager::changeInstance(inst);
         storedGroupSet[instance].swap(groupSet);

@@ -87,17 +87,17 @@ public:
 
 public:
     DecimateMesh();
-    virtual ~DecimateMesh();
+    ~DecimateMesh() override;
 
-    void init();
-    void reinit();
+    void init() override;
+    void reinit() override;
 
-    void update();
+    void update() override;
     void draw();
     void writeObj();
     void computeNormals();
 
-    virtual std::string getTemplateName() const
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }
@@ -107,7 +107,7 @@ public:
         return DataTypes::Name();
     }
 
-    virtual void handleEvent(sofa::core::objectmodel::Event *event);
+    void handleEvent(sofa::core::objectmodel::Event *event) override;
 
 
     void geometry_to_surface(Surface &s);
@@ -158,7 +158,7 @@ public:
         m_triangles = triangles;
     }
 
-    void operator()( HDS& hds)
+    void operator()( HDS& hds) override
     {
         unsigned int numVertices = m_vertices.size();
         unsigned int numTriangles = m_triangles.size();

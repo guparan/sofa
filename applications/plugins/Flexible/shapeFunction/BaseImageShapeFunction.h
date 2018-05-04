@@ -216,12 +216,12 @@ public:
      Data< helper::vector<int> > f_cell;    ///< indices required by shape function in case of overlapping elements
     //@}
 
-    virtual std::string getTemplateName() const    { return templateName(this); }
+    std::string getTemplateName() const override    { return templateName(this); }
     static std::string templateName(const BaseImageShapeFunction<ShapeFunctionTypes_,ImageTypes_>* = NULL) { return ShapeFunctionTypes_::Name()+std::string(",")+ImageTypes_::Name(); }
 
 
     /// interpolate weights and their derivatives at a spatial position
-    void computeShapeFunction(const Coord& childPosition, VRef& ref, VReal& w, VGradient* dw=NULL,VHessian* ddw=NULL, const int cell=-1)
+    void computeShapeFunction(const Coord& childPosition, VRef& ref, VReal& w, VGradient* dw=NULL,VHessian* ddw=NULL, const int cell=-1) override
     {
         // resize input
         unsigned int nbRef=this->f_nbRef.getValue();
@@ -241,7 +241,7 @@ public:
         this->normalize(w,dw,ddw);
     }
 
-    virtual void init()
+    void init() override
     {
         Inherit::init();
     }
@@ -266,7 +266,7 @@ protected:
         BaseImageShapeFunctionSpecialization<ImageTypes>::constructor( this );
     }
 
-    virtual ~BaseImageShapeFunction()
+    ~BaseImageShapeFunction() override
     {
 
     }

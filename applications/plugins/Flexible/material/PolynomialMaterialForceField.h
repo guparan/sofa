@@ -63,7 +63,7 @@ public:
 //    Data<bool > f_PSDStabilization;
     //@}
 
-    virtual void reinit()
+    void reinit() override
     {
         Real C10=0.0;
         Real C01=0,C20=0,C02=0,C30=0,C03=0,C11=0,bulk=0;
@@ -100,7 +100,7 @@ protected:
     {
     }
 
-    virtual ~PolynomialMaterialForceField()     {    }
+    ~PolynomialMaterialForceField() override     {    }
 
 };
 

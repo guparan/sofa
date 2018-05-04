@@ -89,7 +89,7 @@ struct NeoHookeHexahedraMaterial_test : public Sofa_test<typename Vec3Types::Rea
     simulation::Node::SPtr strainNode;
 
     // Create the context for the scene
-    void SetUp()
+    void SetUp() override
     { 
         // Init simulation
         sofa::simulation::setSimulation(simulation = new sofa::simulation::graph::DAGSimulation());
@@ -267,7 +267,7 @@ struct NeoHookeHexahedraMaterial_test : public Sofa_test<typename Vec3Types::Rea
 		return true;
 	}
 
-    void TearDown()
+    void TearDown() override
     {
         if (tractionStruct.root!=NULL)
             sofa::simulation::getSimulation()->unload(tractionStruct.root);

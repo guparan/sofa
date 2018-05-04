@@ -87,7 +87,7 @@ public:
         stabilization = _stabilization;
     }
 
-    Real getPotentialEnergy(const Coord& x) const
+    Real getPotentialEnergy(const Coord& x) const override
     {
         Real J = x.getStrain()[0]*x.getStrain()[1]*x.getStrain()[2];
         Real Jm1 = J-1;
@@ -105,7 +105,7 @@ public:
                volond3 * squareJm1*fourJm1;
     }
 
-    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const
+    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const override
     {
         const Real& U1 = x.getStrain()[0];
         const Real& U2 = x.getStrain()[1];
@@ -169,24 +169,24 @@ public:
 
     }
 
-    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const
+    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const override
     {
         df.getStrain() -= _K * dx.getStrain() * kfactor;
     }
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         return -_K;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C = MatBlock();
         C.invert( _K );
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         return MatBlock();
     }
@@ -243,7 +243,7 @@ public:
         stabilization = _stabilization;
     }
 
-    Real getPotentialEnergy(const Coord& x) const
+    Real getPotentialEnergy(const Coord& x) const override
     {
         Real J = x.getStrain()[0]*x.getStrain()[1];
         Real Jm1 = J-1;
@@ -261,7 +261,7 @@ public:
                volond3 * squareJm1*fourJm1;
     }
 
-    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const
+    void addForce( Deriv& f, const Coord& x, const Deriv& /*v*/) const override
     {
         const Real& U1 = x.getStrain()[0];
         const Real& U2 = x.getStrain()[1];
@@ -354,24 +354,24 @@ public:
 
     }
 
-    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const
+    void addDForce( Deriv& df, const Deriv& dx, const SReal& kfactor, const SReal& /*bfactor*/ ) const override
     {
         df.getStrain() -= _K * dx.getStrain() * kfactor;
     }
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         return -_K;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C = MatBlock();
         C.invert( _K );
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         return MatBlock();
     }

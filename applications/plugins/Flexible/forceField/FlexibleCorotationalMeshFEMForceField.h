@@ -49,7 +49,7 @@ public:
 
     SOFA_CLASS2(SOFA_TEMPLATE(FlexibleCorotationalMeshFEMForceField,DataTypes),SOFA_TEMPLATE(core::behavior::ForceField,DataTypes),SOFA_TEMPLATE(shapefunction::BarycentricShapeFunction,core::behavior::ShapeFunction));
 
-    virtual std::string getTemplateName() const { return templateName(this); }
+    std::string getTemplateName() const override { return templateName(this); }
     static std::string templateName( const FlexibleCorotationalMeshFEMForceField<DataTypes>* = NULL) { return DataTypes::Name(); }
 
     /** @name  Input types    */
@@ -67,7 +67,7 @@ public:
 
     /** @name forceField functions */
     //@{
-    virtual void init()
+    void init() override
     {
         if( !this->mstate )
         {
@@ -146,7 +146,7 @@ public:
 
 
 
-    virtual void reinit()
+    void reinit() override
     {
 
         unsigned size = _materialBlocks.size();
@@ -212,7 +212,7 @@ public:
 
 
 
-    virtual void addForce(const core::MechanicalParams* mparams, DataVecDeriv& _f, const DataVecCoord& _x, const DataVecDeriv& _v)
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& _f, const DataVecCoord& _x, const DataVecDeriv& _v) override
     {
         m_corotationalDeformationMapping->apply( mparams, m_rotatedDofs->x ,_x);
         m_corotationalDeformationMapping->applyJ( mparams, m_rotatedDofs->v ,_v);
@@ -280,7 +280,7 @@ public:
 //        }*/
     }
 
-    virtual void addDForce(const core::MechanicalParams* mparams, DataVecDeriv&  _df, const DataVecDeriv&  _dx )
+    void addDForce(const core::MechanicalParams* mparams, DataVecDeriv&  _df, const DataVecDeriv&  _dx ) override
     {
         m_corotationalDeformationMapping->applyJ( mparams, m_rotatedDofs->dx ,_dx);
 
@@ -296,13 +296,13 @@ public:
     }
 
 
-    virtual SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord& /*x*/) const
+    SReal getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord& /*x*/) const override
     {
         // TODO not implemented
         return 0;
     }
 
-    void draw(const core::visual::VisualParams* /*vparams*/)
+    void draw(const core::visual::VisualParams* /*vparams*/) override
     {
     }
     //@}
@@ -401,7 +401,7 @@ protected:
 
     }
 
-    virtual ~FlexibleCorotationalMeshFEMForceField() {}
+    ~FlexibleCorotationalMeshFEMForceField() override {}
 
 
 

@@ -73,7 +73,7 @@ public:
     Data<helper::OptionsGroup> method; ///< method
     Data< ParamTypes > param; ///< param
 
-    virtual void computeShapeFunction(const Coord& childPosition, VRef& ref, VReal& w, VGradient* dw=NULL,VHessian* ddw=NULL, const Cell /*cell*/=-1)
+    void computeShapeFunction(const Coord& childPosition, VRef& ref, VReal& w, VGradient* dw=NULL,VHessian* ddw=NULL, const Cell /*cell*/=-1) override
     {
         helper::ReadAccessor<Data<VCoord > > parent(this->f_position);
         unsigned int nbp=parent.size(),nbRef=this->f_nbRef.getValue();
@@ -158,7 +158,7 @@ protected:
         method.setValue(methodo);
     }
 
-    virtual ~HatShapeFunction()
+    ~HatShapeFunction() override
     {
 
     }

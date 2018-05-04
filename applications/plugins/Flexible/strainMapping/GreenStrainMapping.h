@@ -55,9 +55,9 @@ protected:
     {
     }
 
-    virtual ~GreenStrainMapping()     { }
+    ~GreenStrainMapping() override     { }
 
-    virtual void applyDJT(const core::MechanicalParams* mparams, core::MultiVecDerivId parentDfId, core::ConstMultiVecDerivId childForce)
+    void applyDJT(const core::MechanicalParams* mparams, core::MultiVecDerivId parentDfId, core::ConstMultiVecDerivId childForce) override
     {
         if(!f_geometricStiffness.getValue()) return;
         else Inherit::applyDJT(mparams,parentDfId,childForce);

@@ -42,8 +42,8 @@ public:
     Data<SReal> d_damping; ///< uniform viscous damping
 
 
-    virtual SReal getPotentialEnergy( const core::MechanicalParams* /*mparams*/,
-                                      const DataVecCoord& x ) const
+    SReal getPotentialEnergy( const core::MechanicalParams* /*mparams*/,
+                                      const DataVecCoord& x ) const override
     {
         const VecCoord& _x = x.getValue();
         const SReal& k = d_stiffness.getValue();
@@ -59,10 +59,10 @@ public:
         return e;
     }
     
-    virtual void addForce(const core::MechanicalParams *,
+    void addForce(const core::MechanicalParams *,
                           DataVecDeriv &f,
                           const DataVecCoord &x,
-                          const DataVecDeriv &)
+                          const DataVecDeriv &) override
     {
         const VecCoord& _x = x.getValue();
         VecDeriv& _f = *f.beginEdit();
@@ -84,9 +84,9 @@ public:
         f.endEdit();
     }
 
-    virtual void addDForce(const core::MechanicalParams *mparams,
+    void addDForce(const core::MechanicalParams *mparams,
                            DataVecDeriv &df,
-                           const DataVecDeriv &dx)
+                           const DataVecDeriv &dx) override
     {
 
         const VecDeriv& _dx = dx.getValue();
@@ -108,8 +108,8 @@ public:
         df.endEdit();
     }
 
-    virtual void addKToMatrix( sofa::defaulttype::BaseMatrix * matrix,
-                               SReal kFact, unsigned int &offset )
+    void addKToMatrix( sofa::defaulttype::BaseMatrix * matrix,
+                               SReal kFact, unsigned int &offset ) override
     {
         const SReal& k = - d_stiffness.getValue() * kFact;
         size_t size = this->mstate->getMatrixSize();
@@ -123,8 +123,8 @@ public:
         }
     }
 
-    virtual void addBToMatrix( sofa::defaulttype::BaseMatrix * matrix,
-                               SReal bFact, unsigned int &offset )
+    void addBToMatrix( sofa::defaulttype::BaseMatrix * matrix,
+                               SReal bFact, unsigned int &offset ) override
     {
         const SReal& b = - d_damping.getValue() * bFact;
         size_t size = this->mstate->getMatrixSize();
@@ -138,7 +138,7 @@ public:
         }
     }
 
-    virtual void updateForceMask()
+    void updateForceMask() override
     {
         for( unsigned int i=0 ; i<m_violated.size() ; ++i )
             if(m_violated[i])

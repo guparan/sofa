@@ -102,7 +102,7 @@ public:
     Data< float > showIndicesScale; ///< Indices samples scale
     //@}
 
-    virtual std::string getTemplateName() const    { return templateName(this);    }
+    std::string getTemplateName() const override    { return templateName(this);    }
     static std::string templateName(const BaseGaussPointSampler* = NULL) { return std::string();    }
 
     BaseGaussPointSampler()    :   Inherited()
@@ -123,7 +123,7 @@ public:
         f_method.setValue(methodOptions);
     }
 
-    virtual void init()
+    void init() override
     {
         addInput(&f_method);
         addInput(&f_order);
@@ -141,7 +141,7 @@ public:
 
 protected:
 
-    virtual void draw(const core::visual::VisualParams* vparams)
+    void draw(const core::visual::VisualParams* vparams) override
     {
         if (!vparams->displayFlags().getShowVisualModels()) return;
 

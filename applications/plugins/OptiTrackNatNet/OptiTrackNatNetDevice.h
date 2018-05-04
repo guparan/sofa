@@ -67,17 +67,17 @@ protected:
 public:
 
     OptiTrackNatNetDevice();
-    virtual ~OptiTrackNatNetDevice();
+    ~OptiTrackNatNetDevice() override;
 
-    virtual void init();
-    virtual void reinit();
-    virtual void draw(const sofa::core::visual::VisualParams* vparams);
+    void init() override;
+    void reinit() override;
+    void draw(const sofa::core::visual::VisualParams* vparams) override;
 
-    virtual void processModelDef(const ModelDef* data);
-    virtual void processFrame(const FrameData* data);
+    void processModelDef(const ModelDef* data) override;
+    void processFrame(const FrameData* data) override;
 
-    virtual void onBeginAnimationStep(const double /*dt*/);
-    virtual void onKeyPressedEvent(sofa::core::objectmodel::KeypressedEvent* ev);
+    void onBeginAnimationStep(const double /*dt*/) override;
+    void onKeyPressedEvent(sofa::core::objectmodel::KeypressedEvent* ev) override;
 
     sofa::core::objectmodel::Data<std::string> trackableName; ///< NatNet trackable name
     sofa::core::objectmodel::Data<int> trackableID; ///< NatNet trackable number (ignored if trackableName is set)

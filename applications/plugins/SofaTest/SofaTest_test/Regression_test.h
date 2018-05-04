@@ -227,7 +227,7 @@ protected:
 
 
     // Create the context for the scene
-    virtual void SetUp()
+    void SetUp() override
     {
         sofa::component::initComponentBase();
         sofa::component::initComponentCommon();

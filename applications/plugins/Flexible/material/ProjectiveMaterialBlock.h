@@ -93,7 +93,7 @@ class ProjectiveMaterialBlock< F331(_Real) >:
 
 
 
-    Real getPotentialEnergy(const Coord& x) const
+    Real getPotentialEnergy(const Coord& x) const override
     {
         this->project(x.getF());
         Real W=0;
@@ -101,33 +101,33 @@ class ProjectiveMaterialBlock< F331(_Real) >:
         return W*K*0.5;
     }
 
-    void addForce( Deriv& f , const Coord& x , const Deriv& v) const
+    void addForce( Deriv& f , const Coord& x , const Deriv& v) const override
     {
         this->project(x.getF());
         f.getF()-= K*(x.getF()- P);
         f.getF()-= B*v.getF();
     }
 
-    void addDForce( Deriv&   df, const Deriv&   dx, const SReal& kfactor, const SReal& bfactor ) const
+    void addDForce( Deriv&   df, const Deriv&   dx, const SReal& kfactor, const SReal& bfactor ) const override
     {
         df.getF() -= dx.getF()*(kfactor*K+bfactor*B);
     }
 
-    MatBlock getK() const
+    MatBlock getK() const override
     {
         MatBlock mK; mK.clear();
         for (int i=0; i<mK.nbLines; i++) mK[i][i]=-K;
         return mK;
     }
 
-    MatBlock getC() const
+    MatBlock getC() const override
     {
         MatBlock C; C.clear();
         for (int i=0; i<C.nbLines; i++) C[i][i]=1./K;
         return C;
     }
 
-    MatBlock getB() const
+    MatBlock getB() const override
     {
         MatBlock mB; mB.clear();
         for (int i=0; i<mB.nbLines; i++) mB[i][i]=-B;

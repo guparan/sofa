@@ -49,12 +49,12 @@ public:
     typedef BaseImageShapeFunction<ShapeFunctionTypes_,ImageTypes_> Inherit;
 
 
-    virtual std::string getTemplateName() const    { return templateName(this); }
+    std::string getTemplateName() const override    { return templateName(this); }
     static std::string templateName(const ImageShapeFunctionContainer<ShapeFunctionTypes_,ImageTypes_>* = NULL) { return ShapeFunctionTypes_::Name()+std::string(",")+ImageTypes_::Name(); }
 
 
-    virtual void init()    { Inherit::init(); reinit();}
-    virtual void reinit()
+    void init() override    { Inherit::init(); reinit();}
+    void reinit() override
     {
         Inherit::reinit();
         // chane nbref according to nb channels
@@ -78,7 +78,7 @@ protected:
         this->f_index.setGroup("input");
     }
 
-    virtual ~ImageShapeFunctionContainer()
+    ~ImageShapeFunctionContainer() override
     {
 
     }

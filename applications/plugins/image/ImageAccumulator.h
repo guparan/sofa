@@ -76,7 +76,7 @@ public:
     Data< ImageTypes > outputImage;
     Data< TransformType > outputTransform;
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const ImageAccumulator<ImageTypes>* = NULL) { return ImageTypes::Name(); }
 
     ImageAccumulator()    :   Inherited()
@@ -95,9 +95,9 @@ public:
         f_listening.setValue(true);
     }
 
-    virtual ~ImageAccumulator() {}
+    ~ImageAccumulator() override {}
 
-    virtual void init() override
+    void init() override
     {
         addInput(&inputImage);
         addInput(&inputTransform);
@@ -106,14 +106,14 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit() override { update(); }
+    void reinit() override { update(); }
 
 protected:
     double SimuTime;
     ctime_t t0,t;
     int count;
 
-    virtual void update() override
+    void update() override
     {
         if(SimuTime==this->getContext()->getTime()) return; // check if simutime has changed
         SimuTime=this->getContext()->getTime();

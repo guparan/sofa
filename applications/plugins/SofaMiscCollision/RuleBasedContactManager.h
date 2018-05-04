@@ -112,7 +112,7 @@ public:
     Data< std::string > d_variables; ///< Define a list of variables to be used inside the rules
     Data< helper::vector<Rule> > rules;
 
-    virtual std::string getContactResponse(core::CollisionModel* model1, core::CollisionModel* model2) override;
+    std::string getContactResponse(core::CollisionModel* model1, core::CollisionModel* model2) override;
 
     void createVariableData ( std::string variable );
 
@@ -120,7 +120,7 @@ public:
 
 protected:
     RuleBasedContactManager();
-    ~RuleBasedContactManager();
+    ~RuleBasedContactManager() override;
 
     std::map<std::string,Data<std::string>* > variablesData;
 

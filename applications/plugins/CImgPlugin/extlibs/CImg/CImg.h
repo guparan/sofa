@@ -2426,7 +2426,7 @@ namespace cimg_library_suffixed {
       std::strncpy(_message,e._message,size);
       _message[size] = 0;
     }
-    ~CImgException() throw() { delete[] _message; }
+    ~CImgException() throw() override { delete[] _message; }
     CImgException& operator=(const CImgException& e) {
       const size_t size = std::strlen(e._message);
       _message = new char[size + 1];
@@ -2435,7 +2435,7 @@ namespace cimg_library_suffixed {
       return *this;
     }
     //! Return a C-string containing the error message associated to the thrown exception.
-    const char *what() const throw() { return _message; }
+    const char *what() const throw() override { return _message; }
   };
 
   // The CImgAbortException class is used to throw an exception when
@@ -2450,7 +2450,7 @@ namespace cimg_library_suffixed {
       std::strncpy(_message,e._message,size);
       _message[size] = 0;
     }
-    ~CImgAbortException() throw() { delete[] _message; }
+    ~CImgAbortException() throw() override { delete[] _message; }
     CImgAbortException& operator=(const CImgAbortException& e) {
       const size_t size = std::strlen(e._message);
       _message = new char[size + 1];
@@ -2459,7 +2459,7 @@ namespace cimg_library_suffixed {
       return *this;
     }
     //! Return a C-string containing the error message associated to the thrown exception.
-    const char *what() const throw() { return _message; }
+    const char *what() const throw() override { return _message; }
   };
 
   // The CImgArgumentException class is used to throw an exception related

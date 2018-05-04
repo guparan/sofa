@@ -103,12 +103,12 @@ public :
     typedef T Real;
     typedef typename BaseVector::Index Index;
 
-    virtual void resize(Index nbRow) = 0;
-    virtual Index size() const = 0;
-    virtual SReal element(Index i) const = 0;
-    virtual void clear() = 0;
-    virtual void set(Index i, SReal val) = 0;
-    virtual void add(Index i, SReal val) = 0;
+    void resize(Index nbRow) override = 0;
+    Index size() const override = 0;
+    SReal element(Index i) const override = 0;
+    void clear() override = 0;
+    void set(Index i, SReal val) override = 0;
+    void add(Index i, SReal val) override = 0;
     virtual const void* deviceRead(Index off=0) const = 0;
     virtual void * deviceWrite(Index off=0) = 0;
     virtual const T* hostRead(Index off=0) const = 0;
@@ -174,7 +174,7 @@ public :
         v.fastResize(nbRow,warp_size);
     }
 
-    void resize(Index nbRow)
+    void resize(Index nbRow) override
     {
         v.resize(nbRow);
     }
@@ -189,17 +189,17 @@ public :
         v.resize(nbRow,warp_size);
     }
 
-    Index size() const
+    Index size() const override
     {
         return v.size();
     }
 
-    SReal element(Index i) const
+    SReal element(Index i) const override
     {
         return v[i];
     }
 
-    void clear()
+    void clear() override
     {
         //for (unsigned Index i=0; i<size(); i++) v[i]=(T)(0.0);
 //		  v.memsetHost();
@@ -208,12 +208,12 @@ public :
 //                    v.resize(size);
     }
 
-    void set(Index i, SReal val)
+    void set(Index i, SReal val) override
     {
         v[i] = (T) val;
     }
 
-    void add(Index i, SReal val)
+    void add(Index i, SReal val) override
     {
         v[i] += (T)val;
     }
@@ -228,22 +228,22 @@ public :
         v = e.v;
     }
 
-    const void* deviceRead(Index off=0) const
+    const void* deviceRead(Index off=0) const override
     {
         return v.deviceReadAt(off);
     }
 
-    void * deviceWrite(Index off=0)
+    void * deviceWrite(Index off=0) override
     {
         return v.deviceWriteAt(off);
     }
 
-    void invalidateDevice()
+    void invalidateDevice() override
     {
         v.invalidateDevice();
     }
 
-    void invalidateHost()
+    void invalidateHost() override
     {
         v.invalidateHost();
     }
@@ -253,17 +253,17 @@ public :
         v.memsetDevice();
     }
 
-    const T* hostRead(Index off=0) const
+    const T* hostRead(Index off=0) const override
     {
         return v.hostReadAt(off);
     }
 
-    T * hostWrite(Index off=0)
+    T * hostWrite(Index off=0) override
     {
         return v.hostWriteAt(off);
     }
 
-    T getSingle(Index off)
+    T getSingle(Index off) override
     {
         return v.getSingle(off);
     }

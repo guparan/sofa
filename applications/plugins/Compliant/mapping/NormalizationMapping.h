@@ -45,13 +45,13 @@ class SOFA_Compliant_API NormalizationMapping : public AssembledMapping<T, T>
 
     enum {N = T::deriv_total_size };
 
-    virtual void init()
+    void init() override
     {
         reinit();
         Inherit1::init();
     }
 
-    virtual void reinit()
+    void reinit() override
     {
         helper::ReadAccessor< Data<helper::vector<unsigned> > > indices(d_indices);
         size_t size = indices.empty() ? this->getFromModel()->getSize() : indices.size(); // if indices is empty, mapping every input dofs
@@ -60,8 +60,8 @@ class SOFA_Compliant_API NormalizationMapping : public AssembledMapping<T, T>
         Inherit1::reinit();
     }
 
-	virtual void apply(typename self::out_pos_type& out, 
-	                   const typename self::in_pos_type& in )  {
+	void apply(typename self::out_pos_type& out, 
+	                   const typename self::in_pos_type& in ) override  {
 
         helper::ReadAccessor< Data<helper::vector<unsigned> > > indices(d_indices);
         size_t size = indices.empty() ? this->getFromModel()->getSize() : indices.size(); // if indices is empty, mapping every input dofs
@@ -75,7 +75,7 @@ class SOFA_Compliant_API NormalizationMapping : public AssembledMapping<T, T>
         }
 	}
 
-	virtual void assemble( const typename self::in_pos_type& in ) {
+	void assemble( const typename self::in_pos_type& in ) override {
 
         helper::ReadAccessor< Data<helper::vector<unsigned> > > indices(d_indices);
         size_t size = indices.empty() ? this->getFromModel()->getSize() : indices.size(); // if indices is empty, mapping every input dofs

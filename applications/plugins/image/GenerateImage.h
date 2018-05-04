@@ -58,7 +58,7 @@ public:
     Data< imCoord > dimxyzct;
     Data< ImageTypes > image;
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const GenerateImage<ImageTypes>* = NULL) { return ImageTypes::Name(); }
 
     GenerateImage()    :   Inherited()
@@ -68,20 +68,20 @@ public:
         this->addAlias(&dimxyzct, "dimensions");
     }
 
-    virtual ~GenerateImage() {}
+    ~GenerateImage() override {}
 
-    virtual void init() override
+    void init() override
     {
         addInput(&dimxyzct);
         addOutput(&image);
         setDirtyValue();
     }
 
-    virtual void reinit() override { update(); }
+    void reinit() override { update(); }
 
 protected:
 
-    virtual void update() override
+    void update() override
     {
         const imCoord& dim = this->dimxyzct.getValue();
         helper::WriteOnlyAccessor<Data< ImageTypes > > out(this->image);

@@ -492,7 +492,7 @@ public:
 
     CudaRigidDistanceGridCollisionModel();
 
-    ~CudaRigidDistanceGridCollisionModel();
+    ~CudaRigidDistanceGridCollisionModel() override;
 
     core::behavior::MechanicalState<InDataTypes>* getRigidModel() { return rigid; }
     core::behavior::MechanicalState<InDataTypes>* getMechanicalState() { return rigid; }

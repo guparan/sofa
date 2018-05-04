@@ -353,12 +353,12 @@ public:
     }
 protected:
     SpatialGridContainer();
-    virtual ~SpatialGridContainer();
+    ~SpatialGridContainer() override;
 public:
-    virtual void init() override;
-    virtual void reinit() override;
-    virtual void draw(const core::visual::VisualParams* vparams) override;
-    virtual void handleEvent(sofa::core::objectmodel::Event* event) override;
+    void init() override;
+    void reinit() override;
+    void draw(const core::visual::VisualParams* vparams) override;
+    void handleEvent(sofa::core::objectmodel::Event* event) override;
 
     Grid* getGrid() { return grid; }
     void updateGrid(const VecCoord& x)
@@ -381,7 +381,7 @@ public:
     }
     bool sortPoints();
 
-    virtual std::string getTemplateName() const override
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }

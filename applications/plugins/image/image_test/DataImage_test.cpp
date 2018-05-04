@@ -45,7 +45,7 @@ struct DataImageLink_test : public Sofa_test<>
     core::objectmodel::Data< defaulttype::Image<unsigned char> > data2;
 
     /// Create a link between the two images
-    void SetUp()
+    void SetUp() override
     { 
     }
 

@@ -57,7 +57,7 @@ namespace sofa {
         }
 
 
-        void addapply( OutCoord& result, const InCoord& data )
+        void addapply( OutCoord& result, const InCoord& data ) override
         {
             Inherited::addapply( result, data );
 
@@ -108,13 +108,13 @@ namespace sofa {
 
 
         /// since principal stretches are oder-independent, sort them before comparison
-        virtual OutDeriv difference( const OutCoord& a, const OutCoord& b )
+        OutDeriv difference( const OutCoord& a, const OutCoord& b ) override
         {
             return (OutDeriv)(sort(a)-sort(b));
         }
 
         /// since principal stretches are oder-independent, sort them before comparison
-        virtual OutVecDeriv difference( const OutVecDeriv& a, const OutVecDeriv& b )
+        OutVecDeriv difference( const OutVecDeriv& a, const OutVecDeriv& b ) override
         {
             if( a.size()!=b.size() ){
                 ADD_FAILURE() << "OutVecDeriv have different sizes";
@@ -131,7 +131,7 @@ namespace sofa {
 
 
         /// re-order child forces with the same order used while computing J in apply
-        virtual OutVecDeriv preTreatment( const OutVecDeriv& f )
+        OutVecDeriv preTreatment( const OutVecDeriv& f ) override
         {
             return static_cast<_Mapping*>(this->mapping)->preTreatment( f );
         }

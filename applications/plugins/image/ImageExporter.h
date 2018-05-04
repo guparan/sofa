@@ -241,7 +241,7 @@ public:
     Data<bool> exportAtEnd; ///< export file when the simulation is finished
 
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const ImageExporter<ImageTypes>* = NULL) { return ImageTypes::Name(); }
 
     ImageExporter()	: Inherited()
@@ -263,11 +263,11 @@ public:
         ImageExporterSpecialization<ImageTypes>::init( *this );
     }
 
-    virtual ~ImageExporter() {}
+    ~ImageExporter() override {}
 
-    virtual	void cleanup() override { if (exportAtEnd.getValue()) write();	}
+    	void cleanup() override { if (exportAtEnd.getValue()) write();	}
 
-    virtual void bwdInit() override { if (exportAtBegin.getValue())	write(); }
+    void bwdInit() override { if (exportAtBegin.getValue())	write(); }
 
 protected:
 

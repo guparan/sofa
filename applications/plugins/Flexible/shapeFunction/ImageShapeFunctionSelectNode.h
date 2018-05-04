@@ -68,7 +68,7 @@ public:
     Data< DistTypes > d_nodeWeights; ///< weights of the selected node
     //@}
 
-    virtual std::string getTemplateName() const { return templateName(this); }
+    std::string getTemplateName() const override { return templateName(this); }
     static std::string templateName(const ImageShapeFunctionSelectNode<ImageTypes>* = NULL) { return ImageTypes::Name(); }
 
     ImageShapeFunctionSelectNode()
@@ -79,7 +79,7 @@ public:
 
     {}
 
-    virtual void init() {
+    void init() override {
         addInput(&d_weights);
         addInput(&d_indices);
         addInput(&d_nodeIndex);
@@ -87,11 +87,11 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit() { update(); }
+    void reinit() override { update(); }
 
 protected:
 
-    virtual void update()
+    void update() override
     {
         unsigned int nodeIndex = d_nodeIndex.getValue();
         sout << "Update image for node " << nodeIndex << sendl;

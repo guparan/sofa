@@ -321,7 +321,7 @@ public:
     void init_frobenius( bool geometricStiffness ) { _geometricStiffnessData.init_frobenius( geometricStiffness ); _R.identity(); }
 
 
-    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) {}
+    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) override {}
     void addapply_small( OutCoord& result, const InCoord& data )
     {
         StrainMat strainmat = cauchyStrainTensor( data.getF() ); // strainmat = ( F + Ft ) * 0.5
@@ -405,7 +405,7 @@ public:
     }
 
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         // order 0
         result.getStrain() += StrainMatToVoigt( _R.multTranspose( data.getF() ) );
@@ -420,7 +420,7 @@ public:
         }
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         // order 0
         result.getF() += _R*StressVoigtToMat( data.getStrain() );
@@ -435,7 +435,7 @@ public:
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock B = MatBlock();
         typedef Eigen::Map<Eigen::Matrix<Real,Out::deriv_total_size,In::deriv_total_size,Eigen::RowMajor> > EigenMap;
@@ -464,7 +464,7 @@ public:
 
     /// @warning assembled geometric stiffness is only implemented for SVD method
     // see the maple file doc/corotational_geometricStiffnessMatrix.mw
-    KBlock getK(const OutDeriv& childForce, bool /*stabilization*/=false)
+    KBlock getK(const OutDeriv& childForce, bool /*stabilization*/=false) override
     {
         if( !_geometricStiffnessData.dROverdF() || _geometricStiffnessData.degenerated() ) return KBlock();
 
@@ -558,7 +558,7 @@ public:
         return K;
     }
 
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
     void addDForce_qr( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor )
     {
         // VERY UNSTABLE
@@ -701,7 +701,7 @@ public:
     void init_frobenius( bool geometricStiffness ) { _geometricStiffnessData.init_frobenius( geometricStiffness ); }
 
 
-    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) {}
+    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) override {}
 
     void addapply_small( OutCoord& result, const InCoord& data )
     {
@@ -768,17 +768,17 @@ public:
         // not yet implemented
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getStrain() += StrainMatToVoigt( _R.multTranspose( data.getF() ) );
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getF() += _R*StressVoigtToMat( data.getStrain() );
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock B = MatBlock();
         typedef Eigen::Map<Eigen::Matrix<Real,Out::deriv_total_size,In::deriv_total_size,Eigen::RowMajor> > EigenMap;
@@ -790,7 +790,7 @@ public:
 
     /// @warning assembled geometric stiffness is only implemented for SVD method
     // see the maple file doc/corotational_geometricStiffnessMatrix.mw
-    KBlock getK(const OutDeriv& childForce, bool /*stabilization*/=false)
+    KBlock getK(const OutDeriv& childForce, bool /*stabilization*/=false) override
     {
         if( !_geometricStiffnessData.dROverdF() || _geometricStiffnessData.degenerated() ) return KBlock();
 
@@ -838,7 +838,7 @@ public:
 
         return K;
     }
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
     void addDForce_qr( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor )
     {
         if( _geometricStiffnessData.degenerated() ) return;
@@ -927,7 +927,7 @@ public:
     void init_svd( bool ) {}
     void init_frobenius( bool ) {}
 
-    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) {}
+    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) override {}
 
     void addapply_small( OutCoord& result, const InCoord& data )
     {
@@ -962,18 +962,18 @@ public:
         addapply_qr( result, data );
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getStrain() += StrainMatToVoigt( _R.multTranspose( data.getF() ) );
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getF() += _R*StressVoigtToMat( data.getStrain() );
     }
 
     // J = u^T where u is the unit vector stored in R
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock B = MatBlock();
         typedef Eigen::Map<Eigen::Matrix<Real,Out::deriv_total_size,In::deriv_total_size,Eigen::RowMajor> > EigenMap;
@@ -984,14 +984,14 @@ public:
 
 
     // Geometric stiffness : dJ/dF=(I-uu^T)/nrm where nrm is the norm of F
-    KBlock getK(const OutDeriv& childForce, bool=false)
+    KBlock getK(const OutDeriv& childForce, bool=false) override
     {
         KBlock K = _R*_R.transposed()*(-1.);
         for(unsigned int j=0; j<spatial_dimensions; j++) K(j,j)+=(Real)1.;
         K*=childForce.getStrain()[0]/this->nrm;
         return K;
     }
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
     void addDForce_qr( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor )
     {
         df.getF()+=(dx.getF() - _R*_R.transposed()*dx.getF()) * (Real)kfactor * childForce.getStrain()[0]/this->nrm;
@@ -1066,7 +1066,7 @@ public:
     void init_frobenius( bool ) {}
 
 
-    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) {}
+    void addapply( OutCoord& /*result*/, const InCoord& /*data*/ ) override {}
 
     void addapply_small( OutCoord& result, const InCoord& data )
     {
@@ -1118,7 +1118,7 @@ public:
 //        }
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         // order 0
         result.getStrain() += StrainMatToVoigt( _R.multTranspose( data.getF() ) );
@@ -1133,7 +1133,7 @@ public:
 //        }
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         // order 0
         result.getF() += _R*StressVoigtToMat( data.getStrain() );
@@ -1148,7 +1148,7 @@ public:
 //        }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock B = MatBlock();
         typedef Eigen::Map<Eigen::Matrix<Real,Out::deriv_total_size,In::deriv_total_size,Eigen::RowMajor> > EigenMap;
@@ -1174,13 +1174,13 @@ public:
     }
 
 
-    KBlock getK(const OutDeriv& /*childForce*/, bool=false)
+    KBlock getK(const OutDeriv& /*childForce*/, bool=false) override
     {
         KBlock K;
         // TODO
         return K;
     }
-    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */) {}
+    void addDForce( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor */) override {}
     void addDForce_qr( InDeriv& /*df*/, const InDeriv& /*dx*/, const OutDeriv& /*childForce*/, const SReal& /*kfactor*/ )
     {
         // TODO

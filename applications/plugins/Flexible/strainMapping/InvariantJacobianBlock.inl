@@ -167,7 +167,7 @@ public:
     Hessian dd2;
     Hessian ddJ;
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         Frame F=data.getF();
         Real detF=getDeterminantGradient(dJ, F);
@@ -196,7 +196,7 @@ public:
         //        std::cout<<"ddJ="<<ddJ<<std::endl;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         Real di1 =  scalarProduct(dI1,data.getF());
         Real di2 =  scalarProduct(dI2,data.getF());
@@ -207,14 +207,14 @@ public:
         result.getStrain()[2] +=  dj;
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         result.getF() += dI1*data.getStrain()[0];
         result.getF() += dI2*data.getStrain()[1];
         result.getF() += dJ*data.getStrain()[2];
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock B = MatBlock();
         for(unsigned int j=0; j<frame_size; j++)      B(0,j) +=  *(&dI1[0][0]+j);
@@ -223,13 +223,13 @@ public:
         return B;
     }
 
-    KBlock getK(const OutDeriv& childForce, bool /*stabilization*/=false)
+    KBlock getK(const OutDeriv& childForce, bool /*stabilization*/=false) override
     {
         KBlock K = KBlock();
         K=dd1*childForce.getStrain()[0]+dd2*childForce.getStrain()[1]+ddJ*childForce.getStrain()[2];
         return K;
     }
-    void addDForce( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor )
+    void addDForce( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor ) override
     {
         Hessian H=dd1*childForce.getStrain()[0]+dd2*childForce.getStrain()[1]+ddJ*childForce.getStrain()[2];
         const Vec<frame_size,Real>& vdx = *reinterpret_cast<const Vec<frame_size,Real>*>(&dx.getF()[0][0]);

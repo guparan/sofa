@@ -108,7 +108,7 @@ public:
     typedef linearsolver::EigenSparseMatrix<In,In>    SparseKMatrixEigen;
     //@}
 	
-    virtual void resizeOut()
+    void resizeOut() override
     {
         if(this->f_printLog.getValue()) std::cout<<this->getName()<<"::resizeOut()"<<std::endl;
 
@@ -129,7 +129,7 @@ public:
 
     /** @name Mapping functions */
     //@{
-    virtual void init()
+    void init() override
     {
         if( core::behavior::BaseMechanicalState* stateFrom = this->fromModel.get()->toBaseMechanicalState() )
             maskFrom = &stateFrom->forceMask;
@@ -144,7 +144,7 @@ public:
         Inherit::init();
     }
 
-    virtual void reinit()
+    void reinit() override
     {
         if(this->assemble.getValue()) updateJ();
 
@@ -161,7 +161,7 @@ public:
     using Inherit::applyJ;
     using Inherit::applyJT;
 
-    virtual void applyJT()
+    void applyJT() override
     {
         applyJT(NULL, *this->fromModel->write(core::VecDerivId::force()), *this->toModel->read(core::ConstVecDerivId::force()));
        //TODO applyDJT(NULL, *this->fromModel->write(core::VecDerivId::force()), *this->toModel->read(core::ConstVecDerivId::force()));
@@ -207,7 +207,7 @@ public:
 		dOut.endEdit();
     }
 
-    virtual void apply(const core::MechanicalParams * /*mparams*/ , Data<OutVecCoord>& dOut, const Data<InVecCoord>& dIn)
+    void apply(const core::MechanicalParams * /*mparams*/ , Data<OutVecCoord>& dOut, const Data<InVecCoord>& dIn) override
     {
         if(this->f_printLog.getValue()) std::cout<<this->getName()<<":apply"<<std::endl;
 
@@ -231,7 +231,7 @@ public:
         if(!BlockType::constant) if(this->assemble.getValue()) updateJ();
     }
 
-    virtual void applyJ(const core::MechanicalParams * /*mparams*/ , Data<OutVecDeriv>& dOut, const Data<InVecDeriv>& dIn)
+    void applyJ(const core::MechanicalParams * /*mparams*/ , Data<OutVecDeriv>& dOut, const Data<InVecDeriv>& dIn) override
     {
         if(this->assemble.getValue())  eigenJacobian.mult(dOut,dIn);
         else
@@ -252,7 +252,7 @@ public:
     }
 
 
-    virtual void applyJT(const core::MechanicalParams * /*mparams*/ , Data<InVecDeriv>& dIn, const Data<OutVecDeriv>& dOut)
+    void applyJT(const core::MechanicalParams * /*mparams*/ , Data<InVecDeriv>& dIn, const Data<OutVecDeriv>& dOut) override
     {
         if(this->assemble.getValue())  eigenJacobian.addMultTranspose(dIn,dOut);
         else
@@ -272,13 +272,13 @@ public:
         }
     }
 
-    virtual void applyJT(const core::ConstraintParams * /*cparams*/ , Data<InMatrixDeriv>& /*out*/, const Data<OutMatrixDeriv>& /*in*/)
+    void applyJT(const core::ConstraintParams * /*cparams*/ , Data<InMatrixDeriv>& /*out*/, const Data<OutMatrixDeriv>& /*in*/) override
     {
 
     }
 
 
-    virtual void applyDJT(const core::MechanicalParams* mparams, core::MultiVecDerivId parentDfId, core::ConstMultiVecDerivId childForceId )
+    void applyDJT(const core::MechanicalParams* mparams, core::MultiVecDerivId parentDfId, core::ConstMultiVecDerivId childForceId ) override
     {
         if(BlockType::constant) return;
 
@@ -318,7 +318,7 @@ public:
 //        cerr<<"BaseStrainMapping::applyDJT, parentForce after = " << parentForce << endl;
     }
 
-    const defaulttype::BaseMatrix* getJ(const core::MechanicalParams * /*mparams*/)
+    const defaulttype::BaseMatrix* getJ(const core::MechanicalParams * /*mparams*/) override
     {
         if(!this->assemble.getValue()/* || !BlockType::constant*/)  // J should have been updated in apply() that is call before (when assemble==1)
         {
@@ -329,7 +329,7 @@ public:
     }
 
     // Compliant plugin API
-    virtual const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs()
+    const helper::vector<sofa::defaulttype::BaseMatrix*>* getJs() override
     {
         if(!this->assemble.getValue()/* || !BlockType::constant*/)  // J should have been updated in apply() that is call before (when assemble==1)
         {
@@ -339,7 +339,7 @@ public:
         return &baseMatrices;
     }
 
-    virtual void updateK( const core::MechanicalParams* mparams, core::ConstMultiVecDerivId childForceId )
+    void updateK( const core::MechanicalParams* mparams, core::ConstMultiVecDerivId childForceId ) override
     {
         if( BlockType::constant /*|| !assemble.getValue()*/ ) { K.resize(0,0); return; }
 
@@ -353,14 +353,14 @@ public:
     }
 
 
-    virtual const defaulttype::BaseMatrix* getK()
+    const defaulttype::BaseMatrix* getK() override
     {
         if( BlockType::constant || !K.compressedMatrix.nonZeros() ) return NULL;
         else return &K;
     }
 
 
-    void draw(const core::visual::VisualParams* /*vparams*/)
+    void draw(const core::visual::VisualParams* /*vparams*/) override
     {
     }
 
@@ -382,7 +382,7 @@ protected:
 
     }
 
-    virtual ~BaseStrainMappingT()     { }
+    ~BaseStrainMappingT() override     { }
 
     SparseMatrix jacobian;   ///< Jacobian of the mapping
 

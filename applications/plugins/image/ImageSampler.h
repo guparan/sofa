@@ -513,7 +513,7 @@ public:
 
     /**@}*/
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const ImageSampler<ImageTypes>* = NULL) { return ImageTypes::Name();    }
     ImageSampler()    :   Inherited()
         , image(initData(&image,ImageTypes(),"image",""))
@@ -549,7 +549,7 @@ public:
         ImageSamplerSpecialization<ImageTypes>::init( this );
     }
 
-    virtual void init() override
+    void init() override
     {
         addInput(&image);
         addInput(&transform);
@@ -563,13 +563,13 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit() override { update(); }
+    void reinit() override { update(); }
 
 protected:
 
     unsigned int time;
 
-    virtual void update() override
+    void update() override
     {
         updateAllInputsIfDirty(); // easy to ensure that all inputs are up-to-date
 
@@ -637,7 +637,7 @@ protected:
     }
 
 #ifndef SOFA_NO_OPENGL
-    virtual void draw(const core::visual::VisualParams* vparams) override
+    void draw(const core::visual::VisualParams* vparams) override
     {
 #ifndef SOFA_NO_OPENGL
         if (!vparams->displayFlags().getShowVisualModels()) return;

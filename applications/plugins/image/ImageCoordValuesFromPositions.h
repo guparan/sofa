@@ -175,7 +175,7 @@ public:
 
     Data< bool > addPosition; ///< add positions to interpolated values (to get translated positions)
 
-    virtual std::string getTemplateName() const    override { return templateName(this);    }
+    std::string getTemplateName() const    override { return templateName(this);    }
     static std::string templateName(const ImageCoordValuesFromPositions<ImageTypes>* = NULL) { return ImageTypes::Name();    }
 
     ImageCoordValuesFromPositions()    :   Inherited()
@@ -197,7 +197,7 @@ public:
         f_listening.setValue(true);
     }
 
-    virtual void init() override
+    void init() override
     {
         addInput(&image);
         addInput(&transform);
@@ -207,13 +207,13 @@ public:
         setDirtyValue();
     }
 
-    virtual void reinit() override { update(); }
+    void reinit() override { update(); }
 
 protected:
 
     unsigned int time;
 
-    virtual void update() override
+    void update() override
     {
         ImageCoordValuesFromPositionsSpecialization<ImageTypes>::update( *this );
         cleanDirty();

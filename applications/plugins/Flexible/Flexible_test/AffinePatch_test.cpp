@@ -74,7 +74,7 @@ namespace sofa {
         Vec3 testedTranslation;
 
         /// Create the context for the scene
-        void SetUp()
+        void SetUp() override
         { 
             // Init simulation
             sofa::simulation::setSimulation(simulation = new sofa::simulation::graph::DAGSimulation());
@@ -178,7 +178,7 @@ namespace sofa {
         }
 
         /// Unload the scene
-        void TearDown()
+        void TearDown() override
         {
             if (root!=NULL)
                 sofa::simulation::getSimulation()->unload(root);

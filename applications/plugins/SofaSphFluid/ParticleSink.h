@@ -108,11 +108,11 @@ protected:
         planeNormal.setValue(n);
     }
 
-    virtual ~ParticleSink()
+    ~ParticleSink() override
     {
     }
 public:
-    virtual void init() override
+    void init() override
     {
         this->core::behavior::ProjectiveConstraintSet<TDataTypes>::init();
         if (!this->mstate) return;
@@ -192,19 +192,19 @@ public:
             res[_fixed[s]] = Deriv();
     }
 
-    virtual void projectResponse(const sofa::core::MechanicalParams* mparams, DataVecDeriv& dx) override ///< project dx to constrained space
+    void projectResponse(const sofa::core::MechanicalParams* mparams, DataVecDeriv& dx) override ///< project dx to constrained space
     {
         VecDeriv& res = *dx.beginEdit(mparams);
         projectResponseT(res);
         dx.endEdit(mparams);
     }
 
-    virtual void projectVelocity(const sofa::core::MechanicalParams* /* mparams */, DataVecDeriv& /* v */) override ///< project dx to constrained space (dx models a velocity) override
+    void projectVelocity(const sofa::core::MechanicalParams* /* mparams */, DataVecDeriv& /* v */) override ///< project dx to constrained space (dx models a velocity) override
     {
 
     }
 
-    virtual void projectPosition(const sofa::core::MechanicalParams* mparams, DataVecCoord& xData) override ///< project x to constrained space (x models a position) override
+    void projectPosition(const sofa::core::MechanicalParams* mparams, DataVecCoord& xData) override ///< project x to constrained space (x models a position) override
     {
         if (!this->mstate) return;
 
@@ -226,7 +226,7 @@ public:
         xData.endEdit(mparams);
     }
 
-    virtual void projectJacobianMatrix(const sofa::core::MechanicalParams* /*mparams*/, DataMatrixDeriv& /* cData */) override
+    void projectJacobianMatrix(const sofa::core::MechanicalParams* /*mparams*/, DataMatrixDeriv& /* cData */) override
     {
 
     }
@@ -236,7 +236,7 @@ public:
 
     }
 
-    virtual void handleEvent(sofa::core::objectmodel::Event* event) override
+    void handleEvent(sofa::core::objectmodel::Event* event) override
     {
         if(simulation::AnimateBeginEvent::checkEventType(event) )
         {
@@ -250,7 +250,7 @@ public:
         }
     }
 
-    virtual void draw(const core::visual::VisualParams*) override
+    void draw(const core::visual::VisualParams*) override
     {
 #ifndef SOFA_NO_OPENGL
         if (!showPlane.getValue()) return;

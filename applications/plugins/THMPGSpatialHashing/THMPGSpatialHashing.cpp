@@ -17,7 +17,7 @@ namespace collision
 {
 
 struct CannotInitializeCellSize : std::exception {
-    virtual const char* what() const throw(){return "Cannot initialize cell size in THMPGSpatialHashing";}
+    const char* what() const throw() override{return "Cannot initialize cell size in THMPGSpatialHashing";}
 };
 
 

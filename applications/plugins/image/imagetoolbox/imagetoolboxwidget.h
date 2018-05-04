@@ -177,7 +177,7 @@ public:
        // if(options) container_layout->add(options);
     }
     
-        void handleSliderPolicies()
+        void handleSliderPolicies() override
         {
             central->handleSliderPolicies();
         }
@@ -200,9 +200,9 @@ class SOFA_IMAGE_GUI_API ImageToolBoxWidget : public SimpleDataWidget<T, Timaget
 public:
     ImageToolBoxWidget(QWidget* parent,const char* name, MyData* d) : Inherit(parent,name,d) {}
     
-    virtual unsigned int sizeWidget() {return 3;}
-    virtual unsigned int numColumnWidget() {return 1;}
-    virtual bool createWidgets()
+    unsigned int sizeWidget() override {return 3;}
+    unsigned int numColumnWidget() override {return 1;}
+    bool createWidgets() override
     {
     
     //std::cout << "ImageToolBoxWidget::createWidgets" << std::endl;

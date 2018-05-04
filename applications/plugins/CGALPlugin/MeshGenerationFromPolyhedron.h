@@ -70,16 +70,16 @@ public:
 
 public:
     MeshGenerationFromPolyhedron();
-    virtual ~MeshGenerationFromPolyhedron() { }
+    ~MeshGenerationFromPolyhedron() override { }
 
-    void init();
-    void reinit();
+    void init() override;
+    void reinit() override;
 
-    void update();
+    void update() override;
 
-    void draw(const sofa::core::visual::VisualParams* vparams);
+    void draw(const sofa::core::visual::VisualParams* vparams) override;
 
-    virtual std::string getTemplateName() const
+    std::string getTemplateName() const override
     {
         return templateName(this);
     }
@@ -138,7 +138,7 @@ public:
         AddTriangles(const VecCoord& points, const SeqTriangles& triangles, const SeqQuads& quads)
             : points(points), triangles(triangles), quads(quads) {}
 
-        void operator()( HDS& hds)
+        void operator()( HDS& hds) override
         {
             typedef typename HDS::Vertex   Vertex;
             typedef typename Vertex::Point CPoint;

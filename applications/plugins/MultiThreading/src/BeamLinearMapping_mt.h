@@ -73,20 +73,20 @@ public:
 
     BeamLinearMapping_mt();
 
-    virtual ~BeamLinearMapping_mt();
+    ~BeamLinearMapping_mt() override;
 
 
-	virtual void apply(const core::MechanicalParams *mparams /* PARAMS FIRST */, Data< typename Out::VecCoord >& out, const Data< typename In::VecCoord >& in);
+	void apply(const core::MechanicalParams *mparams /* PARAMS FIRST */, Data< typename Out::VecCoord >& out, const Data< typename In::VecCoord >& in) override;
 
-    virtual void applyJ(const core::MechanicalParams *mparams /* PARAMS FIRST */, Data< typename Out::VecDeriv >& out, const Data< typename In::VecDeriv >& in);
+    void applyJ(const core::MechanicalParams *mparams /* PARAMS FIRST */, Data< typename Out::VecDeriv >& out, const Data< typename In::VecDeriv >& in) override;
 
-    virtual void applyJT(const core::MechanicalParams *mparams /* PARAMS FIRST */, Data< typename In::VecDeriv >& out, const Data< typename Out::VecDeriv >& in);
+    void applyJT(const core::MechanicalParams *mparams /* PARAMS FIRST */, Data< typename In::VecDeriv >& out, const Data< typename Out::VecDeriv >& in) override;
 
     //virtual void applyJT(const core::ConstraintParams *cparams /* PARAMS FIRST */, Data< typename In::MatrixDeriv >& out, const Data< typename Out::MatrixDeriv >& in);
 
 
-    virtual void init();            // get the interpolation
-    virtual void bwdInit();        // get the points
+    void init() override;            // get the interpolation
+    void bwdInit() override;        // get the points
     
 
 
@@ -111,7 +111,7 @@ private:
 
 	public:
 
-		virtual bool run( simulation::WorkerThread* );
+		bool run( simulation::WorkerThread* ) override;
 
 	protected:
 
@@ -141,7 +141,7 @@ private:
 	
 		applyJTask( const simulation::Task::Status* status );
 
-		virtual bool run( simulation::WorkerThread* );
+		bool run( simulation::WorkerThread* ) override;
 
 	private:
 
@@ -166,7 +166,7 @@ private:
 		
 		applyJTmechTask( const simulation::Task::Status* status );
 	
-		virtual bool run( simulation::WorkerThread* );
+		bool run( simulation::WorkerThread* ) override;
 
 	private:
 

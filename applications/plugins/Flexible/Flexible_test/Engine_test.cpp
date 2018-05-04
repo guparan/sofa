@@ -57,7 +57,7 @@ struct FlexibleDataEngine_test : public DataEngine_test<DataEngineType>
     simulation::Node::SPtr root;
 
 
-    virtual void init()
+    void init() override
     {
         DataEngine_test<DataEngineType>::init();
 

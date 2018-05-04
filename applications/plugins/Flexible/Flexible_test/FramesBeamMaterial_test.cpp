@@ -85,7 +85,7 @@ struct BeamMaterial_test : public Sofa_test<typename Vec3Types::Real>
     #define ADD_SOFA_TEST_SCENES_PATH( x ) sofa_tostring(SOFA_TEST_SCENES_PATH)sofa_tostring(x) 
 
     // Create the context for the scene
-    void SetUp()
+    void SetUp() override
     { 
         // Init simulation
         sofa::simulation::setSimulation(simulation = new sofa::simulation::graph::DAGSimulation());
@@ -211,7 +211,7 @@ struct BeamMaterial_test : public Sofa_test<typename Vec3Types::Real>
         }
 		return true;
 	}
-    void TearDown()
+    void TearDown() override
     {
         if (root!=NULL)
             sofa::simulation::getSimulation()->unload(root);

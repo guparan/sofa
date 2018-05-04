@@ -60,12 +60,12 @@ public:
     void setInstance(PyObject* instance);
     void refreshBinding();
     void doLoadScript();
-    virtual void handleEvent(Event *event) override;
-    virtual void parse ( sofa::core::objectmodel::BaseObjectDescription* arg ) override ;
+    void handleEvent(Event *event) override;
+    void parse ( sofa::core::objectmodel::BaseObjectDescription* arg ) override ;
 
 protected:
     PythonScriptDataEngine();
-    virtual ~PythonScriptDataEngine();
+    ~PythonScriptDataEngine() override;
     //sofa::helper::system::FileEventListener* m_filelistener {nullptr} ;
 
     sofa::helper::system::FileEventListener* m_filelistener {nullptr} ;
@@ -77,10 +77,10 @@ protected:
     PyObject *m_Func_init                  {nullptr} ;
     PyObject *m_Func_parse                {nullptr} ;
 
-    virtual void script_update() override;
-    virtual void script_init() override;
-    virtual void script_parse() override;
-    virtual void loadScript() override;    
+    void script_update() override;
+    void script_init() override;
+    void script_parse() override;
+    void loadScript() override;    
     void init() override;
 
 

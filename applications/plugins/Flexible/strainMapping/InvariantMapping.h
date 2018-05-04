@@ -52,7 +52,7 @@ protected:
     {
     }
 
-    virtual ~InvariantMapping()     { }
+    ~InvariantMapping() override     { }
 
 };
 

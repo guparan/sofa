@@ -49,7 +49,7 @@ protected:
 	
 	std::vector< std::pair<unsigned, unsigned> > index;
 	
-	virtual void assemble( const typename self::in_pos_type& in) {
+	void assemble( const typename self::in_pos_type& in) override {
 		// note: index is filled in @apply
 		
 //		const dofs_type& d = dofs.getValue();
@@ -72,8 +72,8 @@ protected:
 		J.finalize();
 	}
 	
-	virtual void apply(typename self::out_pos_type& out, 
-					   const typename self::in_pos_type& in ) {
+	void apply(typename self::out_pos_type& out, 
+					   const typename self::in_pos_type& in ) override {
 		const dofs_type& d = dofs.getValue();
 
 		// build array of (dof index, coeff index)

@@ -62,7 +62,7 @@ public:
     Data<bool> f_PSDStabilization; ///< project geometric stiffness sub-matrices to their nearest symmetric, positive semi-definite matrices
 
 
-    virtual void reinit()
+    void reinit() override
     {
         for(unsigned int i=0; i<this->jacobian.size(); i++)
         {
@@ -82,7 +82,7 @@ protected:
     {
     }
 
-    virtual ~PrincipalStretchesMapping() { }
+    ~PrincipalStretchesMapping() override { }
 
 };
 

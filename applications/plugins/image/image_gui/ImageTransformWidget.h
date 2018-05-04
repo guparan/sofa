@@ -66,15 +66,15 @@ public :
         : Inherited(parent,name,data)
     {}
 
-    virtual bool createWidgets();
-    virtual void setDataReadOnly(bool /*readOnly*/) {};
+    bool createWidgets() override;
+    void setDataReadOnly(bool /*readOnly*/) override {};
 
-    virtual unsigned int sizeWidget() {return 12;}
-    virtual unsigned int numColumnWidget() {return 3;}
+    unsigned int sizeWidget() override {return 12;}
+    unsigned int numColumnWidget() override {return 3;}
 
 protected:
-    virtual void readFromData();
-    virtual void writeToData();
+    void readFromData() override;
+    void writeToData() override;
 
 protected:
 

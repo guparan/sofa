@@ -91,7 +91,7 @@ class SOFA_Compliant_API AssembledRigidRigidMapping : public AssembledMapping<TI
 
  public:
 
-	void init() {
+	void init() override {
 	  const unsigned n = source.getValue().size();
 	  if(this->getToModel()->getSize() != n) {
 		serr << "init: output size does not match 'source' data, auto-resizing " << n << sendl;
@@ -109,8 +109,8 @@ class SOFA_Compliant_API AssembledRigidRigidMapping : public AssembledMapping<TI
 	typedef AssembledRigidRigidMapping self;
 
 	
-    virtual void assemble_geometric(const typename self::in_pos_type& in_pos,
-                                    const typename self::out_force_type& out_force) {
+    void assemble_geometric(const typename self::in_pos_type& in_pos,
+                                    const typename self::out_force_type& out_force) override {
 
         unsigned geomStiff = geometricStiffness.getValue();
 
@@ -223,7 +223,7 @@ class SOFA_Compliant_API AssembledRigidRigidMapping : public AssembledMapping<TI
 
 
 
-	virtual void assemble( const typename self::in_pos_type& in_pos ) {
+	void assemble( const typename self::in_pos_type& in_pos ) override {
 
 		typename self::jacobian_type::CompressedMatrix& J = this->jacobian.compressedMatrix;
 
@@ -261,8 +261,8 @@ class SOFA_Compliant_API AssembledRigidRigidMapping : public AssembledMapping<TI
 
 
 	
-	virtual void apply(typename self::out_pos_type& out,
-	                   const typename self::in_pos_type& in ) {
+	void apply(typename self::out_pos_type& out,
+	                   const typename self::in_pos_type& in ) override {
 
         const source_vectype& src = source.getValue();
 
@@ -276,7 +276,7 @@ class SOFA_Compliant_API AssembledRigidRigidMapping : public AssembledMapping<TI
 	}
 
 
-    virtual void updateForceMask()
+    void updateForceMask() override
     {
         const source_vectype& src = source.getValue();
 

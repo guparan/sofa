@@ -98,24 +98,24 @@ class LinearJacobianBlock< Rigid3(InReal) , V3(OutReal) > :
         Pa= InPos.rotate(Pa0);  // = (SPos - InPos.getCenter() ) * w[i] ;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         Pa= data.rotate(Pa0);
         result +=  data.getCenter() * Pt + Pa;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += getLinear(data) * Pt + cross(getAngular(data), Pa);
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data * Pt ;
         getAngular(result) += cross(Pa, data);
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -125,7 +125,7 @@ class LinearJacobianBlock< Rigid3(InReal) , V3(OutReal) > :
         return J;
     }
 
-    KBlock getK(const OutDeriv& childForce, bool stabilization=false)
+    KBlock getK(const OutDeriv& childForce, bool stabilization=false) override
     {
         // will only work for 3d rigids
         Mat<adim,adim,Real> block = crossProductMatrix( childForce ) * crossProductMatrix( Pa );
@@ -143,7 +143,7 @@ class LinearJacobianBlock< Rigid3(InReal) , V3(OutReal) > :
         return K;
     }
 
-    void addDForce( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor )
+    void addDForce( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor ) override
     {
         getAngular(df) += In::crosscross( childForce, Pa, getAngular(dx) ) * kfactor;
     }
@@ -208,24 +208,24 @@ class LinearJacobianBlock< Rigid3(InReal) , EV3(OutReal) > :
         Pa= InPos.rotate(Pa0);  // = (SPos - InPos.getCenter() ) * w[i] ;
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         Pa= data.rotate(Pa0);
         result +=  data.getCenter() * Pt + Pa;
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result += getLinear(data) * Pt + cross(getAngular(data), Pa);
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data * Pt ;
         getAngular(result) += cross(Pa, data);
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -235,7 +235,7 @@ class LinearJacobianBlock< Rigid3(InReal) , EV3(OutReal) > :
         return J;
     }
 
-    KBlock getK(const OutDeriv& childForce, bool stabilization=false)
+    KBlock getK(const OutDeriv& childForce, bool stabilization=false) override
     {
         // will only work for 3d rigids
         Mat<adim,adim,Real> block = crossProductMatrix( childForce ) * crossProductMatrix( Pa );
@@ -253,7 +253,7 @@ class LinearJacobianBlock< Rigid3(InReal) , EV3(OutReal) > :
         return K;
     }
 
-    void addDForce( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor )
+    void addDForce( InDeriv& df, const InDeriv& dx, const OutDeriv& childForce, const SReal& kfactor ) override
     {
         getAngular(df) += In::crosscross( childForce, Pa, getAngular(dx) ) * kfactor;
     }
@@ -326,7 +326,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F331(OutReal) > :
         PFa.getF()= A0 * PFa0.getF();
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         rotMat A; data.getOrientation().toMatrix(A);
         PFa.getF()= A * PFa0.getF();  // = update of J according to current transform
@@ -334,13 +334,13 @@ class LinearJacobianBlock< Rigid3(InReal) , F331(OutReal) > :
         result.getF() +=  covMN(data.getCenter(),Ft) + PFa.getF();
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         const cpMatrix W=crossProductMatrix(getAngular(data));
         result.getF() += covMN(getLinear(data),Ft) + W * PFa.getF();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data.getF() * Ft ;
 
@@ -351,7 +351,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F331(OutReal) > :
         //        getAngular(rresult)[2] += dot(PFa.getF()[0],data.getF()[1]) - dot(PFa.getF()[1],data.getF()[0]);
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -365,7 +365,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F331(OutReal) > :
     }
 
 
-    KBlock getK(const OutDeriv& childForce, bool stabilization=false)
+    KBlock getK(const OutDeriv& childForce, bool stabilization=false) override
     {
         // will only work for 3d rigids
         KBlock K = KBlock();
@@ -386,7 +386,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F331(OutReal) > :
         return K;
     }
 
-    void addDForce( InDeriv& df, const InDeriv& dx,  const OutDeriv& childForce, const SReal& kfactor )
+    void addDForce( InDeriv& df, const InDeriv& dx,  const OutDeriv& childForce, const SReal& kfactor ) override
     {
         for(unsigned int i=0; i<mdim; ++i) getAngular(df) += In::crosscross( childForce.getF().col(i), PFa.getF().col(i), getAngular(dx) ) * kfactor;
     }
@@ -459,7 +459,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F321(OutReal) > :
         PFa.getF()= A0 * PFa0.getF();
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         rotMat A; data.getOrientation().toMatrix(A);
         PFa.getF()= A * PFa0.getF();  // = update of J according to current transform
@@ -467,19 +467,19 @@ class LinearJacobianBlock< Rigid3(InReal) , F321(OutReal) > :
         result.getF() +=  covMN(data.getCenter(),Ft) + PFa.getF();
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         const cpMatrix W=crossProductMatrix(getAngular(data));
         result.getF() += covMN(getLinear(data),Ft) + W * PFa.getF();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data.getF() * Ft ;
         for(unsigned int i=0; i<mdim; ++i) getAngular(result) += cross(PFa.getF().col(i),data.getF().col(i));
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -492,7 +492,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F321(OutReal) > :
         return J;
     }
 
-    KBlock getK(const OutDeriv& childForce, bool stabilization=false)
+    KBlock getK(const OutDeriv& childForce, bool stabilization=false) override
     {
         // will only work for 3d rigids
         KBlock K = KBlock();
@@ -513,7 +513,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F321(OutReal) > :
         return K;
     }
 
-    void addDForce( InDeriv& df, const InDeriv& dx,  const OutDeriv& childForce, const SReal& kfactor )
+    void addDForce( InDeriv& df, const InDeriv& dx,  const OutDeriv& childForce, const SReal& kfactor ) override
     {
         for(unsigned int i=0; i<mdim; ++i) getAngular(df) += In::crosscross( childForce.getF().col(i), PFa.getF().col(i), getAngular(dx) ) * kfactor;
     }
@@ -586,7 +586,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F311(OutReal) > :
         PFa.getF()= A0 * PFa0.getF();
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         rotMat A; data.getOrientation().toMatrix(A);
         PFa.getF()= A * PFa0.getF();  // = update of J according to current transform
@@ -594,19 +594,19 @@ class LinearJacobianBlock< Rigid3(InReal) , F311(OutReal) > :
         result.getF() +=  covMN(data.getCenter(),Ft) + PFa.getF();
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         const cpMatrix W=crossProductMatrix(getAngular(data));
         result.getF() += covMN(getLinear(data),Ft) + W * PFa.getF();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data.getF() * Ft ;
         for(unsigned int i=0; i<mdim; ++i) getAngular(result) += cross(PFa.getF().col(i),data.getF().col(i));
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -619,7 +619,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F311(OutReal) > :
         return J;
     }
 
-    KBlock getK(const OutDeriv& childForce, bool stabilization=false)
+    KBlock getK(const OutDeriv& childForce, bool stabilization=false) override
     {
         // will only work for 3d rigids
         KBlock K = KBlock();
@@ -640,7 +640,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F311(OutReal) > :
         return K;
     }
 
-    void addDForce( InDeriv& df, const InDeriv& dx,  const OutDeriv& childForce, const SReal& kfactor )
+    void addDForce( InDeriv& df, const InDeriv& dx,  const OutDeriv& childForce, const SReal& kfactor ) override
     {
         for(unsigned int i=0; i<mdim; ++i) getAngular(df) += In::crosscross( childForce.getF().col(i), PFa.getF().col(i), getAngular(dx) ) * kfactor;
     }
@@ -729,7 +729,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F332(OutReal) > :
         }
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         // = update of J according to current transform
         rotMat A; data.getOrientation().toMatrix(A);
@@ -741,7 +741,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F332(OutReal) > :
         for (unsigned int k = 0; k < dim; ++k) result.getGradientF(k) += covMN( data.getCenter(), dFt[k]) + PFdFa.getGradientF(k);
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         const cpMatrix W=crossProductMatrix(getAngular(data));
 
@@ -749,7 +749,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F332(OutReal) > :
         for (unsigned int k = 0; k < dim; ++k) result.getGradientF(k) += covMN(getLinear(data),dFt[k]) + W * PFdFa.getGradientF(k);
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data.getF() * Ft ;
         for (unsigned int k = 0; k < dim; ++k) getLinear(result) += data.getGradientF(k) * dFt[k] ;
@@ -761,7 +761,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F332(OutReal) > :
         }
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) for(unsigned int j=0; j<mdim; ++j) J(j+i*mdim,i)=Ft[j];
@@ -784,7 +784,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F332(OutReal) > :
         return J;
     }
 
-    KBlock getK(const OutDeriv& childForce, bool stabilization=false)
+    KBlock getK(const OutDeriv& childForce, bool stabilization=false) override
     {
         // will only work for 3d rigids
         KBlock K = KBlock();
@@ -806,7 +806,7 @@ class LinearJacobianBlock< Rigid3(InReal) , F332(OutReal) > :
         return K;
     }
 
-    void addDForce( InDeriv& df, const InDeriv& dx,  const OutDeriv& childForce, const SReal& kfactor )
+    void addDForce( InDeriv& df, const InDeriv& dx,  const OutDeriv& childForce, const SReal& kfactor ) override
     {
         for(unsigned int i=0; i<mdim; ++i)
         {
@@ -885,7 +885,7 @@ class LinearJacobianBlock< Rigid3(InReal) , Affine3(OutReal) > :
         Pa.getAffine()=A0 *Pa0.getAffine();
     }
 
-    void addapply( OutCoord& result, const InCoord& data )
+    void addapply( OutCoord& result, const InCoord& data ) override
     {
         // = update of J according to current transform
         Pa.getCenter()= data.rotate(Pa0.getCenter());
@@ -898,7 +898,7 @@ class LinearJacobianBlock< Rigid3(InReal) , Affine3(OutReal) > :
         for (unsigned int j = 0; j < dim; ++j) result.getAffine()[j][j] -= Pt; // this term cancels the initial identity affine matrix
     }
 
-    void addmult( OutDeriv& result,const InDeriv& data )
+    void addmult( OutDeriv& result,const InDeriv& data ) override
     {
         result.getVCenter() += getLinear(data) * Pt + cross(getAngular(data), Pa.getCenter());
 
@@ -906,7 +906,7 @@ class LinearJacobianBlock< Rigid3(InReal) , Affine3(OutReal) > :
         result.getVAffine() += W * Pa.getAffine();
     }
 
-    void addMultTranspose( InDeriv& result, const OutDeriv& data )
+    void addMultTranspose( InDeriv& result, const OutDeriv& data ) override
     {
         getLinear(result) += data.getVCenter() * Pt ;
         getAngular(result) += cross(Pa.getCenter(), data.getVCenter());
@@ -914,7 +914,7 @@ class LinearJacobianBlock< Rigid3(InReal) , Affine3(OutReal) > :
         for(unsigned int i=0; i<dim; ++i) getAngular(result) += cross(Pa.getAffine().col(i),data.getVAffine().col(i));
     }
 
-    MatBlock getJ()
+    MatBlock getJ() override
     {
         MatBlock J = MatBlock();
         for(unsigned int i=0; i<dim; ++i) J(i,i)=Pt;
@@ -931,7 +931,7 @@ class LinearJacobianBlock< Rigid3(InReal) , Affine3(OutReal) > :
     }
 
 
-    KBlock getK(const OutDeriv& childForce, bool stabilization=false)
+    KBlock getK(const OutDeriv& childForce, bool stabilization=false) override
     {
         // will only work for 3d rigids
         KBlock K;
@@ -963,7 +963,7 @@ class LinearJacobianBlock< Rigid3(InReal) , Affine3(OutReal) > :
         return K;
     }
 
-    void addDForce( InDeriv& df, const InDeriv& dx,  const OutDeriv& childForce, const SReal& kfactor )
+    void addDForce( InDeriv& df, const InDeriv& dx,  const OutDeriv& childForce, const SReal& kfactor ) override
     {
         getAngular(df) += In::crosscross( childForce.getVCenter(), Pa.getCenter(), getAngular(dx) ) * kfactor;
         for(unsigned int i=0; i<dim; ++i) getAngular(df) += In::crosscross( childForce.getVAffine().col(i), Pa.getAffine().col(i), getAngular(dx) ) * kfactor;

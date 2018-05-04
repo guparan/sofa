@@ -143,7 +143,7 @@ public:
 protected:
     RigidDistanceGridCollisionModel();
 
-    ~RigidDistanceGridCollisionModel();
+    ~RigidDistanceGridCollisionModel() override;
 public:
     core::behavior::MechanicalState<InDataTypes>* getRigidModel() { return rigid; }
     core::behavior::MechanicalState<InDataTypes>* getMechanicalState() { return rigid; }
@@ -457,7 +457,7 @@ public:
 protected:
     FFDDistanceGridCollisionModel();
 
-    ~FFDDistanceGridCollisionModel();
+    ~FFDDistanceGridCollisionModel() override;
 public:
     core::behavior::MechanicalState<DataTypes>* getDeformModel() { return ffd; }
     core::topology::BaseMeshTopology* getDeformGrid() { return ffdMesh; }
@@ -512,7 +512,7 @@ class ContactMapper<FFDDistanceGridCollisionModel,DataTypes> : public Barycentri
 public:
     typedef typename DataTypes::Real Real;
     typedef typename DataTypes::Coord Coord;
-    int addPoint(const Coord& P, int index, Real&)
+    int addPoint(const Coord& P, int index, Real&) override
     {
         defaulttype::Vector3 bary;
         int elem = this->model->getDeformCube(index).elem;
@@ -536,7 +536,7 @@ public:
     typedef typename Inherit::MMechanicalState MMechanicalState;
     typedef typename Inherit::MCollisionModel MCollisionModel;
 
-    MMechanicalState* createMapping(const char* name="contactPoints")
+    MMechanicalState* createMapping(const char* name="contactPoints") override
     {
         using sofa::component::mapping::IdentityMapping;
 
@@ -557,7 +557,7 @@ public:
         return outmodel;
     }
 
-    int addPoint(const Coord& P, int index, Real& r)
+    int addPoint(const Coord& P, int index, Real& r) override
     {
         Coord trans = this->model->getInitRotation() * this->model->getInitTranslation();
         int i = Inherit::addPoint(P+trans, index, r);
