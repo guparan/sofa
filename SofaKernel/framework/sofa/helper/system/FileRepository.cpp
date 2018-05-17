@@ -43,6 +43,8 @@
 #include <sstream>
 #include <sofa/helper/logging/Messaging.h>
 #include <sofa/helper/Utils.h>
+#include <sofa/helper/system/FileSystem.h>
+using sofa::helper::system::FileSystem;
 
 #ifdef WIN32
 #define ON_WIN32 true
@@ -75,20 +77,19 @@ std::string cleanPath( const std::string& path )
     return p;
 }
 
-/// Initialize PluginRepository with the current working directory
+// Initialize PluginRepository and DataRepository
 #ifdef WIN32
 FileRepository PluginRepository( "SOFA_PLUGIN_PATH", Utils::getExecutableDirectory().c_str() );
 #else
 FileRepository PluginRepository( "SOFA_PLUGIN_PATH", Utils::getSofaPathTo("lib").c_str() );
 #endif
-
-FileRepository DataRepository("SOFA_DATA_PATH");
+FileRepository DataRepository( "SOFA_DATA_PATH", 0, Utils::getSofaPathTo("etc/sofa.ini").c_str() );
 
 #if defined (_XBOX) || defined(PS3)
 char* getenv(const char* varname) { return NULL; } // NOT IMPLEMENTED
 #endif
 
-FileRepository::FileRepository(const char* envVar, const char* relativePath)
+FileRepository::FileRepository(const char* envVar, const char* relativePath, const char *sofaIniFilePath)
 {
     if (envVar != NULL && envVar[0]!='\0')
     {
@@ -112,7 +113,26 @@ FileRepository::FileRepository(const char* envVar, const char* relativePath)
             p0 = p1+1;
         }
     }
-    //print();
+    if (sofaIniFilePath != NULL && sofaIniFilePath[0]!='\0')
+    {
+        // Add .ini directories
+        std::map<std::string, std::string> iniFileValues = Utils::readBasicIniFile(sofaIniFilePath);
+
+        if (iniFileValues.find("SHARE_DIR") != iniFileValues.end())
+        {
+            std::string shareDir = iniFileValues["SHARE_DIR"];
+            if (!FileSystem::isAbsolute(shareDir))
+                shareDir = Utils::getSofaPathTo(shareDir);
+            addFirstPath(shareDir);
+        }
+        if (iniFileValues.find("EXAMPLES_DIR") != iniFileValues.end())
+        {
+            std::string examplesDir = iniFileValues["EXAMPLES_DIR"];
+            if (!FileSystem::isAbsolute(examplesDir))
+                examplesDir = Utils::getSofaPathTo(examplesDir);
+            addFirstPath(examplesDir);
+        }
+    }
 }
 
 FileRepository::~FileRepository()
