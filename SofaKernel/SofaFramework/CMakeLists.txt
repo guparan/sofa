@@ -209,11 +209,11 @@ install(FILES "${CMAKE_BINARY_DIR}/include/sofa/config.h" DESTINATION "include/s
 list(REMOVE_DUPLICATES SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES)
 
 ## Version
-set(SOFAFRAMEWORK_VERSION "17.12.01")
+set(SOFAFRAMEWORK_VERSION "17.12.02")
 
 ## sofa/version.h
-set(SOFA_VERSION "171201")
-set(SOFA_VERSION_STR "\"17.12.01\"")
+set(SOFA_VERSION "171202")
+set(SOFA_VERSION_STR "\"17.12.02\"")
 configure_file(../framework/sofa/version.h.in "${CMAKE_BINARY_DIR}/include/sofa/version.h")
 install(FILES "${CMAKE_BINARY_DIR}/include/sofa/version.h" DESTINATION include/sofa COMPONENT headers)
 
