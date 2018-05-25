@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -67,9 +67,7 @@ const int SlicedVolumetricModel::__edges__[12][2] = {{ 0,1 }, { 3,2 }, { 4,5 }, 
 SlicedVolumetricModel::SlicedVolumetricModel() //const std::string &name, std::string filename, std::string loader, std::string textureName)
     :
     alpha(initData(&alpha, 0.2f, "alpha", "Opacity of the billboards. 1.0 is 100% opaque.")),
-    //TODO FIXME because of: https://github.com/sofa-framework/sofa/issues/64
-    //This field should support the color="red" api.
-    color(initData(&color, std::string("white"), "color", "Billboard color.")),
+    color(initData(&color, defaulttype::RGBAColor(1.0,1.0,1.0,1.0), "color", "Billboard color.(default=1.0,1.0,1.0,1.0)")),
     _nbPlanes(initData(&_nbPlanes, 100, "nbSlices", "Number of billboards.")),
     _topology(NULL),
     _mstate(NULL),
@@ -146,17 +144,12 @@ void SlicedVolumetricModel::init()
 
 void SlicedVolumetricModel::reinit()
 {
-    setColor(color.getValue());
-
     if( _nbPlanesOld != _nbPlanes.getValue() || _first )
     {
-        // 	if( _nbPlanes.getValue()>2048)_nbPlanes.setValue(2048);
         alpha.setValue((alpha.getValue()*Real(_nbPlanesOld))/Real(_nbPlanes.getValue()));
         _planeSeparations = (Real)((_maxBBox[0]-_minBBox[0]) / (Real)_nbPlanes.getValue());
-// 		cerr<<"_planeSeparations : "<<_planeSeparations<<endl;
         _nbPlanesOld = _nbPlanes.getValue();
     }
-
 }
 
 void SlicedVolumetricModel::drawTransparent(const core::visual::VisualParams* vparams)
@@ -219,12 +212,6 @@ void SlicedVolumetricModel::drawTransparent(const core::visual::VisualParams* vp
 // 	glDisable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-
-
-
-
-
-
     float mat[16];
     glGetFloatv( GL_MODELVIEW_MATRIX, mat );
     vRight=Coord( mat[0], mat[4], mat[8] );
@@ -234,8 +221,8 @@ void SlicedVolumetricModel::drawTransparent(const core::visual::VisualParams* vp
 
     glBindTexture(GL_TEXTURE_3D, _texname);
 
-
-    glColor4f( r,g,b, alpha.getValue());
+    auto& c=color.getValue() ;
+    glColor4f( c.r(),c.g(),c.b(), alpha.getValue());
 
     glEnable(GL_TEXTURE_3D);
 
@@ -364,8 +351,6 @@ void SlicedVolumetricModel::findAndDrawTriangles()
                     }
                     else if(howmany==2)
                     {
-// 						cerr<<"intersect une ligne entiere"<<sendl;
-
                         Intersection inter( s0, _textureCoordinates[cell[e0]]);
                         intersections.push_back( inter );
                         inter = Intersection( s1, _textureCoordinates[cell[e1]]);
@@ -376,59 +361,23 @@ void SlicedVolumetricModel::findAndDrawTriangles()
                 }
             }
 
-// 			cerr<<"intersections.size() : "<<intersections.size()<<endl;
-
             if( intersections.size() <2 )
             {
                 ++itcell;
                 continue;
             }
-// 			else cerr<<"pas assez inter"<<sendl;
-
-
 
             nbintersections += (int)intersections.size();
 
-
-
-
-
-
-
-
-
-
-
-
             // trier les intersections
-
             helper::vector<std::pair<Real,int> > neg; // angle + indice
             helper::vector<std::pair<Real,int> > pos;
             helper::vector<int> nul;
 
-
-
-// 			Coord middle(0,0,0);
-// 			for(unsigned int i=0;i<intersections.size();++i)
-// 				middle+=intersections[i].first;
-// 			animal::v_teq(middle,1.0/intersections.size());
-// 			Coord referenceLine = intersections[0].first - middle;
-
-
             Coord referenceLine = intersections[1].first - intersections[0].first;
-
-
-
             Coord referenceLine2( referenceLine[1],- referenceLine[0], 0);
-// 		// 	Coord referenceLine2( referenceLine[1], referenceLine[0], (-2*referenceLine[0]*referenceLine[1])/referenceLine[2]);
-// 		// 	Coord tmp,referenceLine2;
-// 		// 	animal::v_eq_cross( tmp,referenceLine, intersections[2] - intersections[0]);
-// 		// 	animal::v_eq_cross( referenceLine2,referenceLine, tmp); // est-ce que la line2 a besoin d'etre dans le plan ???
-// 		// 	cerr<<"---\n"<<sendl;
 
-
-
-            for(unsigned int i=2; i<intersections.size(); ++i) // les cas 0 et 1 sont trait�s � la mano
+            for(unsigned int i=2; i<intersections.size(); ++i) // les cas 0 et 1 sont traite la mano
             {
                 Coord actualline = intersections[i].first-intersections[0].first;
 
@@ -439,34 +388,12 @@ void SlicedVolumetricModel::findAndDrawTriangles()
                     neg.push_back( std::pair<Real,int>(angle1, i) );
                 else
                     pos.push_back( std::pair<Real,int>(angle1, i) );
-
-                // 		cerr<<i<<" : "<<angle1<<" "<<angle2<<endl;
             }
-
-
-// 			for(unsigned int i=1;i<intersections.size();++i) // les cas 0 et 1 sont trait�s � la mano
-// 			{
-// 				Coord actualline = intersections[i].first-middle;
-            //
-// 				Real angle1 = animal::v_dot( referenceLine,  actualline);
-// 				Real angle2 = animal::v_dot( referenceLine2, actualline );
-            //
-// 				if( angle2<0.0)
-// 					neg.push_back( std::pair<Real,int>(angle1, i) );
-// 				else
-// 					pos.push_back( std::pair<Real,int>(angle1, i) );
-            //
-// 		// 		cerr<<i<<" : "<<angle1<<" "<<angle2<<endl;
-// 			}
-
-
-
 
             stable_sort( pos.begin(),pos.end());
             stable_sort( neg.begin(),neg.end());
 
             helper::vector<int> tripoints;
-// 			tripoints.push_back(0);
 
             glPointSize(30.0);
             for(unsigned  int i=0; i<pos.size(); ++i)
@@ -481,10 +408,6 @@ void SlicedVolumetricModel::findAndDrawTriangles()
                 tripoints.push_back(neg[i].second);
             }
 
-
-
-
-
             for( unsigned int i=0; i<tripoints.size()-1; ++i)
             {
                 helper::gl::glTexCoordT(intersections[0].second);
@@ -495,23 +418,6 @@ void SlicedVolumetricModel::findAndDrawTriangles()
                 helper::gl::glVertexT(intersections[tripoints[i+1]].first);
             }
 
-
-
-
-
-
-
-// 			for( unsigned int i=0;i<tripoints.size()-1;++i)
-// 			{
-// 				glTexCoord3fv(middle);
-// 				glVertex3fv(middle);
-// 				glTexCoord3fv(intersections[tripoints[i]].second);
-// 				glVertex3fv(intersections[tripoints[i]].first);
-// 				glTexCoord3fv(intersections[tripoints[i+1]].second);
-// 				glVertex3fv(intersections[tripoints[i+1]].first);
-// 			}
-
-
             ++itcell;
         }
 
@@ -521,7 +427,6 @@ void SlicedVolumetricModel::findAndDrawTriangles()
 
     }
     while( true );
-
 }
 
 
@@ -529,8 +434,6 @@ void SlicedVolumetricModel::findAndDrawTriangles()
 /// return 0->no intersection, 1->1 intersection, 2->line on plane
 int SlicedVolumetricModel::intersectionSegmentPlane( const Coord&s0,const Coord&s1,  const Coord &segmentDirection, const Coord& planeNormal, const Real&planeConstant,Real & m_fLineT /*where is the intersection on the segment*/)
 {
-// 	++_debugNbInteresctionComputations;
-
     Real fDdN = segmentDirection * planeNormal;
     Real fSDistance = (planeNormal * s0) - planeConstant;
 
@@ -563,63 +466,6 @@ int SlicedVolumetricModel::intersectionSegmentPlane( const Coord&s0,const Coord&
     }
 
     else return 0;
-}
-
-
-
-
-void SlicedVolumetricModel::setColor(float r, float g, float b)
-{
-    this->r = r;
-    this->g = g;
-    this->b = b;
-}
-
-static int hexval(char c)
-{
-    if (c>='0' && c<='9') return c-'0';
-    else if (c>='a' && c<='f') return (c-'a')+10;
-    else if (c>='A' && c<='F') return (c-'A')+10;
-    else return 0;
-}
-
-void SlicedVolumetricModel::setColor(std::string color)
-{
-    if (color.empty()) return;
-    float r = 1.0f;
-    float g = 1.0f;
-    float b = 1.0f;
-    if (color[0]>='0' && color[0]<='9')
-    {
-        sscanf(color.c_str(),"%f %f %f", &r, &g, &b);
-    }
-    else if (color[0]=='#' && color.length()>=7)
-    {
-        r = (hexval(color[1])*16+hexval(color[2]))/255.0f;
-        g = (hexval(color[3])*16+hexval(color[4]))/255.0f;
-        b = (hexval(color[5])*16+hexval(color[6]))/255.0f;
-    }
-    else if (color[0]=='#' && color.length()>=4)
-    {
-        r = (hexval(color[1])*17)/255.0f;
-        g = (hexval(color[2])*17)/255.0f;
-        b = (hexval(color[3])*17)/255.0f;
-    }
-    else if (color == "white")    { r = 1.0f; g = 1.0f; b = 1.0f; }
-    else if (color == "black")    { r = 0.0f; g = 0.0f; b = 0.0f; }
-    else if (color == "red")      { r = 1.0f; g = 0.0f; b = 0.0f; }
-    else if (color == "green")    { r = 0.0f; g = 1.0f; b = 0.0f; }
-    else if (color == "blue")     { r = 0.0f; g = 0.0f; b = 1.0f; }
-    else if (color == "cyan")     { r = 0.0f; g = 1.0f; b = 1.0f; }
-    else if (color == "magenta")  { r = 1.0f; g = 0.0f; b = 1.0f; }
-    else if (color == "yellow")   { r = 1.0f; g = 1.0f; b = 0.0f; }
-    else if (color == "gray")     { r = 0.5f; g = 0.5f; b = 0.5f; }
-    else
-    {
-        serr << "Unknown color "<<color<<sendl;
-        return;
-    }
-    setColor(r,g,b);
 }
 
 } // namespace visualmodel

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -23,6 +23,8 @@
 #define SOFA_COMPONENT_LINEARSOLVER_MATRIXLINEARSOLVER_INL
 
 #include <SofaBaseLinearSolver/MatrixLinearSolver.h>
+
+#include <sofa/helper/BackTrace.h>
 
 namespace sofa {
 
@@ -61,7 +63,7 @@ MatrixInvertData * MatrixLinearSolver<Matrix,Vector>::getMatrixInvertData(defaul
 template<class Matrix, class Vector>
 MatrixInvertData * MatrixLinearSolver<Matrix,Vector>::createInvertData()
 {
-    std::cerr << "ERROR the solver didn't implement MatrixLinearSolver::getMatrixInvertData this function is not available in MatrixLinearSolver, NULL is return" << std::endl;
+    msg_error("MatrixLinearSolver") << "The solver didn't implement MatrixLinearSolver::getMatrixInvertData this function is not available in MatrixLinearSolver, NULL is return." ;
     return NULL;
 }
 
@@ -161,6 +163,7 @@ void MatrixLinearSolver<Matrix,Vector>::setSystemMBKMatrix(const core::Mechanica
             if (!currentGroup->systemMatrix) currentGroup->systemMatrix = createMatrix();
             currentGroup->matrixAccessor.setGlobalMatrix(currentGroup->systemMatrix);
             currentGroup->matrixAccessor.clear();
+
             //unsigned int nbRow=0, nbCol=0;
             //MechanicalGetMatrixDimensionVisitor(nbRow, nbCol).execute( getContext() );
             //this->getMatrixDimension(&nbRow, &nbCol);
@@ -347,7 +350,7 @@ bool MatrixLinearSolver<Matrix,Vector>::addJMInvJtLocal(Matrix * /*M*/,ResMatrix
         }
         else
         {
-            std::cerr << "AsyncMatrixLinearSolver::addJMInvJt is only implemented for SparseMatrix<Real>" << std::endl;
+            dmsg_error("MatrixLinearSolver") << "AsyncMatrixLinearSolver::addJMInvJt is only implemented for SparseMatrix<Real>" ;
             return false;
         }
     }
@@ -400,11 +403,14 @@ bool MatrixLinearSolver<Matrix,Vector>::addMInvJt(defaulttype::BaseMatrix* resul
 template<class Matrix, class Vector>
 bool MatrixLinearSolver<Matrix,Vector>::buildComplianceMatrix(defaulttype::BaseMatrix* result, double fact)
 {
-    if (result->rowSize()==0) return true;
-
     JMatrixType * j_local = internalData.getLocalJ();
     j_local->clear();
-    j_local->resize(result->rowSize(),currentGroup->systemMatrix->colSize());
+    j_local->resize(result->rowSize(), currentGroup->systemMatrix->colSize());
+
+    if (result->rowSize() == 0)
+    {
+        return true;
+    }
 
     executeVisitor(simulation::MechanicalGetConstraintJacobianVisitor(core::ExecParams::defaultInstance(),j_local));
 
@@ -412,7 +418,8 @@ bool MatrixLinearSolver<Matrix,Vector>::buildComplianceMatrix(defaulttype::BaseM
 }
 
 template<class Matrix, class Vector>
-void MatrixLinearSolver<Matrix,Vector>::applyContactForce(const defaulttype::BaseVector* f,double positionFactor,double velocityFactor) {
+void MatrixLinearSolver<Matrix,Vector>::applyContactForce(const defaulttype::BaseVector* f, double positionFactor, double velocityFactor)
+{    
     currentGroup->systemRHVector->clear();
     currentGroup->systemRHVector->resize(currentGroup->systemMatrix->colSize());
 

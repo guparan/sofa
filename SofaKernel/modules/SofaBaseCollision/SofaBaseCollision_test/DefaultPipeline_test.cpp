@@ -1,25 +1,21 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2016 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
-* This library is free software; you can redistribute it and/or modify it     *
+* This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
 * the Free Software Foundation; either version 2.1 of the License, or (at     *
 * your option) any later version.                                             *
 *                                                                             *
-* This library is distributed in the hope that it will be useful, but WITHOUT *
+* This program is distributed in the hope that it will be useful, but WITHOUT *
 * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or       *
 * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License *
 * for more details.                                                           *
 *                                                                             *
 * You should have received a copy of the GNU Lesser General Public License    *
-* along with this library; if not, write to the Free Software Foundation,     *
-* Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301 USA.          *
+* along with this program. If not, see <http://www.gnu.org/licenses/>.        *
 *******************************************************************************
-*                               SOFA ::                                       *
-*                                                                             *
-* Contributors:                                                               *
-*       damien.marchal@univ-lille1.fr                                         *
+* Authors: The SOFA Team and external contributors (see Authors.txt)          *
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
@@ -48,9 +44,6 @@ using sofa::simulation::SceneLoaderXML ;
 using sofa::core::ExecParams ;
 
 #include <SofaTest/TestMessageHandler.h>
-using sofa::helper::logging::MessageAsTestFailure ;
-using sofa::helper::logging::ExpectMessage ;
-using sofa::helper::logging::Message ;
 
 #include <sofa/helper/BackTrace.h>
 using sofa::helper::BackTrace ;
@@ -66,7 +59,7 @@ int initMessage(){
 
 int messageInited = initMessage();
 
-class TestDefaultPipeLine : public Sofa_test<double> {
+class TestDefaultPipeLine : public Sofa_test<> {
 public:
     void checkDefaultPipelineWithNoAttributes();
     void checkDefaultPipelineWithMissingIntersection();
@@ -75,8 +68,8 @@ public:
 
 void TestDefaultPipeLine::checkDefaultPipelineWithNoAttributes()
 {
-    MessageAsTestFailure warning(Message::Warning) ;
-    MessageAsTestFailure error(Message::Error) ;
+    EXPECT_MSG_NOEMIT(Warning) ;
+    EXPECT_MSG_NOEMIT(Error) ;
 
     std::stringstream scene ;
     scene << "<?xml version='1.0'?>                                                          \n"
@@ -99,8 +92,9 @@ void TestDefaultPipeLine::checkDefaultPipelineWithNoAttributes()
 
 void TestDefaultPipeLine::checkDefaultPipelineWithMissingIntersection()
 {
-    ExpectMessage warning(Message::Warning) ;
-    MessageAsTestFailure error(Message::Error) ;
+    EXPECT_MSG_EMIT(Warning) ;
+    EXPECT_MSG_NOEMIT(Error) ;
+
 
     std::stringstream scene ;
     scene << "<?xml version='1.0'?>                                                          \n"
@@ -120,25 +114,26 @@ void TestDefaultPipeLine::checkDefaultPipelineWithMissingIntersection()
     clearSceneGraph();
 }
 
-int TestDefaultPipeLine::checkDefaultPipelineWithMonkeyValueForDepth(int value)
+int TestDefaultPipeLine::checkDefaultPipelineWithMonkeyValueForDepth(int dvalue)
 {
     std::stringstream scene ;
     scene << "<?xml version='1.0'?>                                                          \n"
              "<Node 	name='Root' gravity='0 -9.81 0' time='0' animate='0' >               \n"
-             "  <DefaultPipeline name='pipeline' depth='"<< value <<"'/>                     \n"
+             "  <DefaultPipeline name='pipeline' depth='"<< dvalue <<"'/>                     \n"
              "  <DiscreteIntersection name='interaction'/>                                    \n"
              "</Node>                                                                        \n" ;
 
     Node::SPtr root = SceneLoaderXML::loadFromMemory ("testscene",
                                                       scene.str().c_str(),
                                                       scene.str().size()) ;
-    //ASSERT_NE(root.get(), nullptr) ;
+    //EXPECT_NE( (root.get()), NULL) ;
     root->init(ExecParams::defaultInstance()) ;
 
     DefaultPipeline* clp = dynamic_cast<DefaultPipeline*>(root->getObject("pipeline")) ;
-    //ASSERT_NE( clp, nullptr) ;
+    //ASSERT_NE( (clp), nullptr) ;
 
     int rv = clp->d_depth.getValue() ;
+
     clearSceneGraph();
     return rv;
 }
@@ -161,19 +156,22 @@ TEST_F(TestDefaultPipeLine, checkDefaultPipelineWithMonkeyValueForDepth_OpenIssu
         std::make_pair( 0, true),
         std::make_pair( 2, true),
         std::make_pair(10, true),
-        std::make_pair(1000, false)
+        std::make_pair(1000, true)
     };
 
     for(auto is : testvalues){
-        MessageAsTestFailure error(Message::Error) ;
+        EXPECT_MSG_NOEMIT(Error) ;
+
         if(is.second){
-            MessageAsTestFailure warning(Message::Warning) ;
+            EXPECT_MSG_NOEMIT(Warning) ;
+
             // Check the returned value.
             if(this->checkDefaultPipelineWithMonkeyValueForDepth(is.first)!=is.first){
                 ADD_FAILURE() << "User provided depth parameter value '" << is.first << "' has been un-expectedly overriden." ;
             }
         }else{
-            ExpectMessage warning(Message::Warning) ;
+            EXPECT_MSG_EMIT(Warning) ;
+
             // Check the default value.
             if(this->checkDefaultPipelineWithMonkeyValueForDepth(is.first)!=6){
                 ADD_FAILURE() << "User provided invalid depth parameter value '" << is.first << "' have not been replaced with the default value = 6." ;

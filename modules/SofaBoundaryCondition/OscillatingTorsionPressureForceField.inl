@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -146,7 +146,6 @@ void OscillatingTorsionPressureForceField<DataTypes>::addForce(const core::Mecha
             pointCnt++;
         }
     avgError /= (Real)pointCnt;
-    //std::cout << "  AE = " << avgError << "  ME = " << maxError << "  AM = " << appliedMoment << std::endl;
 
     // apply remaining moment
     //Real check = 0;
@@ -160,8 +159,6 @@ void OscillatingTorsionPressureForceField<DataTypes>::addForce(const core::Mecha
                 f[i] += force;
             }
         }
-    //std::cout << "RM=" << remainingMoment << "  CHK=" << check << std::endl;
-    //std::cout << "  RM = " << remainingMoment << "  ME = " << maxError << "  AM = " << appliedMoment << std::endl;
 }
 
 

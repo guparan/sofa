@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -39,7 +39,7 @@ namespace sofa {
 /** Test a scene: load a given scene with the xml file contained in the sub-directories Scenes and init it.
 To test a new scene add the xml file in the Scenes directory and add the TEST_F for your scene (see below the example for BilinearConstraint scene). 
  */
-struct LoadScene_test: public Sofa_test<double>
+struct LoadScene_test: public Sofa_test<>
 {
     // root
    simulation::Node::SPtr root;

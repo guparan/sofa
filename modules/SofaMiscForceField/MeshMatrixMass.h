@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -48,7 +48,6 @@ namespace topology
 	template< class DataTypes> class EdgeSetGeometryAlgorithms;
 	template< class DataTypes> class TriangleSetGeometryAlgorithms;
 	template< class DataTypes> class TetrahedronSetGeometryAlgorithms;
-	template< class DataTypes> class BezierTetrahedronSetGeometryAlgorithms;
 	template< class DataTypes> class QuadSetGeometryAlgorithms;
 	template< class DataTypes> class HexahedronSetGeometryAlgorithms;
 }
@@ -95,8 +94,7 @@ public:
         TOPOLOGY_TRIANGLESET=2,
         TOPOLOGY_TETRAHEDRONSET=3,
         TOPOLOGY_QUADSET=4,
-        TOPOLOGY_HEXAHEDRONSET=5,
-        TOPOLOGY_BEZIERTETRAHEDRONSET=6,
+        TOPOLOGY_HEXAHEDRONSET=5
     } TopologyType;
 	/// the way the mass should be computed on non-linear elements
 	typedef enum 
@@ -109,7 +107,7 @@ public:
 
     /// Mass info are stocked on vertices and edges (if lumped matrix)
     topology::PointData<helper::vector<MassType> >  vertexMassInfo;
-    topology::EdgeData<helper::vector<MassType> >   edgeMassInfo;
+    topology::EdgeData<helper::vector<MassType> >   edgeMassInfo; ///< values of the particles masses on edges
 
     /* ---------- Specific data for Bezier Elements ------*/
     /// use this data structure to store mass for Bezier tetrahedra. 
@@ -124,12 +122,12 @@ public:
 
     /// to display the center of gravity of the system
     Data< bool >         showCenterOfGravity;
-    Data< Real >         showAxisSize;
+    Data< Real >         showAxisSize; ///< factor length of the axis displayed (only used for rigids)
     /// if mass lumping should be performed (only compute mass on vertices)
     Data< bool >         lumping;
     /// if specific mass information should be outputed
     Data< bool >         printMass;
-    Data<std::map < std::string, sofa::helper::vector<double> > > f_graph;
+    Data<std::map < std::string, sofa::helper::vector<double> > > f_graph; ///< Graph of the controlled potential
     /// the order of integration for numerical integration
     Data<size_t>	     numericalIntegrationOrder;
     /// the type of numerical integration method chosen
@@ -163,12 +161,12 @@ public:
     sofa::component::topology::QuadSetGeometryAlgorithms<GeometricalTypes>* quadGeo;
     sofa::component::topology::TetrahedronSetGeometryAlgorithms<GeometricalTypes>* tetraGeo;
     sofa::component::topology::HexahedronSetGeometryAlgorithms<GeometricalTypes>* hexaGeo;
-    sofa::component::topology::BezierTetrahedronSetGeometryAlgorithms<GeometricalTypes>* bezierTetraGeo;
+
 
     virtual void clear();
 
-    virtual void reinit();
-    virtual void init();
+    virtual void reinit() override;
+    virtual void init() override;
 
     TopologyType getMassTopologyType() const
     {
@@ -196,36 +194,35 @@ public:
 
 
     // -- Mass interface
-    void addMDx(const core::MechanicalParams*, DataVecDeriv& f, const DataVecDeriv& dx, SReal factor);
+    virtual void addMDx(const core::MechanicalParams*, DataVecDeriv& f, const DataVecDeriv& dx, SReal factor) override;
 
-    void accFromF(const core::MechanicalParams*, DataVecDeriv& a, const DataVecDeriv& f); // This function can't be used as it use M^-1
+    virtual void accFromF(const core::MechanicalParams*, DataVecDeriv& a, const DataVecDeriv& f) override; // This function can't be used as it use M^-1
 
-    void addForce(const core::MechanicalParams*, DataVecDeriv& f, const DataVecCoord& x, const DataVecDeriv& v);
+    virtual void addForce(const core::MechanicalParams*, DataVecDeriv& f, const DataVecCoord& x, const DataVecDeriv& v) override;
 
-    SReal getKineticEnergy(const core::MechanicalParams*, const DataVecDeriv& v) const;  ///< vMv/2 using dof->getV()
+    virtual SReal getKineticEnergy(const core::MechanicalParams*, const DataVecDeriv& v) const override;  ///< vMv/2 using dof->getV() override
 
-    SReal getPotentialEnergy(const core::MechanicalParams*, const DataVecCoord& x) const;   ///< Mgx potential in a uniform gravity field, null at origin
+    virtual SReal getPotentialEnergy(const core::MechanicalParams*, const DataVecCoord& x) const override;   ///< Mgx potential in a uniform gravity field, null at origin
 
-    defaulttype::Vector6 getMomentum(const core::MechanicalParams* mparams, const DataVecCoord& x, const DataVecDeriv& v) const;  ///< (Mv,cross(x,Mv))
+    virtual defaulttype::Vector6 getMomentum(const core::MechanicalParams* mparams, const DataVecCoord& x, const DataVecDeriv& v) const override;  ///< (Mv,cross(x,Mv)) override
 
-    void addGravityToV(const core::MechanicalParams* mparams, DataVecDeriv& d_v);
+    virtual void addGravityToV(const core::MechanicalParams* mparams, DataVecDeriv& d_v) override;
 
-    bool isDiagonal() {return false;}
+    virtual bool isDiagonal() override {return false;}
 
 
 
     /// Add Mass contribution to global Matrix assembling
-    void addMToMatrix(const core::MechanicalParams *mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix);
+    virtual void addMToMatrix(const core::MechanicalParams *mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
 
-    SReal getElementMass(unsigned int index) const;
-    void getElementMass(unsigned int index, defaulttype::BaseMatrix *m) const;
+    virtual SReal getElementMass(unsigned int index) const override;
+    virtual void getElementMass(unsigned int index, defaulttype::BaseMatrix *m) const override;
 
-    void draw(const core::visual::VisualParams* vparams);
+    virtual void draw(const core::visual::VisualParams* vparams) override;
 
     /// Answer wether mass matrix is lumped or not
     bool isLumped() { return lumping.getValue(); }
-	// returns the mass vector for a given index of a Bezier tetrahedron
-	virtual const  MassVector &getBezierTetrahedronMassVector(const size_t i) const;
+
 
 protected:
 

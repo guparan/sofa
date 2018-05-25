@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -19,6 +19,7 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
+#include <fstream>
 
 #include "GUIManager.h"
 #include "BaseGUI.h"
@@ -31,10 +32,8 @@
 #include <sofa/helper/system/FileSystem.h>
 #include <sofa/helper/Utils.h>
 #include <sofa/helper/logging/Messaging.h>
+#include <sofa/helper/system/FileRepository.h>
 
-
-using std::cerr;
-using std::endl;
 using sofa::helper::system::FileSystem;
 using sofa::helper::Utils;
 
@@ -47,8 +46,8 @@ namespace gui
 /*STATIC FIELD DEFINITIONS */
 BaseGUI* GUIManager::currentGUI = NULL;
 std::list<GUIManager::GUICreator> GUIManager::guiCreators;
-std::vector<std::string> GUIManager::guiOptions;
 const char* GUIManager::valid_guiname = NULL;
+ArgumentParser* GUIManager::currentArgumentParser = NULL;
 
 
 BaseGUI* GUIManager::getGUI()
@@ -56,9 +55,14 @@ BaseGUI* GUIManager::getGUI()
     return currentGUI;
 }
 
-void GUIManager::AddGUIOption(const char* option)
+void GUIManager::RegisterParameters(ArgumentParser* argumentParser)
 {
-    guiOptions.push_back(option);
+    currentArgumentParser = argumentParser;
+    for(std::list<GUICreator>::iterator it =guiCreators.begin(), itend =guiCreators.end(); it != itend; ++it)
+    {
+        if (it->parameters)
+            it->parameters(argumentParser);
+    }
 }
 
 const std::string &GUIManager::GetCurrentGUIName()
@@ -66,25 +70,25 @@ const std::string &GUIManager::GetCurrentGUIName()
     return currentGUI->GetGUIName();
 }
 
-int GUIManager::RegisterGUI(const char* name, CreateGUIFn* creator, InitGUIFn* init, int priority)
+int GUIManager::RegisterGUI(const char* name, CreateGUIFn* creator, RegisterGUIParameters* parameters, int priority)
 {
-	if(guiCreators.size())
-	{
-		std::list<GUICreator>::iterator it = guiCreators.begin();
-		std::list<GUICreator>::iterator itend = guiCreators.end();
-		while (it != itend && strcmp(name, it->name))
-			++it;
-		if (it != itend)
-		{
+    if(guiCreators.size())
+    {
+        std::list<GUICreator>::iterator it = guiCreators.begin();
+        std::list<GUICreator>::iterator itend = guiCreators.end();
+        while (it != itend && strcmp(name, it->name))
+            ++it;
+        if (it != itend)
+        {
             msg_error("GUIManager") << "ERROR(GUIManager): GUI "<<name<<" duplicate registration.";
-			return 1;
-		}
-	}
+            return 1;
+        }
+    }
 
     GUICreator entry;
     entry.name = name;
     entry.creator = creator;
-    entry.init = init;
+    entry.parameters = parameters;
     entry.priority = priority;
     guiCreators.push_back(entry);
     return 0;
@@ -176,8 +180,8 @@ GUIManager::GUICreator* GUIManager::GetGUICreator(const char* name)
         ++it;
     if (it == itend)
     {
-        std::cerr << "ERROR(GUIManager): GUI "<<name<<" creation failed."<<std::endl;
-        std::cerr << "Available GUIs:" << ListSupportedGUI(' ') << std::endl;
+        msg_error("GUIManager") << "GUI '"<<name<<"' creation failed."<< msgendl
+                                << "Available GUIs: {" << ListSupportedGUI(' ') <<  "}";
         return NULL;
     }
     else
@@ -187,6 +191,7 @@ GUIManager::GUICreator* GUIManager::GetGUICreator(const char* name)
 int GUIManager::Init(const char* argv0, const char* name)
 {
     BaseGUI::SetProgramName(argv0);
+    BaseGUI::SetArgumentParser(currentArgumentParser);
     sofa::simulation::common::init();
 
     static bool first = true;
@@ -227,7 +232,7 @@ int GUIManager::Init(const char* argv0, const char* name)
 
     if (guiCreators.empty())
     {
-        std::cerr << "ERROR(SofaGUI): No GUI registered."<<std::endl;
+        msg_error("GUIManager") << "No GUI registered.";
         return 1;
     }
 
@@ -242,10 +247,7 @@ int GUIManager::Init(const char* argv0, const char* name)
     }
     valid_guiname = name; // at this point we must have a valid name for the gui.
 
-    if (creator->init)
-        return (*creator->init)(valid_guiname, guiOptions);
-    else
-        return 0;
+    return 0;
 }
 
 
@@ -258,10 +260,10 @@ int GUIManager::createGUI(sofa::simulation::Node::SPtr groot, const char* filena
         {
             return 1;
         }
-        currentGUI = (*creator->creator)(valid_guiname, guiOptions, groot, filename);
+        currentGUI = (*creator->creator)(valid_guiname, groot, filename);
         if (!currentGUI)
         {
-            std::cerr << "ERROR(GUIManager): GUI "<<valid_guiname<<" creation failed."<<std::endl;
+            msg_error("GUIManager") << "GUI '"<<valid_guiname<<"' creation failed." ;
             return 1;
         }
         //Save this GUI type as the last used GUI
@@ -311,7 +313,7 @@ int GUIManager::MainLoop(sofa::simulation::Node::SPtr groot, const char* filenam
     ret = currentGUI->mainLoop();
     if (ret)
     {
-        std::cerr << "ERROR(SofaGUI): GUI "<<currentGUI->GetGUIName()<<" main loop failed (code "<<ret<<")."<<std::endl;
+        dmsg_error("GUIManager") << " GUI '"<<currentGUI->GetGUIName()<<"' main loop failed (code "<<ret<<").";
         return ret;
     }
     return ret;
@@ -320,40 +322,39 @@ void GUIManager::SetDimension(int  width , int  height )
 {
     if (currentGUI)
     {
-//        std::string viewerFileName;
-//        std::string path = sofa::helper::system::DataRepository.getFirstPath();
-//        viewerFileName = path.append("/share/config/sofaviewer.ini");
+        //        std::string viewerFileName;
+        //        std::string path = sofa::helper::system::DataRepository.getFirstPath();
+        //        viewerFileName = path.append("/share/config/sofaviewer.ini");
 
-//        if(sofa::helper::system::DataRepository.findFile(viewerFileName))
-//        {
-//            std::string configPath = sofa::helper::system::DataRepository.getFile(viewerFileName);
-//            std::string w, h;
-//            std::ifstream viewerStream(configPath.c_str());
-//            std::getline(viewerStream,w);
-//            std::getline(viewerStream,h);
-//            viewerStream.close();
+        //        if(sofa::helper::system::DataRepository.findFile(viewerFileName))
+        //        {
+        //            std::string configPath = sofa::helper::system::DataRepository.getFile(viewerFileName);
+        //            std::string w, h;
+        //            std::ifstream viewerStream(configPath.c_str());
+        //            std::getline(viewerStream,w);
+        //            std::getline(viewerStream,h);
+        //            viewerStream.close();
 
-//            std::stringstream convertW(w);
-//            convertW >> width;
+        //            std::stringstream convertW(w);
+        //            convertW >> width;
 
-//            std::stringstream convertH(h);
-//            convertH >> height;
-//        }
+        //            std::stringstream convertH(h);
+        //            convertH >> height;
+        //        }
         currentGUI->setViewerResolution(width,height);
     }
 }
 void GUIManager::SetFullScreen()
 {
     if (currentGUI) currentGUI->setFullScreen();
-    else cerr<<"GUIManager::SetFullScreen(), no currentGUI" << endl;
+    else{ msg_error("GUIManager") <<"no currentGUI" ; }
 }
-
 void GUIManager::SaveScreenshot(const char* filename)
 {
     if (currentGUI) {
-		std::string output = (filename?std::string(filename):"output.png");
-		currentGUI->saveScreenshot(output);
-	}
+        std::string output = (filename?std::string(filename):"output.png");
+        currentGUI->saveScreenshot(output);
+    }
 }
 
 

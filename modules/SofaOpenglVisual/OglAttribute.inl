@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -90,7 +90,10 @@ void OglAttribute< size, type, DataTypes>::initVisual ()
             data.getData() );
     _needUpdate = false;
     _lastUpdateDataCounter = value.getCounter();
+
     /*todo jeremy: add multi shaders management...temp solution for tonight...*/
+    // todo(dmarchal)... I suspect that the Jeremy above is Jeremie Ringard that stop working on Sofa
+    // since 2010.
     _index =  (*shaders.begin())->getAttribute ( indexShader.getValue(), id.getValue().c_str() ); //shader->getAttribute ( indexShader.getValue(), id.getValue().c_str() );
     if (_index == GLuint(-1) )
     {

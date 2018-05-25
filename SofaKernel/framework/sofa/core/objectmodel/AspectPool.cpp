@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -80,7 +80,6 @@ void intrusive_ptr_release(Aspect* a)
 AspectPool::AspectPool()
 {
     // Create all aspects and fill the list of free aspects.
-    // std::cout << "AspectPool"<<this<<": filling " << SOFA_DATA_MAX_ASPECTS << " aspects" << std::endl;
     aspects.resize(SOFA_DATA_MAX_ASPECTS);
     for(int i = 0; i < SOFA_DATA_MAX_ASPECTS; ++i)
     {
@@ -88,7 +87,6 @@ AspectPool::AspectPool()
         AtomicInt aspectID(i);
         freeAspects.push(aspectID);
     }
-    //std::cout << "AspectPool"<<this<<": " << freeAspects.size() << " aspects available" << std::endl;
 }
 
 /**
@@ -118,15 +116,10 @@ AspectRef AspectPool::allocate()
 {
     AspectRef ref;
     AtomicInt aspectID;
-    // std::cout << "AspectPool"<<this<<": allocate" << std::endl;
-    // std::cout << "AspectPool"<<this<<": " << freeAspects.size() << " aspects available" << std::endl;
     if(freeAspects.pop(aspectID))
     {
-        // std::cout << "AspectPool"<<this<<": aspect " << aspectID << " allocated" << std::endl;
         ref = aspects[aspectID];
     }
-    // else
-        // std::cout << "AspectPool"<<this<<": no aspect available" << std::endl;
     return ref;
 }
 
@@ -137,7 +130,6 @@ AspectRef AspectPool::allocate()
  */
 void AspectPool::release(int id)
 {
-    // std::cout << "AspectPool"<<this<<": release aspect " << id << std::endl;
     if(releaseCallback)
     {
         releaseCallback(id);
@@ -184,7 +176,6 @@ void AspectBuffer::clear()
 AspectRef AspectBuffer::allocate()
 {
     int id = availableID.exchange(-1);
-    //std::cerr << "availableID: " << id << " -> " << -1 << std::endl;
     if (id == -1)
         return pool.allocate();
     else
@@ -205,12 +196,10 @@ void AspectBuffer::push(AspectRef id)
         id->add_ref(); // add a ref token that will be implicitly held by latestID
     }
     int prevID = latestID.exchange(newID);
-    //std::cerr << "latestID: " << prevID << " -> " << newID << std::endl;
     if (prevID != -1)
     {
         // store prevID as the next available ID
         int freeID = availableID.exchange(prevID);
-        //std::cerr << "availableID: " << freeID << " -> " << prevID << std::endl;
         if (freeID != -1)
             pool.getAspect(freeID)->release(); // remove the ref token that was implicitly held by availableID
     }
@@ -220,7 +209,6 @@ void AspectBuffer::push(AspectRef id)
 bool AspectBuffer::pop(AspectRef& id)
 {
     int newID = latestID.exchange(-1);
-    //std::cerr << "latestID: " << newID << " -> " << -1 << std::endl;
     if (newID == -1) return false;
     if (id)
     {
@@ -228,7 +216,6 @@ bool AspectBuffer::pop(AspectRef& id)
         // store prevID as the next available ID
         id->add_ref(); // add a ref token that will be implicitly held by availableID
         int freeID = availableID.exchange(prevID);
-        //std::cerr << "availableID: " << freeID << " -> " << prevID << std::endl;
         if (freeID != -1)
             pool.getAspect(freeID)->release(); // remove the ref token that was implicitly held by availableID
     }

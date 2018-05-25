@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -858,7 +858,7 @@ public:
     {
         bool canwrite = d.setPath ( w->text().toStdString() );
         if(!canwrite)
-            std::cerr<<"canot set Path "<<w->text().toStdString()<<std::endl;
+            msg_info()<<"canot set Path "<<w->text().toStdString()<<std::endl;
     }
     static void setReadOnly(Widget* w, bool readOnly)
     {

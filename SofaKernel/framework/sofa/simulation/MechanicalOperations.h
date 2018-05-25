@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -61,19 +61,21 @@ public:
     /// Propagate the given displacement through all mappings and reset the current force delta
     void propagateDxAndResetDf(core::MultiVecDerivId dx, core::MultiVecDerivId df);
     /// Propagate the given position through all mappings
-    void propagateX(core::MultiVecCoordId x, bool applyProjections);
+    void propagateX(core::MultiVecCoordId x);
     /// Propagate the given velocity through all mappings
-    void propagateV(core::MultiVecDerivId v, bool applyProjections);
+    void propagateV(core::MultiVecDerivId v);
     /// Propagate the given position and velocity through all mappings
-    void propagateXAndV(core::MultiVecCoordId x, core::MultiVecDerivId v, bool applyProjections);
+    void propagateXAndV(core::MultiVecCoordId x, core::MultiVecDerivId v);
     /// Propagate the given position through all mappings and reset the current force delta
-    void propagateXAndResetF(core::MultiVecCoordId x, core::MultiVecDerivId f, bool applyProjections);
+    void propagateXAndResetF(core::MultiVecCoordId x, core::MultiVecDerivId f);
     /// Apply projective constraints to the given position vector
     void projectPosition(core::MultiVecCoordId x, SReal time = 0.0);
     /// Apply projective constraints to the given velocity vector
     void projectVelocity(core::MultiVecDerivId v, SReal time = 0.0);
     /// Apply projective constraints to the given vector
     void projectResponse(core::MultiVecDerivId dx, double **W=NULL);
+    /// Apply projective constraints to the given position and velocity vectors
+    void projectPositionAndVelocity(core::MultiVecCoordId x, core::MultiVecDerivId v, double time = 0.0);
     void addMdx(core::MultiVecDerivId res, core::MultiVecDerivId dx, SReal factor = 1.0); ///< res += factor M.dx
     void integrateVelocity(core::MultiVecDerivId res, core::ConstMultiVecCoordId x, core::ConstMultiVecDerivId v, SReal dt); ///< res = x + v.dt
     void accFromF(core::MultiVecDerivId a, core::ConstMultiVecDerivId f); ///< a = M^-1 . f

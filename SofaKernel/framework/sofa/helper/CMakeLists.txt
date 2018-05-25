@@ -7,6 +7,7 @@ set(HEADER_FILES
     BackTrace.h
     cast.h
     ColorMap.h
+    ComponentChange.h
     DualQuat.h
     DualQuat.inl
     Factory.h
@@ -51,7 +52,6 @@ set(HEADER_FILES
     io/FileAccess.h
     io/File.h
     io/Image.h
-    io/ImageBMP.h
     io/ImageDDS.h
     io/ImageRAW.h
     io/MassSpringLoader.h
@@ -105,8 +105,12 @@ set(HEADER_FILES
     vectorLinks.h
     vector_algebra.h
     vector_device.h
+    types/RGBAColor.h
+    types/Material.h
     logging/Messaging.h
     logging/Message.h
+    logging/ComponentInfo.h
+    logging/FileInfo.h
     logging/MessageDispatcher.h
     logging/MessageHandler.h
     logging/ConsoleMessageHandler.h
@@ -121,8 +125,6 @@ set(HEADER_FILES
     logging/ClangStyleMessageFormatter.h
     logging/DefaultStyleMessageFormatter.h
     logging/ExceptionMessageHandler.h
-    logging/RichConsoleStyleMessageFormatter.h
-
 )
 
 set(SOURCE_FILES
@@ -130,6 +132,7 @@ set(SOURCE_FILES
     ArgumentParser.cpp
     BackTrace.cpp
     ColorMap.cpp
+    ComponentChange.cpp
     DualQuat.cpp
     Factory.cpp
     GenerateRigid.cpp
@@ -152,7 +155,6 @@ set(SOURCE_FILES
     io/FileAccess.cpp
     io/File.cpp
     io/Image.cpp
-    io/ImageBMP.cpp
     io/ImageDDS.cpp
     io/ImageRAW.cpp
     io/MassSpringLoader.cpp
@@ -184,8 +186,12 @@ set(SOURCE_FILES
     system/thread/debug.cpp
     system/FileRepository.cpp
     vector.cpp
+    types/fixed_array.cpp
+    types/RGBAColor.cpp
+    types/Material.cpp
     logging/Message.cpp
     logging/MessageDispatcher.cpp
+    logging/ComponentInfo.cpp
     logging/ClangMessageHandler.cpp
     logging/ClangStyleMessageFormatter.cpp
     logging/DefaultStyleMessageFormatter.cpp
@@ -196,7 +202,6 @@ set(SOURCE_FILES
     logging/LoggingMessageHandler.cpp
     logging/RoutingMessageHandler.cpp
     logging/ExceptionMessageHandler.cpp
-    logging/RichConsoleStyleMessageFormatter.cpp
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL Linux)
@@ -211,16 +216,29 @@ if(CMAKE_SYSTEM_NAME STREQUAL Windows)
     list(APPEND SOURCE_FILES  system/FileMonitor_windows.cpp)
 endif()
 
+if(SOFA_BUILD_TESTS)
 
-if(SOFA_HAVE_PNG)
-    list(APPEND HEADER_FILES  io/ImagePNG.h)
-    list(APPEND SOURCE_FILES  io/ImagePNG.cpp)
+    list(APPEND HEADER_FILES testing/BaseTest.h
+                             testing/NumericTest.h
+                             testing/TestMessageHandler.h
+        )
+    list(APPEND SOURCE_FILES testing/BaseTest.cpp
+                             testing/NumericTest.cpp
+                             testing/TestMessageHandler.cpp
+        )
 endif()
 
 if(Boost_thread_FOUND)
     list(APPEND HEADER_FILES system/thread/TimeoutWatchdog.h)
     list(APPEND SOURCE_FILES system/thread/TimeoutWatchdog.cpp)
 endif()
+
+if(Boost_FILESYSTEM_FOUND AND Boost_LOCALE_FOUND)
+    list(APPEND HEADER_FILES system/FileRepository.h)
+    list(APPEND SOURCE_FILES system/FileRepository.cpp)
+endif()
+
+set(SHADER_FILES "")
 
 if(NOT SOFA_NO_OPENGL)
     list(APPEND HEADER_FILES
@@ -233,6 +251,8 @@ if(NOT SOFA_NO_OPENGL)
         system/glu.h
         gl/Axis.h
         gl/BasicShapes.h
+        gl/BasicShapesGL.h
+        gl/BasicShapesGL.inl
         gl/Cylinder.h
         gl/Texture.h
         gl/Trackball.h
@@ -242,6 +262,7 @@ if(NOT SOFA_NO_OPENGL)
     )
     list(APPEND SOURCE_FILES
         gl/Axis.cpp
+        gl/BasicShapesGL.cpp
         gl/Cylinder.cpp
         gl/glText.cpp
         gl/Capture.cpp
@@ -250,12 +271,6 @@ if(NOT SOFA_NO_OPENGL)
         gl/glfont.cpp
         system/gl.cpp
     )
-
-    if(SOFA_HAVE_GLUT)
-        list(APPEND HEADER_FILES
-            system/glut.h
-        )
-    endif()
 
     if(SOFA_HAVE_GLEW)
         list(APPEND HEADER_FILES
@@ -266,6 +281,9 @@ if(NOT SOFA_NO_OPENGL)
         list(APPEND SOURCE_FILES
             gl/FrameBufferObject.cpp
             gl/GLSLShader.cpp
+        )
+        list(APPEND SHADER_FILES
+            gl/shaders/generateSphere.cppglsl
         )
     endif()
 
@@ -286,7 +304,7 @@ if(PS3)
 endif()
 
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SHADER_FILES} ${SOURCE_FILES})
 if(WIN32)
     # Windows library, used in system::FileSystem
     target_link_libraries(${PROJECT_NAME} PRIVATE Shlwapi)
@@ -343,17 +361,28 @@ if(APPLE)
     # on macOS, -framework CoreServices is needed for FileMonitor
     list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK "-framework CoreServices")
 endif()
-target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFAFRAMEWORK_DEPENDENCY_LINK} ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFAFRAMEWORK_DEPENDENCY_LINK} ${Boost_LIBRARIES} )
+
+if(SOFA_BUILD_TESTS)
+    target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFAFRAMEWORK_DEPENDENCY_LINK} ${Boost_LIBRARIES} gtest)
+else()
+    target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFAFRAMEWORK_DEPENDENCY_LINK} ${Boost_LIBRARIES})
+endif()
+
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../..>")
-target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES}>")
+target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC "$<BUILD_INTERFACE:${SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES}>")
 # For generated files, like sofa/config.h
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 set(SOFAHELPER_COMPILE_FLAGS "-DSOFA_BUILD_HELPER")
-if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
-    set(SOFAHELPER_COMPILE_FLAGS "${SOFAHELPER_COMPILE_FLAGS} -DSOFA_LIBSUFFIX=_d")
-endif()
+
+# The default binary suffix for libraries/plugins is "_d" when using a debug build.
+# since this is configuration specific it is a bit more convenient to put it as a debug compile definition for 
+# PluginManager.cpp, at the expense of being much less visible compare to having it in the generated 
+# SofaFramework/config.h
+set_property(SOURCE system/PluginManager.cpp APPEND PROPERTY COMPILE_DEFINITIONS_DEBUG "SOFA_LIBSUFFIX=_d" )
+
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "${SOFAHELPER_COMPILE_FLAGS}")
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${SOFAFRAMEWORK_VERSION}")

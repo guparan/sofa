@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -20,36 +20,18 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 #include <sofa/helper/io/MeshOBJ.h>
+#include <sofa/helper/system/FileRepository.h>
 
-#include <gtest/gtest.h>
-
-#include <SofaTest/TestMessageHandler.h>
-using sofa::helper::logging::ExpectMessage;
-using sofa::helper::logging::Message;
-
-#include <sofa/helper/logging/Message.h>
-using sofa::helper::logging::MessageDispatcher ;
-
-#include <sofa/helper/logging/LoggingMessageHandler.h>
-using sofa::helper::logging::MainLoggingMessageHandler ;
-
-#include <sofa/helper/logging/CountingMessageHandler.h>
-using sofa::helper::logging::MainCountingMessageHandler ;
-
+#include <sofa/helper/testing/BaseTest.h>
+using sofa::helper::testing::BaseTest ;
 
 namespace sofa {
 
 using namespace core::loader;
 
-class MeshOBJ_test : public ::testing::Test
+class MeshOBJ_test : public BaseTest
 {
 protected:
-    MeshOBJ_test() {
-        MessageDispatcher::clearHandlers() ;
-        MessageDispatcher::addHandler( &MainCountingMessageHandler::getInstance() ) ;
-        MessageDispatcher::addHandler( &MainLoggingMessageHandler::getInstance() ) ;
-    }
-
     void SetUp()
     {
         sofa::helper::system::DataRepository.addFirstPath(FRAMEWORK_TEST_RESOURCES_DIR);
@@ -126,7 +108,7 @@ protected:
 TEST_F(MeshOBJ_test, MeshOBJ_NoFile)
 {
     /// This generate a test failure if no message is generated.
-    ExpectMessage raii(Message::Error);
+    EXPECT_MSG_EMIT(Error) ;
 
     MeshOBJTestData meshNoFile("mesh/randomnamewhichdoesnotexist.obj", 0, 0, 0, 0, 0, 0, 0);
     meshNoFile.testBench();

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -53,7 +53,6 @@ void PrintVisitor::processObjects(Seq& list, const char* name)
 
 Visitor::Result PrintVisitor::processNodeTopDown(simulation::Node* node)
 {
-//    std::cout<<"PrintVisitor::processNodeTopDown "<< node->getName() << std::endl;
     for (int i=0; i<level; i++)
         std::cout << "| ";
     std::cout << "+-";
@@ -84,7 +83,6 @@ Visitor::Result PrintVisitor::processNodeTopDown(simulation::Node* node)
 void PrintVisitor::processNodeBottomUp(simulation::Node* /*node*/)
 {
     --level;
-//    std::cout<<"PrintVisitor::processNodeBottomUp "<< node->getName() << std::endl;
 }
 
 } // namespace simulation

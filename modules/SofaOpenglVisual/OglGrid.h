@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -24,6 +24,7 @@
 #include "config.h"
 
 #include <sofa/core/visual/VisualModel.h>
+#include <sofa/defaulttype/RGBAColor.h>
 
 namespace sofa
 {
@@ -43,31 +44,29 @@ public:
 
     enum PLANE {PLANE_X, PLANE_Y, PLANE_Z};
 
-    Data<std::string> plane;
+    Data<std::string> plane; ///< Plane of the grid
     PLANE internalPlane;
 
-    Data<float> size;
-    Data<int> nbSubdiv;
+    Data<float> size; ///< Size of the squared grid
+    Data<int> nbSubdiv; ///< Number of subdivisions
 
-    Data<sofa::defaulttype::Vec<4, float> > color;
-    Data<float> thickness;
-    Data<bool> draw;
+    Data<defaulttype::RGBAColor> color; ///< Color of the lines in the grid. default=(0.34,0.34,0.34,1.0)
+    Data<float> thickness; ///< Thickness of the lines in the grid
+    Data<bool> draw; ///< Display the grid or not
 
     OglGrid():
         plane(initData(&plane, std::string("z"),  "plane", "Plane of the grid")),
         size(initData(&size, 10.0f,  "size", "Size of the squared grid")),
         nbSubdiv(initData(&nbSubdiv, 16,  "nbSubdiv", "Number of subdivisions")),
-        //TODO FIXME because of: https://github.com/sofa-framework/sofa/issues/64
-        //This field should support the color="red" api.
-        color(initData(&color, sofa::defaulttype::Vec<4, float>(0.34117647058f,0.34117647058f,0.34117647058f,1.0f),  "color", "Color of the lines in the grid")),
+        color(initData(&color, defaulttype::RGBAColor(0.34117647058f,0.34117647058f,0.34117647058f,1.0f),  "color", "Color of the lines in the grid. default=(0.34,0.34,0.34,1.0)")),
         thickness(initData(&thickness, 1.0f,  "thickness", "Thickness of the lines in the grid")),
         draw(initData(&draw, true,  "draw", "Display the grid or not"))
     {}
 
-    virtual void init();
-    virtual void reinit();
-    virtual void drawVisual(const core::visual::VisualParams*);
-    virtual void updateVisual();
+    virtual void init() override;
+    virtual void reinit() override;
+    virtual void drawVisual(const core::visual::VisualParams*) override;
+    virtual void updateVisual() override;
 
 protected:
 

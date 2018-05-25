@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -43,8 +43,6 @@ using namespace sofa::simulation;
 using namespace sofa::core::objectmodel;
 using sofa::helper::system::thread::CTime;
 using sofa::helper::system::thread::ctime_t;
-using std::cerr;
-using std::endl;
 
 template<class TMatrix, class TVector>
 SparseCholeskySolver<TMatrix,TVector>::SparseCholeskySolver()
@@ -125,7 +123,6 @@ void SparseCholeskySolver<TMatrix,TVector>::invert(Matrix& M)
     //sout << "diag =";
     //for (int i=0;i<A.n;++i) sout << " " << M.element(i,i);
     //sout << sendl;
-//        std::cerr << "SparseCholeskySolver: start factorization, n = " << A.n << " nnz = " << A.p[A.n] << std::endl;
     //tmp = (double *) cs_malloc (A.n, sizeof (double)) ;
     tmp.resize(A.n);
     S = cs_schol (&A, order) ;		/* ordering and symbolic analysis */

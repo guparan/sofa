@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -20,6 +20,8 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 #include <sofa/helper/io/bvh/BVHMotion.h>
+#include <sofa/helper/logging/Messaging.h>
+
 #include <iostream>
 
 namespace sofa
@@ -49,9 +51,10 @@ void BVHMotion::debug(void)
 {
     for (unsigned int i=0; i<frames.size(); i++)
     {
+        std::stringstream tmpmsg;
         for (unsigned int j=0; j<frames[i].size(); j++)
-            std::cout << frames[i][j] << " ";
-        std::cout << "\n";
+            tmpmsg << frames[i][j] << " ";
+        msg_info("BVHMotion") ;
     }
 }
 

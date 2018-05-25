@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -118,7 +118,7 @@ void QSofaStatWidget::addCollisionModelsStat(const sofa::helper::vector< sofa::c
         {
             QTreeWidgetItem *node = new QTreeWidgetItem(statsCounter);
             node->setText(0,QString(v[i]->getContext()->getName().c_str()));
-            QPixmap* pix = getPixmap(v[i]->getContext());
+            QPixmap* pix = getPixmap(v[i]->getContext(), false,false,false);
             if (pix) node->setIcon(0, QIcon(*pix));
             listStats.insert(std::make_pair(v[i]->getContext(), node));
             item = new QTreeWidgetItem(node);

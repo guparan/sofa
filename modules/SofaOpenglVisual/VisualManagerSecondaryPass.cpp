@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -68,7 +68,6 @@ void VisualManagerSecondaryPass::init()
 {
     sofa::core::objectmodel::BaseContext* context = this->getContext();
     multiPassEnabled=checkMultipass(context);
-    fbo = new FrameBufferObject(true, true, true, true);
 }
 
 void VisualManagerSecondaryPass::initVisual()
@@ -85,7 +84,10 @@ void VisualManagerSecondaryPass::initVisual()
 
         if(fragFilename.getValue().empty())
         {
-            std::cerr << "fragFilename attribute shall not be null. Using compositing.frag instead" << std::endl;
+            msg_warning() << "The attribute 'fragFilename' is not set. " << msgendl
+                          << "Using the default one named 'compositing.frag'" << msgendl
+                          << "To remove this warning you need to set the attribute 'fragFilename' in your scene." ;
+
             m_shaderPostproc->fragFilename.addPath("shaders/compositing.frag");
         }
         else
@@ -96,12 +98,14 @@ void VisualManagerSecondaryPass::initVisual()
     }
 
     initShaderInputTexId();
-        
+
     GLint viewport[4];
     glGetIntegerv(GL_VIEWPORT, viewport);
     passWidth = (GLint)(viewport[2]*factor.getValue());
     passHeight = (GLint)(viewport[3]*factor.getValue());
 
+    fbo = std::unique_ptr<helper::gl::FrameBufferObject>(
+                new FrameBufferObject(true, true, true, true));
     fbo->init(passWidth, passHeight);
 }
 
@@ -122,7 +126,6 @@ void VisualManagerSecondaryPass::initShaderInputTexId()
             if((!currentSecondaryPass->getOutputTags().empty()) && (input_tags.getValue().includes(currentSecondaryPass->getOutputTags())) )
             {
                 m_shaderPostproc->setInt(0, (currentSecondaryPass->getOutputName()).c_str(), nbFbo);
-                //std::cout << "---"<<this->getName()<<"--- add sampler2D \""<< currentSecondaryPass->getName()<<"\" at id="<<nbFbo<<std::endl;
                 nbFbo++;
             }
         }
@@ -133,10 +136,8 @@ void VisualManagerSecondaryPass::initShaderInputTexId()
                 if(input_tags.getValue().includes(currentPass->getTags()))
                 {
                     m_shaderPostproc->setInt(0, (currentPass->getOutputName()).c_str(), nbFbo);
-                    //std::cout << "---"<<this->getName()<<"--- add sampler2D \""<< currentPass->getName()<<"\" at id="<<nbFbo<<std::endl;
                     nbFbo++;
                     m_shaderPostproc->setInt(0, (currentPass->getOutputName()+"_Z").c_str(), nbFbo);
-                    //std::cout << "---"<<this->getName()<<"--- add sampler2D \""<< currentPass->getName()<<"_Z\" at id="<<nbFbo<<std::endl;
                     nbFbo++;
                 }
             }
@@ -179,7 +180,7 @@ void VisualManagerSecondaryPass::preDrawScene(core::visual::VisualParams* vp)
 
     fbo->stop();
     m_shaderPostproc->stop();
-    
+
     //todo: unbind input textures
     unbindInput();
 
@@ -232,13 +233,12 @@ void VisualManagerSecondaryPass::bindInput(core::visual::VisualParams* /*vp*/)
             {
                 if (!currentSecondaryPass->hasFilledFbo())
                 {
-                    std::cerr << "Error: SecondaryPass \"" << this->getName() << "\" cannot access input pass \""<< currentSecondaryPass->getName() <<"\". Please make sure you declared this input pass first in the scn file." << std::endl;
+                    msg_error() << "SecondaryPass \"" << this->getName() << "\" cannot access input pass \""<< currentSecondaryPass->getName() <<"\". Please make sure you declared this input pass first in the scn file." ;
                     return;
                 }
-                //std::cout<<"***"<< this->getName() <<"*** GL_TEXTURE"<<nbFbo<<" color from "<<currentSecondaryPass->getName()<<std::endl;
                 glActiveTexture(GL_TEXTURE0+nbFbo);
                 glEnable(GL_TEXTURE_2D);
-                glBindTexture(GL_TEXTURE_2D, currentSecondaryPass->getFBO()->getColorTexture());
+                glBindTexture(GL_TEXTURE_2D, currentSecondaryPass->getFBO().getColorTexture());
                 glGenerateMipmap(GL_TEXTURE_2D);
 
                 ++nbFbo;
@@ -253,21 +253,19 @@ void VisualManagerSecondaryPass::bindInput(core::visual::VisualParams* /*vp*/)
                 {
                     if (!currentPass->hasFilledFbo())
                     {
-                        std::cerr << "Error: SecondaryPass \"" << this->getName() << "\" cannot access input pass \""<< currentPass->getName() <<"\". Please make sure you declared this input pass first in the scn file." << std::endl;
+                        msg_error() << "SecondaryPass \"" << this->getName() << "\" cannot access input pass \""<< currentPass->getName() <<"\". Please make sure you declared this input pass first in the scn file." ;
                         return;
                     }
 
-                    //std::cout<<"***"<< this->getName() <<"*** GL_TEXTURE"<<nbFbo<<" color from "<<currentPass->getName()<<std::endl;
                     glActiveTexture(GL_TEXTURE0+nbFbo);
                     glEnable(GL_TEXTURE_2D);
-                    glBindTexture(GL_TEXTURE_2D, currentPass->getFBO()->getColorTexture());
+                    glBindTexture(GL_TEXTURE_2D, currentPass->getFBO().getColorTexture());
                     glGenerateMipmap(GL_TEXTURE_2D);
                     ++nbFbo;
 
-                    //std::cout<<"***"<< this->getName() <<"*** GL_TEXTURE"<<nbFbo<<" depth from "<<currentPass->getName()<<std::endl;
                     glActiveTexture(GL_TEXTURE0+nbFbo);
                     glEnable(GL_TEXTURE_2D);
-                    glBindTexture(GL_TEXTURE_2D, currentPass->getFBO()->getDepthTexture());
+                    glBindTexture(GL_TEXTURE_2D, currentPass->getFBO().getDepthTexture());
                     glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_LUMINANCE);
                     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_NONE);
                     ++nbFbo;

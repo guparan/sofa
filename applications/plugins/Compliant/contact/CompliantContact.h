@@ -56,7 +56,7 @@ public:
     typedef typename Inherit::CollisionModel2 CollisionModel2;
     typedef typename Inherit::Intersection Intersection;
 
-    Data< SReal > viscousFriction;
+    Data< SReal > viscousFriction; ///< 0 <= viscousFriction <= 1
 
 
 protected:
@@ -92,7 +92,7 @@ protected:
     void create_node()
     {
 
-//        simulation::MechanicalPropagatePositionAndVelocityVisitor bob( sofa::core::MechanicalParams::defaultInstance() );
+//        simulation::MechanicalPropagateOnlyPositionAndVelocityVisitor bob( sofa::core::MechanicalParams::defaultInstance() );
 //        this->mstate1->getContext()->getRootContext()->executeVisitor( &bob );
 //        this->mstate2->getContext()->getRootContext()->executeVisitor( &bob );
 //        this->mstate1->getContext()->executeVisitor( &bob );

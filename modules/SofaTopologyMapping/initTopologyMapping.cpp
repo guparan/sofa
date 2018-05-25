@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -39,9 +39,7 @@ void initTopologyMapping()
     }
 }
 
-SOFA_LINK_CLASS(BezierTetra2BezierTriangleTopologicalMapping)
-SOFA_LINK_CLASS(Bezier2MeshTopologicalMapping)
-SOFA_LINK_CLASS(Bezier2MeshMechanicalMapping)
+
 SOFA_LINK_CLASS(Mesh2PointMechanicalMapping)
 SOFA_LINK_CLASS(SimpleTesselatedTetraMechanicalMapping)
 SOFA_LINK_CLASS(CenterPointTopologicalMapping)

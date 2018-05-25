@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -23,6 +23,7 @@
 #include <SofaGeneralLoader/MeshXspLoader.h>
 #include <sofa/core/visual/VisualParams.h>
 #include <iostream>
+#include <fstream>
 
 namespace sofa
 {
@@ -190,7 +191,7 @@ bool MeshXspLoader::readXsp (std::ifstream &file, bool vector_spring)
         }
         else		// it's an unknown keyword
         {
-            std::cerr << "Unknown MassSpring keyword:" << cmd;
+            msg_error("MeshXspLoader") << "Unknown MassSpring keyword '" << cmd << "'.";
             d_positions.endEdit();
             d_edges.endEdit();
             gravity.endEdit();

@@ -2,6 +2,15 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaNonUniformFem)
 
 set(HEADER_FILES
+    config.h
+    initNonUniformFEM.h
+    )
+
+set(SOURCE_FILES
+    initNonUniformFEM.cpp
+    )
+
+list(APPEND HEADER_FILES
     DynamicSparseGridGeometryAlgorithms.h
     DynamicSparseGridGeometryAlgorithms.inl
     DynamicSparseGridTopologyAlgorithms.h
@@ -18,11 +27,8 @@ set(HEADER_FILES
     # NonUniformHexahedronFEMForceFieldDensity.inl
     SparseGridMultipleTopology.h
     SparseGridRamificationTopology.h
-    config.h
-    initNonUniformFEM.h
-)
-
-set(SOURCE_FILES
+    )
+list(APPEND SOURCE_FILES
     DynamicSparseGridGeometryAlgorithms.cpp
     DynamicSparseGridTopologyAlgorithms.cpp
     DynamicSparseGridTopologyContainer.cpp
@@ -34,17 +40,16 @@ set(SOURCE_FILES
     # NonUniformHexahedronFEMForceFieldDensity.cpp
     SparseGridMultipleTopology.cpp
     SparseGridRamificationTopology.cpp
-    initNonUniformFEM.cpp
-)
+    )
 
 if(SOFA_HAVE_NEWMAT)
     list(APPEND HEADER_FILES
         HexahedronCompositeFEMForceFieldAndMass.h
         HexahedronCompositeFEMForceFieldAndMass.inl
-    )
+        )
     list(APPEND SOURCE_FILES
         HexahedronCompositeFEMForceFieldAndMass.cpp
-    )
+        )
 endif()
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})

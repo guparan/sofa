@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -19,12 +19,13 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-
+#define SOFA_HELPER_GL_DRAWTOOLGL_CPP
 
 #include <sofa/core/visual/DrawToolGL.h>
 
 #include <sofa/helper/system/gl.h>
 #include <sofa/helper/gl/BasicShapes.h>
+#include <sofa/helper/gl/BasicShapesGL.inl>
 #include <sofa/helper/gl/Axis.h>
 #include <sofa/helper/gl/Cylinder.h>
 #include <sofa/helper/gl/template.h>
@@ -33,6 +34,19 @@
 
 namespace sofa
 {
+
+namespace helper
+{
+
+namespace gl
+{
+
+template class SOFA_CORE_API BasicShapesGL_Sphere< sofa::defaulttype::Vector3 >;
+template class SOFA_CORE_API BasicShapesGL_FakeSphere< sofa::defaulttype::Vector3 >;
+
+} // namespace gl
+
+} // namespace helper
 
 namespace core
 {
@@ -55,6 +69,10 @@ DrawToolGL::DrawToolGL()
 
 DrawToolGL::~DrawToolGL()
 {
+}
+
+void DrawToolGL::init()
+{
 
 }
 
@@ -64,15 +82,15 @@ void DrawToolGL::drawPoints(const std::vector<Vector3> &points, float size, cons
 {
     setMaterial(colour);
     glPointSize(size);
-    glDisable(GL_LIGHTING);
+    disableLighting();
     glBegin(GL_POINTS);
     {
         for (unsigned int i=0; i<points.size(); ++i)
         {
-            drawPoint(points[i], colour);
+            internalDrawPoint(points[i], colour);
         }
     } glEnd();
-    if (getLightEnabled()) glEnable(GL_LIGHTING);
+    if (getLightEnabled()) enableLighting();
     resetMaterial(colour);
     glPointSize(1);
 }
@@ -80,35 +98,46 @@ void DrawToolGL::drawPoints(const std::vector<Vector3> &points, float size, cons
 void DrawToolGL::drawPoints(const std::vector<Vector3> &points, float size, const std::vector<Vec4f>& colour)
 {
     glPointSize(size);
-    glDisable(GL_LIGHTING);
+    disableLighting();
     glBegin(GL_POINTS);
     {
         for (unsigned int i=0; i<points.size(); ++i)
         {
             setMaterial(colour[i]);
-            drawPoint(points[i], colour[i]);
-            if (getLightEnabled()) glEnable(GL_LIGHTING);
+            internalDrawPoint(points[i], colour[i]);
+            if (getLightEnabled()) enableLighting();
             resetMaterial(colour[i]);
         }
     } glEnd();
     glPointSize(1);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void DrawToolGL::internalDrawLine(const Vector3 &p1, const Vector3 &p2, const Vec4f& colour)
+{
+    internalDrawPoint(p1, colour );
+    internalDrawPoint(p2, colour );
+}
+
+void DrawToolGL::drawLine(const Vector3 &p1, const Vector3 &p2, const Vec4f& colour)
+{
+    glBegin(GL_LINES);
+    internalDrawLine(p1,p2,colour);
+    glEnd();
+}
 
 void DrawToolGL::drawLines(const std::vector<Vector3> &points, float size, const Vec<4,float>& colour)
 {
     setMaterial(colour);
     glLineWidth(size);
-    glDisable(GL_LIGHTING);
+    disableLighting();
     glBegin(GL_LINES);
     {
         for (unsigned int i=0; i<points.size()/2; ++i)
         {
-            drawPoint(points[2*i]  , colour );
-            drawPoint(points[2*i+1], colour );
+            internalDrawLine(points[2*i],points[2*i+1]  , colour );
         }
     } glEnd();
-    if (getLightEnabled()) glEnable(GL_LIGHTING);
+    if (getLightEnabled()) enableLighting();
     resetMaterial(colour);
     glLineWidth(1);
 }
@@ -116,18 +145,17 @@ void DrawToolGL::drawLines(const std::vector<Vector3> &points, float size, const
 void DrawToolGL::drawLines(const std::vector<Vector3> &points, float size, const std::vector<Vec<4,float> >& colours)
 {
     glLineWidth(size);
-    glDisable(GL_LIGHTING);
+    disableLighting();
     glBegin(GL_LINES);
     {
         for (unsigned int i=0; i<points.size()/2; ++i)
         {
             setMaterial(colours[i]);
-            drawPoint(points[2*i]  , colours[i] );
-            drawPoint(points[2*i+1], colours[i] );
+            internalDrawLine(points[2*i],points[2*i+1]  , colours[i] );
             resetMaterial(colours[i]);
         }
     } glEnd();
-    if (getLightEnabled()) glEnable(GL_LIGHTING);
+    if (getLightEnabled()) enableLighting();
     glLineWidth(1);
 }
 
@@ -137,16 +165,15 @@ void DrawToolGL::drawLines(const std::vector<Vector3> &points, const std::vector
 {
     setMaterial(colour);
     glLineWidth(size);
-    glDisable(GL_LIGHTING);
+    disableLighting();
     glBegin(GL_LINES);
     {
         for (unsigned int i=0; i<index.size(); ++i)
         {
-            drawPoint(points[ index[i][0] ], colour );
-            drawPoint(points[ index[i][1] ], colour );
+            internalDrawLine(points[ index[i][0] ],points[ index[i][1] ], colour );
         }
     } glEnd();
-    if (getLightEnabled()) glEnable(GL_LIGHTING);
+    if (getLightEnabled()) enableLighting();
     resetMaterial(colour);
     glLineWidth(1);
 }
@@ -157,21 +184,39 @@ void DrawToolGL::drawLineStrip(const std::vector<Vector3> &points, float size, c
 {
     setMaterial(colour);
     glLineWidth(size);
-    glDisable(GL_LIGHTING);
+    disableLighting();
     glBegin(GL_LINE_STRIP);
     {
         for (unsigned int i=0; i<points.size(); ++i)
         {
-            drawPoint(points[i]  , colour );
+            internalDrawPoint(points[i]  , colour );
         }
     } glEnd();
-    if (getLightEnabled()) glEnable(GL_LIGHTING);
+    if (getLightEnabled()) enableLighting();
     resetMaterial(colour);
     glLineWidth(1);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+void DrawToolGL::drawLineLoop(const std::vector<Vector3> &points, float size, const Vec<4,float>& colour)
+{
+    setMaterial(colour);
+    glLineWidth(size);
+    disableLighting();
+    glBegin(GL_LINE_LOOP);
+    {
+        for (unsigned int i=0; i<points.size(); ++i)
+        {
+            internalDrawPoint(points[i]  , colour );
+        }
+    } glEnd();
+    if (getLightEnabled()) enableLighting();
+    resetMaterial(colour);
+    glLineWidth(1);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void DrawToolGL::drawTriangles(const std::vector<Vector3> &points, const Vec<4,float>& colour)
 {
@@ -248,9 +293,9 @@ void DrawToolGL::drawTriangles(const std::vector<Vector3> &points,
                 Vector3 n = cross((b-a),(c-a));
                 n.normalize();
 
-                drawPoint(a,n,colour[3*i+0]);
-                drawPoint(b,n,colour[3*i+1]);
-                drawPoint(c,n,colour[3*i+2]);
+                internalDrawPoint(a,n,colour[3*i+0]);
+                internalDrawPoint(b,n,colour[3*i+1]);
+                internalDrawPoint(c,n,colour[3*i+2]);
 
             }
         }
@@ -320,8 +365,8 @@ void DrawToolGL::drawFrame(const Vector3& position, const Quaternion &orientatio
 void DrawToolGL::drawSpheres(const std::vector<Vector3> &points, float radius, const Vec<4,float>& colour)
 {
     setMaterial(colour);
-    for (unsigned int i=0; i<points.size(); ++i)
-        drawSphere(points[i], radius);
+
+    m_sphereUtil.draw(points, radius);
 
     resetMaterial(colour);
 }
@@ -331,8 +376,29 @@ void DrawToolGL::drawSpheres(const std::vector<Vector3> &points, float radius, c
 void DrawToolGL::drawSpheres(const std::vector<Vector3> &points, const std::vector<float>& radius, const Vec<4,float>& colour)
 {
     setMaterial(colour);
-    for (unsigned int i=0; i<points.size(); ++i)
-        drawSphere(points[i], radius[i]);
+
+    m_sphereUtil.draw(points, radius);
+
+    resetMaterial(colour);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void DrawToolGL::drawFakeSpheres(const std::vector<Vector3> &points, float radius, const Vec<4, float>& colour)
+{
+    setMaterial(colour);
+
+    m_fakeSphereUtil.draw(points, radius);
+
+    resetMaterial(colour);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void DrawToolGL::drawFakeSpheres(const std::vector<Vector3> &points, const std::vector<float>& radius, const Vec<4, float>& colour)
+{
+    setMaterial(colour);
+
+    m_fakeSphereUtil.draw(points, radius);
 
     resetMaterial(colour);
 }
@@ -551,7 +617,7 @@ void DrawToolGL::drawPlus ( const float& radius, const Vec<4,float>& colour, con
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void DrawToolGL::drawPoint(const Vector3 &p, const Vec<4,float> &c)
+void DrawToolGL::internalDrawPoint(const Vector3 &p, const Vec<4,float> &c)
 {
 #ifdef PS3
     // bit of a hack we force to enter our emulation of draw immediate
@@ -563,9 +629,7 @@ void DrawToolGL::drawPoint(const Vector3 &p, const Vec<4,float> &c)
     glVertexNv<3>(p.ptr());
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void DrawToolGL::drawPoint(const Vector3 &p, const Vector3 &n, const Vec<4,float> &c)
+void DrawToolGL::internalDrawPoint(const Vector3 &p, const Vector3 &n, const Vec<4,float> &c)
 {
 #ifdef PS3
     // bit of a hack we force to enter our emulation of draw immediate
@@ -578,9 +642,25 @@ void DrawToolGL::drawPoint(const Vector3 &p, const Vector3 &n, const Vec<4,float
     glVertexNv<3>(p.ptr());
 }
 
+
+void DrawToolGL::drawPoint(const Vector3 &p, const Vec<4,float> &c)
+{
+    glBegin(GL_POINTS);
+    internalDrawPoint(p,c);
+    glEnd();
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void DrawToolGL::drawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,
+void DrawToolGL::drawPoint(const Vector3 &p, const Vector3 &n, const Vec<4,float> &c)
+{
+    glBegin(GL_POINTS);
+    internalDrawPoint(p, n, c);
+    glEnd();
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void DrawToolGL::internalDrawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,
         const Vector3 &normal,
         const Vec<4,float> &c1, const Vec<4,float> &c2, const Vec<4,float> &c3)
 {
@@ -594,7 +674,7 @@ void DrawToolGL::drawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 
 }
 
 
-void DrawToolGL::drawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,
+void DrawToolGL::internalDrawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,
         const Vector3 &normal1, const Vector3 &normal2, const Vector3 &normal3,
         const Vec<4,float> &c1, const Vec<4,float> &c2, const Vec<4,float> &c3)
 {
@@ -610,7 +690,7 @@ void DrawToolGL::drawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 
 }
 
 
-void DrawToolGL::drawTriangle( const Vector3 &p1, const Vector3 &p2, const Vector3 &p3,
+void DrawToolGL::internalDrawTriangle( const Vector3 &p1, const Vector3 &p2, const Vector3 &p3,
         const Vector3 &normal, const  Vec<4,float> &c)
 {
     glNormalT(normal);
@@ -621,7 +701,7 @@ void DrawToolGL::drawTriangle( const Vector3 &p1, const Vector3 &p2, const Vecto
 }
 
 
-void DrawToolGL::drawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,
+void DrawToolGL::internalDrawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,
         const Vector3 &normal)
 {
     glNormalT(normal);
@@ -629,11 +709,69 @@ void DrawToolGL::drawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 
     glVertexNv<3>(p2.ptr());
     glVertexNv<3>(p3.ptr());
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void DrawToolGL::drawQuad(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,const Vector3 &p4,
+void DrawToolGL::drawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,
         const Vector3 &normal,
-        const Vec<4,float> &c1, const Vec<4,float> &c2, const Vec<4,float> &c3, const Vec<4,float> &c4)
+        const Vec<4,float> &c1, const Vec<4,float> &c2, const Vec<4,float> &c3)
+{
+    glBegin(GL_TRIANGLES);
+    internalDrawTriangle(p1, p2, p3, normal, c1, c2, c3);
+    glEnd();
+}
+
+
+void DrawToolGL::drawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,
+        const Vector3 &normal1, const Vector3 &normal2, const Vector3 &normal3,
+        const Vec<4,float> &c1, const Vec<4,float> &c2, const Vec<4,float> &c3)
+{
+    glBegin(GL_TRIANGLES);
+    internalDrawTriangle(p1, p2, p3, normal1, normal2, normal3, c1, c2, c3);
+    glEnd();
+}
+
+
+void DrawToolGL::drawTriangle( const Vector3 &p1, const Vector3 &p2, const Vector3 &p3,
+        const Vector3 &normal, const  Vec<4,float> &c)
+{
+    glBegin(GL_TRIANGLES);
+    internalDrawTriangle(p1, p2, p3, normal, c);
+    glEnd();
+}
+
+
+void DrawToolGL::drawTriangle(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,
+        const Vector3 &normal)
+{
+    glBegin(GL_TRIANGLES);
+    internalDrawTriangle(p1, p2, p3, normal);
+    glEnd();
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void DrawToolGL::internalDrawQuad(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,const Vector3 &p4,
+        const Vector3 &normal)
+{
+    glNormalT(normal);
+    glVertexNv<3>(p1.ptr());
+    glVertexNv<3>(p2.ptr());
+    glVertexNv<3>(p3.ptr());
+    glVertexNv<3>(p4.ptr());
+}
+
+void DrawToolGL::internalDrawQuad(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,const Vector3 &p4,
+        const Vector3 &normal, const Vec4f &c)
+{
+    glNormalT(normal);
+    glColor4fv(c.ptr());
+    glVertexNv<3>(p1.ptr());
+    glVertexNv<3>(p2.ptr());
+    glVertexNv<3>(p3.ptr());
+    glVertexNv<3>(p4.ptr());
+}
+
+void DrawToolGL::internalDrawQuad(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,const Vector3 &p4,
+        const Vector3 &normal,
+        const Vec4f &c1, const Vec4f &c2, const Vec4f &c3, const Vec4f &c4)
 {
     glNormalT(normal);
     glColor4fv(c1.ptr());
@@ -646,10 +784,9 @@ void DrawToolGL::drawQuad(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,
     glVertexNv<3>(p4.ptr());
 }
 
-
-void DrawToolGL::drawQuad(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,const Vector3 &p4,
+void DrawToolGL::internalDrawQuad(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,const Vector3 &p4,
         const Vector3 &normal1, const Vector3 &normal2, const Vector3 &normal3, const Vector3 &normal4,
-        const Vec<4,float> &c1, const Vec<4,float> &c2, const Vec<4,float> &c3, const Vec<4,float> &c4)
+        const Vec4f &c1, const Vec4f &c2, const Vec4f &c3, const Vec4f &c4)
 {
     glNormalT(normal1);
     glColor4fv(c1.ptr());
@@ -666,26 +803,41 @@ void DrawToolGL::drawQuad(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,
 }
 
 
+void DrawToolGL::drawQuad(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,const Vector3 &p4,
+        const Vector3 &normal,
+        const Vec<4,float> &c1, const Vec<4,float> &c2, const Vec<4,float> &c3, const Vec<4,float> &c4)
+{
+    glBegin(GL_QUADS);
+    internalDrawQuad(p1, p2, p3, p4, normal, c1, c2, c3, c4);
+    glEnd();
+}
+
+
+void DrawToolGL::drawQuad(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,const Vector3 &p4,
+        const Vector3 &normal1, const Vector3 &normal2, const Vector3 &normal3, const Vector3 &normal4,
+        const Vec<4,float> &c1, const Vec<4,float> &c2, const Vec<4,float> &c3, const Vec<4,float> &c4)
+{
+    glBegin(GL_QUADS);
+    internalDrawQuad(p1, p2, p3, p4, normal1, normal2, normal3, normal4, c1, c2, c3, c4);
+    glEnd();
+}
+
+
 void DrawToolGL::drawQuad( const Vector3 &p1, const Vector3 &p2, const Vector3 &p3,const Vector3 &p4,
         const Vector3 &normal, const  Vec<4,float> &c)
 {
-    glNormalT(normal);
-    glColor4fv(c.ptr());
-    glVertexNv<3>(p1.ptr());
-    glVertexNv<3>(p2.ptr());
-    glVertexNv<3>(p3.ptr());
-    glVertexNv<3>(p4.ptr());
+    glBegin(GL_QUADS);
+    internalDrawQuad(p1, p2, p3, p4, normal, c);
+    glEnd();
 }
 
 
 void DrawToolGL::drawQuad(const Vector3 &p1,const Vector3 &p2,const Vector3 &p3,const Vector3 &p4,
         const Vector3 &normal)
 {
-    glNormalT(normal);
-    glVertexNv<3>(p1.ptr());
-    glVertexNv<3>(p2.ptr());
-    glVertexNv<3>(p3.ptr());
-    glVertexNv<3>(p4.ptr());
+    glBegin(GL_QUADS);
+    internalDrawQuad(p1, p2, p3, p4, normal);
+    glEnd();
 }
 
 void DrawToolGL::drawQuads(const std::vector<Vector3> &points, const Vec4f& colour)
@@ -701,7 +853,7 @@ void DrawToolGL::drawQuads(const std::vector<Vector3> &points, const Vec4f& colo
             const Vector3& d = points[ 4*i+3 ];
             Vector3 n = cross((b-a),(c-a));
             n.normalize();
-            drawQuad(a,b,c,d,n,colour);
+            internalDrawQuad(a,b,c,d,n,colour);
         }
     } glEnd();
     resetMaterial(colour);
@@ -758,20 +910,20 @@ void DrawToolGL::drawScaledTetrahedra(const std::vector<Vector3> &points, const 
         Vector3 np1 = ((p1 - center)*scale) + center;
         Vector3 np2 = ((p2 - center)*scale) + center;
         Vector3 np3 = ((p3 - center)*scale) + center;
-        
+
         //this->drawTetrahedron(p0,p1,p2,p3,colour); // not recommanded as it will call glBegin/glEnd <number of tetra> times
         this->drawTriangle(np0, np1, np2, cross((p1 - p0), (p2 - p0)), colour);
         this->drawTriangle(np0, np1, np3, cross((p1 - p0), (p3 - p0)), colour);
         this->drawTriangle(np0, np2, np3, cross((p2 - p0), (p3 - p0)), colour);
         this->drawTriangle(np1, np2, np3, cross((p2 - p1), (p3 - p1)), colour);
-    } 
+    }
     glEnd();
     resetMaterial(colour);
 }
 
 
 void DrawToolGL::drawHexahedron(const Vector3 &p0, const Vector3 &p1, const Vector3 &p2, const Vector3 &p3,
-                                const Vector3 &p4, const Vector3 &p5, const Vector3 &p6, const Vector3 &p7, 
+                                const Vector3 &p4, const Vector3 &p5, const Vector3 &p6, const Vector3 &p7,
                                 const Vec4f &colour)
 {
     //{{0,1,2,3}, {4,7,6,5}, {1,0,4,5},{1,5,6,2},  {2,6,7,3}, {0,3,7,4}}
@@ -791,7 +943,7 @@ void DrawToolGL::drawHexahedron(const Vector3 &p0, const Vector3 &p1, const Vect
 void DrawToolGL::drawHexahedra(const std::vector<Vector3> &points, const Vec4f& colour)
 {
     setMaterial(colour);
-    
+
     glBegin(GL_QUADS);
     for (std::vector<Vector3>::const_iterator it = points.begin(), end = points.end(); it != end;)
     {
@@ -947,8 +1099,8 @@ void DrawToolGL::setPolygonMode(int _mode, bool _wireframe)
 void DrawToolGL::setLightingEnabled(bool _isAnabled)
 {
     mLightEnabled = _isAnabled;
-    if (this->getLightEnabled()) glEnable(GL_LIGHTING);
-    else glDisable(GL_LIGHTING);
+    if (this->getLightEnabled()) enableLighting();
+    else disableLighting();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1086,6 +1238,27 @@ void DrawToolGL::disableBlending()
 {
     glDisable(GL_BLEND);
 }
+
+void DrawToolGL::enableLighting()
+{
+    glEnable(GL_LIGHTING);
+}
+
+void DrawToolGL::disableLighting()
+{
+    glDisable(GL_LIGHTING);
+}
+
+void DrawToolGL::enableDepthTest()
+{
+    glEnable(GL_DEPTH_TEST);
+}
+
+void DrawToolGL::disableDepthTest()
+{
+    glDisable(GL_DEPTH_TEST);
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DrawToolGL::draw3DText(const Vector3 &p, float scale, const Vec4f &color, const char* text)
 {

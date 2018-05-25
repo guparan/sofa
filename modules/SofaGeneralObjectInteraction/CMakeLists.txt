@@ -2,6 +2,15 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaGeneralObjectInteraction)
 
 set(HEADER_FILES
+    config.h
+    initGeneralObjectInteraction.h
+    )
+
+set(SOURCE_FILES
+    initGeneralObjectInteraction.cpp
+    )
+
+list(APPEND HEADER_FILES
     AttachConstraint.h
     AttachConstraint.inl
     BoxStiffSpringForceField.h
@@ -10,18 +19,13 @@ set(HEADER_FILES
     InteractionEllipsoidForceField.inl
     RepulsiveSpringForceField.h
     RepulsiveSpringForceField.inl
-    config.h
-    initGeneralObjectInteraction.h
-)
-
-set(SOURCE_FILES
-	AttachConstraint.cpp
-	BoxStiffSpringForceField.cpp
+    )
+list(APPEND SOURCE_FILES
+    AttachConstraint.cpp
+    BoxStiffSpringForceField.cpp
     InteractionEllipsoidForceField.cpp
     RepulsiveSpringForceField.cpp
-    initGeneralObjectInteraction.cpp
-)
-
+    )
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaDeformable)

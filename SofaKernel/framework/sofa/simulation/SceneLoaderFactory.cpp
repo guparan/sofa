@@ -1,7 +1,7 @@
 
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -30,11 +30,31 @@ namespace sofa
 namespace simulation
 {
 
+SceneLoader::Listeners SceneLoader::s_listerners;
+
 SceneLoaderFactory* SceneLoaderFactory::getInstance()
 {
     static SceneLoaderFactory instance;
     return &instance;
 }
+
+/// This function resturns a real object but it is RVO optimized.
+std::vector<std::string> SceneLoaderFactory::extensions()
+{
+    std::vector<std::string> tmp ;
+    SceneLoaderFactory::SceneLoaderList* loaders = getEntries();
+    for (SceneLoaderFactory::SceneLoaderList::iterator it=loaders->begin(); it!=loaders->end(); ++it)
+    {
+        SceneLoader::ExtensionList extensions;
+        (*it)->getExtensionList(&extensions);
+        for (SceneLoader::ExtensionList::iterator itExt=extensions.begin(); itExt!=extensions.end(); ++itExt)
+        {
+            tmp.push_back(*itExt) ;
+        }
+    }
+    return tmp ;
+}
+
 
 /// Get an entry given a file extension
 SceneLoader* SceneLoaderFactory::getEntryFileExtension(std::string extension)

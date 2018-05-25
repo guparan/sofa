@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -35,8 +35,9 @@
 #include <sofa/core/objectmodel/BaseObjectDescription.h>
 #include <sofa/core/objectmodel/Tag.h>
 
-#include <boost/intrusive_ptr.hpp>
+#include <sofa/core/sptr.h>
 
+#include <deque>
 #include <string>
 #include <map>
 
@@ -105,8 +106,8 @@ namespace loader
 
 
 #define SOFA_BASE_CAST_IMPLEMENTATION(CLASSNAME) \
-virtual const CLASSNAME* to##CLASSNAME() const { return this; } \
-virtual       CLASSNAME* to##CLASSNAME()       { return this; }
+virtual const CLASSNAME* to##CLASSNAME() const override { return this; } \
+virtual       CLASSNAME* to##CLASSNAME()       override { return this; }
 
 
 
@@ -130,9 +131,11 @@ namespace objectmodel
 class SOFA_CORE_API Base
 {
 public:
-    typedef Base* Ptr;
-    typedef boost::intrusive_ptr<Base> SPtr;
 
+    typedef Base* Ptr;
+
+    using SPtr = sptr<Base>;
+    
     typedef TClass< Base, void > MyClass;
     static const MyClass* GetClass() { return MyClass::get(); }
     virtual const BaseClass* getClass() const { return GetClass(); }
@@ -332,17 +335,13 @@ public:
 
     /// @}
 
-    /// @name logs
-    ///   Messages and warnings logging
-    /// @{
 
 private:
-
     /// effective ostringstream for logging
     mutable std::ostringstream _serr, _sout;
+    mutable std::deque<sofa::helper::logging::Message> m_messageslog ;
 
 public:
-
     /// write into component buffer + Message processedby message handlers
     /// default message type = Warning
     mutable helper::system::SofaOStream<helper::logging::Message::Warning> serr;
@@ -353,16 +352,23 @@ public:
     /// runs the stream processing
     mutable helper::system::SofaEndl<Base> sendl;
 
-
-    const std::string& getWarnings() const;
-    const std::string& getOutputs() const;
-
-    void clearWarnings();
-    void clearOutputs();
+    ////////////// DEPRECATED /////////////////////////////////////////////////////////////////////////////
+    const std::string getWarnings() const;  /// use getLoggedMessageAsString() or getLoggedMessage instead.
+    const std::string getOutputs() const;   /// use getLoggedMessageAsString() or getLoggedMessage instead.
+    void clearWarnings();                   /// use clearLoggedMessages() instead
+    void clearOutputs();                    /// use clearLoggedMessages() instead
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
     void processStream(std::ostream& out);
 
-    /// @}
+    void addMessage(const sofa::helper::logging::Message& m) const ;
+    size_t  countLoggedMessages(sofa::helper::logging::Message::TypeSet t=sofa::helper::logging::Message::AnyTypes) const ;
+    const std::deque<sofa::helper::logging::Message>& getLoggedMessages() const ;
+    const std::string getLoggedMessagesAsString(sofa::helper::logging::Message::TypeSet t=sofa::helper::logging::Message::AnyTypes) const ;
+
+    void clearLoggedMessages() const ;
+
+    inline bool notMuted() const { return f_printLog.getValue(); }
 
 protected:
     /// Helper method used by initData()
@@ -441,9 +447,6 @@ public:
     }
 
 protected:
-    std::string warnings;
-    std::string outputs;
-
     /// List of fields (Data instances)
     VecData m_vecData;
     /// name -> Data multi-map (includes names and aliases)
@@ -458,12 +461,12 @@ public:
     /// Name of the object.
     Data<std::string> name;
 
-    Data<bool> f_printLog;
 
-    Data< sofa::core::objectmodel::TagSet > f_tags;
+    Data<bool> f_printLog; ///< if true, emits extra messages at runtime.
 
-    Data< sofa::defaulttype::BoundingBox > f_bbox;
+    Data< sofa::core::objectmodel::TagSet > f_tags; ///< list of the subsets the objet belongs to
 
+    Data< sofa::defaulttype::BoundingBox > f_bbox; ///< this object bounding box
 
     /// @name casting
     ///   trivial cast to a few base components
@@ -473,6 +476,7 @@ public:
     /// @{
     ///
 public:
+
 
 
 #define SOFA_BASE_CAST_DEFINITION(NAMESPACE,CLASSNAME) \
@@ -524,14 +528,50 @@ public:
     /// @}
 };
 
-
-
-
-
 } // namespace objectmodel
 
 } // namespace core
 
 } // namespace sofa
 
+/// This allow Base object to interact with the messaging system.
+namespace sofa
+{
+namespace helper
+{
+namespace logging
+{
+    inline bool notMuted(const sofa::core::objectmodel::Base* t){ return t->notMuted(); }
+    inline bool notMuted(sofa::core::objectmodel::Base* t){ return t->notMuted(); }
+
+    class SOFA_CORE_API SofaComponentInfo : public ComponentInfo
+    {
+    public:
+        const sofa::core::objectmodel::Base* m_component ;
+        std::string                          m_name;
+
+        SofaComponentInfo(const sofa::core::objectmodel::Base* c)
+        {
+            assert(c!=nullptr) ;
+            m_component = c ;
+            m_sender = c->getClassName() ;
+            m_name = c->getName() ;
+        }
+
+        const std::string& name() const { return m_name; }
+        std::ostream& toStream(std::ostream &out) const
+        {
+            out << m_sender << "(" << m_name << ")" ;
+            return out ;
+        }
+    };
+
+    /// This construct a new ComponentInfo object from a Base object.
+    inline ComponentInfo::SPtr getComponentInfo(const sofa::core::objectmodel::Base* t)
+    {
+        return ComponentInfo::SPtr( new SofaComponentInfo(t) ) ;
+    }
+} // logging
+} // helper
+} // sofa
 #endif

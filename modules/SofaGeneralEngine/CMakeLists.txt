@@ -2,10 +2,21 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaGeneralEngine)
 
 set(HEADER_FILES
+    config.h
+    initGeneralEngine.h
+    )
+
+set(SOURCE_FILES
+    initGeneralEngine.cpp
+    )
+
+list(APPEND HEADER_FILES
     AverageCoord.h
     AverageCoord.inl
     ClusteringEngine.h
     ClusteringEngine.inl
+    ComplementaryROI.h
+    ComplementaryROI.inl
     ComplementaryROI.h
     ComplementaryROI.inl
     DilateEngine.h
@@ -110,13 +121,11 @@ set(HEADER_FILES
     ValuesFromPositions.inl
     Vertex2Frame.h
     Vertex2Frame.inl
-    config.h
-    initGeneralEngine.h
-)
-
-set(SOURCE_FILES
+    )
+list(APPEND SOURCE_FILES
     AverageCoord.cpp
     ClusteringEngine.cpp
+    ComplementaryROI.cpp
     ComplementaryROI.cpp
     DilateEngine.cpp
     DifferenceEngine.cpp
@@ -172,8 +181,7 @@ set(SOURCE_FILES
     ValuesFromIndices.cpp
     ValuesFromPositions.cpp
     Vertex2Frame.cpp
-    initGeneralEngine.cpp
-)
+    )
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaMeshCollision SofaGeneralMeshCollision)

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -50,10 +50,7 @@ typedef bool (*FilterFunction) (Message&) ;
 ///
 /// \brief The RoutingMessageHandler class saves a copy of the messages in a buffer.
 ///
-/// This class is a MessageHandler that can be added to in a MessageDispatcher.
-/// Once set the class can start copying the messages passing through
-/// the MessageDispatcher in a buffer.
-///
+/// This class is a MessageHandler to implement complex routing rules.
 ///
 /// User interested in having a singleton of this class should have a look
 /// at \see MainRoutingMessageHandler.

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -68,7 +68,6 @@ template < class TCollisionModel1, class TCollisionModel2, class ResponseDataTyp
 void BarycentricPenalityContact<TCollisionModel1,TCollisionModel2,ResponseDataTypes>::setDetectionOutputs(OutputVector* o)
 {
     TOutputVector& outputs = *static_cast<TOutputVector*>(o);
-    const bool printLog = this->f_printLog.getValue();
     if (ff==NULL)
     {
         MechanicalState1* mstate1 = mapper1.createMapping(GenerateStirngID::generate().c_str());
@@ -77,9 +76,6 @@ void BarycentricPenalityContact<TCollisionModel1,TCollisionModel2,ResponseDataTy
         ff->setName( getName() );
         setInteractionTags(mstate1, mstate2);
         ff->init();
-#ifdef SOFA_SMP
-        ff->setPartition(mstate1->getPartition());
-#endif
 
     }
 
@@ -121,7 +117,7 @@ void BarycentricPenalityContact<TCollisionModel1,TCollisionModel2,ResponseDataTy
             if (!index)
             {
                 ++nbnew;
-                if (printLog) sout << "BarycentricPenalityContact: New contact "<<o->id<<sendl;
+                dmsg_info() << " new contact "<<o->id ;
             }
         }
         index = -1-i; // save this index as a negative value in contactIndex map.
@@ -146,7 +142,7 @@ void BarycentricPenalityContact<TCollisionModel1,TCollisionModel2,ResponseDataTy
         int& index = it->second;
         if (index >= 0)
         {
-            if (printLog) sout << "BarycentricPenalityContact: Removed contact "<<it->first<<sendl;
+            dmsg_info() << " removed contact "<<it->first ;
             ContactIndexMap::iterator oldit = it;
             ++it;
             contactIndex.erase(oldit);
@@ -157,7 +153,7 @@ void BarycentricPenalityContact<TCollisionModel1,TCollisionModel2,ResponseDataTy
             ++it;
         }
     }
-    if (printLog) sout << "BarycentricPenalityContact: "<<insize<<" input contacts, "<<size<<" contacts used for response ("<<nbnew<<" new)."<<sendl;
+    dmsg_info() << " "<<insize<<" input contacts, "<<size<<" contacts used for response ("<<nbnew<<" new).";
 
     //int size = contacts.size();
     ff->clear(size);

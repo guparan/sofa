@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -48,15 +48,15 @@ int OglVolumetricModelClass = sofa::core::RegisterObject("Volumetric model for O
 
 
 OglVolumetricModel::OglVolumetricModel()
-    : b_modified(false)
-    , b_useTopology(false)
-    , b_tboCreated(false)
+    : d_tetrahedra(initData(&d_tetrahedra, "tetrahedra", "Tetrahedra to draw"))
+    , d_hexahedra(initData(&d_hexahedra, "hexahedra", "Hexahedra to draw"))
     , d_volumeScale(initData(&d_volumeScale, (float)1.0, "volumeScale", "Scale for each volumetric primitive"))
     , d_depthTest(initData(&d_depthTest, (bool)false, "depthTest", "Set Depth Test"))
     , d_blending(initData(&d_blending, (bool)false, "blending", "Set Blending"))
     , d_defaultColor(initData(&d_defaultColor, defaulttype::Vec4f(), "defaultColor", "Color for each volume (if the attribute a_vertexColor is not detected)"))
-    , d_tetrahedra(initData(&d_tetrahedra, "tetrahedra", "Tetrahedra to draw"))
-    , d_hexahedra(initData(&d_hexahedra, "hexahedra", "Hexahedra to draw"))
+    , b_modified(false)
+    , b_useTopology(false)
+    , b_tboCreated(false)
 {
     addAlias(&d_defaultColor, "color");
 }

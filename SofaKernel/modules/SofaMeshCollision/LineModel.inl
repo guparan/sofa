@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -30,7 +30,6 @@
 #include <SofaMeshCollision/Line.h>
 #include <sofa/core/CollisionElement.h>
 #include <vector>
-#include <sofa/helper/gl/template.h>
 #include <sofa/simulation/Node.h>
 #include <sofa/core/topology/TopologyChange.h>
 #include <sofa/simulation/Simulation.h>
@@ -99,7 +98,7 @@ void TLineModel<DataTypes>::init()
         serr <<"LineModel requires a MeshTopology" << sendl;
         return;
     }
-	this->topology = bmt;
+    this->topology = bmt;
     resize( bmt->getNbEdges() );
 
     for(int i = 0; i < bmt->getNbEdges(); i++)
@@ -440,16 +439,16 @@ void TLineModel<DataTypes>::draw(const core::visual::VisualParams* vparams)
 template<class DataTypes>
 bool TLineModel<DataTypes>::canCollideWithElement(int index, CollisionModel* model2, int index2)
 {
-    //std::cerr<<"canCollideWithElement is called"<<std::endl;
+    //msg_info()<<"canCollideWithElement is called"<<std::endl;
 
     if (!this->bSelfCollision.getValue()) return true;
     if (this->getContext() != model2->getContext()) return true;
     sofa::core::topology::BaseMeshTopology* topology = this->getMeshTopology();
     /*
-    	TODO : separate 2 case: the model is only composed of lines or is composed of triangles
-    	bool NoTriangles = true;
-    	if( this->getContext()->get<TriangleModel>  != NULL)
-    		NoTriangles = false;
+        TODO : separate 2 case: the model is only composed of lines or is composed of triangles
+        bool NoTriangles = true;
+        if( this->getContext()->get<TriangleModel>  != NULL)
+            NoTriangles = false;
     */
     int p11 = elems[index].p[0];
     int p12 = elems[index].p[1];
@@ -462,7 +461,7 @@ bool TLineModel<DataTypes>::canCollideWithElement(int index, CollisionModel* mod
     }
     const helper::vector <unsigned int>& EdgesAroundVertex11 =topology->getEdgesAroundVertex(p11);
     const helper::vector <unsigned int>& EdgesAroundVertex12 =topology->getEdgesAroundVertex(p12);
-    //std::cerr<<"EdgesAroundVertex11 ok"<<std::endl;
+    //msg_info()<<"EdgesAroundVertex11 ok"<<std::endl;
 
 
     if (model2 == this)
@@ -518,7 +517,7 @@ bool TLineModel<DataTypes>::canCollideWithElement(int index, CollisionModel* mod
     }
     else if (model2 == mpoints)
     {
-        //std::cerr<<" point Model"<<std::endl;
+        //msg_info()<<" point Model"<<std::endl;
 
         // if point belong to the segment, return false
         if (index2==p11 || index2==p12)
@@ -542,13 +541,6 @@ bool TLineModel<DataTypes>::canCollideWithElement(int index, CollisionModel* mod
                 return false;
         }
         return true;
-
-        //sout << "line-point self test "<<index<<" - "<<index2<<sendl;
-        //std::cout << "line-point self test "<<index<<" - "<<index2<<"   - elems[index].p[0]-1"<<elems[index].p[0]-1<<"   elems[index]..p[1]+1 "<<elems[index].p[1]+1<<std::endl;
-
-
-        // case1: only lines (aligned lines !!)
-        //return index2 < p11-1 || index2 > p12+1;
 
         // only removes collision with the two vertices of the segment
         // TODO: neighborhood search !
@@ -687,7 +679,7 @@ void TLineModel<DataTypes>::computeBBox(const core::ExecParams* params, bool onl
     if( !onlyVisible ) return;
 
     static const Real max_real = std::numeric_limits<Real>::max();
-    static const Real min_real = std::numeric_limits<Real>::min();
+    static const Real min_real = std::numeric_limits<Real>::lowest();
     Real maxBBox[3] = {min_real,min_real,min_real};
     Real minBBox[3] = {max_real,max_real,max_real};
 

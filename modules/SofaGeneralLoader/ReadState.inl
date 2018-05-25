@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -247,7 +247,9 @@ void ReadState::processReadState()
     if (updated)
     {
         //sout<<"update from file"<<sendl;
-        sofa::simulation::MechanicalPropagatePositionAndVelocityVisitor action1(core::MechanicalParams::defaultInstance());
+        sofa::simulation::MechanicalProjectPositionAndVelocityVisitor action0(core::MechanicalParams::defaultInstance());
+        this->getContext()->executeVisitor(&action0);
+        sofa::simulation::MechanicalPropagateOnlyPositionAndVelocityVisitor action1(core::MechanicalParams::defaultInstance());
         this->getContext()->executeVisitor(&action1);
         sofa::simulation::UpdateMappingVisitor action2(core::MechanicalParams::defaultInstance());
         this->getContext()->executeVisitor(&action2);

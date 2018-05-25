@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -25,7 +25,7 @@
 #include "config.h"
 
 #include <sofa/core/visual/VisualModel.h>
-
+#include <sofa/defaulttype/RGBAColor.h>
 namespace sofa
 {
 namespace core
@@ -58,23 +58,18 @@ protected:
     Visual3DText();
 
 public:
-    virtual void init();
+    virtual void init() override;
 
-    virtual void reinit();
+    virtual void reinit() override;
 
-    virtual void drawTransparent(const core::visual::VisualParams* vparams);
-
-private:
-    void setColor(float r, float g, float b, float a);
-    void setColor(std::string color);
-    defaulttype::Vec4f m_color;
+    virtual void drawTransparent(const core::visual::VisualParams* vparams) override;
 
 public:
-    Data<std::string> d_text;
-    Data<defaulttype::Vec3f> d_position;
-    Data<float> d_scale;
-    Data<std::string> d_color;
-    Data<bool> d_depthTest;
+    Data<std::string> d_text; ///< Test to display
+    Data<defaulttype::Vec3f> d_position; ///< 3d position
+    Data<float> d_scale; ///< text scale
+    Data<defaulttype::RGBAColor> d_color; ///< text color. (default=[1.0,1.0,1.0,1.0])
+    Data<bool> d_depthTest; ///< perform depth test
 
 
 };

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -55,12 +55,12 @@ protected:
     ConstraintSolver();
 
     virtual ~ConstraintSolver();
-	
-private:
-	ConstraintSolver(const ConstraintSolver& n) ;
-	ConstraintSolver& operator=(const ConstraintSolver& n) ;
 
-	
+private:
+    ConstraintSolver(const ConstraintSolver& n) ;
+    ConstraintSolver& operator=(const ConstraintSolver& n) ;
+
+
 public:
     /**
      * Launch the sequence of operations in order to solve the constraints
@@ -97,7 +97,10 @@ public:
     /// Compute the residual in the newton iterations due to the constraints forces
     /// i.e. compute Vecid::force() += J^t lambda
     /// the result is accumulated in Vecid::force()
-    virtual void computeResidual(const core::ExecParams* /*params*/) { std::cerr << "ComputeResidual is not implemented in " << this->getName() << std::endl; }
+    virtual void computeResidual(const core::ExecParams* /*params*/)
+    {
+        dmsg_error() << "ComputeResidual is not implemented in " << this->getName() ;
+    }
 
 
     /// @name Resolution DOFs vectors API
@@ -138,8 +141,8 @@ protected:
 
 public:
 
-    virtual bool insertInNode( objectmodel::BaseNode* node );
-    virtual bool removeInNode( objectmodel::BaseNode* node );
+    virtual bool insertInNode( objectmodel::BaseNode* node ) override;
+    virtual bool removeInNode( objectmodel::BaseNode* node ) override;
 };
 
 } // namespace behavior

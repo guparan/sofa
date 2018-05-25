@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -52,9 +52,6 @@ enum IncludeNodeType
 class SOFA_SIMULATION_COMMON_API BaseElement : public core::objectmodel::BaseObjectDescription
 {
 private:
-    //std::string name;
-    //std::string type;
-
     std::string basefile;
     std::string m_srcfile;
     int m_srcline;

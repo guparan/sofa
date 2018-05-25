@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -20,6 +20,7 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 #include <SofaTest/Sofa_test.h>
+#include <SofaTest/TestMessageHandler.h>
 
 #include <SofaComponentCommon/initComponentCommon.h>
 #include <SofaComponentBase/initComponentBase.h>
@@ -38,7 +39,7 @@ namespace sofa {
 /**  Test TopologicalChangeProcessor incise process
   */
 
-struct TopologicalChangeProcessor_test: public Sofa_test<double>
+struct TopologicalChangeProcessor_test: public Sofa_test<>
 {
     // root
    simulation::Node::SPtr root;
@@ -59,6 +60,7 @@ struct TopologicalChangeProcessor_test: public Sofa_test<double>
 
        // Load the scene from the xml file
        std::string fileName = std::string(SOFAMISCTOPOLOGY_TEST_SCENES_DIR) + "/" + "IncisionTrianglesProcess.scn";
+       std::cout << fileName.c_str() << std::endl;
        root = sofa::simulation::getSimulation()->load(fileName.c_str()).get();
 
        // Test if root is not null

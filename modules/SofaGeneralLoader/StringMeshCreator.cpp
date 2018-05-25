@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -60,7 +60,6 @@ bool StringMeshCreator::load()
     for(unsigned x=0; x<numX; x++)
     {
         my_positions.push_back( Vector3(x * 1./(numX-1), 0, 0) );
-        //            cerr<<"StringMeshCreator::load, add point " << Vector3(i * 1./(numX-1), j * 1./(numY-1), 0) << endl;
     }
     helper::vector<Edge >& my_edges = *(d_edges.beginEdit());
     for( unsigned e=1; e<numX; e++ )

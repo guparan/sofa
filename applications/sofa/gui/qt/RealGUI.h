@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -22,6 +22,9 @@
 #ifndef SOFA_GUI_VIEWER_REALGUI_H
 #define SOFA_GUI_VIEWER_REALGUI_H
 
+#include <string>
+#include <vector>
+
 #include <SofaGui/config.h>
 #include <ui_GUI.h>
 #include <sofa/gui/qt/SofaGUIQt.h>
@@ -40,8 +43,10 @@
 #include <QTimer>
 #include <QTextBrowser>
 #include <QDockWidget>
-
+#include <QWindow>
 #include <time.h>
+
+#include <sofa/helper/system/FileMonitor.h>
 
 // Recorder GUI is not used (broken in most scenes)
 #define SOFA_GUI_QT_NO_RECORDER
@@ -70,6 +75,8 @@ class BaseViewer;
 namespace qt
 {
 
+class DocBrowser ;
+
 #ifndef SOFA_GUI_QT_NO_RECORDER
 class QSofaRecorder;
 #endif
@@ -96,12 +103,11 @@ class SofaViewer;
 
 class SOFA_SOFAGUIQT_API RealGUI : public QMainWindow, public Ui::GUI, public sofa::gui::BaseGUI
 {
-    Q_OBJECT
+    Q_OBJECT    
 
 //-----------------STATIC METHODS------------------------{
 public:
-    static int InitGUI(const char* name, const std::vector<std::string>& options);
-    static BaseGUI* CreateGUI(const char* name, const std::vector<std::string>& options, sofa::simulation::Node::SPtr groot = NULL, const char* filename = NULL);
+    static BaseGUI* CreateGUI(const char* name, sofa::simulation::Node::SPtr groot = NULL, const char* filename = NULL);
 
     static void SetPixmap(std::string pixmap_filename, QPushButton* b);
 
@@ -114,8 +120,7 @@ protected:
 
 //-----------------CONSTRUCTOR - DESTRUCTOR ------------------------{
 public:
-    RealGUI( const char* viewername,
-            const std::vector<std::string>& options = std::vector<std::string>() );
+    RealGUI( const char* viewername);
 
     ~RealGUI();
 //-----------------CONSTRUCTOR - DESTRUCTOR ------------------------}
@@ -125,28 +130,13 @@ public:
 //-----------------OPTIONS DEFINITIONS------------------------{
 //public:
 
-#ifdef SOFA_GUI_INTERACTION
-    QPushButton *interactionButton;
-#endif
-
 #ifdef SOFA_DUMP_VISITOR_INFO
     virtual void setTraceVisitors(bool);
 #endif
 
     virtual void showFPS(double fps);
 
-public slots:
-    virtual void changeHtmlPage( const QUrl&);
-
 protected:
-#ifdef SOFA_GUI_INTERACTION
-    void mouseMoveEvent( QMouseEvent * e);
-    void wheelEvent( QWheelEvent * event );
-    void mousePressEvent(QMouseEvent * e);
-    void mouseReleaseEvent(QMouseEvent * e);
-    void keyReleaseEvent(QKeyEvent * e);
-    bool eventFilter(QObject *obj, QEvent *event);
-#endif
 
 #ifndef SOFA_GUI_QT_NO_RECORDER
     QSofaRecorder* recorder;
@@ -157,10 +147,6 @@ protected:
 
 
 private:
-
-#ifdef SOFA_GUI_INTERACTION
-    bool m_interactionActived;
-#endif
 
 #ifdef SOFA_PML
     virtual void pmlOpen(const char* filename, bool resetView=true);
@@ -227,9 +213,8 @@ private:
     //currently unused: scale is experimental
     float object_Scale[2];
     bool saveReloadFile;
-    DisplayFlagsDataWidget *displayFlag;
-    QDialog* descriptionScene;
-    QTextBrowser* htmlPage;
+    DisplayFlagsDataWidget*  displayFlag  {nullptr};
+    DocBrowser*              m_docbrowser {nullptr};
     bool animationState;
     int frameCounter;
     unsigned int m_viewerMSAANbSampling;
@@ -244,10 +229,13 @@ public:
     virtual int mainLoop();
     virtual int closeGUI();
     virtual sofa::simulation::Node* currentSimulation();
-    virtual void fileOpen(std::string filename, bool temporaryFile=false);
+    virtual void fileOpen(std::string filename, bool temporaryFile=false, bool reload=false);
+
     // virtual void fileOpen();
     virtual void fileOpenSimu(std::string filename);
     virtual void setScene(Node::SPtr groot, const char* filename=NULL, bool temporaryFile=false);
+    virtual void setSceneWithoutMonitor(Node::SPtr groot, const char* filename=NULL, bool temporaryFile=false);
+
     virtual void unloadScene(bool _withViewer = true);
 
     virtual void setTitle( std::string windowTitle );
@@ -257,7 +245,7 @@ public:
     virtual void setViewerResolution(int w, int h);
     virtual void setFullScreen() { setFullScreen(true); }
     virtual void setFullScreen(bool enable);
-    virtual void setBackgroundColor(const defaulttype::Vector3& c);
+    virtual void setBackgroundColor(const defaulttype::RGBAColor& c);
     virtual void setBackgroundImage(const std::string& i);
     virtual void setViewerConfiguration(sofa::component::configurationsetting::ViewerSetting* viewerConf);
     virtual void setMouseButtonConfiguration(sofa::component::configurationsetting::MouseButtonSetting *button);
@@ -297,8 +285,7 @@ protected:
     /// init data member from RealGUI for the viewer initialisation in the GUI
     void init();
     void createDisplayFlags(Node::SPtr root);
-    void loadHtmlDescription(const char* filename);
-    void loadSimulation(bool one_step=false);//? where is the implementation ?
+    void loadSimulation(bool one_step=false); //? where is the implementation ?
     void eventNewStep();
     void eventNewTime();
     void keyPressEvent ( QKeyEvent * e );
@@ -328,11 +315,12 @@ protected:
 
     sofa::simulation::Node::SPtr mSimulation;
 
+    sofa::helper::system::FileEventListener* m_filelistener {nullptr};
 private:
     void addViewer();//? where is the implementation ?
 
     /// Parse options from the RealGUI constructor
-    void parseOptions(const std::vector<std::string>& options);
+    void parseOptions();
 
     void createPluginManager();
 
@@ -343,12 +331,7 @@ private:
     void createSimulationGraph();
     void createPropertyWidget();
     void createWindowVisitor();
-    void createSceneDescription();
-//----------------- METHODS------------------------}
 
-
-
-//-----------------SIGNALS-SLOTS------------------------{
 public slots:
     virtual void NewRootNode(sofa::simulation::Node* root, const char* path);
     virtual void ActivateNode(sofa::simulation::Node* , bool );
@@ -388,23 +371,21 @@ public slots:
     virtual void currentTabChanged(int index);
 
     virtual void fileNew();
-    virtual void fileOpen();
+    virtual void popupOpenFileSelector();
     virtual void fileReload();
     virtual void fileSave();
     virtual void fileExit();
     virtual void fileSaveAs() {
         fileSaveAs((Node *)NULL);
     }
-    virtual void helpIndex() { /* TODO */ }
-    virtual void helpContents() { /* TODO */ }
     virtual void helpAbout() { /* TODO */ }
     virtual void editRecordDirectory();
     virtual void editGnuplotDirectory();
+    virtual void showDocBrowser() ;
     virtual void showPluginManager();
     virtual void showMouseManager();
     virtual void showVideoRecorderManager();
     virtual void toolsDockMoved();
-
 
 protected slots:
     /// Allow to dynamicly change viewer. Called when click on another viewer in GUI Qt viewer list (see viewerMap).
@@ -418,6 +399,8 @@ protected slots:
     void propertyDockMoved(Qt::DockWidgetArea a);
 
     void appendToDataLogFile(QString);
+
+    void docBrowserVisibilityChanged(bool) ;
 
 signals:
     void reload();
@@ -451,7 +434,7 @@ struct ActivationFunctor
             desact_text.remove(QString("Deactivated "), Qt::CaseInsensitive);
             item->setText(0,desact_text);
             //Remove the icon
-            QPixmap *p = getPixmap(n);
+            QPixmap *p = getPixmap(n, false,false, false);
             item->setIcon(0, QIcon(*p));
 //            item->setOpen(true);
             item->setExpanded(true);
@@ -471,7 +454,6 @@ protected:
     std::string pixmap_filename;
     bool active;
     GraphListenerQListView* listener;
-
 };
 
 } // namespace qt

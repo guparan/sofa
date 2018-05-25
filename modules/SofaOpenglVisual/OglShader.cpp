@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -575,11 +575,10 @@ void OglShaderElement::init()
     if(isMultipass==NULL)
     {
         if ( OglShader* shader = mycontext->core::objectmodel::BaseContext::get<OglShader>(this->getTags()) )
-		{
+        {
             shaders.insert( shader );
-            if (f_printLog.getValue())
-                msg_info(this) << this->id.getValue() << " set in " << shader->getName();
-//            shaders.insert(mycontext->core::objectmodel::BaseContext::get<OglShader>());
+
+            msg_info() << this->id.getValue() << " set in " << shader->getName();
         }
         return;
     }

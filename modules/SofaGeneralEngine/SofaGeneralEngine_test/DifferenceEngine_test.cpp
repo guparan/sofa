@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -20,6 +20,9 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 #include <SofaTest/Sofa_test.h>
+#include <SofaTest/TestMessageHandler.h>
+
+
 #include <sofa/helper/BackTrace.h>
 
 #include <SofaSimulationGraph/DAGSimulation.h>
@@ -101,19 +104,22 @@ struct DifferenceEngine_test : public Sofa_test<typename _DataTypes::value_type>
 };
 
 using testing::Types;
-typedef Types<defaulttype::Vec3d> DataTypes;
+typedef Types<defaulttype::Vector3> DataTypes;
 
 TYPED_TEST_CASE(DifferenceEngine_test, DataTypes);
 
 TYPED_TEST(DifferenceEngine_test, NormalBehavior) {
+    EXPECT_MSG_NOEMIT(Error) ;
     ASSERT_NO_THROW(this->normalTests()) ;
 }
 
 TYPED_TEST(DifferenceEngine_test, UpdateTest) {
+    EXPECT_MSG_NOEMIT(Error) ;
     ASSERT_NO_THROW(this->updateTest()) ;
 }
 
 TYPED_TEST(DifferenceEngine_test, DataTest) {
+    EXPECT_MSG_NOEMIT(Error) ;
     ASSERT_NO_THROW(this->dataTest()) ;
 }
 

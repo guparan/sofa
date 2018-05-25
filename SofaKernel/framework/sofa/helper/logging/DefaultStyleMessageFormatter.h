@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -41,6 +41,10 @@ namespace helper
 namespace logging
 {
 
+/// Format the message using a very simple sofa style. For more advanced formatting style
+/// have a look at RichStyleMessageFormatter.
+/// Example:
+///           [ERROR] ClassName(instanceName): this is a message printed somewhere.
 class SOFA_HELPER_API DefaultStyleMessageFormatter : public MessageFormatter
 {
 public:
@@ -51,6 +55,7 @@ private:
         // singleton API
         DefaultStyleMessageFormatter();
         DefaultStyleMessageFormatter(const DefaultStyleMessageFormatter&);
+
         void operator=(const DefaultStyleMessageFormatter&);
         static DefaultStyleMessageFormatter s_instance;
 };

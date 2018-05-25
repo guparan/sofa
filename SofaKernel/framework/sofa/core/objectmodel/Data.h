@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -32,7 +32,7 @@
 #include <sofa/helper/vector.h>
 #include <memory>
 #include <string>
-
+#include <sofa/helper/logging/Message.h>
 namespace sofa
 {
 
@@ -638,11 +638,11 @@ public:
     typedef core::objectmodel::Data<T> data_container_type;
     typedef typename Inherit::container_type container_type;
 
-	// these are forbidden (until c++11 move semantics) as they break
-	// RAII encapsulation. the reference member 'data' prevents them
-	// anyways, but the intent is more obvious like this.
-	WriteAccessor(const WriteAccessor& );
-	WriteAccessor& operator=(const WriteAccessor& );
+    // these are forbidden (until c++11 move semantics) as they break
+    // RAII encapsulation. the reference member 'data' prevents them
+    // anyways, but the intent is more obvious like this.
+    WriteAccessor(const WriteAccessor& );
+    WriteAccessor& operator=(const WriteAccessor& );
 
 protected:
     data_container_type& data;
@@ -687,7 +687,31 @@ public:
 
 /// Easy syntax for getting read/write access to a Data using operator ->. Example: write(someFlagData)->setFlagValue(true);
 template<class T>
-inline WriteAccessor<core::objectmodel::Data<T> > write(core::objectmodel::Data<T>& data) { return WriteAccessor<core::objectmodel::Data<T> >(data); }
+inline WriteAccessor<core::objectmodel::Data<T> > write(core::objectmodel::Data<T>& data, const core::ExecParams* params)
+{
+    return WriteAccessor<core::objectmodel::Data<T> >(params,data);
+}
+
+
+template<class T>
+inline WriteAccessor<core::objectmodel::Data<T> > write(core::objectmodel::Data<T>& data) 
+{ 
+    return write(data,sofa::core::ExecParams::defaultInstance() ); 
+}
+
+
+template<class T>
+inline ReadAccessor<core::objectmodel::Data<T> > read(const core::objectmodel::Data<T>& data, const core::ExecParams* params)
+{
+    return ReadAccessor<core::objectmodel::Data<T> >(params, data);
+}
+
+
+template<class T>
+inline ReadAccessor<core::objectmodel::Data<T> > read(core::objectmodel::Data<T>& data)
+{
+    return read(data, sofa::core::ExecParams::defaultInstance());
+}
 
 /// Easy syntax for getting write only access to a Data using operator ->. Example: writeOnly(someFlagData)->setFlagValue(true);
 template<class T>

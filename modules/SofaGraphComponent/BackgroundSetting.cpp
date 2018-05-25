@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -40,9 +40,7 @@ int BackgroundSettingClass = core::RegisterObject("Background colour setting")
         ;
 
 BackgroundSetting::BackgroundSetting():
-    //TODO FIXME because of: https://github.com/sofa-framework/sofa/issues/64
-    //This field should support the color="red" api.
-    color(initData(&color, "color", "Color of the Background of the Viewer"))
+      color(initData(&color, "color", "Color of the Background of the Viewer"))
     , image(initData(&image, "image", "Image to be used as background of the viewer"))
 {
 }

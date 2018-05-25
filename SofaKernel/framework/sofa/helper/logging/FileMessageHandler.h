@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -40,10 +40,15 @@ namespace logging
 
 class MessageFormatter;
 
+/// A message handle that saves the content message passing by in a file.
+/// The formatting can be customize by passing a different MessageFormatter in the constructor.
+/// Example of use:
+///     MessageDispatcher::addHandler(new FileMessageHandler("myfile.log"));
 class SOFA_HELPER_API FileMessageHandler : public MessageHandler
 {
 public:
     FileMessageHandler(const char* filename,MessageFormatter* formatter = 0);
+
     virtual ~FileMessageHandler();
     virtual void process(Message& m) ;
 

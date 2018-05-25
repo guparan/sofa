@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -47,6 +47,7 @@
 #include <QCheckBox>
 #include <QSpinBox>
 #include <QVBoxLayout>
+#include <QTextBrowser>
 
 
 namespace sofa
@@ -140,6 +141,7 @@ public:
     void readOnlyData(QWidget *widget, core::objectmodel::BaseData* data);
 
 public slots:
+    void openExternalBrowser(const QUrl &link);
     void reject   ();
     void accept   ();
     void closeNow () {emit(reject());} //called from outside to close the current widget
@@ -163,8 +165,7 @@ signals:
 
 protected slots:
     //update the tables of value at each step of the simulation
-    void clearWarnings() {node->clearWarnings(); logWarningEdit->clear();}
-    void clearOutputs() {node->clearOutputs(); logOutputEdit->clear();}
+    void clearMessages() ;
 
 protected:
     void updateConsole();  //update the console log of warnings and outputs
@@ -175,13 +176,12 @@ protected:
     core::objectmodel::BaseData* data_;
     const ModifyObjectFlags dialogFlags_;
 
-    QWidget* outputTab;
-    QTextEdit *logOutputEdit;
-    QWidget *warningTab;
-    QTextEdit *logWarningEdit;
+    QWidget *messageTab;
+    QTextBrowser *messageEdit;
 
     QTabWidget *dialogTab;
     QPushButton *buttonUpdate;
+    int m_numMessages;
 
     //Widget specific to Node:
     //Transformation widget: translation, rotation, scale ( only experimental and deactivated)

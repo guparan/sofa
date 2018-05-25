@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -153,19 +153,14 @@ unsigned int Tetra2TriangleTopologicalMapping::getFromIndex(unsigned int ind)
 
 void Tetra2TriangleTopologicalMapping::updateTopologicalMappingTopDown()
 {
-
     // INITIALISATION of TRIANGULAR mesh from TETRAHEDRAL mesh :
-//	cerr << "updateTopologicalMappingTopDown called" << endl;
-
     if (fromModel)
     {
-
         TriangleSetTopologyModifier *to_tstm;
         toModel->getContext()->get(to_tstm);
 
         if (toModel)
         {
-
             std::list<const TopologyChange *>::const_iterator itBegin=fromModel->beginChange();
             std::list<const TopologyChange *>::const_iterator itEnd=fromModel->endChange();
 
@@ -189,8 +184,6 @@ void Tetra2TriangleTopologicalMapping::updateTopologicalMappingTopDown()
 
                 case core::topology::TRIANGLESREMOVED:
                 {
-//						cerr << "INFO_print : Tetra2TriangleTopologicalMapping - TRIANGLESREMOVED" << endl;
-
                     int last;
                     int ind_last;
 

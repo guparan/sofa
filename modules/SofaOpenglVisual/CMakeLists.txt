@@ -2,52 +2,47 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaOpenglVisual)
 
 if(${SOFA_NO_OPENGL})
-    message(SEND_ERROR "Warning: CMake flag SOFA_NO_OPENGL is active.")
-    message("Flag SOFA_NO_OPENGL incompatible with the SofaOpenglVisual module.")    
+message(SEND_ERROR "Warning: CMake flag SOFA_NO_OPENGL is active.")
+message("Flag SOFA_NO_OPENGL incompatible with the SofaOpenglVisual module.")
 endif()
 
 set(HEADER_FILES
+    config.h
+    initOpenGLVisual.h
+    )
+
+set(SOURCE_FILES
+    initOpenGLVisual.cpp
+    )
+
+list(APPEND HEADER_FILES
     ClipPlane.h
     OglColorMap.h
     CompositingVisualLoop.h
     DataDisplay.h
-    OglCylinderModel.h
-    OglGrid.h
     OglLabel.h
-    OglLineAxis.h
     OglModel.h
-    OglRenderingSRGB.h
-    OglSceneFrame.h
     PointSplatModel.h
-    config.h
-    initOpenGLVisual.h
     MergeVisualModels.h
-)
-
-set(SOURCE_FILES
+    )
+list(APPEND SOURCE_FILES
     ClipPlane.cpp
     OglColorMap.cpp
     CompositingVisualLoop.cpp
     DataDisplay.cpp
-    OglCylinderModel.cpp
     OglGrid.cpp
     OglLabel.cpp
-    OglLineAxis.cpp
     OglModel.cpp
-    OglRenderingSRGB.cpp
-    OglSceneFrame.cpp
     PointSplatModel.cpp
-    initOpenGLVisual.cpp
     MergeVisualModels.cpp
-)
+    )
 
 if(SOFA_HAVE_GLEW)
-
     list(APPEND HEADER_FILES
-		LightManager.h
-		Light.h
-		OrderIndependentTransparencyManager.h
-		OglOITShader.h
+        LightManager.h
+        Light.h
+        OrderIndependentTransparencyManager.h
+        OglOITShader.h
         OglAttribute.h
         OglAttribute.inl
         OglShader.h
@@ -63,13 +58,13 @@ if(SOFA_HAVE_GLEW)
         SlicedVolumetricModel.h
         VisualManagerPass.h
         VisualManagerSecondaryPass.h
-    )
+        )
 
     list(APPEND SOURCE_FILES
-		Light.cpp
-		LightManager.cpp
-		OrderIndependentTransparencyManager.cpp
-		OglOITShader.cpp
+        Light.cpp
+        LightManager.cpp
+        OrderIndependentTransparencyManager.cpp
+        OglOITShader.cpp
         OglAttribute.cpp
         OglShader.cpp
         OglShaderMacro.cpp
@@ -83,8 +78,24 @@ if(SOFA_HAVE_GLEW)
         SlicedVolumetricModel.cpp
         VisualManagerPass.cpp
         VisualManagerSecondaryPass.cpp
-    )
+        )
+endif()
 
+if(SOFA_WITH_DEPRECATED_COMPONENTS)
+    list(APPEND HEADER_FILES
+        OglCylinderModel.h
+        OglGrid.h
+        OglRenderingSRGB.h
+        OglLineAxis.h
+        OglSceneFrame.h
+        )
+    list(APPEND SOURCE_FILES
+        OglCylinderModel.cpp
+        OglGrid.cpp
+        OglRenderingSRGB.cpp
+        OglLineAxis.cpp
+        OglSceneFrame.cpp
+        )
 endif()
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})

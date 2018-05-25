@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -45,11 +45,11 @@ DAGNode::DAGNode(const std::string& name, DAGNode* parent)
 
 DAGNode::~DAGNode()
 {
-	for (ChildIterator it = child.begin(), itend = child.end(); it != itend; ++it)
+    for (ChildIterator it = child.begin(), itend = child.end(); it != itend; ++it)
     {
-		DAGNode::SPtr dagnode = sofa::core::objectmodel::SPtr_static_cast<DAGNode>(*it);
-		dagnode->l_parents.remove(this);
-	}
+        DAGNode::SPtr dagnode = sofa::core::objectmodel::SPtr_static_cast<DAGNode>(*it);
+        dagnode->l_parents.remove(this);
+    }
 }
 
 /// Create, add, then return the new child of this Node
@@ -63,7 +63,6 @@ Node::SPtr DAGNode::createChild(const std::string& nodeName)
 /// Add a child node
 void DAGNode::doAddChild(DAGNode::SPtr node)
 {
-//    printf("DAGNode::doAddChild this=%X(%s) child=%X(%s)\n",this,getName().c_str(),node.get(),node->getName().c_str());
     child.add(node);
     node->l_parents.add(this);
     node->l_parents.updateLinks(); // to fix load-time unresolved links
@@ -170,7 +169,7 @@ void* DAGNode::getObject(const sofa::core::objectmodel::ClassInfo& class_info, c
 #ifdef DEBUG_GETOBJECT
     std::string cname = class_info.name();
     if (cname != std::string("N4sofa4core6ShaderE"))
-        std::cout << "DAGNode: search for object of type " << class_info.name() << std::endl;
+        std::cout << "DAGNode: search for object of type " << class_info.name() ;
     std::string gname = "N4sofa9component8topology32TetrahedronSetGeometryAlgorithms";
     bool isg = cname.length() >= gname.length() && std::string(cname, 0, gname.length()) == gname;
 #endif
@@ -182,13 +181,13 @@ void* DAGNode::getObject(const sofa::core::objectmodel::ClassInfo& class_info, c
             {
 #ifdef DEBUG_GETOBJECT
                 if (isg)
-                    std::cout << "DAGNode: testing object " << (obj)->getName() << " of type " << (obj)->getClassName() << std::endl;
+                    std::cout << "DAGNode: testing object " << (obj)->getName() << " of type " << (obj)->getClassName() ;
 #endif
                 result = class_info.dynamicCast(obj);
                 if (result != NULL)
                 {
 #ifdef DEBUG_GETOBJECT
-                    std::cout << "DAGNode: found object " << (obj)->getName() << " of type " << (obj)->getClassName() << std::endl;
+                    std::cout << "DAGNode: found object " << (obj)->getName() << " of type " << (obj)->getClassName() ;
 #endif
                     break;
                 }
@@ -217,7 +216,7 @@ void* DAGNode::getObject(const sofa::core::objectmodel::ClassInfo& class_info, c
             }
             break;
         case SearchRoot:
-            std::cerr << "SearchRoot SHOULD NOT BE POSSIBLE HERE!\n";
+            dmsg_error("DAGNode") << "SearchRoot SHOULD NOT BE POSSIBLE HERE.";
             break;
         }
     }
@@ -281,7 +280,7 @@ void* DAGNode::getObject(const sofa::core::objectmodel::ClassInfo& class_info, c
         }
         else if (pend < path.length())
         {
-            //std::cerr << "ERROR: child node "<<name<<" not found in "<<getPathName()<<std::endl;
+            //dmsg_error("DAGNode") << "Child node "<<name<<" not found in "<<getPathName();
             return NULL;
         }
         else
@@ -289,7 +288,7 @@ void* DAGNode::getObject(const sofa::core::objectmodel::ClassInfo& class_info, c
             core::objectmodel::BaseObject* obj = simulation::Node::getObject(name);
             if (obj == NULL)
             {
-                //std::cerr << "ERROR: object "<<name<<" not found in "<<getPathName()<<std::endl;
+                //dmsg_error("DAGNode") << "ERROR: object "<<name<<" not found in "<<getPathName();
                 return NULL;
             }
             else
@@ -297,7 +296,7 @@ void* DAGNode::getObject(const sofa::core::objectmodel::ClassInfo& class_info, c
                 void* result = class_info.dynamicCast(obj);
                 if (result == NULL)
                 {
-                    std::cerr << "ERROR: object "<<name<<" in "<<getPathName()<<" does not implement class "<<class_info.name()<<std::endl;
+                    dmsg_error("DAGNode") << "Object "<<name<<" in "<<getPathName()<<" does not implement class "<<class_info.name() ;
                     return NULL;
                 }
                 else
@@ -423,6 +422,40 @@ bool DAGNode::hasAncestor(const BaseContext* context) const
 }
 
 
+/// Mesh Topology that is relevant for this context
+/// (within it or its parents until a mapping is reached that does not preserve topologies).
+core::topology::BaseMeshTopology* DAGNode::getActiveMeshTopology() const
+{
+    if (this->meshTopology)
+        return this->meshTopology;
+    // Check if a local mapping stops the search
+    if (this->mechanicalMapping && !this->mechanicalMapping->sameTopology())
+    {
+        return NULL;
+    }
+    for ( Sequence<core::BaseMapping>::iterator i=this->mapping.begin(), iend=this->mapping.end(); i!=iend; ++i )
+    {
+        if (!(*i)->sameTopology())
+        {
+            return NULL;
+        }
+    }
+    // No mapping with a different topology, continue on to the parents
+    const LinkParents::Container &parents = l_parents.getValue();
+    for ( unsigned int i = 0; i < parents.size() ; i++ )
+    {
+        // if the visitor is run from a sub-graph containing a multinode linked with a node outside of the subgraph, do not consider the outside node by looking on the sub-graph descendancy
+        if ( parents[i] )
+        {
+            core::topology::BaseMeshTopology* res = parents[i]->getActiveMeshTopology();
+            if (res)
+                return res;
+        }
+    }
+    return NULL; // not found in any parents
+}
+
+
 void DAGNode::precomputeTraversalOrder( const core::ExecParams* params )
 {
     // acumulating traversed Nodes
@@ -455,25 +488,25 @@ void DAGNode::precomputeTraversalOrder( const core::ExecParams* params )
 /// Execute a recursive action starting from this node
 void DAGNode::doExecuteVisitor(simulation::Visitor* action, bool precomputedOrder)
 {
-	if( precomputedOrder && !_precomputedTraversalOrder.empty() )
+    if( precomputedOrder && !_precomputedTraversalOrder.empty() )
     {
-//        std::cerr<<SOFA_CLASS_METHOD<<"precomputed "<<_precomputedTraversalOrder<<std::endl;
+//        msg_info()<<SOFA_CLASS_METHOD<<"precomputed "<<_precomputedTraversalOrder<<std::endl;
 
         for( NodeList::iterator it = _precomputedTraversalOrder.begin(), itend = _precomputedTraversalOrder.end() ; it != itend ; ++it )
-		{
-			if ( action->canAccessSleepingNode || !(*it)->getContext()->isSleeping() )
-				action->processNodeTopDown( *it );
-		}
+        {
+            if ( action->canAccessSleepingNode || !(*it)->getContext()->isSleeping() )
+                action->processNodeTopDown( *it );
+        }
 
         for( NodeList::reverse_iterator it = _precomputedTraversalOrder.rbegin(), itend = _precomputedTraversalOrder.rend() ; it != itend ; ++it )
-		{
-			if ( action->canAccessSleepingNode || !(*it)->getContext()->isSleeping() )
-	            action->processNodeBottomUp( *it );
-		}
+        {
+            if ( action->canAccessSleepingNode || !(*it)->getContext()->isSleeping() )
+                action->processNodeBottomUp( *it );
+        }
     }
     else
     {
-//        std::cerr<<SOFA_CLASS_METHOD<<"not precomputed "<<action->getClassName()<<"      -  "<<action->getCategoryName()<<" "<<action->getInfos()<<std::endl;
+//        msg_info()<<SOFA_CLASS_METHOD<<"not precomputed "<<action->getClassName()<<"      -  "<<action->getCategoryName()<<" "<<action->getInfos()<<std::endl;
 
 
         // WARNING: do not store the traversal infos in the DAGNode, as several visitors could traversed the graph simultaneously
@@ -538,8 +571,8 @@ void DAGNode::executeVisitorTopDown(simulation::Visitor* action, NodeList& execu
         return;
     }
 
-	if( this->isSleeping() && !action->canAccessSleepingNode )
-	{
+    if( this->isSleeping() && !action->canAccessSleepingNode )
+    {
         // do not execute the visitor on this node
         statusMap[this] = PRUNED;
 
@@ -581,7 +614,6 @@ void DAGNode::executeVisitorTopDown(simulation::Visitor* action, NodeList& execu
         // do not execute the visitor on this node
         statusMap[this] = PRUNED;
 
-//        std::cout << "...pruned (all parents pruned)" << std::endl;
         // ... but continue the recursion anyway!
         if( action->childOrderReversed(this) )
             for(unsigned int i = child.size(); i>0;)
@@ -660,8 +692,8 @@ void DAGNode::executeVisitorTreeTraversal( simulation::Visitor* action, StatusMa
         return;
     }
 
-	if( this->isSleeping() && !action->canAccessSleepingNode )
-	{
+    if( this->isSleeping() && !action->canAccessSleepingNode )
+    {
         // do not execute the visitor on this node
         statusMap[this] = PRUNED;
         return;
@@ -709,7 +741,7 @@ void DAGNode::updateContext()
     {
         if( debug_ )
         {
-            std::cerr<<"DAGNode::updateContext, node = "<<getName()<<", incoming context = "<< firstParent->getContext() << std::endl;
+            msg_info()<<"DAGNode::updateContext, node = "<<getName()<<", incoming context = "<< firstParent->getContext() ;
         }
         // TODO
         // ahem.... not sure here... which parent should I copy my context from exactly ?
@@ -726,7 +758,7 @@ void DAGNode::updateSimulationContext()
     {
         if( debug_ )
         {
-            std::cerr<<"DAGNode::updateContext, node = "<<getName()<<", incoming context = "<< firstParent->getContext() << std::endl;
+            msg_info()<<"DAGNode::updateContext, node = "<<getName()<<", incoming context = "<< firstParent->getContext() ;
         }
         // TODO
         // ahem.... not sure here... which parent should I copy my simulation context from exactly ?

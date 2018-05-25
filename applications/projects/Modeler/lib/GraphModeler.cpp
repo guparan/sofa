@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -19,6 +19,7 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
+#include <fstream>
 #include "GraphModeler.h"
 #include "AddPreset.h"
 
@@ -174,7 +175,11 @@ BaseObject::SPtr GraphModeler::addComponent(Node::SPtr parent, const ClassEntry:
     {
         if (templateName.empty())
         {
-            if (entry->creatorMap.find(entry->defaultTemplate) == entry->creatorMap.end()) { std::cerr << "Error: No template specified" << std::endl; return object;}
+            if (entry->creatorMap.find(entry->defaultTemplate) == entry->creatorMap.end())
+            {
+                msg_error("GraphModeler") << "No template specified." ;
+                return object;
+            }
 
             c=entry->creatorMap.find(entry->defaultTemplate)->second;
             templateUsed=entry->defaultTemplate;
@@ -464,8 +469,8 @@ void GraphModeler::addInPropertyWidget(QTreeWidgetItem *item, bool clear)
     if(object == NULL)
         return;
 
-	if(propertyWidget)
-		propertyWidget->addComponent(object->getName().c_str(), object, item, clear);
+    if(propertyWidget)
+        propertyWidget->addComponent(object->getName().c_str(), object, item, clear);
 }
 
 void GraphModeler::doubleClick(QTreeWidgetItem *item, int /* column */)
@@ -871,8 +876,9 @@ void GraphModeler::loadPreset(Node *parent, std::string presetFile,
     }
 
 
+    msg_warning_when(!newXML->init(), "GraphModeler")
+            << "Objects initialization failed.";
 
-    if (!newXML->init()) std::cerr<< "Objects initialization failed.\n";
     Node *presetNode = dynamic_cast<Node*> ( newXML->getObject() );
     if (presetNode) addNode(parent,presetNode);
 }

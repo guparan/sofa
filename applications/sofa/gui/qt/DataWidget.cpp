@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -29,6 +29,8 @@
 #include <QToolTip>
 
 #define SIZE_TEXT     60
+
+
 namespace sofa
 {
 namespace helper
@@ -43,7 +45,7 @@ namespace qt
 
 using namespace core::objectmodel;
 
-DataWidget::DataWidget(QWidget* parent,const char* name, MyData* d) 
+DataWidget::DataWidget(QWidget* parent,const char* name, MyData* d)
 :QWidget(parent /*,name */), baseData(d), dirty(false), counter(-1)
 {
     this->setObjectName(name);
@@ -53,7 +55,7 @@ DataWidget::~DataWidget()
 {
 }
 
-void 
+void
 DataWidget::setData( MyData* d)
 {
     baseData = d;
@@ -157,6 +159,22 @@ DataWidget::setWidgetDirty(bool b)
     dirty = b;
     Q_EMIT WidgetDirty(b);
 }
+
+typedef sofa::helper::Factory<std::string, DataWidget, DataWidget::CreatorArgument> DataWidgetFactory;
+
+DataWidget *DataWidget::CreateDataWidget(const DataWidget::CreatorArgument &dwarg)
+{
+    DataWidget *datawidget_ = 0;
+    const std::string &widgetName=dwarg.data->getWidget();
+    if (widgetName.empty())
+        datawidget_ = DataWidgetFactory::CreateAnyObject(dwarg);
+    else
+        datawidget_ = DataWidgetFactory::CreateObject(widgetName, dwarg);
+
+    return datawidget_;
+}
+
+
 /*QDisplayDataInfoWidget definitions */
 
 QDisplayDataInfoWidget::QDisplayDataInfoWidget(QWidget* parent, const std::string& helper,
@@ -166,7 +184,7 @@ QDisplayDataInfoWidget::QDisplayDataInfoWidget(QWidget* parent, const std::strin
 
     QHBoxLayout* layout = new QHBoxLayout(this);
     layout->setContentsMargins(0,0,0,0);
-	layout->setSpacing(0);
+    layout->setSpacing(0);
 
     std::string final_str;
     formatHelperString(helper,final_str);
@@ -174,9 +192,9 @@ QDisplayDataInfoWidget::QDisplayDataInfoWidget(QWidget* parent, const std::strin
     if (modifiable)
     {
         QPushButton *helper_button = new QPushButton(this);
-		helper_button->setIcon(LinkIcon());
-		helper_button->setFixedSize(QSize(16, 16));
-		helper_button->setToolTip(QString(final_str.c_str()));
+        helper_button->setIcon(LinkIcon());
+        helper_button->setFixedSize(QSize(16, 16));
+        helper_button->setToolTip(QString(final_str.c_str()));
         helper_button->setAutoDefault(false);
         layout->addWidget(helper_button, 0, Qt::AlignLeft);
         connect(helper_button, SIGNAL( clicked() ), this, SLOT( linkModification()));
@@ -186,7 +204,7 @@ QDisplayDataInfoWidget::QDisplayDataInfoWidget(QWidget* parent, const std::strin
     }
     else
     {
-		/*
+        /*
 #ifndef SOFA_GUI_QT_NO_DATA_HELP
         QLabel* helper_label = new QLabel(this);
         helper_label->setText(QString(final_str.c_str()));
@@ -203,19 +221,19 @@ QDisplayDataInfoWidget::QDisplayDataInfoWidget(QWidget* parent, const std::strin
             QToolTip::add(parent, final_str.c_str());
         }
 #endif
-		*/
+        */
     }
     if(modifiable || !data->getLinkPath().empty())
     {
         linkpath_edit = new QLineEdit(this);
-		linkpath_edit->setContentsMargins(2, 0, 0, 0);
+        linkpath_edit->setContentsMargins(2, 0, 0, 0);
         linkpath_edit->setText(QString(data->getLinkPath().c_str()));
         linkpath_edit->setReadOnly(!modifiable);
         layout->addWidget(linkpath_edit);
         linkpath_edit->setVisible(!data->getLinkPath().empty());
-		if(modifyObjectFlags.PROPERTY_WIDGET_FLAG)
-			connect(linkpath_edit, SIGNAL( textChanged(const QString&)), this, SIGNAL( WidgetDirty()));
-		else
+        if(modifyObjectFlags.PROPERTY_WIDGET_FLAG)
+            connect(linkpath_edit, SIGNAL( textChanged(const QString&)), this, SIGNAL( WidgetDirty()));
+        else
             connect(linkpath_edit, SIGNAL( editingFinished()), this, SLOT( linkEdited()));
     }
     else
@@ -236,7 +254,7 @@ void QDisplayDataInfoWidget::linkModification()
 }
 void QDisplayDataInfoWidget::linkEdited()
 {
-//    std::cerr << "QDisplayDataInfoWidget::linkEdited " << linkpath_edit->text().toStdString() << std::endl;
+//    dmsg_error("DataWidget") << "QDisplayDataInfoWidget::linkEdited " << linkpath_edit->text().toStdString() ;
     data->setParent(linkpath_edit->text().toStdString() );
 }
 

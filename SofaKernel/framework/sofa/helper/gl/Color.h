@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -26,6 +26,15 @@
 
 #include <sofa/helper/helper.h>
 
+/// Forward declaration
+namespace sofa {
+    namespace helper {
+        namespace types {
+            class RGBAColor;
+        }
+    }
+}
+
 
 namespace sofa
 {
@@ -39,13 +48,14 @@ namespace gl
 class SOFA_HELPER_API Color
 {
 public:
-
-    Color();
-
-    ~Color();
+    static void set(const sofa::helper::types::RGBAColor& color) ;
 
     static void setHSVA( float h, float s, float v, float a );
     static void getHSVA( float* rgba, float h, float s, float v, float a );
+
+private:
+    Color();
+    ~Color();
 };
 
 } // namespace gl

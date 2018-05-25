@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -202,7 +202,7 @@ public:
     };
 
     /**
-    	* \brief A wrench aka a SpatialVector representing a force and a torque
+        * \brief A wrench aka a SpatialVector representing a force and a torque
      * This is pratically a SpatialVector (screw) with the additionnal semantics
      * that this screw represents a wrench (force and torque) and not a twist (velocity)
      * @author Anthony Truchet, CEA, 2006
@@ -280,13 +280,13 @@ public:
         Transform& operator *= (const Transform& f2);
 
         /** Project a spatial vector from child to parent
-        	*  TODO One should handle differently the transformation of a twist and a wrench !
-        	*  This applying the adjoint to velocities or its transpose to wrench :
-        	*  V_parent = Ad . V_child or W_child = Ad^T . W_parent
-        	*  To project a wrench in the child frame to the parent frame you need to do
-        	*  parent_wrench = this->inversed * child_wrench
-        	*  (this doc needs to be douv-ble checked !)
-        	*/
+            *  TODO One should handle differently the transformation of a twist and a wrench !
+            *  This applying the adjoint to velocities or its transpose to wrench :
+            *  V_parent = Ad . V_child or W_child = Ad^T . W_parent
+            *  To project a wrench in the child frame to the parent frame you need to do
+            *  parent_wrench = this->inversed * child_wrench
+            *  (this doc needs to be douv-ble checked !)
+            */
         // create a spatial Vector from a small transformation
         SpatialVector  CreateSpatialVector();
         SpatialVector DTrans();
@@ -337,9 +337,8 @@ public:
         template<class Real2>
         Transform& operator*=(Real2 a)
         {
-            std::cout << "SolidTypes<R>::Transform::operator *="<<std::endl;
+            dmsg_info("Transform") << "SolidTypes<R>::Transform::operator *=";
             origin_ *= a;
-            //orientation *= a;
             return *this;
         }
 

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -132,7 +132,6 @@ void TCapsuleModel<DataTypes>::computeBoundingTree(int maxDepth)
     }
 
     if (!isMoving() && !cubeModel->empty() && !updated){
-        std::cout<<"immobile..."<<std::endl;
         return; // No need to recompute BBox if immobile
     }
 
@@ -166,7 +165,7 @@ void TCapsuleModel<DataTypes>::computeBoundingTree(int maxDepth)
 
         }
         cubeModel->computeBoundingTree(maxDepth);
-    }    
+    }
 }
 
 

@@ -1,31 +1,27 @@
 cmake_minimum_required(VERSION 3.1)
 project(SofaGeneralTopology)
 
-
 set(HEADER_FILES
-    BezierTetrahedronSetGeometryAlgorithms.h
-    BezierTetrahedronSetGeometryAlgorithms.inl
-    BezierTetrahedronSetTopologyContainer.h
-    BezierTriangleSetGeometryAlgorithms.h
-    BezierTriangleSetGeometryAlgorithms.inl
-    BezierTriangleSetTopologyContainer.h
-    CubeTopology.h
-    CylinderGridTopology.h
-    SphereQuadTopology.h
     config.h
     initGeneralTopology.h
-)
+    )
 
 set(SOURCE_FILES
-    BezierTetrahedronSetGeometryAlgorithms.cpp
-    BezierTetrahedronSetTopologyContainer.cpp
-    BezierTriangleSetGeometryAlgorithms.cpp
-    BezierTriangleSetTopologyContainer.cpp
+    initGeneralTopology.cpp
+    )
+
+list(APPEND HEADER_FILES
+    CubeTopology.h
+    CylinderGridTopology.h
+    SphereGridTopology.h
+    SphereQuadTopology.h
+    )
+list(APPEND SOURCE_FILES
     CubeTopology.cpp
     CylinderGridTopology.cpp
+    SphereGridTopology.cpp
     SphereQuadTopology.cpp
-    initGeneralTopology.cpp
-)
+    )
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCommon SofaBaseTopology)

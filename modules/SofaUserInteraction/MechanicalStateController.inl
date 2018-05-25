@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -184,7 +184,8 @@ void MechanicalStateController<DataTypes>::applyController()
 
 
     sofa::simulation::Node *node = static_cast<sofa::simulation::Node*> (this->getContext());
-    sofa::simulation::MechanicalPropagatePositionAndVelocityVisitor mechaVisitor(core::MechanicalParams::defaultInstance()); mechaVisitor.execute(node);
+    sofa::simulation::MechanicalProjectPositionAndVelocityVisitor mechaProjectVisitor(core::MechanicalParams::defaultInstance()); mechaProjectVisitor.execute(node);
+    sofa::simulation::MechanicalPropagateOnlyPositionAndVelocityVisitor mechaVisitor(core::MechanicalParams::defaultInstance()); mechaVisitor.execute(node);
     sofa::simulation::UpdateMappingVisitor updateVisitor(core::ExecParams::defaultInstance()); updateVisitor.execute(node);
 };
 

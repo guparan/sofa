@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -20,6 +20,9 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 #include <SofaTest/Sofa_test.h>
+#include <SofaTest/TestMessageHandler.h>
+
+
 #include <SofaSimulationGraph/DAGSimulation.h>
 #include <sofa/simulation/DeleteVisitor.h>
 #include <sofa/simulation/CleanupVisitor.h>
@@ -80,7 +83,10 @@ struct UncoupledConstraintCorrection_test: public Sofa_test<SReal>
 };
 
 // run the tests
-TEST_F( UncoupledConstraintCorrection_test,objectRemovalThenStep) { this->objectRemovalThenStep(); }
+TEST_F( UncoupledConstraintCorrection_test,objectRemovalThenStep) {
+    EXPECT_MSG_NOEMIT(Error) ;
+    this->objectRemovalThenStep();
+}
 
 
 }// namespace sofa

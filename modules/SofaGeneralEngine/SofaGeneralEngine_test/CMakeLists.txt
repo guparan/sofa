@@ -2,11 +2,12 @@ cmake_minimum_required(VERSION 3.1)
 
 project(SofaGeneralEngine_test)
 
-
 set(HEADER_FILES)
 
-set(SOURCE_FILES
+set(SOURCE_FILES ../../empty.cpp)
 
+if(SOFA_BUILD_COMPONENTSET_STANDARD)
+    list(APPEND SOURCE_FILES
         AverageCoord_test.cpp
         ClusteringEngine_test.cpp
         ComplementaryROI_test.cpp
@@ -17,8 +18,11 @@ set(SOURCE_FILES
         SphereROI_test.cpp
         PlaneROI_test.cpp
         TransformEngine_test.cpp
-
-        )
+        SmoothMeshEngine_test.cpp
+        IndicesFromValues_test.cpp
+        MergePoints_test.cpp
+        IndexValueMapper_test.cpp)
+endif()
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} SofaGTestMain SofaTest)

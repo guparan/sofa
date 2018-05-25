@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -149,7 +149,10 @@ void SofaTutorialManager::openTutorial(const std::string& filename)
     //Set the Graph
     xml::BaseElement* newXML = xml::loadFromFile ( filename.c_str() );
     if (newXML == NULL) return;
-    if (!newXML->init()) std::cerr<< "Objects initialization failed.\n";
+
+    msg_info_when(!newXML->init(), "SofaTutorialManager")
+            << "Objects initialization failed.";
+
     Node *root = down_cast<Node>( newXML->getObject()->toBaseNode() );
     graph->setRoot(root, false);
     graph->setFilename(filename);

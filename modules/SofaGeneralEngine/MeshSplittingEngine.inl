@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -86,7 +86,7 @@ void MeshSplittingEngine<DataTypes>::update()
     }
     for(size_t i=0;i<nb+1;++i) position[i]->endEdit();
 
-    if(this->f_printLog.getValue())    std::cout<<this->name<<":"<<"updated"<<std::endl;
+    msg_info() <<this->name<<":"<<"updated" ;
 }
 
 

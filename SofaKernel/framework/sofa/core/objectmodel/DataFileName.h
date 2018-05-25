@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -27,7 +27,6 @@
 #endif
 
 #include <sofa/core/objectmodel/Data.h>
-#include <sofa/helper/system/FileRepository.h>
 #include <sofa/helper/SVector.h>
 
 namespace sofa
@@ -95,16 +94,21 @@ public:
     virtual void virtualSetValue(const std::string& v) { setValue(v); }
     virtual bool read(const std::string& s );
 
-    virtual const std::string& getRelativePath() const { return getValue(); }
+    virtual const std::string& getRelativePath() const
+    {
+        this->updateIfDirty();
+        return m_relativepath ;
+    }
+
     virtual const std::string& getFullPath() const
     {
         this->updateIfDirty();
-        return fullpath;
+        return m_fullpath;
     }
     virtual const std::string& getAbsolutePath() const
     {
         this->updateIfDirty();
-        return fullpath;
+        return m_fullpath;
     }
 
     virtual void update()
@@ -116,7 +120,8 @@ public:
 protected:
     void updatePath();
 
-    std::string fullpath;
+    std::string m_fullpath;
+    std::string m_relativepath;
 
 private:
     DataFileName(const Inherit& d);

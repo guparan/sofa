@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -24,6 +24,7 @@
 
 #include "ProjectionToLineMapping.h"
 #include <sofa/core/visual/VisualParams.h>
+#include <sofa/defaulttype/RGBAColor.h>
 #include <iostream>
 
 namespace sofa
@@ -42,7 +43,7 @@ ProjectionToTargetLineMapping<TIn, TOut>::ProjectionToTargetLineMapping()
     , f_origins(initData(&f_origins, "origins", "Origins of the lines on which the points are projected"))
     , f_directions(initData(&f_directions, "directions", "Directions of the lines on which the points are projected"))
     , d_drawScale(initData(&d_drawScale, SReal(10), "drawScale", "Draw scale"))
-    , d_drawColor(initData(&d_drawColor, defaulttype::Vec4f(0,1,0,1), "drawColor", "Draw color"))
+    , d_drawColor(initData(&d_drawColor, defaulttype::RGBAColor(0,1,0,1), "drawColor", "Draw color. (default=[0.0,1.0,0.0,1.0])"))
 {
 }
 
@@ -133,7 +134,6 @@ void ProjectionToTargetLineMapping<TIn, TOut>::applyJT(const core::MechanicalPar
 template <class TIn, class TOut>
 void ProjectionToTargetLineMapping<TIn, TOut>::applyJT(const core::ConstraintParams*, Data<InMatrixDeriv>& , const Data<OutMatrixDeriv>& )
 {
-    //    cerr<<"ProjectionToTargetLineMapping<TIn, TOut>::applyJT is not implemented " << endl;
 }
 
 
@@ -202,7 +202,7 @@ ProjectionToLineMultiMapping<TIn, TOut>::ProjectionToLineMultiMapping()
     : Inherit1()
     , f_indices(initData(&f_indices, "indices", "Indices of the parent points (if empty, all input dofs are mapped)"))
     , d_drawScale(initData(&d_drawScale, SReal(10), "drawScale", "Draw scale"))
-    , d_drawColor(initData(&d_drawColor, defaulttype::Vec4f(0,1,0,1), "drawColor", "Draw color"))
+    , d_drawColor(initData(&d_drawColor, defaulttype::RGBAColor(0,1,0,1), "drawColor", "Draw color. (default=[0.0,1.0,0.0,1.0])"))
 {
 }
 

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -19,17 +19,16 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
+#include <sofa/helper/system/FileRepository.h>
 #include <sofa/helper/io/MeshSTL.h>
 
-#include <gtest/gtest.h>
+#include <sofa/helper/testing/BaseTest.h>
+using sofa::helper::testing::BaseTest ;
 
-#include <SofaTest/TestMessageHandler.h>
-using sofa::helper::logging::ExpectMessage;
-using sofa::helper::logging::Message;
 
 namespace sofa {
 
-class MeshSTL_test : public ::testing::Test
+class MeshSTL_test : public BaseTest
 {
 protected:
 
@@ -108,7 +107,7 @@ protected:
 TEST_F(MeshSTL_test, MeshSTL_NoFile)
 {
     /// This generate a test failure if no message is generated.
-    ExpectMessage raii(Message::Error);
+    EXPECT_MSG_EMIT(Error) ;
 
     MeshSTLTestData meshNoFile("mesh/randomnamewhichdoesnotexist.obj", 0, 0, 0, 0, 0, 0);
     meshNoFile.testBench();

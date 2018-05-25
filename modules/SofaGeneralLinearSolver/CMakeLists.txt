@@ -2,22 +2,27 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaGeneralLinearSolver)
 
 set(HEADER_FILES
+    config.h
+    initGeneralLinearSolver.h
+    )
+
+set(SOURCE_FILES
+    initGeneralLinearSolver.cpp
+    )
+
+list(APPEND HEADER_FILES
     BTDLinearSolver.h
     BTDLinearSolver.inl
     CholeskySolver.h
     CholeskySolver.inl
     MinResLinearSolver.h
     MinResLinearSolver.inl
-    config.h
-    initGeneralLinearSolver.h
-)
-
-set(SOURCE_FILES
+    )
+list(APPEND SOURCE_FILES
     BTDLinearSolver.cpp
     CholeskySolver.cpp
     MinResLinearSolver.cpp
-    initGeneralLinearSolver.cpp
-)
+    )
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCommon SofaBaseLinearSolver)

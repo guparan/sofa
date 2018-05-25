@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -100,7 +100,7 @@ typename SolidTypes<R>::SpatialVector SolidTypes<R>::SpatialVector::operator - (
 template<class R>
 typename SolidTypes<R>::Real SolidTypes<R>::SpatialVector::operator * ( const SpatialVector& v ) const
 {
-    //std::cerr<<" SolidTypes<R>::SpatialVector: "<<*this<<" * "<<v<<" = "<< lineVec * v.freeVec + freeVec * v.lineVec<<std::endl;
+    //msg_info()<<" SolidTypes<R>::SpatialVector: "<<*this<<" * "<<v<<" = "<< lineVec * v.freeVec + freeVec * v.lineVec<<std::endl;
     return lineVec * v.freeVec + freeVec * v.lineVec;
 }
 
@@ -179,7 +179,7 @@ SolidTypes<R>::Transform::Transform( const SpatialVector& v )
     //origin_ = v.freeVec;
     orientation_ = Rot::createFromRotationVector( v.lineVec );
     origin_ = - orientation_.inverseRotate( v.freeVec );
-    //std::cerr<<"SolidTypes<R>::Transform::Transform( const SpatialVector& v ), v = "<<v<<", this = "<<*this<<std::endl;
+    //msg_info()<<"SolidTypes<R>::Transform::Transform( const SpatialVector& v ), v = "<<v<<", this = "<<*this<<std::endl;
 }
 
 template<class R>
@@ -306,7 +306,7 @@ void SolidTypes<R>::Transform::clear()
 template<class R>
 typename SolidTypes<R>::Transform SolidTypes<R>::Transform::operator * (const Transform& f2) const
 {
-    //std::cerr<<"SolidTypes<R>::Transform::operator *, orientation = "<<orientation_<<", f2.orientation = "<<f2.getOrientation()<<", product = "<<orientation_ * f2.getOrientation()<<std::endl;
+    //msg_info()<<"SolidTypes<R>::Transform::operator *, orientation = "<<orientation_<<", f2.orientation = "<<f2.getOrientation()<<", product = "<<orientation_ * f2.getOrientation()<<std::endl;
     return Transform(  orientation_ * f2.getOrientation(), f2.getOriginOfParentInChild() + f2.getOrientation().inverseRotate(origin_)) ;
 }
 
@@ -328,14 +328,6 @@ typename SolidTypes<R>::SpatialVector  SolidTypes<R>::Transform::CreateSpatialVe
 template<class R>
 typename SolidTypes<R>::SpatialVector SolidTypes<R>::Transform::operator * (const SpatialVector& sv ) const
 {
-    /*
-       return SpatialVector(
-                  orientation_.rotate(sv.lineVec),
-                  orientation_.rotate(sv.freeVec - cross( origin_, sv.lineVec) )
-              );*/
-
-    //std::cout<<"sv.lineVec"<<sv.lineVec<<" orientation_.rotate(sv.lineVec)"<<orientation_.rotate(sv.lineVec)<<std::endl;
-
     return SpatialVector(
             orientation_.rotate(sv.lineVec),
             orientation_.rotate( cross(sv.lineVec, origin_ ) + sv.freeVec)
@@ -354,41 +346,18 @@ typename SolidTypes<R>::SpatialVector SolidTypes<R>::Transform::operator / (cons
 template<class R>
 typename SolidTypes<R>::Transform SolidTypes<R>::Transform::inversed() const
 {
-    //return Transform( orientation_.inverse(), -(orientation_.inverse().rotate(origin_)) );
     return Transform( orientation_.inverse(), -(orientation_.rotate(origin_)) );
 }
 
 template<class R>
 void SolidTypes<R>::Transform::writeOpenGlMatrix( GLdouble *m ) const
 {
-    /*    std::cerr<<"SolidTypes<R>::Transform::writeOpenGlMatrix, this = "<<*this<<std::endl;
-        std::cerr<<"SolidTypes<R>::Transform::writeOpenGlMatrix, origin_ = "<<origin_<<std::endl;*/
     orientation_.writeOpenGlMatrix(m);
     Vec t = getOrigin();
-    /*	std::cerr<<"SolidTypes<R>::Transform::writeOpenGlMatrix, t = "<<t<<std::endl;*/
     m[12] = t[0];
     m[13] = t[1];
     m[14] = t[2];
 }
-
-//This type should not have its own draw function
-//template<class R>
-//void SolidTypes<R>::Transform::glDraw() const
-//{
-//#ifndef SOFA_NO_OPENGL
-//    glPushAttrib( GL_COLOR_BUFFER_BIT );
-//    glColor3f(1,0,0);
-//    glVertex3f( 0,0,0 );
-//    glVertex3f( 1,0,0 );
-//    glColor3f(0,1,0);
-//    glVertex3f( 0,0,0 );
-//    glVertex3f( 0,1,0 );
-//    glColor3f(0,0,1);
-//    glVertex3f( 0,0,0 );
-//    glVertex3f( 0,0,1 );
-//    glPopAttrib();
-//#endif /* SOFA_NO_OPENGL */
-//}
 
 template<class R>
 void SolidTypes<R>::Transform::printInternal( std::ostream& out ) const
@@ -401,36 +370,14 @@ void SolidTypes<R>::Transform::printInternal( std::ostream& out ) const
 template<class R>
 typename SolidTypes<R>::Transform& SolidTypes<R>::Transform::operator += (const SpatialVector& v)
 {
-    //std::cerr << "SolidTypes<R>::Transform::operator += SpatialVector "<<v<<", Transform(v) = "<<Transform(v)<<std::endl;
     *this *= Transform(v);
     return *this;
 }
 
-// template<class R>
-// typename SolidTypes<R>::Transform& SolidTypes<R>::Transform::operator += (const SpatialVector& v)
-// {
-//         std::cerr << "SolidTypes<R>::Transform::operator += SpatialVector "<<v<<std::endl;
-//     SpatialVector vlocal = (*this)/v;
-//     Transform tv(vlocal);
-//     std::cerr << "SolidTypes<R>::Transform::operator += SpatialVector, vlocal = "<<vlocal<<", transform = "<<tv<<std::endl;
-//     std::cerr << "SolidTypes<R>::Transform::operator += SpatialVector, tv.getOrigin() = "<<tv.getOrigin()<<std::endl;
-//     std::cerr << "SolidTypes<R>::Transform::operator += SpatialVector, getOriginOfParentInChild() = "<<getOriginOfParentInChild()<<std::endl;
-//     std::cerr << "SolidTypes<R>::Transform::operator += SpatialVector, tv.getOrientation().inverseRotate( getOriginOfParentInChild()) = "<<tv.getOrientation().inverseRotate( getOriginOfParentInChild())<<std::endl;
-//     std::cerr << "SolidTypes<R>::Transform::operator += SpatialVector, tv.getOrientation().inverseRotate( getOrientation().rotate(tv.getOrigin())) = "<<tv.getOrientation().inverseRotate(getOrientation().rotate(tv.getOrigin()) )<<std::endl;
-//     std::cerr << "SolidTypes<R>::Transform::operator += SpatialVector, tv.getOrientation().inverseRotate( getOriginOfParentInChild()-getOrientation().rotate(tv.getOrigin()) = "<<tv.getOrientation().inverseRotate( getOriginOfParentInChild()-getOrientation().rotate(tv.getOrigin()))<<std::endl;
-//     *this = Transform(
-//                  tv.getOrientation()*getOrientation(),
-//     tv.getOrientation().inverseRotate( getOriginOfParentInChild()-getOrientation().rotate(tv.getOrigin())
-//                                  )
-//              );
-//     std::cerr<<"SolidTypes<R>::Transform::operator += SpatialVector, new value = "<<*this<<std::endl;
-//     return *this;
-// }
-
 template<class R>
 typename SolidTypes<R>::Transform& SolidTypes<R>::Transform::operator +=(const Transform& a)
 {
-    std::cerr << "SolidTypes<R>::Transform::operator +="<<std::endl;
+    dmsg_warning("SolidTypes::operator+") << "+";
     origin_ += a.getOriginOfParentInChild();
 
     // previously commented out:
@@ -440,28 +387,8 @@ typename SolidTypes<R>::Transform& SolidTypes<R>::Transform::operator +=(const T
     return *this;
 }
 
-/*
-template<class R>
-      typename SolidTypes<R>::Transform& SolidTypes<R>::Transform::operator*=(Real a)
-{
-   std::cout << "SolidTypes<R>::Transform::operator *="<<std::endl;
-   origin_ *= a;
-        //orientation *= a;
-   return *this;
-}
-
-template<class R>
-      typename SolidTypes<R>::Transform SolidTypes<R>::Transform::operator*(Real a) const
-{
-   Transform r = *this;
-   r*=a;
-   return r;
-}
-*/
 
 //=================================================================================
-
-
 template<class R>
 SolidTypes<R>::RigidInertia::RigidInertia()
 {}

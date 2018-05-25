@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -19,8 +19,11 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
+#include <sofa/helper/system/FileRepository.h>
 #include <sofa/core/objectmodel/DataFileName.h>
 #include <sofa/core/objectmodel/Base.h>
+
+using sofa::helper::system::DataRepository ;
 
 namespace sofa
 {
@@ -33,9 +36,9 @@ namespace objectmodel
 
 bool DataFileName::read(const std::string& s )
 {
-	bool ret = Inherit::read(s);
-	if (ret) updatePath();
-	return ret;
+    bool ret = Inherit::read(s);
+    if (ret) updatePath();
+    return ret;
 }
 
 void DataFileName::updatePath()
@@ -43,17 +46,34 @@ void DataFileName::updatePath()
     DataFileName* parentDataFileName = NULL;
     if (parentData)
         parentDataFileName = dynamic_cast<DataFileName*>(parentData.get());
+
     if (parentDataFileName)
     {
-        fullpath = parentDataFileName->getFullPath();
+        m_fullpath = parentDataFileName->getFullPath();
         if (this->m_owner)
-            this->m_owner->sout << "Updated DataFileName " << this->getName() << " with path " << fullpath << this->m_owner->sendl;
+            this->m_owner->sout << "Updated DataFileName " << this->getName() << " with path " << m_fullpath << this->m_owner->sendl;
+        m_relativepath = parentDataFileName->getRelativePath() ;
     }
     else
     {
-        fullpath = m_values[currentAspect()].getValue();
-        if (!fullpath.empty())
-            helper::system::DataRepository.findFile(fullpath,"",(this->m_owner ? &(this->m_owner->serr.ostringstream()) : &std::cerr));
+        // Update the fullpath.
+        m_fullpath = m_values[currentAspect()].getValue();
+        if (!m_fullpath.empty())
+            DataRepository.findFile(m_fullpath,"",(this->m_owner ? &(this->m_owner->serr.ostringstream()) : &std::cerr));
+
+        // Update the relative path.
+        for(const std::string& path : DataRepository.getPaths() )
+        {
+            if( m_fullpath.find(path) == 0 )
+            {
+                m_relativepath=DataRepository.relativeToPath(m_fullpath, path,
+                                                             false /*option for backward compatibility*/);
+                break;
+            }
+        }
+        if (m_relativepath.empty())
+            m_relativepath = m_values[currentAspect()].getValue();
+
     }
 }
 

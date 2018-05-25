@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -57,26 +57,17 @@ DampVelocitySolver::DampVelocitySolver()
 void DampVelocitySolver::solve(const core::ExecParams* params, SReal dt, sofa::core::MultiVecCoordId /*xResult*/, sofa::core::MultiVecDerivId vResult)
 {
     sofa::simulation::common::VectorOperations vop( params, this->getContext() );
-    //sofa::simulation::common::MechanicalOperations mop( this->getContext() );
     MultiVecDeriv vel(&vop, vResult /*core::VecDerivId::velocity()*/ );
-    bool printLog = f_printLog.getValue();
 
-    if( printLog )
-    {
-        serr<<"DampVelocitySolver, dt = "<< dt <<sendl;
-        serr<<"DampVelocitySolver, initial v = "<< vel <<sendl;
-    }
+    msg_info() <<"DampVelocitySolver, dt = "<< dt
+               <<"DampVelocitySolver, initial v = "<< vel ;
 
-    //mop.addSeparateGravity(dt);	// v += dt*g . Used if mass wants to added G separately from the other forces to v.
 
     vel.teq( exp(-rate.getValue()*dt) );
     if( threshold.getValue() != 0.0 )
         vel.threshold( threshold.getValue() );
 
-    if( printLog )
-    {
-        serr<<"DampVelocitySolver, final v = "<< vel <<sendl;
-    }
+    msg_info() <<"DampVelocitySolver, final v = "<< vel ;
 }
 
 } // namespace odesolver

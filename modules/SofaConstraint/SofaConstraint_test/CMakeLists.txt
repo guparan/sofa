@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 3.1)
 
 project(SofaConstraint_test)
 
-set(SOURCE_FILES
+set(SOURCE_FILES ../../empty.cpp)
+
+list(APPEND SOURCE_FILES
     BilateralInteractionConstraint_test.cpp
     UncoupledConstraintCorrection_test.cpp)
 

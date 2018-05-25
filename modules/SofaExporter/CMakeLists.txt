@@ -2,6 +2,22 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaExporter)
 
 set(HEADER_FILES
+    config.h
+    initExporter.h
+    )
+
+set(SOURCE_FILES
+    initExporter.cpp
+    )
+
+set(EXTRA_FILES
+    README.md
+    examples/MeshExporter.scn
+    examples/STLExporter.scn
+    examples/OBJExporter.scn
+    )
+
+list(APPEND HEADER_FILES
     BlenderExporter.h
     BlenderExporter.inl
     MeshExporter.h
@@ -12,11 +28,9 @@ set(HEADER_FILES
     WriteState.inl
     WriteTopology.h
     WriteTopology.inl
-    config.h
-    initExporter.h
-)
+    )
 
-set(SOURCE_FILES
+list(APPEND SOURCE_FILES
     BlenderExporter.cpp
     MeshExporter.cpp
     OBJExporter.cpp
@@ -24,10 +38,9 @@ set(SOURCE_FILES
     VTKExporter.cpp
     WriteState.cpp
     WriteTopology.cpp
-    initExporter.cpp
-)
+    )
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${EXTRA_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationTree)
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_EXPORTER")
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")

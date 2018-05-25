@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -21,6 +21,8 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_VISUALMODEL_LABEL_H
 #define SOFA_COMPONENT_VISUALMODEL_LABEL_H
+#include <string>
+
 #include "config.h"
 
 #include <sofa/core/objectmodel/Data.h>
@@ -30,7 +32,6 @@
 #include <sofa/helper/rmath.h>
 #include <sofa/helper/gl/template.h>
 #include <sofa/defaulttype/Vec.h>
-#include <string>
 #include <SofaGraphComponent/BackgroundSetting.h>
 
 namespace sofa
@@ -42,50 +43,42 @@ namespace component
 namespace visualmodel
 {
 
-class SOFA_OPENGL_VISUAL_API OglLabel : public sofa::core::visual::VisualModel
+class SOFA_OPENGL_VISUAL_API OglLabel : public core::visual::VisualModel
 {
 public:
-    SOFA_CLASS(OglLabel, sofa::core::visual::VisualModel);
+    SOFA_CLASS(OglLabel, core::visual::VisualModel);
+
+public:
+    Data<std::string>            d_prefix; ///< The prefix of the text to display
+    Data<std::string>            d_label; ///< The text to display
+    Data<std::string>            d_suffix; ///< The suffix of the text to display
+    Data<unsigned int>           d_x; ///< The x position of the text on the screen
+    Data<unsigned int>           d_y; ///< The y position of the text on the screen
+    Data<unsigned int>           d_fontsize; ///< The size of the font used to display the text on the screen
+    Data<defaulttype::RGBAColor> d_color; ///< The color of the text to display. (default='gray')
+    Data<bool>                   d_selectContrastingColor ; ///< Overide the color value but one that contrast with the background color
+    Data<unsigned int>           d_updateLabelEveryNbSteps; ///< Update the display of the label every nb of time steps
+    Data<bool>                   d_visible; ///< Is label displayed
+
+    void init() override;
+    void reinit() override;
+    void updateVisual() override;
+    void drawVisual(const core::visual::VisualParams* vparams) override;
+
+    void handleEvent(core::objectmodel::Event *) override;
+
+    void parse(core::objectmodel::BaseObjectDescription *arg) override;
+    void setColor(float r, float g, float b, float a) ;
+
 
 protected:
     OglLabel();
-    virtual ~OglLabel() {
-    }
+    virtual ~OglLabel() {}
 
-    unsigned int stepCounter;
-
-public:
-
-    Data<std::string> prefix;
-    Data<std::string> label;
-    Data<std::string> suffix;
-    Data<unsigned int> x;
-    Data<unsigned int> y;
-    Data<unsigned int> fontsize;
-    Data<std::string> color;
-    Data<unsigned int> updateLabelEveryNbSteps;
-	Data<bool> f_visible;
-
-    void init();
-    void reinit();
-    void updateVisual();
-    void drawVisual(const core::visual::VisualParams* vparams);
-
-    void handleEvent(sofa::core::objectmodel::Event *);
+    unsigned int                 m_stepCounter;
 
 private:
-    void setColor(float r, float g, float b, float a);
-    void setColor(std::string color);
-
-
-    float r,g,b,a;
-    typedef defaulttype::Vec4f Color;   // Color with alpha value
-
-    std::string internalLabel;
-
-    sofa::component::configurationsetting::BackgroundSetting* backgroundSetting;
-
-
+    std::string                  m_internalLabel;
 };
 
 } // namespace visualmodel

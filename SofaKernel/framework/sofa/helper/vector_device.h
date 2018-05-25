@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -184,7 +184,6 @@ public:
     {
         if (&v == this)
         {
-            //COMM : std::cerr << "ERROR: self-assignment of CudaVector< " << core::objectmodel::Base::decodeTypeName(typeid(T)) << ">"<<std::endl;
             return;
         }
         DEBUG_OUT_V(SPACEP << "operator=, id is " << v.id << "(" << v.hostIsValid << "," << (v.deviceIsValid&1) << ") " << std::endl);
@@ -648,6 +647,18 @@ public:
     {
         checkIndex ( i );
         return *hostWriteAt(i);
+    }
+
+    const T* data( ) const
+    {
+        checkIndex ( 0 );
+        return hostReadAt(0);
+    }
+
+    T* data( )
+    {
+        checkIndex ( 0 );
+        return hostWriteAt(0);
     }
 
     const T& getCached ( size_type i ) const

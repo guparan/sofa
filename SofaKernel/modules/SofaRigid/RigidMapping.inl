@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -34,7 +34,6 @@
 #include <sofa/helper/io/MassSpringLoader.h>
 #include <sofa/helper/io/SphereLoader.h>
 #include <sofa/helper/io/Mesh.h>
-#include <sofa/helper/gl/template.h>
 #include <sofa/helper/decompose.h>
 
 #include <sofa/simulation/Simulation.h>
@@ -139,7 +138,6 @@ RigidMapping<TIn, TOut>::RigidMapping()
     , matrixJ()
     , updateJ(false)
 {
-    //std::cout << "RigidMapping Creation\n";
     this->addAlias(&fileRigidMapping, "filename");
 }
 
@@ -269,7 +267,7 @@ void RigidMapping<TIn, TOut>::clear(int reserve)
 template <class TIn, class TOut>
 void RigidMapping<TIn, TOut>::setRepartition(unsigned int value)
 {
-    serr<<"setRepartition: deprecated function"<<sendl;
+    msg_deprecated()<<"setRepartition function. Fill rigidIndexPerPoint instead.";
 
     helper::vector<unsigned int>& rigidIndexPerPoint = *this->rigidIndexPerPoint.beginWriteOnly();
 
@@ -279,20 +277,22 @@ void RigidMapping<TIn, TOut>::setRepartition(unsigned int value)
 
     unsigned int idx = 0;
     for( size_t i=0 ; i<size ; )
+    {
          for( size_t j=0; j<value && i<size ; ++j, ++i )
+         {
             rigidIndexPerPoint[i] = idx;
+         }
          ++idx;
+    }
 
     this->rigidIndexPerPoint.endEdit();
-
-
 }
 
 template <class TIn, class TOut>
 void RigidMapping<TIn, TOut>::setRepartition(sofa::helper::vector<
                                              unsigned int> values)
 {
-    serr<<"setRepartition: deprecated function "<<sendl;
+    msg_deprecated()<<"setRepartition function. Fill rigidIndexPerPoint instead.";
 
     helper::vector<unsigned int>& rigidIndexPerPoint = *this->rigidIndexPerPoint.beginWriteOnly();
 
@@ -302,8 +302,12 @@ void RigidMapping<TIn, TOut>::setRepartition(sofa::helper::vector<
 
     size_t i = 0;
     for( unsigned int idx=0 ; idx<values.size() ; ++idx )
+    {
          for( size_t j=0, jend=values[idx]; j<jend ; ++j, ++i )
+         {
             rigidIndexPerPoint[i] = idx;
+         }
+    }
 
     this->rigidIndexPerPoint.endEdit();
 }
@@ -315,11 +319,13 @@ const typename RigidMapping<TIn, TOut>::VecCoord & RigidMapping<TIn, TOut>::getP
     {
         const Data<VecCoord>* v = this->toModel.get()->read(core::VecCoordId::restPosition());
         if (v)
+        {
             return v->getValue();
+        }
         else
-            serr
-                    << "RigidMapping: ERROR useX0 can only be used in MechanicalMappings."
-                    << sendl;
+        {
+            msg_error()<< "RigidMapping: ERROR useX0 can only be used in MechanicalMappings.";
+        }
     }
     return points.getValue();
 }
@@ -490,11 +496,8 @@ void RigidMapping<TIn, TOut>::applyJT(const core::ConstraintParams * /*cparams*/
     InMatrixDeriv& out = *dOut.beginEdit();
     const OutMatrixDeriv& in = dIn.getValue();
 
-    if (this->f_printLog.getValue())
-    {
-        sout << "J on mapped DOFs == " << in << sendl;
-        sout << "J on input  DOFs == " << out << sendl;
-    }
+    dmsg_info() << "J on mapped DOFs == " << in << msgendl
+                << "J on input  DOFs == " << out ;
 
     const unsigned int numDofs = this->getFromModel()->getSize();
 
@@ -541,11 +544,7 @@ void RigidMapping<TIn, TOut>::applyJT(const core::ConstraintParams * /*cparams*/
     }
 
 
-
-    if (this->f_printLog.getValue())
-    {
-        sout << "new J on input  DOFs = " << out << sendl;
-    }
+    dmsg_info() << "new J on input  DOFs = " << out ;
 
     dOut.endEdit();
 }
@@ -555,27 +554,27 @@ namespace impl {
 
 template<class U, class Coord>
 static void fill_block(Eigen::Matrix<U, 3, 6>& block, const Coord& v) {
-	U x = v[0];
-	U y = v[1];
-	U z = v[2];
-				
-	// note: this is -hat(v)
-	block.template rightCols<3>() <<
-					
-		0,   z,  -y,
-		-z,  0,   x,
-		y,  -x,   0;
+    U x = v[0];
+    U y = v[1];
+    U z = v[2];
+
+    // note: this is -hat(v)
+    block.template rightCols<3>() <<
+
+        0,   z,  -y,
+        -z,  0,   x,
+        y,  -x,   0;
 }
 
 template<class U, class Coord>
 void fill_block(Eigen::Matrix<U, 2, 3>& block, const Coord& v) {
-	U x = v[0];
-	U y = v[1];
-				
-	// note: this is -hat(v)
-	block.template rightCols<1>() <<
-		-y,
-		x;
+    U x = v[0];
+    U y = v[1];
+
+    // note: this is -hat(v)
+    block.template rightCols<1>() <<
+        -y,
+        x;
 }
 
 
@@ -584,26 +583,26 @@ void fill_block(Eigen::Matrix<U, 2, 3>& block, const Coord& v) {
 template <class TIn, class TOut>
 const helper::vector<sofa::defaulttype::BaseMatrix*>* RigidMapping<TIn, TOut>::getJs()
 {
-	const VecCoord& out =this->toModel->read(core::ConstVecCoordId::position())->getValue();
+    const VecCoord& out =this->toModel->read(core::ConstVecCoordId::position())->getValue();
     const InVecCoord& in =this->fromModel->read(core::ConstVecCoordId::position())->getValue();
 
-	typename SparseMatrixEigen::CompressedMatrix& J = eigenJacobian.compressedMatrix;
-	
+    typename SparseMatrixEigen::CompressedMatrix& J = eigenJacobian.compressedMatrix;
+
     if( updateJ || J.size() == 0 )
     {
 
         updateJ = false;
 
-		J.resize(out.size() * NOut, in.size() * NIn);
-		J.setZero();
+        J.resize(out.size() * NOut, in.size() * NIn);
+        J.setZero();
 
-		// matrix chunk
-		typedef typename TOut::Real real;
-		typedef Eigen::Matrix<real, NOut, NIn> block_type;
-		block_type block;
-		
-		// translation part
-		block.template leftCols<NOut>().setIdentity();
+        // matrix chunk
+        typedef typename TOut::Real real;
+        typedef Eigen::Matrix<real, NOut, NIn> block_type;
+        block_type block;
+
+        // translation part
+        block.template leftCols<NOut>().setIdentity();
 
 
 
@@ -648,8 +647,8 @@ const helper::vector<sofa::defaulttype::BaseMatrix*>* RigidMapping<TIn, TOut>::g
             }
         }
 
-		J.finalize();		
-	}
+        J.finalize();
+    }
 
     return &eigenJacobians;
 }

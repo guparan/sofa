@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -32,6 +32,7 @@
 #include <fstream>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 #include <qevent.h>
 
@@ -45,8 +46,6 @@
 #include <sofa/helper/gl/glText.inl>
 #include <sofa/helper/gl/Axis.h>
 #include <sofa/helper/gl/RAII.h>
-
-#include <sofa/helper/io/ImageBMP.h>
 
 #include <sofa/defaulttype/RigidTypes.h>
 #include <sofa/gui/ColourPickingVisitor.h>
@@ -128,13 +127,6 @@ QGLFormat QtViewer::setupGLFormat(const unsigned int nbMSAASamples)
 
 //    int val = 0;
 
-//#ifdef __APPLE__
-//        std::cout << "QtViewer: disabling vertical refresh sync (Mac version)" << std::endl;
-//        const GLint swapInterval = 0;
-//        CGLSetParameter(CGLGetCurrentContext(), kCGLCPSwapInterval, &swapInterval);
-//        //std::cout << this->format().swapInterval() << std::endl;
-//#endif
-
 #if defined(QT_VERSION) && QT_VERSION >= 0x040200
     std::cout << "QtViewer: disabling vertical refresh sync" << std::endl;
     f.setSwapInterval(0); // disable vertical refresh sync
@@ -162,6 +154,10 @@ QtViewer::QtViewer(QWidget* parent, const char* name, const unsigned int nbMSAAS
     : QOpenGLWidget(setupGLFormat(nbMSAASamples), parent)
 #endif // defined(QT_VERSION) && QT_VERSION >= 0x050400
 {
+#ifdef __linux__
+    ::setenv("MESA_GL_VERSION_OVERRIDE", "3.0", 1);
+#endif // __linux
+
     this->setObjectName(name);
 
 #if defined(QT_VERSION) && QT_VERSION >= 0x050400
@@ -222,7 +218,19 @@ QtViewer::~QtViewer()
 // -----------------------------------------------------------------
 void QtViewer::initializeGL(void)
 {
-    std::cout << "QtViewer: OpenGL " << glGetString(GL_VERSION) << " context created." << std::endl;
+    std::cout << "QtViewer: OpenGL " << glGetString(GL_VERSION)
+              << " context created." << std::endl;
+    if (std::string((const char*)glGetString(GL_VENDOR)).find("Intel") !=
+            std::string::npos)
+    {
+        const char* mesaEnv = ::getenv("MESA_GL_VERSION_OVERRIDE");
+        if ( !mesaEnv || std::string(mesaEnv) != "3.0")
+            msg_error("runSofa") << "QtViewer is not compatible with Intel drivers on "
+                                    "Linux. To use runSofa, either change the gui to "
+                                    "qglviewer (runSofa -g qglviewer) or set the "
+                                    "environment variable \"MESA_GL_VERSION_OVERRIDE\" "
+                                    "to the value \"3.0\"";
+    }
 
     static GLfloat specref[4];
     static GLfloat ambientLight[4];
@@ -276,7 +284,7 @@ void QtViewer::initializeGL(void)
 #ifdef SOFA_HAVE_GLEW
         glewInit();
         if (!GLEW_ARB_multitexture)
-            std::cerr << "Error: GL_ARB_multitexture not supported\n";
+            msg_error("QtViewer") << "GL_ARB_multitexture not supported.";
 #endif
 
         _clearBuffer = GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT;
@@ -351,8 +359,6 @@ void QtViewer::initializeGL(void)
 
         //printf("GL initialized\n");
     }
-
-
 
     // switch to preset view
     resetView();
@@ -807,7 +813,7 @@ void QtViewer::drawScene(void)
 
     if(!currentCamera)
     {
-        std::cerr << "ERROR: no camera defined" << std::endl;
+        msg_error("QtViewer") << "No camera defined.";
         return;
     }
 
@@ -1062,12 +1068,12 @@ void QtViewer::calcProjection(int width, int height)
 
     GLdouble projectionMatrix[16];
     currentCamera->getOpenGLProjectionMatrix(projectionMatrix);
-    
-    glViewport(0, 0, width, height);
+
+    glViewport(0, 0, width * this->devicePixelRatio(), height * this->devicePixelRatio()); // to handle retina displays
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glMultMatrixd(projectionMatrix);
-    
+
     glMatrixMode(GL_MODELVIEW);
     glGetDoublev(GL_PROJECTION_MATRIX, lastProjectionMatrix);
 
@@ -1614,17 +1620,17 @@ void QtViewer::newView()
     SofaViewer::newView();
 }
 
-void QtViewer::getView(Vec3d& pos, Quat& ori) const
+void QtViewer::getView(Vector3& pos, Quat& ori) const
 {
     SofaViewer::getView(pos, ori);
 }
 
-void QtViewer::setView(const Vec3d& pos, const Quat &ori)
+void QtViewer::setView(const Vector3& pos, const Quat &ori)
 {
     SofaViewer::setView(pos, ori);
 }
 
-void QtViewer::moveView(const Vec3d& pos, const Quat &ori)
+void QtViewer::moveView(const Vector3& pos, const Quat &ori)
 {
     SofaViewer::moveView(pos, ori);
 }

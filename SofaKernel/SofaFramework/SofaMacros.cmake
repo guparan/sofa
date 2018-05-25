@@ -178,13 +178,30 @@ macro(sofa_add_generic directory name type)
         if(${option})
             message("Adding ${type} ${name}")
             add_subdirectory(${directory} ${name})
-            set_target_properties(${name} PROPERTIES FOLDER ${type}s) # IDE folder
-            set_target_properties(${name} PROPERTIES DEBUG_POSTFIX "_d")
+            #Check if the target has been successfully added
+            if(TARGET ${name})
+                set_target_properties(${name} PROPERTIES FOLDER ${type}s) # IDE folder
+                set_target_properties(${name} PROPERTIES DEBUG_POSTFIX "_d")
+            endif()
+        endif()
+
+        # Add current target in the internal list only if not present already
+        get_property(_allTargets GLOBAL PROPERTY __GlobalTargetList__)
+        get_property(_allTargetNames GLOBAL PROPERTY __GlobalTargetNameList__)
+
+        # if(NOT ${name} IN_LIST _allTargets) # ONLY CMAKE >= 3.3 and policy to NEW
+        list (FIND _allTargets ${name} _index)
+        if(NOT ${_index} GREATER -1)
+            set_property(GLOBAL APPEND PROPERTY __GlobalTargetList__ ${name})
+        endif()
+
+        #if(NOT ${option} IN_LIST _allTargetNames)# ONLY CMAKE >= 3.3 and policy to NEW
+        list (FIND _allTargetNames ${option} _index)
+        if(NOT ${_index} GREATER -1)
+            set_property(GLOBAL APPEND PROPERTY __GlobalTargetNameList__ ${option})
         endif()
     else()
-
         message("${type} ${name} (${CMAKE_CURRENT_LIST_DIR}/${directory}) does not exist and will be ignored.")
-
     endif()
 endmacro()
 
@@ -223,6 +240,11 @@ endmacro()
 
 macro(sofa_add_plugin directory plugin_name)
     sofa_add_generic( ${directory} ${plugin_name} "Plugin" ${ARGV2} )
+endmacro()
+
+macro(sofa_add_plugin_experimental directory plugin_name)
+    sofa_add_generic( ${directory} ${plugin_name} "Plugin" ${ARGV2} )
+    message("-- ${plugin_name} is an experimental feature, use it at your own risk.")
 endmacro()
 
 

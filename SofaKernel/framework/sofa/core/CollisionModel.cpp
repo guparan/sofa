@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -21,7 +21,9 @@
 ******************************************************************************/
 #include "CollisionModel.h"
 #include <sofa/core/objectmodel/BaseNode.h>
+#include <sofa/helper/types/RGBAColor.h>
 
+using sofa::helper::types::RGBAColor ;
 namespace sofa
 {
 
@@ -52,7 +54,7 @@ const float* CollisionModel::getColor4f()
     static const float defaultColor[4] = {0.25f, 0.25f, 0.25f, 1};
 
     if (color.isSet())
-        return color.getValue().ptr();
+        return color.getValue().data();
     else if (isSimulated())
         if (isMoving())
             if (isActive()) {setColor4f(defaultColorSimulatedMovingActive); return defaultColorSimulatedMovingActive;}

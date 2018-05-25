@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -27,6 +27,7 @@
 #include <SofaBaseTopology/NumericalIntegrationDescriptor.h>
 #include <sofa/defaulttype/VecTypes.h>
 
+#include <sofa/helper/types/RGBAColor.h>
 namespace sofa
 {
 
@@ -57,11 +58,12 @@ class EdgeSetGeometryAlgorithms : public PointSetGeometryAlgorithms<DataTypes>
 {
 public:
     SOFA_CLASS(SOFA_TEMPLATE(EdgeSetGeometryAlgorithms,DataTypes),SOFA_TEMPLATE(PointSetGeometryAlgorithms,DataTypes));
-	typedef sofa::core::topology::BaseMeshTopology::EdgeID EdgeID;
+    typedef sofa::core::topology::BaseMeshTopology::EdgeID EdgeID;
     typedef sofa::core::topology::BaseMeshTopology::Edge Edge;
     typedef sofa::core::topology::BaseMeshTopology::SeqEdges SeqEdges;
     typedef sofa::core::topology::BaseMeshTopology::EdgesAroundVertex EdgesAroundVertex;
 
+    typedef sofa::helper::types::RGBAColor RGBAColor ;
     typedef sofa::defaulttype::Vec3d Vec3d;
     typedef typename DataTypes::VecCoord VecCoord;
     typedef typename DataTypes::VecDeriv VecDeriv;
@@ -72,22 +74,22 @@ public:
     enum { NC = CPos::static_size };
 
 protected:
-	bool initializedEdgeCubatureTables;
+    bool initializedEdgeCubatureTables;
     EdgeSetGeometryAlgorithms()
         : PointSetGeometryAlgorithms<DataTypes>()
-		,initializedEdgeCubatureTables(false)
+        ,initializedEdgeCubatureTables(false)
         , showEdgeIndices(core::objectmodel::Base::initData(&showEdgeIndices, (bool) false, "showEdgeIndices", "Debug : view Edge indices."))
         , _draw(core::objectmodel::Base::initData(&_draw, false, "drawEdges","if true, draw the edges in the topology."))
-        , _drawColor(initData(&_drawColor, sofa::defaulttype::Vec3f(0.4f,1.0f,0.3f), "drawColorEdges", "RGB code color used to draw edges."))
+        , _drawColor(initData(&_drawColor, RGBAColor(0.4f,1.0f,0.3f, 1.0f), "drawColorEdges", "RGB code color used to draw edges."))
     {
     }
-    virtual ~EdgeSetGeometryAlgorithms() {}
+    virtual ~EdgeSetGeometryAlgorithms() override {}
 
-	void defineEdgeCubaturePoints();
+    void defineEdgeCubaturePoints();
 public:
     //virtual void reinit();
 
-    virtual void draw(const core::visual::VisualParams* vparams);
+    virtual void draw(const core::visual::VisualParams* vparams) override;
 
     /// computes the length of edge no i and returns it
     Real computeEdgeLength(const EdgeID i) const;
@@ -156,17 +158,17 @@ public:
     /** \brief Process the added point initialization according to the topology and local coordinates.
     */
     virtual void initPointAdded(unsigned int indice, const core::topology::PointAncestorElem &ancestorElem
-        , const helper::vector< VecCoord* >& coordVecs, const helper::vector< VecDeriv* >& derivVecs);
+        , const helper::vector< VecCoord* >& coordVecs, const helper::vector< VecDeriv* >& derivVecs) override;
 
-	/** return a pointer to the container of cubature points */
-	NumericalIntegrationDescriptor<Real,1> &getEdgeNumericalIntegrationDescriptor();
+    /** return a pointer to the container of cubature points */
+    NumericalIntegrationDescriptor<Real,1> &getEdgeNumericalIntegrationDescriptor();
 
 protected:
-    Data<bool> showEdgeIndices;
-    Data<bool> _draw;
-    Data<sofa::defaulttype::Vec3f> _drawColor;
-	/// include cubature points
-	NumericalIntegrationDescriptor<Real,1> edgeNumericalIntegration;
+    Data<bool> showEdgeIndices; ///< Debug : view Edge indices.
+    Data<bool>  _draw; ///< if true, draw the edges in the topology.
+    Data<RGBAColor> _drawColor; ///< RGB code color used to draw edges.
+    /// include cubature points
+    NumericalIntegrationDescriptor<Real,1> edgeNumericalIntegration;
 };
 
 #if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_COMPONENT_TOPOLOGY_EDGESETGEOMETRYALGORITHMS_CPP)

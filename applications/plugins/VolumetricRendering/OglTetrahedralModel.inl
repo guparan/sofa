@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -42,11 +42,11 @@ template<class DataTypes>
 OglTetrahedralModel<DataTypes>::OglTetrahedralModel()
     : m_topology(NULL)
     , m_positions(initData(&m_positions, "position", "Vertices coordinates"))
+    , depthTest(initData(&depthTest, (bool)false, "depthTest", "Set Depth Test"))
+    , blending(initData(&blending, (bool)false, "blending", "Set Blending"))
     , modified(false)
     , lastMeshRev(-1)
     , useTopology(false)
-    , depthTest(initData(&depthTest, (bool)false, "depthTest", "Set Depth Test"))
-    , blending(initData(&blending, (bool)false, "blending", "Set Blending"))
 {
 }
 

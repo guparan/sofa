@@ -2,19 +2,28 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaMisc)
 
 set(HEADER_FILES
-    MeshTetraStuffing.h
     initMisc.h
-)
+    )
 
 set(SOURCE_FILES
-    MeshTetraStuffing.cpp
     initMisc.cpp
-)
+    )
 
-if(SOFA_HAVE_SMP)
-    list(APPEND HEADER_FILES ParallelCGLinearSolver.h)
-    list(APPEND HEADER_FILES ParallelCGLinearSolver.inl)
-    list(APPEND SOURCE_FILES ParallelCGLinearSolver.cpp)
+list(APPEND HEADER_FILES
+    MeshTetraStuffing.h
+    AddResourceRepository.h
+    )
+list(APPEND SOURCE_FILES
+    MeshTetraStuffing.cpp
+    AddResourceRepository.cpp
+    )
+
+if(SOFA_WITH_DEPRECATED_COMPONENTS)
+    if(SOFA_HAVE_SMP)
+        list(APPEND HEADER_FILES ParallelCGLinearSolver.h)
+        list(APPEND HEADER_FILES ParallelCGLinearSolver.inl)
+        list(APPEND SOURCE_FILES ParallelCGLinearSolver.cpp)
+    endif()
 endif()
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})

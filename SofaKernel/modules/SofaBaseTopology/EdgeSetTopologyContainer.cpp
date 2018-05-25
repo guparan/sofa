@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -74,11 +74,10 @@ void EdgeSetTopologyContainer::init()
             for(size_t j=0; j<2; ++j)
             {
                 int a = m_edge[i][j];
-                if (a >= getNbPoints()) nbPoints.setValue(a+1);
+                if (a >= getNbPoints()) setNbPoints(a+1);
             }
         }
     }
-    // std::cout << "coords: " << getPX(m_edge[1][0]) << " " << getPY(m_edge[1][0]) << " " << getPZ(m_edge[1][0]) << std::endl;
 
     PointSetTopologyContainer::init();
 }
@@ -87,8 +86,8 @@ void EdgeSetTopologyContainer::addEdge(int a, int b)
 {
     helper::WriteAccessor< Data< sofa::helper::vector<Edge> > > m_edge = d_edge;
     m_edge.push_back(Edge(a,b));
-    if (a >= getNbPoints()) nbPoints.setValue(a+1);
-    if (b >= getNbPoints()) nbPoints.setValue(b+1);
+    if (a >= getNbPoints()) setNbPoints(a+1);
+    if (b >= getNbPoints()) setNbPoints(b+1);
 }
 
 void EdgeSetTopologyContainer::createEdgesAroundVertexArray()
@@ -561,7 +560,7 @@ void EdgeSetTopologyContainer::clear()
 {
     clearEdges();
     clearEdgesAroundVertex();
-	// Do not set to 0 the number of points as it prevents the  creation of topological items (edgeArray in tetrahedra for instance)
+    // Do not set to 0 the number of points as it prevents the  creation of topological items (edgeArray in tetrahedra for instance)
 //    PointSetTopologyContainer::clear();
 }
 

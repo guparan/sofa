@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -261,7 +261,7 @@ void SurfacePressureForceField<DataTypes>::addDForce(const core::MechanicalParam
 
 		} 
 		//			for (unsigned int i=0;i<df.size();++i) {
-		//			std::cerr<<"df["<<i<<"]= "<<df[i]<<std::endl;
+		//			msg_info()<<"df["<<i<<"]= "<<df[i]<<std::endl;
 		//		}
 		d_df.endEdit();
 	}

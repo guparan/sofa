@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -97,7 +97,7 @@ void TutorialSelector::loadTutorials(const std::string &fileTutorial)
     TiXmlNode* node=hDoc.FirstChildElement().ToElement();
     if (!node)
     {
-        std::cerr << "Error loading file: " << fileTutorial << std::endl;
+        msg_error("TutorialSelector") << "Unable to load file '"  << fileTutorial << "'";
         return;
     }
     openNode(node, 0, true);

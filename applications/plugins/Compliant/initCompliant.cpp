@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -66,6 +66,7 @@ void initExternalModule()
         // adding _Compliant python module
         if( PythonFactory::s_sofaPythonModule ) // add the module only if the Sofa module exists (SofaPython is loaded)
         {
+            simulation::PythonEnvironment::gil lock(__func__);
             static PyObject *s__CompliantPythonModule = SP_INIT_MODULE(_Compliant);
 
             // adding more bindings to the _Compliant module

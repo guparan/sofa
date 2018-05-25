@@ -2,14 +2,19 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaMiscTopology)
 
 set(HEADER_FILES
-    TopologicalChangeProcessor.h
-    config.h
-    initMiscTopology.h
+config.h
+initMiscTopology.h
 )
 
 set(SOURCE_FILES
-    TopologicalChangeProcessor.cpp
-    initMiscTopology.cpp
+initMiscTopology.cpp
+)
+
+list(APPEND HEADER_FILES
+TopologicalChangeProcessor.h
+)
+list(APPEND SOURCE_FILES
+TopologicalChangeProcessor.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -81,7 +81,7 @@ void Operation::start()
         performer = createPerformer();
         if (!performer)
         {
-            std::cerr << defaultPerformerType() << " performer cannot be created with the picked model" << std::endl;
+            msg_error("MouseOperation") << defaultPerformerType() << " performer cannot be created with the picked model.";
             return;
         }
         else
@@ -146,8 +146,6 @@ void FixOperation::configurePerformer(sofa::component::collision::InteractionPer
 //*******************************************************************************************
 void TopologyOperation::start()
 {
-    //std::cout <<"TopologyOperation::start()"<< std::endl;
-
     if (getTopologicalOperation() == 0)  // Remove one element
     {
         performer=component::collision::InteractionPerformer::InteractionPerformerFactory::getInstance()->createObject("RemovePrimitive", pickHandle->getInteraction()->mouseInteractor.get());

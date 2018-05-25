@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -39,9 +39,6 @@ using std::vector;
 #ifdef SOFA_HAVE_DAG
 #include <SofaSimulationGraph/init.h>
 #include <SofaSimulationGraph/DAGSimulation.h>
-#endif
-#ifdef SOFA_SMP
-#include <SofaSimulationTree/SMPSimulation.h>
 #endif
 #include <SofaSimulationTree/init.h>
 #include <SofaSimulationTree/TreeSimulation.h>
@@ -89,19 +86,18 @@ using sofa::gui::BaseGUI;
 #include <sofa/helper/logging/ConsoleMessageHandler.h>
 using sofa::helper::logging::ConsoleMessageHandler ;
 
-#include <sofa/helper/logging/RichConsoleStyleMessageFormatter.h>
+#include <sofa/core/logging/RichConsoleStyleMessageFormatter.h>
 using  sofa::helper::logging::RichConsoleStyleMessageFormatter ;
 
-#ifdef SOFA_HAVE_GLUT_GUI
-#include <sofa/helper/system/glut.h>
-#endif // SOFA_HAVE_GLUT_GUI
+#include <sofa/core/logging/PerComponentLoggingMessageHandler.h>
+using  sofa::helper::logging::MainPerComponentLoggingMessageHandler ;
 
-#ifdef SOFA_SMP
-#include <athapascan-1>
-#endif /* SOFA_SMP */
 #ifdef WIN32
 #include <windows.h>
 #endif
+
+#include <sofa/gui/GuiDataRepository.h>
+using sofa::gui::GuiDataRepository ;
 
 using sofa::helper::system::DataRepository;
 using sofa::helper::system::PluginRepository;
@@ -116,6 +112,8 @@ using sofa::helper::logging::ClangMessageHandler ;
 #include <sofa/helper/logging/ExceptionMessageHandler.h>
 using sofa::helper::logging::ExceptionMessageHandler;
 
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
 
 
 void loadVerificationData(string& directory, string& filename, Node* node)
@@ -139,11 +137,17 @@ void loadVerificationData(string& directory, string& filename, Node* node)
     v_read.execute(node);
 }
 
+void addGUIParameters(ArgumentParser* argumentParser)
+{
+    GUIManager::RegisterParameters(argumentParser);
+}
+
 // ---------------------------------------------------------------------
 // ---
 // ---------------------------------------------------------------------
 int main(int argc, char** argv)
 {
+    GuiDataRepository.addFirstPath(Utils::getSofaPathTo("share/sofa/gui/runSofa/resources").c_str()) ;
     sofa::helper::BackTrace::autodump();
 
     ExecParams::defaultInstance()->setAspectID(0);
@@ -173,23 +177,26 @@ int main(int argc, char** argv)
 
     string fileName ;
     bool        startAnim = false;
+    bool        showHelp = false;
     bool        printFactory = false;
     bool        loadRecent = false;
     bool        temporaryFile = false;
     bool        testMode = false;
-    int         nbIterations = BatchGUI::DEFAULT_NUMBER_OF_ITERATIONS;
+    bool        noAutoloadPlugins = false;
     unsigned int nbMSSASamples = 1;
-    unsigned    computationTimeSampling=0; ///< Frequency of display of the computation time statistics, in number of animation steps. 0 means never.
+    bool computationTimeAtBegin = false;
+    unsigned int computationTimeSampling=0; ///< Frequency of display of the computation time statistics, in number of animation steps. 0 means never.
+    string    computationTimeOutputType="stdout";
 
     string gui = "";
     string verif = "";
-#ifdef SOFA_SMP
-    string simulationType = "smp";
-#elif defined(SOFA_HAVE_DAG)
+
+#if defined(SOFA_HAVE_DAG)
     string simulationType = "dag";
 #else
     string simulationType = "tree";
 #endif
+
     vector<string> plugins;
     vector<string> files;
 #ifdef SOFA_SMP
@@ -200,35 +207,58 @@ int main(int argc, char** argv)
     string colorsStatus = "auto";
     string messageHandler = "auto";
     bool enableInteraction = false ;
+    int width = 800;
+    int height = 600;
 
     string gui_help = "choose the UI (";
     gui_help += GUIManager::ListSupportedGUI('|');
     gui_help += ")";
 
-    sofa::helper::parse(&files, "This is a SOFA application. Here are the command line arguments")
-    // alphabetical order on short name
-    .option(&startAnim,'a',"start","start the animation loop")
-    .option(&computationTimeSampling,'c',"computationTimeSampling","Frequency of display of the computation time statistics, in number of animation steps. 0 means never.")
-    .option(&gui,'g',"gui",gui_help.c_str())
-    .option(&plugins,'l',"load","load given plugins")
-    .option(&nbMSSASamples, 'm', "msaa", "number of samples for MSAA (Multi Sampling Anti Aliasing ; value < 2 means disabled")
-    .option(&nbIterations,'n',"nb_iterations","(only batch) Number of iterations of the simulation")
-    .option(&printFactory,'p',"factory","print factory logs")
-    .option(&loadRecent,'r',"recent","load most recently opened file")
-    .option(&simulationType,'s',"simu","select the type of simulation (bgl, dag, tree, smp)")
-    .option(&temporaryFile,'t',"temporary","the loaded scene won't appear in history of opened files")
-    .option(&testMode,'x',"test","select test mode with xml output after N iteration")
-    .option(&verif,'v',"verification","load verification data for the scene")
-    .option(&colorsStatus,'z',"colors","use colors on stdout and stderr (yes, no, auto)")
-    .option(&messageHandler,'f',"formatting","select the message formatting to use (auto, clang, sofa, rich, test)")
-    .option(&enableInteraction, 'i', "interactive", "enable interactive mode for the GUI which includes idle and mouse events (EXPERIMENTAL)")
+    ArgumentParser* argParser = new ArgumentParser(argc, argv);
+    argParser->addArgument(po::value<bool>(&showHelp)->default_value(false)->implicit_value(true),                  "help,h", "Display this help message");
+    argParser->addArgument(po::value<bool>(&startAnim)->default_value(false)->implicit_value(true),                 "start,a", "start the animation loop");
+    argParser->addArgument(po::value<bool>(&computationTimeAtBegin)->default_value(false)->implicit_value(true),    "computationTimeAtBegin,b", "Output computation time statistics of the init (at the begin of the simulation)");
+    argParser->addArgument(po::value<unsigned int>(&computationTimeSampling)->default_value(0),                     "computationTimeSampling", "Frequency of display of the computation time statistics, in number of animation steps. 0 means never.");
+    argParser->addArgument(po::value<std::string>(&computationTimeOutputType)->default_value("stdout"),             "computationTimeOutputType,o", "Output type for the computation time statistics: either stdout, json or ljson");
+    argParser->addArgument(po::value<std::string>(&gui)->default_value(""),                                         "gui,g", gui_help.c_str());
+    argParser->addArgument(po::value<std::vector<std::string>>(&plugins),                                           "load,l", "load given plugins");
+    argParser->addArgument(po::value<bool>(&noAutoloadPlugins)->default_value(false)->implicit_value(true),         "noautoload", "disable plugins autoloading");
+
+    // example of an option using lambda function which ensure the value passed is > 0
+    argParser->addArgument(po::value<unsigned int>(&nbMSSASamples)->default_value(1)->notifier([](unsigned int value)
+    {
+        if (value < 1) {
+            std::cerr << "msaa sample cannot be lower than 1" << std::endl;
+            exit( EXIT_FAILURE );
+        }
+    }),                                                                                                             "msaa,m", "number of samples for MSAA (Multi Sampling Anti Aliasing ; value < 2 means disabled");
+
+    argParser->addArgument(po::value<bool>(&printFactory)->default_value(false)->implicit_value(true),              "factory,p", "print factory logs");
+    argParser->addArgument(po::value<bool>(&loadRecent)->default_value(false)->implicit_value(true),                "recent,r", "load most recently opened file");
+    argParser->addArgument(po::value<std::string>(&simulationType),                                                 "simu,s", "select the type of simulation (bgl, dag, tree)");
+    argParser->addArgument(po::value<bool>(&temporaryFile)->default_value(false)->implicit_value(true),             "tmp", "the loaded scene won't appear in history of opened files");
+    argParser->addArgument(po::value<bool>(&testMode)->default_value(false)->implicit_value(true),                  "test", "select test mode with xml output after N iteration");
+    argParser->addArgument(po::value<std::string>(&verif)->default_value(""), "verification,v",                     "load verification data for the scene");
+    argParser->addArgument(po::value<std::string>(&colorsStatus)->default_value("auto")->implicit_value("yes"),     "colors,c", "use colors on stdout and stderr (yes, no, auto)");
+    argParser->addArgument(po::value<std::string>(&messageHandler)->default_value("auto"), "formatting,f",          "select the message formatting to use (auto, clang, sofa, rich, test)");
+    argParser->addArgument(po::value<bool>(&enableInteraction)->default_value(false)->implicit_value(true),         "interactive,i", "enable interactive mode for the GUI which includes idle and mouse events (EXPERIMENTAL)");
+    argParser->addArgument(po::value<std::vector<std::string> >()->multitoken(), "argv",                            "forward extra args to the python interpreter");
 
 #ifdef SOFA_SMP
-    .option(&disableStealing,'w',"disableStealing","Disable Work Stealing")
-    .option(&nProcs,'c',"nprocs","Number of processor")
-    .option(&affinity,'f',"affinity","Enable aFfinity base Work Stealing")
+    argParser->addArgument(po::value<bool>(&disableStealing)->default_value(false)->implicit_value(true),           "disableStealing,w", "Disable Work Stealing")
+    argParser->addArgument(po::value<std::string>(&nProcs)->default_value(""),                                      "nprocs", "Number of processor")
+    argParser->addArgument(po::value<bool>(&affinity)->default_value(false)->implicit_value(true),                  "affinity", "Enable aFfinity base Work Stealing")
 #endif
-    (argc,argv);
+
+    addGUIParameters(argParser);
+    argParser->parse();
+    files = argParser->getInputFileList();
+
+    if(showHelp)
+    {
+        argParser->showHelp();
+        exit( EXIT_SUCCESS );
+    }
 
     // Note that initializations must be done after ArgumentParser that can exit the application (without cleanup)
     // even if everything is ok e.g. asking for help
@@ -242,36 +272,6 @@ int main(int argc, char** argv)
     sofa::component::initComponentAdvanced();
     sofa::component::initComponentMisc();
 
-#ifdef SOFA_SMP
-    int ac = 0;
-    char **av = NULL;
-
-    Util::KaapiComponentManager::prop["util.globalid"]="0";
-    Util::KaapiComponentManager::prop["sched.strategy"]="I";
-    if(!disableStealing)
-        Util::KaapiComponentManager::prop["sched.stealing"]="true";
-    if(nProcs!="")
-        Util::KaapiComponentManager::prop["community.thread.poolsize"]=nProcs;
-    if(affinity)
-    {
-        Util::KaapiComponentManager::prop["sched.stealing"]="true";
-        Util::KaapiComponentManager::prop["sched.affinity"]="true";
-    }
-
-    a1::Community com = a1::System::join_community( ac, av);
-#endif /* SOFA_SMP */
-
-#ifndef SOFA_NO_OPENGL
-#ifdef SOFA_HAVE_GLUT_GUI
-    if(gui!="batch") glutInit(&argc,argv);
-#endif // SOFA_HAVE_GLUT_GUI
-#endif // SOFA_NO_OPENGL
-
-#ifdef SOFA_SMP
-        if (simulationType == "smp")
-            sofa::simulation::setSimulation(new sofa::simulation::tree::SMPSimulation());
-        else
-#endif
 #ifdef SOFA_HAVE_DAG
     if (simulationType == "tree")
         sofa::simulation::setSimulation(new TreeSimulation());
@@ -313,15 +313,13 @@ int main(int argc, char** argv)
         MessageDispatcher::addHandler( new ExceptionMessageHandler() ) ;
     }
     else{
-        msg_warning("") << "Invalid argument ‘" << messageHandler << "‘ for ‘--formatting‘";
+        msg_warning("") << "Invalid argument '" << messageHandler << "' for '--formatting'";
     }
+    MessageDispatcher::addHandler(&MainPerComponentLoggingMessageHandler::getInstance()) ;
+
 
     // Add the plugin directory to PluginRepository
-#ifdef WIN32
-    const string pluginDir = Utils::getExecutableDirectory();
-#else
-    const string pluginDir = Utils::getSofaPathPrefix() + "/lib";
-#endif
+    const std::string& pluginDir = Utils::getPluginDirectory();
     PluginRepository.addFirstPath(pluginDir);
 
     // Initialise paths
@@ -334,35 +332,28 @@ int main(int argc, char** argv)
     for (unsigned int i=0; i<plugins.size(); i++)
         PluginManager::getInstance().loadPlugin(plugins[i]);
 
-    // to force loading plugin SofaPython if existing
+    std::string configPluginPath = pluginDir + "/" + TOSTRING(CONFIG_PLUGIN_FILENAME);
+    std::string defaultConfigPluginPath = pluginDir + "/" + TOSTRING(DEFAULT_CONFIG_PLUGIN_FILENAME);
+
+    if (!noAutoloadPlugins)
     {
-        std::ostringstream no_error_message; // no to get an error on the console if SofaPython does not exist
-        sofa::helper::system::PluginManager::getInstance().loadPlugin("SofaPython",&no_error_message);
+        if (DataRepository.findFile(configPluginPath))
+        {
+            msg_info("runSofa") << "Loading automatically plugin list in " << configPluginPath;
+            PluginManager::getInstance().readFromIniFile(configPluginPath);
+        }
+        else if (DataRepository.findFile(defaultConfigPluginPath))
+        {
+            msg_info("runSofa") << "Loading automatically plugin list in " << defaultConfigPluginPath;
+            PluginManager::getInstance().readFromIniFile(defaultConfigPluginPath);
+        }
+        else
+            msg_info("runSofa") << "No plugin list found. No plugin will be automatically loaded.";
     }
+    else
+        msg_info("runSofa") << "Automatic plugin loading disabled.";
 
     PluginManager::getInstance().init();
-
-    if(gui.compare("batch") == 0 && nbIterations >= 0)
-    {
-        ostringstream oss ;
-        oss << "nbIterations=";
-        oss << nbIterations;
-        GUIManager::AddGUIOption(oss.str().c_str());
-    }
-
-    if(enableInteraction){
-        msg_warning("Main") << "you activated the interactive mode. This is currently an experimental feature "
-                               "that may change or be removed in the future. " ;
-        GUIManager::AddGUIOption("enableInteraction");
-    }
-
-    if(nbMSSASamples > 1)
-    {
-        ostringstream oss ;
-        oss << "msaa=";
-        oss << nbMSSASamples;
-        GUIManager::AddGUIOption(oss.str().c_str());
-    }
 
     if (int err = GUIManager::Init(argv[0],gui.c_str()))
         return err;
@@ -387,7 +378,7 @@ int main(int argc, char** argv)
         return err;
 
     //To set a specific resolution for the viewer, use the component ViewerSetting in you scene graph
-    GUIManager::SetDimension(800,600);
+    GUIManager::SetDimension(width, height);
 
     Node::SPtr groot = sofa::simulation::getSimulation()->load(fileName.c_str());
     if( !groot )
@@ -398,7 +389,19 @@ int main(int argc, char** argv)
         loadVerificationData(verif, fileName, groot.get());
     }
 
+    if( computationTimeAtBegin )
+    {
+        sofa::helper::AdvancedTimer::setEnabled("Init", true);
+        sofa::helper::AdvancedTimer::setInterval("Init", 1);
+        sofa::helper::AdvancedTimer::setOutputType("Init", computationTimeOutputType);
+        sofa::helper::AdvancedTimer::begin("Init");
+    }
+
     sofa::simulation::getSimulation()->init(groot.get());
+    if( computationTimeAtBegin )
+    {
+        msg_info("") << sofa::helper::AdvancedTimer::end("Init", groot.get());
+    }
     GUIManager::SetScene(groot,fileName.c_str(), temporaryFile);
 
 
@@ -418,6 +421,7 @@ int main(int argc, char** argv)
     {
         sofa::helper::AdvancedTimer::setEnabled("Animate", true);
         sofa::helper::AdvancedTimer::setInterval("Animate", computationTimeSampling);
+        sofa::helper::AdvancedTimer::setOutputType("Animate", computationTimeOutputType);
     }
 
     //=======================================

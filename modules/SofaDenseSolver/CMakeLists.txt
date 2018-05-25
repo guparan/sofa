@@ -2,19 +2,24 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaDenseSolver)
 
 set(HEADER_FILES
+    config.h
+    initDenseSolver.h
+    )
+
+set(SOURCE_FILES
+    initDenseSolver.cpp
+    )
+
+list(APPEND HEADER_FILES
     LULinearSolver.h
     NewMatMatrix.h
     NewMatVector.h
-    config.h
-    initDenseSolver.h
-)
-
-set(SOURCE_FILES
+    )
+list(APPEND SOURCE_FILES
     LULinearSolver.cpp
     NewMatCGLinearSolver.cpp
     NewMatCholeskySolver.cpp
-    initDenseSolver.cpp
-)
+    )
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaBaseLinearSolver)

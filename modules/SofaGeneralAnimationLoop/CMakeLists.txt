@@ -2,17 +2,21 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaGeneralAnimationLoop)
 
 set(HEADER_FILES
-    MultiStepAnimationLoop.h
-    MultiTagAnimationLoop.h
     config.h
     initGeneralAnimationLoop.h
-)
+    )
 
 set(SOURCE_FILES
-    MultiStepAnimationLoop.cpp
-    MultiTagAnimationLoop.cpp
     initGeneralAnimationLoop.cpp
-)
+    )
+
+list(APPEND HEADER_FILES
+    MultiStepAnimationLoop.h
+    MultiTagAnimationLoop.h )
+
+list(APPEND SOURCE_FILES
+    MultiStepAnimationLoop.cpp
+    MultiTagAnimationLoop.cpp )
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCommon)

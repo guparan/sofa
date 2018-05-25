@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -672,7 +672,7 @@ void HexahedronSetTopologyModifier::removeHexahedra(const sofa::helper::vector< 
     for (unsigned int i = 0; i < hexahedraIds.size(); i++)
     {
         if( hexahedraIds[i] >= m_container->getNumberOfHexahedra())
-            std::cout << "Error: HexahedronSetTopologyModifier::removeHexahedra: hexahedra: "<< hexahedraIds[i] <<" is out of bound and won't be removed." << std::endl;
+            msg_error() << "Unable to remove the hexahedra: "<< hexahedraIds[i] <<" its index is out of bound." ;
         else
             hexahedraIds_filtered.push_back(hexahedraIds[i]);
     }
@@ -720,7 +720,7 @@ void HexahedronSetTopologyModifier::propagateTopologicalEngineChanges()
         if (topoEngine->isDirty())
         {
 #ifndef NDEBUG
-            std::cout << "HexahedronSetTopologyModifier::performing: " << topoEngine->getName() << std::endl;
+            msg_info() << "HexahedronSetTopologyModifier::performing: " << topoEngine->getName() ;
 #endif
             topoEngine->update();
         }

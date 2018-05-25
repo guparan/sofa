@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -39,18 +39,22 @@ SOFA_DECL_CLASS(GenerateGrid)
 int GenerateGridClass = core::RegisterObject("Generate a Grid Tetrahedral or Hexahedral Mesh")
 #ifndef SOFA_FLOAT
         .add< GenerateGrid<Vec3dTypes> >()
+        .add< GenerateGrid<Vec2dTypes> >()
 #endif //SOFA_FLOAT
 #ifndef SOFA_DOUBLE
         .add< GenerateGrid<Vec3fTypes> >()
+        .add< GenerateGrid<Vec2fTypes> >()
 #endif //SOFA_DOUBLE
         ;
 
 
 #ifndef SOFA_FLOAT
 template class SOFA_GENERAL_ENGINE_API GenerateGrid<Vec3dTypes>;
+template class SOFA_GENERAL_ENGINE_API GenerateGrid<Vec2dTypes>;
 #endif //SOFA_FLOAT
 #ifndef SOFA_DOUBLE
 template class SOFA_GENERAL_ENGINE_API GenerateGrid<Vec3fTypes>;
+template class SOFA_GENERAL_ENGINE_API GenerateGrid<Vec2fTypes>;
 #endif //SOFA_DOUBLE
 
 

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -51,6 +51,7 @@ const char* BaseGUI::mProgramName = NULL;
 std::string BaseGUI::mGuiName = "";
 std::string BaseGUI::configDirectoryPath = ".";
 std::string BaseGUI::screenshotDirectoryPath = ".";
+ArgumentParser* BaseGUI::mArgumentParser = NULL;
 
 BaseGUI::BaseGUI()
 {
@@ -151,11 +152,11 @@ static void setDirectoryPath(std::string& outputVariable, const std::string& pat
 
     if (!pathExists && !createIfNecessary)
     {
-        std::cerr << "Error: No such directory: " << path << std::endl;
+        msg_error("BaseGUI") << "No such directory '" << path << "'";
     }
     else if (pathExists && !FileSystem::isDirectory(path))
     {
-        std::cerr << "Error: Not a directory: " << path << std::endl;
+         msg_error("BaseGUI") << "Not a directory: " << path << "'";
     }
     else
     {

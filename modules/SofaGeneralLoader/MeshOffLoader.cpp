@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -23,6 +23,7 @@
 #include <SofaGeneralLoader/MeshOffLoader.h>
 #include <sofa/core/visual/VisualParams.h>
 #include <sofa/helper/system/SetDirectory.h>
+#include <fstream>
 
 namespace sofa
 {
@@ -76,8 +77,7 @@ bool MeshOffLoader::load()
 
 bool MeshOffLoader::readOFF (std::ifstream &file, const char* /* filename */ )
 {
-    if(f_printLog.getValue())
-        sout << "MeshOffLoader::readOFF" << sendl;
+    msg_info() << "MeshOffLoader::readOFF" ;
 
     helper::vector<sofa::defaulttype::Vector3>& my_positions = *(d_positions.beginEdit());
 
@@ -102,13 +102,9 @@ bool MeshOffLoader::readOFF (std::ifstream &file, const char* /* filename */ )
         values >> numberOfVertices >> numberOfFaces >> numberOfEdges;
     }
 
-    if(f_printLog.getValue())
-    {
-        sout << "vertices = "<< numberOfVertices << sendl;
-        sout << "faces = "<< numberOfFaces << sendl;
-        sout << "edges = "<< numberOfEdges << sendl;
-    }
-
+    msg_info() << "vertices = "<< numberOfVertices
+               << "faces = "<< numberOfFaces
+               << "edges = "<< numberOfEdges ;
 
     currentNumberOfVertices = 0;
 

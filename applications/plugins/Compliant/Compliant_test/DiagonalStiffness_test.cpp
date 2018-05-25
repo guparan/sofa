@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -23,7 +23,6 @@
 #include <SofaTest/ForceField_test.h>
 
 #include <SofaTest/TestMessageHandler.h>
-using sofa::helper::logging::ExpectMessage ;
 using sofa::helper::logging::Message ;
 
 #include <SofaSimulationGraph/DAGSimulation.h>
@@ -59,6 +58,8 @@ struct DiagonalStiffness_test : public ForceField_test<_DiagonalStiffness>
     */
     DiagonalStiffness_test():Inherited::ForceField_test()
     {
+        this->errorFactorPotentialEnergy = 3; // increading tolerance for potential energy test due to non-linearities
+
         //Position
         x.resize(3);
         DataTypes::set( x[0], 0,0,0);

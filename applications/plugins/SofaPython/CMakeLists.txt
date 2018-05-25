@@ -5,6 +5,10 @@ set(SOFAPYTHON_MAJOR_VERSION 0)
 set(SOFAPYTHON_MINOR_VERSION 1)
 set(SOFAPYTHON_VERSION ${SOFAPYTHON_MAJOR_VERSION}.${SOFAPYTHON_MINOR_VERSION})
 
+if(UNIX)
+  list(APPEND PYTHON_LIBRARIES dl)
+endif()
+
 set(SOFA_HAVE_PYTHON 1)
 
 set(HEADER_FILES
@@ -17,9 +21,11 @@ set(HEADER_FILES
     Binding_BaseMeshTopology.h
     Binding_BaseObject.h
     Binding_BaseState.h
+    Binding_BaseTopologyObject.h
     Binding_Context.h
     Binding_Data.h
     Binding_DataEngine.h
+    Binding_DataFileName.h
     Binding_DataFileNameVector.h
     Binding_DisplayFlagsData.h
     Binding_OptionsGroupData.h
@@ -29,17 +35,23 @@ set(HEADER_FILES
     Binding_Mapping.h
 #    Binding_MechanicalObject.h
     Binding_MeshLoader.h
+    Binding_TopologyChange.h
+    Binding_PointSetTopologyModifier.h
+    Binding_TriangleSetTopologyModifier.h
     Binding_MeshTopology.h
     Binding_MultiMapping.h
     Binding_Node.h
     Binding_OBJExporter.h
+    Binding_STLExporter.h
     Binding_PythonScriptController.h
+    Binding_PythonScriptDataEngine.h
     Binding_RegularGridTopology.h
     Binding_RigidMapping.h
     Binding_SofaModule.h
 #    Binding_SubsetMultiMapping.h
     Binding_Topology.h
     Binding_Vector.h
+    Binding_VectorLinearSpringData.h
     Binding_VisualModel.h
     PythonCommon.h
     PythonEnvironment.h
@@ -48,11 +60,14 @@ set(HEADER_FILES
     PythonMainScriptController.h
     PythonScriptController.h
     PythonScriptControllerHelper.h
+    PythonScriptDataEngine.h
     PythonScriptEvent.h
     PythonScriptFunction.h
+    PythonToSofa.inl
     PythonVisitor.h
     SceneLoaderPY.h
     ScriptController.h
+    ScriptDataEngine.h
     ScriptEvent.h
     ScriptFunction.h
 )
@@ -67,9 +82,11 @@ set(SOURCE_FILES
     Binding_BaseMeshTopology.cpp
     Binding_BaseObject.cpp
     Binding_BaseState.cpp
+    Binding_BaseTopologyObject.cpp
     Binding_Context.cpp
     Binding_Data.cpp
     Binding_DataEngine.cpp
+    Binding_DataFileName.cpp
     Binding_DataFileNameVector.cpp
     Binding_DisplayFlagsData.cpp
     Binding_OptionsGroupData.cpp
@@ -79,32 +96,41 @@ set(SOURCE_FILES
     Binding_Mapping.cpp
 #    Binding_MechanicalObject.cpp
     Binding_MeshLoader.cpp
+    Binding_TopologyChange.cpp
+    Binding_PointSetTopologyModifier.cpp
+    Binding_TriangleSetTopologyModifier.cpp
     Binding_MeshTopology.cpp
     Binding_MultiMapping.cpp
     Binding_Node.cpp
     Binding_OBJExporter.cpp
+    Binding_STLExporter.cpp
     Binding_PythonScriptController.cpp
+    Binding_PythonScriptDataEngine.cpp
     Binding_RegularGridTopology.cpp
     Binding_RigidMapping.cpp
     Binding_SofaModule.cpp
 #    Binding_SubsetMultiMapping.cpp
     Binding_Topology.cpp
     Binding_Vector.cpp
+    Binding_VectorLinearSpringData.cpp
     Binding_VisualModel.cpp
     PythonEnvironment.cpp
     PythonFactory.cpp
     PythonMacros.cpp
     PythonMainScriptController.cpp
     PythonScriptController.cpp
+    PythonScriptDataEngine.cpp
     PythonScriptControllerHelper.cpp
     PythonScriptEvent.cpp
     PythonScriptFunction.cpp
     PythonVisitor.cpp
     SceneLoaderPY.cpp
     ScriptController.cpp
+    ScriptDataEngine.cpp
     ScriptEvent.cpp
     ScriptFunction.cpp
     initSofaPython.cpp
+    ctypes.cpp
 )
 
 set(PYTHON_FILES
@@ -119,6 +145,7 @@ set(PYTHON_FILES
     python/SofaPython/units.py
     python/SofaPython/noPicking.py
     python/SofaPython/livecoding.py
+    python/SofaPython/PythonAdvancedTimer.py
 )
 
 

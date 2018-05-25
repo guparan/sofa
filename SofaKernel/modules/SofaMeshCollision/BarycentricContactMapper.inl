@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -62,7 +62,7 @@ typename BarycentricContactMapper<TCollisionModel,DataTypes>::MMechanicalState* 
     simulation::Node* parent = dynamic_cast<simulation::Node*>(model->getContext());
     if (parent==NULL)
     {
-        std::cerr << "ERROR: BarycentricContactMapper only works for scenegraph scenes.\n";
+        msg_error("BarycentricContactMapper") << "BarycentricContactMapper only works for scenegraph scenes.";
         return NULL;
     }
     simulation::Node::SPtr child = parent->createChild(name);

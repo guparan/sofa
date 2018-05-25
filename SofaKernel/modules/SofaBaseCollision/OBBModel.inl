@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -438,15 +438,12 @@ inline void TOBB<DataTypes>::showVertices()const{
     std::vector<Coord> vs;
     vertices(vs);
 
-    std::cout<<"vertices==============="<<std::endl;
+    std::stringstream tmpmsg ;
+    tmpmsg << "vertices:"<< msgendl;
     for(unsigned int i = 0 ; i < vs.size() ; ++i)
-        std::cout<<"\t"<<vs[i]<<std::endl;
+        tmpmsg<<"-"<<vs[i]<<msgendl;
+    dmsg_info("TOBB<DataTypes") << tmpmsg.str() ;
 }
-
-//template <class DataTypes>
-//bool TOBBModel<DataTypes>::bidon()const{return false;}
-
-
 
 template <class DataTypes>
 void TOBBModel<DataTypes>::computeBBox(const core::ExecParams* params, bool onlyVisible)
@@ -455,7 +452,7 @@ void TOBBModel<DataTypes>::computeBBox(const core::ExecParams* params, bool only
 
 
     static const Real max_real = std::numeric_limits<Real>::max();
-    static const Real min_real = std::numeric_limits<Real>::min();
+    static const Real min_real = std::numeric_limits<Real>::lowest();
     Real maxBBox[3] = {min_real,min_real,min_real};
     Real minBBox[3] = {max_real,max_real,max_real};
 

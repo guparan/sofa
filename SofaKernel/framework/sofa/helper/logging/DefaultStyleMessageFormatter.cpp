@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -73,7 +73,7 @@ void DefaultStyleMessageFormatter::formatMessage(const Message& m,std::ostream& 
     out << s_messageTypeColors[m.type()] << s_messageTypePrefixes[m.type()];
 
     if (!m.sender().empty())
-        out << Console::BLUE << "[" << m.sender() << "] ";
+        out << Console::BLUE << "[" << m.componentInfo() << "] ";
 
     out << Console::DEFAULT_COLOR << m.message().str() << std::endl;
 }

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -95,22 +95,7 @@ void DataFileNameWidget::raiseDialog()
 
     if (s.isNull() ) return;
     fileName=std::string (s.toStdString());
-//
-//#ifdef WIN32
-//
-//  /* WIN32 is a pain here because of mixed case formatting with randomly
-//  picked slash and backslash to separate dirs
-//  */
-//  std::replace(fileName.begin(),fileName.end(),'\\' , '/' );
-//  std::replace(SofaPath.begin(),SofaPath.end(),'\\' , '/' );
-//  std::transform(fileName.begin(), fileName.end(), fileName.begin(), ::tolower );
-//  std::transform(SofaPath.begin(), SofaPath.end(), SofaPath.begin(), ::tolower );
-//
-//#endif
-//	std::string::size_type loc = fileName.find( SofaPath, 0 );
-//	if (loc==0) fileName = fileName.substr(SofaPath.size()+1);
-    fileName = sofa::helper::system::FileRepository::relativeToPath(fileName,SofaPath);
-
+    fileName = sofa::helper::system::FileRepository::relativeToPath(fileName,SofaPath,false);
 
     openFilePath->setText( QString( fileName.c_str() ) );
 }

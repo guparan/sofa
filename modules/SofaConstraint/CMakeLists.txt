@@ -2,6 +2,15 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaConstraint)
 
 set(HEADER_FILES
+    config.h
+    initConstraint.h
+    )
+
+set(SOURCE_FILES
+    initConstraint.cpp
+    )
+
+list(APPEND HEADER_FILES
     BilateralConstraintResolution.h
     BilateralInteractionConstraint.h
     BilateralInteractionConstraint.inl
@@ -10,11 +19,11 @@ set(HEADER_FILES
     ConstraintAttachBodyPerformer.inl
     ConstraintSolverImpl.h
     ContactDescription.h
+    ContactIdentifier.h
     FreeMotionAnimationLoop.h
     FrictionContact.h
     FrictionContact.inl
     GenericConstraintCorrection.h
-    GenericConstraintCorrection.inl
     GenericConstraintSolver.h
     LCPConstraintSolver.h
     LMDNewProximityIntersection.h
@@ -35,15 +44,25 @@ set(HEADER_FILES
     UncoupledConstraintCorrection.inl
     UnilateralInteractionConstraint.h
     UnilateralInteractionConstraint.inl
-    config.h
-    initConstraint.h
-)
-
-set(SOURCE_FILES
+    BarycentricDistanceLMConstraintContact.h
+    BarycentricDistanceLMConstraintContact.inl
+    DOFBlockerLMConstraint.h
+    DOFBlockerLMConstraint.inl
+    FixedLMConstraint.h
+    FixedLMConstraint.inl
+    DistanceLMContactConstraint.h
+    DistanceLMContactConstraint.inl
+    DistanceLMConstraint.h
+    DistanceLMConstraint.inl
+    LMConstraintSolver.h
+    LMConstraintDirectSolver.h
+    )
+list(APPEND SOURCE_FILES
     BilateralInteractionConstraint.cpp
     ConstraintAnimationLoop.cpp
     ConstraintAttachBodyPerformer.cpp
     ConstraintSolverImpl.cpp
+    ContactIdentifier.cpp
     FreeMotionAnimationLoop.cpp
     FrictionContact.cpp
     GenericConstraintCorrection.cpp
@@ -58,35 +77,14 @@ set(SOURCE_FILES
     StopperConstraint.cpp
     UncoupledConstraintCorrection.cpp
     UnilateralInteractionConstraint.cpp
-    initConstraint.cpp
-)
-
-
-    list(APPEND HEADER_FILES
-        BarycentricDistanceLMConstraintContact.h
-        BarycentricDistanceLMConstraintContact.inl
-        DOFBlockerLMConstraint.h
-        DOFBlockerLMConstraint.inl
-        FixedLMConstraint.h
-        FixedLMConstraint.inl
-        DistanceLMContactConstraint.h
-        DistanceLMContactConstraint.inl
-        DistanceLMConstraint.h
-        DistanceLMConstraint.inl
-        LMConstraintSolver.h
-        LMConstraintDirectSolver.h
+    BarycentricDistanceLMConstraintContact.cpp
+    DOFBlockerLMConstraint.cpp
+    FixedLMConstraint.cpp
+    DistanceLMContactConstraint.cpp
+    DistanceLMConstraint.cpp
+    LMConstraintSolver.cpp
+    LMConstraintDirectSolver.cpp
     )
-
-    list(APPEND SOURCE_FILES
-        BarycentricDistanceLMConstraintContact.cpp
-        DOFBlockerLMConstraint.cpp
-        FixedLMConstraint.cpp
-        DistanceLMContactConstraint.cpp
-        DistanceLMConstraint.cpp
-        LMConstraintSolver.cpp
-        LMConstraintDirectSolver.cpp
-    )
-
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaMeshCollision SofaSimpleFem SofaImplicitOdeSolver SofaUserInteraction SofaBaseLinearSolver)

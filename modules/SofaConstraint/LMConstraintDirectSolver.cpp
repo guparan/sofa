@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -195,13 +195,10 @@ bool LMConstraintDirectSolver::solveSystem(const core::ConstraintParams* cParams
         Lambda.noalias() = solverSVD.matrixV()*invSingularValues.asDiagonal()*solverSVD.matrixU().transpose()*c;
     }
 
-    if (this->f_printLog.getValue())
-    {
-        sout << "W" <<  printDimension(W) <<  "  Lambda" << printDimension(Lambda) << "  c" << printDimension(c) << sendl;
-        sout << "\nW     ===============================================\n" << W
-                <<  "\nLambda===============================================\n" << Lambda
-                <<  "\nc     ===============================================\n" << c << sendl;
-    }
+    msg_info() << "W" <<  printDimension(W) <<  "  Lambda" << printDimension(Lambda) << "  c" << printDimension(c) << msgendl
+                << "W     ===============================================\n" << W << msgendl
+                << "Lambda===============================================\n" << Lambda << msgendl
+                << "c     ===============================================\n" << c ;
 
 #ifdef SOFA_DUMP_VISITOR_INFO
     sofa::simulation::Visitor::printCloseNode("DirectSolveSystem");

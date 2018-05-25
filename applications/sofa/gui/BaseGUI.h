@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -27,6 +27,8 @@
 #include <sofa/defaulttype/Vec.h>
 #include <SofaGraphComponent/ViewerSetting.h>
 #include <SofaGraphComponent/MouseButtonSetting.h>
+#include <sofa/helper/ArgumentParser.h>
+using sofa::helper::ArgumentParser;
 
 #include <list>
 
@@ -76,7 +78,7 @@ public:
     virtual void setViewerConfiguration(sofa::component::configurationsetting::ViewerSetting* /*viewerConf*/) {}
     virtual void setViewerResolution(int /* width */, int /* height */) {}
     virtual void setFullScreen() {}
-    virtual void setBackgroundColor(const defaulttype::Vector3& /*color*/) {}
+    virtual void setBackgroundColor(const defaulttype::RGBAColor& /*color*/) {}
     virtual void setBackgroundImage(const std::string& /*image*/) {}
 
     virtual BaseViewer* getViewer() {return NULL;}
@@ -102,6 +104,7 @@ public:
 
     static const char* GetProgramName() { return mProgramName; }
     static void SetProgramName(const char* argv0) { if(argv0) mProgramName = argv0;}
+    static void SetArgumentParser(ArgumentParser* parser) {mArgumentParser = parser;}
 
     static const std::string& getConfigDirectoryPath();
     static const std::string& getScreenshotDirectoryPath();
@@ -113,19 +116,20 @@ protected:
     /// The destructor should not be called directly. Use the closeGUI() method instead.
     virtual ~BaseGUI();
 
-    static std::string mGuiName; // would like to make it const but not possible with the current implementation of RealGUI...
+    static std::string mGuiName;
     static std::string configDirectoryPath;
     static std::string screenshotDirectoryPath;
     static const char* mProgramName;
+    static ArgumentParser* mArgumentParser;
 };
 
 ////// TO declare into BaseViewer
-//setScene();
-//resetView();
-//setBackgroundColour(...)
-//setBackgroundImage(...)
-//setScene()
-//getSceneFileName()
+///setScene();
+///resetView();
+///setBackgroundColour(...)
+///setBackgroundImage(...)
+///setScene()
+///getSceneFileName()
 
 } // namespace gui
 

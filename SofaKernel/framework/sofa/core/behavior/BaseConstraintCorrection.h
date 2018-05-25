@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -56,14 +56,14 @@ class BaseConstraintCorrection : public virtual objectmodel::BaseObject
 public:
     SOFA_ABSTRACT_CLASS(BaseConstraintCorrection, objectmodel::BaseObject);
 protected:
-	BaseConstraintCorrection() {};
+    BaseConstraintCorrection() {};
     virtual ~BaseConstraintCorrection() {}
-	
-private:
-	BaseConstraintCorrection(const BaseConstraintCorrection& n) ;
-	BaseConstraintCorrection& operator=(const BaseConstraintCorrection& n) ;
 
-	
+private:
+    BaseConstraintCorrection(const BaseConstraintCorrection& n) ;
+    BaseConstraintCorrection& operator=(const BaseConstraintCorrection& n) ;
+
+
 public:
     /// @name Compliance Matrix API
     /// @{
@@ -131,7 +131,10 @@ public:
     /// Compute the residual in the newton iterations due to the constraints forces
     /// i.e. compute Vecid::force() += J^t lambda
     /// the result is accumulated in Vecid::force()
-    virtual void computeResidual(const core::ExecParams* /*params*/, defaulttype::BaseVector * /*lambda*/) { std::cerr << "ComputeResidual is not implemented in " << this->getName() << std::endl; }
+    virtual void computeResidual(const core::ExecParams* /*params*/, defaulttype::BaseVector * /*lambda*/)
+    {
+        dmsg_error() << "ComputeResidual is not implemented in " << this->getName() ;
+    }
 
     /// @name Deprecated API
     /// @{

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -390,6 +390,10 @@ AttachConstraint<DataTypes>::AttachConstraint()
     , f_lastDir( initData(&f_lastDir,"lastDir", "direction from lastPos at which the attach coustraint should become inactive") )
     , f_clamp( initData(&f_clamp, false,"clamp", "true to clamp particles at lastPos instead of freeing them.") )
     , f_minDistance( initData(&f_minDistance, (Real)-1,"minDistance", "the constraint become inactive if the distance between the points attached is bigger than minDistance.") )
+    , d_positionFactor(initData(&d_positionFactor, (Real)1.0, "positionFactor", "IN: Factor applied to projection of position"))
+    , d_velocityFactor(initData(&d_velocityFactor, (Real)1.0, "velocityFactor", "IN: Factor applied to projection of velocity"))
+    , d_responseFactor(initData(&d_responseFactor, (Real)1.0, "responseFactor", "IN: Factor applied to projection of force/acceleration"))
+    , d_constraintFactor( initData(&d_constraintFactor,"constraintFactor","Constraint factor per pair of points constrained. 0 -> the constraint is released. 1 -> the constraint is fully constrained") )
 {
     // default to indice 0
 //     f_indices1.beginEdit()->push_back(0);
@@ -412,6 +416,10 @@ AttachConstraint<DataTypes>::AttachConstraint(core::behavior::MechanicalState<Da
     , f_lastDir( initData(&f_lastDir,"lastDir", "direction from lastPos at which the attach coustraint should become inactive") )
     , f_clamp( initData(&f_clamp, false,"clamp", "true to clamp particles at lastPos instead of freeing them.") )
     , f_minDistance( initData(&f_minDistance, (Real)-1,"minDistance", "the constraint become inactive if the distance between the points attached is bigger than minDistance.") )
+    , d_positionFactor(initData(&d_positionFactor, (Real)1.0, "positionFactor", "IN: Factor applied to projection of position"))
+    , d_velocityFactor(initData(&d_velocityFactor, (Real)1.0, "velocityFactor", "IN: Factor applied to projection of velocity"))
+    , d_responseFactor(initData(&d_responseFactor, (Real)1.0, "responseFactor", "IN: Factor applied to projection of force/acceleration"))
+    , d_constraintFactor( initData(&d_constraintFactor,"constraintFactor","Constraint factor per pair of points constrained. 0 -> the constraint is released. 1 -> the constraint is fully constrained") )
 {
     // default to indice 0
 //     f_indices1.beginEdit()->push_back(0);
@@ -495,7 +503,50 @@ void AttachConstraint<DataTypes>::init()
                 addConstraint(best, i2);
             }
         }
+
+        helper::vector<Real>& constraintFactor = *d_constraintFactor.beginEdit();
+
+        // constraintFactor default behavior
+        // if NOT set : initialize all constraints active
+        if(!d_constraintFactor.isSet())
+        {
+            unsigned int size = f_indices2.getValue().size();
+
+            constraintFactor.clear();
+            constraintFactor.resize(size);
+
+            for (unsigned int j=0; j<size; ++j)
+            {
+                constraintFactor[j] = 1.0;
+            }
+        }
+        // if set : check size
+        else
+        {
+            if(constraintFactor.size() != f_indices2.getValue().size())
+            {
+                msg_error() << "Size of vector constraintFactor, do not fit number of indices attached";
+            }
+            else
+            {
+                for (unsigned int j=0; j<constraintFactor.size(); ++j)
+                {
+                    if((constraintFactor[j] > 1.0) || (constraintFactor[j] < 0.0))
+                    {
+                        msg_warning() << "Value of vector constraintFactor at indice "<<j<<" is out of bounds [0.0 - 1.0]";
+                    }
+                }
+            }
+        }
+        d_constraintFactor.endEdit();
     }
+
+    // Check coherency of size between indices vectors 1 and 2
+    if(f_indices1.getValue().size() != f_indices2.getValue().size())
+    {
+        msg_error() << "Size mismatch between indices1 and indices2";
+    }
+
 #if 0
     // Initialize functions and parameters
     topology::PointSubset my_subset = f_indices.getValue();
@@ -523,6 +574,12 @@ template <>
 void AttachConstraint<sofa::defaulttype::Rigid3dTypes>::calcRestRotations();
 #endif
 
+
+template<class DataTypes>
+void AttachConstraint<DataTypes>::projectJacobianMatrix(const core::MechanicalParams* /*mparams*/ /* PARAMS FIRST */, core::MultiMatrixDerivId /*cId*/)
+{
+}
+
 template <class DataTypes>
 void AttachConstraint<DataTypes>::projectPosition(const core::MechanicalParams * /*mparams*/, DataVecCoord& res1_d, DataVecCoord& res2_d)
 {
@@ -532,7 +589,6 @@ void AttachConstraint<DataTypes>::projectPosition(const core::MechanicalParams *
     const bool lastFreeRotation = f_lastFreeRotation.getValue();
     const bool last = (f_lastDir.isSet() && f_lastDir.getValue().norm() > 1.0e-10);
     const bool clamp = f_clamp.getValue();
-    const bool log = this->f_printLog.getValue();
 
     VecCoord &res1 = *res1_d.beginEdit();
     VecCoord &res2 = *res2_d.beginEdit();
@@ -555,15 +611,13 @@ void AttachConstraint<DataTypes>::projectPosition(const core::MechanicalParams *
             {
                 if (clamp)
                 {
-                    if (activeFlags[i])
-                        sout << "AttachConstraint: point "<<indices1[i]<<" stopped."<<sendl;
-                    //DataTypes::set(p,f_lastPos.getValue()[0],f_lastPos.getValue()[1],f_lastPos.getValue()[2]);
-                    //p = f_lastPos.getValue();
+                    msg_info_when(activeFlags[i]) << "AttachConstraint: point "
+                                                  <<indices1[i]<<" stopped." ;
                 }
                 else
                 {
-                    if (activeFlags[i])
-                        sout << "AttachConstraint: point "<<indices1[i]<<" is free."<<sendl;
+                    msg_info_when(activeFlags[i]) << "AttachConstraint: point "
+                                                  <<indices1[i]<<" is free.";
                 }
                 active = false;
             }
@@ -575,8 +629,7 @@ void AttachConstraint<DataTypes>::projectPosition(const core::MechanicalParams *
         Coord p = res1[indices1[i]];
         if (activeFlags[i])
         {
-            if (log)
-                sout << "AttachConstraint: x2["<<indices2[i]<<"] = x1["<<indices1[i]<<"]"<<sendl;
+            msg_info() << "AttachConstraint: x2["<<indices2[i]<<"] = x1["<<indices1[i]<<"]";
 
             projectPosition(p, res2[indices2[i]], freeRotations || (lastFreeRotation && (i>=activeFlags.size() || !activeFlags[i+1])), i);
         }
@@ -584,8 +637,7 @@ void AttachConstraint<DataTypes>::projectPosition(const core::MechanicalParams *
         {
             DataTypes::set(p,f_lastPos.getValue()[0],f_lastPos.getValue()[1],f_lastPos.getValue()[2]);
 
-            if (log)
-                sout << "AttachConstraint: x2["<<indices2[i]<<"] = lastPos"<<sendl;
+            msg_info() << "AttachConstraint: x2["<<indices2[i]<<"] = lastPos";
 
             projectPosition(p, res2[indices2[i]], freeRotations, i);
         }
@@ -606,7 +658,6 @@ void AttachConstraint<DataTypes>::projectVelocity(const core::MechanicalParams *
     const bool freeRotations = f_freeRotations.getValue();
     const bool lastFreeRotation = f_lastFreeRotation.getValue();
     const bool clamp = f_clamp.getValue();
-    const bool log = this->f_printLog.getValue();
 
     for (unsigned int i=0; i<indices1.size() && i<indices2.size(); ++i)
     {
@@ -617,15 +668,13 @@ void AttachConstraint<DataTypes>::projectVelocity(const core::MechanicalParams *
 
         if (active)
         {
-            if (log)
-                sout << "AttachConstraint: v2["<<indices2[i]<<"] = v1["<<indices1[i]<<"]"<<sendl;
+            msg_info() << "AttachConstraint: v2["<<indices2[i]<<"] = v1["<<indices1[i]<<"]" ;
 
             projectVelocity(res1[indices1[i]], res2[indices2[i]], freeRotations || (lastFreeRotation && (i>=activeFlags.size() || !activeFlags[i+1])), i);
         }
         else if (clamp)
         {
-            if (log)
-                sout << "AttachConstraint: v2["<<indices2[i]<<"] = 0"<<sendl;
+            msg_info() << "AttachConstraint: v2["<<indices2[i]<<"] = 0" ;
 
             Deriv v = Deriv();
             projectVelocity(v, res2[indices2[i]], freeRotations, i);
@@ -648,7 +697,6 @@ void AttachConstraint<DataTypes>::projectResponse(const core::MechanicalParams *
     const bool freeRotations = f_freeRotations.getValue();
     const bool lastFreeRotation = f_lastFreeRotation.getValue();
     const bool clamp = f_clamp.getValue();
-    const bool log = this->f_printLog.getValue();
 
     for (unsigned int i=0; i<indices1.size() && i<indices2.size(); ++i)
     {
@@ -659,29 +707,24 @@ void AttachConstraint<DataTypes>::projectResponse(const core::MechanicalParams *
 
         if (active)
         {
-            if (log)
-            {
-                if (twoway)
-                    sout << "AttachConstraint: r2["<<indices2[i]<<"] = r1["<<indices2[i]<<"] = (r2["<<indices2[i]<<"] + r2["<<indices2[i]<<"])"<<sendl;
-                else
-                    sout << "AttachConstraint: r2["<<indices2[i]<<"] = 0"<<sendl;
+            if (twoway){
+                msg_info() << " r2["<<indices2[i]<<"] = r1["<<indices2[i]<<"] = (r2["<<indices2[i]<<"] + r2["<<indices2[i]<<"])";
+            }else{
+                msg_info() << " r2["<<indices2[i]<<"] = 0";
             }
 
             projectResponse(res1[indices1[i]], res2[indices2[i]], freeRotations || (lastFreeRotation && (i>=activeFlags.size() || !activeFlags[i+1])), twoway, i);
 
-            if (log)
-                sout << "AttachConstraint: final r2["<<indices2[i]<<"] = "<<res2[indices2[i]]<<""<<sendl;
+            msg_info() << " final r2["<<indices2[i]<<"] = "<<res2[indices2[i]]<<"";
         }
         else if (clamp)
         {
-            if (log)
-                sout << "AttachConstraint: r2["<<indices2[i]<<"] = 0"<<sendl;
+            msg_info() << " r2["<<indices2[i]<<"] = 0";
 
             Deriv v = Deriv();
             projectResponse(v, res2[indices2[i]], freeRotations, false, i);
 
-            if (log)
-                sout << "AttachConstraint: final r2["<<indices2[i]<<"] = "<<res2[indices2[i]]<<""<<sendl;
+            msg_info() << " final r2["<<indices2[i]<<"] = "<<res2[indices2[i]]<<"";
         }
     }
 
@@ -710,15 +753,13 @@ void AttachConstraint<DataTypes>::applyConstraint(const core::MechanicalParams *
     const unsigned int NCLast = DerivConstrainedSize(f_lastFreeRotation.getValue());
     unsigned int i=0;
     const bool clamp = f_clamp.getValue();
-    const bool log = this->f_printLog.getValue();
 
     for (SetIndexArray::const_iterator it = indices.begin(); it != indices.end(); ++it, ++i)
     {
         if (!clamp && i < activeFlags.size() && !activeFlags[i])
             continue;
 
-        if (log)
-            sout << "AttachConstraint: apply in matrix column/row "<<(*it)<<""<<sendl;
+        msg_info() << "AttachConstraint: apply in matrix column/row "<<(*it);
 
         if (NCLast != NC && (i>=activeFlags.size() || !activeFlags[i+1]))
         {
@@ -754,8 +795,7 @@ void AttachConstraint<DataTypes>::applyConstraint(const core::MechanicalParams *
 
     unsigned int offset = (unsigned int)o;
 
-    if (this->f_printLog.getValue())
-        sout << "applyConstraint in Vector with offset = " << offset << sendl;
+    msg_info() << "applyConstraint in Vector with offset = " << offset ;
 
     const SetIndexArray & indices = f_indices2.getValue();
     const unsigned int N = Deriv::size();

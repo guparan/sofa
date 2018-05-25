@@ -2,6 +2,15 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaGraphComponent)
 
 set(HEADER_FILES
+    config.h
+    initGraphComponent.h
+    )
+
+set(SOURCE_FILES
+    initGraphComponent.cpp
+    )
+
+list(APPEND HEADER_FILES
     AddFrameButtonSetting.h
     AddRecordedCameraButtonSetting.h
     AttachBodyButtonSetting.h
@@ -16,11 +25,12 @@ set(HEADER_FILES
     SofaDefaultPathSetting.h
     StatsSetting.h
     ViewerSetting.h
-    config.h
-    initGraphComponent.h
-)
-
-set(SOURCE_FILES
+    SceneChecks.h
+    SceneCheckAPIChanges.h
+    SceneCheckerVisitor.h
+    APIVersion.h
+    )
+list(APPEND SOURCE_FILES
     AddFrameButtonSetting.cpp
     AddRecordedCameraButtonSetting.cpp
     AttachBodyButtonSetting.cpp
@@ -34,12 +44,14 @@ set(SOURCE_FILES
     SofaDefaultPathSetting.cpp
     StatsSetting.cpp
     ViewerSetting.cpp
-    initGraphComponent.cpp
-)
-
+    SceneChecks.cpp
+    SceneCheckAPIChanges.cpp
+    SceneCheckerVisitor.cpp
+    APIVersion.cpp
+    )
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationTree)
+target_link_libraries(${PROJECT_NAME} PUBLIC SofaHelper SofaSimulationCore SofaSimulationTree)
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_GRAPH_COMPONENT")
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 

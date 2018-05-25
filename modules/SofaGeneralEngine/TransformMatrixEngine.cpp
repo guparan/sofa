@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -84,6 +84,8 @@ void InvertTransformMatrixEngine::update()
     helper::ReadAccessor< Data<Matrix4> > inT = d_inT;
     helper::WriteAccessor< Data<Matrix4> > outT = d_outT;
 
+    cleanDirty();
+
     /*bool ok = */transformInvertMatrix((*outT), (*inT));
     // TODO print warning if not ok
 }
@@ -109,6 +111,8 @@ void TranslateTransformMatrixEngine::update()
     helper::ReadAccessor< Data<Matrix4> > inT = d_inT;
     helper::ReadAccessor< Data<Vector3> > translation = d_translation;
     helper::WriteAccessor< Data<Matrix4> > outT = d_outT;
+
+    cleanDirty();
 
     Matrix4 myT;
     myT.identity();
@@ -139,6 +143,7 @@ void RotateTransformMatrixEngine::update()
     helper::ReadAccessor< Data<Vector3> > rotation = d_rotation;
     helper::WriteAccessor< Data<Matrix4> > outT = d_outT;
 
+    cleanDirty();
 
     Matrix4 myT;
     myT.identity();
@@ -171,6 +176,8 @@ void ScaleTransformMatrixEngine::update()
     helper::ReadAccessor< Data<Matrix4> > inT = d_inT;
     helper::ReadAccessor< Data<Vector3> > scale = d_scale;
     helper::WriteAccessor< Data<Matrix4> > outT = d_outT;
+
+    cleanDirty();
 
     Matrix4 myT;
     myT.identity();

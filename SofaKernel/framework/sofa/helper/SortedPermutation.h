@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -66,17 +66,14 @@ helper::vector<unsigned> sortedPermutation( const Container& values )
 }
 
 ////Example:
-//    helper::vector<double> values;
-//     values.push_back(24);
-//     values.push_back(55);
-//     values.push_back(22);
-//     values.push_back(1);
-
-//     vector<unsigned> permutation = sortedPermutation(values);
-
-//    //The following prints: 3 2 0 1
-
-//     std::cout << permutation << "\n";
+///    helper::vector<double> values;
+///     values.push_back(24);
+///     values.push_back(55);
+///     values.push_back(22);
+///     values.push_back(1);
+///     vector<unsigned> permutation = sortedPermutation(values);
+///    //The following prints: 3 2 0 1
+///     std::cout << permutation << "\n";
 
 
 

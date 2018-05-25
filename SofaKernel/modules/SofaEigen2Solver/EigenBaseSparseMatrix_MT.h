@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -585,7 +585,7 @@ class SparseTimeDenseProduct_MT
             internal::sparse_time_dense_product(m_lhs, m_rhs, dest, alpha);
         else
         {
-//            std::cerr<<"SparseTimeDenseProduct_MT: "<<m_nbThreads<<std::endl;
+//            msg_info()<<"SparseTimeDenseProduct_MT: "<<m_nbThreads<<std::endl;
             internal::sparse_time_dense_product_MT<Lhs,Rhs,Dest,Scalar>(m_lhs, m_rhs, dest, alpha, m_nbThreads);
         }
 #else

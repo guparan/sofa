@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -22,17 +22,24 @@
 
 #include "Binding_RegularGridTopology.h"
 #include "Binding_GridTopology.h"
+#include "PythonToSofa.inl"
 
 using namespace sofa::component::topology;
 using namespace sofa::core::objectmodel;
 
-extern "C" PyObject * RegularGridTopology_setPos(PyObject *self, PyObject * args)
+
+/// getting a RegularGridTopology* from a PyObject*
+static inline RegularGridTopology* get_RegularGridTopology(PyObject* obj) {
+    return sofa::py::unwrap<RegularGridTopology>(obj);
+}
+
+
+static PyObject * RegularGridTopology_setPos(PyObject *self, PyObject * args)
 {
-    RegularGridTopology* obj=down_cast<RegularGridTopology>(((PySPtr<Base>*)self)->object->toTopology());
+    RegularGridTopology* obj = get_RegularGridTopology( self );
     double xmin,xmax,ymin,ymax,zmin,zmax;
     if (!PyArg_ParseTuple(args, "dddddd",&xmin,&xmax,&ymin,&ymax,&zmin,&zmax))
     {
-        PyErr_BadArgument();
         return NULL;
     }
     obj->setPos(xmin,xmax,ymin,ymax,zmin,zmax);

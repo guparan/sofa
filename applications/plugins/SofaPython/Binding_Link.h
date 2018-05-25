@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -27,6 +27,6 @@
 SP_DECLARE_CLASS_TYPE(Link)
 
 PyObject *GetLinkValuePython(sofa::core::objectmodel::BaseLink* link);
-bool SetLinkValuePython(sofa::core::objectmodel::BaseLink* link, PyObject* value);
+int SetLinkValuePython(sofa::core::objectmodel::BaseLink* link, PyObject* value);
 
 #endif // BINDING_BASELINK_H

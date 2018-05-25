@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -109,17 +109,6 @@ void FreeMotionAnimationLoop::step(const sofa::core::ExecParams* params, SReal d
     if (dt == 0)
         dt = this->gnode->getDt();
 
-#ifdef SOFA_DUMP_VISITOR_INFO
-    simulation::Visitor::printNode("Step");
-#endif
-
-    {
-        sofa::helper::AdvancedTimer::stepBegin("AnimateBeginEvent");
-        AnimateBeginEvent ev ( dt );
-        PropagateEventVisitor act ( params, &ev );
-        this->gnode->execute ( act );
-        sofa::helper::AdvancedTimer::stepEnd("AnimateBeginEvent");
-    }
 
     double startTime = this->gnode->getTime();
 
@@ -132,12 +121,9 @@ void FreeMotionAnimationLoop::step(const sofa::core::ExecParams* params, SReal d
     MultiVecDeriv freeVel(&vop, core::VecDerivId::freeVelocity() );
 
     {
-    MultiVecDeriv dx(&vop, core::VecDerivId::dx() ); dx.realloc( &vop, true, true );
-    MultiVecDeriv df(&vop, core::VecDerivId::dforce() ); df.realloc( &vop, true, true );
+        MultiVecDeriv dx(&vop, core::VecDerivId::dx() ); dx.realloc( &vop, true, true );
+        MultiVecDeriv df(&vop, core::VecDerivId::dforce() ); df.realloc( &vop, true, true );
     }
-
-
-
 
     // This solver will work in freePosition and freeVelocity vectors.
     // We need to initialize them if it's not already done.
@@ -146,6 +132,19 @@ void FreeMotionAnimationLoop::step(const sofa::core::ExecParams* params, SReal d
     simulation::MechanicalVInitVisitor< core::V_DERIV >(params, core::VecDerivId::freeVelocity(), core::ConstVecDerivId::velocity(), true).execute(this->gnode);
 
     sofa::helper::AdvancedTimer::stepEnd("MechanicalVInitVisitor");
+
+
+#ifdef SOFA_DUMP_VISITOR_INFO
+    simulation::Visitor::printNode("Step");
+#endif
+
+    {
+        sofa::helper::AdvancedTimer::stepBegin("AnimateBeginEvent");
+        AnimateBeginEvent ev ( dt );
+        PropagateEventVisitor act ( params, &ev );
+        this->gnode->execute ( act );
+        sofa::helper::AdvancedTimer::stepEnd("AnimateBeginEvent");
+    }
 
     BehaviorUpdatePositionVisitor beh(params , dt);
 
@@ -164,21 +163,18 @@ void FreeMotionAnimationLoop::step(const sofa::core::ExecParams* params, SReal d
 
     // Update the BehaviorModels
     // Required to allow the RayPickInteractor interaction
-    if (f_printLog.getValue())
-        serr << "updatePos called" << sendl;
+    dmsg_info() << "updatePos called" ;
 
     AdvancedTimer::stepBegin("UpdatePosition");
     this->gnode->execute(&beh);
     AdvancedTimer::stepEnd("UpdatePosition");
 
-    if (f_printLog.getValue())
-        serr << "updatePos performed - beginVisitor called" << sendl;
+    dmsg_info() << "updatePos performed - beginVisitor called" ;
 
     simulation::MechanicalBeginIntegrationVisitor beginVisitor(params, dt);
     this->gnode->execute(&beginVisitor);
 
-    if (f_printLog.getValue())
-        serr << "beginVisitor performed - SolveVisitor for freeMotion is called" << sendl;
+    dmsg_info() << "beginVisitor performed - SolveVisitor for freeMotion is called" ;
 
     // Free Motion
     AdvancedTimer::stepBegin("FreeMotion");
@@ -186,15 +182,15 @@ void FreeMotionAnimationLoop::step(const sofa::core::ExecParams* params, SReal d
     this->gnode->execute(&freeMotion);
     AdvancedTimer::stepEnd("FreeMotion");
 
-    mop.propagateXAndV(freePos, freeVel, true); // apply projective constraints
+    mop.projectPositionAndVelocity(freePos, freeVel); // apply projective constraints
+    mop.propagateXAndV(freePos, freeVel);
 
-    if (f_printLog.getValue())
-        serr << " SolveVisitor for freeMotion performed" << sendl;
+    dmsg_info() << " SolveVisitor for freeMotion performed" ;
 
     if (displayTime.getValue())
     {
-        sout << " >>>>> Begin display FreeMotionAnimationLoop time" << sendl;
-        sout <<" Free Motion " << ((double)CTime::getTime() - time) * timeScale << " ms" << sendl;
+        msg_info() << " >>>>> Begin display FreeMotionAnimationLoop time  " << msgendl
+                   <<" Free Motion " << ((double)CTime::getTime() - time) * timeScale << " ms" ;
 
         time = (double)CTime::getTime();
     }
@@ -204,7 +200,7 @@ void FreeMotionAnimationLoop::step(const sofa::core::ExecParams* params, SReal d
     computeCollision(params);
     AdvancedTimer::stepEnd  ("Collision");
 
-    mop.propagateX(pos, false); // Why is this done at that point ???
+    mop.propagateX(pos); // Why is this done at that point ???
 
     if (displayTime.getValue())
     {
@@ -232,14 +228,15 @@ void FreeMotionAnimationLoop::step(const sofa::core::ExecParams* params, SReal d
 
             // xfree += dv * dt
             freePos.eq(freePos, dv, dt);
-            mop.propagateX(freePos, false); // ignore projective constraints
+            mop.propagateX(freePos);
 
             cparams.setOrder(core::ConstraintParams::POS);
             constraintSolver->solveConstraint(&cparams, pos);
 
             MultiVecDeriv dx(&vop, constraintSolver->getDx());
 
-            mop.propagateV(vel, true); // apply projective constraints
+            mop.projectVelocity(vel); // apply projective constraints
+            mop.propagateV(vel);
             mop.projectResponse(dx);
             mop.propagateDx(dx, true);
 
@@ -253,7 +250,8 @@ void FreeMotionAnimationLoop::step(const sofa::core::ExecParams* params, SReal d
             cparams.setV(freeVel);
 
             constraintSolver->solveConstraint(&cparams, pos, vel);
-            mop.propagateV(vel, true); // apply projective constraints
+            mop.projectVelocity(vel); // apply projective constraints
+            mop.propagateV(vel);
 
             MultiVecDeriv dx(&vop, constraintSolver->getDx());
             mop.projectResponse(dx);

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -42,6 +42,7 @@ Visitor::Result UpdateLinksVisitor::processNodeTopDown(simulation::Node* node)
         this->processObject(it->get());
     }
 
+    //TODO(dmarchal): why do we clear the messsage logs when we update the links ?
     //node->clearWarnings(); node->clearOutputs();
     return RESULT_CONTINUE;
 }

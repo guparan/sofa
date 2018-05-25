@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -90,9 +90,12 @@ SOFA_LINK_CLASS(ShapeFunctionDiscretizer)
 SOFA_LINK_CLASS(DiffusionShapeFunction)
 #endif
 
+#ifdef SOFA_HAVE_SofaHighOrderTopology
+SOFA_LINK_CLASS(BezierShapeFunction)
+#endif
+
 SOFA_LINK_CLASS(ShepardShapeFunction)
 SOFA_LINK_CLASS(BarycentricShapeFunction)
-SOFA_LINK_CLASS(BezierShapeFunction)
 SOFA_LINK_CLASS(DefGradientMechanicalObject)
 SOFA_LINK_CLASS(LinearMapping_point)
 SOFA_LINK_CLASS(LinearMapping_affine)

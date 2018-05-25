@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -206,16 +206,13 @@ bool ReadTopology::readNext(double time, std::vector<std::string>& validLines)
                 }
                 getline(*infile, line);
             }
-        //std::cout << "line= "<<line<<std::endl;
         std::istringstream str(line);
         str >> cmd;
-        //std::cout << "cmd:: " << cmd << std::endl;
         if (cmd == "T=")
         {
             str >> nextTime;
 
             nextTime += loopTime;
-            //sout << "next time: " << nextTime << sendl;
             if (nextTime <= time)
                 validLines.clear();
         }
@@ -246,7 +243,6 @@ void ReadTopology::processReadTopology()
         if (buff == "T=")
         {
             //Nothing to do in this case.
-            //std::cout << "cas T" << std::endl;
             ++it;
             continue;
         }

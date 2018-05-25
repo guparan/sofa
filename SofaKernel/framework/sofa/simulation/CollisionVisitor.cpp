@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -58,7 +58,7 @@ void CollisionVisitor::processCollisionPipeline(simulation::Node*
 #endif
         , core::collision::Pipeline* obj)
 {
-    //std::cerr<<"CollisionVisitor::processCollisionPipeline"<<std::endl;
+    //msg_info()<<"CollisionVisitor::processCollisionPipeline"<<std::endl;
 #ifdef SOFA_DUMP_VISITOR_INFO
     printComment("computeCollisionReset");
     ctime_t t0=begin(node, obj);
@@ -135,20 +135,7 @@ void CollisionResponseVisitor::processCollisionPipeline(simulation::Node*
 #endif
 }
 
-#ifdef SOFA_SMP
 
-void ParallelCollisionVisitor::processCollisionPipeline(simulation::Node*, core::collision::ParallelPipeline* obj)
-{
-    obj->parallelComputeCollisions();
-}
-void ParallelCollisionVisitor::processCollisionPipeline(simulation::Node* node, core::collision::Pipeline* obj)
-{
-    core::collision::ParallelPipeline* p = dynamic_cast<core::collision::ParallelPipeline*>(obj);
-    if (p)
-        processCollisionPipeline(node, p);
-}
-
-#endif
 
 } // namespace simulation
 

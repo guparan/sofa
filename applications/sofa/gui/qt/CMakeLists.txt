@@ -9,11 +9,13 @@ set(MOC_HEADER_FILES
     GenGraphForm.h
     LinkWidget.h
     MaterialDataWidget.h
+    RGBAColorDataWidget.h
     ModifyObject.h
     QDataDescriptionWidget.h
     QDisplayDataWidget.h
     QDisplayLinkWidget.h
     QDisplayPropertyWidget.h
+    QRGBAColorPicker.h
     QModelViewTableUpdater.h
     QMouseOperations.h
     QSofaListView.h
@@ -27,13 +29,13 @@ set(MOC_HEADER_FILES
     SofaPluginManager.h
     SofaVideoRecorderManager.h
     WDoubleLineEdit.h
+    panels/QDocBrowser.h
 )
 
 # these header files do not need MOCcing
 set(HEADER_FILES
     FileManagement.h
     GraphListenerQListView.h
-    ImageQt.h
     PickHandlerCallBacks.h
     QMenuFilesRecentlyOpened.h
     QModelViewTableDataContainer.h
@@ -52,15 +54,16 @@ set(SOURCE_FILES
     FileManagement.cpp
     GenGraphForm.cpp
     GraphListenerQListView.cpp
-    ImageQt.cpp
     LinkWidget.cpp
     MaterialDataWidget.cpp
+    RGBAColorDataWidget.cpp
     ModifyObject.cpp
     PickHandlerCallBacks.cpp
     QDataDescriptionWidget.cpp
     QDisplayDataWidget.cpp
     QDisplayLinkWidget.cpp
     QDisplayPropertyWidget.cpp
+    QRGBAColorPicker.cpp
     QMenuFilesRecentlyOpened.cpp
     QModelViewTableUpdater.cpp
     QMouseOperations.cpp
@@ -78,6 +81,7 @@ set(SOURCE_FILES
     TableDataWidget.cpp
     WDoubleLineEdit.cpp
     viewer/SofaViewer.cpp
+    panels/QDocBrowser.cpp
 )
 
 set(UI_FILES
@@ -88,6 +92,7 @@ set(UI_FILES
     PluginManager.ui
     VideoRecorderManager.ui
 )
+
 
 if(SOFA_DUMP_VISITOR_INFO)
     list(APPEND MOC_HEADER_FILES
@@ -120,7 +125,7 @@ if(SOFAGUI_ENABLE_QWT)
          QMomentumStatWidget.h)
 
     list(APPEND SOURCE_FILES
-         GraphDataWidget.cpp         
+         GraphDataWidget.cpp
          QGraphStatWidget.cpp
          QEnergyStatWidget.cpp
          QMomentumStatWidget.cpp
@@ -163,7 +168,7 @@ if(Qt5Core_FOUND)
     set(MOC_FILES_GROUP "Generated")
     qt5_wrap_ui(FORM_FILES ${UI_FILES})
     set(FORM_FILES_GROUP "Generated")
-    
+
 
 else()
     message("SofaGUIQt: Using Qt4")
@@ -175,7 +180,7 @@ else()
     set(MOC_FILES_GROUP "Generated")
     qt4_wrap_ui(FORM_FILES ${UI_FILES})
     set(FORM_FILES_GROUP "Generated")
-    
+
     set(EXT_QT_LIBRARIES ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTOPENGL_LIBRARY} ${QT_QTXML_LIBRARY})
 
 endif()
@@ -197,12 +202,9 @@ endif()
 # target_compile_definitions(${PROJECT_NAME} PUBLIC "QT3_SUPPORT")
 
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_SOFAGUIQT")
-if(SOFA_ENABLE_QWT)
-    set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_SOFAGUIQT")
-endif()
-
 
 sofa_install_targets(SofaGui SofaGuiQt "")
 
+file(INSTALL "resources" DESTINATION "../../share/sofa/gui/qt")
 install(FILES ${HEADER_FILES} DESTINATION "include/sofa/gui/qt")
 install(FILES ${MOC_HEADER_FILES} DESTINATION "include/sofa/gui/qt")

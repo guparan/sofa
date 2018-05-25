@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -97,7 +97,7 @@ public:
     typedef typename DiagonalMassInternalData<DataTypes,TMassType>::MassVector MassVector;
     typedef typename DiagonalMassInternalData<DataTypes,TMassType>::GeometricalTypes GeometricalTypes;
 
-    VecMass f_mass;
+    VecMass d_mass; ///< values of the particles masses
 
     typedef core::topology::BaseMeshTopology::Point Point;
     typedef core::topology::BaseMeshTopology::Edge Edge;
@@ -175,20 +175,20 @@ public:
     protected:
         DiagonalMass<DataTypes,TMassType>* dm;
     };
-    DMassPointHandler* pointHandler;
+    DMassPointHandler* m_pointHandler;
     /// the mass density used to compute the mass from a mesh topology and geometry
-    Data< Real > m_massDensity;
+    Data< Real > d_massDensity;
 
     /// if true, the mass of every element is computed based on the rest position rather than the position
-    Data< bool > m_computeMassOnRest;
+    Data< bool > d_computeMassOnRest;
 
     /// total mass of the object
-    Data< Real > m_totalMass;
+    Data< Real > d_totalMass;
 
     /// to display the center of gravity of the system
-    Data< bool > showCenterOfGravity;
-    Data< float > showAxisSize;
-    core::objectmodel::DataFileName fileMass;
+    Data< bool > d_showCenterOfGravity;
+    Data< float > d_showAxisSize; ///< factor length of the axis displayed (only used for rigids)
+    core::objectmodel::DataFileName d_fileMass; ///< an Xsp3.0 file to specify the mass parameters
 
 protected:
     ////////////////////////// Inherited attributes ////////////////////////////
@@ -204,7 +204,7 @@ protected:
 
     class Loader;
     /// The type of topology to build the mass from the topology
-    TopologyType topologyType;
+    TopologyType m_topologyType;
 
 
 public:
@@ -218,24 +218,25 @@ public:
 protected:
     DiagonalMass();
 
-    ~DiagonalMass();
+    ~DiagonalMass() override;
 public:
 
     bool load(const char *filename);
 
     void clear();
 
-    virtual void reinit();
-    virtual void init();
+    virtual void reinit() override;
+    virtual void init() override;
 
 
     TopologyType getMassTopologyType() const
     {
-        return topologyType;
+        return m_topologyType;
     }
+
     Real getMassDensity() const
     {
-        return m_massDensity.getValue();
+        return d_massDensity.getValue();
     }
 
 protected:
@@ -245,11 +246,11 @@ public:
 
     void setMassDensity(Real m)
     {
-        m_massDensity.setValue(m);
+        d_massDensity.setValue(m);
     }
 
-    SReal getTotalMass() const { return m_totalMass.getValue(); }
-    int getMassCount() { return f_mass.getValue().size(); }
+    SReal getTotalMass() const { return d_totalMass.getValue(); }
+    int getMassCount() { return d_mass.getValue().size(); }
 
 
     void addMass(const MassType& mass);
@@ -257,33 +258,33 @@ public:
     void resize(int vsize);
 
     // -- Mass interface
-    void addMDx(const core::MechanicalParams* mparams, DataVecDeriv& f, const DataVecDeriv& dx, SReal factor);
+    void addMDx(const core::MechanicalParams* mparams, DataVecDeriv& f, const DataVecDeriv& dx, SReal factor) override;
 
-    void accFromF(const core::MechanicalParams* mparams, DataVecDeriv& a, const DataVecDeriv& f);
+    void accFromF(const core::MechanicalParams* mparams, DataVecDeriv& a, const DataVecDeriv& f) override;
 
-    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& f, const DataVecCoord& x, const DataVecDeriv& v);
+    void addForce(const core::MechanicalParams* mparams, DataVecDeriv& f, const DataVecCoord& x, const DataVecDeriv& v) override;
 
-    SReal getKineticEnergy(const core::MechanicalParams* mparams, const DataVecDeriv& v) const;  ///< vMv/2 using dof->getV()
+    SReal getKineticEnergy(const core::MechanicalParams* mparams, const DataVecDeriv& v) const override;  ///< vMv/2 using dof->getV() override
 
-    SReal getPotentialEnergy(const core::MechanicalParams* mparams, const DataVecCoord& x) const;   ///< Mgx potential in a uniform gravity field, null at origin
+    SReal getPotentialEnergy(const core::MechanicalParams* mparams, const DataVecCoord& x) const override;   ///< Mgx potential in a uniform gravity field, null at origin
 
-    defaulttype::Vector6 getMomentum(const core::MechanicalParams* mparams, const DataVecCoord& x, const DataVecDeriv& v) const;  ///< (Mv,cross(x,Mv)+Iw)
+    defaulttype::Vector6 getMomentum(const core::MechanicalParams* mparams, const DataVecCoord& x, const DataVecDeriv& v) const override;  ///< (Mv,cross(x,Mv)+Iw) override
 
-    void addGravityToV(const core::MechanicalParams* mparams, DataVecDeriv& d_v);
+    void addGravityToV(const core::MechanicalParams* mparams, DataVecDeriv& d_v) override;
 
     /// Add Mass contribution to global Matrix assembling
-    void addMToMatrix(const core::MechanicalParams *mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix);
+    void addMToMatrix(const core::MechanicalParams *mparams, const sofa::core::behavior::MultiMatrixAccessor* matrix) override;
 
 
-    SReal getElementMass(unsigned int index) const;
-    void getElementMass(unsigned int index, defaulttype::BaseMatrix *m) const;
+    SReal getElementMass(unsigned int index) const override;
+    void getElementMass(unsigned int index, defaulttype::BaseMatrix *m) const override;
 
-    bool isDiagonal() {return true;}
+    bool isDiagonal() override {return true;}
 
-    void draw(const core::visual::VisualParams* vparams);
+    void draw(const core::visual::VisualParams* vparams) override;
 
 
-    virtual std::string getTemplateName() const
+    virtual std::string getTemplateName() const override
     {
         return templateName(this);
     }

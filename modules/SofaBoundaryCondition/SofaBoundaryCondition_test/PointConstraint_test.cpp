@@ -1,7 +1,7 @@
 
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -31,6 +31,9 @@
 #include <SofaBaseMechanics/UniformMass.h>
 #include <SceneCreator/SceneCreator.h>
 #include <SofaBoundaryCondition/ConstantForceField.h>
+
+#include <SofaTest/TestMessageHandler.h>
+
 
 namespace sofa{
 namespace {
@@ -144,6 +147,7 @@ TYPED_TEST_CASE(PointConstraint_test, DataTypes);
 // first test case
 TYPED_TEST( PointConstraint_test , testValue )
 {
+    EXPECT_MSG_NOEMIT(Error) ;
     EXPECT_TRUE(  this->test(1e-8) );
 }
 

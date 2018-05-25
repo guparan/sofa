@@ -2,6 +2,15 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaGeneralMeshCollision)
 
 set(HEADER_FILES
+    config.h
+    initGeneralMeshCollision.h
+    )
+
+set(SOURCE_FILES
+    initGeneralMeshCollision.cpp
+    )
+
+list(APPEND HEADER_FILES
     DirectSAP.h
     IncrSAP.h
     # IntrTriangleOBB.h
@@ -15,11 +24,8 @@ set(HEADER_FILES
     # SubsetContactMapper.inl
     TriangleOctree.h
     TriangleOctreeModel.h
-    config.h
-    initGeneralMeshCollision.h
-)
-
-set(SOURCE_FILES
+    )
+list(APPEND SOURCE_FILES
     DirectSAP.cpp
     IncrSAP.cpp
     # IntrTriangleOBB.cpp
@@ -29,8 +35,7 @@ set(SOURCE_FILES
     # SubsetContactMapper.cpp
     TriangleOctree.cpp
     TriangleOctreeModel.cpp
-    initGeneralMeshCollision.cpp
-)
+    )
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaObjectInteraction SofaRigid SofaBaseCollision SofaMeshCollision)

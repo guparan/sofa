@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -98,13 +98,6 @@ void Quad2TriangleTopologicalMapping::init()
 
             toModel->setNbPoints(fromModel->getNbPoints());
 
-
-            for (int i=0; i<fromModel->getNbPoints(); i++)
-            {
-                toModel->addPoint(fromModel->getPX(i), fromModel->getPY(i), fromModel->getPZ(i));
-            }
-
-
             TriangleSetTopologyModifier *to_tstm;
             toModel->getContext()->get(to_tstm);
 
@@ -144,10 +137,6 @@ void Quad2TriangleTopologicalMapping::init()
 
             for (unsigned int i=0; i<quadArray.size(); ++i)
             {
-
-                //std::cout << "INFO_print : Quad2TriangleTopologicalMapping - i = " << i << std::endl;
-                //std::cout << "INFO_print : Quad2TriangleTopologicalMapping - quad = " << quadArray[i] << std::endl;
-
                 unsigned int p0 = quadArray[i][0];
                 unsigned int p1 = quadArray[i][1];
                 unsigned int p2 = quadArray[i][2];

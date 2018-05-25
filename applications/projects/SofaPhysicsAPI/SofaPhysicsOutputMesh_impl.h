@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -25,11 +25,10 @@
 #include "SofaPhysicsAPI.h"
 
 #include <SofaBaseVisual/VisualModelImpl.h>
-#include <SofaOpenglVisual/OglTetrahedralModel.h>
 #include <sofa/core/visual/VisualModel.h>
 #include <sofa/core/visual/Shader.h>
 
-class SofaPhysicsOutputMesh::Impl
+class SOFA_SOFAPHYSICSAPI_API SofaPhysicsOutputMesh::Impl
 {
 public:
 

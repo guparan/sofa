@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -39,7 +39,7 @@ using namespace sofa::defaulttype;
 
 SOFA_DECL_CLASS(IndexValueMapper)
 
-int IndexValueMapperClass = core::RegisterObject("?")
+int IndexValueMapperClass = core::RegisterObject("Input values to output values mapper. Includes indices rules, such as replacement, resize")
 #ifndef SOFA_FLOAT
         .add< IndexValueMapper<Vec3dTypes> >(true)
 #endif //SOFA_FLOAT

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -102,7 +102,7 @@ void DecimateMesh<DataTypes>::update()
 #if CGAL_VERSION_NR >= CGAL_VERSION_NUMBER(4,5,0)
         SMS::edge_collapse(surface
                            ,stop
-#if CGAL_VERSION_NR >= CGAL_VERSION_NUMBER(4,7,0)
+#if CGAL_VERSION_NR >= CGAL_VERSION_NUMBER(4,7,-1)
                            ,CGAL::parameters::vertex_index_map( get(CGAL::vertex_external_index,surface))
 #else
                             , CGAL::vertex_index_map(get(CGAL::vertex_external_index, surface))
@@ -119,7 +119,7 @@ void DecimateMesh<DataTypes>::update()
 #if CGAL_VERSION_NR >= CGAL_VERSION_NUMBER(4,5,0)
         SMS::edge_collapse(surface
                            ,stop
-#if CGAL_VERSION_NR >= CGAL_VERSION_NUMBER(4,7,0)
+#if CGAL_VERSION_NR >= CGAL_VERSION_NUMBER(4,7,-1)
                            ,CGAL::parameters::vertex_index_map( get(CGAL::vertex_external_index,surface))
 #else
                            , CGAL::vertex_index_map(get(CGAL::vertex_external_index, surface))
