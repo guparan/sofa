@@ -15,6 +15,15 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release")
 endif()
 
+option(FORCE_COLORED_OUTPUT "Always produce ANSI-colored output (GNU/Clang only)." FALSE)
+if(${FORCE_COLORED_OUTPUT})
+    if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+       add_compile_options(-fdiagnostics-color=always)
+    elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+       add_compile_options(-fcolor-diagnostics)
+    endif()
+endif()
+
 
 # Enable the organisation in folders for generators that support
 # it. (E.g. some versions of Visual Studio have 'solution folders')
@@ -86,13 +95,13 @@ endif(UNIX)
 include(CompilerOptions)
 
 ## Boost (1.54.0 or higher) is now mandatory.
-if(WIN32)
-    message("Boost autodetection on Windows was removed.\n"
-        "Please follow CMake documentation to find Boost on your system.\n"
-        "Hint: set BOOST_ROOT to your Boost location.")
-endif()
 set(BOOST_MIN_VERSION "1.54.0")
 find_package(Boost ${BOOST_MIN_VERSION} REQUIRED)
+if(WIN32 AND NOT Boost_FOUND)
+    message("WARNING: Boost autodetection on Windows was removed.\n"
+        "  Please follow CMake documentation to find Boost on your system.\n"
+        "  Hint: set BOOST_ROOT to your Boost location.")
+endif()
 
 ### Dependency pack for Windows
 if(MSVC)
