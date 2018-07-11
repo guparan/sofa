@@ -156,9 +156,9 @@ if(SOFA_HAVE_BOOST_SYSTEM
     endif()
 
     list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${BOOST_TARGETS})
-    sofa_install_libraries_from_targets(${BOOST_TARGETS})
+    sofa_install_libraries(${Boost_LIBRARIES})
     if(WIN32)
-        sofa_copy_libraries_from_targets(${BOOST_TARGETS})
+        sofa_copy_libraries(${Boost_LIBRARIES})
     endif()
 endif()
 
