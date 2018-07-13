@@ -179,7 +179,11 @@ if(Qt5Core_FOUND)
         install(FILES ${QT_PLUGINS} DESTINATION "bin/platforms" COMPONENT applications)
     endif()
     # Installing Qt ICU libraries the hard way (dirty)
-    file(GLOB QT_ICU_LIBRARIES "${Qt_location}/lib/libicu*${CMAKE_SHARED_LIBRARY_SUFFIX}")
+    file(GLOB QT_ICU_LIBRARIES
+		"${Qt_location}/lib/libicudata${CMAKE_SHARED_LIBRARY_SUFFIX}"
+		"${Qt_location}/lib/libicui18n${CMAKE_SHARED_LIBRARY_SUFFIX}"
+		"${Qt_location}/lib/libicuuc${CMAKE_SHARED_LIBRARY_SUFFIX}"
+		)
     sofa_install_libraries(${QT_ICU_LIBRARIES})
 endif()
 
