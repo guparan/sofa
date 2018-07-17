@@ -65,7 +65,7 @@ if(Qt5Core_FOUND)
 
     # QT INSTALL
     get_target_property(QtCore_location Qt5::Core LOCATION_${CMAKE_BUILD_TYPE})
-    string(REGEX REPLACE "\\/[^/]*/[^/]*$" "" Qt_location ${QtCore_location})
+    string(REGEX REPLACE "\\/lib/.*$" "" Qt_location ${QtCore_location})
     # Installing Qt plugins the hard way (dirty)
     install(DIRECTORY "${Qt_location}/plugins/" DESTINATION "bin" COMPONENT applications)
     # Installing Qt XCB libraries the hard way (dirty)
