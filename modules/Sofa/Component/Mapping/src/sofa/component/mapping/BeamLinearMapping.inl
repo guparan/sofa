@@ -35,10 +35,8 @@
 
 namespace sofa
 {
-
 namespace component
 {
-
 namespace mapping
 {
 
@@ -346,9 +344,7 @@ const sofa::defaulttype::BaseMatrix* BeamLinearMapping<TIn, TOut>::getJ()
 
 
 } // namespace mapping
-
 } // namespace component
-
 } // namespace sofa
 
 #endif

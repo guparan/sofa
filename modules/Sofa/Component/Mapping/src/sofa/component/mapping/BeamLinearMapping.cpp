@@ -27,10 +27,8 @@
 
 namespace sofa
 {
-
 namespace component
 {
-
 namespace mapping
 {
 
@@ -59,24 +57,22 @@ int BeamLinearMappingClass = core::RegisterObject("Set the positions and velocit
         ;
 
 #ifndef SOFA_FLOAT
-template class SOFA_MISC_MAPPING_API BeamLinearMapping< Rigid3dTypes, Vec3dTypes >;
-template class SOFA_MISC_MAPPING_API BeamLinearMapping< Rigid3dTypes, ExtVec3fTypes >;
+template class SOFA_COMPONENT_MAPPING_API BeamLinearMapping< Rigid3dTypes, Vec3dTypes >;
+template class SOFA_COMPONENT_MAPPING_API BeamLinearMapping< Rigid3dTypes, ExtVec3fTypes >;
 #endif
 #ifndef SOFA_DOUBLE
-template class SOFA_MISC_MAPPING_API BeamLinearMapping< Rigid3fTypes, Vec3fTypes >;
-template class SOFA_MISC_MAPPING_API BeamLinearMapping< Rigid3fTypes, ExtVec3fTypes >;
+template class SOFA_COMPONENT_MAPPING_API BeamLinearMapping< Rigid3fTypes, Vec3fTypes >;
+template class SOFA_COMPONENT_MAPPING_API BeamLinearMapping< Rigid3fTypes, ExtVec3fTypes >;
 #endif
 
 #ifndef SOFA_FLOAT
 #ifndef SOFA_DOUBLE
-template class SOFA_MISC_MAPPING_API BeamLinearMapping< Rigid3dTypes, Vec3fTypes >;
-template class SOFA_MISC_MAPPING_API BeamLinearMapping< Rigid3fTypes, Vec3dTypes >;
+template class SOFA_COMPONENT_MAPPING_API BeamLinearMapping< Rigid3dTypes, Vec3fTypes >;
+template class SOFA_COMPONENT_MAPPING_API BeamLinearMapping< Rigid3fTypes, Vec3dTypes >;
 #endif
 #endif
 
 } // namespace mapping
-
 } // namespace component
-
 } // namespace sofa
 

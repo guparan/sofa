@@ -1,0 +1,45 @@
+{
+    "dependencies": [
+        "SofaCore",
+        "SofaHelper",
+        "SofaBaseTopology"
+    ],
+    "dependency_targets": [
+        "SofaBase",
+        "SofaFramework"
+    ],
+    "deprecated_header_files": [
+        "deprecated_layout/SofaMiscMapping/BeamLinearMapping.h"
+    ],
+    "extra_files": [],
+    "from_root": "../..",
+    "header_files": [
+        "src/sofa/component/mapping/BeamLinearMapping.h",
+        "src/sofa/component/mapping/BeamLinearMapping.inl"
+    ],
+    "new_namespace": [
+        "sofa",
+        "component",
+        "mapping"
+    ],
+    "old_namespace": [
+        "sofa",
+        "component",
+        "mapping"
+    ],
+    "package_cname": "SOFA_COMPONENT_MAPPING",
+    "package_components": [
+        "BeamLinearMapping"
+    ],
+    "package_dir_config": "../../modules/Sofa/Component/Mapping/config",
+    "package_dir_deprecated": "../../modules/Sofa/Component/Mapping/deprecated_layout/SofaMiscMapping",
+    "package_dir_src": "../../modules/Sofa/Component/Mapping/src",
+    "package_dir_src_with_namespace": "../../modules/Sofa/Component/Mapping/src/sofa/component/mapping",
+    "package_name": "Sofa.Component.Mapping",
+    "package_type": "library",
+    "recipe_dir": "recipes",
+    "source_files": [
+        "src/sofa/component/mapping/BeamLinearMapping.cpp"
+    ],
+    "src_from": "../../modules/SofaMiscMapping"
+}
