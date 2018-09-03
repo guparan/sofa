@@ -32,12 +32,12 @@ namespace solidmechanics
 {
 
 extern "C" {
-    SOFA_COMPONENT_API void initExternalModule();
-    SOFA_COMPONENT_API const char* getModuleName();
-    SOFA_COMPONENT_API const char* getModuleVersion();
-    SOFA_COMPONENT_API const char* getModuleLicense();
-    SOFA_COMPONENT_API const char* getModuleDescription();
-    SOFA_COMPONENT_API const char* getModuleComponentList();
+    SOFA_COMPONENT_SOLIDMECHANICS_API void initExternalModule();
+    SOFA_COMPONENT_SOLIDMECHANICS_API const char* getModuleName();
+    SOFA_COMPONENT_SOLIDMECHANICS_API const char* getModuleVersion();
+    SOFA_COMPONENT_SOLIDMECHANICS_API const char* getModuleLicense();
+    SOFA_COMPONENT_SOLIDMECHANICS_API const char* getModuleDescription();
+    SOFA_COMPONENT_SOLIDMECHANICS_API const char* getModuleComponentList();
 }
 
 void initExternalModule()
