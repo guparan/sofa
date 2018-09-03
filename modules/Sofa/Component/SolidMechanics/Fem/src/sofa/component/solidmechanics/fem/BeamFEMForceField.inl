@@ -22,8 +22,9 @@
 #ifndef SOFA_COMPONENT_FORCEFIELD_BEAMFEMFORCEFIELD_INL
 #define SOFA_COMPONENT_FORCEFIELD_BEAMFEMFORCEFIELD_INL
 
-#include <SofaBaseTopology/TopologyData.inl>
 #include "BeamFEMForceField.h"
+
+#include <SofaBaseTopology/TopologyData.inl>
 #include <sofa/core/visual/VisualParams.h>
 #include <sofa/core/topology/BaseMeshTopology.h>
 #include <SofaBaseTopology/GridTopology.h>
@@ -38,8 +39,8 @@
 #include <sofa/defaulttype/RigidTypes.h>
 #include <sofa/simulation/Node.h>
 
-#include "StiffnessContainer.h"
-#include "PoissonContainer.h"
+#include <SofaGeneralSimpleFem/StiffnessContainer.h>
+#include <SofaGeneralSimpleFem/PoissonContainer.h>
 
 
 namespace sofa
