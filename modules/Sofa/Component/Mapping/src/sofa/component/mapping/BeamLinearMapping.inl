@@ -22,7 +22,7 @@
 #ifndef SOFA_COMPONENT_MAPPING_BEAMLINEARMAPPING_INL
 #define SOFA_COMPONENT_MAPPING_BEAMLINEARMAPPING_INL
 
-#include <SofaMiscMapping/BeamLinearMapping.h>
+#include "BeamLinearMapping.h"
 #include <sofa/core/visual/VisualParams.h>
 
 #include <sofa/helper/io/MassSpringLoader.h>

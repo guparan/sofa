@@ -20,7 +20,7 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 #define SOFA_COMPONENT_MAPPING_BEAMLINEARMAPPING_CPP
-#include <SofaMiscMapping/BeamLinearMapping.inl>
+#include "BeamLinearMapping.inl"
 
 #include <sofa/core/ObjectFactory.h>
 
