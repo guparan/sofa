@@ -1,0 +1,45 @@
+{
+    "dependencies": [
+        "SofaBaseTopology",
+        "SofaSimpleFem"
+    ],
+    "dependency_targets": [
+        "SofaCommon",
+        "SofaBase"
+    ],
+    "deprecated_header_files": [
+        "deprecated_layout/SofaGeneralSimpleFem/BeamFEMForceField.h"
+    ],
+    "extra_files": [],
+    "from_root": "../..",
+    "header_files": [
+        "src/sofa/component/solidmechanics/fem/BeamFEMForceField.h",
+        "src/sofa/component/solidmechanics/fem/BeamFEMForceField.inl"
+    ],
+    "new_namespace": [
+        "sofa",
+        "component",
+        "solidmechanics",
+        "fem"
+    ],
+    "old_namespace": [
+        "sofa",
+        "component",
+        "forcefield"
+    ],
+    "package_cname": "SOFA_COMPONENT_SOLIDMECHANICS_FEM",
+    "package_components": [
+        "BeamFEMForceField"
+    ],
+    "package_dir_config": "../../modules/Sofa/Component/SolidMechanics/Fem/config",
+    "package_dir_deprecated": "../../modules/Sofa/Component/SolidMechanics/Fem/deprecated_layout/SofaGeneralSimpleFem",
+    "package_dir_src": "../../modules/Sofa/Component/SolidMechanics/Fem/src",
+    "package_dir_src_with_namespace": "../../modules/Sofa/Component/SolidMechanics/Fem/src/sofa/component/solidmechanics/fem",
+    "package_name": "Sofa.Component.SolidMechanics.Fem",
+    "package_type": "library",
+    "recipe_dir": "recipes",
+    "source_files": [
+        "src/sofa/component/solidmechanics/fem/BeamFEMForceField.cpp"
+    ],
+    "src_from": "../../modules/SofaGeneralSimpleFem"
+}

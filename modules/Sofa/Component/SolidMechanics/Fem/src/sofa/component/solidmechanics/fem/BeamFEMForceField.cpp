@@ -27,11 +27,11 @@
 
 namespace sofa
 {
-
 namespace component
 {
-
-namespace forcefield
+namespace solidmechanics
+{
+namespace fem
 {
 
 using namespace sofa::defaulttype;
@@ -51,15 +51,14 @@ int BeamFEMForceFieldClass = core::RegisterObject("Beam finite elements")
         ;
 
 #ifndef SOFA_FLOAT
-template class SOFA_GENERAL_SIMPLE_FEM_API BeamFEMForceField<Rigid3dTypes>;
+template class SOFA_COMPONENT_SOLIDMECHANICS_FEM_API BeamFEMForceField<Rigid3dTypes>;
 #endif
 #ifndef SOFA_DOUBLE
-template class SOFA_GENERAL_SIMPLE_FEM_API BeamFEMForceField<Rigid3fTypes>;
+template class SOFA_COMPONENT_SOLIDMECHANICS_FEM_API BeamFEMForceField<Rigid3fTypes>;
 #endif
 
-} // namespace forcefield
-
+} // namespace fem
+} // namespace solidmechanics
 } // namespace component
-
 } // namespace sofa
 

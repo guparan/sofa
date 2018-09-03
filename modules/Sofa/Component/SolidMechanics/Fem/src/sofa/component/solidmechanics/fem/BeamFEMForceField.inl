@@ -44,11 +44,11 @@
 
 namespace sofa
 {
-
 namespace component
 {
-
-namespace forcefield
+namespace solidmechanics
+{
+namespace fem
 {
 
 
@@ -769,10 +769,9 @@ void BeamFEMForceField<DataTypes>::BeamInfo::init(double E, double L, double nu,
     _Asz = 0.0;
 }
 
-} // namespace forcefield
-
+} // namespace fem
+} // namespace solidmechanics
 } // namespace component
-
 } // namespace sofa
 
 #endif // SOFA_COMPONENT_FORCEFIELD_BEAMFEMFORCEFIELD_INL

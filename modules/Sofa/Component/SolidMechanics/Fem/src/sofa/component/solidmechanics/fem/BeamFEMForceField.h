@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_BEAMFEMFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_BEAMFEMFORCEFIELD_H
-#include "config.h"
+#include <Sofa.Component.SolidMechanics.Fem.h>
 
 
 #include <sofa/core/behavior/ForceField.h>
@@ -46,7 +46,9 @@ namespace sofa
 {
 namespace component
 {
-namespace forcefield
+namespace solidmechanics
+{
+namespace fem
 {
 
 /** Compute Finite Element forces based on 6D beam elements.
@@ -288,17 +290,16 @@ protected:
 
 #if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_COMPONENT_FORCEFIELD_BEAMFEMFORCEFIELD_CPP)
 #ifndef SOFA_FLOAT
-extern template class SOFA_GENERAL_SIMPLE_FEM_API BeamFEMForceField<defaulttype::Rigid3dTypes>;
+extern template class SOFA_COMPONENT_SOLIDMECHANICS_FEM_API BeamFEMForceField<defaulttype::Rigid3dTypes>;
 #endif
 #ifndef SOFA_DOUBLE
-extern template class SOFA_GENERAL_SIMPLE_FEM_API BeamFEMForceField<defaulttype::Rigid3fTypes>;
+extern template class SOFA_COMPONENT_SOLIDMECHANICS_FEM_API BeamFEMForceField<defaulttype::Rigid3fTypes>;
 #endif
 #endif
 
-} // namespace forcefield
-
+} // namespace fem
+} // namespace solidmechanics
 } // namespace component
-
 } // namespace sofa
 
 #endif // SOFA_COMPONENT_FORCEFIELD_BEAMFEMFORCEFIELD_H
