@@ -32,16 +32,20 @@
 
 namespace sofa
 {
-
 namespace component
 {
-
 namespace container
 {
 class StiffnessContainer;
 class PoissonContainer;
 } // namespace container
+} // namespace component
+} // namespace sofa
 
+namespace sofa
+{
+namespace component
+{
 namespace forcefield
 {
 
