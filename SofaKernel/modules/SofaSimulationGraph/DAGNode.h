@@ -51,7 +51,7 @@ class SOFA_SIMULATION_GRAPH_API DAGNode : public simulation::Node
 {
 public:
     typedef Node::DisplayFlags DisplayFlags;
-    SOFA_CLASS(DAGNode, simulation::Node);
+    SOFA_FRAMEWORK_CLASS(DAGNode, simulation::Node);
 
     typedef MultiLink<DAGNode,DAGNode,BaseLink::FLAG_STOREPATH|BaseLink::FLAG_DOUBLELINK> LinkParents;
     typedef LinkParents::const_iterator ParentIterator;

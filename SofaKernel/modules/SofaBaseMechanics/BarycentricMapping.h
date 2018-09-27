@@ -329,6 +329,7 @@ public:
 
     int addPointInCube(const int cubeIndex, const SReal* baryCoords) override;
 
+    virtual void init() override {}
     void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
 
     void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;
@@ -454,6 +455,7 @@ public:
 
     int addPointInCube(const int cubeIndex, const SReal* baryCoords) override;
 
+    virtual void init() override {}
     void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
     void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;
     void applyJ( typename Out::VecDeriv& out, const typename In::VecDeriv& in ) override;
@@ -531,6 +533,7 @@ public:
 
     int addPointInCube(const int cubeIndex, const SReal* baryCoords) override;
 
+    virtual void init() override {}
     void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
 
     void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;
@@ -602,6 +605,7 @@ public:
     int addPointInLine(const int edgeIndex, const SReal* baryCoords) override;
     int createPointInLine(const typename Out::Coord& p, int edgeIndex, const typename In::VecCoord* points) override;
 
+    virtual void init() override {}
     void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
 
     void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;
@@ -692,6 +696,7 @@ public:
     virtual int addPointInTriangle(const int triangleIndex, const SReal* baryCoords) override;
     int createPointInTriangle(const typename Out::Coord& p, int triangleIndex, const typename In::VecCoord* points) override;
 
+    virtual void init() override {}
     void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
 
     void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;
@@ -786,6 +791,7 @@ public:
     int addPointInQuad(const int index, const SReal* baryCoords) override;
     int createPointInQuad(const typename Out::Coord& p, int index, const typename In::VecCoord* points) override;
 
+    virtual void init() override {}
     void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
 
     void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;
@@ -877,6 +883,7 @@ public:
 
     int addPointInTetra(const int index, const SReal* baryCoords) override;
 
+    virtual void init() override {}
     void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
 
     void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;
@@ -949,6 +956,7 @@ public:
 
     int setPointInCube(const int pointIndex, const int cubeIndex, const SReal* baryCoords) override;
 
+    virtual void init() override {}
     void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
 
     void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;

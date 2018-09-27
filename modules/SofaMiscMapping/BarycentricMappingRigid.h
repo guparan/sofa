@@ -99,6 +99,7 @@ public:
     int addPointInTetra(const int index, const SReal* baryCoords) override;
     int addPointOrientationInTetra( const int tetraIndex, const sofa::defaulttype::Matrix3 baryCoorsOrient );
 
+    virtual void init() override {}
     void init(const typename Out::VecCoord& out, const typename In::VecCoord& in) override;
 
     void apply( typename Out::VecCoord& out, const typename In::VecCoord& in ) override;

@@ -44,7 +44,7 @@ Derives from BaseObject in order to model the parameters as Datas, which makes t
 class SOFA_SIMULATION_TREE_API TreeSimulation: public Simulation
 {
 public:
-    SOFA_CLASS(TreeSimulation, Simulation);
+    SOFA_FRAMEWORK_CLASS(TreeSimulation, Simulation);
 
     TreeSimulation();
     ~TreeSimulation(); // this is a terminal class
