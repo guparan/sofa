@@ -43,6 +43,8 @@
 #include <sstream>
 #include <sofa/helper/logging/Messaging.h>
 #include <sofa/helper/Utils.h>
+#include <sofa/helper/system/FileSystem.h>
+using sofa::helper::system::FileSystem;
 
 #ifdef WIN32
 #define ON_WIN32 true
@@ -112,7 +114,29 @@ FileRepository::FileRepository(const char* envVar, const char* relativePath)
             p0 = p1+1;
         }
     }
-    //print();
+    if ( strcmp(envVar, "SOFA_DATA_PATH") == 0 )
+    {
+        // Read the paths to the share/ and examples/ directories from etc/sofa.ini,
+        const std::string etcDir = Utils::getSofaPathPrefix() + "/etc";
+        const std::string sofaIniFilePath = etcDir + "/sofa.ini";
+        std::map<std::string, std::string> iniFileValues = Utils::readBasicIniFile(sofaIniFilePath);
+
+        // and add them to DataRepository
+        if (iniFileValues.find("SHARE_DIR") != iniFileValues.end())
+        {
+            std::string shareDir = iniFileValues["SHARE_DIR"];
+            if (!FileSystem::isAbsolute(shareDir))
+                shareDir = etcDir + "/" + shareDir;
+            this->addFirstPath(shareDir);
+        }
+        if (iniFileValues.find("EXAMPLES_DIR") != iniFileValues.end())
+        {
+            std::string examplesDir = iniFileValues["EXAMPLES_DIR"];
+            if (!FileSystem::isAbsolute(examplesDir))
+                examplesDir = etcDir + "/" + examplesDir;
+            this->addFirstPath(examplesDir);
+        }
+    }
 }
 
 FileRepository::~FileRepository()
