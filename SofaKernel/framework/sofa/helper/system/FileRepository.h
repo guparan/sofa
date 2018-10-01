@@ -27,6 +27,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <functional>
 
 namespace sofa
 {
@@ -58,6 +59,7 @@ public:
 
     /// Initialize the set of paths from an environment variable.
     FileRepository(const char* envVar = "SOFA_DATA_PATH", const char* relativePath = 0);
+    FileRepository(const char* envVar, std::function<void()> initFct);
 
     ~FileRepository();
 

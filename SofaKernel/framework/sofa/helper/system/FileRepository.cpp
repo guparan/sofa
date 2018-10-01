@@ -79,12 +79,40 @@ std::string cleanPath( const std::string& path )
 
 /// Initialize PluginRepository with the current working directory
 #ifdef WIN32
-FileRepository PluginRepository( "SOFA_PLUGIN_PATH", Utils::getExecutableDirectory().c_str() );
+//FileRepository PluginRepository( "SOFA_PLUGIN_PATH", Utils::getExecutableDirectory().c_str() );
+FileRepository PluginRepository("SOFA_PLUGIN_PATH", [&](){
+    PluginRepository.addFirstPath(Utils::getExecutableDirectory());
+});
 #else
-FileRepository PluginRepository( "SOFA_PLUGIN_PATH", Utils::getSofaPathTo("lib").c_str() );
+//FileRepository PluginRepository( "SOFA_PLUGIN_PATH", Utils::getSofaPathTo("lib").c_str() );
+FileRepository PluginRepository("SOFA_PLUGIN_PATH", [&](){
+    PluginRepository.addFirstPath(Utils::getSofaPathTo("lib"));
+});
 #endif
 
-FileRepository DataRepository("SOFA_DATA_PATH");
+//FileRepository DataRepository("SOFA_DATA_PATH");
+FileRepository DataRepository("SOFA_DATA_PATH", [&](){
+    // Read the paths to the share/ and examples/ directories from etc/sofa.ini,
+    const std::string etcDir = Utils::getSofaPathPrefix() + "/etc";
+    const std::string sofaIniFilePath = etcDir + "/sofa.ini";
+    std::map<std::string, std::string> iniFileValues = Utils::readBasicIniFile(sofaIniFilePath);
+
+    // and add them to DataRepository
+    if (iniFileValues.find("SHARE_DIR") != iniFileValues.end())
+    {
+        std::string shareDir = iniFileValues["SHARE_DIR"];
+        if (!FileSystem::isAbsolute(shareDir))
+            shareDir = etcDir + "/" + shareDir;
+        DataRepository.addFirstPath(shareDir);
+    }
+    if (iniFileValues.find("EXAMPLES_DIR") != iniFileValues.end())
+    {
+        std::string examplesDir = iniFileValues["EXAMPLES_DIR"];
+        if (!FileSystem::isAbsolute(examplesDir))
+            examplesDir = etcDir + "/" + examplesDir;
+        DataRepository.addFirstPath(examplesDir);
+    }
+});
 
 #if defined (_XBOX) || defined(PS3)
 char* getenv(const char* varname) { return NULL; } // NOT IMPLEMENTED
@@ -114,29 +142,18 @@ FileRepository::FileRepository(const char* envVar, const char* relativePath)
             p0 = p1+1;
         }
     }
-    if ( strcmp(envVar, "SOFA_DATA_PATH") == 0 )
-    {
-        // Read the paths to the share/ and examples/ directories from etc/sofa.ini,
-        const std::string etcDir = Utils::getSofaPathPrefix() + "/etc";
-        const std::string sofaIniFilePath = etcDir + "/sofa.ini";
-        std::map<std::string, std::string> iniFileValues = Utils::readBasicIniFile(sofaIniFilePath);
+}
 
-        // and add them to DataRepository
-        if (iniFileValues.find("SHARE_DIR") != iniFileValues.end())
-        {
-            std::string shareDir = iniFileValues["SHARE_DIR"];
-            if (!FileSystem::isAbsolute(shareDir))
-                shareDir = etcDir + "/" + shareDir;
-            this->addFirstPath(shareDir);
-        }
-        if (iniFileValues.find("EXAMPLES_DIR") != iniFileValues.end())
-        {
-            std::string examplesDir = iniFileValues["EXAMPLES_DIR"];
-            if (!FileSystem::isAbsolute(examplesDir))
-                examplesDir = etcDir + "/" + examplesDir;
-            this->addFirstPath(examplesDir);
-        }
+FileRepository::FileRepository(const char* envVar, std::function<void()> initFct)
+{
+    if (envVar != NULL && envVar[0] != '\0')
+    {
+        const char* envpath = getenv(envVar);
+        if (envpath != NULL && envpath[0]!='\0')
+            addFirstPath(envpath);
     }
+    initFct();
+    print();
 }
 
 FileRepository::~FileRepository()
