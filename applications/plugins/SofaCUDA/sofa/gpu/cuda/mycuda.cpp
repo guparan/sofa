@@ -130,10 +130,8 @@ namespace gpu
 namespace cuda
 {
 
-//SOFA_LINK_CLASS(CudaSpringForceField)
 #ifdef SOFA_HAVE_MINIFLOWVR
 #endif
-//SOFA_LINK_CLASS(CudaCollision)
 #ifdef SOFACUDA_ENABLE_VOLUMETRICRENDERING
 #endif // SOFACUDA_ENABLE_VOLUMETRICRENDERING
 

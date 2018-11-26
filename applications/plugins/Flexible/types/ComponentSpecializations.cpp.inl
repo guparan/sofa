@@ -282,7 +282,6 @@ template class SOFA_Flexible_API ProjectToPointConstraint<TYPEABSTRACTNAME3fType
 
 //// ==========================================================================
 //// ProjectToLineConstraint
-//SOFA_DECL_CLASS ( EVALUATOR(TYPEABSTRACTNAME,ProjectToLineConstraint) )
 //int EVALUATOR(TYPEABSTRACTNAME,ProjectToLineConstraintClass) = core::RegisterObject ( "Project particles to a line" )
 //#ifndef SOFA_FLOAT
 //.add< ProjectToLineConstraint<defaulttype::TYPEABSTRACTNAME3dTypes> >()
@@ -300,7 +299,6 @@ template class SOFA_Flexible_API ProjectToPointConstraint<TYPEABSTRACTNAME3fType
 
 //// ==========================================================================
 //// ProjectToPlaneConstraint
-//SOFA_DECL_CLASS ( EVALUATOR(TYPEABSTRACTNAME,ProjectToPlaneConstraint) )
 //int EVALUATOR(TYPEABSTRACTNAME,ProjectToPlaneConstraintClass) = core::RegisterObject ( "Project particles to a plane" )
 //#ifndef SOFA_FLOAT
 //.add< ProjectToPlaneConstraint<defaulttype::TYPEABSTRACTNAME3dTypes> >()
@@ -319,7 +317,6 @@ template class SOFA_Flexible_API ProjectToPointConstraint<TYPEABSTRACTNAME3fType
 
 //// ==========================================================================
 //// ProjectDirectionConstraint
-//SOFA_DECL_CLASS ( EVALUATOR(TYPEABSTRACTNAME,ProjectDirectionConstraint) )
 //int EVALUATOR(TYPEABSTRACTNAME,ProjectDirectionConstraintClass) = core::RegisterObject ( "Project particles to a line" )
 //#ifndef SOFA_FLOAT
 //.add< ProjectDirectionConstraint<defaulttype::TYPEABSTRACTNAME3dTypes> >()
