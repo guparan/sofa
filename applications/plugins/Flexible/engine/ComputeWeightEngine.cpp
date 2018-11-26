@@ -63,7 +63,7 @@ void ComputeWeightEngine::reinit()
 }
 
 
-void ComputeWeightEngine::update()
+void ComputeWeightEngine::doUpdate()
 {
     if( !l_visualModel || !l_shapeFunction )
     {
