@@ -23,11 +23,11 @@
 
 #include "GUIManager.h"
 #include "BaseGUI.h"
-//#include <SofaComponentBase/initComponentBase.h>
-//#include <SofaComponentCommon/initComponentCommon.h>
-//#include <SofaComponentGeneral/initComponentGeneral.h>
-//#include <SofaComponentAdvanced/initComponentAdvanced.h>
-//#include <SofaComponentMisc/initComponentMisc.h>
+#include <SofaComponentBase/initComponentBase.h>
+#include <SofaComponentCommon/initComponentCommon.h>
+#include <SofaComponentGeneral/initComponentGeneral.h>
+#include <SofaComponentAdvanced/initComponentAdvanced.h>
+#include <SofaComponentMisc/initComponentMisc.h>
 #include <SofaSimulationCommon/init.h>
 #include <sofa/helper/system/FileSystem.h>
 #include <sofa/helper/Utils.h>
