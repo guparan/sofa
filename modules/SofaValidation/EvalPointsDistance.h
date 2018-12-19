@@ -109,7 +109,7 @@ public:
 
     virtual void handleEvent(sofa::core::objectmodel::Event* event) override;
     virtual void draw(const core::visual::VisualParams* vparams) override;
-    virtual void doDraw(const VecCoord& x1, const VecCoord& x2);
+    virtual void doDraw(const core::visual::VisualParams* vparams, const VecCoord& x1, const VecCoord& x2);
 
     /// Retrieve the associated MechanicalState (First model)
     core::behavior::MechanicalState<DataTypes>* getMState1() { return mstate1.get(); }
@@ -159,7 +159,7 @@ protected:
     sofa::defaulttype::BoundingBox box2;
 };
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_COMPONENT_MISC_EVALPOINTSDISTANCE_CPP)
+#if  !defined(SOFA_COMPONENT_MISC_EVALPOINTSDISTANCE_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_VALIDATION_API EvalPointsDistance<defaulttype::Vec3dTypes>;
 extern template class SOFA_VALIDATION_API EvalPointsDistance<defaulttype::Rigid3dTypes>;

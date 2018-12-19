@@ -24,14 +24,8 @@
 
 #include <sofa/core/core.h>
 #include <sofa/core/behavior/BaseProjectiveConstraintSet.h>
-#include <sofa/core/behavior/MechanicalState.h>
-#include <sofa/core/behavior/MultiMatrixAccessor.h>
 
-#include <sofa/defaulttype/BaseMatrix.h>
-#include <sofa/defaulttype/BaseVector.h>
 
-#include <sofa/defaulttype/VecTypes.h>
-#include <sofa/defaulttype/RigidTypes.h>
 
 namespace sofa
 {
@@ -189,7 +183,7 @@ protected:
     SingleLink<ProjectiveConstraintSet<DataTypes>,MechanicalState<DataTypes>,BaseLink::FLAG_STRONGLINK> mstate;
 };
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_CORE_BEHAVIOR_PROJECTIVECONSTRAINTSET_CPP)
+#if  !defined(SOFA_CORE_BEHAVIOR_PROJECTIVECONSTRAINTSET_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_CORE_API ProjectiveConstraintSet< defaulttype::Vec6dTypes >;
 extern template class SOFA_CORE_API ProjectiveConstraintSet< defaulttype::Vec3dTypes >;

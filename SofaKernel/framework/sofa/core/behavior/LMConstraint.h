@@ -25,9 +25,6 @@
 #include <sofa/core/core.h>
 #include <sofa/core/behavior/BaseLMConstraint.h>
 #include <sofa/core/behavior/MechanicalState.h>
-#include <sofa/core/objectmodel/BaseObject.h>
-#include <sofa/defaulttype/VecTypes.h>
-#include <sofa/defaulttype/RigidTypes.h>
 
 namespace sofa
 {
@@ -171,7 +168,7 @@ protected:
     virtual void updateForceMask() override {}
 };
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_CORE_BEHAVIOR_LMCONSTRAINT_CPP)
+#if  !defined(SOFA_CORE_BEHAVIOR_LMCONSTRAINT_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_CORE_API LMConstraint<defaulttype::Vec3dTypes,defaulttype::Vec3dTypes>;
 extern template class SOFA_CORE_API LMConstraint<defaulttype::Vec3dTypes,defaulttype::Vec2dTypes>;

@@ -24,7 +24,6 @@
 #include <sofa/core/ObjectFactory.h>
 #include <sofa/defaulttype/Vec3Types.h>
 #include <sofa/defaulttype/RigidTypes.h>
-//#include <sofa/helper/gl/Axis.h>
 #include <sstream>
 
 namespace sofa
@@ -38,9 +37,6 @@ namespace projectiveconstraintset
 
 using namespace sofa::defaulttype;
 using namespace sofa::helper;
-
-SOFA_DECL_CLASS(OscillatorConstraint)
-
 
 int OscillatorConstraintClass = core::RegisterObject("Apply a sinusoidal trajectory to given points")
 #ifndef SOFA_FLOAT

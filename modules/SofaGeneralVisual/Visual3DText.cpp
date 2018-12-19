@@ -24,6 +24,8 @@
 #include "Visual3DText.h"
 #include <sofa/core/visual/VisualParams.h>
 #include <sofa/defaulttype/RGBAColor.h>
+#include <sofa/helper/system/gl.h>
+
 
 namespace sofa
 {
@@ -33,8 +35,6 @@ namespace component
 
 namespace visualmodel
 {
-
-SOFA_DECL_CLASS(Visual3DText)
 
 int Visual3DTextClass = core::RegisterObject("Display 3D camera-oriented text")
         .add< Visual3DText >()

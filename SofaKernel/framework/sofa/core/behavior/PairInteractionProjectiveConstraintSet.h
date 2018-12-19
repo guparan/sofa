@@ -24,10 +24,7 @@
 
 #include <sofa/core/core.h>
 #include <sofa/core/behavior/BaseInteractionProjectiveConstraintSet.h>
-#include <sofa/core/behavior/MechanicalState.h>
 
-#include <sofa/defaulttype/VecTypes.h>
-#include <sofa/defaulttype/RigidTypes.h>
 
 namespace sofa
 {
@@ -197,7 +194,7 @@ protected:
     typename MechanicalState<DataTypes>::ForceMask *mask2;
 };
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_CORE_BEHAVIOR_PAIRINTERACTIONPROJECTIVECONSTRAINTSET_CPP)
+#if  !defined(SOFA_CORE_BEHAVIOR_PAIRINTERACTIONPROJECTIVECONSTRAINTSET_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_CORE_API PairInteractionProjectiveConstraintSet<defaulttype::Vec3dTypes>;
 extern template class SOFA_CORE_API PairInteractionProjectiveConstraintSet<defaulttype::Vec2dTypes>;

@@ -23,10 +23,8 @@
 #define SOFA_CORE_OBJECTMODEL_CLASSINFO_H
 
 #include <sofa/helper/system/config.h>
-#include <sofa/helper/FnDispatcher.h>
+#include <sofa/helper/TypeInfo.h>
 #include <sofa/core/objectmodel/Data.h>
-#include <string>
-#include <map>
 
 
 namespace sofa

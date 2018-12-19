@@ -23,6 +23,8 @@
 #include "OglLineAxis.h"
 #include <sofa/core/ObjectFactory.h>
 #include <sofa/core/visual/VisualParams.h>
+#include <sofa/helper/system/gl.h>
+
 
 namespace sofa
 {
@@ -32,8 +34,6 @@ namespace component
 
 namespace visualmodel
 {
-
-SOFA_DECL_CLASS(OglLineAxis)
 
 int OglLineAxisClass = core::RegisterObject("Display scene axis")
         .add< component::visualmodel::OglLineAxis >()

@@ -28,6 +28,7 @@
 #include <sofa/simulation/UpdateMappingVisitor.h>
 #include <sofa/simulation/DeactivatedNodeVisitor.h>
 #include <sofa/core/visual/VisualParams.h>
+#include <sofa/helper/system/gl.h>
 #include <sofa/core/ObjectFactory.h>
 #include <algorithm>
 #include <fstream>
@@ -869,8 +870,6 @@ void OptiTrackNatNetDevice::onBeginAnimationStep(const double /*dt*/)
 {
     update();
 }
-
-SOFA_DECL_CLASS(OptiTrackNatNetDevice)
 
 int OptiTrackNatNetDeviceClass = sofa::core::RegisterObject("Tracked rigid device relying on OptiTrackNatNetClient")
         .add< OptiTrackNatNetDevice >()

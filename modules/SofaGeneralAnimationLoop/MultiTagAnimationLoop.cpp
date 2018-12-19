@@ -51,8 +51,6 @@ int MultiTagAnimationLoopClass = core::RegisterObject("Simple animation loop tha
         .addAlias("MultiTagMasterSolver")
         ;
 
-SOFA_DECL_CLASS(MultiTagAnimationLoop);
-
 MultiTagAnimationLoop::MultiTagAnimationLoop(simulation::Node* gnode)
     : Inherit(gnode)
 {
@@ -93,12 +91,14 @@ void MultiTagAnimationLoop::step(const sofa::core::ExecParams* params, SReal dt)
 
     sofa::core::objectmodel::TagSet::iterator it;
 
+    sofa::core::ConstraintParams cparams(*params);
+
     for (it = tagList.begin(); it != tagList.end(); ++it)
     {
         this->addTag (*it);
 
         dmsg_info() << "begin constraints reset" ;
-        sofa::simulation::MechanicalResetConstraintVisitor(params).execute(this->getContext());
+        sofa::simulation::MechanicalResetConstraintVisitor(&cparams).execute(this->getContext());
         dmsg_info() << "end constraints reset" ;
 
         dmsg_info() << "begin collision for tag: "<< *it ;
@@ -131,11 +131,12 @@ void MultiTagAnimationLoop::step(const sofa::core::ExecParams* params, SReal dt)
     }
     sofa::helper::AdvancedTimer::stepEnd("UpdateMapping");
 
-#ifndef SOFA_NO_UPDATE_BBOX
-    sofa::helper::AdvancedTimer::stepBegin("UpdateBBox");
-    this->gnode->execute<UpdateBoundingBoxVisitor>(params);
-    sofa::helper::AdvancedTimer::stepEnd("UpdateBBox");
-#endif
+    if (!SOFA_NO_UPDATE_BBOX)
+    {
+        sofa::helper::AdvancedTimer::stepBegin("UpdateBBox");
+        this->gnode->execute<UpdateBoundingBoxVisitor>(params);
+        sofa::helper::AdvancedTimer::stepEnd("UpdateBBox");
+    }
 #ifdef SOFA_DUMP_VISITOR_INFO
     simulation::Visitor::printCloseNode("Step");
 #endif

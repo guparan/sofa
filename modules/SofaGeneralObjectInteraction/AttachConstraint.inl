@@ -24,7 +24,7 @@
 
 #include <SofaGeneralObjectInteraction/AttachConstraint.h>
 #include <sofa/core/visual/VisualParams.h>
-#include <sofa/helper/gl/template.h>
+#include <sofa/defaulttype/RGBAColor.h>
 #include <sofa/defaulttype/RigidTypes.h>
 #include <iostream>
 #include <SofaBaseTopology/TopologySubsetData.inl>
@@ -478,8 +478,6 @@ void AttachConstraint<DataTypes>::init()
     f_indices2.createTopologicalEngine(topology);
     f_indices2.registerTopologicalData();
 
-    constraintReleased.resize(f_indices2.getValue().size());
-
     if (f_radius.getValue() >= 0 && f_indices1.getValue().size()==0 && f_indices2.getValue().size()==0 && this->mstate1 && this->mstate2)
     {
         const Real maxR = f_radius.getValue();
@@ -547,16 +545,7 @@ void AttachConstraint<DataTypes>::init()
         msg_error() << "Size mismatch between indices1 and indices2";
     }
 
-#if 0
-    // Initialize functions and parameters
-    topology::PointSubset my_subset = f_indices.getValue();
-
-    my_subset.setTestFunction(FCTestNewPointFunction);
-    my_subset.setRemovalFunction(FCRemovalFunction);
-
-    my_subset.setTestParameter( (void *) this );
-    my_subset.setRemovalParameter( (void *) this );
-#endif
+    constraintReleased.resize(f_indices2.getValue().size());
     activeFlags.resize(f_indices2.getValue().size());
     std::fill(activeFlags.begin(), activeFlags.end(), true);
     if (f_restRotations.getValue())
@@ -594,6 +583,7 @@ void AttachConstraint<DataTypes>::projectPosition(const core::MechanicalParams *
     VecCoord &res2 = *res2_d.beginEdit();
 
     // update active flags
+    constraintReleased.resize(indices2.size());
     activeFlags.resize(indices2.size());
     if (last)
         lastDist.resize(indices2.size());
@@ -659,6 +649,9 @@ void AttachConstraint<DataTypes>::projectVelocity(const core::MechanicalParams *
     const bool lastFreeRotation = f_lastFreeRotation.getValue();
     const bool clamp = f_clamp.getValue();
 
+    constraintReleased.resize(indices2.size());
+    activeFlags.resize(indices2.size());
+
     for (unsigned int i=0; i<indices1.size() && i<indices2.size(); ++i)
     {
         bool active = true;
@@ -697,6 +690,9 @@ void AttachConstraint<DataTypes>::projectResponse(const core::MechanicalParams *
     const bool freeRotations = f_freeRotations.getValue();
     const bool lastFreeRotation = f_lastFreeRotation.getValue();
     const bool clamp = f_clamp.getValue();
+
+    constraintReleased.resize(indices2.size());
+    activeFlags.resize(indices2.size());
 
     for (unsigned int i=0; i<indices1.size() && i<indices2.size(); ++i)
     {
@@ -754,6 +750,9 @@ void AttachConstraint<DataTypes>::applyConstraint(const core::MechanicalParams *
     unsigned int i=0;
     const bool clamp = f_clamp.getValue();
 
+    constraintReleased.resize(indices.size());
+    activeFlags.resize(indices.size());
+
     for (SetIndexArray::const_iterator it = indices.begin(); it != indices.end(); ++it, ++i)
     {
         if (!clamp && i < activeFlags.size() && !activeFlags[i])
@@ -804,6 +803,9 @@ void AttachConstraint<DataTypes>::applyConstraint(const core::MechanicalParams *
     unsigned int i = 0;
     const bool clamp = f_clamp.getValue();
 
+    constraintReleased.resize(indices.size());
+    activeFlags.resize(indices.size());
+
     for (SetIndexArray::const_iterator it = indices.begin(); it != indices.end(); ++it, ++i)
     {
         if (!clamp && i < activeFlags.size() && !activeFlags[i])
@@ -826,35 +828,39 @@ void AttachConstraint<DataTypes>::applyConstraint(const core::MechanicalParams *
 template <class DataTypes>
 void AttachConstraint<DataTypes>::draw(const core::visual::VisualParams* vparams)
 {
-#ifndef SOFA_NO_OPENGL
     if (!vparams->displayFlags().getShowBehaviorModels())
         return;
+
+    vparams->drawTool()->saveLastState();
+    vparams->drawTool()->disableLighting();
 
     const SetIndexArray & indices1 = f_indices1.getValue();
     const SetIndexArray & indices2 = f_indices2.getValue();
     const VecCoord& x1 = this->mstate1->read(core::ConstVecCoordId::position())->getValue();
     const VecCoord& x2 = this->mstate2->read(core::ConstVecCoordId::position())->getValue();
-    glDisable (GL_LIGHTING);
-    glPointSize(10);
-    glColor4f (1,0.5,0.5,1);
-    glBegin (GL_POINTS);
+
+    sofa::defaulttype::RGBAColor color(1,0.5,0.5,1);
+    std::vector<sofa::defaulttype::Vector3> vertices;
+
     for (unsigned int i=0; i<indices1.size() && i<indices2.size(); ++i)
     {
-        if (activeFlags.size() > i && !activeFlags[i]) continue;
-        sofa::helper::gl::glVertexT(x2[indices2[i]]);
+        if (activeFlags.size() > i && !activeFlags[i])
+            continue;
+        vertices.push_back(sofa::defaulttype::Vector3(x2[indices2[i]][0],x2[indices2[i]][1],x2[indices2[i]][2]));
     }
-    glEnd();
-    glPointSize(1);
-    glColor4f (1,0.5,0.5,1);
-    glBegin (GL_LINES);
+    vparams->drawTool()->drawPoints(vertices,10,color);
+    vertices.clear();
+
+    color = sofa::defaulttype::RGBAColor(1,0.5,0.5,1);
     for (unsigned int i=0; i<indices1.size() && i<indices2.size(); ++i)
     {
-        if (activeFlags.size() > i && !activeFlags[i]) continue;
-        sofa::helper::gl::glVertexT(x1[indices1[i]]);
-        sofa::helper::gl::glVertexT(x2[indices2[i]]);
+        if (activeFlags.size() > i && !activeFlags[i])
+            continue;
+        vertices.push_back(sofa::defaulttype::Vector3(x1[indices1[i]][0],x1[indices1[i]][1],x1[indices1[i]][2]));
+        vertices.push_back(sofa::defaulttype::Vector3(x2[indices2[i]][0],x2[indices2[i]][1],x2[indices2[i]][2]));
     }
-    glEnd();
-#endif /* SOFA_NO_OPENGL */
+    vparams->drawTool()->drawLines(vertices,1,color);
+    vparams->drawTool()->restoreLastState();
 }
 
 } // namespace constraint

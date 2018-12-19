@@ -24,8 +24,6 @@
 #include <sofa/core/ObjectFactory.h>
 #include <sofa/defaulttype/Vec3Types.h>
 #include <sofa/defaulttype/RigidTypes.h>
-//#include <sofa/helper/gl/Axis.h>
-
 
 namespace sofa
 {
@@ -35,9 +33,6 @@ namespace component
 
 namespace projectiveconstraintset
 {
-
-SOFA_DECL_CLASS(ParabolicConstraint)
-
 
 int ParabolicConstraintClass = core::RegisterObject("Apply a parabolic trajectory to given points")
 #ifndef SOFA_FLOAT

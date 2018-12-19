@@ -98,14 +98,13 @@ SOFA_CONSTRAINT_API void UncoupledConstraintCorrection< defaulttype::Rigid3Types
         Rigid3Mass massValue;
 
         //Should use the BaseMatrix API to get the Mass
-        //void getElementMass(unsigned int index, defaulttype::BaseMatrix *m)
         if (node != NULL)
         {
             core::behavior::BaseMass *m = node->mass;
             UniformMass< Rigid3Types, Rigid3Mass > *um = dynamic_cast< UniformMass< Rigid3Types, Rigid3Mass >* > (m);
 
             if (um)
-                massValue = um->getMass();
+                massValue = um->getVertexMass();
             else
                 serr << "WARNING : no mass found" << sendl;
         }
@@ -179,9 +178,7 @@ SOFA_CONSTRAINT_API void UncoupledConstraintCorrection< defaulttype::Rigid3Types
 }
 
 
-SOFA_DECL_CLASS(UncoupledConstraintCorrection)
-
-int UncoupledConstraintCorrectionClass = core::RegisterObject("Component computing contact forces within a simulated body using the compliance method.")
+int UncoupledConstraintCorrectionClass = core::RegisterObject("Component computing constraint forces within a simulated body using the compliance method.")
 #ifndef SOFA_FLOAT
         .add< UncoupledConstraintCorrection< Vec1dTypes > >()
         .add< UncoupledConstraintCorrection< Vec2dTypes > >()

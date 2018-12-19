@@ -22,15 +22,7 @@
 #ifndef SOFA_CORE_OBJECTMODEL_TAG_H
 #define SOFA_CORE_OBJECTMODEL_TAG_H
 
-#if !defined(__GNUC__) || (__GNUC__ > 3 || (_GNUC__ == 3 && __GNUC_MINOR__ > 3))
-#pragma once
-#endif
-
-#include <sofa/helper/set.h>
 #include <sofa/defaulttype/DataTypeInfo.h>
-#include <sofa/core/core.h>
-#include <iostream>
-#include <string>
 
 namespace sofa
 {

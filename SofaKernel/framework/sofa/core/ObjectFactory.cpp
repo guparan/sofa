@@ -187,6 +187,10 @@ objectmodel::BaseObject::SPtr ObjectFactory::createObject(objectmodel::BaseConte
             msg_warning(object.get()) << w;
         }
 
+        ////////////////////////// This code is emitting a warning messages if the scene is loaded
+        if( m_callbackOnCreate )
+            m_callbackOnCreate(object.get(), arg);
+
         ///////////////////////// All this code is just there to implement the MakeDataAlias component.
         std::vector<std::string> todelete;
         for(auto& kv : entry->m_dataAlias)
@@ -219,8 +223,6 @@ objectmodel::BaseObject::SPtr ObjectFactory::createObject(objectmodel::BaseConte
             }
             object->parse(&newdesc);
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-
     }
 
     return object;
@@ -442,6 +444,19 @@ RegisterObject& RegisterObject::addCreator(std::string classname,
     }
     return *this;
 }
+
+//template<class RealObject>
+//RegisterObject& RegisterObject::add(bool defaultTemplate)
+//{
+//    RealObject* p = NULL;
+//    std::string classname = RealObject::className(p);
+//    std::string templatename = RealObject::templateName(p);
+
+//    if (defaultTemplate)
+//        entry.defaultTemplate = templatename;
+
+//    return addCreator(classname, templatename, ObjectFactory::Creator::SPtr(new ObjectCreator<RealObject>));
+//}
 
 RegisterObject::operator int()
 {

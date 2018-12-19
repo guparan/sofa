@@ -30,6 +30,8 @@
 #include <sofa/defaulttype/VecTypes.h>
 #include <sofa/defaulttype/RigidTypes.h>
 
+#include <sofa/helper/StringUtils.h>
+
 namespace sofa
 {
 
@@ -65,7 +67,7 @@ public:
 
     void reinit() override;
 
-    void update() override;
+    void doUpdate() override;
 
     virtual std::string getTemplateName() const override
     {
@@ -110,7 +112,7 @@ protected:
             ohelp << help << (i+1);
             std::string name_i = oname.str();
             std::string help_i = ohelp.str();
-            Data<T>* d = new Data<T>(help_i.c_str(), true, false);
+            Data<T>* d = new Data<T>(sofa::helper::getAStringCopy(help_i.c_str()), true, false);
             d->setName(name_i);
             vf.push_back(d);
             this->addData(d);
@@ -167,7 +169,7 @@ protected:
     }
 };
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_COMPONENT_ENGINE_MERGEMESHES_CPP)
+#if  !defined(SOFA_COMPONENT_ENGINE_MERGEMESHES_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_GENERAL_ENGINE_API MergeMeshes<defaulttype::Vec1dTypes>;
 extern template class SOFA_GENERAL_ENGINE_API MergeMeshes<defaulttype::Vec2dTypes>;

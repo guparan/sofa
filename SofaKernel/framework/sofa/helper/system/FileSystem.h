@@ -68,6 +68,15 @@ static bool listDirectory(const std::string& directoryPath,
                           std::vector<std::string>& outputFilenames,
                           const std::string& extension);
 
+/// @brief Find the files from a directory which match the given extension.
+///
+/// It pushes the files absolute paths in the vector provided in argument.
+/// @warning The directory must exist.
+/// @return the number of files found or -1 as error
+static int findFiles(const std::string& directoryPath,
+                          std::vector<std::string>& outputFilePaths,
+                          const std::string& extension, const int depth = 0);
+
 /// @brief Create a directory. (This function accepts relative paths)
 ///
 /// On Unix platform, the directory is created with permissions 0755. On
@@ -100,6 +109,9 @@ static bool isDirectory(const std::string& path);
 
 /// @brief Return true if and only if the given file path is absolute.
 static bool isAbsolute(const std::string& path);
+
+/// @brief Return true if and only if the given file path is an existing file.
+static bool isFile(const std::string& path);
 
 /// @brief Replace backslashes with slashes.
 static std::string convertBackSlashesToSlashes(const std::string& path);

@@ -202,9 +202,7 @@ bool PluginManager::loadPluginByName(const std::string& pluginName, const std::s
 
 bool PluginManager::loadPlugin(const std::string& plugin, const std::string& suffix, bool ignoreCase, std::ostream* errlog)
 {
-    // If 'plugin' ends with ".so", ".dll" or ".dylib", this is a path
-    const std::string dotExt = "." + DynamicLibrary::extension;
-    if (std::equal(dotExt.rbegin(), dotExt.rend(), plugin.rbegin()))
+    if (FileSystem::isFile(plugin))
     {
         return loadPluginByPath(plugin,  errlog);
     }
@@ -230,15 +228,12 @@ bool PluginManager::unloadPlugin(const std::string &pluginPath, std::ostream* er
     }
 }
 
-Plugin* PluginManager::getPlugin(const std::string& plugin, const std::string& suffix, bool ignoreCase)
+Plugin* PluginManager::getPlugin(const std::string& plugin, const std::string& /*suffix*/, bool /*ignoreCase*/)
 {
     std::string pluginPath = plugin;
 
-    // If 'plugin' ends with ".so", ".dll" or ".dylib", this is a path
-    const std::string dotExt = "." + DynamicLibrary::extension;
-    if (!std::equal(dotExt.rbegin(), dotExt.rend(), plugin.rbegin()))
-    {
-        pluginPath = findPlugin(plugin, suffix, ignoreCase);
+    if (!FileSystem::isFile(plugin)) {
+        pluginPath = findPlugin(plugin);
     }
 
     if (!pluginPath.empty() && m_pluginMap.find(pluginPath) != m_pluginMap.end())
@@ -305,7 +300,7 @@ std::string PluginManager::findPlugin(const std::string& pluginName, const std::
     for (std::vector<std::string>::iterator i = m_searchPaths.begin(); i!=m_searchPaths.end(); i++)
     {
         const std::string path = *i + "/" + libName;
-        if (FileSystem::exists(path))
+        if (FileSystem::isFile(path))
             return path;
     }
     // Second try: case insensitive
@@ -335,10 +330,7 @@ bool PluginManager::pluginIsLoaded(const std::string& plugin)
 {
     std::string pluginPath = plugin;
 
-    // If 'plugin' ends with ".so", ".dll" or ".dylib", this is a path
-    const std::string dotExt = "." + DynamicLibrary::extension;
-    if (!std::equal(dotExt.rbegin(), dotExt.rend(), plugin.rbegin()))
-    {
+    if (!FileSystem::isFile(plugin)) {
         pluginPath = findPlugin(plugin);
     }
 

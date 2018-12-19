@@ -29,7 +29,7 @@
 
 
 // for memory :
-// SOFA_NEW_HEXA :
+// HEXA :
 //
 // 	     7----6
 //      /|   /|
@@ -157,7 +157,7 @@ protected:
 
 };
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_COMPONENT_FORCEFIELD_HEXAHEDRONCOMPOSITEFEMFORCEFIELDANDMASS_CPP)
+#if  !defined(SOFA_COMPONENT_FORCEFIELD_HEXAHEDRONCOMPOSITEFEMFORCEFIELDANDMASS_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_NON_UNIFORM_FEM_API HexahedronCompositeFEMForceFieldAndMass<defaulttype::Vec3dTypes>;
 #endif

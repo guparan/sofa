@@ -24,13 +24,6 @@
 #include "config.h"
 
 #include <SofaBaseCollision/BaseProximityIntersection.h>
-#include <sofa/helper/FnDispatcher.h>
-#include <SofaBaseCollision/CapsuleModel.h>
-#include <SofaBaseCollision/SphereModel.h>
-#include <SofaBaseCollision/CubeModel.h>
-#include <SofaBaseCollision/CapsuleIntTool.h>
-#include <SofaBaseCollision/OBBModel.h>
-#include <SofaBaseCollision/OBBIntTool.h>
 
 namespace sofa
 {
@@ -67,7 +60,7 @@ namespace core
 {
 namespace collision
 {
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_COMPONENT_COLLISION_NEWPROXIMITYINTERSECTION_CPP)
+#if  !defined(SOFA_COMPONENT_COLLISION_NEWPROXIMITYINTERSECTION_CPP)
 extern template class SOFA_BASE_COLLISION_API IntersectorFactory<component::collision::NewProximityIntersection>;
 #endif
 }

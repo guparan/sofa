@@ -23,9 +23,7 @@
 #define SOFA_CORE_BEHAVIOR_MECHANICALSTATE_H
 
 #include <sofa/core/behavior/BaseMechanicalState.h>
-#include <sofa/core/VecId.h>
 #include <sofa/core/State.h>
-#include <sofa/defaulttype/DataTypeInfo.h>
 
 namespace sofa
 {
@@ -222,7 +220,7 @@ public:
 
 };
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_CORE_BEHAVIOR_MECHANICALSTATE_CPP)
+#if  !defined(SOFA_CORE_BEHAVIOR_MECHANICALSTATE_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_CORE_API MechanicalState<defaulttype::Vec3dTypes>;
 extern template class SOFA_CORE_API MechanicalState<defaulttype::Vec2dTypes>;

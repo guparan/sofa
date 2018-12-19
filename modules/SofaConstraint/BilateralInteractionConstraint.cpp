@@ -81,7 +81,7 @@ public:
             qQ = Q.getOrientation();
             qP.normalize();
             qQ.normalize();
-            dQP = qDiff(qQ, qP);
+            dQP = qP.quatDiff(qQ, qP);
             dQP.normalize();
 
             qQ2 = qP*dQP;
@@ -109,7 +109,7 @@ public:
             resTab[offset] = new BilateralConstraintResolution3Dof();
             offset += 3;
             BilateralConstraintResolution3Dof* temp = new BilateralConstraintResolution3Dof();
-            temp->tolerance = tolerance;	// specific (smaller) tolerance for the rotation
+            temp->setTolerance(tolerance);	// specific (smaller) tolerance for the rotation
             resTab[offset] = temp;
             offset += 3;
         }
@@ -414,8 +414,6 @@ void BilateralInteractionConstraint<defaulttype::Rigid3fTypes>::addContact(Deriv
 
 #endif
 
-
-SOFA_DECL_CLASS(BilateralInteractionConstraint)
 
 int BilateralInteractionConstraintClass = core::RegisterObject("TODO-BilateralInteractionConstraint")
         #ifdef SOFA_WITH_DOUBLE

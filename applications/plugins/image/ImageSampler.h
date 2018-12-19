@@ -29,6 +29,7 @@
 #include <sofa/core/objectmodel/BaseObject.h>
 #include <sofa/core/topology/BaseMeshTopology.h>
 #include <sofa/core/visual/VisualParams.h>
+#include <sofa/helper/system/gl.h>
 
 #include <sofa/core/objectmodel/Event.h>
 #include <sofa/simulation/AnimateEndEvent.h>
@@ -569,12 +570,8 @@ protected:
 
     unsigned int time;
 
-    virtual void update() override
+    virtual void doUpdate() override
     {
-        updateAllInputsIfDirty(); // easy to ensure that all inputs are up-to-date
-
-        cleanDirty();
-
         raParam params(this->param);
 
         if(this->method.getValue().getSelectedId() == REGULAR)
