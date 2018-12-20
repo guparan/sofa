@@ -194,17 +194,17 @@ int GUIManager::Init(const char* argv0, const char* name)
     BaseGUI::SetArgumentParser(currentArgumentParser);
     sofa::simulation::common::init();
 
-//    static bool first = true;
-//    if (first)
-//    {
-//        sofa::component::initComponentBase();
-//        sofa::component::initComponentCommon();
-//        sofa::component::initComponentGeneral();
-//        sofa::component::initComponentAdvanced();
-//        sofa::component::initComponentMisc();
+    static bool first = true;
+    if (first)
+    {
+        sofa::component::initComponentBase();
+        sofa::component::initComponentCommon();
+        sofa::component::initComponentGeneral();
+        sofa::component::initComponentAdvanced();
+        sofa::component::initComponentMisc();
 
-//        first = false;
-//    }
+        first = false;
+    }
 
     if (currentGUI)
         return 0; // already initialized
