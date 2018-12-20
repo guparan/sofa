@@ -194,15 +194,16 @@ add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/SofaCommon)
 add_subdirectory(SofaGeneral)
 add_subdirectory(SofaAdvanced)
 add_subdirectory(SofaMisc)
-add_subdirectory(SofaGui)
-
-## Packages
-add_subdirectory(applications/packages)
 
 ## Modules
 ## in the consortium convention a module is a similar to a plugin the difference is that
 ## a module is hosted and managed by the consortium while plugins are hosted and managed by third parties.
 add_subdirectory(modules)
+
+## Packages
+add_subdirectory(applications/packages)
+
+add_subdirectory(SofaGui)
 
 # SofaTest depends on SofaPython, so we add SofaPython before SofaTest.
 sofa_add_plugin( applications/plugins/SofaPython SofaPython )
