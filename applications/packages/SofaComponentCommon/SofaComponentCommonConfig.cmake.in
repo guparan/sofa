@@ -5,6 +5,7 @@
 find_package(SofaCommon REQUIRED)
 
 if(NOT TARGET @PROJECT_NAME@)
+    include("${CMAKE_CURRENT_LIST_DIR}/SofaCommonTargets.cmake")
     include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@Targets.cmake")
 endif()
 

@@ -84,7 +84,7 @@ TEST(MessageHandlerComponent, simpleInit)
 
 TEST(MessageHandlerComponent, missingHandler)
 {
-    sofa::component::initBaseUtils();
+    sofa::component::initComponentBase();
 
     string scene =
         "<?xml version='1.0'?>                                               "
@@ -104,7 +104,7 @@ TEST(MessageHandlerComponent, missingHandler)
 
 TEST(MessageHandlerComponent, invalidHandler)
 {
-    sofa::component::initBaseUtils();
+    sofa::component::initComponentBase();
 
     string scene =
         "<?xml version='1.0'?>                                               "
@@ -124,7 +124,7 @@ TEST(MessageHandlerComponent, invalidHandler)
 
 TEST(MessageHandlerComponent, clangHandler)
 {
-    sofa::component::initBaseUtils();
+    sofa::component::initComponentBase();
 
     string scene =
         "<?xml version='1.0'?>                                               "
