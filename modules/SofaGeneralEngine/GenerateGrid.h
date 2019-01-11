@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -23,9 +23,7 @@
 #define SOFA_COMPONENT_ENGINE_GENERATEGRID_H
 #include "config.h"
 
-#if !defined(__GNUC__) || (__GNUC__ > 3 || (_GNUC__ == 3 && __GNUC_MINOR__ > 3))
-#pragma once
-#endif
+
 
 #include <sofa/core/DataEngine.h>
 #include <sofa/core/objectmodel/BaseObject.h>
@@ -75,7 +73,7 @@ public:
 
     void reinit() override;
 
-    void update() override;
+    void doUpdate() override;
 
     virtual std::string getTemplateName() const override
     {
@@ -93,13 +91,13 @@ public:
     Data<SeqQuads> d_quad; ///< output quads
     Data<SeqTriangles> d_triangle; ///< output triangles
     Data<SeqHexahedra> d_hexahedron; ///< output hexahedra
-    Data<Vec3> d_minCorner; /// the position of the minimum corner 
-    Data<Vec3> d_maxCorner; ///the position of the maximum corner 
-    Data<Vec3Int> d_resolution; /// the resolution in the 3 directions
+    Data<Vec3> d_minCorner; ///< the position of the minimum corner 
+    Data<Vec3> d_maxCorner; ///< the position of the maximum corner 
+    Data<Vec3Int> d_resolution; ///< the resolution in the 3 directions
 };
 
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_COMPONENT_ENGINE_GENERATEGRID_CPP)
+#if  !defined(SOFA_COMPONENT_ENGINE_GENERATEGRID_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_GENERAL_ENGINE_API GenerateGrid<defaulttype::Vec3dTypes>;
 extern template class SOFA_GENERAL_ENGINE_API GenerateGrid<defaulttype::Vec2dTypes>;

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -48,7 +48,7 @@ struct IntrUtil<TTriangle<DataType> >{
 
 
 template <class TDataTypes1,class TDataTypes2>
-class IntrAxis<TTriangle<TDataTypes1>,TOBB<TDataTypes2> >
+class SOFA_MESH_COLLISION_API IntrAxis<TTriangle<TDataTypes1>,TOBB<TDataTypes2> >
 {
 public:
     typedef typename TDataTypes1::Real Real;
@@ -100,7 +100,7 @@ public:
 
 
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_COMPONENT_COLLISION_INTRMESHUTILITY_CPP)
+#if  !defined(SOFA_COMPONENT_COLLISION_INTRMESHUTILITY_CPP)
 #ifndef SOFA_FLOAT
 extern template struct SOFA_MESH_COLLISION_API IntrUtil<TTriangle<defaulttype::Vec3dTypes> >;
 extern template class SOFA_MESH_COLLISION_API FindContactSet<TTriangle<defaulttype::Vec3dTypes>,TOBB<defaulttype::Rigid3dTypes> >;

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -49,15 +49,18 @@ public:
     class SOFA_SIMULATION_GRAPH_API SceneInstance
     {
     public:
-
          SceneInstance(const std::string& rootname="root") ;
          SceneInstance(const std::string& type, const std::string& memory) ;
          ~SceneInstance() ;
+
+        /// Create a new scene instance from the content of the filename using the factory.
+        static SceneInstance LoadFromFile(const std::string& filename) ;
 
         Node::SPtr root ;
         Simulation* simulation {nullptr} ;
 
         void initScene() ;
+        void simulate(const double timestep) ;
     } ;
 };
 

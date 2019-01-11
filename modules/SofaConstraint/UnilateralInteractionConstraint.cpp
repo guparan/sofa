@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -37,8 +37,6 @@ namespace constraintset
 using namespace sofa::defaulttype;
 using namespace sofa::helper;
 
-SOFA_DECL_CLASS(UnilateralInteractionConstraint)
-
 //TODO(dmarchal) What does this TODO mean ?
 int UnilateralInteractionConstraintClass = core::RegisterObject("TODO-UnilateralInteractionConstraint")
 #ifndef SOFA_FLOAT
@@ -66,8 +64,6 @@ void UnilateralConstraintResolutionWithFriction::init(int line, double** w, doub
     _W[3]=w[line+1][line+1];
     _W[4]=w[line+1][line+2];
     _W[5]=w[line+2][line+2];
-
-//	return;
 
     ////////////////// christian : the following does not work ! /////////
     if(_prev)

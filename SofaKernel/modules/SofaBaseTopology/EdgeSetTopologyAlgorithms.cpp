@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -20,7 +20,6 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 #define SOFA_COMPONENT_TOPOLOGY_EDGESETTOPOLOGYALGORITHMS_CPP
-#include <SofaBaseTopology/EdgeSetTopologyAlgorithms.h>
 #include <SofaBaseTopology/EdgeSetTopologyAlgorithms.inl>
 
 #include <sofa/defaulttype/VecTypes.h>
@@ -37,7 +36,6 @@ namespace topology
 {
 
 using namespace sofa::defaulttype;
-SOFA_DECL_CLASS(EdgeSetTopologyAlgorithms)
 int EdgeSetTopologyAlgorithmsClass = core::RegisterObject("Edge set topology algorithms")
 #ifdef SOFA_FLOAT
         .add< EdgeSetTopologyAlgorithms<Vec3fTypes> >(true) // default template

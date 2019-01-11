@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -69,11 +69,11 @@ using sofa::defaulttype::Vec3d ;
 #ifdef SOFA_WITH_DOUBLE
     using sofa::defaulttype::Rigid3dTypes ;
     using sofa::defaulttype::Vec3dTypes ;
-#endif //
+#endif
 #ifdef SOFA_WITH_FLOAT
     using sofa::defaulttype::Rigid3fTypes ;
     using sofa::defaulttype::Vec3fTypes ;
-#endif //
+#endif
 
 template<class T>
 class BilateralInteractionConstraintSpecialization {};
@@ -113,16 +113,16 @@ protected:
 
     std::vector<unsigned int> cid;
 
-    Data<helper::vector<int> > m1;
-    Data<helper::vector<int> > m2;
-    Data<VecDeriv> restVector;    
+    Data<helper::vector<int> > m1; ///< index of the constraint on the first model
+    Data<helper::vector<int> > m2; ///< index of the constraint on the second model
+    Data<VecDeriv> restVector; ///< Relative position to maintain between attached points (optional)
     VecCoord initialDifference;
 
-    Data<double> d_numericalTolerance;
-    Data<int> activateAtIteration;
-    Data<bool> merge;
-    Data<bool> derivative;
-    Data<bool> keepOrientDiff;
+    Data<double> d_numericalTolerance; ///< a real value specifying the tolerance during the constraint solving. (default=0.0001
+    Data<int> activateAtIteration; ///< activate constraint at specified interation (0 = always enabled, -1=disabled)
+    Data<bool> merge; ///< TEST: merge the bilateral constraints in a unique constraint
+    Data<bool> derivative; ///< TEST: derivative
+    Data<bool> keepOrientDiff; ///< keep the initial difference in orientation (only for rigids)
     std::vector<Vec3d> prevForces;
 
     // grouped square constraints
@@ -223,7 +223,7 @@ template<>
 void BilateralInteractionConstraint<Rigid3fTypes>::addContact(Deriv /*norm*/, Coord P, Coord Q, Real /*contactDistance*/, int m1, int m2, Coord /*Pfree*/, Coord /*Qfree*/, long /*id*/, PersistentID /*localid*/);
 #endif
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_BUILD_CONSTRAINT)
+#if  !defined(SOFA_BUILD_CONSTRAINT)
 #ifdef SOFA_WITH_DOUBLE
 extern template class SOFA_CONSTRAINT_API BilateralInteractionConstraint< Vec3dTypes >;
 extern template class SOFA_CONSTRAINT_API BilateralInteractionConstraint< Rigid3dTypes >;

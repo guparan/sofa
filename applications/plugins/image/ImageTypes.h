@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -32,8 +32,7 @@
 #define cimg_use_opencv
 #endif
 
-#define cimg_display 0
-#include <CImg/SOFACImg.h>
+#include <CImgPlugin/SOFACImg.h>
 #include <sofa/defaulttype/Vec.h>
 #include <sofa/defaulttype/Mat.h>
 #include <sofa/defaulttype/Quat.h>
@@ -850,14 +849,11 @@ public:
             if (ptr && !ptr->displayFlags.getValue().getShowVisualModels()) continue;
 
             const ResizableExtVector<VisualModelTypes::Coord>& verts= visualModels[m]->getVertices();
-            //            const ResizableExtVector<VisualModelTypes::Coord>& verts= visualModels[m]->m_positions.getValue();
-            //            const ResizableExtVector<int> * extvertPosIdx = &visualModels[m]->m_vertPosIdx.getValue();
 
             ResizableExtVector<Coord> tposition; tposition.resize(verts.size());
             unsigned int ind;
             for(unsigned int i=0; i<tposition.size(); i++)
             {
-                /*                if(!extvertPosIdx->empty()) ind=(*extvertPosIdx)[i]; else */ind=i;
                 tposition[i]=transform->toImage(Coord((Real)verts[ind][0],(Real)verts[ind][1],(Real)verts[ind][2]));
             }
             helper::ReadAccessor<Data< core::loader::Material > > mat(visualModels[m]->material);

@@ -1,9 +1,7 @@
 #ifndef SOFA_FLEXIBLE_ImageDensityMass_H
 #define SOFA_FLEXIBLE_ImageDensityMass_H
 
-#if !defined(__GNUC__) || (__GNUC__ > 3 || (_GNUC__ == 3 && __GNUC_MINOR__ > 3))
-#pragma once
-#endif
+
 
 #include <sofa/defaulttype/VecTypes.h>
 #include <sofa/core/State.h>
@@ -85,7 +83,7 @@ public:
 #ifndef SOFA_FLOAT
     Data< defaulttype::ImageD > f_densityImage; ///< the density map
 #else
-	Data< defaulttype::ImageF > f_densityImage;
+	Data< defaulttype::ImageF > f_densityImage; ///< A density map (ratio kg/dm^3)
 #endif 
 
     typedef defaulttype::ImageLPTransform<Real> TransformType;
@@ -104,7 +102,7 @@ public:
 
     //@}
 
-    Data< bool > f_printMassMatrix;
+    Data< bool > f_printMassMatrix; ///< Should the mass matrix be print in console after being precomputed?
 
     Real m_totalMass, m_totalVolume; ///< for debug purpose
 
@@ -180,7 +178,7 @@ protected:
 
 
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_FLEXIBLE_ImageDensityMass_CPP)
+#if  !defined(SOFA_FLEXIBLE_ImageDensityMass_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_Flexible_API ImageDensityMass<defaulttype::Vec3dTypes,core::behavior::ShapeFunctiond,defaulttype::Mat3x3d>; // volume FEM (tetra, hexa)
 //extern template class SOFA_Flexible_API ImageDensityMass<defaulttype::Rigid3dTypes,core::behavior::ShapeFunctiond,defaulttype::Rigid3dMass>; // rigid frame

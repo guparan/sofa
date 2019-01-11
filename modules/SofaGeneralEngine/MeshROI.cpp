@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -35,30 +35,28 @@ namespace engine
 
 using namespace sofa::defaulttype;
 
-SOFA_DECL_CLASS(MeshROI)
-
 int MeshROIClass = core::RegisterObject("Find the primitives (vertex/edge/triangle/tetrahedron) inside a given mesh")
 #ifndef SOFA_FLOAT
         .add< MeshROI<Vec3dTypes> >(true) //default template
         .add< MeshROI<Rigid3dTypes> >()
-        .add< MeshROI<Vec6dTypes> >() //Phuoc
+        .add< MeshROI<Vec6dTypes> >()
 #endif //SOFA_FLOAT
 #ifndef SOFA_DOUBLE
         .add< MeshROI<Vec3fTypes> >()
         .add< MeshROI<Rigid3fTypes> >()
-        .add< MeshROI<Vec6fTypes> >() //Phuoc
+        .add< MeshROI<Vec6fTypes> >()
 #endif //SOFA_DOUBLE
         ;
 
 #ifndef SOFA_FLOAT
 template class SOFA_GENERAL_ENGINE_API MeshROI<Vec3dTypes>;
 template class SOFA_GENERAL_ENGINE_API MeshROI<Rigid3dTypes>;
-template class SOFA_GENERAL_ENGINE_API MeshROI<Vec6dTypes>; //Phuoc
+template class SOFA_GENERAL_ENGINE_API MeshROI<Vec6dTypes>;
 #endif //SOFA_FLOAT
 #ifndef SOFA_DOUBLE
 template class SOFA_GENERAL_ENGINE_API MeshROI<Vec3fTypes>;
 template class SOFA_GENERAL_ENGINE_API MeshROI<Rigid3fTypes>;
-template class SOFA_GENERAL_ENGINE_API MeshROI<Vec6fTypes>; //Phuoc
+template class SOFA_GENERAL_ENGINE_API MeshROI<Vec6fTypes>;
 #endif //SOFA_DOUBLE
 
 

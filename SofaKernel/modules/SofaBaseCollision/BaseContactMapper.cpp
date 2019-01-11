@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -37,6 +37,18 @@ namespace collision
 {
 
 using namespace defaulttype;
+
+std::string GenerateStringID::generate(){
+    static std::string alphanum = "0123456789!@#$%^&*ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    std::string result;
+    result.resize(length);
+    for (int i = 0; i < length; i++)
+        result[i] = alphanum[rand() % length];
+
+    return result;
+}
+
+
 
 #ifndef SOFA_DOUBLE
 template class SOFA_BASE_COLLISION_API BaseContactMapper<defaulttype::Vec3fTypes>;

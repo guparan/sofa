@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -23,9 +23,7 @@
 #define SOFA_COMPONENT_INTERACTIONFORCEFIELD_BOXSTIFFSPRINGFORCEFIELD_H
 #include "config.h"
 
-#if !defined(__GNUC__) || (__GNUC__ > 3 || (_GNUC__ == 3 && __GNUC_MINOR__ > 3))
-#pragma once
-#endif
+
 
 #include <SofaDeformable/StiffSpringForceField.h>
 #include <sofa/defaulttype/Vec.h>
@@ -70,17 +68,17 @@ public:
     void init() override;
     void bwdInit() override;
 
-    Data<Vec6>  box_object1;
-    Data<Vec6>  box_object2;
-    Data<SReal> factorRestLength;
-    Data<bool>  forceOldBehavior;
+    Data<Vec6>  box_object1; ///< Box for the object1 where springs will be attached
+    Data<Vec6>  box_object2; ///< Box for the object2 where springs will be attached
+    Data<SReal> factorRestLength; ///< Factor used to compute the rest length of the springs generated
+    Data<bool>  forceOldBehavior; ///< Keep using the old behavior
     // -- VisualModel interface
 
     void draw(const core::visual::VisualParams* vparams) override;
 
 };
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_COMPONENT_INTERACTIONFORCEFIELD_BOXSTIFFSPRINGFORCEFIELD_CPP)
+#if  !defined(SOFA_COMPONENT_INTERACTIONFORCEFIELD_BOXSTIFFSPRINGFORCEFIELD_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_GENERAL_OBJECT_INTERACTION_API BoxStiffSpringForceField<defaulttype::Vec3dTypes>;
 extern template class SOFA_GENERAL_OBJECT_INTERACTION_API BoxStiffSpringForceField<defaulttype::Vec2dTypes>;

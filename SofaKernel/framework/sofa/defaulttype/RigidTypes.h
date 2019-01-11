@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -643,6 +643,15 @@ public:
     inline friend std::istream& operator >> ( std::istream& in, RigidCoord<3,real>& v )
     {
         in>>v.center>>v.orientation;
+        if (!v.orientation.isNormalized())
+        {
+            std::stringstream text;
+            text << "Rigid Object with invalid quaternion (non-unitary norm)! Normalising quaternion value... " << msgendl;
+            text << "Previous value was: " << v.orientation << msgendl ;
+            v.orientation.normalize();
+            text << "New value is: " << v.orientation;
+            msg_warning("Rigid") << text.str();
+        }
         return in;
     }
     static int max_size()

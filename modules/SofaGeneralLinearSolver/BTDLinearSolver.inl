@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -805,7 +805,9 @@ bool BTDLinearSolver<Matrix,Vector>::addJMInvJt(RMatrix& result, JMatrix& J, dou
     }
 
 
-    if (f_verbose.getValue())
+    const bool verbose  = this->f_verbose.getValue();
+
+    if (verbose)
     {
 // debug christian: print of the inverse matrix:
         sout<< "C = ["<<sendl;
@@ -852,7 +854,12 @@ bool BTDLinearSolver<Matrix,Vector>::addJMInvJt(RMatrix& result, JMatrix& J, dou
                     acc += val1 * getMinvElement(col1,col2) * val2;
                 }
             }
-            sout << "W("<<row1<<","<<row2<<") += "<<acc<<" * "<<fact<<sendl;
+
+            if (verbose)
+            {
+                sout << "W("<<row1<<","<<row2<<") += "<<acc<<" * "<<fact<<sendl;
+            }
+
             acc *= fact;
             result.add(row1,row2,acc);
             if (row1!=row2)

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -23,16 +23,9 @@
 #define SOFA_CORE_BEHAVIOR_PAIRINTERACTIONFORCEFIELD_H
 
 #include <sofa/core/core.h>
-#include <sofa/core/MultiVecId.h>
-#include <sofa/core/MechanicalParams.h>
 #include <sofa/core/behavior/BaseInteractionForceField.h>
-#include <sofa/core/behavior/MechanicalState.h>
 
-#include <sofa/core/objectmodel/Data.h>
-#include <sofa/defaulttype/Vec.h>
 
-#include <sofa/defaulttype/Vec3Types.h>
-#include <sofa/defaulttype/RigidTypes.h>
 
 namespace sofa
 {
@@ -216,11 +209,11 @@ public:
             std::string object2 = arg->getAttribute("object2","");
             if (!object1.empty())
             {
-                arg->setAttribute("object1", object1.c_str());
+                arg->setAttribute("object1", object1);
             }
             if (!object2.empty())
             {
-                arg->setAttribute("object2", object2.c_str());
+                arg->setAttribute("object2", object2);
             }
             obj->parse(arg);
         }
@@ -260,7 +253,7 @@ protected:
 
 };
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_CORE_BEHAVIOR_PAIRINTERACTIONFORCEFIELD_CPP)
+#if  !defined(SOFA_CORE_BEHAVIOR_PAIRINTERACTIONFORCEFIELD_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_CORE_API PairInteractionForceField<defaulttype::Vec6dTypes>;
 extern template class SOFA_CORE_API PairInteractionForceField<defaulttype::Vec3dTypes>;

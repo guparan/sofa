@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -35,10 +35,18 @@ using sofa::core::objectmodel::BaseObjectDescription ;
 #include <sofa/simulation/XMLPrintVisitor.h>
 using sofa::simulation::XMLPrintVisitor ;
 
+#include <sofa/helper/system/PluginManager.h>
+using sofa::helper::system::PluginManager ;
+
 namespace sofa
 {
 namespace simpleapi
 {
+
+bool importPlugin(const std::string& name)
+{
+    return PluginManager::getInstance().loadPlugin(name) ;
+}
 
 void dumpScene(Node::SPtr root)
 {
@@ -66,7 +74,7 @@ Node::SPtr createRootNode(Simulation::SPtr s, const std::string& name,
     BaseObjectDescription desc(name.c_str(), "Node");
     for(auto& kv : params)
     {
-        desc.setAttribute(kv.first.c_str(), kv.second.c_str());
+        desc.setAttribute(kv.first.c_str(), kv.second);
     }
     root->parse(&desc) ;
 
@@ -81,7 +89,7 @@ BaseObject::SPtr createObject(Node::SPtr parent, const std::string& type, const 
     BaseObjectDescription desc(type.c_str(),type.c_str());
     for(auto& kv : params)
     {
-        desc.setAttribute(kv.first.c_str(), kv.second.c_str());
+        desc.setAttribute(kv.first.c_str(), kv.second);
     }
 
     /// Create the object.
@@ -103,7 +111,7 @@ Node::SPtr createChild(Node::SPtr& node, const std::string& name, const std::map
     BaseObjectDescription desc(name.c_str(), "Node");
     for(auto& kv : params)
     {
-        desc.setAttribute(kv.first.c_str(), kv.second.c_str());
+        desc.setAttribute(kv.first.c_str(), kv.second);
     }
     Node::SPtr tmp = node->createChild(name);
     tmp->parse(&desc);

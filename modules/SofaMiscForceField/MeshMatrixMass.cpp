@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -22,7 +22,6 @@
 #define SOFA_COMPONENT_MASS_MESHMATRIXMASS_CPP
 #include <SofaMiscForceField/MeshMatrixMass.inl>
 #include <sofa/core/ObjectFactory.h>
-#include <sofa/helper/gl/Axis.h>
 
 namespace sofa
 {
@@ -41,8 +40,8 @@ using namespace sofa::defaulttype;
 template <>
 Vector6 MeshMatrixMass<Vec3dTypes, double>::getMomentum ( const core::MechanicalParams*, const DataVecCoord& vx, const DataVecDeriv& vv ) const
 {
-    const MassVector &vertexMass= vertexMassInfo.getValue();
-    const MassVector &edgeMass= edgeMassInfo.getValue();
+    const MassVector &vertexMass= d_vertexMassInfo.getValue();
+    const MassVector &edgeMass= d_edgeMassInfo.getValue();
 
     helper::ReadAccessor< DataVecCoord > x = vx;
     helper::ReadAccessor< DataVecDeriv > v = vv;
@@ -84,8 +83,8 @@ Vector6 MeshMatrixMass<Vec3dTypes, double>::getMomentum ( const core::Mechanical
 template <>
 Vector6 MeshMatrixMass<Vec3fTypes, float>::getMomentum ( const core::MechanicalParams*, const DataVecCoord& vx, const DataVecDeriv& vv ) const
 {
-    const MassVector &vertexMass= vertexMassInfo.getValue();
-    const MassVector &edgeMass= edgeMassInfo.getValue();
+    const MassVector &vertexMass= d_vertexMassInfo.getValue();
+    const MassVector &edgeMass= d_edgeMassInfo.getValue();
 
     helper::ReadAccessor< DataVecCoord > x = vx;
     helper::ReadAccessor< DataVecDeriv > v = vv;
@@ -130,31 +129,29 @@ Vector6 MeshMatrixMass<Vec3fTypes, float>::getMomentum ( const core::MechanicalP
 
 
 
-SOFA_DECL_CLASS(MeshMatrixMass)
-
 // Register in the Factory
 int MeshMatrixMassClass = core::RegisterObject("Define a specific mass for each particle")
 #ifndef SOFA_FLOAT
-        .add< MeshMatrixMass<Vec3dTypes,double> >()
-        .add< MeshMatrixMass<Vec2dTypes,double> >()
-        .add< MeshMatrixMass<Vec1dTypes,double> >()
+        .add< MeshMatrixMass<Vec3dTypes,Vec3dTypes::Real> >()
+        .add< MeshMatrixMass<Vec2dTypes,Vec2dTypes::Real> >()
+        .add< MeshMatrixMass<Vec1dTypes,Vec1dTypes::Real> >()
 #endif
 #ifndef SOFA_DOUBLE
-        .add< MeshMatrixMass<Vec3fTypes,float> >()
-        .add< MeshMatrixMass<Vec2fTypes,float> >()
-        .add< MeshMatrixMass<Vec1fTypes,float> >()
+        .add< MeshMatrixMass<Vec3fTypes,Vec3fTypes::Real> >()
+        .add< MeshMatrixMass<Vec2fTypes,Vec2fTypes::Real> >()
+        .add< MeshMatrixMass<Vec1fTypes,Vec1fTypes::Real> >()
 #endif
         ;
 
 #ifndef SOFA_FLOAT
-template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec3dTypes,double>;
-template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec2dTypes,double>;
-template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec1dTypes,double>;
+template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec3dTypes,Vec3dTypes::Real>;
+template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec2dTypes,Vec2dTypes::Real>;
+template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec1dTypes,Vec1dTypes::Real>;
 #endif
 #ifndef SOFA_DOUBLE
-template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec3fTypes,float>;
-template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec2fTypes,float>;
-template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec1fTypes,float>;
+template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec3fTypes,Vec3fTypes::Real>;
+template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec2fTypes,Vec2fTypes::Real>;
+template class SOFA_MISC_FORCEFIELD_API MeshMatrixMass<Vec1fTypes,Vec1fTypes::Real>;
 #endif
 
 

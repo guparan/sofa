@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -66,7 +66,7 @@ public:
 
     void reinit() override;
 
-    void update() override;
+    void doUpdate() override;
 
     virtual std::string getTemplateName() const override
     {
@@ -78,13 +78,13 @@ public:
         return Data<Value>::templateName();
     }
 
-    Data<unsigned int> f_nbInputs;
+    Data<unsigned int> f_nbInputs; ///< Number of input vectors
     helper::vectorData<VecValue> vf_inputs;
-    Data<VecValue> f_output;
+    Data<VecValue> f_output; ///< Output vector
 
 };
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_COMPONENT_ENGINE_MERGEVECTORS_CPP)
+#if  !defined(SOFA_COMPONENT_ENGINE_MERGEVECTORS_CPP)
 
 extern template class SOFA_GENERAL_ENGINE_API MergeVectors< helper::vector<int> >;
 extern template class SOFA_GENERAL_ENGINE_API MergeVectors< helper::vector<bool> >;

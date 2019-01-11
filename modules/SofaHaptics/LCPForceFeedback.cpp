@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -170,9 +170,6 @@ template class SOFA_HAPTICS_API LCPForceFeedback<defaulttype::Rigid3dTypes>;
 template class SOFA_HAPTICS_API LCPForceFeedback<defaulttype::Vec1fTypes>;
 template class SOFA_HAPTICS_API LCPForceFeedback<defaulttype::Rigid3fTypes>;
 #endif
-
-SOFA_DECL_CLASS(LCPForceFeedback)
-
 
 } // namespace controller
 

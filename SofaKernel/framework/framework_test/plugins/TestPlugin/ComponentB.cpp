@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -24,7 +24,7 @@
 #include "ComponentB.h"
 
 #include <sofa/core/ObjectFactory.h>
-
+#include <sofa/defaulttype/VecTypes.h>
 
 namespace sofa
 {
@@ -42,8 +42,6 @@ template<class T>
 ComponentB<T>::~ComponentB()
 {
 }
-
-SOFA_DECL_CLASS(ComponentB)
 
 int ComponentBClass = sofa::core::RegisterObject("Component B")
 #ifndef SOFA_FLOAT

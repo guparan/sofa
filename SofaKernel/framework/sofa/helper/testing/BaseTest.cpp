@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU General Public License as published by the Free  *
@@ -38,7 +38,6 @@ using sofa::helper::Utils;
 using sofa::helper::BackTrace;
 
 #include <sofa/helper/system/console.h>
-using sofa::helper::Console ;
 
 #include <sofa/helper/testing/TestMessageHandler.h>
 using sofa::helper::logging::MessageDispatcher ;
@@ -56,15 +55,11 @@ void initializeOnce()
 {
     static bool initialized = false ;
     if(!initialized){
-        Console::setColorsStatus(Console::ColorsDisabled) ;
+        console::setStatus(console::Status::Off) ;
 
         MessageDispatcher::addHandler( MainGtestMessageHandler::getInstance() ) ;
         BackTrace::autodump() ;
 
-
-        //const std::string pluginDir = Utils::getPluginDirectory() ;
-        //PluginRepository.addFirstPath(pluginDir);
-        //PluginManager::getInstance().loadPlugin("SceneCreator") ;
         initialized=true ;
     }
 }
@@ -86,7 +81,7 @@ BaseTest::BaseTest() :
 
     ///gtest already use color so we remove the color from the sofa message to make the distinction
     ///clean and avoid ambiguity.
-    Console::setColorsStatus(Console::ColorsDisabled) ;
+    console::setStatus(console::Status::Off);
 
     ///Repeating this for each class is harmless because addHandler test if the handler is already installed and
     ///if so it don't install it again.

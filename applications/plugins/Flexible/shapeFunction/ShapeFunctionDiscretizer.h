@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -122,7 +122,7 @@ public:
 
 protected:
 
-    virtual void update()
+    virtual void doUpdate()
     {
         if( !_shapeFunction ) return;
 
@@ -131,8 +131,6 @@ protected:
         raTransform inT(this->f_transform);
         if(in->isEmpty())  { serr<<"Image not found"<<sendl; return; }
         const cimg_library::CImg<T>& inimg = in->getCImg(0);  // suppose time=0
-
-        cleanDirty();
 
         // init indices and weights images
         const unsigned int nbref=_shapeFunction->f_nbRef.getValue();

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -35,32 +35,26 @@ using namespace sofa::defaulttype;
 using namespace sofa::core::collision;
 using namespace helper;
 
-SOFA_DECL_CLASS(Cylinder)
-
-int RigidCylinderModelClass = core::RegisterObject("Collision model which represents a set of rigid cylinders")
+static int RigidCylinderModelClass = core::RegisterObject("Collision model which represents a set of rigid cylinders")
 #ifndef SOFA_FLOAT
-        .add<  TCylinderModel<defaulttype::Rigid3dTypes> >()
+        .add<  TCylinderModel<Rigid3dTypes> >()
 #endif
 #ifndef SOFA_DOUBLE
-        .add < TCylinderModel<defaulttype::Rigid3fTypes> >()
+        .add < TCylinderModel<Rigid3fTypes> >()
 #endif
         //TODO(dmarchal): Fix deprecated management...
         .addAlias("Cylinder")
         .addAlias("CylinderModel")
-//.addAlias("CylinderMesh")
-//.addAlias("CylinderSet")
         ;
 
 #ifndef SOFA_FLOAT
-template class SOFA_BASE_COLLISION_API TCylinder<defaulttype::Rigid3dTypes>;
-template class SOFA_BASE_COLLISION_API TCylinderModel<defaulttype::Rigid3dTypes>;
+template class SOFA_BASE_COLLISION_API TCylinder<Rigid3dTypes>;
+template class SOFA_BASE_COLLISION_API TCylinderModel<Rigid3dTypes>;
 #endif
 #ifndef SOFA_DOUBLE
-template class SOFA_BASE_COLLISION_API TCylinder<defaulttype::Rigid3fTypes>;
-template class SOFA_BASE_COLLISION_API TCylinderModel<defaulttype::Rigid3fTypes>;
+template class SOFA_BASE_COLLISION_API TCylinder<Rigid3fTypes>;
+template class SOFA_BASE_COLLISION_API TCylinderModel<Rigid3fTypes>;
 #endif
-
-
 
 
 }

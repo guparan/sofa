@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -24,7 +24,7 @@
 
 #include <SofaGeneralObjectInteraction/AttachConstraint.h>
 #include <sofa/core/visual/VisualParams.h>
-#include <sofa/helper/gl/template.h>
+#include <sofa/defaulttype/RGBAColor.h>
 #include <sofa/defaulttype/RigidTypes.h>
 #include <iostream>
 #include <SofaBaseTopology/TopologySubsetData.inl>
@@ -390,6 +390,10 @@ AttachConstraint<DataTypes>::AttachConstraint()
     , f_lastDir( initData(&f_lastDir,"lastDir", "direction from lastPos at which the attach coustraint should become inactive") )
     , f_clamp( initData(&f_clamp, false,"clamp", "true to clamp particles at lastPos instead of freeing them.") )
     , f_minDistance( initData(&f_minDistance, (Real)-1,"minDistance", "the constraint become inactive if the distance between the points attached is bigger than minDistance.") )
+    , d_positionFactor(initData(&d_positionFactor, (Real)1.0, "positionFactor", "IN: Factor applied to projection of position"))
+    , d_velocityFactor(initData(&d_velocityFactor, (Real)1.0, "velocityFactor", "IN: Factor applied to projection of velocity"))
+    , d_responseFactor(initData(&d_responseFactor, (Real)1.0, "responseFactor", "IN: Factor applied to projection of force/acceleration"))
+    , d_constraintFactor( initData(&d_constraintFactor,"constraintFactor","Constraint factor per pair of points constrained. 0 -> the constraint is released. 1 -> the constraint is fully constrained") )
 {
     // default to indice 0
 //     f_indices1.beginEdit()->push_back(0);
@@ -412,6 +416,10 @@ AttachConstraint<DataTypes>::AttachConstraint(core::behavior::MechanicalState<Da
     , f_lastDir( initData(&f_lastDir,"lastDir", "direction from lastPos at which the attach coustraint should become inactive") )
     , f_clamp( initData(&f_clamp, false,"clamp", "true to clamp particles at lastPos instead of freeing them.") )
     , f_minDistance( initData(&f_minDistance, (Real)-1,"minDistance", "the constraint become inactive if the distance between the points attached is bigger than minDistance.") )
+    , d_positionFactor(initData(&d_positionFactor, (Real)1.0, "positionFactor", "IN: Factor applied to projection of position"))
+    , d_velocityFactor(initData(&d_velocityFactor, (Real)1.0, "velocityFactor", "IN: Factor applied to projection of velocity"))
+    , d_responseFactor(initData(&d_responseFactor, (Real)1.0, "responseFactor", "IN: Factor applied to projection of force/acceleration"))
+    , d_constraintFactor( initData(&d_constraintFactor,"constraintFactor","Constraint factor per pair of points constrained. 0 -> the constraint is released. 1 -> the constraint is fully constrained") )
 {
     // default to indice 0
 //     f_indices1.beginEdit()->push_back(0);
@@ -470,8 +478,6 @@ void AttachConstraint<DataTypes>::init()
     f_indices2.createTopologicalEngine(topology);
     f_indices2.registerTopologicalData();
 
-    constraintReleased.resize(f_indices2.getValue().size());
-
     if (f_radius.getValue() >= 0 && f_indices1.getValue().size()==0 && f_indices2.getValue().size()==0 && this->mstate1 && this->mstate2)
     {
         const Real maxR = f_radius.getValue();
@@ -495,17 +501,51 @@ void AttachConstraint<DataTypes>::init()
                 addConstraint(best, i2);
             }
         }
+
+        helper::vector<Real>& constraintFactor = *d_constraintFactor.beginEdit();
+
+        // constraintFactor default behavior
+        // if NOT set : initialize all constraints active
+        if(!d_constraintFactor.isSet())
+        {
+            unsigned int size = f_indices2.getValue().size();
+
+            constraintFactor.clear();
+            constraintFactor.resize(size);
+
+            for (unsigned int j=0; j<size; ++j)
+            {
+                constraintFactor[j] = 1.0;
+            }
+        }
+        // if set : check size
+        else
+        {
+            if(constraintFactor.size() != f_indices2.getValue().size())
+            {
+                msg_error() << "Size of vector constraintFactor, do not fit number of indices attached";
+            }
+            else
+            {
+                for (unsigned int j=0; j<constraintFactor.size(); ++j)
+                {
+                    if((constraintFactor[j] > 1.0) || (constraintFactor[j] < 0.0))
+                    {
+                        msg_warning() << "Value of vector constraintFactor at indice "<<j<<" is out of bounds [0.0 - 1.0]";
+                    }
+                }
+            }
+        }
+        d_constraintFactor.endEdit();
     }
-#if 0
-    // Initialize functions and parameters
-    topology::PointSubset my_subset = f_indices.getValue();
 
-    my_subset.setTestFunction(FCTestNewPointFunction);
-    my_subset.setRemovalFunction(FCRemovalFunction);
+    // Check coherency of size between indices vectors 1 and 2
+    if(f_indices1.getValue().size() != f_indices2.getValue().size())
+    {
+        msg_error() << "Size mismatch between indices1 and indices2";
+    }
 
-    my_subset.setTestParameter( (void *) this );
-    my_subset.setRemovalParameter( (void *) this );
-#endif
+    constraintReleased.resize(f_indices2.getValue().size());
     activeFlags.resize(f_indices2.getValue().size());
     std::fill(activeFlags.begin(), activeFlags.end(), true);
     if (f_restRotations.getValue())
@@ -523,6 +563,12 @@ template <>
 void AttachConstraint<sofa::defaulttype::Rigid3dTypes>::calcRestRotations();
 #endif
 
+
+template<class DataTypes>
+void AttachConstraint<DataTypes>::projectJacobianMatrix(const core::MechanicalParams* /*mparams*/ /* PARAMS FIRST */, core::MultiMatrixDerivId /*cId*/)
+{
+}
+
 template <class DataTypes>
 void AttachConstraint<DataTypes>::projectPosition(const core::MechanicalParams * /*mparams*/, DataVecCoord& res1_d, DataVecCoord& res2_d)
 {
@@ -537,6 +583,7 @@ void AttachConstraint<DataTypes>::projectPosition(const core::MechanicalParams *
     VecCoord &res2 = *res2_d.beginEdit();
 
     // update active flags
+    constraintReleased.resize(indices2.size());
     activeFlags.resize(indices2.size());
     if (last)
         lastDist.resize(indices2.size());
@@ -602,6 +649,9 @@ void AttachConstraint<DataTypes>::projectVelocity(const core::MechanicalParams *
     const bool lastFreeRotation = f_lastFreeRotation.getValue();
     const bool clamp = f_clamp.getValue();
 
+    constraintReleased.resize(indices2.size());
+    activeFlags.resize(indices2.size());
+
     for (unsigned int i=0; i<indices1.size() && i<indices2.size(); ++i)
     {
         bool active = true;
@@ -640,6 +690,9 @@ void AttachConstraint<DataTypes>::projectResponse(const core::MechanicalParams *
     const bool freeRotations = f_freeRotations.getValue();
     const bool lastFreeRotation = f_lastFreeRotation.getValue();
     const bool clamp = f_clamp.getValue();
+
+    constraintReleased.resize(indices2.size());
+    activeFlags.resize(indices2.size());
 
     for (unsigned int i=0; i<indices1.size() && i<indices2.size(); ++i)
     {
@@ -697,6 +750,9 @@ void AttachConstraint<DataTypes>::applyConstraint(const core::MechanicalParams *
     unsigned int i=0;
     const bool clamp = f_clamp.getValue();
 
+    constraintReleased.resize(indices.size());
+    activeFlags.resize(indices.size());
+
     for (SetIndexArray::const_iterator it = indices.begin(); it != indices.end(); ++it, ++i)
     {
         if (!clamp && i < activeFlags.size() && !activeFlags[i])
@@ -747,6 +803,9 @@ void AttachConstraint<DataTypes>::applyConstraint(const core::MechanicalParams *
     unsigned int i = 0;
     const bool clamp = f_clamp.getValue();
 
+    constraintReleased.resize(indices.size());
+    activeFlags.resize(indices.size());
+
     for (SetIndexArray::const_iterator it = indices.begin(); it != indices.end(); ++it, ++i)
     {
         if (!clamp && i < activeFlags.size() && !activeFlags[i])
@@ -769,35 +828,39 @@ void AttachConstraint<DataTypes>::applyConstraint(const core::MechanicalParams *
 template <class DataTypes>
 void AttachConstraint<DataTypes>::draw(const core::visual::VisualParams* vparams)
 {
-#ifndef SOFA_NO_OPENGL
     if (!vparams->displayFlags().getShowBehaviorModels())
         return;
+
+    vparams->drawTool()->saveLastState();
+    vparams->drawTool()->disableLighting();
 
     const SetIndexArray & indices1 = f_indices1.getValue();
     const SetIndexArray & indices2 = f_indices2.getValue();
     const VecCoord& x1 = this->mstate1->read(core::ConstVecCoordId::position())->getValue();
     const VecCoord& x2 = this->mstate2->read(core::ConstVecCoordId::position())->getValue();
-    glDisable (GL_LIGHTING);
-    glPointSize(10);
-    glColor4f (1,0.5,0.5,1);
-    glBegin (GL_POINTS);
+
+    sofa::defaulttype::RGBAColor color(1,0.5,0.5,1);
+    std::vector<sofa::defaulttype::Vector3> vertices;
+
     for (unsigned int i=0; i<indices1.size() && i<indices2.size(); ++i)
     {
-        if (activeFlags.size() > i && !activeFlags[i]) continue;
-        sofa::helper::gl::glVertexT(x2[indices2[i]]);
+        if (activeFlags.size() > i && !activeFlags[i])
+            continue;
+        vertices.push_back(sofa::defaulttype::Vector3(x2[indices2[i]][0],x2[indices2[i]][1],x2[indices2[i]][2]));
     }
-    glEnd();
-    glPointSize(1);
-    glColor4f (1,0.5,0.5,1);
-    glBegin (GL_LINES);
+    vparams->drawTool()->drawPoints(vertices,10,color);
+    vertices.clear();
+
+    color = sofa::defaulttype::RGBAColor(1,0.5,0.5,1);
     for (unsigned int i=0; i<indices1.size() && i<indices2.size(); ++i)
     {
-        if (activeFlags.size() > i && !activeFlags[i]) continue;
-        sofa::helper::gl::glVertexT(x1[indices1[i]]);
-        sofa::helper::gl::glVertexT(x2[indices2[i]]);
+        if (activeFlags.size() > i && !activeFlags[i])
+            continue;
+        vertices.push_back(sofa::defaulttype::Vector3(x1[indices1[i]][0],x1[indices1[i]][1],x1[indices1[i]][2]));
+        vertices.push_back(sofa::defaulttype::Vector3(x2[indices2[i]][0],x2[indices2[i]][1],x2[indices2[i]][2]));
     }
-    glEnd();
-#endif /* SOFA_NO_OPENGL */
+    vparams->drawTool()->drawLines(vertices,1,color);
+    vparams->drawTool()->restoreLastState();
 }
 
 } // namespace constraint

@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -75,8 +75,6 @@ using namespace sofa::defaulttype;
 using namespace sofa::core;
 using namespace sofa::core::behavior;
 using namespace sofa::component::mapping;
-
-SOFA_DECL_CLASS(CudaRigidMapping)
 
 int RigidMappingCudaClass = core::RegisterObject("Supports GPU-side computations using CUDA")
         .add< RigidMapping< CudaRigid3fTypes, CudaVec3fTypes> >()

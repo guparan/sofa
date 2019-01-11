@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -33,8 +33,6 @@ namespace component
 namespace mapping
 {
 
-SOFA_DECL_CLASS(ProjectionToTargetPlaneMapping)
-
 using namespace defaulttype;
 
 // Register in the Factory
@@ -60,8 +58,6 @@ template class SOFA_MISC_MAPPING_API ProjectionToTargetPlaneMapping< Rigid3fType
 #endif
 
 ///////////////////
-
-SOFA_DECL_CLASS(ProjectionToPlaneMultiMapping)
 
 using namespace defaulttype;
 

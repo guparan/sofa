@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -38,8 +38,6 @@ namespace forcefield
 using namespace sofa::defaulttype;
 using namespace core::behavior;
 
-
-SOFA_DECL_CLASS(ParticlesRepulsionForceField)
 
 int ParticlesRepulsionForceFieldClass = core::RegisterObject("ForceField using SpatialGridContainer to compute repulsion forces in a set of spheres")
 #ifndef SOFA_FLOAT

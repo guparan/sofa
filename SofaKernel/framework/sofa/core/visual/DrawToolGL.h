@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -25,9 +25,6 @@
 #define SOFA_CORE_VISUAL_DRAWTOOLGL_H
 
 #include <sofa/core/visual/DrawTool.h>
-#include <sofa/defaulttype/Vec.h>
-#include <sofa/defaulttype/RGBAColor.h>
-#include <sofa/helper/system/gl.h>
 #include <sofa/helper/gl/BasicShapesGL.h>
 
 namespace sofa
@@ -80,6 +77,8 @@ public:
             const Vector3 &normal1, const Vector3 &normal2, const Vector3 &normal3,
             const Vec4f &c1, const Vec4f &c2, const Vec4f &c3);
     virtual void drawTriangles(const std::vector<Vector3> &points, const Vec4f& colour);
+    virtual void drawTriangles(const std::vector<Vector3> &points,
+            const std::vector< Vec4f > &colour);
     virtual void drawTriangles(const std::vector<Vector3> &points, const Vector3& normal, const Vec4f& colour);
     virtual void drawTriangles(const std::vector<Vector3> &points,
             const std::vector< Vec3i > &index,
@@ -131,6 +130,7 @@ public:
             const Vector3 &normal1, const Vector3 &normal2, const Vector3 &normal3, const Vector3 &normal4,
             const Vec4f &c1, const Vec4f &c2, const Vec4f &c3, const Vec4f &c4);
     virtual void drawQuads(const std::vector<Vector3> &points, const Vec4f& colour) ;
+    virtual void drawQuads(const std::vector<Vector3> &points, const std::vector<Vec4f>& colours);
 
 
     virtual void drawTetrahedron(const Vector3 &p0, const Vector3 &p1, const Vector3 &p2, const Vector3 &p3, const Vec4f &colour);
@@ -145,11 +145,11 @@ public:
     virtual void drawSphere( const Vector3 &p, float radius);
     virtual void drawEllipsoid(const Vector3 &p, const Vector3 &radii);
 
-    virtual void drawBoundingBox( const Vector3 &min, const Vector3 &max );
+    virtual void drawBoundingBox( const Vector3 &min, const Vector3 &max, float size = 1.0);
 
     virtual void draw3DText(const Vector3 &p, float scale, const Vec4f &color, const char* text);
 
-    virtual void draw3DText_Indices(const helper::vector<Vector3> &positions, float scale, const Vec4f &color);
+    virtual void draw3DText_Indices(const std::vector<Vector3> &positions, float scale, const Vec4f &color);
 
     virtual void clear();
 
@@ -231,10 +231,6 @@ public:
     int getPolygonMode() {return mPolygonMode;}
     bool getWireFrameEnabled() {return mWireFrameEnabled;}
 };
-
-//#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_HELPER_GL_DRAWTOOLGL_CPP)
-//extern template class SOFA_CORE_API BasicShapesGL_Sphere < sofa::defaulttype::Vector3 >;
-//#endif // defined(SOFA_EXTERN_TEMPLATE)
 
 }//namespace visual
 

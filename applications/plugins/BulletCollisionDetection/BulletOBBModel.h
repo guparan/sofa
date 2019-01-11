@@ -41,7 +41,7 @@ public:
     typedef typename DataTypes::Quat Quaternion;
     //typedef TBtTriangle<DataTypes> Element;
 
-    sofa::core::objectmodel::Data<SReal> margin;
+    sofa::core::objectmodel::Data<SReal> margin; ///< Margin used for collision detection within bullet
 
     virtual void initBullet();
     virtual void updateBullet();
@@ -72,7 +72,7 @@ protected:
 
 typedef TBulletOBBModel<defaulttype::RigidTypes> BulletOBBModel;
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(SOFA_BUILD_BULLETCOLLISIONDETECTION)
+#if  !defined(SOFA_BUILD_BULLETCOLLISIONDETECTION)
 #ifndef SOFA_FLOAT
 extern template class SOFA_BULLETCOLLISIONDETECTION_API TBulletOBBModel<defaulttype::Rigid3dTypes>;
 #endif

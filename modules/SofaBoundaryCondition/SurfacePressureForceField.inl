@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -25,7 +25,7 @@
 #include <SofaBoundaryCondition/SurfacePressureForceField.h>
 #include <sofa/core/visual/VisualParams.h>
 #include <sofa/core/topology/BaseMeshTopology.h>
-#include <sofa/helper/gl/template.h>
+#include <sofa/defaulttype/RGBAColor.h>
 #include <vector>
 #include <set>
 #include <iostream>
@@ -112,13 +112,6 @@ void SurfacePressureForceField<DataTypes>::verifyDerivative(VecDeriv& v_plus, Ve
         }
         std::cout<<" DVana["<<i<<"] = "<<DV<<" DVval[i].size() = "<<DVval[i].size()<<std::endl;
 
-        /*
-                for(unsigned int j=0; j<DVval[i].size(); j++)
-                {
-                    std::cout<<" M["<<DVind[i][j]<<"] ="<<DVval[i][j]<<std::endl;
-                }
-         */
-
     }
 
 }
@@ -130,13 +123,6 @@ void SurfacePressureForceField<DataTypes>::addForce(const core::MechanicalParams
     VecDeriv& f = *d_f.beginEdit();
     const VecCoord& x = d_x.getValue();
     const VecDeriv& v = d_v.getValue();
-    /*
-        VecCoord xPlus = x;
-        VecDeriv fplus = f;
-      */
-
-//    const Data<VecCoord>* xRest= this->mstate->read(core::ConstVecCoordId::restPosition()) ;
-//    const VecCoord &x0 = xRest->getValue();
 
     m_f.resize(f.size());  for(unsigned int i=0;i<m_f.size();i++) m_f[i].clear(); // store forces for visualization
 
@@ -187,27 +173,6 @@ void SurfacePressureForceField<DataTypes>::addForce(const core::MechanicalParams
                 }
             }
 
-            /*
-
-                        VecDeriv Din;
-                        Din.resize(x.size());
-                       for (unsigned int i=0; i<Din.size(); i++)
-                       {
-                           Real i1,i2,i3;
-                           i1=(Real)(i%3+1);
-                           i2=-(Real)(i%2)+0.156;
-                           i3=(Real)(i%5+2);
-                           Din[i]=Deriv(0.0000123*i1,0.0000152*i2,0.00000981*i3);
-                           xPlus[i]=x[i]+Din[i];
-                       }
-                       addTriangleSurfacePressure(fplus,xPlus,v,p, false);
-
-
-                       verifyDerivative(fplus, f,  derivTriNormalValues,derivTriNormalIndices, Din);
-
-            */
-
-
         }
 
         // Quads
@@ -241,9 +206,6 @@ void SurfacePressureForceField<DataTypes>::addForce(const core::MechanicalParams
 template <class DataTypes>
 void SurfacePressureForceField<DataTypes>::addDForce(const core::MechanicalParams* mparams, DataVecDeriv&  d_df , const DataVecDeriv&  d_dx )
 {
-
-
-	//    Real kFactor = (Real)mparams->kFactorIncludingRayleighDamping(this->rayleighStiffness.getValue());
 	Real kFactor = (Real)mparams->kFactor();
 	if (m_useTangentStiffness.getValue()) {
 		VecDeriv& df       = *(d_df.beginEdit());
@@ -260,9 +222,6 @@ void SurfacePressureForceField<DataTypes>::addDForce(const core::MechanicalParam
 			}
 
 		} 
-		//			for (unsigned int i=0;i<df.size();++i) {
-		//			msg_info()<<"df["<<i<<"]= "<<df[i]<<std::endl;
-		//		}
 		d_df.endEdit();
 	}
 
@@ -306,6 +265,19 @@ void SurfacePressureForceField<DataTypes>::addKToMatrix(const core::MechanicalPa
 	}
 }
 
+template<class DataTypes>
+SReal SurfacePressureForceField<DataTypes>::getPotentialEnergy(const core::MechanicalParams* /*mparams*/, const DataVecCoord&  /* x */) const
+{
+    serr << "Get potentialEnergy not implemented" << sendl;
+    return 0.0;
+}
+
+template<class DataTypes>
+void SurfacePressureForceField<DataTypes>::setPressure(const Real _pressure)
+{
+    this->m_pressure.setValue(_pressure);
+}
+
 template <class DataTypes>
 typename SurfacePressureForceField<DataTypes>::Real SurfacePressureForceField<DataTypes>::computeMeshVolume(const VecDeriv& /*f*/, const VecCoord& x)
 {
@@ -313,29 +285,68 @@ typename SurfacePressureForceField<DataTypes>::Real SurfacePressureForceField<Da
     typedef core::topology::BaseMeshTopology::Quad Quad;
 
     Real volume = 0;
-    int i = 0;
-
-    for (i = 0; i < m_topology->getNbTriangles(); i++)
+    unsigned int nTriangles = 0;
+    const VecIndex& triangleIndices = m_triangleIndices.getValue();
+    if (!triangleIndices.empty())
     {
-        Triangle t = m_topology->getTriangle(i);
-        Deriv ab = x[t[1]] - x[t[0]];
-        Deriv ac = x[t[2]] - x[t[0]];
-        volume += (ab.cross(ac))[2] * (x[t[0]][2] + x[t[1]][2] + x[t[2]][2]) / static_cast<Real>(6.0);
+        nTriangles = triangleIndices.size();
+    }
+    else
+    {
+        nTriangles = m_topology->getNbTriangles();
     }
 
-    for (i = 0; i < m_topology->getNbQuads(); i++)
+    unsigned int triangleIdx = 0;
+    for (unsigned int i = 0; i < nTriangles; i++)
     {
-        Quad q = m_topology->getQuad(i);
-
-        Deriv ab = x[q[1]] - x[q[0]];
-        Deriv ac = x[q[2]] - x[q[0]];
-        Deriv ad = x[q[3]] - x[q[0]];
-
-        volume += ab.cross(ac)[2] * (x[q[0]][2] + x[q[1]][2] + x[q[2]][2]) / static_cast<Real>(6.0);
-        volume += ac.cross(ad)[2] * (x[q[0]][2] + x[q[2]][2] + x[q[3]][2]) / static_cast<Real>(6.0);
+        if (!triangleIndices.empty())
+        {
+            triangleIdx = triangleIndices[i];
+        }
+        else
+        {
+            triangleIdx = i;
+        }
+        Triangle t = m_topology->getTriangle(triangleIdx);
+        const Coord a = x[t[0]];
+        const Coord b = x[t[1]];
+        const Coord c = x[t[2]];
+        volume += dot(cross(a,b),c);
     }
 
-    return volume;
+    unsigned int nQuads = 0;
+    const VecIndex& quadIndices = m_quadIndices.getValue();
+    if (!quadIndices.empty())
+    {
+        nQuads = quadIndices.size();
+    }
+    else
+    {
+        nQuads = m_topology->getNbQuads();
+    }
+
+    unsigned int quadIdx = 0;
+    for (unsigned int i = 0; i < nQuads; i++)
+    {
+        if (!quadIndices.empty())
+        {
+            quadIdx = quadIndices[i];
+        }
+        else
+        {
+            quadIdx = i;
+        }
+        Quad q = m_topology->getQuad(quadIdx);
+        const Coord a = x[q[0]];
+        const Coord b = x[q[1]];
+        const Coord c = x[q[2]];
+        const Coord d = x[q[3]];
+        volume += dot(cross(a,b),c);
+        volume += dot(cross(a,c),d);
+    }
+
+    // Divide by 6 when computing tetrahedron volume
+    return volume / 6.0;
 }
 
 
@@ -475,70 +486,43 @@ const typename SurfacePressureForceField<DataTypes>::Real SurfacePressureForceFi
     return 0.0;
 }
 
-
-
 template<class DataTypes>
 void SurfacePressureForceField<DataTypes>::draw(const core::visual::VisualParams* vparams)
 {
-#ifndef SOFA_NO_OPENGL
     if (!vparams->displayFlags().getShowForceFields()) return;
     if (!this->mstate) return;
 
-    if (vparams->displayFlags().getShowWireFrame())
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-
-    glDisable(GL_LIGHTING);
-
-    glColor4f(0.f,0.8f,0.3f,1.f);
-
-    glBegin(GL_LINE_LOOP);
-    glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-    glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-    glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-    glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-    glEnd();
-
-    glBegin(GL_LINE_LOOP);
-    glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-    glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-    glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-    glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-    glEnd();
-
-    glBegin(GL_LINES);
-    glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-    glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-
-    glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-    glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-
-    glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-    glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-
-    glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-    glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-    glEnd();
-
+    vparams->drawTool()->saveLastState();
 
     if (vparams->displayFlags().getShowWireFrame())
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        vparams->drawTool()->setPolygonMode(0, true);
+
+    vparams->drawTool()->disableLighting();
+
+    const sofa::defaulttype::RGBAColor boxcolor(0.0, 0.8, 0.3, 1.0);
+
+    vparams->drawTool()->setMaterial(boxcolor);
+    vparams->drawTool()->drawBoundingBox(DataTypes::getCPos(m_min.getValue()), DataTypes::getCPos(m_max.getValue()));
+
+    if (vparams->displayFlags().getShowWireFrame())
+        vparams->drawTool()->setPolygonMode(0, false);
 
 
     helper::ReadAccessor<DataVecCoord> x = this->mstate->read(core::ConstVecCoordId::position());
     if (m_drawForceScale.getValue() && m_f.size()==x.size())
     {
         std::vector< defaulttype::Vector3 > points;
-        const sofa::defaulttype::Vec<4,float> color(0,1,0.5,1);
+        const sofa::defaulttype::RGBAColor color(0,1,0.5,1);
 
         for (unsigned int i=0; i<x.size(); i++)
         {
-            points.push_back(x[i]);
-            points.push_back(x[i]+m_f[i]*m_drawForceScale.getValue());
+            points.push_back(DataTypes::getCPos(x[i]));
+            points.push_back(DataTypes::getCPos(x[i]) + DataTypes::getDPos(m_f[i])*m_drawForceScale.getValue());
         }
         vparams->drawTool()->drawLines(points, 1, color);
     }
-#endif /* SOFA_NO_OPENGL */
+
+    vparams->drawTool()->restoreLastState();
 }
 
 #ifndef SOFA_FLOAT
@@ -573,33 +557,73 @@ void SurfacePressureForceField<defaulttype::Rigid3dTypes>::addDForce(const core:
 template <>
 SurfacePressureForceField<defaulttype::Rigid3dTypes>::Real SurfacePressureForceField<defaulttype::Rigid3dTypes>::computeMeshVolume(const VecDeriv& /*f*/, const VecCoord& x)
 {
-	typedef core::topology::BaseMeshTopology::Triangle Triangle;
-	typedef core::topology::BaseMeshTopology::Quad Quad;
+    typedef core::topology::BaseMeshTopology::Triangle Triangle;
+    typedef core::topology::BaseMeshTopology::Quad Quad;
 
-	Real volume = 0;
-	int i = 0;
+    Real volume = 0;
 
-	for (i = 0; i < m_topology->getNbTriangles(); i++)
-	{
-		Triangle t = m_topology->getTriangle(i);
-		defaulttype::Rigid3dTypes::CPos ab = x[t[1]].getCenter() - x[t[0]].getCenter();
-		defaulttype::Rigid3dTypes::CPos ac = x[t[2]].getCenter() - x[t[0]].getCenter();
-		volume += (ab.cross(ac))[2] * (x[t[0]][2] + x[t[1]][2] + x[t[2]][2]) / static_cast<Real>(6.0);
-	}
+    unsigned int nTriangles = 0;
+    const VecIndex& triangleIndices = m_triangleIndices.getValue();
+    if (!triangleIndices.empty())
+    {
+        nTriangles = triangleIndices.size();
+    }
+    else
+    {
+        nTriangles = m_topology->getNbTriangles();
+    }
 
-	for (i = 0; i < m_topology->getNbQuads(); i++)
-	{
-		Quad q = m_topology->getQuad(i);
+    unsigned int triangleIdx = 0;
+    for (unsigned int i = 0; i < nTriangles; i++)
+    {
+        if (!triangleIndices.empty())
+        {
+            triangleIdx = triangleIndices[i];
+        }
+        else
+        {
+            triangleIdx = i;
+        }
+        Triangle t = m_topology->getTriangle(triangleIdx);
+        const defaulttype::Rigid3dTypes::CPos a = x[t[0]].getCenter();
+        const defaulttype::Rigid3dTypes::CPos b = x[t[1]].getCenter();
+        const defaulttype::Rigid3dTypes::CPos c = x[t[2]].getCenter();
+        volume += dot(cross(a,b),c);
+    }
 
-		defaulttype::Rigid3dTypes::CPos ab = x[q[1]].getCenter() - x[q[0]].getCenter();
-		defaulttype::Rigid3dTypes::CPos ac = x[q[2]].getCenter() - x[q[0]].getCenter();
-		defaulttype::Rigid3dTypes::CPos ad = x[q[3]].getCenter() - x[q[0]].getCenter();
+    unsigned int nQuads = 0;
+    const VecIndex& quadIndices = m_quadIndices.getValue();
+    if (!quadIndices.empty())
+    {
+        nQuads = quadIndices.size();
+    }
+    else
+    {
+        nQuads = m_topology->getNbQuads();
+    }
 
-		volume += ab.cross(ac)[2] * (x[q[0]][2] + x[q[1]][2] + x[q[2]][2]) / static_cast<Real>(6.0);
-		volume += ac.cross(ad)[2] * (x[q[0]][2] + x[q[2]][2] + x[q[3]][2]) / static_cast<Real>(6.0);
-	}
+    unsigned int quadIdx = 0;
+    for (unsigned int i = 0; i < nQuads; i++)
+    {
+        if (!quadIndices.empty())
+        {
+            quadIdx = quadIndices[i];
+        }
+        else
+        {
+            quadIdx = i;
+        }
+        Quad q = m_topology->getQuad(quadIdx);
+        const defaulttype::Rigid3dTypes::CPos a = x[q[0]].getCenter();
+        const defaulttype::Rigid3dTypes::CPos b = x[q[1]].getCenter();
+        const defaulttype::Rigid3dTypes::CPos c = x[q[2]].getCenter();
+        const defaulttype::Rigid3dTypes::CPos d = x[q[3]].getCenter();
+        volume += dot(cross(a,b),c);
+        volume += dot(cross(a,c),d);
+    }
 
-	return volume;
+    // Divide by 6 when computing tetrahedron volume
+    return volume / 6.0;
 }
 
 template <>
@@ -687,70 +711,6 @@ void SurfacePressureForceField<defaulttype::Rigid3dTypes>::verifyDerivative(VecD
 {
 }
 
-template<>
-void SurfacePressureForceField<defaulttype::Rigid3dTypes>::draw(const core::visual::VisualParams* vparams)
-{
-#ifndef SOFA_NO_OPENGL
-	if (!vparams->displayFlags().getShowForceFields()) return;
-	if (!this->mstate) return;
-
-	if (vparams->displayFlags().getShowWireFrame())
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-
-	glDisable(GL_LIGHTING);
-
-	glColor4f(0.f,0.8f,0.3f,1.f);
-
-	glBegin(GL_LINE_LOOP);
-	glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-	glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-	glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-	glEnd();
-
-	glBegin(GL_LINES);
-	glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-
-	glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-
-	glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-
-	glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-	glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-	glEnd();
-
-
-	if (vparams->displayFlags().getShowWireFrame())
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-
-	helper::ReadAccessor<DataVecCoord> x = this->mstate->read(core::ConstVecCoordId::position());
-	if (m_drawForceScale.getValue() && m_f.size()==x.size())
-	{
-		std::vector< defaulttype::Vector3 > points;
-		const defaulttype::Vec<4,float> color(0,1,0.5,1);
-
-		for (unsigned int i=0; i<x.size(); i++)
-		{
-			points.push_back(x[i].getCenter());
-			points.push_back(x[i].getCenter()+m_f[i].getVCenter()*m_drawForceScale.getValue());
-		}
-		vparams->drawTool()->drawLines(points, 1, color);
-	}
-#endif /* SOFA_NO_OPENGL */
-}
-
 #endif
 
 #ifndef SOFA_DOUBLE
@@ -786,32 +746,72 @@ template <>
 SurfacePressureForceField<defaulttype::Rigid3fTypes>::Real SurfacePressureForceField<defaulttype::Rigid3fTypes>::computeMeshVolume(const VecDeriv& /*f*/, const VecCoord& x)
 {
 	typedef core::topology::BaseMeshTopology::Triangle Triangle;
-	typedef core::topology::BaseMeshTopology::Quad Quad;
+    typedef core::topology::BaseMeshTopology::Quad Quad;
 
 	Real volume = 0;
-	int i = 0;
 
-	for (i = 0; i < m_topology->getNbTriangles(); i++)
-	{
-		Triangle t = m_topology->getTriangle(i);
-		defaulttype::Rigid3fTypes::CPos ab = x[t[1]].getCenter() - x[t[0]].getCenter();
-		defaulttype::Rigid3fTypes::CPos ac = x[t[2]].getCenter() - x[t[0]].getCenter();
-		volume += (ab.cross(ac))[2] * (x[t[0]][2] + x[t[1]][2] + x[t[2]][2]) / static_cast<Real>(6.0);
-	}
+    unsigned int nTriangles = 0;
+    const VecIndex& triangleIndices = m_triangleIndices.getValue();
+    if (!triangleIndices.empty())
+    {
+        nTriangles = triangleIndices.size();
+    }
+    else
+    {
+        nTriangles = m_topology->getNbTriangles();
+    }
 
-	for (i = 0; i < m_topology->getNbQuads(); i++)
-	{
-		Quad q = m_topology->getQuad(i);
+    unsigned int triangleIdx = 0;
+    for (unsigned int i = 0; i < nTriangles; i++)
+    {
+        if (!triangleIndices.empty())
+        {
+            triangleIdx = triangleIndices[i];
+        }
+        else
+        {
+            triangleIdx = i;
+        }
+        Triangle t = m_topology->getTriangle(triangleIdx);
+        const defaulttype::Rigid3fTypes::CPos a = x[t[0]].getCenter();
+        const defaulttype::Rigid3fTypes::CPos b = x[t[1]].getCenter();
+        const defaulttype::Rigid3fTypes::CPos c = x[t[2]].getCenter();
+        volume += dot(cross(a,b),c);
+    }
 
-		defaulttype::Rigid3fTypes::CPos ab = x[q[1]].getCenter() - x[q[0]].getCenter();
-		defaulttype::Rigid3fTypes::CPos ac = x[q[2]].getCenter() - x[q[0]].getCenter();
-		defaulttype::Rigid3fTypes::CPos ad = x[q[3]].getCenter() - x[q[0]].getCenter();
+    unsigned int nQuads = 0;
+    const VecIndex& quadIndices = m_quadIndices.getValue();
+    if (!quadIndices.empty())
+    {
+        nQuads = quadIndices.size();
+    }
+    else
+    {
+        nQuads = m_topology->getNbQuads();
+    }
 
-		volume += ab.cross(ac)[2] * (x[q[0]][2] + x[q[1]][2] + x[q[2]][2]) / static_cast<Real>(6.0);
-		volume += ac.cross(ad)[2] * (x[q[0]][2] + x[q[2]][2] + x[q[3]][2]) / static_cast<Real>(6.0);
-	}
+    unsigned int quadIdx = 0;
+    for (unsigned int i = 0; i < nQuads; i++)
+    {
+        if (!quadIndices.empty())
+        {
+            quadIdx = quadIndices[i];
+        }
+        else
+        {
+            quadIdx = i;
+        }
+        Quad q = m_topology->getQuad(quadIdx);
+        const defaulttype::Rigid3fTypes::CPos a = x[q[0]].getCenter();
+        const defaulttype::Rigid3fTypes::CPos b = x[q[1]].getCenter();
+        const defaulttype::Rigid3fTypes::CPos c = x[q[2]].getCenter();
+        const defaulttype::Rigid3fTypes::CPos d = x[q[3]].getCenter();
+        volume += dot(cross(a,b),c);
+        volume += dot(cross(a,c),d);
+    }
 
-	return volume;
+    // Divide by 6 when computing tetrahedron volume
+        return volume / 6.0;
 }
 
 template <>
@@ -897,70 +897,6 @@ void SurfacePressureForceField<defaulttype::Rigid3fTypes>::addQuadSurfacePressur
 template<>
 void SurfacePressureForceField<defaulttype::Rigid3fTypes>::verifyDerivative(VecDeriv& /*v_plus*/, VecDeriv& /*v*/,  VecVec3DerivValues& /*DVval*/, VecVec3DerivIndices& /*DVind*/, const VecDeriv& /*Din*/)
 {
-}
-
-template<>
-void SurfacePressureForceField<defaulttype::Rigid3fTypes>::draw(const core::visual::VisualParams* vparams)
-{
-#ifndef SOFA_NO_OPENGL
-	if (!vparams->displayFlags().getShowForceFields()) return;
-	if (!this->mstate) return;
-
-	if (vparams->displayFlags().getShowWireFrame())
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-
-	glDisable(GL_LIGHTING);
-
-	glColor4f(0.f,0.8f,0.3f,1.f);
-
-	glBegin(GL_LINE_LOOP);
-	glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-	glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-	glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-	glEnd();
-
-	glBegin(GL_LINES);
-	glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-
-	glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_min.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_min.getValue()[2]);
-
-	glVertex3d(m_max.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-	glVertex3d(m_max.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-
-	glVertex3d(m_min.getValue()[0],m_min.getValue()[1],m_max.getValue()[2]);
-	glVertex3d(m_min.getValue()[0],m_max.getValue()[1],m_max.getValue()[2]);
-	glEnd();
-
-
-	if (vparams->displayFlags().getShowWireFrame())
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-
-	helper::ReadAccessor<DataVecCoord> x = this->mstate->read(core::ConstVecCoordId::position());
-	if (m_drawForceScale.getValue() && m_f.size()==x.size())
-	{
-		std::vector< defaulttype::Vector3 > points;
-		const defaulttype::Vec<4,float> color(0,1,0.5,1);
-
-		for (unsigned int i=0; i<x.size(); i++)
-		{
-			points.push_back(x[i].getCenter());
-			points.push_back(x[i].getCenter()+m_f[i].getVCenter()*m_drawForceScale.getValue());
-		}
-		vparams->drawTool()->drawLines(points, 1, color);
-	}
-#endif /* SOFA_NO_OPENGL */
 }
 
 #endif

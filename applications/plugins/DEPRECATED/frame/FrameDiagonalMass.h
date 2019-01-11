@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -22,9 +22,7 @@
 #ifndef FRAME_FRAMEDIAGONALMASS_H
 #define FRAME_FRAMEDIAGONALMASS_H
 
-#if !defined(__GNUC__) || (__GNUC__ > 3 || (_GNUC__ == 3 && __GNUC_MINOR__ > 3))
-#pragma once
-#endif
+
 
 #include <sofa/core/behavior/Mass.h>
 #include "FrameMass.h"
@@ -75,7 +73,7 @@ public:
     /// to display the center of gravity of the system
     Data< float > showAxisSize;
     core::objectmodel::DataFileName fileMass;
-    Data< float > damping;
+    Data< float > damping; ///< add a force which is "- damping * speed"
 
     FrameDiagonalMass();
     ~FrameDiagonalMass();
@@ -146,7 +144,7 @@ private:
 
 
 
-#if defined(SOFA_EXTERN_TEMPLATE) && !defined(FRAME_FRAMEDIAGONALMASS_CPP)
+#if  !defined(FRAME_FRAMEDIAGONALMASS_CPP)
 #ifndef SOFA_FLOAT
 extern template class SOFA_FRAME_API FrameDiagonalMass<Rigid3dTypes,Frame3dMass>;
 extern template class SOFA_FRAME_API FrameDiagonalMass<Affine3dTypes,Frame3x12dMass>;

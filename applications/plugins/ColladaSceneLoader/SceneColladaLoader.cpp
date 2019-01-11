@@ -1,6 +1,6 @@
 /******************************************************************************
 *       SOFA, Simulation Open-Framework Architecture, development version     *
-*                (c) 2006-2017 INRIA, USTL, UJF, CNRS, MGH                    *
+*                (c) 2006-2018 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -71,8 +71,6 @@ using namespace sofa::component::mapping;
 using namespace sofa::component::collision;
 using namespace sofa::component::projectiveconstraintset;
 using namespace sofa::simulation;
-
-SOFA_DECL_CLASS(SceneColladaLoader)
 
 int SceneColladaLoaderClass = core::RegisterObject("Specific scene loader for Collada file format.")
         .add< SceneColladaLoader >()
