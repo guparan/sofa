@@ -20,25 +20,28 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 
-#include <sofa/core/behavior/BaseController.h>
+#include "../initLeapMotion.h"
+
+#include <MyListener.h>
+
 #include <SofaOpenglVisual/OglModel.h>
 #include <SofaUserInteraction/Controller.h>
+#include <sofa/core/behavior/BaseController.h>
 //#include <sofa/core/behavior/MechanicalState.h>
+#include <sofa/core/ObjectFactory.h>
 #include <sofa/core/visual/VisualParams.h>
 //#include <sofa/defaulttype/SolidTypes.h>
 #include <sofa/defaulttype/VecTypes.h>
 #include <sofa/defaulttype/RigidTypes.h>
 #include <sofa/helper/system/thread/CTime.h>
-#include <sofa/core/ObjectFactory.h>
 #include <sofa/helper/system/gl.h>
 #include <sofa/helper/gl/BasicShapes.h>
 #include <sofa/helper/gl/glText.inl>
-#include <sofa/core/ObjectFactory.h>
 #include <sofa/simulation/AnimateBeginEvent.h>
 #include <sofa/simulation/AnimateEndEvent.h>
+
 #include <iostream>
 #include <sstream>
-#include <MyListener.h>
 
 namespace sofa
 {
