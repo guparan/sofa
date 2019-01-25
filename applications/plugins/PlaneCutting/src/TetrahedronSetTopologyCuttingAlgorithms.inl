@@ -103,7 +103,9 @@ unsigned int TetrahedronSetTopologyCuttingAlgorithms<DataTypes>::subDivideTetrah
     sofa::helper::vector<Coord> &intersections) noexcept
 {
     if (!this->m_state || !this->m_container || !this->m_modifier)
+    {
         return 0;
+    }
 
     // Locate the last corner of the parallelogram
     const Coord
@@ -118,15 +120,16 @@ unsigned int TetrahedronSetTopologyCuttingAlgorithms<DataTypes>::subDivideTetrah
     listTetrasCount.clear();
     listTetrasCount.resize(this->m_container->getNbTetrahedra());
 
-    for (unsigned int edge_id = 0; edge_id < this->m_container->getNumberOfEdges(); ++edge_id) {
-
+    for (unsigned int edge_id = 0; edge_id < this->m_container->getNumberOfEdges(); ++edge_id)
+    {
         const Coord
             &edge_p0 = positions[this->m_container->getEdge(edge_id)[0]], // Tetrahedron's edge first vertex
             &edge_p1 = positions[this->m_container->getEdge(edge_id)[1]], // Tetrahedron's edge second vertex
             edge = edge_p1 - edge_p0; // Tetrahedron's edge
 
         Coord intersection;
-        if (RayIntersectsParallelogram(p0, p1, p2, edge_p0, edge_p1, intersection)) {
+        if (RayIntersectsParallelogram(p0, p1, p2, edge_p0, edge_p1, intersection))
+        {
             intersections.push_back(intersection);
             intersectedEdges.push_back(edge_id);
 
@@ -137,12 +140,16 @@ unsigned int TetrahedronSetTopologyCuttingAlgorithms<DataTypes>::subDivideTetrah
                 {
                     listTetrasCount[tetrasIdx[j]] ++;
                 }
-
             }
         }
     }
 
-    if (intersections.size() > 0 && intersections.size() == intersectedEdges.size())
+    if (intersections.size() <= 0)
+    {
+        return 0;
+    }
+
+    if (intersections.size() == intersectedEdges.size())
     {
         if(!m_removeTetra.getValue())
         {
