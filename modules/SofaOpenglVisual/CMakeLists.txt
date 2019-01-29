@@ -24,6 +24,7 @@ list(APPEND HEADER_FILES
     OglModel.h
     PointSplatModel.h
     MergeVisualModels.h
+    TexcoordMappingEngine.h
     )
 list(APPEND SOURCE_FILES
     ClipPlane.cpp
@@ -34,6 +35,7 @@ list(APPEND SOURCE_FILES
     OglModel.cpp
     PointSplatModel.cpp
     MergeVisualModels.cpp
+    TexcoordMappingEngine.cpp
     )
 
 if(SOFA_HAVE_GLEW)
