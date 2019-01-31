@@ -151,7 +151,7 @@ void addGUIParameters(ArgumentParser* argumentParser)
 int main(int argc, char** argv)
 {
     // Add resources dir to GuiDataRepository
-    const std::string runSofaIniFilePath = Utils::getSofaPathTo("/etc/runSofa.ini");
+    const std::string runSofaIniFilePath = Utils::getSofaPathTo("etc/runSofa.ini");
     std::map<std::string, std::string> iniFileValues = Utils::readBasicIniFile(runSofaIniFilePath);
     if (iniFileValues.find("RESOURCES_DIR") != iniFileValues.end())
     {
@@ -162,6 +162,9 @@ int main(int argc, char** argv)
             sofa::gui::GuiDataRepository.addFirstPath(dir);
         }
     }
+
+    // Force add plugins dir to PluginRepository (even if not existing)
+    PluginRepository.addFirstPath( Utils::getSofaPathPrefix()+"/plugins" );
 
     sofa::helper::BackTrace::autodump();
 
