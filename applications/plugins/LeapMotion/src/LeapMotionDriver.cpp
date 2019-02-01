@@ -342,7 +342,7 @@ void LeapMotionDriver::handleEvent(core::objectmodel::Event *event)
     if (sofa::core::objectmodel::KeypressedEvent::checkEventType(event))
     {
         sofa::core::objectmodel::KeypressedEvent *ev = static_cast<sofa::core::objectmodel::KeypressedEvent *> (event);
-        if (ev->getKey() == 67) // c
+        if (ev->getKey() == 76) // L
         {
             drawInteractionBox = !drawInteractionBox;
             std::cout << "Interaction box toggled" << std::endl;
