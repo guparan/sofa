@@ -133,6 +133,8 @@ if(SOFA_HAVE_BOOST_SYSTEM
 
     set(SOFA_HAVE_BOOST 1)
 
+    message("Boost_PROGRAM_OPTIONS_LIBRARY = ${Boost_PROGRAM_OPTIONS_LIBRARY}")
+
     sofa_create_target(BoostSystem SofaFramework "${Boost_SYSTEM_LIBRARY}" "${Boost_INCLUDE_DIRS}")
     sofa_create_target(BoostFileSystem SofaFramework "${Boost_FILESYSTEM_LIBRARY}" "${Boost_INCLUDE_DIRS}")
     sofa_create_target(BoostLocale SofaFramework "${Boost_LOCALE_LIBRARY}" "${Boost_INCLUDE_DIRS}")
@@ -182,11 +184,11 @@ set(SOFA_BUILD_OPTIONS_SRC
     )
 foreach(NAME ${SOFA_BUILD_OPTIONS_SRC})
     configure_file("${NAME}.in" "${CMAKE_BINARY_DIR}/include/sofa/config/${NAME}")
-    install(FILES "${CMAKE_BINARY_DIR}/include/sofa/config/${NAME}" DESTINATION "include/sofa/config" COMPONENT headers)
+    install(FILES "${CMAKE_BINARY_DIR}/include/sofa/config/${NAME}" DESTINATION "include/${PROJECT_NAME}/sofa/config" COMPONENT headers)
 endforeach()
 
 configure_file("config.h.in" "${CMAKE_BINARY_DIR}/include/sofa/config.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/sofa/config.h" DESTINATION "include/sofa" COMPONENT headers)
+install(FILES "${CMAKE_BINARY_DIR}/include/sofa/config.h" DESTINATION "include/${PROJECT_NAME}/sofa" COMPONENT headers)
 
 # make sure everyone in the build tree can see <sofa/config.h>
 #list(APPEND SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_BINARY_DIR})
@@ -197,7 +199,7 @@ set(SOFAFRAMEWORK_VERSION "${Sofa_VERSION}")
 set(SOFA_VERSION_STR "\"${Sofa_VERSION}\"")
 set(SOFA_VERSION "${Sofa_VERSION_MAJOR}${Sofa_VERSION_MINOR}${Sofa_VERSION_PATCH}")
 configure_file(../framework/sofa/version.h.in "${CMAKE_BINARY_DIR}/include/sofa/version.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/sofa/version.h" DESTINATION include/sofa COMPONENT headers)
+install(FILES "${CMAKE_BINARY_DIR}/include/sofa/version.h" DESTINATION include/${PROJECT_NAME}/sofa COMPONENT headers)
 
 
 ## Subdirectories
@@ -235,6 +237,9 @@ if(MSVC)
 endif()
 
 set(SOFAFRAMEWORK_TARGETS SofaCore SofaDefaultType SofaHelper)
+foreach(TARGET ${SOFAFRAMEWORK_TARGETS})
+    target_include_directories(${TARGET} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
+endforeach()
 
 ## CMake package configurations files
 sofa_write_package_config_files(SofaFramework ${SOFAFRAMEWORK_VERSION})

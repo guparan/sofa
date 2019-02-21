@@ -178,7 +178,7 @@ add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${PYTHON_FILE
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${PYTHON_INCLUDE_DIRS}
     PUBLIC "$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/>"
-    PUBLIC "$<INSTALL_INTERFACE:include>"
+    PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>"
     )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCommon SofaUserInteraction SofaGuiCommon SofaComponentMisc SofaComponentGeneral ${PYTHON_LIBRARIES})
@@ -188,7 +188,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL Linux)
 endif()
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>")
-target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>")
+target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${SOFAPYTHON_VERSION})
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "${SOFAPYTHON_COMPILER_FLAGS}")
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")

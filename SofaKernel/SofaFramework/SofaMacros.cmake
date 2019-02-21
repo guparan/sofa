@@ -45,6 +45,8 @@ macro(sofa_create_target TARGETNAME NAMESPACE LIBRARY_PATH INCLUDE_DIRS)
     # message("LIBRARY_PATH ${LIBRARY_PATH}")
     parse_library_list( "${LIBRARY_PATH}" FOUND LIB_FOUND DEBUG LIB_DEBUG OPT LIB_OPT GENERAL LIB_GEN )
 
+#    message("set_target_properties(${NAMESPACE_TARGETNAME} PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${INCLUDE_DIRS})")
+
     # message("FOUND ${LIB_FOUND} DEBUG: ${LIB_DEBUG} OPT: ${LIB_OPT} GEN: ${LIB_GEN}")
     if(LIB_FOUND)
         if(NOT TARGET ${TARGETNAME} )
@@ -447,10 +449,11 @@ macro(sofa_install_targets package_name the_targets include_install_dir)
             RUNTIME DESTINATION bin COMPONENT applications
             LIBRARY DESTINATION lib COMPONENT libraries
             ARCHIVE DESTINATION lib COMPONENT libraries
-            PUBLIC_HEADER DESTINATION include/${include_install_dir} COMPONENT headers)
+            PUBLIC_HEADER DESTINATION include/${package_name}/${include_install_dir} COMPONENT headers)
 
-    # non-flat headers install (if no PUBLIC_HEADER and include_install_dir specified)
     foreach(target ${the_targets})
+#        target_include_directories(${target} PUBLIC "$<INSTALL_INTERFACE:include/${target}>")
+        # non-flat headers install (if no PUBLIC_HEADER and include_install_dir specified)
         get_target_property(public_header ${target} PUBLIC_HEADER)
         if("${public_header}" STREQUAL "public_header-NOTFOUND" AND NOT "${include_install_dir}" STREQUAL "")
             set(optional_argv3 "${ARGV3}")
@@ -463,13 +466,13 @@ macro(sofa_install_targets package_name the_targets include_install_dir)
                 # will be true if include_source_dir is empty
                 set(include_source_dir "${CMAKE_CURRENT_SOURCE_DIR}/${include_source_dir}")
             endif()
-            #message("${target}: ${include_source_dir} -> include/${include_install_dir}")
+            #message("${target}: ${include_source_dir} -> include/${package_name}/${include_install_dir}")
             file(GLOB_RECURSE header_files "${include_source_dir}/*.h" "${include_source_dir}/*.inl")
             foreach(header ${header_files})
                 file(RELATIVE_PATH path_from_package "${include_source_dir}" "${header}")
                 get_filename_component(dir_from_package ${path_from_package} DIRECTORY)
                 install(FILES ${header}
-                        DESTINATION "include/${include_install_dir}/${dir_from_package}"
+                        DESTINATION "include/${package_name}/${include_install_dir}/${dir_from_package}"
                         COMPONENT headers)
             endforeach()
         endif()
@@ -513,7 +516,6 @@ endmacro()
 #
 # check_required_components(Foo Qux)
 macro(sofa_write_package_config_files package_name version)
-
     ## <package_name>Targets.cmake
     install(EXPORT ${package_name}Targets DESTINATION lib/cmake/${package_name} COMPONENT headers)
 

@@ -363,8 +363,8 @@ else()
 endif()
 
 
-target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../..>")
+message("SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES = ${SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES}")
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC "$<BUILD_INTERFACE:${SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES}>")
 # For generated files, like sofa/config.h
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")

@@ -250,8 +250,6 @@ if(Boost_thread_FOUND)
     list(APPEND SOURCE_FILES objectmodel/AspectPool.cpp)
 endif()
 
-
-
 # # TODO?
 # if(SOFA-MISC_SUPPORT_MOVING_FRAMES)
 #     list(APPEND HEADER_FILES behavior/InertiaForce.h)
@@ -259,13 +257,36 @@ endif()
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaHelper SofaDefaultType)
-target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../..>")
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_CORE")
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${SOFAFRAMEWORK_VERSION}")
 
 sofa_install_targets(SofaFramework ${PROJECT_NAME} "sofa/core")
+
+### Dependency pack for Windows
+if(MSVC)
+    #define BOOST_ALL_DYN_LINK needed for dynamic linking with boost libraries
+    add_definitions(-DBOOST_ALL_DYN_LINK)
+
+    set(SOFA_DEPENDENCY_PACK_DIR "" CACHE PATH "sofa windows dependency pack path")
+    if(SOFA_DEPENDENCY_PACK_DIR)
+        set(DEPENDENCY_PACK_DIR "${SOFA_DEPENDENCY_PACK_DIR}")
+    else()
+        set(DEPENDENCY_PACK_DIR "${CMAKE_CURRENT_SOURCE_DIR}") # Default
+    endif()
+
+    list(APPEND CMAKE_INCLUDE_PATH ${DEPENDENCY_PACK_DIR}/include)
+    if(CMAKE_CL_64)
+        list(APPEND CMAKE_LIBRARY_PATH ${DEPENDENCY_PACK_DIR}/lib/win64)
+    else()
+        list(APPEND CMAKE_LIBRARY_PATH ${DEPENDENCY_PACK_DIR}/lib/win32)
+    endif()
+
+    install(DIRECTORY ${DEPENDENCY_PACK_DIR}/include/ DESTINATION include/WinDepPack COMPONENT headers)
+    target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include/WinDepPack>")
+    install(DIRECTORY ${DEPENDENCY_PACK_DIR}/licenses/ DESTINATION licenses COMPONENT applications)
+endif()
 
 if(UNIX AND NOT APPLE)
 	# Installing ICU libraries the hard way (dirty)
