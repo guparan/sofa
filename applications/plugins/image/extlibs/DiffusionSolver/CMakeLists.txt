@@ -30,7 +30,7 @@ endif()
 
 target_link_libraries(${PROJECT_NAME} CImgPlugin)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CImgPlugin_INCLUDE_DIRS})
-target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>")
+target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
 
 install(TARGETS ${PROJECT_NAME}
         COMPONENT DiffusionSolver_libraries
