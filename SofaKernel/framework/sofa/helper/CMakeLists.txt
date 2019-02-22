@@ -363,12 +363,37 @@ else()
     target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFAFRAMEWORK_DEPENDENCY_LINK})
 endif()
 
+### Dependency pack for Windows
+if(MSVC)
+    #define BOOST_ALL_DYN_LINK needed for dynamic linking with boost libraries
+    add_definitions(-DBOOST_ALL_DYN_LINK)
 
-target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>")
-target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../..>")
-target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC "$<BUILD_INTERFACE:${SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES}>")
-# For generated files, like sofa/config.h
-target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+    set(SOFA_DEPENDENCY_PACK_DIR "" CACHE PATH "sofa windows dependency pack path")
+    if(SOFA_DEPENDENCY_PACK_DIR)
+        set(DEPENDENCY_PACK_DIR "${SOFA_DEPENDENCY_PACK_DIR}")
+    else()
+        set(DEPENDENCY_PACK_DIR "${CMAKE_SOURCE_DIR}") # Default
+    endif()
+
+    list(APPEND CMAKE_INCLUDE_PATH ${DEPENDENCY_PACK_DIR}/include)
+    if(CMAKE_CL_64)
+        list(APPEND CMAKE_LIBRARY_PATH ${DEPENDENCY_PACK_DIR}/lib/win64)
+    else()
+        list(APPEND CMAKE_LIBRARY_PATH ${DEPENDENCY_PACK_DIR}/lib/win32)
+    endif()
+
+    install(DIRECTORY ${DEPENDENCY_PACK_DIR}/include/ DESTINATION include/WinDepPack COMPONENT headers)
+    install(DIRECTORY ${DEPENDENCY_PACK_DIR}/licenses/ DESTINATION licenses COMPONENT applications)
+endif()
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../..>"
+    "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
+target_include_directories(${PROJECT_NAME} SYSTEM
+    PUBLIC "$<BUILD_INTERFACE:${SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES}>"
+    PUBLIC "$<INSTALL_INTERFACE:include/WinDepPack>"
+    PUBLIC "$<INSTALL_INTERFACE:include/Eigen>")
+
 set(SOFAHELPER_COMPILE_FLAGS "-DSOFA_BUILD_HELPER")
 
 # The default binary suffix for libraries/plugins is "_d" when using a debug build.

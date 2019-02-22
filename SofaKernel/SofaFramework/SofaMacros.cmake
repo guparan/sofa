@@ -445,7 +445,7 @@ macro(sofa_install_targets package_name the_targets include_install_dir)
             RUNTIME DESTINATION bin COMPONENT applications
             LIBRARY DESTINATION lib COMPONENT libraries
             ARCHIVE DESTINATION lib COMPONENT libraries
-            PUBLIC_HEADER DESTINATION include/${include_install_dir} COMPONENT headers)
+            PUBLIC_HEADER DESTINATION include/${package_name}/${include_install_dir} COMPONENT headers)
 
     # non-flat headers install (if no PUBLIC_HEADER and include_install_dir specified)
     foreach(target ${the_targets})
@@ -461,13 +461,13 @@ macro(sofa_install_targets package_name the_targets include_install_dir)
                 # will be true if include_source_dir is empty
                 set(include_source_dir "${CMAKE_CURRENT_SOURCE_DIR}/${include_source_dir}")
             endif()
-            #message("${target}: ${include_source_dir} -> include/${include_install_dir}")
+            #message("${target}: ${include_source_dir} -> include/${package_name}/${include_install_dir}")
             file(GLOB_RECURSE header_files "${include_source_dir}/*.h" "${include_source_dir}/*.inl")
             foreach(header ${header_files})
                 file(RELATIVE_PATH path_from_package "${include_source_dir}" "${header}")
                 get_filename_component(dir_from_package ${path_from_package} DIRECTORY)
                 install(FILES ${header}
-                        DESTINATION "include/${include_install_dir}/${dir_from_package}"
+                        DESTINATION "include/${package_name}/${include_install_dir}/${dir_from_package}"
                         COMPONENT headers)
             endforeach()
         endif()
