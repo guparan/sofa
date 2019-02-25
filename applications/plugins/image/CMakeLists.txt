@@ -91,7 +91,7 @@ else(MultiThreading_FOUND)
 endif(MultiThreading_FOUND)
 
 configure_file(config.h.in "${CMAKE_BINARY_DIR}/include/image/config.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/image/config.h" DESTINATION "include/image")
+install(FILES "${CMAKE_BINARY_DIR}/include/image/config.h" DESTINATION "include/image/image")
 
 if( SofaPython_FOUND )
     # Config files and install rules for pythons scripts

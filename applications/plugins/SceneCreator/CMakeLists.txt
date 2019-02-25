@@ -25,7 +25,7 @@ find_package(Metis QUIET)
 
 ## SceneCreator/config.h
 configure_file(config.h.in "${CMAKE_BINARY_DIR}/include/SceneCreator/config.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/SceneCreator/config.h" DESTINATION "include/SceneCreator" COMPONENT headers)
+install(FILES "${CMAKE_BINARY_DIR}/include/SceneCreator/config.h" DESTINATION "include/SceneCreator/SceneCreator" COMPONENT headers)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} SofaSimulationGraph)
@@ -42,7 +42,7 @@ if(Metis_FOUND)
 endif()
 
 ## Install rules for the library; CMake package configurations files
-sofa_generate_package(NAME SceneCreator VERSION ${SCENECREATOR_VERSION} TARGETS SceneCreator  INCLUDE_INSTALL_DIR SceneCreator)
+sofa_generate_package(NAME SceneCreator VERSION ${SCENECREATOR_VERSION} TARGETS SceneCreator INCLUDE_INSTALL_DIR SceneCreator)
 
 
 ## Add example project to use sceneCreator
