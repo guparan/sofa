@@ -11,8 +11,13 @@ if(SOFA_HAVE_NEWMAT)
     find_package(Newmat REQUIRED)
 endif()
 
-if(NOT TARGET SofaComponentGeneral)
-	include("${CMAKE_CURRENT_LIST_DIR}/SofaGeneralTargets.cmake")
-endif()
+foreach(target @SOFAGENERAL_TARGETS@)
+    # if any target of this project is undefined
+    if(NOT TARGET ${target})
+        # define all targets of this project
+        include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@Targets.cmake")
+        break()
+    endif()
+endforeach()
 
 check_required_components(@SOFAGENERAL_TARGETS@)

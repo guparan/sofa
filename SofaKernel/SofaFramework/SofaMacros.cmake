@@ -449,10 +449,10 @@ macro(sofa_install_targets package_name the_targets include_install_dir)
             ARCHIVE DESTINATION lib COMPONENT libraries
             PUBLIC_HEADER DESTINATION include/${package_name}/${include_install_dir} COMPONENT headers)
 
-    # non-flat headers install (if no PUBLIC_HEADER and include_install_dir specified)
+    # non-flat headers install (no PUBLIC_HEADER)
     foreach(target ${the_targets})
         get_target_property(public_header ${target} PUBLIC_HEADER)
-        if("${public_header}" STREQUAL "public_header-NOTFOUND" AND NOT "${include_install_dir}" STREQUAL "")
+        if(NOT public_header)
             set(optional_argv3 "${ARGV3}")
             if(optional_argv3)
                 # ARGV3 is a non-breaking additional argument to handle INCLUDE_SOURCE_DIR (see sofa_generate_package)
@@ -513,7 +513,6 @@ endmacro()
 #
 # check_required_components(Foo Qux)
 macro(sofa_write_package_config_files package_name version)
-
     ## <package_name>Targets.cmake
     install(EXPORT ${package_name}Targets DESTINATION lib/cmake/${package_name} COMPONENT headers)
 
