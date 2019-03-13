@@ -449,14 +449,17 @@ macro(sofa_install_targets package_name the_targets install_include_subdir)
 
     if(NOT "${install_include_subdir}" STREQUAL "") # Handle multi-dir install (no PUBLIC_HEADER)
         foreach(target ${the_targets})
-            get_target_property(public_header ${target} PUBLIC_HEADER)
-            if("${public_header}" STREQUAL "public_header-NOTFOUND")
-                #message("Full install (no PUBLIC_HEADER): ${CMAKE_CURRENT_SOURCE_DIR}")
-                # the trailing slash is IMPORTANT, see https://cmake.org/pipermail/cmake/2009-December/033850.html
-                install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
-                        DESTINATION include/${install_include_subdir}
-                        COMPONENT headers
-                        FILES_MATCHING PATTERN "*.h" PATTERN "*.inl")
+            get_target_property(target_type ${target} TYPE)
+            if(NOT "${target_type}" STREQUAL "INTERFACE_LIBRARY")
+                get_target_property(public_header ${target} PUBLIC_HEADER)
+                if("${public_header}" STREQUAL "public_header-NOTFOUND")
+                    #message("Full install (no PUBLIC_HEADER): ${CMAKE_CURRENT_SOURCE_DIR}")
+                    # the trailing slash is IMPORTANT, see https://cmake.org/pipermail/cmake/2009-December/033850.html
+                    install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
+                            DESTINATION include/${install_include_subdir}
+                            COMPONENT headers
+                            FILES_MATCHING PATTERN "*.h" PATTERN "*.inl")
+                endif()
             endif()
         endforeach()
     endif()
