@@ -74,7 +74,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC ${GMP_LIBRARIES} ${MPFR_LIBRARIES} 
 if(image_FOUND)
     target_link_libraries(${PROJECT_NAME} PUBLIC image)
     target_link_libraries(${PROJECT_NAME} PUBLIC CGAL_ImageIO)
-    set_target_properties(CGAL_ImageIO PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${CGAL_INCLUDE_DIRS})
+    set_target_properties(CGAL_ImageIO PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${CGAL_INCLUDE_DIRS}")
 endif()
 
 if(SOFA_BUILD_TESTS)
