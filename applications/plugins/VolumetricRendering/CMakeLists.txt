@@ -39,8 +39,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${VOLUMETRICRENDERING_V
 
 target_link_libraries(${PROJECT_NAME} SofaHelper SofaOpenglVisual )
 
-configure_file(config.h.in "${CMAKE_BINARY_DIR}/include/VolumetricRendering/config.h")
-
 ## Install rules for the library and headers; CMake package configurations files
 sofa_create_package(${PROJECT_NAME} ${VOLUMETRICRENDERING_VERSION} ${PROJECT_NAME} ${PROJECT_NAME})
 
