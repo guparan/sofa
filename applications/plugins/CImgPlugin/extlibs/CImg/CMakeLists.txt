@@ -3,11 +3,11 @@ cmake_minimum_required(VERSION 3.1)
 project(CImg)
 
 install(FILES CImg.h
-        DESTINATION "${CImgPlugin_INSTALL_DIR}/include/CImg"
+        DESTINATION "${PLUGIN_INSTALL_DIR}/include/CImg"
         COMPONENT CImg_headers)
 
 install(DIRECTORY plugins
-        DESTINATION "${CImgPlugin_INSTALL_DIR}/include/CImg"
+        DESTINATION "${PLUGIN_INSTALL_DIR}/include/CImg"
         COMPONENT CImg_headers)
 
 
@@ -22,5 +22,5 @@ configure_file(CImgConfig.cmake.in ${CMAKE_BINARY_DIR}/cmake/CImgConfig.cmake)
 set(CIMG_INCLUDE_DIR include)
 configure_file(CImgConfig.cmake.in InstalledCImgConfig.cmake)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/InstalledCImgConfig.cmake
-        DESTINATION "${CImgPlugin_INSTALL_DIR}/lib/cmake/CImg"
+        DESTINATION "${PLUGIN_INSTALL_DIR}/lib/cmake/CImg"
         RENAME CImgConfig.cmake)

@@ -171,10 +171,6 @@ int main(int argc, char** argv)
     {
         PluginRepository.addFirstPath(Utils::getSofaPathPrefix()+"/plugins");
     }
-    if ( FileSystem::isDirectory(Utils::getSofaPathPrefix()+"/modules") )
-    {
-        PluginRepository.addFirstPath(Utils::getSofaPathPrefix()+"/modules");
-    }
 
     sofa::helper::BackTrace::autodump();
 

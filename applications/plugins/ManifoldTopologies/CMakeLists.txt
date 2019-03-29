@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(ManifoldTopologies VERSION 0.1)
+sofa_plugin(ManifoldTopologies VERSION 0.1)
 
 set(HEADER_FILES
     ManifoldEdgeSetGeometryAlgorithms.h

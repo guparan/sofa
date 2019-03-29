@@ -357,10 +357,9 @@ if(APPLE)
     list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK "-framework CoreServices")
 endif()
 
+target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFAFRAMEWORK_DEPENDENCY_LINK})
 if(SOFA_BUILD_TESTS)
-    target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFAFRAMEWORK_DEPENDENCY_LINK} ${Boost_LIBRARIES} gtest)
-else()
-    target_link_libraries(${PROJECT_NAME} PUBLIC ${SOFAFRAMEWORK_DEPENDENCY_LINK})
+    target_link_libraries(${PROJECT_NAME} PUBLIC gtest)
 endif()
 
 ### Dependency pack for Windows
@@ -382,7 +381,7 @@ if(MSVC)
         list(APPEND CMAKE_LIBRARY_PATH ${DEPENDENCY_PACK_DIR}/lib/win32)
     endif()
 
-    install(DIRECTORY ${DEPENDENCY_PACK_DIR}/include/ DESTINATION include/WinDepPack COMPONENT headers)
+    install(DIRECTORY ${DEPENDENCY_PACK_DIR}/include/ DESTINATION include/extlibs/WinDepPack COMPONENT headers)
     install(DIRECTORY ${DEPENDENCY_PACK_DIR}/licenses/ DESTINATION licenses COMPONENT applications)
 endif()
 
@@ -391,8 +390,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} SYSTEM
     PUBLIC "$<BUILD_INTERFACE:${SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES}>"
-    PUBLIC "$<INSTALL_INTERFACE:include/WinDepPack>"
-    PUBLIC "$<INSTALL_INTERFACE:include/Eigen>")
+    PUBLIC "$<INSTALL_INTERFACE:include/extlibs/WinDepPack>"
+    PUBLIC "$<INSTALL_INTERFACE:include/extlibs/Eigen>"
+    PUBLIC "$<INSTALL_INTERFACE:include/extlibs/json>"
+    )
 
 set(SOFAHELPER_COMPILE_FLAGS "-DSOFA_BUILD_HELPER")
 
@@ -406,4 +407,4 @@ set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "${SOFAHELPER_COM
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${SOFAFRAMEWORK_VERSION}")
 
-sofa_install_targets(SofaFramework ${PROJECT_NAME} "sofa/helper")
+sofa_install_targets(SofaFramework ${PROJECT_NAME} "SofaFramework/sofa/helper")

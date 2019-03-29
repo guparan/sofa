@@ -7,12 +7,48 @@ set(EXTLIBS_TARGETS
 )
 
 ## Necessary ones
-add_subdirectory(SuiteSparse)
-add_subdirectory(csparse)
-add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/eigen-3.2.7 eigen)
-add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/newmat newmat)
-add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/tinyxml tinyxml)
-add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/json json)
+find_package(SuiteSparse QUIET)
+message("SuiteSparse_FOUND = ${SuiteSparse_FOUND}")
+if(NOT SuiteSparse_FOUND)
+    add_subdirectory(SuiteSparse)
+endif()
+
+find_package(CSparse QUIET)
+message("CSparse_FOUND = ${CSparse_FOUND}")
+if(NOT CSparse_FOUND)
+    add_subdirectory(csparse)
+endif()
+
+#message("EIGEN3_FOUND = ${EIGEN3_FOUND}")
+#message("EIGEN3_INCLUDE_DIR = ${EIGEN3_INCLUDE_DIR}")
+#message("EIGEN3_VERSION = ${EIGEN3_VERSION}")
+
+#find_package(Eigen3 QUIET)
+#if(NOT Eigen3_FOUND AND NOT EIGEN3_FOUND)
+    add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/eigen eigen)
+#endif()
+
+#message("EIGEN3_INCLUDE_DIR = ${EIGEN3_INCLUDE_DIR}")
+#message("EIGEN3_VERSION = ${EIGEN3_VERSION}")
+
+
+find_package(Newmat QUIET)
+message("Newmat_FOUND = ${Newmat_FOUND}")
+if(NOT Newmat_FOUND)
+    add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/newmat newmat)
+endif()
+
+find_package(TinyXML QUIET)
+message("TinyXML_FOUND = ${TinyXML_FOUND}")
+if(NOT TinyXML_FOUND)
+    add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/tinyxml tinyxml)
+endif()
+
+find_package(json QUIET)
+message("json_FOUND = ${json_FOUND}")
+if(NOT json_FOUND)
+    add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/json json)
+endif()
 
 
 ## Optional ones

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(PreassembledMass VERSION 0.1)
+sofa_plugin(PreassembledMass VERSION 0.1)
 
 
 set(HEADER_FILES

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(EmptyCmakePlugin)
+sofa_plugin(EmptyCmakePlugin)
 
 set(HEADER_FILES
     config.h

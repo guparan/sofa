@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(PSL)
+sofa_plugin(PSL)
 
 ### Plugin dependencies
 find_package(SofaFramework REQUIRED)

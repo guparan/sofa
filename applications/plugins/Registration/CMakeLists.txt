@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(Registration VERSION 0.1)
+sofa_plugin(Registration VERSION 0.1)
 
 # VERSION backward compatibility
 #string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)

@@ -2,6 +2,16 @@ include(CMakePackageConfigHelpers)
 include(CMakeParseLibraryList)
 
 
+macro(sofa_plugin name)
+    project(${ARGV})
+    set(${name}_INSTALL_DIR ".") # default
+    if(SOFA_KERNEL_SOURCE_DIR)
+        # building in SOFA, we want to install in modules/plugins directory (overridable if needed)
+        set(${name}_INSTALL_DIR "plugins/${name}")
+        set(PLUGIN_INSTALL_DIR "plugins/${name}")
+    endif()
+endmacro()
+
 # - Create an imported target from a library path and an include dir path.
 #   Handle the special case where LIBRARY_PATH is in fact an existing target.
 #   Handle the case where LIBRARY_PATH contains the following syntax supported by cmake:
@@ -106,13 +116,7 @@ macro(sofa_add_generic directory name type)
 
         option(${option} "Build the ${name} ${type}." ${active})
         if(${option})
-            message("Adding ${type} ${name}")            
-            set(${name}_INSTALL_DIR ".") # default
-            if(SOFA_KERNEL_SOURCE_DIR)
-                # building in SOFA, we want to install in modules/plugins directory (overridable if needed)
-                string(TOLOWER "${type}s" types_lower)
-                set(${name}_INSTALL_DIR "${types_lower}/${name}")
-            endif()
+            message("Adding ${type} ${name}")
             add_subdirectory(${directory} ${name})
             #Check if the target has been successfully added
             if(TARGET ${name})

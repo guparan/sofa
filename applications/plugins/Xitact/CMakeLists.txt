@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(Xitact)
+sofa_plugin(Xitact)
 
 
 set(HEADER_FILES

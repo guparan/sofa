@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SofaTest VERSION 0.1)
+sofa_plugin(SofaTest VERSION 0.1)
 
 set(HEADER_FILES
     InitPlugin_test.h
@@ -67,7 +67,7 @@ if(SofaPython_FOUND)
 endif()
 target_link_libraries(${PROJECT_NAME} SceneCreator SofaComponentBase SofaComponentCommon SofaComponentGeneral SofaComponentAdvanced SofaComponentMisc)
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>")
-target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
+target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:${PLUGIN_INSTALL_DIR}/include>")
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_TEST -DSOFA_SRC_DIR=\"${CMAKE_SOURCE_DIR}\"")
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "_d")

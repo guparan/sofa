@@ -224,7 +224,7 @@ endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_SOFAGUIQT")
 
-sofa_install_targets(SofaGui SofaGuiQt "sofa/gui/qt")
+sofa_install_targets(SofaGui SofaGuiQt "SofaGui/sofa/gui/qt")
 
 # Create build and install versions of .ini file for resources finding
 set(RESOURCES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/resources")

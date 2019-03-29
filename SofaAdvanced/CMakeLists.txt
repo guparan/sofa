@@ -11,8 +11,8 @@ set(SOFA_HAVE_FLOWVR ${MiniFlowVR_FOUND}) # cmakedefine
 set(SOFAADVANCED_VERSION ${SofaFramework_VERSION})
 
 ## SofaAdvanced/config.h
-configure_file(config.h.in "${CMAKE_BINARY_DIR}/include/SofaAdvanced/config.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/SofaAdvanced/config.h" DESTINATION "include/SofaAdvanced" COMPONENT headers)
+configure_file(config.h.in "${CMAKE_BINARY_DIR}/include/${PROJECT_NAME}/config.h")
+install(FILES "${CMAKE_BINARY_DIR}/include/${PROJECT_NAME}/config.h" DESTINATION "include/${PROJECT_NAME}/${PROJECT_NAME}" COMPONENT headers)
 
 
 ### Subdirectories

@@ -1,7 +1,7 @@
 add_subdirectory(extlibs/DiffusionSolver)
 
 cmake_minimum_required(VERSION 3.1)
-project(image VERSION 0.1)
+sofa_plugin(image VERSION 0.1)
 
 set(SOURCE_FILES
     CollisionToCarvingEngine.cpp
@@ -142,7 +142,7 @@ endif()
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CImgPlugin_INCLUDE_DIRS}>")
-target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
+target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:${PLUGIN_INSTALL_DIR}/include>")
 if(FREENECT_FOUND)
     target_include_directories(${PROJECT_NAME} PUBLIC "${FREENECT_INCLUDE_DIR}")
 endif()
@@ -158,7 +158,7 @@ if( SofaPython_FOUND )
 endif()
 
 if(SOFA_HAVE_ZLIB)
-    target_link_libraries(${PROJECT_NAME} SofaFramework::ZLIB)
+    target_link_libraries(${PROJECT_NAME} ZLIB::ZLIB)
 endif()
 
 if(SOFA_BUILD_TESTS)

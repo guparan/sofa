@@ -52,8 +52,8 @@ endif()
 
 ### Dependencies
 
-set(SOFAFRAMEWORK_DEPENDENCY_LINK)
-set(SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES)
+set(SOFAFRAMEWORK_DEPENDENCY_LINK) # will be added to SofaHelper link libraries
+set(SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES) # will be added to SofaHelper include dirs
 
 
 find_package(GTest CONFIG QUIET)
@@ -146,6 +146,8 @@ list(APPEND SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES ${EIGEN3_INCLUDE_DIR})
 ## JSON
 list(APPEND SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES ${JSON_INCLUDE_DIR})
 
+list(REMOVE_DUPLICATES SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES)
+
 ## Generate & install the different files that contains the defines associated with
 ## the state of the build option.
 set(SOFA_BUILD_OPTIONS_SRC
@@ -163,10 +165,6 @@ endforeach()
 
 configure_file("config.h.in" "${CMAKE_BINARY_DIR}/include/sofa/config.h")
 install(FILES "${CMAKE_BINARY_DIR}/include/sofa/config.h" DESTINATION "include/${PROJECT_NAME}/sofa" COMPONENT headers)
-
-# make sure everyone in the build tree can see <sofa/config.h>
-#list(APPEND SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_BINARY_DIR})
-list(REMOVE_DUPLICATES SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES)
 
 ## Version
 set(SOFAFRAMEWORK_VERSION "${Sofa_VERSION}")

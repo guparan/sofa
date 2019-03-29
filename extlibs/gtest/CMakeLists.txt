@@ -61,7 +61,7 @@ else()
 endif()
 
 target_include_directories(gtest PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>")
-target_include_directories(gtest PUBLIC "$<INSTALL_INTERFACE:include/GTest/include>")
+target_include_directories(gtest PUBLIC "$<INSTALL_INTERFACE:include/extlibs/GTest/include>")
 
 include(${SOFA_KERNEL_SOURCE_DIR}/SofaFramework/SofaMacros.cmake)
-sofa_generate_package(NAME GTest VERSION 2.6.2 TARGETS "gtest")
+sofa_generate_package(NAME GTest VERSION 2.6.2 TARGETS "gtest" INCLUDE_INSTALL_DIR "extlibs/GTest")

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(PersistentContact)
+sofa_plugin(PersistentContact)
 
 
 set(HEADER_FILES

@@ -277,4 +277,4 @@ if(UNIX AND NOT APPLE)
 	target_link_libraries(${PROJECT_NAME} PRIVATE ${ICU_LIBRARIES}) # force link with ICU
 endif()
 
-sofa_install_targets(SofaFramework ${PROJECT_NAME} "sofa/core")
+sofa_install_targets(SofaFramework ${PROJECT_NAME} "SofaFramework/sofa/core")

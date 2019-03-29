@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SofaEulerianFluid VERSION 1.0)
+sofa_plugin(SofaEulerianFluid VERSION 1.0)
 
 set(HEADER_FILES
     Fluid2D.h
@@ -25,7 +25,7 @@ set(EXTRA_FILES
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${EXTRA_FILES})
 target_link_libraries(${PROJECT_NAME} SofaCore)
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>")
-#target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
+#target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:${PLUGIN_INSTALL_DIR}/include>")
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_EULERIAN_FLUID -DSOFA_SRC_DIR=\"${CMAKE_SOURCE_DIR}\"")
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 
