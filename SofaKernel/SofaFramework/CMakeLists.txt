@@ -71,7 +71,7 @@ if(NOT SOFA_NO_OPENGL)
 
     if(OPENGL_GLU_FOUND AND UNIX AND NOT APPLE AND SOFA_BUILD_RELEASE_PACKAGE)
         # Add GLU to Linux binaries
-        sofa_install_libraries_from_targets(OpenGL::GLU)
+        sofa_install_libraries(TARGETS OpenGL::GLU)
     endif()
 
     ## GLEW
@@ -81,10 +81,7 @@ if(NOT SOFA_NO_OPENGL)
         list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${GLEW_Target})
         list(APPEND SOFAFRAMEWORK_DEPENDENCY_INCLUDE_DIRECTORIES ${GLEW_INCLUDE_DIRS})
 
-        if(WIN32)
-            sofa_copy_libraries_from_targets(${GLEW_Target}) # Windows dependency pack
-        endif()
-        sofa_install_libraries_from_targets(${GLEW_Target})
+        sofa_install_libraries(TARGETS ${GLEW_Target})
     else()
         message("OpenGL advanced functions (e.g shaders, FBO) are disabled.")
     endif()
@@ -104,8 +101,7 @@ if(ZLIB_FOUND)
     list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${ZLIB_Target})
 
     if(WIN32)
-        sofa_copy_libraries_from_targets(${ZLIB_Target}) # Windows dependency pack
-        sofa_install_libraries_from_targets(${ZLIB_Target})
+        sofa_install_libraries(TARGETS ${ZLIB_Target})
     endif()
 endif()
 set(SOFA_HAVE_ZLIB ${ZLIB_FOUND})
@@ -155,12 +151,10 @@ if(SOFA_HAVE_BOOST_SYSTEM
     endif()
 
     list(APPEND SOFAFRAMEWORK_DEPENDENCY_LINK ${BOOST_TARGETS})
-    sofa_install_libraries_from_targets(${BOOST_TARGETS})
-    sofa_install_libraries(${Boost_CHRONO_LIBRARY} ${Boost_ATOMIC_LIBRARY})
-    if(WIN32)
-        sofa_copy_libraries_from_targets(${BOOST_TARGETS})
-        sofa_copy_libraries(${Boost_CHRONO_LIBRARY} ${Boost_ATOMIC_LIBRARY})
-    endif()
+    sofa_install_libraries(
+        TARGETS ${BOOST_TARGETS}
+        LIBRARIES ${Boost_CHRONO_LIBRARY} ${Boost_ATOMIC_LIBRARY}
+        )
 endif()
 
 ## Eigen

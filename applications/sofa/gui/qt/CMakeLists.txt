@@ -19,7 +19,7 @@ set(MOC_HEADER_FILES
     QModelViewTableUpdater.h
     QMouseOperations.h
     QSofaListView.h
-    QSofaRecorder.h
+#    QSofaRecorder.h
     QSofaStatWidget.h
     QTabulationModifyObject.h
     QTransformationWidget.h
@@ -68,7 +68,7 @@ set(SOURCE_FILES
     QModelViewTableUpdater.cpp
     QMouseOperations.cpp
     QSofaListView.cpp
-    QSofaRecorder.cpp
+#    QSofaRecorder.cpp
     QSofaStatWidget.cpp
     QTabulationModifyObject.cpp
     QTransformationWidget.cpp
@@ -168,10 +168,7 @@ if(Qt5Core_FOUND)
     qt5_wrap_ui(FORM_FILES ${UI_FILES})
     set(FORM_FILES_GROUP "Generated")
 
-    if(WIN32)
-        sofa_copy_libraries_from_targets(${QT_TARGETS})
-    endif()
-    sofa_install_libraries_from_targets(${QT_TARGETS})
+    sofa_install_libraries(TARGETS ${QT_TARGETS})
 
     # QT INSTALL (dirty)
     # Get Qt libraries dir
@@ -190,20 +187,23 @@ if(Qt5Core_FOUND)
         endif()
     endif()
     # Install Qt plugins
-    install(DIRECTORY "${QT_PLUGINS_DIR}/" DESTINATION "bin" COMPONENT applications)
+    install(DIRECTORY "${QT_PLUGINS_DIR}/iconengines" DESTINATION "bin" COMPONENT applications)
+    install(DIRECTORY "${QT_PLUGINS_DIR}/imageformats" DESTINATION "bin" COMPONENT applications)
+    install(DIRECTORY "${QT_PLUGINS_DIR}/platforms" DESTINATION "bin" COMPONENT applications)
+    install(DIRECTORY "${QT_PLUGINS_DIR}/styles" DESTINATION "bin" COMPONENT applications)
     # Install Qt XCB libraries
     file(GLOB QT_XCB_LIBRARIES
         "${QT_LIBRARIES_DIR}/libQt5DBus${CMAKE_SHARED_LIBRARY_SUFFIX}"
         "${QT_LIBRARIES_DIR}/libQt5XcbQpa${CMAKE_SHARED_LIBRARY_SUFFIX}"
         )
-    sofa_install_libraries(${QT_XCB_LIBRARIES})
+    sofa_install_libraries(LIBRARIES ${QT_XCB_LIBRARIES})
     # Install Qt ICU libraries
     file(GLOB QT_ICU_LIBRARIES
         "${QT_LIBRARIES_DIR}/libicudata${CMAKE_SHARED_LIBRARY_SUFFIX}"
         "${QT_LIBRARIES_DIR}/libicui18n${CMAKE_SHARED_LIBRARY_SUFFIX}"
         "${QT_LIBRARIES_DIR}/libicuuc${CMAKE_SHARED_LIBRARY_SUFFIX}"
         )
-    sofa_install_libraries(${QT_ICU_LIBRARIES})
+    sofa_install_libraries(LIBRARIES ${QT_ICU_LIBRARIES})
 endif()
 
 add_library(${PROJECT_NAME} SHARED ${MOC_HEADER_FILES} ${HEADER_FILES} ${MOC_FILES} ${FORM_FILES} ${SOURCE_FILES})
@@ -212,7 +212,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CUR
 target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>")
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaGuiCommon SofaBaseVisual SofaLoader SofaOpenglVisual SofaMiscForceField)
 target_link_libraries(${PROJECT_NAME} PUBLIC ${EXT_QT_LIBRARIES})
-target_link_libraries(${PROJECT_NAME} PRIVATE SofaExporter)
+#target_link_libraries(${PROJECT_NAME} PRIVATE SofaExporter)
 if(SOFAGUI_ENABLE_QWT)
     target_link_libraries(${PROJECT_NAME} PUBLIC qwt)
 endif()
