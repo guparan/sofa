@@ -8,8 +8,8 @@ find_package(SofaBase REQUIRED)
 set(SOFACOMMON_VERSION ${SofaFramework_VERSION})
 
 ## SofaCommon/config.h
-configure_file(config.h.in "${CMAKE_BINARY_DIR}/include/SofaCommon/config.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/SofaCommon/config.h" DESTINATION "include/SofaCommon" COMPONENT headers)
+configure_file(config.h.in "${CMAKE_BINARY_DIR}/include/${PROJECT_NAME}/config.h")
+install(FILES "${CMAKE_BINARY_DIR}/include/${PROJECT_NAME}/config.h" DESTINATION "include/${PROJECT_NAME}/${PROJECT_NAME}" COMPONENT headers)
 
 
 ### Subdirectories

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-project(RigidScale VERSION 0.1)
+sofa_plugin(RigidScale VERSION 0.1)
 
 set(HEADER_FILES "")
 

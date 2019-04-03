@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SofaCarving VERSION 0.1)
+sofa_plugin(SofaCarving VERSION 0.1)
 
 set(HEADER_FILES
     CarvingManager.h
@@ -24,7 +24,7 @@ target_link_libraries(${PROJECT_NAME} SofaComponentGeneral)
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>")
-target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
+target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:${PLUGIN_INSTALL_DIR}/include>")
 
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_SOFACARVING")
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")

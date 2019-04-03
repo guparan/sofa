@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SofaSimpleGUI)
+sofa_plugin(SofaSimpleGUI)
 
 set(SOFASIMPLEGUI_VERSION 0.1)
 

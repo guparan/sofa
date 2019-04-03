@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SofaStereo)
+sofa_plugin(SofaStereo)
 
 set(SOFASTEREO_MAJOR_VERSION 0)
 set(SOFASTEREO_MINOR_VERSION 1)

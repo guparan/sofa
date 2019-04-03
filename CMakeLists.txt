@@ -59,11 +59,11 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 list(APPEND CMAKE_MODULE_PATH "${SOFA_KERNEL_SOURCE_DIR}/cmake")
 list(APPEND CMAKE_MODULE_PATH "${SOFA_KERNEL_SOURCE_DIR}/cmake/Modules")
 list(APPEND CMAKE_MODULE_PATH "${SOFA_KERNEL_SOURCE_DIR}/SofaFramework")
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/extlibs)
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/applications/plugins)
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/applications/packages)
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/applications/projects)
+list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}")
+list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}/extlibs")
+#list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}/applications/plugins")
+#list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}/applications/packages")
+#list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}/applications/projects")
 
 ## RPATH
 if(UNIX)
@@ -182,6 +182,7 @@ if(${SOFA_FLOATING_POINT_TYPE} STREQUAL both)
 endif()
 
 ### Extlibs
+add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs)
 add_subdirectory(extlibs)
 
 ### Main Sofa subdirectories
@@ -377,10 +378,6 @@ cpack_add_component(applications
     )
 cpack_add_component(headers
     DISPLAY_NAME "C++ Headers"
-    GROUP development
-    )
-cpack_add_component(Eigen_headers
-    DISPLAY_NAME "Eigen Headers"
     GROUP development
     )
 cpack_add_component(GTest_headers

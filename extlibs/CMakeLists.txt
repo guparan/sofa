@@ -2,27 +2,28 @@ cmake_minimum_required(VERSION 3.1)
 
 set(EXTLIBS_TARGETS
     csparse
-    newmat
-    tinyxml
 )
 
 ## Necessary ones
-add_subdirectory(SuiteSparse)
-add_subdirectory(csparse)
-add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/eigen-3.2.7 eigen)
-add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/newmat newmat)
-add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/tinyxml tinyxml)
-add_subdirectory(${SOFA_KERNEL_SOURCE_DIR}/extlibs/json json)
+#find_package(SuiteSparse QUIET)
+#message("SuiteSparse_FOUND = ${SuiteSparse_FOUND}")
+#if(NOT SuiteSparse_FOUND)
+#    add_subdirectory(SuiteSparse)
+#endif()
 
+find_package(CSparse QUIET)
+if(NOT CSparse_FOUND)
+    add_subdirectory(csparse)
+endif()
 
-## Optional ones
-if (SOFAGUI_ENABLE_QWT)
+if(SOFAGUI_ENABLE_QWT)
     message("Qwt activated")
     add_subdirectory(qwt-6.1.2/src qwt)
+    list(APPEND EXTLIBS_TARGETS qwt)
 endif()
 
 option(SOFA_BUILD_MINIFLOWVR "Build the miniFlowVR library distributed in the extlibs/ directory." OFF)
-if (SOFA_BUILD_MINIFLOWVR)
+if(SOFA_BUILD_MINIFLOWVR)
     add_subdirectory(miniFlowVR)
     list(APPEND EXTLIBS_TARGETS miniFlowVR)
 endif()

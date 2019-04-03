@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(OptiTrackNatNet)
+sofa_plugin(OptiTrackNatNet)
 
 
 set(HEADER_FILES

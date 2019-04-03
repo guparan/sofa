@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SofaSphFluid VERSION 1.0)
+sofa_plugin(SofaSphFluid VERSION 1.0)
 
 set(HEADER_FILES
     ParticleSink.h

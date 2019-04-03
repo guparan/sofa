@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SofaVolumetricData)
+sofa_plugin(SofaVolumetricData)
 
 set(SOFAVOLUMETRICDATA_VERSION 1.0)
 
@@ -41,7 +41,7 @@ endif()
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>")
-target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
+target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:${PLUGIN_INSTALL_DIR}/include>")
 
 ## Install rules for the library and headers; CMake package configurations files
 sofa_create_package(SofaVolumetricData ${SOFAVOLUMETRICDATA_VERSION} ${PROJECT_NAME} SofaVolumetricData)

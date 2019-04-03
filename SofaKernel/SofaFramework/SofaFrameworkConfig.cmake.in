@@ -12,8 +12,8 @@ include(SofaMacros)
 # Help finding headers (install only)
 # TODO: a better way to do this?
 set(INCLUDE_PATHS
-    "${CMAKE_CURRENT_LIST_DIR}/../../../include/WinDepPack"
-    "${CMAKE_CURRENT_LIST_DIR}/../../../include/Eigen"
+    "${CMAKE_CURRENT_LIST_DIR}/../../../include/extlibs/WinDepPack"
+    "${CMAKE_CURRENT_LIST_DIR}/../../../include/extlibs/Eigen"
     )
 foreach(include_path ${INCLUDE_PATHS})
     list(FIND CMAKE_INCLUDE_PATH ${include_path} found_index)

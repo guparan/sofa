@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SensableEmulation)
+sofa_plugin(SensableEmulation)
 
 
 set(HEADER_FILES

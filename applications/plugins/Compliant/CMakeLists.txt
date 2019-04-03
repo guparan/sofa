@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(Compliant VERSION 0.1)
+sofa_plugin(Compliant VERSION 0.1)
 
 set(HEADER_FILES
     assembly/AssembledSystem.h
@@ -266,7 +266,7 @@ add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILE
 target_link_libraries(${PROJECT_NAME} SofaEigen2Solver SofaUserInteraction SofaComponentMisc SofaSimulationGraph SofaMiscCollision)
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>")
-target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
+target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:${PLUGIN_INSTALL_DIR}/include>")
 
 # linking explicitly with rt looks necessary on some posix (e.g. CentOS)
 if(UNIX AND NOT APPLE)

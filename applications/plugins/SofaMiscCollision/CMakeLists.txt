@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SofaMiscCollision VERSION 1.0)
+sofa_plugin(SofaMiscCollision VERSION 1.0)
 
 set(SOFA_HAVE_SOFAMISCCOLLISION 1)
 
