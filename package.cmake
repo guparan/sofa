@@ -1,25 +1,23 @@
 ######################
 # Wrapper macro to set boolean value to a variable
 macro(setSofaOption name value)
-    if(NOT ${name})
-        set(${name} "${value}" CACHE BOOL "" FORCE)
-    endif()
-    message("${name} ${value}")
+    set(${name} "${value}" CACHE BOOL "" FORCE)
+    message("${name} ${${name}}")
 endmacro()
 
 macro(setSofaPath name value)
     set(${name} "${value}" CACHE PATH "" FORCE)
-    message("${name} ${value}")
+    message("${name} ${${name}}")
 endmacro()
 
 macro(setSofaString name value)
     set(${name} "${value}" CACHE STRING "" FORCE)
-    message("${name} ${value}")
+    message("${name} ${${name}}")
 endmacro()
 
 macro(setSofaFilePath name value)
     set(${name} "${value}" CACHE FILEPATH "" FORCE)
-    message("${name} ${value}")
+    message("${name} ${${name}}")
 endmacro()
 ######################
 
@@ -30,7 +28,7 @@ setSofaOption(APPLICATION_MODELER OFF)
 
 setSofaOption(SOFA_USE_MASK OFF)
 
-setSofaOption(SOFA_BUILD_TESTS ON)
+#setSofaOption(SOFA_BUILD_TESTS ON)
 setSofaOption(SOFA_BUILD_TUTORIALS OFF)
 setSofaOption(SOFA_BUILD_METIS ON)
 

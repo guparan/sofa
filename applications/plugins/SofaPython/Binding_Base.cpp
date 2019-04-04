@@ -227,7 +227,7 @@ BaseData* helper_addNewData(PyObject *args, PyObject * kw, Base * obj) {
 
     char* dataRawType = new char;
     char* dataClass = new char;
-    char* dataHelp = new char;
+    char* dataHelp = "missing help";
     char * dataName = new char;
     std::string val = "";
     
@@ -347,7 +347,7 @@ BaseData* helper_addNewData(PyObject *args, PyObject * kw, Base * obj) {
             {
                 if(!bd->setParent(tmp.str()))
                 {
-                    msg_warning(obj) << "Could not setup link for Data, initialzing empty.";
+                    msg_warning(obj) << "Could not setup link for Data, initializing empty " << tmp.str() ;
                 }
             }
             else
