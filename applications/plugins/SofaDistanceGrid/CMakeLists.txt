@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SofaDistanceGrid)
+sofa_plugin(SofaDistanceGrid)
 
 set(SOFADISTANCEGRID_VERSION 1.0)
 set(SOFA_HAVE_SOFADISTANCEGRID 1)
@@ -64,4 +64,9 @@ target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>"
 
 
 ## Install rules for the library and headers; CMake package configurations files
-sofa_create_package(SofaDistanceGrid ${SOFADISTANCEGRID_VERSION} ${PROJECT_NAME} SofaDistanceGrid)
+#sofa_create_package(SofaDistanceGrid ${SOFADISTANCEGRID_VERSION} ${PROJECT_NAME} SofaDistanceGrid)
+sofa_generate_package(
+    NAME ${PROJECT_NAME}
+    TARGETS ${PROJECT_NAME}
+    VERSION ${SOFADISTANCEGRID_VERSION}
+    )

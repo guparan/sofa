@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(ColladaSceneLoader)
+sofa_plugin(ColladaSceneLoader)
 
 set(HEADER_FILES
     SceneColladaLoader.h

@@ -3,14 +3,27 @@ cmake_minimum_required(VERSION 3.1)
 set(EXTLIBS_TARGETS
     newmat
     tinyxml
-    json
 )
 
-## Necessary ones
-add_subdirectory(eigen-3.2.7 eigen)
-add_subdirectory(newmat)
-add_subdirectory(tinyxml)
-add_subdirectory(json)
+# Eigen (header-only)
+set(EIGEN_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/eigen-3.2.7" CACHE PATH "Eigen directory (containing Eigen/src/...)")
+mark_as_advanced(EIGEN_ROOT)
+
+# Newmat
+find_package(Newmat QUIET)
+if(NOT Newmat_FOUND)
+    add_subdirectory(newmat)
+endif()
+
+# TinyXML
+find_package(TinyXML QUIET)
+if(NOT TinyXML_FOUND)
+    add_subdirectory(tinyxml)
+endif()
+
+# Nlohmann JSON (header-only)
+set(JSON_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/json" CACHE PATH "Nlohmann JSON directory")
+mark_as_advanced(JSON_ROOT)
 
 foreach(target ${EXTLIBS_TARGETS})
     set_target_properties(${target} PROPERTIES DEBUG_POSTFIX "_d")

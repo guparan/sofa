@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(BulletCollisionDetection)
+sofa_plugin(BulletCollisionDetection)
 
 #WARNING, when installing bullet write in the bullet CMakeLists.txt the line add_definitions(-DBULLET_TRIANGLE_COLLISION)
 # todo: is it possible to do a platform check for BULLET_TRIANGLE_COLLISION?

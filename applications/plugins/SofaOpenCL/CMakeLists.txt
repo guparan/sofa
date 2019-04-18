@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SofaOpenCL)
+sofa_plugin(SofaOpenCL)
 
 set(SOFAOPENCL_VERSION 0.1)
 

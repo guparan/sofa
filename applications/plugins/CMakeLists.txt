@@ -3,6 +3,15 @@ cmake_minimum_required(VERSION 3.1)
 find_package(SofaFramework)
 
 sofa_add_plugin(CImgPlugin CImgPlugin ON) # ON by default and first as it is used by other plugins.
+
+#message("CMAKE_CURRENT_BINARY_DIR/CImgPlugin = ${CMAKE_CURRENT_BINARY_DIR}/CImgPlugin")
+#message("CMAKE_CURRENT_LIST_DIR/CImgPlugin = ${CMAKE_CURRENT_LIST_DIR}/CImgPlugin")
+#include(ExternalProject)
+#ExternalProject_Add(CImgPlugin
+#    PREFIX "${CMAKE_CURRENT_BINARY_DIR}/CImgPlugin"
+#    SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/CImgPlugin"
+#    )
+
 sofa_add_plugin(SofaEulerianFluid SofaEulerianFluid)
 sofa_add_plugin(SofaSphFluid SofaSphFluid)
 sofa_add_plugin(SofaMiscCollision SofaMiscCollision ON) # Contains DefaultCollisionGroupManager

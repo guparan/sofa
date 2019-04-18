@@ -2,14 +2,14 @@ cmake_minimum_required(VERSION 3.1)
 
 project(CImg)
 
-install(FILES
-        CImg.h
-        DESTINATION include/CImg
+set(CImgPlugin_INSTALL_DIR ".")
+
+install(FILES CImg.h
+        DESTINATION "${CImgPlugin_INSTALL_DIR}/include/CImg"
         COMPONENT CImg_headers)
 
-install(DIRECTORY
-        plugins
-        DESTINATION include/CImg
+install(DIRECTORY plugins
+        DESTINATION "${CImgPlugin_INSTALL_DIR}/include/CImg"
         COMPONENT CImg_headers)
 
 
@@ -18,16 +18,11 @@ include(CMakePackageConfigHelpers)
 ### CImgConfig.cmake
 ## Build tree
 set(CIMG_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
-configure_package_config_file(CImgConfig.cmake.in
-                              ${CMAKE_BINARY_DIR}/cmake/CImgConfig.cmake
-                              INSTALL_DESTINATION lib/cmake/CImg
-                              PATH_VARS CIMG_INCLUDE_DIR)
+configure_file(CImgConfig.cmake.in ${CMAKE_BINARY_DIR}/cmake/CImgConfig.cmake)
+
 ## Install tree
 set(CIMG_INCLUDE_DIR include)
-configure_package_config_file(CImgConfig.cmake.in
-                              InstalledCImgConfig.cmake
-                              INSTALL_DESTINATION lib/cmake/CImg
-                              PATH_VARS CIMG_INCLUDE_DIR)
+configure_file(CImgConfig.cmake.in InstalledCImgConfig.cmake)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/InstalledCImgConfig.cmake
-        DESTINATION lib/cmake/CImg
+        DESTINATION "${CImgPlugin_INSTALL_DIR}/lib/cmake/CImg"
         RENAME CImgConfig.cmake)

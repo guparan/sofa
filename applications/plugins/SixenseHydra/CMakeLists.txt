@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SixenseHydra)
+sofa_plugin(SixenseHydra)
 
 
 set(HEADER_FILES

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(SofaCUDA)
+sofa_plugin(SofaCUDA)
 
 set(SOFACUDA_MAJOR_VERSION 0)
 set(SOFACUDA_MINOR_VERSION 1)
@@ -284,9 +284,6 @@ option(SOFACUDA_PRECISE "Use IEEE 754-compliant floating point operations." OFF)
 set(SOFACUDA_ARCH "sm_20" CACHE STRING "GPU architecture, as passed to nvcc with the -arch option.")
 
 include(SofaCUDANvccFlags.cmake)
-
-configure_file(config.h.in "${CMAKE_BINARY_DIR}/include/SofaCUDA/config.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/SofaCUDA/config.h" DESTINATION "include/SofaCUDA")
 
 
 # nvcc uses a "host code compiler" to compile CPU code, specified by CUDA_HOST_COMPILER.

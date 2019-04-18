@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(Haption)
+sofa_plugin(Haption)
 
 find_package(SofaHaptics REQUIRED)
 
