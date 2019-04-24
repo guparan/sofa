@@ -40,7 +40,7 @@ set(SOURCE_FILES
 
 	)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 
 AddCompilerDefinitions("SOFA_BUILD_SOFAVRPNCLIENT")
 AddLinkerDependencies(SofaCore SofaSimulationCommon vrpn_quat vrpn_client)

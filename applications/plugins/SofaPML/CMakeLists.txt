@@ -6,6 +6,6 @@ AddLinkerDependencies(SofaSimulationCommon SofaDeformable xml2 PML LML)
 file(GLOB HEADER_FILES *.h)
 file(GLOB SOURCE_FILES *.cpp)
 AddCompilerDefinitions("SOFA_BUILD_FILEMANAGER_PML")
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 
 include(${SOFA_CMAKE_DIR}/postProject.cmake)

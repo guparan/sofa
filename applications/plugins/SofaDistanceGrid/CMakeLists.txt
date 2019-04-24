@@ -41,7 +41,7 @@ set(EXTRA_FILES
 
 add_subdirectory(SofaDistanceGrid_test)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${EXTRA_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${EXTRA_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaMeshCollision SofaMiscCollision ${SOFAADVANCED_DEPENDENCY_LINK})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaUserInteraction)
 
@@ -64,4 +64,9 @@ target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>"
 
 
 ## Install rules for the library and headers; CMake package configurations files
-sofa_create_package(SofaDistanceGrid ${SOFADISTANCEGRID_VERSION} ${PROJECT_NAME} SofaDistanceGrid)
+#sofa_create_package(SofaDistanceGrid ${SOFADISTANCEGRID_VERSION} ${PROJECT_NAME} SofaDistanceGrid)
+sofa_generate_package(
+    NAME ${PROJECT_NAME}
+    TARGETS ${PROJECT_NAME}
+    VERSION ${SOFADISTANCEGRID_VERSION}
+    )

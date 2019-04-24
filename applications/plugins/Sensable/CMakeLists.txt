@@ -26,7 +26,7 @@ include_directories(${OPENHAPTICS_INCLUDE_DIR})
 include_directories(${OPENHAPTICS_UTIL_INCLUDE_DIR})
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/..")
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_SENSABLEPLUGIN")
 target_link_libraries(${PROJECT_NAME} SofaHaptics ${OPENHAPTICS_LIBRARIES})
 

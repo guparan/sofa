@@ -31,7 +31,7 @@ set(README_FILES
 
 find_package(SofaGeneral REQUIRED)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_PERSISTENTCONTACT")
 target_link_libraries(${PROJECT_NAME} SofaBaseMechanics SofaRigid SofaConstraint)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/..")

@@ -52,7 +52,7 @@ set(README_FILES
 	QtOgreViewer.txt
 	)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
 
 AddCompilerDefinitions("SOFA_BUILD_QTOGREVIEWERPLUGIN")
 AddLinkerDependencies(SofaGuiQt)

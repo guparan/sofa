@@ -17,7 +17,7 @@ find_package(SofaGeneral REQUIRED)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 find_package(Sixense REQUIRED)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_SIXENSE_HYDRA")
 target_link_libraries(${PROJECT_NAME} SofaBaseLinearSolver SofaBaseTopology
     SofaMeshCollision SofaSimpleFem SofaConstraint SofaUserInteraction)

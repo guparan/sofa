@@ -98,7 +98,7 @@ find_package(SofaGeneral REQUIRED)
 message(WARNING "SofaOpenCL: TODO: don't use absolute path (SOFA_SRC_DIR)")
 
 include_directories(${OPENCL_INCLUDE_DIRS})
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${OTHER_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${OTHER_FILES})
 add_definitions("-DSOFA_SRC_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}/../../..\"")
 
 add_definitions("-DSOFA_BUILD_GPU_OPENCL")

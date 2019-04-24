@@ -54,10 +54,6 @@ if (CGAL_VERSION VERSION_GREATER 4.9) # if CGAL >= 4.10
 endif()
 
 
-## CGALPlugin/config.h
-configure_file(config.h.in "${CMAKE_BINARY_DIR}/include/CGALPlugin/config.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/CGALPlugin/config.h" DESTINATION "include/CGALPlugin")
-
 if(WIN32)
     #add library dir as it is not added automatically on Windows (?)
     link_directories(${CGAL_LIBRARIES_DIR})
@@ -86,7 +82,7 @@ if(WIN32)
 endif()
 
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>")

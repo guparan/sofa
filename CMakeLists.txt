@@ -54,16 +54,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${RUNTIME_OUTPUT_DIRECTOR
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${LIBRARY_OUTPUT_DIRECTORY})
 
 ## Environment
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
 list(APPEND CMAKE_MODULE_PATH "${SOFA_KERNEL_SOURCE_DIR}/cmake")
 list(APPEND CMAKE_MODULE_PATH "${SOFA_KERNEL_SOURCE_DIR}/cmake/Modules")
 list(APPEND CMAKE_MODULE_PATH "${SOFA_KERNEL_SOURCE_DIR}/SofaFramework")
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/extlibs)
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/applications/plugins)
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/applications/packages)
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/applications/projects)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules")
+list(APPEND CMAKE_PREFIX_PATH "${CMAKE_BINARY_DIR}/cmake")
+list(APPEND CMAKE_IGNORE_PATH "${CMAKE_INSTALL_PREFIX}") # ignore install directory for findXXX commands
 
 ## RPATH
 if(UNIX)
@@ -108,30 +105,11 @@ if(NOT Boost_FOUND)
     else()
         message(FATAL_ERROR "Boost (${BOOST_MIN_VERSION} or higher) is mandatory.")
     endif()
-endif()
-
-### Dependency pack for Windows
-if(MSVC)
-    #define BOOST_ALL_DYN_LINK needed for dynamic linking with boost libraries
-    add_definitions(-DBOOST_ALL_DYN_LINK)
-
-    set(SOFA_DEPENDENCY_PACK_DIR "" CACHE PATH "sofa windows dependency pack path")
-    if(SOFA_DEPENDENCY_PACK_DIR)
-        set(DEPENDENCY_PACK_DIR "${SOFA_DEPENDENCY_PACK_DIR}")
-    else()
-        # Default
-        set(DEPENDENCY_PACK_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+else()
+    if(MSVC)
+        #define BOOST_ALL_DYN_LINK needed for dynamic linking with boost libraries
+        add_definitions(-DBOOST_ALL_DYN_LINK)
     endif()
-
-    list(APPEND CMAKE_INCLUDE_PATH ${DEPENDENCY_PACK_DIR}/include)
-    if(CMAKE_CL_64)
-        list(APPEND CMAKE_LIBRARY_PATH ${DEPENDENCY_PACK_DIR}/lib/win64)
-    else()
-        list(APPEND CMAKE_LIBRARY_PATH ${DEPENDENCY_PACK_DIR}/lib/win32)
-    endif()
-
-    install(DIRECTORY ${DEPENDENCY_PACK_DIR}/include/ DESTINATION include COMPONENT headers)
-    install(DIRECTORY ${DEPENDENCY_PACK_DIR}/licenses/ DESTINATION licenses COMPONENT applications)
 endif()
 
 ### Mask
@@ -398,10 +376,6 @@ cpack_add_component(headers
     DISPLAY_NAME "C++ Headers"
     GROUP development
     )
-cpack_add_component(Eigen_headers
-    DISPLAY_NAME "Eigen Headers"
-    GROUP development
-    )
 cpack_add_component(GTest_headers
     DISPLAY_NAME "GTest Headers"
     GROUP development
@@ -510,7 +484,7 @@ endif()
 
 if(APPLE)
     find_package(ICU COMPONENTS data i18n uc)
-    sofa_install_libraries(${ICU_LIBRARIES})
+    sofa_install_libraries(LIBRARIES ${ICU_LIBRARIES})
     message("ICU_LIBRARIES = ${ICU_LIBRARIES}")
 endif()
 

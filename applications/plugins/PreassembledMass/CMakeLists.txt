@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(PreassembledMass)
+project(PreassembledMass VERSION 0.1)
 
 
 set(HEADER_FILES
@@ -17,7 +17,7 @@ find_package(SofaGeneral REQUIRED)
 find_package(Compliant REQUIRED)
 find_package(Flexible QUIET)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} SofaEigen2Solver)
 target_link_libraries(${PROJECT_NAME} Compliant)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/..")
@@ -32,11 +32,8 @@ endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS ${PREASSEMBLEDMASS_COMPILER_FLAGS})
 
-install(TARGETS ${PROJECT_NAME}
-        COMPONENT PreassembledMass_libraries
-        EXPORT PreassembledMassTargets
-        RUNTIME DESTINATION bin
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib)
-
-install(DIRECTORY examples/ DESTINATION share/sofa/plugins/${PROJECT_NAME})
+sofa_generate_package(
+    NAME ${PROJECT_NAME}
+    TARGETS ${PROJECT_NAME}
+    VERSION ${PROJECT_VERSION}
+    )

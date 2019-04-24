@@ -20,7 +20,7 @@ find_package(Assimp REQUIRED)
 find_package(Flexible QUIET)
 find_package(image QUIET)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
 target_link_libraries(${PROJECT_NAME} SofaGeneralRigid SofaLoader SofaSimulationCommon SofaBaseMechanics SofaRigid SofaBoundaryCondition SofaBaseTopology SofaBaseVisual SofaOpenglVisual SofaDeformable SofaMeshCollision)
 set(COLLADASCENELOADER_COMPILE_FLAGS "-DSOFA_BUILD_COLLADASCENELOADER")
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/..")

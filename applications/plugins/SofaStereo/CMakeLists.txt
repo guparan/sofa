@@ -28,7 +28,7 @@ set(SOURCE_FILES
 find_package(SofaFramework REQUIRED)
 find_package(SofaGeneral REQUIRED)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
+sofa_plugin_add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_PLUGIN_STEREO")
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${SOFASTEREO_VERSION})
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
