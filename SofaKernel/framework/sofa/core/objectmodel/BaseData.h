@@ -319,13 +319,13 @@ protected:
     virtual bool updateFromParentValue(const BaseData* parent);
 
     /// Help message
-    const char* help {nullptr} ;
+    const char* help {""} ;
     /// Owner class
-    const char* ownerClass {nullptr} ;
+    const char* ownerClass {""} ;
     /// group
-    const char* group {nullptr};
+    const char* group {""};
     /// widget
-    const char* widget {nullptr};
+    const char* widget {""};
     /// Number of changes since creation
     helper::fixed_array<int, SOFA_DATA_MAX_ASPECTS> m_counters;
     /// True if this %Data is set, i.e. its value is different from the default value
