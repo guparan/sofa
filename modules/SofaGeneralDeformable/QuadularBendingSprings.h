@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_QUADULARBENDINGSPRINGS_H
 #define SOFA_COMPONENT_FORCEFIELD_QUADULARBENDINGSPRINGS_H
-#include "config.h"
+#include <SofaGeneralDeformable/config.h>
 
 #include <sofa/core/behavior/ForceField.h>
 #include <sofa/core/topology/BaseMeshTopology.h>
@@ -208,7 +208,7 @@ protected:
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_QUADULARBENDINGSPRINGS_CPP)
 
-extern template class SOFA_GENERAL_DEFORMABLE_API QuadularBendingSprings<sofa::defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALDEFORMABLE_API QuadularBendingSprings<sofa::defaulttype::Vec3Types>;
 
 
 

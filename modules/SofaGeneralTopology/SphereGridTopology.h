@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_SPHEREGRIDTOPOLOGY_H
 #define SOFA_COMPONENT_TOPOLOGY_SPHEREGRIDTOPOLOGY_H
-#include "config.h"
+#include <SofaGeneralTopology/config.h>
 
 #include <SofaBaseTopology/GridTopology.h>
 
@@ -39,7 +39,7 @@ namespace topology
  * Position and direction are set by @sa d_center and @sa d_axis
  * nz discretisation is along the sphere axis
   */
-class SOFA_GENERAL_TOPOLOGY_API SphereGridTopology : public GridTopology
+class SOFA_SOFAGENERALTOPOLOGY_API SphereGridTopology : public GridTopology
 {
 public:
     SOFA_CLASS(SphereGridTopology,GridTopology);

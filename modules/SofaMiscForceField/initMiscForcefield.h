@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_FORCEFIELD_INIT_H
 #define SOFA_COMPONENT_MISC_FORCEFIELD_INIT_H
-#include "config.h"
+#include <SofaMiscForceField/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_MISC_FORCEFIELD_API initMiscForcefield();
+void SOFA_SOFAMISCFORCEFIELD_API initMiscForcefield();
 
 } // namespace component
 

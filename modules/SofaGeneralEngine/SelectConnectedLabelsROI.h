@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SelectConnectedLabelsROI_H_
 #define SelectConnectedLabelsROI_H_
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 
 

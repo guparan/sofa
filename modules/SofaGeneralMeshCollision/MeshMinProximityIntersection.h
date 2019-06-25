@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_MESHMINPROXIMITYINTERSECTION_H
 #define SOFA_COMPONENT_COLLISION_MESHMINPROXIMITYINTERSECTION_H
-#include "config.h"
+#include <SofaGeneralMeshCollision/config.h>
 
 #include <SofaBaseCollision/MinProximityIntersection.h>
 #include <sofa/helper/FnDispatcher.h>
@@ -43,7 +43,7 @@ namespace component
 namespace collision
 {
 
-class SOFA_GENERAL_MESH_COLLISION_API MeshMinProximityIntersection : public core::collision::BaseIntersector
+class SOFA_SOFAGENERALMESHCOLLISION_API MeshMinProximityIntersection : public core::collision::BaseIntersector
 {
     typedef MinProximityIntersection::OutputVector OutputVector;
 

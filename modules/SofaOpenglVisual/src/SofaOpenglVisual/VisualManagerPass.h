@@ -28,7 +28,7 @@
 
 #ifndef SOFA_COMPONENT_VISUALMANAGERPASS_H
 #define SOFA_COMPONENT_VISUALMANAGERPASS_H
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <SofaOpenglVisual/CompositingVisualLoop.h>
 #include <sofa/core/visual/VisualManager.h>
@@ -52,7 +52,7 @@ namespace visualmodel
  *  \brief Render pass element: render the relevant tagged objects in a FBO
  */
 
-class SOFA_OPENGL_VISUAL_API VisualManagerPass : public core::visual::VisualManager
+class SOFA_SOFAOPENGLVISUAL_API VisualManagerPass : public core::visual::VisualManager
 {
 public:
     SOFA_CLASS(VisualManagerPass, core::visual::VisualManager);

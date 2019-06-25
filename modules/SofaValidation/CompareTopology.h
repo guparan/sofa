@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_COMPARETOPOLOGY_H
 #define SOFA_COMPONENT_MISC_COMPARETOPOLOGY_H
-#include "config.h"
+#include <SofaValidation/config.h>
 
 #include <SofaGeneralLoader/ReadTopology.h>
 #include <sofa/simulation/Visitor.h>
@@ -40,7 +40,7 @@ namespace misc
 
 /** Compare Topology vectors from file at each timestep
 */
-class SOFA_VALIDATION_API CompareTopology: public ReadTopology
+class SOFA_SOFAVALIDATION_API CompareTopology: public ReadTopology
 {
 public:
     SOFA_CLASS(CompareTopology,ReadTopology);
@@ -87,7 +87,7 @@ protected :
 
 
 /// Create CompareTopology component in the graph each time needed
-class SOFA_VALIDATION_API CompareTopologyCreator: public simulation::Visitor
+class SOFA_SOFAVALIDATION_API CompareTopologyCreator: public simulation::Visitor
 {
 public:
     CompareTopologyCreator(const core::ExecParams* params);
@@ -109,7 +109,7 @@ protected:
 };
 
 
-class SOFA_VALIDATION_API CompareTopologyResult: public simulation::Visitor
+class SOFA_SOFAVALIDATION_API CompareTopologyResult: public simulation::Visitor
 {
 public:
     CompareTopologyResult(const core::ExecParams* params);

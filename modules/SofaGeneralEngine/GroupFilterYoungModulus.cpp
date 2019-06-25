@@ -41,7 +41,7 @@ int GroupFilterYoungModulusClass = core::RegisterObject("This class gives a vect
  
         ;
 
-template class SOFA_GENERAL_ENGINE_API GroupFilterYoungModulus<Vec3Types>;
+template class SOFA_SOFAGENERALENGINE_API GroupFilterYoungModulus<Vec3Types>;
  
 
 

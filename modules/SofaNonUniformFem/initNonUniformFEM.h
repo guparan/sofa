@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_NON_UNIFORM_FEM_INIT_H
 #define SOFA_COMPONENT_NON_UNIFORM_FEM_INIT_H
-#include "config.h"
+#include <SofaNonUniformFem/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_NON_UNIFORM_FEM_API initNonUniformFEM();
+void SOFA_SOFANONUNIFORMFEM_API initNonUniformFEM();
 
 } // namespace component
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONSTRAINT_INIT_H
 #define SOFA_COMPONENT_CONSTRAINT_INIT_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_CONSTRAINT_API initConstraint();
+void SOFA_SOFACONSTRAINT_API initConstraint();
 
 } // namespace component
 

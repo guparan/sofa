@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_TAITSURFACEPRESSUREFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_TAITSURFACEPRESSUREFORCEFIELD_H
-#include "config.h"
+#include <SofaBoundaryCondition/config.h>
 
 #include <sofa/core/behavior/ForceField.h>
 #include <sofa/core/topology/BaseMeshTopology.h>
@@ -138,7 +138,7 @@ protected:
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_TAITSURFACEPRESSUREFORCEFIELD_CPP)
 
-extern template class SOFA_BOUNDARY_CONDITION_API TaitSurfacePressureForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API TaitSurfacePressureForceField<defaulttype::Vec3Types>;
 
 #endif //  !defined(SOFA_COMPONENT_FORCEFIELD_TAITSURFACEPRESSUREFORCEFIELD_CPP)
 

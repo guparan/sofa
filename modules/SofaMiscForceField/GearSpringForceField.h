@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_INTERACTIONFORCEFIELD_GEARSPRINGFORCEFIELD_H
 #define SOFA_COMPONENT_INTERACTIONFORCEFIELD_GEARSPRINGFORCEFIELD_H
-#include "config.h"
+#include <SofaMiscForceField/config.h>
 
 #include <sofa/core/behavior/PairInteractionForceField.h>
 #include <sofa/core/behavior/MechanicalState.h>
@@ -307,8 +307,8 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_GEARSPRINGFORCEFIELD_CPP)
-extern template class SOFA_MISC_FORCEFIELD_API GearSpring<defaulttype::Rigid3Types>;
-extern template class SOFA_MISC_FORCEFIELD_API GearSpringForceField<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAMISCFORCEFIELD_API GearSpring<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAMISCFORCEFIELD_API GearSpringForceField<defaulttype::Rigid3Types>;
 
 #endif
 } // namespace interactionforcefield

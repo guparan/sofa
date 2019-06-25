@@ -33,7 +33,7 @@
 
 #ifndef SOFA_COMPONENT_CONTROLLER_CONTROLLER_H
 #define SOFA_COMPONENT_CONTROLLER_CONTROLLER_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <sofa/core/behavior/BaseController.h>
 
@@ -71,7 +71,7 @@ namespace controller
  * Provides also an interface for BeginAnimation and EndAnimation events
  * launched at the beginning and the end of a time step.
  */
-class SOFA_USER_INTERACTION_API Controller : public core::behavior::BaseController
+class SOFA_SOFAUSERINTERACTION_API Controller : public core::behavior::BaseController
 {
 
 public:

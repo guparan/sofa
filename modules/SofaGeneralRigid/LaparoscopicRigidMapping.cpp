@@ -44,7 +44,7 @@ int LaparoscopicRigidMappingClass = core::RegisterObject("TODO-LaparoscopicRigid
         .add< LaparoscopicRigidMapping< LaparoscopicRigidTypes, RigidTypes > >()
         ;
 
-template class SOFA_GENERAL_RIGID_API LaparoscopicRigidMapping< LaparoscopicRigidTypes, RigidTypes >;
+template class SOFA_SOFAGENERALRIGID_API LaparoscopicRigidMapping< LaparoscopicRigidTypes, RigidTypes >;
 
 } // namespace mapping
 

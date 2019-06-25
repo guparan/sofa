@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_SKINNINGMAPPING_H
 #define SOFA_COMPONENT_MAPPING_SKINNINGMAPPING_H
-#include "config.h"
+#include <SofaGeneralRigid/config.h>
 
 #include <sofa/core/Mapping.h>
 #include <sofa/defaulttype/RigidTypes.h>
@@ -132,8 +132,8 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_MAPPING_SKINNINGMAPPING_CPP)
-extern template class SOFA_GENERAL_RIGID_API SkinningMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::Vec3dTypes >;
-extern template class SOFA_GENERAL_RIGID_API SkinningMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::ExtVec3Types >;
+extern template class SOFA_SOFAGENERALRIGID_API SkinningMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::Vec3dTypes >;
+extern template class SOFA_SOFAGENERALRIGID_API SkinningMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::ExtVec3Types >;
 
 
 #endif // !defined(SOFA_COMPONENT_MAPPING_SKINNINGMAPPING_CPP)

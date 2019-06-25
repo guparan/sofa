@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_EVALPOINTSDISTANCE_H
 #define SOFA_COMPONENT_MISC_EVALPOINTSDISTANCE_H
-#include "config.h"
+#include <SofaValidation/config.h>
 
 #include <sofa/core/behavior/MechanicalState.h>
 
@@ -160,8 +160,8 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_MISC_EVALPOINTSDISTANCE_CPP)
-extern template class SOFA_VALIDATION_API EvalPointsDistance<defaulttype::Vec3Types>;
-extern template class SOFA_VALIDATION_API EvalPointsDistance<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAVALIDATION_API EvalPointsDistance<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAVALIDATION_API EvalPointsDistance<defaulttype::Rigid3Types>;
 
 #endif
 

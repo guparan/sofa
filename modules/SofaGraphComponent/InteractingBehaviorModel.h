@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_CORE_INTERACTINGBEHAVIORMODEL_H
 #define SOFA_CORE_INTERACTINGBEHAVIORMODEL_H
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 #include <SofaBaseMechanics/MechanicalObject.h>
 #include <sofa/core/behavior/Mass.h>

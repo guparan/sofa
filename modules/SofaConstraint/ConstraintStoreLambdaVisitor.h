@@ -1,6 +1,6 @@
 #ifndef SOFA_CONSTRAINT_CONSTRAINTSTORELAMBDAVISITOR_H
 #define SOFA_CONSTRAINT_CONSTRAINTSTORELAMBDAVISITOR_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <sofa/simulation/MechanicalVisitor.h>
 
@@ -10,7 +10,7 @@ namespace sofa
 namespace simulation
 {
 
-class SOFA_CONSTRAINT_API ConstraintStoreLambdaVisitor : public BaseMechanicalVisitor
+class SOFA_SOFACONSTRAINT_API ConstraintStoreLambdaVisitor : public BaseMechanicalVisitor
 {
 public:
     ConstraintStoreLambdaVisitor(const sofa::core::ConstraintParams* cParams, const sofa::defaulttype::BaseVector* lambda);

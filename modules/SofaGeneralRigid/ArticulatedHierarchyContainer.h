@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONTAINER_ARTICULATEDHIERARCHYCONTAINER_H
 #define SOFA_COMPONENT_CONTAINER_ARTICULATEDHIERARCHYCONTAINER_H
-#include "config.h"
+#include <SofaGeneralRigid/config.h>
 
 #include <sofa/core/objectmodel/BaseObject.h>
 #include <sofa/defaulttype/VecTypes.h>
@@ -48,7 +48,7 @@ class Articulation;
 * @see ArticulatedCenter
 * @see Articulation
 */
-class SOFA_GENERAL_RIGID_API ArticulatedHierarchyContainer : public virtual core::objectmodel::BaseObject
+class SOFA_SOFAGENERALRIGID_API ArticulatedHierarchyContainer : public virtual core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(ArticulatedHierarchyContainer,core::objectmodel::BaseObject);
@@ -97,7 +97,7 @@ private:
 *	All the variables which are defined in this class can be modified once sofa is running.
 */
 
-class SOFA_GENERAL_RIGID_API ArticulationCenter : public virtual core::objectmodel::BaseObject
+class SOFA_SOFAGENERALRIGID_API ArticulationCenter : public virtual core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(ArticulationCenter,core::objectmodel::BaseObject);
@@ -210,7 +210,7 @@ public:
 *	An articulation is defined by an axis, an orientation and an index.
 *	All the variables which are defined in this class can be modified once sofa is running.
 */
-class SOFA_GENERAL_RIGID_API Articulation : public virtual core::objectmodel::BaseObject
+class SOFA_SOFAGENERALRIGID_API Articulation : public virtual core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(Articulation,core::objectmodel::BaseObject);

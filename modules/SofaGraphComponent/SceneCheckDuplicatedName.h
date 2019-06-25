@@ -22,7 +22,7 @@
 #ifndef SOFA_SIMULATION_SCENECHECKDUPLICATEDNAME_H
 #define SOFA_SIMULATION_SCENECHECKDUPLICATEDNAME_H
 
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 #include "SceneCheck.h"
 #include <map>
 #include <sstream>
@@ -34,7 +34,7 @@ namespace simulation
 namespace _scenechecking_
 {
     
-class SOFA_GRAPH_COMPONENT_API SceneCheckDuplicatedName : public SceneCheck
+class SOFA_SOFAGRAPHCOMPONENT_API SceneCheckDuplicatedName : public SceneCheck
 {
 public:
     virtual ~SceneCheckDuplicatedName() {}

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_TRIANGLEOCTREE_H
 #define SOFA_COMPONENT_COLLISION_TRIANGLEOCTREE_H
-#include "config.h"
+#include <SofaGeneralMeshCollision/config.h>
 
 #include <sofa/core/CollisionModel.h>
 #include <SofaBaseMechanics/MechanicalObject.h>
@@ -47,7 +47,7 @@ namespace collision
 
 class TriangleOctree;
 
-class SOFA_GENERAL_MESH_COLLISION_API TriangleOctreeRoot
+class SOFA_SOFAGENERALMESHCOLLISION_API TriangleOctreeRoot
 {
 public:
     typedef sofa::core::topology::BaseMeshTopology::SeqTriangles SeqTriangles;
@@ -81,7 +81,7 @@ protected:
     void calcTriangleAABB(int t, double* bb, double& size);
 };
 
-class SOFA_GENERAL_MESH_COLLISION_API TriangleOctree
+class SOFA_SOFAGENERALMESHCOLLISION_API TriangleOctree
 {
 public:
     class traceResult

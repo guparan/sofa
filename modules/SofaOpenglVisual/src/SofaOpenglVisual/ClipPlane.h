@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CLIPPLANE_H
 #define SOFA_COMPONENT_CLIPPLANE_H
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <sofa/core/visual/VisualModel.h>
 #include <sofa/defaulttype/VecTypes.h>
@@ -36,7 +36,7 @@ namespace component
 namespace visualmodel
 {
 
-class SOFA_OPENGL_VISUAL_API ClipPlane : public core::visual::VisualModel
+class SOFA_SOFAOPENGLVISUAL_API ClipPlane : public core::visual::VisualModel
 {
 public:
     SOFA_CLASS(ClipPlane, core::visual::VisualModel);

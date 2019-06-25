@@ -33,7 +33,7 @@
 
 #ifndef SOFA_COMPONENT_CONTROLLER_MECHANICALSTATECONTROLLER_H
 #define SOFA_COMPONENT_CONTROLLER_MECHANICALSTATECONTROLLER_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <SofaUserInteraction/Controller.h>
 #include <sofa/defaulttype/VecTypes.h>
@@ -179,12 +179,12 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_CONTROLLER_MECHANICALSTATECONTROLLER_CPP)
-//extern template class SOFA_USER_INTERACTION_API MechanicalStateController<defaulttype::Vec3Types>;
-//extern template class SOFA_USER_INTERACTION_API MechanicalStateController<defaulttype::Vec2Types>;
-extern template class SOFA_USER_INTERACTION_API MechanicalStateController<defaulttype::Vec1Types>;
-//extern template class SOFA_USER_INTERACTION_API MechanicalStateController<defaulttype::Vec6Types>;
-extern template class SOFA_USER_INTERACTION_API MechanicalStateController<defaulttype::Rigid3Types>;
-//extern template class SOFA_USER_INTERACTION_API MechanicalStateController<defaulttype::Rigid2Types>;
+//extern template class SOFA_SOFAUSERINTERACTION_API MechanicalStateController<defaulttype::Vec3Types>;
+//extern template class SOFA_SOFAUSERINTERACTION_API MechanicalStateController<defaulttype::Vec2Types>;
+extern template class SOFA_SOFAUSERINTERACTION_API MechanicalStateController<defaulttype::Vec1Types>;
+//extern template class SOFA_SOFAUSERINTERACTION_API MechanicalStateController<defaulttype::Vec6Types>;
+extern template class SOFA_SOFAUSERINTERACTION_API MechanicalStateController<defaulttype::Rigid3Types>;
+//extern template class SOFA_SOFAUSERINTERACTION_API MechanicalStateController<defaulttype::Rigid2Types>;
 
 #endif
 

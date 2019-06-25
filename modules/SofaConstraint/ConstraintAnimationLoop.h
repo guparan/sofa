@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ANIMATIONLOOP_CONSTRAINTANIMATIONLOOP_H
 #define SOFA_COMPONENT_ANIMATIONLOOP_CONSTRAINTANIMATIONLOOP_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <sofa/core/ConstraintParams.h>
 #include <sofa/core/MultiVecId.h>
@@ -48,7 +48,7 @@ namespace animationloop
 {
 
 
-class SOFA_CONSTRAINT_API MechanicalGetConstraintResolutionVisitor : public simulation::BaseMechanicalVisitor
+class SOFA_SOFACONSTRAINT_API MechanicalGetConstraintResolutionVisitor : public simulation::BaseMechanicalVisitor
 {
 public:
     MechanicalGetConstraintResolutionVisitor(const core::ConstraintParams* params, std::vector<core::behavior::ConstraintResolution*>& res, unsigned int offset)
@@ -88,7 +88,7 @@ private:
 };
 
 
-class SOFA_CONSTRAINT_API MechanicalSetConstraint : public simulation::BaseMechanicalVisitor
+class SOFA_SOFACONSTRAINT_API MechanicalSetConstraint : public simulation::BaseMechanicalVisitor
 {
 public:
     MechanicalSetConstraint(const core::ConstraintParams* _cparams, core::MultiMatrixDerivId _res, unsigned int &_contactId)
@@ -145,7 +145,7 @@ protected:
 };
 
 
-class SOFA_CONSTRAINT_API MechanicalAccumulateConstraint2 : public simulation::BaseMechanicalVisitor
+class SOFA_SOFACONSTRAINT_API MechanicalAccumulateConstraint2 : public simulation::BaseMechanicalVisitor
 {
 public:
     MechanicalAccumulateConstraint2(const core::ConstraintParams* _cparams, core::MultiMatrixDerivId _res)
@@ -191,7 +191,7 @@ protected:
 };
 
 
-class SOFA_CONSTRAINT_API ConstraintProblem
+class SOFA_SOFACONSTRAINT_API ConstraintProblem
 {
 protected:
     sofa::component::linearsolver::LPtrFullMatrix<double> _W;
@@ -222,7 +222,7 @@ public:
 
 
 
-class SOFA_CONSTRAINT_API ConstraintAnimationLoop : public sofa::simulation::CollisionAnimationLoop
+class SOFA_SOFACONSTRAINT_API ConstraintAnimationLoop : public sofa::simulation::CollisionAnimationLoop
 {
 public:
     typedef sofa::simulation::CollisionAnimationLoop Inherit;

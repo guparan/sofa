@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_DEFORMABLEONRIGIDFRAMEMAPPING_H
 #define SOFA_COMPONENT_MAPPING_DEFORMABLEONRIGIDFRAMEMAPPING_H
-#include "config.h"
+#include <SofaMiscMapping/config.h>
 
 #include <sofa/core/Multi2Mapping.h>
 
@@ -180,7 +180,7 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_MAPPING_DEFORMABLEONRIGIDFRAMEMAPPING_CPP)
-extern template class SOFA_MISC_MAPPING_API DeformableOnRigidFrameMapping< sofa::defaulttype::Vec3Types, sofa::defaulttype::Rigid3Types, sofa::defaulttype::Vec3Types >;
+extern template class SOFA_SOFAMISCMAPPING_API DeformableOnRigidFrameMapping< sofa::defaulttype::Vec3Types, sofa::defaulttype::Rigid3Types, sofa::defaulttype::Vec3Types >;
 
 #endif
 

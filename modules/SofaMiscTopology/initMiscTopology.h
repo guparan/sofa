@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_TOPOLOGY_INIT_H
 #define SOFA_COMPONENT_MISC_TOPOLOGY_INIT_H
-#include "config.h"
+#include <SofaMiscTopology/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_MISC_TOPOLOGY_API initMiscTopology();
+void SOFA_SOFAMISCTOPOLOGY_API initMiscTopology();
 
 } // namespace component
 

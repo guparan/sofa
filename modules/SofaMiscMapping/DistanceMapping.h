@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_DistanceMapping_H
 #define SOFA_COMPONENT_MAPPING_DistanceMapping_H
-#include "config.h"
+#include <SofaMiscMapping/config.h>
 
 #include <sofa/core/Mapping.h>
 #include <sofa/core/MultiMapping.h>
@@ -318,10 +318,10 @@ private:
 
 
 #if  !defined(SOFA_COMPONENT_MAPPING_DistanceMapping_CPP)
-extern template class SOFA_MISC_MAPPING_API DistanceMapping< defaulttype::Vec3Types, defaulttype::Vec1Types >;
-extern template class SOFA_MISC_MAPPING_API DistanceMapping< defaulttype::Rigid3Types, defaulttype::Vec1Types >;
-extern template class SOFA_MISC_MAPPING_API DistanceMultiMapping< defaulttype::Vec3Types, defaulttype::Vec1Types >;
-extern template class SOFA_MISC_MAPPING_API DistanceMultiMapping< defaulttype::Rigid3Types, defaulttype::Vec1Types >;
+extern template class SOFA_SOFAMISCMAPPING_API DistanceMapping< defaulttype::Vec3Types, defaulttype::Vec1Types >;
+extern template class SOFA_SOFAMISCMAPPING_API DistanceMapping< defaulttype::Rigid3Types, defaulttype::Vec1Types >;
+extern template class SOFA_SOFAMISCMAPPING_API DistanceMultiMapping< defaulttype::Vec3Types, defaulttype::Vec1Types >;
+extern template class SOFA_SOFAMISCMAPPING_API DistanceMultiMapping< defaulttype::Rigid3Types, defaulttype::Vec1Types >;
 
 
 #endif

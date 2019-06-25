@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_DYNAMICSPARSEGRIDTOPOLOGYCONTAINER_H
 #define SOFA_COMPONENT_TOPOLOGY_DYNAMICSPARSEGRIDTOPOLOGYCONTAINER_H
-#include "config.h"
+#include <SofaNonUniformFem/config.h>
 
 #include <SofaBaseTopology/HexahedronSetTopologyContainer.h>
 #include <SofaBaseTopology/TopologyData.h>
@@ -36,7 +36,7 @@ namespace component
 namespace topology
 {
 /** a class that stores a sparse regular grid of hexahedra and provides a better loading and access to neighbors than HexahedronSetTopologyContainer */
-class SOFA_NON_UNIFORM_FEM_API DynamicSparseGridTopologyContainer : public HexahedronSetTopologyContainer
+class SOFA_SOFANONUNIFORMFEM_API DynamicSparseGridTopologyContainer : public HexahedronSetTopologyContainer
 {
     friend class DynamicSparseGridTopologyModifier;
 

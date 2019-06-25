@@ -37,7 +37,7 @@ namespace core
 {
     namespace collision
     {
-        template class SOFA_CONSTRAINT_API IntersectorFactory<component::collision::LocalMinDistance>;
+        template class SOFA_SOFACONSTRAINT_API IntersectorFactory<component::collision::LocalMinDistance>;
     }
 }
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LIGHTMANAGER_H
 #define SOFA_COMPONENT_LIGHTMANAGER_H
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <sofa/defaulttype/SolidTypes.h>
 #include <SofaOpenglVisual/Light.h>
@@ -48,7 +48,7 @@ namespace visualmodel
  *  It centralizes all the Lights and managed them.
  *
  */
-class SOFA_OPENGL_VISUAL_API LightManager : public core::visual::VisualManager
+class SOFA_SOFAOPENGLVISUAL_API LightManager : public core::visual::VisualManager
 {
 public:
     SOFA_CLASS(LightManager, core::visual::VisualManager);

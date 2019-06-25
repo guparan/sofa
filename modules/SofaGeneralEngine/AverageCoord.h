@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_AverageCoord_H
 #define SOFA_COMPONENT_ENGINE_AverageCoord_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 #include <sofa/core/DataEngine.h>
 #include <sofa/core/objectmodel/BaseObject.h>
@@ -90,10 +90,10 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_AverageCoord_CPP)
-extern template class SOFA_GENERAL_ENGINE_API AverageCoord<defaulttype::Vec2Types>;
-extern template class SOFA_GENERAL_ENGINE_API AverageCoord<defaulttype::Vec3Types>;
-extern template class SOFA_GENERAL_ENGINE_API AverageCoord<defaulttype::Rigid2Types>;
-extern template class SOFA_GENERAL_ENGINE_API AverageCoord<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API AverageCoord<defaulttype::Vec2Types>;
+extern template class SOFA_SOFAGENERALENGINE_API AverageCoord<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API AverageCoord<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFAGENERALENGINE_API AverageCoord<defaulttype::Rigid3Types>;
  
 #endif
 

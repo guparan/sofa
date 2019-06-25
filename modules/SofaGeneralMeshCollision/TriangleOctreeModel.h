@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_TRIANGLEOCTREEMODEL_H
 #define SOFA_COMPONENT_COLLISION_TRIANGLEOCTREEMODEL_H
-#include "config.h"
+#include <SofaGeneralMeshCollision/config.h>
 
 #include <sofa/core/CollisionModel.h>
 #include <SofaBaseMechanics/MechanicalObject.h>
@@ -40,7 +40,7 @@ namespace component
 namespace collision
 {
 
-class SOFA_GENERAL_MESH_COLLISION_API TriangleOctreeModel : public  TriangleModel, public TriangleOctreeRoot
+class SOFA_SOFAGENERALMESHCOLLISION_API TriangleOctreeModel : public  TriangleModel, public TriangleOctreeRoot
 {
 public:
     SOFA_CLASS(TriangleOctreeModel, TriangleModel);

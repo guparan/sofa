@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_QUADPRESSUREFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_QUADPRESSUREFORCEFIELD_H
-#include "config.h"
+#include <SofaBoundaryCondition/config.h>
 
 #include <sofa/core/behavior/ForceField.h>
 #include <SofaBaseTopology/TopologySparseData.h>
@@ -133,7 +133,7 @@ protected :
 
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_QUADPRESSUREFORCEFIELD_CPP)
-extern template class SOFA_BOUNDARY_CONDITION_API QuadPressureForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API QuadPressureForceField<defaulttype::Vec3Types>;
 
 
 #endif //  !defined(SOFA_COMPONENT_FORCEFIELD_QUADPRESSUREFORCEFIELD_CPP)

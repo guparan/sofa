@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef MergeROIs_H_
 #define MergeROIs_H_
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONSTRAINTSET_STOPPERCONSTRAINT_H
 #define SOFA_COMPONENT_CONSTRAINTSET_STOPPERCONSTRAINT_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <sofa/core/behavior/Constraint.h>
 #include <sofa/core/behavior/MechanicalState.h>

@@ -22,7 +22,7 @@
 #ifndef SOFA_SIMULATION_SCENECHECKERLISTENER_H
 #define SOFA_SIMULATION_SCENECHECKERLISTENER_H
 
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 #include <sofa/simulation/SceneLoaderFactory.h>
 #include <sofa/simulation/Visitor.h>
@@ -39,7 +39,7 @@ namespace _scenechecking_
 {
 
 /// to be able to react when a scene is loaded
-class SOFA_GRAPH_COMPONENT_API SceneCheckerListener : public SceneLoader::Listener
+class SOFA_SOFAGRAPHCOMPONENT_API SceneCheckerListener : public SceneLoader::Listener
 {
 public:
     static SceneCheckerListener* getInstance();

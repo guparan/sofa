@@ -38,12 +38,12 @@ static int OglModelClass = RegisterObject("Generic visual model for OpenGL displ
         .add< sofa::component::visualmodel::OglModel >();
 
 extern "C" {
-    SOFA_OPENGL_VISUAL_API void initExternalModule();
-    SOFA_OPENGL_VISUAL_API const char* getModuleName();
-    SOFA_OPENGL_VISUAL_API const char* getModuleVersion();
-    SOFA_OPENGL_VISUAL_API const char* getModuleLicense();
-    SOFA_OPENGL_VISUAL_API const char* getModuleDescription();
-    SOFA_OPENGL_VISUAL_API const char* getModuleComponentList();
+    SOFA_SOFAOPENGLVISUAL_API void initExternalModule();
+    SOFA_SOFAOPENGLVISUAL_API const char* getModuleName();
+    SOFA_SOFAOPENGLVISUAL_API const char* getModuleVersion();
+    SOFA_SOFAOPENGLVISUAL_API const char* getModuleLicense();
+    SOFA_SOFAOPENGLVISUAL_API const char* getModuleDescription();
+    SOFA_SOFAOPENGLVISUAL_API const char* getModuleComponentList();
 }
 
 void initExternalModule()

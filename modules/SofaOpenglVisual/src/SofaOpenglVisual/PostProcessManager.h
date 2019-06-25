@@ -28,7 +28,7 @@
 
 #ifndef SOFA_COMPONENT_POSTPROCESSMANAGER_H_
 #define SOFA_COMPONENT_POSTPROCESSMANAGER_H_
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <sofa/core/visual/VisualManager.h>
 #include <sofa/core/visual/VisualParams.h>
@@ -45,7 +45,7 @@ namespace component
 namespace visualmodel
 {
 
-class SOFA_OPENGL_VISUAL_API PostProcessManager : public core::visual::VisualManager
+class SOFA_SOFAOPENGLVISUAL_API PostProcessManager : public core::visual::VisualManager
 {
 public:
     SOFA_CLASS(PostProcessManager,core::visual::VisualModel);

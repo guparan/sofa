@@ -46,7 +46,7 @@ namespace visualmodel
 /**
  * This class merges several visual models.
  */
-class SOFA_OPENGL_VISUAL_API MergeVisualModels : public OglModel
+class SOFA_SOFAOPENGLVISUAL_API MergeVisualModels : public OglModel
 {
 public:
     SOFA_CLASS(MergeVisualModels,OglModel);

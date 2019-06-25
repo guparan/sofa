@@ -34,7 +34,7 @@
 #ifndef SOFA_COMPONENT_ORDERINDEPENDENTTRANSPARENCYMANAGER_H
 #define SOFA_COMPONENT_ORDERINDEPENDENTTRANSPARENCYMANAGER_H
 
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <sofa/core/visual/VisualManager.h>
 #include <sofa/helper/gl/GLSLShader.h>
@@ -54,7 +54,7 @@ namespace visualmodel
  *  \note Reference: http://jcgt.org/published/0002/02/09/paper.pdf
  */
 
-class SOFA_OPENGL_VISUAL_API OrderIndependentTransparencyManager : public core::visual::VisualManager
+class SOFA_SOFAOPENGLVISUAL_API OrderIndependentTransparencyManager : public core::visual::VisualManager
 {
     class FrameBufferObject
     {

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONSTRAINTSET_SLIDINGCONSTRAINT_H
 #define SOFA_COMPONENT_CONSTRAINTSET_SLIDINGCONSTRAINT_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <sofa/core/behavior/PairInteractionConstraint.h>
 #include <sofa/core/behavior/MechanicalState.h>
@@ -102,7 +102,7 @@ private:
 };
 
 #if  !defined(SOFA_COMPONENT_CONSTRAINTSET_SLIDINGCONSTRAINT_CPP)
-extern template class SOFA_CONSTRAINT_API SlidingConstraint< defaulttype::Vec3Types >;
+extern template class SOFA_SOFACONSTRAINT_API SlidingConstraint< defaulttype::Vec3Types >;
 
 #endif
 

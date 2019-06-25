@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LOADER_MESHOFFLOADER_H
 #define SOFA_COMPONENT_LOADER_MESHOFFLOADER_H
-#include "config.h"
+#include <SofaGeneralLoader/config.h>
 
 #include <sofa/core/loader/MeshLoader.h>
 
@@ -34,7 +34,7 @@ namespace component
 namespace loader
 {
 
-class SOFA_GENERAL_LOADER_API MeshOffLoader : public sofa::core::loader::MeshLoader
+class SOFA_SOFAGENERALLOADER_API MeshOffLoader : public sofa::core::loader::MeshLoader
 {
 public:
     SOFA_CLASS(MeshOffLoader,sofa::core::loader::MeshLoader);

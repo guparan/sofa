@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_ADDRECORDEDCAMERAPERFORMER_H
 #define SOFA_COMPONENT_COLLISION_ADDRECORDEDCAMERAPERFORMER_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <SofaUserInteraction/MouseInteractor.h>
 #include <SofaUserInteraction/InteractionPerformer.h>
@@ -40,7 +40,7 @@ namespace component
 namespace collision
 {
 
-    class SOFA_USER_INTERACTION_API AddRecordedCameraPerformer: public InteractionPerformer
+    class SOFA_SOFAUSERINTERACTION_API AddRecordedCameraPerformer: public InteractionPerformer
     {
     public:
         AddRecordedCameraPerformer(BaseMouseInteractor *i)

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_TRIANGULARBIQUADRATICSPRINGSFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_TRIANGULARBIQUADRATICSPRINGSFORCEFIELD_H
-#include "config.h"
+#include <SofaGeneralDeformable/config.h>
 
 
 
@@ -239,7 +239,7 @@ protected :
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_TRIANGULARBIQUADRATICSPRINGSFORCEFIELD_CPP)
 
-extern template class SOFA_GENERAL_DEFORMABLE_API TriangularBiquadraticSpringsForceField<sofa::defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALDEFORMABLE_API TriangularBiquadraticSpringsForceField<sofa::defaulttype::Vec3Types>;
 
 
 #endif //  !defined(SOFA_COMPONENT_FORCEFIELD_TRIANGULARBIQUADRATICSPRINGSFORCEFIELD_CPP)

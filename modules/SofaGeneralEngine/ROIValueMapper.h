@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef ROIValueMapper_H_
 #define ROIValueMapper_H_
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 
 

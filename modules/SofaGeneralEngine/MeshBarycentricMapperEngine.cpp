@@ -41,7 +41,7 @@ int MeshBarycentricMapperEngineClass = core::RegisterObject("This class maps a s
  
         ;
 
-template class SOFA_GENERAL_ENGINE_API MeshBarycentricMapperEngine<Vec3Types>;
+template class SOFA_SOFAGENERALENGINE_API MeshBarycentricMapperEngine<Vec3Types>;
  
 
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SelectLabelROI_H_
 #define SelectLabelROI_H_
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 
 

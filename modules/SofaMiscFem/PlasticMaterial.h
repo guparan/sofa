@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FEM_MATERIAL_PLASTICMATERIAL_H
 #define SOFA_COMPONENT_FEM_MATERIAL_PLASTICMATERIAL_H
-#include "config.h"
+#include <SofaMiscFem/config.h>
 
 #include <SofaMiscFem/BaseMaterial.h>
 #include <newmat/newmat.h>

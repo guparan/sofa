@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_VISUALMODEL_VISUALTRANSFORM_H
 #define SOFA_COMPONENT_VISUALMODEL_VISUALTRANSFORM_H
-#include "config.h"
+#include <SofaGeneralVisual/config.h>
 
 #include <sofa/core/visual/VisualModel.h>
 #include <sofa/defaulttype/RigidTypes.h>
@@ -37,7 +37,7 @@ namespace visualmodel
 /// This can be used to change where elements are rendered, but has no effect on the actual simulation.
 /// It can be used for example to correctly render forcefields applied to a mesh that is then transformed by a rigid DOF using DeformableOnRigidFrameMapping.
 
-class SOFA_GENERAL_VISUAL_API VisualTransform : public sofa::core::visual::VisualModel
+class SOFA_SOFAGENERALVISUAL_API VisualTransform : public sofa::core::visual::VisualModel
 {
 public:
     SOFA_CLASS(VisualTransform,sofa::core::visual::VisualModel);

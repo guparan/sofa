@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_LINESETSKINNINGMAPPING_H
 #define SOFA_COMPONENT_MAPPING_LINESETSKINNINGMAPPING_H
-#include "config.h"
+#include <SofaGeneralRigid/config.h>
 
 #include <sofa/core/Mapping.h>
 #include <sofa/core/topology/BaseMeshTopology.h>
@@ -188,7 +188,7 @@ private:
 };
 
 #if  !defined(SOFA_COMPONENT_MAPPING_LINESETSKINNINGMAPPING_CPP)
-extern template class SOFA_GENERAL_RIGID_API LineSetSkinningMapping< defaulttype::Rigid3Types, defaulttype::Vec3Types >;
+extern template class SOFA_SOFAGENERALRIGID_API LineSetSkinningMapping< defaulttype::Rigid3Types, defaulttype::Vec3Types >;
 
 
 #endif

@@ -34,7 +34,7 @@ namespace component
 
 namespace collision
 {
-template class SOFA_USER_INTERACTION_API  SuturePointPerformer<defaulttype::Vec3Types>;
+template class SOFA_SOFAUSERINTERACTION_API  SuturePointPerformer<defaulttype::Vec3Types>;
 
 
 helper::Creator<InteractionPerformer::InteractionPerformerFactory, SuturePointPerformer<defaulttype::Vec3dTypes> >  SuturePointPerformerVec3dClass("SuturePoints",true);

@@ -32,7 +32,7 @@
 //
 #ifndef SOFA_COMPONENT_FORCEFIELD_TRIANGULARBENDINGSPRINGS_H
 #define SOFA_COMPONENT_FORCEFIELD_TRIANGULARBENDINGSPRINGS_H
-#include "config.h"
+#include <SofaGeneralDeformable/config.h>
 
 
 
@@ -213,7 +213,7 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_TRIANGULARBENDINGSPRINGS_CPP)
-extern template class SOFA_GENERAL_DEFORMABLE_API TriangularBendingSprings<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALDEFORMABLE_API TriangularBendingSprings<defaulttype::Vec3Types>;
 
 #endif // !defined(SOFA_COMPONENT_FORCEFIELD_TRIANGULARBENDINGSPRINGS_CPP)
 

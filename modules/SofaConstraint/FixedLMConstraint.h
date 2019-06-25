@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONSTRAINTSET_FIXEDLMCONSTRAINT_H
 #define SOFA_COMPONENT_CONSTRAINTSET_FIXEDLMCONSTRAINT_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <sofa/core/topology/BaseMeshTopology.h>
 #include <sofa/core/behavior/LMConstraint.h>
@@ -148,8 +148,8 @@ protected :
 
 
 #if  !defined(SOFA_COMPONENT_CONSTRAINTSET_FIXEDLMCONSTRAINT_CPP)
-extern template class SOFA_CONSTRAINT_API FixedLMConstraint<defaulttype::Vec3Types>;
-extern template class SOFA_CONSTRAINT_API FixedLMConstraint<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFACONSTRAINT_API FixedLMConstraint<defaulttype::Vec3Types>;
+extern template class SOFA_SOFACONSTRAINT_API FixedLMConstraint<defaulttype::Rigid3Types>;
 
 #endif
 

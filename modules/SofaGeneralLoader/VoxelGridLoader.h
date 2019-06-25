@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LOADER_VOXELGRIDLOADER
 #define SOFA_COMPONENT_LOADER_VOXELGRIDLOADER
-#include "config.h"
+#include <SofaGeneralLoader/config.h>
 
 #include <sofa/core/loader/VoxelLoader.h>
 
@@ -36,7 +36,7 @@ namespace loader
 {
 
 
-class SOFA_GENERAL_LOADER_API VoxelGridLoader : public sofa::core::loader::VoxelLoader
+class SOFA_SOFAGENERALLOADER_API VoxelGridLoader : public sofa::core::loader::VoxelLoader
 {
 public:
     SOFA_CLASS(VoxelGridLoader,VoxelLoader);

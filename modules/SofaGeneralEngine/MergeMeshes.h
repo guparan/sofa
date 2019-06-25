@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_MERGEMESHS_H
 #define SOFA_COMPONENT_ENGINE_MERGEMESHS_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 #include <sofa/defaulttype/Vec.h>
 #include <sofa/core/DataEngine.h>
@@ -170,11 +170,11 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_MERGEMESHES_CPP)
-extern template class SOFA_GENERAL_ENGINE_API MergeMeshes<defaulttype::Vec1Types>;
-extern template class SOFA_GENERAL_ENGINE_API MergeMeshes<defaulttype::Vec2Types>;
-extern template class SOFA_GENERAL_ENGINE_API MergeMeshes<defaulttype::Vec3Types>;
-extern template class SOFA_GENERAL_ENGINE_API MergeMeshes<defaulttype::Rigid2Types>;
-extern template class SOFA_GENERAL_ENGINE_API MergeMeshes<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API MergeMeshes<defaulttype::Vec1Types>;
+extern template class SOFA_SOFAGENERALENGINE_API MergeMeshes<defaulttype::Vec2Types>;
+extern template class SOFA_SOFAGENERALENGINE_API MergeMeshes<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API MergeMeshes<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFAGENERALENGINE_API MergeMeshes<defaulttype::Rigid3Types>;
  
 #endif
 

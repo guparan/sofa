@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONTROLLER_FORCEFEEDBACK_H
 #define SOFA_COMPONENT_CONTROLLER_FORCEFEEDBACK_H
-#include "config.h"
+#include <SofaHaptics/config.h>
 
 #include <sofa/simulation/Node.h>
 #include <sofa/core/behavior/BaseController.h>

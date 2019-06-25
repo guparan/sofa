@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_ADDFRAMEPERFORMER_H
 #define SOFA_COMPONENT_COLLISION_ADDFRAMEPERFORMER_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <SofaUserInteraction/InteractionPerformer.h>
 #include <sofa/defaulttype/VecTypes.h>
@@ -55,7 +55,7 @@ public:
 
 
 #if  !defined(SOFA_COMPONENT_COLLISION_ADDFRAMEPERFORMER_CPP)
-extern template class SOFA_USER_INTERACTION_API  AddFramePerformer<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAUSERINTERACTION_API  AddFramePerformer<defaulttype::Vec3Types>;
 
 #endif
 

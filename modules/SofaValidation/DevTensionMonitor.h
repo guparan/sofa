@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_DEVTENSIONMONITOR_H
 #define SOFA_COMPONENT_MISC_DEVTENSIONMONITOR_H
-#include "config.h"
+#include <SofaValidation/config.h>
 
 #include <sofa/helper/vector.h>
 #include <sofa/core/objectmodel/Event.h>
@@ -104,7 +104,7 @@ protected:
 
 
 #if  !defined(SOFA_COMPONENT_MISC_DEVTENSIONMONITOR_CPP)
-extern template class SOFA_VALIDATION_API DevTensionMonitor<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAVALIDATION_API DevTensionMonitor<defaulttype::Rigid3Types>;
 
 #endif
 

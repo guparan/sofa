@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_DEVMONITOR_H
 #define SOFA_COMPONENT_MISC_DEVMONITOR_H
-#include "config.h"
+#include <SofaValidation/config.h>
 
 #include <sofa/helper/vector.h>
 #include <sofa/core/objectmodel/Event.h>
@@ -38,7 +38,7 @@ namespace misc
 {
 
 template <class TDataTypes>
-class SOFA_VALIDATION_API DevMonitor: public virtual core::DevBaseMonitor
+class SOFA_SOFAVALIDATION_API DevMonitor: public virtual core::DevBaseMonitor
 {
 public:
     SOFA_CLASS(SOFA_TEMPLATE(DevMonitor,TDataTypes), core::DevBaseMonitor);

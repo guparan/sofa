@@ -35,7 +35,7 @@ namespace component
 
 namespace collision
 {
-template class SOFA_USER_INTERACTION_API FixParticlePerformer<defaulttype::Vec3Types>;
+template class SOFA_SOFAUSERINTERACTION_API FixParticlePerformer<defaulttype::Vec3Types>;
 helper::Creator<InteractionPerformer::InteractionPerformerFactory, FixParticlePerformer<defaulttype::Vec3Types> >  FixParticlePerformerVec3dClass("FixParticle",true);
 
 }

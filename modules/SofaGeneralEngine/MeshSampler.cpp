@@ -38,7 +38,7 @@ int MeshSamplerClass = core::RegisterObject("Select uniformly distributed points
  
         ;
 
-template class SOFA_GENERAL_ENGINE_API MeshSampler<Vec3Types>;
+template class SOFA_SOFAGENERALENGINE_API MeshSampler<Vec3Types>;
  
 
 

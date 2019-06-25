@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_WRITESTATE_H
 #define SOFA_COMPONENT_MISC_WRITESTATE_H
-#include "config.h"
+#include <SofaExporter/config.h>
 
 #include <sofa/core/State.h>
 #include <sofa/core/objectmodel/BaseObject.h>

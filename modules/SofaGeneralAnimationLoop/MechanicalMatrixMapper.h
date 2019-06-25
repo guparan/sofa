@@ -49,7 +49,7 @@ namespace interactionforcefield
 {
 
 
-class SOFA_GENERAL_ANIMATION_LOOP_API MechanicalAccumulateJacobian : public simulation::BaseMechanicalVisitor
+class SOFA_SOFAGENERALANIMATIONLOOP_API MechanicalAccumulateJacobian : public simulation::BaseMechanicalVisitor
 {
 public:
     MechanicalAccumulateJacobian(const core::ConstraintParams* _cparams, core::MultiMatrixDerivId _res)
@@ -274,10 +274,10 @@ protected:
 };
 
 #if !defined(SOFA_COMPONENT_ANIMATIONLOOP_MECHANICALMATRIXMAPPER_CPP)
-extern template class SOFA_GENERAL_ANIMATION_LOOP_API MechanicalMatrixMapper<defaulttype::Vec3Types, defaulttype::Rigid3Types>;
-extern template class SOFA_GENERAL_ANIMATION_LOOP_API MechanicalMatrixMapper<defaulttype::Vec3Types, defaulttype::Vec3Types>;
-extern template class SOFA_GENERAL_ANIMATION_LOOP_API MechanicalMatrixMapper<defaulttype::Vec1Types, defaulttype::Rigid3Types>;
-extern template class SOFA_GENERAL_ANIMATION_LOOP_API MechanicalMatrixMapper<defaulttype::Vec1Types, defaulttype::Vec1Types>;
+extern template class SOFA_SOFAGENERALANIMATIONLOOP_API MechanicalMatrixMapper<defaulttype::Vec3Types, defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAGENERALANIMATIONLOOP_API MechanicalMatrixMapper<defaulttype::Vec3Types, defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALANIMATIONLOOP_API MechanicalMatrixMapper<defaulttype::Vec1Types, defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAGENERALANIMATIONLOOP_API MechanicalMatrixMapper<defaulttype::Vec1Types, defaulttype::Vec1Types>;
 #endif
 
 } // namespace interactionforcefield

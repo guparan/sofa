@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_MISC_API initMisc();
+void SOFA_SOFAMISC_API initMisc();
 
 } // namespace component
 

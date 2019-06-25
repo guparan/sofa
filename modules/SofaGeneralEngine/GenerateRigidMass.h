@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_GENERATERIGIDMASS_H
 #define SOFA_COMPONENT_ENGINE_GENERATERIGIDMASS_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 #include <sofa/core/DataEngine.h>
 #include <sofa/core/objectmodel/DataFileName.h>
@@ -110,7 +110,7 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_GENERATERIGIDMASS_CPP)
-extern template class SOFA_GENERAL_ENGINE_API GenerateRigidMass<defaulttype::Rigid3Types, defaulttype::Rigid3Mass>;
+extern template class SOFA_SOFAGENERALENGINE_API GenerateRigidMass<defaulttype::Rigid3Types, defaulttype::Rigid3Mass>;
 
 #endif
 

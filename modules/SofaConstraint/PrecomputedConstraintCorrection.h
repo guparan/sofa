@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_CORE_COLLISION_CONTACTCORRECTION_H
 #define SOFA_CORE_COLLISION_CONTACTCORRECTION_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <sofa/core/behavior/ConstraintCorrection.h>
 #include <sofa/core/objectmodel/DataFileName.h>
@@ -223,9 +223,9 @@ void PrecomputedConstraintCorrection<defaulttype::Vec1Types>::draw(const core::v
 
 
 #if  !defined(SOFA_COMPONENT_CONSTRAINTSET_PRECOMPUTEDCONSTRAINTCORRECTION_CPP)
-extern template class SOFA_CONSTRAINT_API PrecomputedConstraintCorrection<defaulttype::Vec3Types>;
-extern template class SOFA_CONSTRAINT_API PrecomputedConstraintCorrection<defaulttype::Vec1Types>;
-extern template class SOFA_CONSTRAINT_API PrecomputedConstraintCorrection<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFACONSTRAINT_API PrecomputedConstraintCorrection<defaulttype::Vec3Types>;
+extern template class SOFA_SOFACONSTRAINT_API PrecomputedConstraintCorrection<defaulttype::Vec1Types>;
+extern template class SOFA_SOFACONSTRAINT_API PrecomputedConstraintCorrection<defaulttype::Rigid3Types>;
 
 #endif
 

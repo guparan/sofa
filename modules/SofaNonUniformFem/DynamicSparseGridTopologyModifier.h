@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_DYNAMICSPARSEGRIDTOPOLOGYMODIFIER_H
 #define SOFA_COMPONENT_TOPOLOGY_DYNAMICSPARSEGRIDTOPOLOGYMODIFIER_H
-#include "config.h"
+#include <SofaNonUniformFem/config.h>
 
 #include <SofaBaseTopology/HexahedronSetTopologyModifier.h>
 
@@ -36,7 +36,7 @@ class DynamicSparseGridTopologyContainer;
 /**
 * A class that modifies the topology by adding and removing hexahedra
 */
-class SOFA_NON_UNIFORM_FEM_API DynamicSparseGridTopologyModifier : public HexahedronSetTopologyModifier
+class SOFA_SOFANONUNIFORMFEM_API DynamicSparseGridTopologyModifier : public HexahedronSetTopologyModifier
 {
 public:
     SOFA_CLASS(DynamicSparseGridTopologyModifier,HexahedronSetTopologyModifier);

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_CENTEROFMASSMULTIMAPPING_H
 #define SOFA_COMPONENT_MAPPING_CENTEROFMASSMULTIMAPPING_H
-#include "config.h"
+#include <SofaMiscMapping/config.h>
 
 #include <sofa/core/MultiMapping.h>
 #include <sofa/core/behavior/BaseMass.h>
@@ -111,9 +111,9 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_MAPPING_CENTEROFMASSMULTIMAPPING_CPP)
-extern template class SOFA_MISC_MAPPING_API CenterOfMassMultiMapping< defaulttype::Vec3Types, defaulttype::Vec3Types >;
-extern template class SOFA_MISC_MAPPING_API CenterOfMassMultiMapping< defaulttype::Rigid3Types, defaulttype::Rigid3Types >;
-extern template class SOFA_MISC_MAPPING_API CenterOfMassMultiMapping< defaulttype::Rigid3Types, defaulttype::Vec3Types >;
+extern template class SOFA_SOFAMISCMAPPING_API CenterOfMassMultiMapping< defaulttype::Vec3Types, defaulttype::Vec3Types >;
+extern template class SOFA_SOFAMISCMAPPING_API CenterOfMassMultiMapping< defaulttype::Rigid3Types, defaulttype::Rigid3Types >;
+extern template class SOFA_SOFAMISCMAPPING_API CenterOfMassMultiMapping< defaulttype::Rigid3Types, defaulttype::Vec3Types >;
 
 #endif
 

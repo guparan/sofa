@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_FEM_INIT_H
 #define SOFA_COMPONENT_MISC_FEM_INIT_H
-#include "config.h"
+#include <SofaMiscFem/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_MISC_FEM_API initMiscFEM();
+void SOFA_SOFAMISCFEM_API initMiscFEM();
 
 } // namespace component
 

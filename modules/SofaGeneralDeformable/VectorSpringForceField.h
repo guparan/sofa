@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_INTERACTIONFORCEFIELD_VECTORSPRINGFORCEFIELD_H
 #define SOFA_COMPONENT_INTERACTIONFORCEFIELD_VECTORSPRINGFORCEFIELD_H
-#include "config.h"
+#include <SofaGeneralDeformable/config.h>
 
 #include <SofaDeformable/SpringForceField.h>
 #include <sofa/core/behavior/ForceField.h>
@@ -201,7 +201,7 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_VECTORSPRINGFORCEFIELD_CPP)
-extern template class SOFA_GENERAL_DEFORMABLE_API VectorSpringForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALDEFORMABLE_API VectorSpringForceField<defaulttype::Vec3Types>;
 
 #endif
 

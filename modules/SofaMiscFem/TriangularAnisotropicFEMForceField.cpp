@@ -42,7 +42,7 @@ int TriangularAnisotropicFEMForceFieldClass = core::RegisterObject("Triangular f
 
         ;
 
-template class SOFA_MISC_FEM_API TriangularAnisotropicFEMForceField<Vec3Types>;
+template class SOFA_SOFAMISCFEM_API TriangularAnisotropicFEMForceField<Vec3Types>;
 
 
 

@@ -42,9 +42,9 @@ int TextureInterpolationClass = core::RegisterObject("Create texture coordinate 
  
         ;
 
-template class SOFA_GENERAL_ENGINE_API TextureInterpolation <Vec1Types>;
-template class SOFA_GENERAL_ENGINE_API TextureInterpolation <Vec2Types>;
-template class SOFA_GENERAL_ENGINE_API TextureInterpolation <Vec3Types>;
+template class SOFA_SOFAGENERALENGINE_API TextureInterpolation <Vec1Types>;
+template class SOFA_SOFAGENERALENGINE_API TextureInterpolation <Vec2Types>;
+template class SOFA_SOFAGENERALENGINE_API TextureInterpolation <Vec3Types>;
  
 
 

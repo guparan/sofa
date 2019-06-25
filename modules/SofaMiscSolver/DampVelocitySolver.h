@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ODESOLVER_DampVelocitySolver_H
 #define SOFA_COMPONENT_ODESOLVER_DampVelocitySolver_H
-#include "config.h"
+#include <SofaMiscSolver/config.h>
 
 #include <sofa/core/behavior/OdeSolver.h>
 
@@ -37,7 +37,7 @@ namespace odesolver
 /** Velocity damping and thresholding.
 This is not an ODE solver, but it can be used as a post-process after a real ODE solver.
 */
-class SOFA_MISC_SOLVER_API DampVelocitySolver : public sofa::core::behavior::OdeSolver
+class SOFA_SOFAMISCSOLVER_API DampVelocitySolver : public sofa::core::behavior::OdeSolver
 {
 public:
     SOFA_CLASS(DampVelocitySolver, sofa::core::behavior::OdeSolver);

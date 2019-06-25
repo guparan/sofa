@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_MERGESETS_H
 #define SOFA_COMPONENT_ENGINE_MERGESETS_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 #include <sofa/core/DataEngine.h>
 #include <sofa/core/objectmodel/BaseObject.h>
@@ -67,10 +67,10 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_MERGESETS_CPP)
-extern template class SOFA_GENERAL_ENGINE_API MergeSets<int>;
-extern template class SOFA_GENERAL_ENGINE_API MergeSets<unsigned int>;
-//extern template class SOFA_GENERAL_ENGINE_API MergeSets<long long>;
-//extern template class SOFA_GENERAL_ENGINE_API MergeSets<unsigned long long>;
+extern template class SOFA_SOFAGENERALENGINE_API MergeSets<int>;
+extern template class SOFA_SOFAGENERALENGINE_API MergeSets<unsigned int>;
+//extern template class SOFA_SOFAGENERALENGINE_API MergeSets<long long>;
+//extern template class SOFA_SOFAGENERALENGINE_API MergeSets<unsigned long long>;
 #endif
 
 } // namespace engine

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef GIDMESHLOADER_H
 #define GIDMESHLOADER_H
-#include "config.h"
+#include <SofaGeneralLoader/config.h>
 
 #include <sofa/core/loader/MeshLoader.h>
 
@@ -35,7 +35,7 @@ namespace component
 namespace loader
 {
 
-class SOFA_GENERAL_LOADER_API GIDMeshLoader : public sofa::core::loader::MeshLoader
+class SOFA_SOFAGENERALLOADER_API GIDMeshLoader : public sofa::core::loader::MeshLoader
 {
 public :
 	SOFA_CLASS(GIDMeshLoader, sofa::core::loader::MeshLoader);

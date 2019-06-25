@@ -45,7 +45,7 @@ int TriangularFEMForceFieldClass = core::RegisterObject("Corotational Triangular
 
         ;
 
-template class SOFA_MISC_FEM_API TriangularFEMForceField<Vec3Types>;
+template class SOFA_SOFAMISCFEM_API TriangularFEMForceField<Vec3Types>;
 
 
 

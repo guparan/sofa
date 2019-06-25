@@ -44,8 +44,8 @@ int ProjectToLineConstraintClass = core::RegisterObject("Attach given particles 
 
         ;
 
-template class SOFA_BOUNDARY_CONDITION_API ProjectToLineConstraint<Vec3Types>;
-template class SOFA_BOUNDARY_CONDITION_API ProjectToLineConstraint<Vec2Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API ProjectToLineConstraint<Vec3Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API ProjectToLineConstraint<Vec2Types>;
 
 
 

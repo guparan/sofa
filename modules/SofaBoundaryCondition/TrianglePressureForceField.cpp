@@ -45,7 +45,7 @@ int TrianglePressureForceFieldClass = core::RegisterObject("TrianglePressure")
 
         ;
 
-template class SOFA_BOUNDARY_CONDITION_API TrianglePressureForceField<Vec3Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API TrianglePressureForceField<Vec3Types>;
 
 
 

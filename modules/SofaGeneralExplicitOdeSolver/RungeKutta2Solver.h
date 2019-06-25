@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ODESOLVER_RUNGEKUTTA2SOLVER_H
 #define SOFA_COMPONENT_ODESOLVER_RUNGEKUTTA2SOLVER_H
-#include "config.h"
+#include <SofaGeneralExplicitOdeSolver/config.h>
 
 #include <sofa/core/behavior/OdeSolver.h>
 
@@ -35,7 +35,7 @@ namespace odesolver
 {
 
 /** A popular time integration method, much more precise than the EulerSolver */
-class SOFA_GENERAL_EXPLICIT_ODE_SOLVER_API RungeKutta2Solver : public sofa::core::behavior::OdeSolver
+class SOFA_SOFAGENERALEXPLICITODESOLVER_API RungeKutta2Solver : public sofa::core::behavior::OdeSolver
 {
 public:
     SOFA_CLASS(RungeKutta2Solver, sofa::core::behavior::OdeSolver);

@@ -29,7 +29,7 @@ namespace sofa
 namespace component
 {
 
-void SOFA_COMPONENT_API init();
+void SOFA_SOFAMISC_API init();
 
 } // namespace component
 

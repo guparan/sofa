@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_PROJECTIVETRANSFORMENGINE_H
 #define SOFA_COMPONENT_ENGINE_PROJECTIVETRANSFORMENGINE_H
-#include "config.h"
+#include <SofaMiscEngine/config.h>
 
 
 
@@ -87,9 +87,9 @@ protected:
 
 #if  !defined(SOFA_COMPONENT_ENGINE_PROJECTIVETRANSFORMENGINE_CPP)
 
-extern template class SOFA_MISC_ENGINE_API ProjectiveTransformEngine<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAMISCENGINE_API ProjectiveTransformEngine<defaulttype::Vec3Types>;
  
-extern template class SOFA_MISC_ENGINE_API ProjectiveTransformEngine<defaulttype::ExtVec3fTypes>;
+extern template class SOFA_SOFAMISCENGINE_API ProjectiveTransformEngine<defaulttype::ExtVec3fTypes>;
 
 #endif
 

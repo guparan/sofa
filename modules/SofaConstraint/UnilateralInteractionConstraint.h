@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONSTRAINTSET_UNILATERALINTERACTIONCONSTRAINT_H
 #define SOFA_COMPONENT_CONSTRAINTSET_UNILATERALINTERACTIONCONSTRAINT_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <sofa/core/behavior/PairInteractionConstraint.h>
 #include <sofa/core/behavior/MechanicalState.h>
@@ -88,7 +88,7 @@ protected:
     bool resetFlag; // We delete all forces that were not read
 };
 
-class SOFA_CONSTRAINT_API UnilateralConstraintResolutionWithFriction : public core::behavior::ConstraintResolution
+class SOFA_SOFACONSTRAINT_API UnilateralConstraintResolutionWithFriction : public core::behavior::ConstraintResolution
 {
 public:
     UnilateralConstraintResolutionWithFriction(double mu, PreviousForcesContainer* prev = nullptr, bool* active = nullptr)
@@ -219,7 +219,7 @@ public:
 
 
 #if  !defined(SOFA_COMPONENT_CONSTRAINTSET_UNILATERALINTERACTIONCONSTRAINT_CPP)
-extern template class SOFA_CONSTRAINT_API UnilateralInteractionConstraint<defaulttype::Vec3Types>;
+extern template class SOFA_SOFACONSTRAINT_API UnilateralInteractionConstraint<defaulttype::Vec3Types>;
 
 #endif
 

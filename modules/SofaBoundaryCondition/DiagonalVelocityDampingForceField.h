@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_DIAGONALVELOCITYDAMPINGFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_DIAGONALVELOCITYDAMPINGFORCEFIELD_H
-#include "config.h"
+#include <SofaBoundaryCondition/config.h>
 
 #include <sofa/core/behavior/ForceField.h>
 
@@ -74,12 +74,12 @@ public:
 
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_DIAGONALVELOCITYDAMPINGFORCEFIELD_CPP)
-extern template class SOFA_BOUNDARY_CONDITION_API DiagonalVelocityDampingForceField<defaulttype::Vec3Types>;
-extern template class SOFA_BOUNDARY_CONDITION_API DiagonalVelocityDampingForceField<defaulttype::Vec2Types>;
-extern template class SOFA_BOUNDARY_CONDITION_API DiagonalVelocityDampingForceField<defaulttype::Vec1Types>;
-extern template class SOFA_BOUNDARY_CONDITION_API DiagonalVelocityDampingForceField<defaulttype::Vec6Types>;
-extern template class SOFA_BOUNDARY_CONDITION_API DiagonalVelocityDampingForceField<defaulttype::Rigid3Types>;
-extern template class SOFA_BOUNDARY_CONDITION_API DiagonalVelocityDampingForceField<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API DiagonalVelocityDampingForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API DiagonalVelocityDampingForceField<defaulttype::Vec2Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API DiagonalVelocityDampingForceField<defaulttype::Vec1Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API DiagonalVelocityDampingForceField<defaulttype::Vec6Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API DiagonalVelocityDampingForceField<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API DiagonalVelocityDampingForceField<defaulttype::Rigid2Types>;
 
 #endif
 

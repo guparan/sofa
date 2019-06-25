@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_OCTREEDETECTION_H
 #define SOFA_COMPONENT_COLLISION_OCTREEDETECTION_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <sofa/core/collision/BroadPhaseDetection.h>
 #include <sofa/core/collision/NarrowPhaseDetection.h>
@@ -46,7 +46,7 @@ namespace collision
  *    up to find a triangle in the other object. Both triangles are tested to evaluate if they are in
  * colliding state. It must be used with a TriangleOctreeModel,as an octree is used to traverse the object.
  */
-class SOFA_USER_INTERACTION_API RayTraceDetection :public core::collision::BroadPhaseDetection,
+class SOFA_SOFAUSERINTERACTION_API RayTraceDetection :public core::collision::BroadPhaseDetection,
     public core::collision::NarrowPhaseDetection
 {
 public:

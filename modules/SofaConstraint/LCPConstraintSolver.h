@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONSTRAINTSET_LCPCONSTRAINTSOLVER_H
 #define SOFA_COMPONENT_CONSTRAINTSET_LCPCONSTRAINTSOLVER_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <SofaConstraint/ConstraintSolverImpl.h>
 #include <sofa/core/behavior/BaseConstraintCorrection.h>
@@ -113,7 +113,7 @@ private:
     const core::ConstraintParams* _cparams;
 };
 
-class SOFA_CONSTRAINT_API LCPConstraintSolver : public ConstraintSolverImpl
+class SOFA_SOFACONSTRAINT_API LCPConstraintSolver : public ConstraintSolverImpl
 {
 public:
     SOFA_CLASS(LCPConstraintSolver, ConstraintSolverImpl);

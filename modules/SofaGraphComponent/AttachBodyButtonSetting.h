@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONFIGURATIONSETTING_ATTACHBODYBUTTON_H
 #define SOFA_COMPONENT_CONFIGURATIONSETTING_ATTACHBODYBUTTON_H
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 #include <sofa/core/objectmodel/ConfigurationSetting.h>
 #include <SofaGraphComponent/MouseButtonSetting.h>
@@ -35,7 +35,7 @@ namespace component
 namespace configurationsetting
 {
 
-class SOFA_GRAPH_COMPONENT_API AttachBodyButtonSetting: public MouseButtonSetting
+class SOFA_SOFAGRAPHCOMPONENT_API AttachBodyButtonSetting: public MouseButtonSetting
 {
 public:
     SOFA_CLASS(AttachBodyButtonSetting,MouseButtonSetting);

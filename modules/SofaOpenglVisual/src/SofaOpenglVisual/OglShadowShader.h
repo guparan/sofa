@@ -32,7 +32,7 @@
 //
 #ifndef SOFA_COMPONENT_OGLSHADOWSHADER
 #define SOFA_COMPONENT_OGLSHADOWSHADER
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <SofaOpenglVisual/OglShader.h>
 
@@ -45,7 +45,7 @@ namespace component
 namespace visualmodel
 {
 
-class SOFA_OPENGL_VISUAL_API OglShadowShader : public sofa::component::visualmodel::OglShader
+class SOFA_SOFAOPENGLVISUAL_API OglShadowShader : public sofa::component::visualmodel::OglShader
 {
 public:
     SOFA_CLASS(OglShadowShader, sofa::component::visualmodel::OglShader);

@@ -43,9 +43,9 @@ int EllipsoidForceFieldClass = core::RegisterObject("Repulsion applied by an ell
         .add< EllipsoidForceField<Vec1Types> >()
 
         ;
-template class SOFA_BOUNDARY_CONDITION_API EllipsoidForceField<Vec3Types>;
-template class SOFA_BOUNDARY_CONDITION_API EllipsoidForceField<Vec2Types>;
-template class SOFA_BOUNDARY_CONDITION_API EllipsoidForceField<Vec1Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API EllipsoidForceField<Vec3Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API EllipsoidForceField<Vec2Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API EllipsoidForceField<Vec1Types>;
 
 
 } // namespace forcefield

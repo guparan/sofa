@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_DATAMONITOR_H
 #define SOFA_COMPONENT_MISC_DATAMONITOR_H
-#include "config.h"
+#include <SofaValidation/config.h>
 
 #include <sofa/core/BaseState.h>
 
@@ -37,7 +37,7 @@ namespace misc
 /**
  * @brief  DataMonitor Class
  */
-class SOFA_VALIDATION_API DataMonitor : public virtual sofa::core::objectmodel::BaseObject
+class SOFA_SOFAVALIDATION_API DataMonitor : public virtual sofa::core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(DataMonitor, core::objectmodel::BaseObject);

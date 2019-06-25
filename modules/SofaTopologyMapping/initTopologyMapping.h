@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_MAPPING_INIT_H
 #define SOFA_COMPONENT_TOPOLOGY_MAPPING_INIT_H
-#include "config.h"
+#include <SofaTopologyMapping/config.h>
 
 
 namespace sofa
@@ -31,7 +31,7 @@ namespace component
 {
 
 
-void SOFA_TOPOLOGY_MAPPING_API initTopologyMapping();
+void SOFA_SOFATOPOLOGYMAPPING_API initTopologyMapping();
 
 } // namespace component
 

@@ -42,9 +42,9 @@ int PairBoxROIClass = core::RegisterObject("Find the primitives (vertex/edge/tri
  
         ;
 
-template class SOFA_GENERAL_ENGINE_API PairBoxROI<Vec3Types>;
-template class SOFA_GENERAL_ENGINE_API PairBoxROI<Rigid3Types>;
-template class SOFA_GENERAL_ENGINE_API PairBoxROI<Vec6Types>; //Phuoc
+template class SOFA_SOFAGENERALENGINE_API PairBoxROI<Vec3Types>;
+template class SOFA_SOFAGENERALENGINE_API PairBoxROI<Rigid3Types>;
+template class SOFA_SOFAGENERALENGINE_API PairBoxROI<Vec6Types>; //Phuoc
  
 
 

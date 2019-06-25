@@ -28,7 +28,7 @@
 #include <sofa/core/objectmodel/BaseObject.h>
 using sofa::core::objectmodel::BaseObject ;
 
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 namespace sofa
 {
@@ -39,7 +39,7 @@ namespace component
 namespace _apiversion_
 {
 
-class SOFA_GRAPH_COMPONENT_API APIVersion : public BaseObject
+class SOFA_SOFAGRAPHCOMPONENT_API APIVersion : public BaseObject
 {
 
 public:

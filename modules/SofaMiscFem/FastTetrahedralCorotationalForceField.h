@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_FASTTETRAHEDRALCOROTATIONALFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_FASTTETRAHEDRALCOROTATIONALFORCEFIELD_H
-#include "config.h"
+#include <SofaMiscFem/config.h>
 
 
 
@@ -213,7 +213,7 @@ protected :
 };
 
 #if  !defined(SOFA_COMPONENT_INTERACTIONFORCEFIELD_FASTTETRAHEDRALCOROTATIONALFORCEFIELD_CPP)
-extern template class SOFA_MISC_FEM_API FastTetrahedralCorotationalForceField<sofa::defaulttype::Vec3Types>;
+extern template class SOFA_SOFAMISCFEM_API FastTetrahedralCorotationalForceField<sofa::defaulttype::Vec3Types>;
 
 #endif
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_RAYNEWPROXIMITYINTERSECTION_H
 #define SOFA_COMPONENT_COLLISION_RAYNEWPROXIMITYINTERSECTION_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <SofaBaseCollision/NewProximityIntersection.h>
 #include <sofa/helper/FnDispatcher.h>
@@ -42,7 +42,7 @@ namespace component
 namespace collision
 {
 
-class SOFA_USER_INTERACTION_API RayNewProximityIntersection : public core::collision::BaseIntersector
+class SOFA_SOFAUSERINTERACTION_API RayNewProximityIntersection : public core::collision::BaseIntersector
 {
     typedef NewProximityIntersection::OutputVector OutputVector;
 

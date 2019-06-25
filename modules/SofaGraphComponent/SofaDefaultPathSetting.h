@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONFIGURATIONSETTING_SOFADEFAULTPATH_H
 #define SOFA_COMPONENT_CONFIGURATIONSETTING_SOFADEFAULTPATH_H
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 #include <sofa/core/objectmodel/ConfigurationSetting.h>
 #include <sofa/core/objectmodel/DataFileName.h>
@@ -36,7 +36,7 @@ namespace configurationsetting
 {
 
 ///Class for the configuration of default path for sofa application.
-class SOFA_GRAPH_COMPONENT_API SofaDefaultPathSetting: public core::objectmodel::ConfigurationSetting
+class SOFA_SOFAGRAPHCOMPONENT_API SofaDefaultPathSetting: public core::objectmodel::ConfigurationSetting
 {
 public:
     SOFA_CLASS(SofaDefaultPathSetting,core::objectmodel::ConfigurationSetting); ///< Sofa macro to define typedef.

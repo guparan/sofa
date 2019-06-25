@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FEM_OGDEN_H
 #define SOFA_COMPONENT_FEM_OGDEN_H
-#include "config.h"
+#include <SofaMiscFem/config.h>
 
 
 #include <SofaMiscFem/HyperelasticMaterial.h>

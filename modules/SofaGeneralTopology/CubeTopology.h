@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_CUBETOPOLOGY_H
 #define SOFA_COMPONENT_TOPOLOGY_CUBETOPOLOGY_H
-#include "config.h"
+#include <SofaGeneralTopology/config.h>
 
 #include <SofaBaseTopology/MeshTopology.h>
 
@@ -34,7 +34,7 @@ namespace component
 namespace topology
 {
 
-class SOFA_GENERAL_TOPOLOGY_API CubeTopology : public MeshTopology
+class SOFA_SOFAGENERALTOPOLOGY_API CubeTopology : public MeshTopology
 {
 public:
     SOFA_CLASS(CubeTopology,MeshTopology);

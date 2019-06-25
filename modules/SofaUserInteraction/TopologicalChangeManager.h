@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_TOPOLOGICALCHANGEMANAGER_H
 #define SOFA_COMPONENT_COLLISION_TOPOLOGICALCHANGEMANAGER_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <sofa/core/CollisionElement.h>
 
@@ -53,7 +53,7 @@ class TetrahedronModel;
 
 
 /// a class to manage the handling of topological changes which have been requested from the Collision Model
-class SOFA_USER_INTERACTION_API TopologicalChangeManager
+class SOFA_SOFAUSERINTERACTION_API TopologicalChangeManager
 {
 public:
     TopologicalChangeManager();

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_INCISEALONGPATHPERFORMER_H
 #define SOFA_COMPONENT_COLLISION_INCISEALONGPATHPERFORMER_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <SofaUserInteraction/InteractionPerformer.h>
 
@@ -56,7 +56,7 @@ protected:
 };
 
 
-class SOFA_USER_INTERACTION_API InciseAlongPathPerformer: public InteractionPerformer, public InciseAlongPathPerformerConfiguration
+class SOFA_SOFAUSERINTERACTION_API InciseAlongPathPerformer: public InteractionPerformer, public InciseAlongPathPerformerConfiguration
 {
 public:
     InciseAlongPathPerformer(BaseMouseInteractor *i)

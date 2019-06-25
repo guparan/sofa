@@ -41,7 +41,7 @@ int VectorSpringForceFieldClass = core::RegisterObject("Spring force field actin
 
         ;
 
-template class SOFA_GENERAL_DEFORMABLE_API VectorSpringForceField<Vec3Types>;
+template class SOFA_SOFAGENERALDEFORMABLE_API VectorSpringForceField<Vec3Types>;
 
 
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_BEAMLINEARMAPPING_H
 #define SOFA_COMPONENT_MAPPING_BEAMLINEARMAPPING_H
-#include "config.h"
+#include <SofaMiscMapping/config.h>
 
 #include <sofa/core/Mapping.h>
 
@@ -120,8 +120,8 @@ template <int N, class Real> struct RigidMappingMatrixHelper;
 
 
 #if  !defined(SOFA_COMPONENT_MAPPING_BEAMLINEARMAPPING_CPP)
-extern template class SOFA_MISC_MAPPING_API BeamLinearMapping< defaulttype::Rigid3Types, defaulttype::Vec3dTypes >;
-extern template class SOFA_MISC_MAPPING_API BeamLinearMapping< defaulttype::Rigid3Types, defaulttype::ExtVec3Types >;
+extern template class SOFA_SOFAMISCMAPPING_API BeamLinearMapping< defaulttype::Rigid3Types, defaulttype::Vec3dTypes >;
+extern template class SOFA_SOFAMISCMAPPING_API BeamLinearMapping< defaulttype::Rigid3Types, defaulttype::ExtVec3Types >;
 
 
 

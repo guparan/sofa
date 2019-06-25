@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_ARTICULATEDSYSTEMMAPPING_H
 #define SOFA_COMPONENT_MAPPING_ARTICULATEDSYSTEMMAPPING_H
-#include "config.h"
+#include <SofaGeneralRigid/config.h>
 
 #include <sofa/core/Multi2Mapping.h>
 
@@ -230,7 +230,7 @@ private:
 
 #if  !defined(SOFA_COMPONENT_MAPPING_ARTICULATEDSYSTEMMAPPING_CPP)
 
-extern template class SOFA_GENERAL_RIGID_API ArticulatedSystemMapping< sofa::defaulttype::Vec1Types, sofa::defaulttype::Rigid3Types, sofa::defaulttype::Rigid3Types >;
+extern template class SOFA_SOFAGENERALRIGID_API ArticulatedSystemMapping< sofa::defaulttype::Vec1Types, sofa::defaulttype::Rigid3Types, sofa::defaulttype::Rigid3Types >;
 
 
 

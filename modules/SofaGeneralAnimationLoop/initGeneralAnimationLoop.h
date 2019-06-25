@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_GENERAL_ANIMATION_LOOP_INIT_H
 #define SOFA_COMPONENT_GENERAL_ANIMATION_LOOP_INIT_H
-#include "config.h"
+#include <SofaGeneralAnimationLoop/config.h>
 
 namespace sofa
 {
@@ -29,7 +29,7 @@ namespace sofa
 namespace component
 {
 
-void SOFA_GENERAL_ANIMATION_LOOP_API initGeneralAnimationLoop();
+void SOFA_SOFAGENERALANIMATIONLOOP_API initGeneralAnimationLoop();
 
 } // namespace component
 

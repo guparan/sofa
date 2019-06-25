@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_GENERAL_LINEAR_SOLVER_INIT_H
 #define SOFA_COMPONENT_GENERAL_LINEAR_SOLVER_INIT_H
-#include "config.h"
+#include <SofaGeneralLinearSolver/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_GENERAL_LINEAR_SOLVER_API initGeneralLinearSolver();
+void SOFA_SOFAGENERALLINEARSOLVER_API initGeneralLinearSolver();
 
 } // namespace component
 

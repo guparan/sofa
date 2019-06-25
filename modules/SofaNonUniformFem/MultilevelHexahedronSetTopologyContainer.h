@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_MULTILEVELHEXAHEDRONSETTOPOLOGYCONTAINER_H
 #define SOFA_COMPONENT_TOPOLOGY_MULTILEVELHEXAHEDRONSETTOPOLOGYCONTAINER_H
-#include "config.h"
+#include <SofaNonUniformFem/config.h>
 
 #include <SofaBaseTopology/HexahedronSetTopologyContainer.h>
 #include <SofaBaseTopology/TopologyData.h>
@@ -47,7 +47,7 @@ namespace topology
 class MultilevelHexahedronSetTopologyModifier;
 
 
-class SOFA_NON_UNIFORM_FEM_API MultilevelHexahedronSetTopologyContainer : public HexahedronSetTopologyContainer
+class SOFA_SOFANONUNIFORMFEM_API MultilevelHexahedronSetTopologyContainer : public HexahedronSetTopologyContainer
 {
     friend class MultilevelHexahedronSetTopologyModifier;
 
@@ -140,7 +140,7 @@ private:
 
     void connectionToNodeAdjacency(const Vec3i& connection, std::map<unsigned int, unsigned int>& nodeMap) const;
 
-    class SOFA_NON_UNIFORM_FEM_API Component
+    class SOFA_SOFANONUNIFORMFEM_API Component
     {
     public:
         Component(const Vec3i& id, const std::set<Vec3i>& voxels);
@@ -204,7 +204,7 @@ private:
 };
 
 /** notifies change in the multilevel structure other than adding or removing coarse hexahedra */
-class SOFA_NON_UNIFORM_FEM_API MultilevelModification : public core::topology::TopologyChange
+class SOFA_SOFANONUNIFORMFEM_API MultilevelModification : public core::topology::TopologyChange
 {
 public:
     static const int MULTILEVEL_MODIFICATION = core::topology::TOPOLOGYCHANGE_LASTID + 1;

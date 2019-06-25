@@ -23,7 +23,7 @@
 #ifndef SOFA_COMPONENT_ENGINE_SumEngine_H
 #define SOFA_COMPONENT_ENGINE_SumEngine_H
 
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 #include <sofa/core/DataEngine.h>
 #include <sofa/defaulttype/Vec.h>
 
@@ -77,8 +77,8 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_SumEngine_CPP)
-extern template class SOFA_GENERAL_ENGINE_API SumEngine<defaulttype::Vec1d>;
-extern template class SOFA_GENERAL_ENGINE_API SumEngine<defaulttype::Vec3d>;
+extern template class SOFA_SOFAGENERALENGINE_API SumEngine<defaulttype::Vec1d>;
+extern template class SOFA_SOFAGENERALENGINE_API SumEngine<defaulttype::Vec3d>;
 
 #endif
 

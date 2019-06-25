@@ -28,7 +28,7 @@
 
 #ifndef DEVMONITORMANAGER_H_
 #define DEVMONITORMANAGER_H_
-#include "config.h"
+#include <SofaValidation/config.h>
 
 #include <SofaValidation/DevMonitor.h>
 #include <sofa/defaulttype/VecTypes.h>
@@ -43,7 +43,7 @@ namespace component
 namespace misc
 {
 
-class SOFA_VALIDATION_API DevMonitorManager : public DevMonitor<sofa::defaulttype::Vec3Types>
+class SOFA_SOFAVALIDATION_API DevMonitorManager : public DevMonitor<sofa::defaulttype::Vec3Types>
 {
 public:
     SOFA_CLASS(DevMonitorManager, SOFA_TEMPLATE(DevMonitor,sofa::defaulttype::Vec3Types));

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_VALIDATION_INIT_H
 #define SOFA_COMPONENT_VALIDATION_INIT_H
-#include "config.h"
+#include <SofaValidation/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_VALIDATION_API initValidation();
+void SOFA_SOFAVALIDATION_API initValidation();
 
 } // namespace component
 

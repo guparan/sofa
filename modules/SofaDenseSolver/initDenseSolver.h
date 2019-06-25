@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_DENSE_SOLVER_INIT_H
 #define SOFA_COMPONENT_DENSE_SOLVER_INIT_H
-#include "config.h"
+#include <SofaDenseSolver/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_DENSE_SOLVER_API initDenseSolver();
+void SOFA_SOFADENSESOLVER_API initDenseSolver();
 
 } // namespace component
 

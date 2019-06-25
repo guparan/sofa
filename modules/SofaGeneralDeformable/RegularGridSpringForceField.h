@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_INTERACTIONFORCEFIELD_REGULARGRIDSPRINGFORCEFIELD_H
 #define SOFA_COMPONENT_INTERACTIONFORCEFIELD_REGULARGRIDSPRINGFORCEFIELD_H
-#include "config.h"
+#include <SofaGeneralDeformable/config.h>
 
 #include <SofaDeformable/StiffSpringForceField.h>
 #include <SofaBaseTopology/RegularGridTopology.h>
@@ -127,10 +127,10 @@ protected:
     topology::RegularGridTopology* topology;
 };
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_REGULARGRIDSPRINGFORCEFIELD_CPP)
-extern template class SOFA_GENERAL_DEFORMABLE_API RegularGridSpringForceField<defaulttype::Vec3Types>;
-extern template class SOFA_GENERAL_DEFORMABLE_API RegularGridSpringForceField<defaulttype::Vec2Types>;
-extern template class SOFA_GENERAL_DEFORMABLE_API RegularGridSpringForceField<defaulttype::Vec1Types>;
-extern template class SOFA_GENERAL_DEFORMABLE_API RegularGridSpringForceField<defaulttype::Vec6Types>;
+extern template class SOFA_SOFAGENERALDEFORMABLE_API RegularGridSpringForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALDEFORMABLE_API RegularGridSpringForceField<defaulttype::Vec2Types>;
+extern template class SOFA_SOFAGENERALDEFORMABLE_API RegularGridSpringForceField<defaulttype::Vec1Types>;
+extern template class SOFA_SOFAGENERALDEFORMABLE_API RegularGridSpringForceField<defaulttype::Vec6Types>;
 
 #endif
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_GENERALDEFORMABLE_INIT_H
 #define SOFA_COMPONENT_GENERALDEFORMABLE_INIT_H
-#include "config.h"
+#include <SofaGeneralDeformable/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_GENERAL_DEFORMABLE_API initGeneralDeformable();
+void SOFA_SOFAGENERALDEFORMABLE_API initGeneralDeformable();
 
 } // namespace component
 

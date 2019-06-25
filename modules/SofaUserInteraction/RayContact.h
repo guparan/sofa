@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_RAYCONTACT_H
 #define SOFA_COMPONENT_COLLISION_RAYCONTACT_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <sofa/core/collision/Contact.h>
 #include <sofa/helper/Factory.h>
@@ -37,7 +37,7 @@ namespace collision
 
 class RayModel;
 
-class SOFA_USER_INTERACTION_API BaseRayContact : public core::collision::Contact
+class SOFA_SOFAUSERINTERACTION_API BaseRayContact : public core::collision::Contact
 {
 public:
     typedef RayModel CollisionModel1;

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONTROLLER_LCPFORCEFEEDBACK_H
 #define SOFA_COMPONENT_CONTROLLER_LCPFORCEFEEDBACK_H
-#include "config.h"
+#include <SofaHaptics/config.h>
 
 #include <SofaHaptics/MechanicalStateForceFeedback.h>
 #include <sofa/core/behavior/MechanicalState.h>

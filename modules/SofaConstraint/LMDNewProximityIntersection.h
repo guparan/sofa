@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_LMDNEWPROXIMITYINTERSECTION_H
 #define SOFA_COMPONENT_COLLISION_LMDNEWPROXIMITYINTERSECTION_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <SofaBaseCollision/BaseProximityIntersection.h>
 #include <sofa/helper/FnDispatcher.h>
@@ -45,7 +45,7 @@ namespace collision
 /// I guess LMD is for Local Min Distance?
 /// What is the specificity of this approach?
 /// What are exactly doing the filters?
-class SOFA_CONSTRAINT_API LMDNewProximityIntersection : public BaseProximityIntersection
+class SOFA_SOFACONSTRAINT_API LMDNewProximityIntersection : public BaseProximityIntersection
 {
 public:
     SOFA_CLASS(LMDNewProximityIntersection,BaseProximityIntersection);

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ANIMATIONLOOP_MULTITAGANIMATIONLOOP_H
 #define SOFA_COMPONENT_ANIMATIONLOOP_MULTITAGANIMATIONLOOP_H
-#include "config.h"
+#include <SofaGeneralAnimationLoop/config.h>
 
 #include <sofa/core/behavior/BaseAnimationLoop.h>
 #include <sofa/simulation/CollisionAnimationLoop.h>
@@ -37,7 +37,7 @@ namespace animationloop
 
 /** Simple animation loop that given a list of tags, animate the graph one tag after another.
 */
-class SOFA_GENERAL_ANIMATION_LOOP_API MultiTagAnimationLoop : public sofa::simulation::CollisionAnimationLoop
+class SOFA_SOFAGENERALANIMATIONLOOP_API MultiTagAnimationLoop : public sofa::simulation::CollisionAnimationLoop
 {
 public:
     typedef sofa::simulation::CollisionAnimationLoop Inherit;

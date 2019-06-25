@@ -22,7 +22,7 @@
 #ifndef SOFA_SIMULATION_SCENECHECKERVISTOR_H
 #define SOFA_SIMULATION_SCENECHECKERVISTOR_H
 
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 #include <functional>
 #include <map>
@@ -37,7 +37,7 @@ namespace simulation
 namespace _scenechecking_
 {
 
-class SOFA_GRAPH_COMPONENT_API SceneCheckerVisitor : public Visitor
+class SOFA_SOFAGRAPHCOMPONENT_API SceneCheckerVisitor : public Visitor
 {
 public:
     SceneCheckerVisitor(const sofa::core::ExecParams* params = sofa::core::ExecParams::defaultInstance()) ;

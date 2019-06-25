@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_CONTACTIDENTIFIER_H
 #define SOFA_COMPONENT_COLLISION_CONTACTIDENTIFIER_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <sofa/core/collision/DetectionOutput.h>
 
@@ -39,7 +39,7 @@ namespace component
 namespace collision
 {
 
-class SOFA_CONSTRAINT_API ContactIdentifier
+class SOFA_SOFACONSTRAINT_API ContactIdentifier
 {
 public:
     ContactIdentifier()

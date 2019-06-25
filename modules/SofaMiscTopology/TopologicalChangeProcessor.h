@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_TOPOLOGICALCHANGEPROCESSOR_H
 #define SOFA_COMPONENT_MISC_TOPOLOGICALCHANGEPROCESSOR_H
-#include "config.h"
+#include <SofaMiscTopology/config.h>
 
 
 #include <sofa/simulation/AnimateBeginEvent.h>
@@ -52,7 +52,7 @@ class TriangleIncisionInformation;
  *
  * SIMPLE METHODE FOR THE MOMENT. DON'T HANDLE MULTIPLE TOPOLOGIES
 */
-class SOFA_MISC_TOPOLOGY_API TopologicalChangeProcessor: public core::objectmodel::BaseObject
+class SOFA_SOFAMISCTOPOLOGY_API TopologicalChangeProcessor: public core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(TopologicalChangeProcessor,core::objectmodel::BaseObject);

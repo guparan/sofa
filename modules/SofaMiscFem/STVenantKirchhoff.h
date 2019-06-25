@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FEM_STVENANTKIRCHHOFF_H
 #define SOFA_COMPONENT_FEM_STVENANTKIRCHHOFF_H
-#include "config.h"
+#include <SofaMiscFem/config.h>
 
 
 #include <SofaMiscFem/initMiscFEM.h>

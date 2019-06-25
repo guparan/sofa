@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_DYNAMICSPARSEGRIDTOPOLOGYALGORITHMS_H
 #define SOFA_COMPONENT_TOPOLOGY_DYNAMICSPARSEGRIDTOPOLOGYALGORITHMS_H
-#include "config.h"
+#include <SofaNonUniformFem/config.h>
 
 #include <SofaBaseTopology/HexahedronSetTopologyAlgorithms.h>
 #include <SofaNonUniformFem/DynamicSparseGridTopologyContainer.h>
@@ -67,11 +67,11 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_TOPOLOGY_DYNAMICSPARSEGRIDTOPOLOGYALGORITHMS_CPP)
-extern template class SOFA_NON_UNIFORM_FEM_API DynamicSparseGridTopologyAlgorithms<defaulttype::Vec3Types>;
-extern template class SOFA_NON_UNIFORM_FEM_API DynamicSparseGridTopologyAlgorithms<defaulttype::Vec2Types>;
-extern template class SOFA_NON_UNIFORM_FEM_API DynamicSparseGridTopologyAlgorithms<defaulttype::Vec1Types>;
-//extern template class SOFA_NON_UNIFORM_FEM_API DynamicSparseGridTopologyAlgorithms<defaulttype::Rigid3Types>;
-//extern template class SOFA_NON_UNIFORM_FEM_API DynamicSparseGridTopologyAlgorithms<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFANONUNIFORMFEM_API DynamicSparseGridTopologyAlgorithms<defaulttype::Vec3Types>;
+extern template class SOFA_SOFANONUNIFORMFEM_API DynamicSparseGridTopologyAlgorithms<defaulttype::Vec2Types>;
+extern template class SOFA_SOFANONUNIFORMFEM_API DynamicSparseGridTopologyAlgorithms<defaulttype::Vec1Types>;
+//extern template class SOFA_SOFANONUNIFORMFEM_API DynamicSparseGridTopologyAlgorithms<defaulttype::Rigid3Types>;
+//extern template class SOFA_SOFANONUNIFORMFEM_API DynamicSparseGridTopologyAlgorithms<defaulttype::Rigid2Types>;
 
 
 #endif

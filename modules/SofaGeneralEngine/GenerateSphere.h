@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_GENERATESPHERE_H
 #define SOFA_COMPONENT_ENGINE_GENERATESPHERE_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 
 
@@ -111,7 +111,7 @@ public:
 
 
 #if  !defined(SOFA_COMPONENT_ENGINE_GENERATESPHERE_CPP)
-extern template class SOFA_GENERAL_ENGINE_API GenerateSphere<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API GenerateSphere<defaulttype::Vec3Types>;
 
 #endif
 

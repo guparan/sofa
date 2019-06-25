@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LOADER_GridMeshCreator_H
 #define SOFA_COMPONENT_LOADER_GridMeshCreator_H
-#include "config.h"
+#include <SofaGeneralLoader/config.h>
 
 #include <sofa/core/loader/MeshLoader.h>
 namespace sofa
@@ -39,7 +39,7 @@ namespace loader
 
   @author François Faure, 2012
 */
-class SOFA_GENERAL_LOADER_API GridMeshCreator : public sofa::core::loader::MeshLoader
+class SOFA_SOFAGENERALLOADER_API GridMeshCreator : public sofa::core::loader::MeshLoader
 {
 public:
 

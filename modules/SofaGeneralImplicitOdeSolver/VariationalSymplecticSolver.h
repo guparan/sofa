@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef VariationalSymplecticSolver_H
 #define VariationalSymplecticSolver_H
-#include "config.h"
+#include <SofaGeneralImplicitOdeSolver/config.h>
 
 #include <sofa/core/behavior/OdeSolver.h>
 #include <fstream>
@@ -44,7 +44,7 @@ using namespace sofa::defaulttype;
  * several Newton steps to estimate the velocity
  *
 */
-class SOFA_GENERAL_IMPLICIT_ODE_SOLVER_API VariationalSymplecticSolver : public sofa::core::behavior::OdeSolver
+class SOFA_SOFAGENERALIMPLICITODESOLVER_API VariationalSymplecticSolver : public sofa::core::behavior::OdeSolver
 {
 public:
     SOFA_CLASS(VariationalSymplecticSolver, sofa::core::behavior::OdeSolver);

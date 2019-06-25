@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONFIGURATIONSETTING_STATS_H
 #define SOFA_COMPONENT_CONFIGURATIONSETTING_STATS_H
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 #include <sofa/core/objectmodel/ConfigurationSetting.h>
 #include <sofa/defaulttype/Vec.h>
@@ -36,7 +36,7 @@ namespace configurationsetting
 {
 
 ///Class for the configuration of stats settings.
-class SOFA_GRAPH_COMPONENT_API StatsSetting: public core::objectmodel::ConfigurationSetting
+class SOFA_SOFAGRAPHCOMPONENT_API StatsSetting: public core::objectmodel::ConfigurationSetting
 {
 public:
     SOFA_CLASS(StatsSetting,core::objectmodel::ConfigurationSetting);   ///< Sofa macro to define typedef.

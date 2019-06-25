@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_IDENTITYTOPOLOGICALMAPPING_H
 #define SOFA_COMPONENT_TOPOLOGY_IDENTITYTOPOLOGICALMAPPING_H
-#include "config.h"
+#include <SofaTopologyMapping/config.h>
 
 #include <sofa/core/topology/TopologicalMapping.h>
 
@@ -44,7 +44,7 @@ namespace topology
  * The implementation currently assumes that both topology have been initialized identically.
  */
 
-class SOFA_TOPOLOGY_MAPPING_API IdentityTopologicalMapping : public sofa::core::topology::TopologicalMapping
+class SOFA_SOFATOPOLOGYMAPPING_API IdentityTopologicalMapping : public sofa::core::topology::TopologicalMapping
 {
 public:
     SOFA_CLASS(IdentityTopologicalMapping,sofa::core::topology::TopologicalMapping);

@@ -25,9 +25,9 @@
 #include <sofa/helper/system/config.h>
 
 #ifdef SOFA_BUILD_CONSTRAINT
-#  define SOFA_CONSTRAINT_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#  define SOFA_SOFACONSTRAINT_API SOFA_EXPORT_DYNAMIC_LIBRARY
 #else
-#  define SOFA_CONSTRAINT_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#  define SOFA_SOFACONSTRAINT_API SOFA_IMPORT_DYNAMIC_LIBRARY
 #endif
 
 namespace sofa
@@ -41,7 +41,7 @@ namespace tree
 
 /// @brief Initialize the SofaSimulationTree library, as well as its
 /// dependencies: SofaSimulationCommon, SofaCore, SofaDefaultType, SofaHelper.
-void SOFA_SIMULATION_TREE_API init();
+void SOFA_SOFACONSTRAINT_API init();
 
 } // namespace tree
 

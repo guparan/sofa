@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_TRIANGULARANISOTROPICFEMFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_TRIANGULARANISOTROPICFEMFORCEFIELD_H
-#include "config.h"
+#include <SofaMiscFem/config.h>
 
 
 
@@ -116,7 +116,7 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_TRIANGULARANISOTROPICFEMFORCEFIELD_CPP)
-extern template class SOFA_MISC_FEM_API TriangularAnisotropicFEMForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAMISCFEM_API TriangularAnisotropicFEMForceField<defaulttype::Vec3Types>;
 
 #endif
 

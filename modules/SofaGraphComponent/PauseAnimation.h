@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_PAUSEANIMATION_H
 #define SOFA_COMPONENT_MISC_PAUSEANIMATION_H
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 #include <sofa/core/objectmodel/BaseObject.h>
 #include <sofa/core/behavior/MechanicalState.h>

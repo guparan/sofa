@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_MeshBoundaryROI_H
 #define SOFA_COMPONENT_ENGINE_MeshBoundaryROI_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 #include <sofa/core/DataEngine.h>
 #include <sofa/core/objectmodel/BaseObject.h>

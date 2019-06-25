@@ -47,8 +47,8 @@ int GearSpringForceFieldClass = core::RegisterObject("Gear springs for Rigids")
 
         ;
 
-template class SOFA_MISC_FORCEFIELD_API GearSpring<defaulttype::Rigid3Types>;
-template class SOFA_MISC_FORCEFIELD_API GearSpringForceField<defaulttype::Rigid3Types>;
+template class SOFA_SOFAMISCFORCEFIELD_API GearSpring<defaulttype::Rigid3Types>;
+template class SOFA_SOFAMISCFORCEFIELD_API GearSpringForceField<defaulttype::Rigid3Types>;
 
 
 

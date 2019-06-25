@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MASS_MATRIXMASS_H
 #define SOFA_COMPONENT_MASS_MATRIXMASS_H
-#include "config.h"
+#include <SofaMiscForceField/config.h>
 
 #include <sofa/defaulttype/VecTypes.h>
 #include <sofa/core/behavior/Mass.h>

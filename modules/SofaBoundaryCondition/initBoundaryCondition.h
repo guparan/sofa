@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_BOUNDARY_CONDITION_INIT_H
 #define SOFA_COMPONENT_BOUNDARY_CONDITION_INIT_H
-#include "config.h"
+#include <SofaBoundaryCondition/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_BOUNDARY_CONDITION_API initBoundaryCondition();
+void SOFA_SOFABOUNDARYCONDITION_API initBoundaryCondition();
 
 } // namespace component
 

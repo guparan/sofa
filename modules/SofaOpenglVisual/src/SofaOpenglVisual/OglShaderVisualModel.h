@@ -28,7 +28,7 @@
 
 #ifndef OGLSHADERVISUALMODEL_H_
 #define OGLSHADERVISUALMODEL_H_
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <SofaOpenglVisual/OglModel.h>
 #include <SofaOpenglVisual/OglShader.h>
@@ -45,7 +45,7 @@ namespace visualmodel
 {
 
 
-class SOFA_OPENGL_VISUAL_API OglShaderVisualModel : public OglModel
+class SOFA_SOFAOPENGLVISUAL_API OglShaderVisualModel : public OglModel
 {
 public:
     SOFA_CLASS(OglShaderVisualModel, OglModel);

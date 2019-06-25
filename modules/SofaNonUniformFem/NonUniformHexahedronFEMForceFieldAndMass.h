@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_NONUNIFORMHEXAHEDRONFEMFORCEFIELDANDMASS_H
 #define SOFA_COMPONENT_FORCEFIELD_NONUNIFORMHEXAHEDRONFEMFORCEFIELDANDMASS_H
-#include "config.h"
+#include <SofaNonUniformFem/config.h>
 
 
 #include <SofaGeneralSimpleFem/HexahedronFEMForceFieldAndMass.h>
@@ -121,7 +121,7 @@ protected:
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_NONUNIFORMHEXAHEDRONFEMFORCEFIELDANDMASS_CPP)
 
-extern template class SOFA_NON_UNIFORM_FEM_API NonUniformHexahedronFEMForceFieldAndMass<sofa::defaulttype::Vec3Types>;
+extern template class SOFA_SOFANONUNIFORMFEM_API NonUniformHexahedronFEMForceFieldAndMass<sofa::defaulttype::Vec3Types>;
 
 
 #endif

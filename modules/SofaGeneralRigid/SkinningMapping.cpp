@@ -48,8 +48,8 @@ int SkinningMappingClass = core::RegisterObject("skin a model from a set of rigi
 
         ;
 
-template class SOFA_GENERAL_RIGID_API SkinningMapping< Rigid3Types, Vec3dTypes >;
-template class SOFA_GENERAL_RIGID_API SkinningMapping< Rigid3Types, ExtVec3Types >;
+template class SOFA_SOFAGENERALRIGID_API SkinningMapping< Rigid3Types, Vec3dTypes >;
+template class SOFA_SOFAGENERALRIGID_API SkinningMapping< Rigid3Types, ExtVec3Types >;
 
 
 

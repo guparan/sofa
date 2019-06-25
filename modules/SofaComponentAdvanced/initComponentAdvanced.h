@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ADVANCED_INIT_H
 #define SOFA_COMPONENT_ADVANCED_INIT_H
-#include "config.h"
+#include <SofaComponentAdvanced/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_COMPONENT_ADVANCED_API initComponentAdvanced();
+void SOFA_SOFACOMPONENTADVANCED_API initComponentAdvanced();
 
 } // namespace component
 

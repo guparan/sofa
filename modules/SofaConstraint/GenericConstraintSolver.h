@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONSTRAINTSET_GENERICCONSTRAINTSOLVER_H
 #define SOFA_COMPONENT_CONSTRAINTSET_GENERICCONSTRAINTSOLVER_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <SofaConstraint/ConstraintSolverImpl.h>
 #include <sofa/core/behavior/BaseConstraintCorrection.h>
@@ -38,7 +38,7 @@ namespace constraintset
 
 class GenericConstraintSolver;
 
-class SOFA_CONSTRAINT_API GenericConstraintProblem : public ConstraintProblem
+class SOFA_SOFACONSTRAINT_API GenericConstraintProblem : public ConstraintProblem
 {
 public:
     sofa::component::linearsolver::FullVector<double> _d;
@@ -76,7 +76,7 @@ public:
     int getNumConstraintGroups();
 };
 
-class SOFA_CONSTRAINT_API GenericConstraintSolver : public ConstraintSolverImpl
+class SOFA_SOFACONSTRAINT_API GenericConstraintSolver : public ConstraintSolverImpl
 {
     typedef std::vector<core::behavior::BaseConstraintCorrection*> list_cc;
     typedef std::vector<list_cc> VecListcc;
@@ -153,7 +153,7 @@ protected:
 };
 
 
-class SOFA_CONSTRAINT_API MechanicalGetConstraintResolutionVisitor : public simulation::BaseMechanicalVisitor
+class SOFA_SOFACONSTRAINT_API MechanicalGetConstraintResolutionVisitor : public simulation::BaseMechanicalVisitor
 {
 public:
     MechanicalGetConstraintResolutionVisitor(const core::ConstraintParams* params, std::vector<core::behavior::ConstraintResolution*>& res);

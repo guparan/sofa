@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FEM_BASEMATERIAL_H
 #define SOFA_COMPONENT_FEM_BASEMATERIAL_H
-#include "config.h"
+#include <SofaMiscFem/config.h>
 
 #include <sofa/core/objectmodel/BaseObject.h>
 #include <sofa/defaulttype/Vec.h>
@@ -37,7 +37,7 @@ namespace fem
 /**
  * Generic material class
  */
-class SOFA_MISC_FEM_API BaseMaterial : public virtual core::objectmodel::BaseObject
+class SOFA_SOFAMISCFEM_API BaseMaterial : public virtual core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(BaseMaterial,core::objectmodel::BaseObject);

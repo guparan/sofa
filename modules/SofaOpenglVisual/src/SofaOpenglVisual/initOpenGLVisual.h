@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_OPENGL_VISUAL_INIT_H
 #define SOFA_COMPONENT_OPENGL_VISUAL_INIT_H
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 namespace sofa
 {

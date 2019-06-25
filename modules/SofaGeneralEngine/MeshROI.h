@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_MESHROI_H
 #define SOFA_COMPONENT_ENGINE_MESHROI_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 
 
@@ -171,9 +171,9 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_MESHROI_CPP)
-extern template class SOFA_GENERAL_ENGINE_API MeshROI<defaulttype::Vec3Types>;
-extern template class SOFA_GENERAL_ENGINE_API MeshROI<defaulttype::Rigid3Types>;
-extern template class SOFA_GENERAL_ENGINE_API MeshROI<defaulttype::Vec6Types>; //Phuoc
+extern template class SOFA_SOFAGENERALENGINE_API MeshROI<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API MeshROI<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API MeshROI<defaulttype::Vec6Types>; //Phuoc
  
 #endif
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONTEXTOBJECT_GRAVITY_H
 #define SOFA_COMPONENT_CONTEXTOBJECT_GRAVITY_H
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 #include <sofa/defaulttype/Vec.h>
 #include <sofa/core/objectmodel/ContextObject.h>
@@ -41,7 +41,7 @@ namespace contextobject
 {
 
 /** Override the default gravity */
-class SOFA_GRAPH_COMPONENT_API Gravity : public core::objectmodel::ContextObject
+class SOFA_SOFAGRAPHCOMPONENT_API Gravity : public core::objectmodel::ContextObject
 {
 public:
     SOFA_CLASS(Gravity, core::objectmodel::ContextObject);

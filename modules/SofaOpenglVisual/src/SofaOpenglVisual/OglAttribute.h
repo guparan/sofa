@@ -22,7 +22,7 @@
 
 #ifndef _OGL_ATTRIBUTE_H_
 #define _OGL_ATTRIBUTE_H_
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <sofa/core/visual/VisualModel.h>
 #include <sofa/defaulttype/VecTypes.h>
@@ -103,7 +103,7 @@ protected:
 };
 
 /** FLOAT ATTRIBUTE **/
-class SOFA_OPENGL_VISUAL_API OglFloatAttribute : public OglAttribute<1, GL_FLOAT, float>
+class SOFA_SOFAOPENGLVISUAL_API OglFloatAttribute : public OglAttribute<1, GL_FLOAT, float>
 {
 public:
     SOFA_CLASS(OglFloatAttribute, SOFA_TEMPLATE3(OglAttribute, 1, GL_FLOAT, float));
@@ -112,7 +112,7 @@ public:
 
 };
 
-class SOFA_OPENGL_VISUAL_API OglFloat2Attribute : public OglAttribute<2, GL_FLOAT, sofa::defaulttype::Vec<2, float> >
+class SOFA_SOFAOPENGLVISUAL_API OglFloat2Attribute : public OglAttribute<2, GL_FLOAT, sofa::defaulttype::Vec<2, float> >
 {
 public:
     SOFA_CLASS(OglFloat2Attribute, SOFA_TEMPLATE3(OglAttribute, 2, GL_FLOAT, SOFA_TEMPLATE2(sofa::defaulttype::Vec, 2, float)));
@@ -121,7 +121,7 @@ public:
 
 };
 
-class SOFA_OPENGL_VISUAL_API OglFloat3Attribute : public OglAttribute<3, GL_FLOAT, sofa::defaulttype::Vec<3, float> >
+class SOFA_SOFAOPENGLVISUAL_API OglFloat3Attribute : public OglAttribute<3, GL_FLOAT, sofa::defaulttype::Vec<3, float> >
 {
 public:
     SOFA_CLASS(OglFloat3Attribute, SOFA_TEMPLATE3(OglAttribute, 3, GL_FLOAT, SOFA_TEMPLATE2(sofa::defaulttype::Vec, 3, float)));
@@ -130,7 +130,7 @@ public:
 
 };
 
-class SOFA_OPENGL_VISUAL_API OglFloat4Attribute : public OglAttribute<4, GL_FLOAT, sofa::defaulttype::Vec<4, float> >
+class SOFA_SOFAOPENGLVISUAL_API OglFloat4Attribute : public OglAttribute<4, GL_FLOAT, sofa::defaulttype::Vec<4, float> >
 {
 public:
     SOFA_CLASS(OglFloat4Attribute, SOFA_TEMPLATE3(OglAttribute, 4, GL_FLOAT, SOFA_TEMPLATE2(sofa::defaulttype::Vec, 4, float)));
@@ -143,7 +143,7 @@ public:
 
 
 /** INT ATTRIBUTE **/
-class SOFA_OPENGL_VISUAL_API OglIntAttribute : public OglAttribute<1, GL_INT, int>
+class SOFA_SOFAOPENGLVISUAL_API OglIntAttribute : public OglAttribute<1, GL_INT, int>
 {
 public:
     SOFA_CLASS(OglIntAttribute, SOFA_TEMPLATE3(OglAttribute, 1, GL_INT, int));
@@ -152,7 +152,7 @@ public:
 
 };
 
-class SOFA_OPENGL_VISUAL_API OglInt2Attribute : public OglAttribute<2, GL_INT, sofa::defaulttype::Vec<2, int> >
+class SOFA_SOFAOPENGLVISUAL_API OglInt2Attribute : public OglAttribute<2, GL_INT, sofa::defaulttype::Vec<2, int> >
 {
 public:
     SOFA_CLASS(OglInt2Attribute, SOFA_TEMPLATE3(OglAttribute, 2, GL_INT, SOFA_TEMPLATE2(sofa::defaulttype::Vec, 2, int)));
@@ -161,7 +161,7 @@ public:
 
 };
 
-class SOFA_OPENGL_VISUAL_API OglInt3Attribute : public OglAttribute<3, GL_INT, sofa::defaulttype::Vec<3, int> >
+class SOFA_SOFAOPENGLVISUAL_API OglInt3Attribute : public OglAttribute<3, GL_INT, sofa::defaulttype::Vec<3, int> >
 {
 public:
     SOFA_CLASS(OglInt3Attribute, SOFA_TEMPLATE3(OglAttribute, 3, GL_INT, SOFA_TEMPLATE2(sofa::defaulttype::Vec, 3, int)));
@@ -170,7 +170,7 @@ public:
 
 };
 
-class SOFA_OPENGL_VISUAL_API OglInt4Attribute : public OglAttribute<4, GL_INT, sofa::defaulttype::Vec<4, int> >
+class SOFA_SOFAOPENGLVISUAL_API OglInt4Attribute : public OglAttribute<4, GL_INT, sofa::defaulttype::Vec<4, int> >
 {
 public:
     SOFA_CLASS(OglInt4Attribute, SOFA_TEMPLATE3(OglAttribute, 4, GL_INT, SOFA_TEMPLATE2(sofa::defaulttype::Vec, 4, int)));
@@ -183,7 +183,7 @@ public:
 
 
 /** UNSIGNED INT ATTRIBUTE **/
-class SOFA_OPENGL_VISUAL_API OglUIntAttribute : public OglAttribute<1, GL_UNSIGNED_INT, unsigned int>
+class SOFA_SOFAOPENGLVISUAL_API OglUIntAttribute : public OglAttribute<1, GL_UNSIGNED_INT, unsigned int>
 {
 public:
     SOFA_CLASS(OglUIntAttribute, SOFA_TEMPLATE3(OglAttribute, 1, GL_UNSIGNED_INT, unsigned int));
@@ -192,7 +192,7 @@ public:
 
 };
 
-class SOFA_OPENGL_VISUAL_API OglUInt2Attribute : public OglAttribute<2, GL_UNSIGNED_INT, sofa::defaulttype::Vec<2, unsigned int> >
+class SOFA_SOFAOPENGLVISUAL_API OglUInt2Attribute : public OglAttribute<2, GL_UNSIGNED_INT, sofa::defaulttype::Vec<2, unsigned int> >
 {
 public:
     SOFA_CLASS(OglUInt2Attribute, SOFA_TEMPLATE3(OglAttribute, 2, GL_UNSIGNED_INT, SOFA_TEMPLATE2(sofa::defaulttype::Vec, 2, unsigned int)));
@@ -201,7 +201,7 @@ public:
 
 };
 
-class SOFA_OPENGL_VISUAL_API OglUInt3Attribute : public OglAttribute<3, GL_UNSIGNED_INT, sofa::defaulttype::Vec<3, unsigned int> >
+class SOFA_SOFAOPENGLVISUAL_API OglUInt3Attribute : public OglAttribute<3, GL_UNSIGNED_INT, sofa::defaulttype::Vec<3, unsigned int> >
 {
 public:
     SOFA_CLASS(OglUInt3Attribute, SOFA_TEMPLATE3(OglAttribute, 3, GL_UNSIGNED_INT, SOFA_TEMPLATE2(sofa::defaulttype::Vec, 3, unsigned int)));
@@ -210,7 +210,7 @@ public:
 
 };
 
-class SOFA_OPENGL_VISUAL_API OglUInt4Attribute : public OglAttribute<4, GL_UNSIGNED_INT, sofa::defaulttype::Vec<4, unsigned int> >
+class SOFA_SOFAOPENGLVISUAL_API OglUInt4Attribute : public OglAttribute<4, GL_UNSIGNED_INT, sofa::defaulttype::Vec<4, unsigned int> >
 {
 public:
     SOFA_CLASS(OglUInt4Attribute, SOFA_TEMPLATE3(OglAttribute, 4, GL_UNSIGNED_INT, SOFA_TEMPLATE2(sofa::defaulttype::Vec, 4, unsigned int)));

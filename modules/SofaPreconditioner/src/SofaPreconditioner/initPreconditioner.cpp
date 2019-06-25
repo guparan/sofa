@@ -30,12 +30,12 @@ namespace component
 {
 
 extern "C" {
-SOFA_PRECONDITIONER_API void initExternalModule();
-SOFA_PRECONDITIONER_API const char* getModuleName();
-SOFA_PRECONDITIONER_API const char* getModuleVersion();
-SOFA_PRECONDITIONER_API const char* getModuleLicense();
-SOFA_PRECONDITIONER_API const char* getModuleDescription();
-SOFA_PRECONDITIONER_API const char* getModuleComponentList();
+SOFA_SOFAPRECONDITIONER_API void initExternalModule();
+SOFA_SOFAPRECONDITIONER_API const char* getModuleName();
+SOFA_SOFAPRECONDITIONER_API const char* getModuleVersion();
+SOFA_SOFAPRECONDITIONER_API const char* getModuleLicense();
+SOFA_SOFAPRECONDITIONER_API const char* getModuleDescription();
+SOFA_SOFAPRECONDITIONER_API const char* getModuleComponentList();
 }
 
 void initExternalModule()

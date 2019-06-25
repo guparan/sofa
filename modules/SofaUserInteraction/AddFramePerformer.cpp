@@ -35,7 +35,7 @@ namespace component
 namespace collision
 {
 
-template class SOFA_USER_INTERACTION_API  AddFramePerformer<defaulttype::Vec3Types>;
+template class SOFA_SOFAUSERINTERACTION_API  AddFramePerformer<defaulttype::Vec3Types>;
 
 
 

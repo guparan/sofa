@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_EVALSURFACEDISTANCE_H
 #define SOFA_COMPONENT_MISC_EVALSURFACEDISTANCE_H
-#include "config.h"
+#include <SofaValidation/config.h>
 
 #include "EvalPointsDistance.h"
 
@@ -94,7 +94,7 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_MISC_EVALSURFACEDISTANCE_CPP)
-extern template class SOFA_VALIDATION_API EvalSurfaceDistance<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAVALIDATION_API EvalSurfaceDistance<defaulttype::Vec3Types>;
 
 #endif
 

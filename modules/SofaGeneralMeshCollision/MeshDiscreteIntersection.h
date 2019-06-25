@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_MESHDISCRETEINTERSECTION_H
 #define SOFA_COMPONENT_COLLISION_MESHDISCRETEINTERSECTION_H
-#include "config.h"
+#include <SofaGeneralMeshCollision/config.h>
 
 #include <sofa/core/collision/Intersection.h>
 #include <sofa/helper/FnDispatcher.h>
@@ -42,7 +42,7 @@ namespace component
 
 namespace collision
 {
-class SOFA_GENERAL_MESH_COLLISION_API MeshDiscreteIntersection : public core::collision::BaseIntersector
+class SOFA_SOFAGENERALMESHCOLLISION_API MeshDiscreteIntersection : public core::collision::BaseIntersector
 {
 
     typedef DiscreteIntersection::OutputVector OutputVector;

@@ -43,9 +43,9 @@ int DistanceFromTargetMappingClass = core::RegisterObject("Compute edge extensio
 
         ;
 
-template class SOFA_MISC_MAPPING_API DistanceFromTargetMapping< Vec3Types, Vec1Types >;
-template class SOFA_MISC_MAPPING_API DistanceFromTargetMapping< Vec1Types, Vec1Types >;
-template class SOFA_MISC_MAPPING_API DistanceFromTargetMapping< Rigid3Types, Vec1Types >;
+template class SOFA_SOFAMISCMAPPING_API DistanceFromTargetMapping< Vec3Types, Vec1Types >;
+template class SOFA_SOFAMISCMAPPING_API DistanceFromTargetMapping< Vec1Types, Vec1Types >;
+template class SOFA_SOFAMISCMAPPING_API DistanceFromTargetMapping< Rigid3Types, Vec1Types >;
 
 
 

@@ -41,7 +41,7 @@ int DevTensionMonitorClass = core::RegisterObject("Tension monitoring")
 
         ;
 
-template class SOFA_VALIDATION_API DevTensionMonitor<Rigid3Types>;
+template class SOFA_SOFAVALIDATION_API DevTensionMonitor<Rigid3Types>;
 
 
 } // namespace misc

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONSTRAINTSET_BILATERALCONSTRAINTRESOLUTION_H
 #define SOFA_COMPONENT_CONSTRAINTSET_BILATERALCONSTRAINTRESOLUTION_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 
 #include <sofa/defaulttype/Mat.h>

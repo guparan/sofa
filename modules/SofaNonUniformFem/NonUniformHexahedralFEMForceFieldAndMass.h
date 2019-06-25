@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_NONUNIFORMHEXAHEDRALFEMFORCEFIELDANDMASS_H
 #define SOFA_COMPONENT_FORCEFIELD_NONUNIFORMHEXAHEDRALFEMFORCEFIELDANDMASS_H
-#include "config.h"
+#include <SofaNonUniformFem/config.h>
 
 #include <SofaGeneralSimpleFem/HexahedralFEMForceFieldAndMass.h>
 #include <sofa/core/topology/TopologyChange.h>
@@ -207,7 +207,7 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_NONUNIFORMHEXAHEDRALFEMFORCEFIELDANDMASS_CPP)
-extern template class SOFA_NON_UNIFORM_FEM_API NonUniformHexahedralFEMForceFieldAndMass<defaulttype::Vec3Types>;
+extern template class SOFA_SOFANONUNIFORMFEM_API NonUniformHexahedralFEMForceFieldAndMass<defaulttype::Vec3Types>;
 
 #endif
 

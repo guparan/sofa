@@ -22,7 +22,7 @@
 #ifndef SOFA_SIMULATION_SCENECHECKMISSINGREQUIREDPLUGIN_H
 #define SOFA_SIMULATION_SCENECHECKMISSINGREQUIREDPLUGIN_H
 
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 #include "SceneCheck.h"
 #include <map>
 #include <vector>
@@ -40,7 +40,7 @@ namespace simulation
 namespace _scenechecking_
 {
 
-class SOFA_GRAPH_COMPONENT_API SceneCheckMissingRequiredPlugin : public SceneCheck
+class SOFA_SOFAGRAPHCOMPONENT_API SceneCheckMissingRequiredPlugin : public SceneCheck
 {
 public:
     typedef std::shared_ptr<SceneCheckMissingRequiredPlugin> SPtr;

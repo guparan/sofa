@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_EXTRUDEEDGESANDGENERATEQUADS_H
 #define SOFA_COMPONENT_ENGINE_EXTRUDEEDGESANDGENERATEQUADS_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 
 
@@ -95,7 +95,7 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_EXTRUDEEDGESANDGENERATEQUADS_CPP)
-extern template class SOFA_GENERAL_ENGINE_API ExtrudeEdgesAndGenerateQuads<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API ExtrudeEdgesAndGenerateQuads<defaulttype::Vec3Types>;
  
 #endif
 

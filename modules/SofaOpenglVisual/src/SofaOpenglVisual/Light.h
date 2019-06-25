@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LIGHT
 #define SOFA_COMPONENT_LIGHT
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <sofa/core/visual/VisualModel.h>
 #include <sofa/core/objectmodel/BaseObject.h>
@@ -53,7 +53,7 @@ namespace visualmodel
  *   - Spot light (position, direction, cutoff...).
  *
  */
-class SOFA_OPENGL_VISUAL_API Light : public sofa::core::visual::VisualModel
+class SOFA_SOFAOPENGLVISUAL_API Light : public sofa::core::visual::VisualModel
 {
 public:
     enum LightType { DIRECTIONAL = 0, POSITIONAL = 1, SPOTLIGHT = 2 };
@@ -134,7 +134,7 @@ protected:
 
 };
 
-class SOFA_OPENGL_VISUAL_API DirectionalLight : public Light
+class SOFA_SOFAOPENGLVISUAL_API DirectionalLight : public Light
 {
 public:
     SOFA_CLASS(DirectionalLight, Light);
@@ -158,7 +158,7 @@ private:
 
 };
 
-class SOFA_OPENGL_VISUAL_API PositionalLight : public Light
+class SOFA_SOFAOPENGLVISUAL_API PositionalLight : public Light
 {
 public:
     SOFA_CLASS(PositionalLight, Light);
@@ -176,7 +176,7 @@ public:
     LightType getLightType() override { return LightType::POSITIONAL; }
 };
 
-class SOFA_OPENGL_VISUAL_API SpotLight : public PositionalLight
+class SOFA_SOFAOPENGLVISUAL_API SpotLight : public PositionalLight
 {
 public:
     SOFA_CLASS(SpotLight, PositionalLight);

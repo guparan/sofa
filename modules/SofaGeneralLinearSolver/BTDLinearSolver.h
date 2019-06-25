@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LINEARSOLVER_BTDLINEARSOLVER_H
 #define SOFA_COMPONENT_LINEARSOLVER_BTDLINEARSOLVER_H
-#include "config.h"
+#include <SofaGeneralLinearSolver/config.h>
 
 #include <sofa/core/behavior/LinearSolver.h>
 #include <SofaBaseLinearSolver/MatrixLinearSolver.h>
@@ -601,7 +601,7 @@ private:
 };
 
 #if  !defined(SOFA_COMPONENT_LINEARSOLVER_BTDLINEARSOLVER_CPP)
-extern template class SOFA_GENERAL_LINEAR_SOLVER_API BTDLinearSolver< BTDMatrix<6, double>, BlockVector<6, double> >;
+extern template class SOFA_SOFAGENERALLINEARSOLVER_API BTDLinearSolver< BTDMatrix<6, double>, BlockVector<6, double> >;
 
 
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_QUAD2TRIANGLETOPOLOGICALMAPPING_H
 #define SOFA_COMPONENT_TOPOLOGY_QUAD2TRIANGLETOPOLOGICALMAPPING_H
-#include "config.h"
+#include <SofaTopologyMapping/config.h>
 
 #include <sofa/core/topology/TopologicalMapping.h>
 
@@ -51,7 +51,7 @@ namespace topology
 *
 */
 
-class SOFA_TOPOLOGY_MAPPING_API Quad2TriangleTopologicalMapping : public sofa::core::topology::TopologicalMapping
+class SOFA_SOFATOPOLOGYMAPPING_API Quad2TriangleTopologicalMapping : public sofa::core::topology::TopologicalMapping
 {
 
 public:

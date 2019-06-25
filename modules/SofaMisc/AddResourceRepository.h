@@ -37,7 +37,7 @@ namespace misc
 {
 
 
-class SOFA_MISC_API BaseAddResourceRepository: public sofa::core::objectmodel::BaseObject
+class SOFA_SOFAMISC_API BaseAddResourceRepository: public sofa::core::objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(BaseAddResourceRepository, sofa::core::objectmodel::BaseObject);

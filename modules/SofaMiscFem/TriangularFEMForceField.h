@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_TRIANGULARFEMFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_TRIANGULARFEMFORCEFIELD_H
-#include "config.h"
+#include <SofaMiscFem/config.h>
 
 
 
@@ -343,7 +343,7 @@ public:
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_TRIANGULARFEMFORCEFIELD_CPP)
 
-extern template class SOFA_MISC_FEM_API TriangularFEMForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAMISCFEM_API TriangularFEMForceField<defaulttype::Vec3Types>;
 
 
 #endif //  !defined(SOFA_COMPONENT_FORCEFIELD_TRIANGULARFEMFORCEFIELD_CPP)

@@ -26,9 +26,9 @@
 #include <sofa/core/Plugin.h>
 
 #ifdef SOFA_BUILD_GENERAL_VISUAL
-#  define SOFA_GENERAL_VISUAL_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#  define SOFA_SOFAGENERALVISUAL_API SOFA_EXPORT_DYNAMIC_LIBRARY
 #else
-#  define SOFA_GENERAL_VISUAL_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#  define SOFA_SOFAGENERALVISUAL_API SOFA_IMPORT_DYNAMIC_LIBRARY
 #endif
 
 SOFA_DECL_PLUGIN(GeneralVisualPlugin);
@@ -44,7 +44,7 @@ namespace common
 
 /// @brief Initialize the SofaSimulationCommon library, as well as its
 /// dependencies: SofaCore, SofaDefaultType, SofaHelper.
-void SOFA_SIMULATION_COMMON_API init();
+void SOFA_SOFAGENERALVISUAL_API init();
 
 } // namespace common
 

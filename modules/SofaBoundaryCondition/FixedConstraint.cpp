@@ -50,19 +50,19 @@ int FixedConstraintClass = core::RegisterObject("Attach given particles to their
 
 
 // methods specilizations declaration
-template <> SOFA_BOUNDARY_CONDITION_API
+template <> SOFA_SOFABOUNDARYCONDITION_API
 void FixedConstraint<defaulttype::Rigid3Types >::draw(const core::visual::VisualParams* vparams);
-template <> SOFA_BOUNDARY_CONDITION_API
+template <> SOFA_SOFABOUNDARYCONDITION_API
 void FixedConstraint<defaulttype::Rigid2Types >::draw(const core::visual::VisualParams* vparams);
 
 
 
-template class SOFA_BOUNDARY_CONDITION_API FixedConstraint<Vec3Types>;
-template class SOFA_BOUNDARY_CONDITION_API FixedConstraint<Vec2Types>;
-template class SOFA_BOUNDARY_CONDITION_API FixedConstraint<Vec1Types>;
-template class SOFA_BOUNDARY_CONDITION_API FixedConstraint<Vec6Types>;
-template class SOFA_BOUNDARY_CONDITION_API FixedConstraint<Rigid3Types>;
-template class SOFA_BOUNDARY_CONDITION_API FixedConstraint<Rigid2Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API FixedConstraint<Vec3Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API FixedConstraint<Vec2Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API FixedConstraint<Vec1Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API FixedConstraint<Vec6Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API FixedConstraint<Rigid3Types>;
+template class SOFA_SOFABOUNDARYCONDITION_API FixedConstraint<Rigid2Types>;
 
 
 

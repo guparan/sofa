@@ -22,7 +22,7 @@
 #ifndef SOFA_SIMULATION_SCENECHECKS_H
 #define SOFA_SIMULATION_SCENECHECKS_H
 
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 #include <sofa/helper/system/config.h>
 #include <iostream>
 #include <string>
@@ -42,7 +42,7 @@ namespace simulation
 namespace _scenechecking_
 {
 
-class SOFA_GRAPH_COMPONENT_API SceneCheck
+class SOFA_SOFAGRAPHCOMPONENT_API SceneCheck
 {
 public:
     virtual ~SceneCheck() {}

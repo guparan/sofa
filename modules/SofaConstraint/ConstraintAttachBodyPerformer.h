@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_CONSTRAINTATTACHBODYPERFORMER_H
 #define SOFA_COMPONENT_COLLISION_CONSTRAINTATTACHBODYPERFORMER_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <SofaUserInteraction/InteractionPerformer.h>
 #include <SofaBaseCollision/BaseContactMapper.h>
@@ -55,7 +55,7 @@ public:
 struct BodyPicked;
 
 template <class DataTypes>
-class SOFA_CONSTRAINT_API ConstraintAttachBodyPerformer: public TInteractionPerformer<DataTypes>
+class SOFA_SOFACONSTRAINT_API ConstraintAttachBodyPerformer: public TInteractionPerformer<DataTypes>
 {
 public:
     typedef typename DataTypes::VecCoord VecCoord;
@@ -104,7 +104,7 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_COLLISION_CONSTRAINTATTACHBODYPERFORMER_CPP)
-extern template class SOFA_CONSTRAINT_API ConstraintAttachBodyPerformer<defaulttype::Vec3Types>;
+extern template class SOFA_SOFACONSTRAINT_API ConstraintAttachBodyPerformer<defaulttype::Vec3Types>;
 #endif
 
 }

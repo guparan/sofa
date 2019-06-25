@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONFIGURATIONSETTING_ADDRECORDEDCAMERABUTTON_H
 #define SOFA_COMPONENT_CONFIGURATIONSETTING_ADDRECORDEDCAMERABUTTON_H
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 #include <sofa/core/objectmodel/ConfigurationSetting.h>
 #include <SofaGraphComponent/MouseButtonSetting.h>
@@ -36,7 +36,7 @@ namespace component
 namespace configurationsetting
 {
 
-class SOFA_GRAPH_COMPONENT_API AddRecordedCameraButtonSetting: public MouseButtonSetting
+class SOFA_SOFAGRAPHCOMPONENT_API AddRecordedCameraButtonSetting: public MouseButtonSetting
 {
 public:
     SOFA_CLASS(AddRecordedCameraButtonSetting,MouseButtonSetting);
@@ -47,7 +47,7 @@ public:
 
 };
 
-class SOFA_GRAPH_COMPONENT_API StartNavigationButtonSetting: public MouseButtonSetting
+class SOFA_SOFAGRAPHCOMPONENT_API StartNavigationButtonSetting: public MouseButtonSetting
 {
 public:
     SOFA_CLASS(StartNavigationButtonSetting,MouseButtonSetting);

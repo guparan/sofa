@@ -42,8 +42,8 @@ static int CholeskySolverClass = core::RegisterObject("Direct linear solver base
         .add< CholeskySolver< SparseMatrix<double>, FullVector<double> > >(true)
         .add< CholeskySolver< FullMatrix<double>, FullVector<double> > >();
 
-template class SOFA_GENERAL_LINEAR_SOLVER_API CholeskySolver< SparseMatrix<double>, FullVector<double> >;
-template class SOFA_GENERAL_LINEAR_SOLVER_API CholeskySolver< FullMatrix<double>, FullVector<double> >;
+template class SOFA_SOFAGENERALLINEARSOLVER_API CholeskySolver< SparseMatrix<double>, FullVector<double> >;
+template class SOFA_SOFAGENERALLINEARSOLVER_API CholeskySolver< FullMatrix<double>, FullVector<double> >;
 
 
 } // namespace linearsolver

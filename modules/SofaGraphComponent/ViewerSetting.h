@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONFIGURATIONSETTING_VIEWER_H
 #define SOFA_COMPONENT_CONFIGURATIONSETTING_VIEWER_H
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 #include <sofa/core/objectmodel/ConfigurationSetting.h>
 #include <sofa/defaulttype/Vec.h>
@@ -37,7 +37,7 @@ namespace configurationsetting
 {
 
 ///Class for the configuration of viewer settings.
-class SOFA_GRAPH_COMPONENT_API ViewerSetting: public sofa::core::objectmodel::ConfigurationSetting
+class SOFA_SOFAGRAPHCOMPONENT_API ViewerSetting: public sofa::core::objectmodel::ConfigurationSetting
 {
 public:
     SOFA_CLASS(ViewerSetting,ConfigurationSetting); ///< Sofa macro to define typedef.

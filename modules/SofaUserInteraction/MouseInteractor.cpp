@@ -44,9 +44,9 @@ int MouseInteractorRigidClass = core::RegisterObject("Perform tasks related to t
 
         ;
 
-template class SOFA_USER_INTERACTION_API MouseInteractor<defaulttype::Vec2Types>;
-template class SOFA_USER_INTERACTION_API MouseInteractor<defaulttype::Vec3Types>;
-template class SOFA_USER_INTERACTION_API MouseInteractor<defaulttype::Rigid3Types>;
+template class SOFA_SOFAUSERINTERACTION_API MouseInteractor<defaulttype::Vec2Types>;
+template class SOFA_SOFAUSERINTERACTION_API MouseInteractor<defaulttype::Vec3Types>;
+template class SOFA_SOFAUSERINTERACTION_API MouseInteractor<defaulttype::Rigid3Types>;
 
 
 

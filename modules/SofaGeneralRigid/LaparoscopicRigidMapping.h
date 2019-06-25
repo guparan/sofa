@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_LAPAROSCOPICRIGIDMAPPING_H
 #define SOFA_COMPONENT_MAPPING_LAPAROSCOPICRIGIDMAPPING_H
-#include "config.h"
+#include <SofaGeneralRigid/config.h>
 
 #include <sofa/core/Mapping.h>
 
@@ -92,7 +92,7 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_MAPPING_LAPAROSCOPICRIGIDMAPPING_CPP)
-extern template class SOFA_GENERAL_RIGID_API LaparoscopicRigidMapping< LaparoscopicRigidTypes, RigidTypes >;
+extern template class SOFA_SOFAGENERALRIGID_API LaparoscopicRigidMapping< LaparoscopicRigidTypes, RigidTypes >;
 #endif
 
 } // namespace mapping

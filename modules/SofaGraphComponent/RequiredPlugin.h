@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef REQUIREDPLUGIN_H_
 #define REQUIREDPLUGIN_H_
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 
 #include <sofa/core/objectmodel/BaseObject.h>
 #include <sofa/core/objectmodel/DataFileName.h>
@@ -43,7 +43,7 @@ namespace component
 namespace misc
 {
 
-class SOFA_GRAPH_COMPONENT_API RequiredPlugin : public core::objectmodel::BaseObject
+class SOFA_SOFAGRAPHCOMPONENT_API RequiredPlugin : public core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(RequiredPlugin,core::objectmodel::BaseObject);

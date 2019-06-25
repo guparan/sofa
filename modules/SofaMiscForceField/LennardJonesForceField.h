@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_LENNARDJONESFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_LENNARDJONESFORCEFIELD_H
-#include "config.h"
+#include <SofaMiscForceField/config.h>
 
 #include <sofa/core/behavior/ForceField.h>
 #include <sofa/core/behavior/MechanicalState.h>
@@ -97,7 +97,7 @@ public:
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_LENNARDJONESFORCEFIELD_CPP)
 
-extern template class SOFA_MISC_FORCEFIELD_API LennardJonesForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAMISCFORCEFIELD_API LennardJonesForceField<defaulttype::Vec3Types>;
 
 
 #endif //  !defined(SOFA_COMPONENT_FORCEFIELD_LENNARDJONESFORCEFIELD_CPP)

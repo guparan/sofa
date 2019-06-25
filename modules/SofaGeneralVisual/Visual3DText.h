@@ -22,7 +22,7 @@
 #ifndef SOFA_COMPONENT_VISUALMODEL_3DTEXT_H
 #define SOFA_COMPONENT_VISUALMODEL_3DTEXT_H
 
-#include "config.h"
+#include <SofaGeneralVisual/config.h>
 
 #include <sofa/core/visual/VisualModel.h>
 #include <sofa/defaulttype/RGBAColor.h>
@@ -48,7 +48,7 @@ namespace visualmodel
 
 
 /// Draw camera-oriented (billboard) 3D text
-class SOFA_GENERAL_VISUAL_API Visual3DText : public core::visual::VisualModel
+class SOFA_SOFAGENERALVISUAL_API Visual3DText : public core::visual::VisualModel
 {
 
 public:

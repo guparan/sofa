@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_SquareDistanceMapping_H
 #define SOFA_COMPONENT_MAPPING_SquareDistanceMapping_H
-#include "config.h"
+#include <SofaMiscMapping/config.h>
 
 #include <sofa/core/Mapping.h>
 #include <sofa/core/MultiMapping.h>
@@ -139,8 +139,8 @@ protected:
 
 
 #if  !defined(SOFA_COMPONENT_MAPPING_SquareDistanceMapping_CPP)
-extern template class SOFA_MISC_MAPPING_API SquareDistanceMapping< defaulttype::Vec3Types, defaulttype::Vec1Types >;
-extern template class SOFA_MISC_MAPPING_API SquareDistanceMapping< defaulttype::Rigid3Types, defaulttype::Vec1Types >;
+extern template class SOFA_SOFAMISCMAPPING_API SquareDistanceMapping< defaulttype::Vec3Types, defaulttype::Vec1Types >;
+extern template class SOFA_SOFAMISCMAPPING_API SquareDistanceMapping< defaulttype::Rigid3Types, defaulttype::Vec1Types >;
 
 
 #endif

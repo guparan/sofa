@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_SUTUREPOINTPERFORMER_H
 #define SOFA_COMPONENT_COLLISION_SUTUREPOINTPERFORMER_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <SofaUserInteraction/InteractionPerformer.h>
 #include <SofaDeformable/StiffSpringForceField.h>
@@ -52,7 +52,7 @@ protected:
 
 
 template <class DataTypes>
-class SOFA_USER_INTERACTION_API SuturePointPerformer: public TInteractionPerformer<DataTypes>, public SuturePointPerformerConfiguration
+class SOFA_SOFAUSERINTERACTION_API SuturePointPerformer: public TInteractionPerformer<DataTypes>, public SuturePointPerformerConfiguration
 {
 public:
     typedef typename DataTypes::Real Real;
@@ -78,7 +78,7 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_COLLISION_SUTUREPOINTPERFORMER_CPP)
-extern template class SOFA_USER_INTERACTION_API  SuturePointPerformer<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAUSERINTERACTION_API  SuturePointPerformer<defaulttype::Vec3Types>;
 
 #endif
 

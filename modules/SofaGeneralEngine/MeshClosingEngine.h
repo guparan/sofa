@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_MeshClosingEngine_H
 #define SOFA_COMPONENT_ENGINE_MeshClosingEngine_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 #include <sofa/core/DataEngine.h>
 #include <sofa/core/objectmodel/BaseObject.h>
@@ -117,7 +117,7 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_MeshClosingEngine_CPP)
-extern template class SOFA_GENERAL_ENGINE_API MeshClosingEngine<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API MeshClosingEngine<defaulttype::Vec3Types>;
  
 #endif
 

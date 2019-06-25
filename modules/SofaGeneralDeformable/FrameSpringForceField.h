@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_INTERACTIONFORCEFIELD_FRAMESPRINGFORCEFIELD_H
 #define SOFA_COMPONENT_INTERACTIONFORCEFIELD_FRAMESPRINGFORCEFIELD_H
-#include "config.h"
+#include <SofaGeneralDeformable/config.h>
 
 #include <sofa/core/behavior/PairInteractionForceField.h>
 #include <sofa/core/behavior/MechanicalState.h>
@@ -212,7 +212,7 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_INTERACTIONFORCEFIELD_FRAMESPRINGFORCEFIELD_CPP)
-extern template class SOFA_GENERAL_DEFORMABLE_API FrameSpringForceField<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAGENERALDEFORMABLE_API FrameSpringForceField<defaulttype::Rigid3Types>;
 
 #endif
 

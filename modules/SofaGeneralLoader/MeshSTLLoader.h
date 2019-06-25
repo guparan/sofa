@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LOADER_MESHSTLLOADER_H
 #define SOFA_COMPONENT_LOADER_MESHSTLLOADER_H
-#include "config.h"
+#include <SofaGeneralLoader/config.h>
 
 #include <sofa/core/loader/MeshLoader.h>
 
@@ -35,7 +35,7 @@ namespace loader
 {
 
 // Format doc: http://en.wikipedia.org/wiki/STL_(file_format)
-class SOFA_GENERAL_LOADER_API MeshSTLLoader : public sofa::core::loader::MeshLoader
+class SOFA_SOFAGENERALLOADER_API MeshSTLLoader : public sofa::core::loader::MeshLoader
 {
 public:
     SOFA_CLASS(MeshSTLLoader,sofa::core::loader::MeshLoader);

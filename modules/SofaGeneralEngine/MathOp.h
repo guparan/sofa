@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_MATHOP_H
 #define SOFA_COMPONENT_ENGINE_MATHOP_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 #include <sofa/defaulttype/Vec.h>
 #include <sofa/core/DataEngine.h>
@@ -88,15 +88,15 @@ protected:
 
 #if  !defined(SOFA_COMPONENT_ENGINE_MATHOP_CPP)
 
-extern template class SOFA_GENERAL_ENGINE_API MathOp< helper::vector<int> >;
-extern template class SOFA_GENERAL_ENGINE_API MathOp< helper::vector<bool> >;
-extern template class SOFA_GENERAL_ENGINE_API MathOp< helper::vector<double> >;
-extern template class SOFA_GENERAL_ENGINE_API MathOp< helper::vector<defaulttype::Vec2d> >;
-extern template class SOFA_GENERAL_ENGINE_API MathOp< helper::vector<defaulttype::Vec3d> >;
-extern template class SOFA_GENERAL_ENGINE_API MathOp< defaulttype::Rigid2Types::VecCoord >;
-extern template class SOFA_GENERAL_ENGINE_API MathOp< defaulttype::Rigid2Types::VecDeriv >;
-extern template class SOFA_GENERAL_ENGINE_API MathOp< defaulttype::Rigid3Types::VecCoord >;
-extern template class SOFA_GENERAL_ENGINE_API MathOp< defaulttype::Rigid3Types::VecDeriv >;
+extern template class SOFA_SOFAGENERALENGINE_API MathOp< helper::vector<int> >;
+extern template class SOFA_SOFAGENERALENGINE_API MathOp< helper::vector<bool> >;
+extern template class SOFA_SOFAGENERALENGINE_API MathOp< helper::vector<double> >;
+extern template class SOFA_SOFAGENERALENGINE_API MathOp< helper::vector<defaulttype::Vec2d> >;
+extern template class SOFA_SOFAGENERALENGINE_API MathOp< helper::vector<defaulttype::Vec3d> >;
+extern template class SOFA_SOFAGENERALENGINE_API MathOp< defaulttype::Rigid2Types::VecCoord >;
+extern template class SOFA_SOFAGENERALENGINE_API MathOp< defaulttype::Rigid2Types::VecDeriv >;
+extern template class SOFA_SOFAGENERALENGINE_API MathOp< defaulttype::Rigid3Types::VecCoord >;
+extern template class SOFA_SOFAGENERALENGINE_API MathOp< defaulttype::Rigid3Types::VecDeriv >;
  
 #endif
 

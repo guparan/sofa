@@ -22,7 +22,7 @@
 #ifndef SOFA_SIMULATION_SCENECHECKAPICHANGES_H
 #define SOFA_SIMULATION_SCENECHECKAPICHANGES_H
 
-#include "config.h"
+#include <SofaGraphComponent/config.h>
 #include "SceneCheck.h"
 #include <string>
 #include <map>
@@ -48,7 +48,7 @@ namespace _scenechecking_
 {
 
 typedef std::function<void(sofa::core::objectmodel::Base*)> ChangeSetHookFunction;
-class SOFA_GRAPH_COMPONENT_API SceneCheckAPIChange : public SceneCheck
+class SOFA_SOFAGRAPHCOMPONENT_API SceneCheckAPIChange : public SceneCheck
 {
 public:
     SceneCheckAPIChange();

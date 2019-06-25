@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_INTERACTIONFORCEFIELD_QUADBENDINGSPRINGS_H
 #define SOFA_COMPONENT_INTERACTIONFORCEFIELD_QUADBENDINGSPRINGS_H
-#include "config.h"
+#include <SofaGeneralDeformable/config.h>
 
 #include <SofaDeformable/StiffSpringForceField.h>
 #include <map>
@@ -72,8 +72,8 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_INTERACTIONFORCEFIELD_QUADBENDINGSPRINGS_CPP)
-extern template class SOFA_GENERAL_DEFORMABLE_API QuadBendingSprings<defaulttype::Vec3Types>;
-extern template class SOFA_GENERAL_DEFORMABLE_API QuadBendingSprings<defaulttype::Vec2Types>;
+extern template class SOFA_SOFAGENERALDEFORMABLE_API QuadBendingSprings<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALDEFORMABLE_API QuadBendingSprings<defaulttype::Vec2Types>;
 
 #endif
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_DISTANCES_H
 #define SOFA_COMPONENT_ENGINE_DISTANCES_H
-#include "config.h"
+#include <SofaMiscEngine/config.h>
 
 
 
@@ -230,8 +230,8 @@ private:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_DISTANCES_CPP)
-extern template class SOFA_MISC_ENGINE_API Distances<defaulttype::Vec3Types>;
-//extern template class SOFA_MISC_ENGINE_API Distances<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAMISCENGINE_API Distances<defaulttype::Vec3Types>;
+//extern template class SOFA_SOFAMISCENGINE_API Distances<defaulttype::Rigid3Types>;
  
 #endif
 

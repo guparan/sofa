@@ -3,6 +3,6 @@ namespace sofa {
 
 	using namespace sofa::defaulttype;
 
-	template struct SOFA_SOFATEST_API LennardJonesForceField_test<sofa::defaulttype::Vec3Types>;
+	template struct SOFA_SOFAMISCFEM_API LennardJonesForceField_test<sofa::defaulttype::Vec3Types>;
 
 }

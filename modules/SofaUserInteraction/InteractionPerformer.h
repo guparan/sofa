@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_INTERACTIONPERFORMER_H
 #define SOFA_COMPONENT_COLLISION_INTERACTIONPERFORMER_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <SofaGraphComponent/MouseButtonSetting.h>
 #include <sofa/helper/Factory.h>
@@ -42,7 +42,7 @@ template <class DataTypes>
 class MouseInteractor;
 
 
-class SOFA_USER_INTERACTION_API InteractionPerformer
+class SOFA_SOFAUSERINTERACTION_API InteractionPerformer
 {
 public:
     typedef helper::Factory<std::string, InteractionPerformer, BaseMouseInteractor*> InteractionPerformerFactory;
@@ -93,7 +93,7 @@ public:
 namespace helper
 {
 //delay load of the specialized Factory class. unique definition reside in the cpp file.
-extern template class SOFA_USER_INTERACTION_API Factory<std::string, component::collision::InteractionPerformer, component::collision::BaseMouseInteractor*>;
+extern template class SOFA_SOFAUSERINTERACTION_API Factory<std::string, component::collision::InteractionPerformer, component::collision::BaseMouseInteractor*>;
 }
 #endif
 

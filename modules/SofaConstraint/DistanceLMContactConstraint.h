@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONSTRAINT_DistanceLMContactConstraint_H
 #define SOFA_COMPONENT_CONSTRAINT_DistanceLMContactConstraint_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <sofa/core/VecId.h>
 #include <sofa/core/ConstraintParams.h>
@@ -157,7 +157,7 @@ protected:
 
 
 #if  !defined(SOFA_COMPONENT_CONSTRAINTSET_DistanceLMContactConstraint_CPP)
-extern template class SOFA_CONSTRAINT_API DistanceLMContactConstraint<defaulttype::Vec3Types>;
+extern template class SOFA_SOFACONSTRAINT_API DistanceLMContactConstraint<defaulttype::Vec3Types>;
 
 #endif
 

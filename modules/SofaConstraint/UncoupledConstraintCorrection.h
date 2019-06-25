@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONSTRAINTSET_UNCOUPLEDCONSTRAINTCORRECTION_H
 #define SOFA_COMPONENT_CONSTRAINTSET_UNCOUPLEDCONSTRAINTCORRECTION_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <sofa/core/behavior/ConstraintCorrection.h>
 #include <sofa/core/behavior/OdeSolver.h>
@@ -158,10 +158,10 @@ void UncoupledConstraintCorrection< sofa::defaulttype::Rigid3Types >::getComplia
 
 
 #if  !defined(SOFA_COMPONENT_CONSTRAINTSET_UNCOUPLEDCONSTRAINTCORRECTION_CPP)
-extern template class SOFA_CONSTRAINT_API UncoupledConstraintCorrection<defaulttype::Vec3Types>;
-extern template class SOFA_CONSTRAINT_API UncoupledConstraintCorrection<defaulttype::Vec2Types>;
-extern template class SOFA_CONSTRAINT_API UncoupledConstraintCorrection<defaulttype::Vec1Types>;
-extern template class SOFA_CONSTRAINT_API UncoupledConstraintCorrection<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFACONSTRAINT_API UncoupledConstraintCorrection<defaulttype::Vec3Types>;
+extern template class SOFA_SOFACONSTRAINT_API UncoupledConstraintCorrection<defaulttype::Vec2Types>;
+extern template class SOFA_SOFACONSTRAINT_API UncoupledConstraintCorrection<defaulttype::Vec1Types>;
+extern template class SOFA_SOFACONSTRAINT_API UncoupledConstraintCorrection<defaulttype::Rigid3Types>;
 
 #endif
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef RECORDEDCAMERA_H
 #define RECORDEDCAMERA_H
-#include "config.h"
+#include <SofaGeneralVisual/config.h>
 
 #include <SofaBaseVisual/BaseCamera.h>
 #include <sofa/helper/gl/Trackball.h>
@@ -36,7 +36,7 @@ namespace component
 namespace visualmodel
 {
 
-class SOFA_GENERAL_VISUAL_API RecordedCamera : public BaseCamera
+class SOFA_SOFAGENERALVISUAL_API RecordedCamera : public BaseCamera
 {
 public:
     SOFA_CLASS(RecordedCamera, BaseCamera);

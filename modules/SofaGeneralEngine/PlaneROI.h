@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_PLANEROI_H
 #define SOFA_COMPONENT_ENGINE_PLANEROI_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 
 
@@ -158,8 +158,8 @@ private:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_PLANEROI_CPP)
-extern template class SOFA_GENERAL_ENGINE_API PlaneROI<defaulttype::Vec3Types>;
-extern template class SOFA_GENERAL_ENGINE_API PlaneROI<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API PlaneROI<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API PlaneROI<defaulttype::Rigid3Types>;
  
 #endif
 

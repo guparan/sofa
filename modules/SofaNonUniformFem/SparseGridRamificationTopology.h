@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_SparseGridRamificationTopology_H
 #define SOFA_COMPONENT_TOPOLOGY_SparseGridRamificationTopology_H
-#include "config.h"
+#include <SofaNonUniformFem/config.h>
 
 #include <SofaBaseTopology/SparseGridTopology.h>
 
@@ -35,7 +35,7 @@ namespace topology
 {
 
 /// a SparseGridTopology where each resulting cube contains only one independant connexe component (nodes can be multiplied by using virtual nodes)
-class SOFA_NON_UNIFORM_FEM_API SparseGridRamificationTopology : public SparseGridTopology
+class SOFA_SOFANONUNIFORMFEM_API SparseGridRamificationTopology : public SparseGridTopology
 {
 public:
     SOFA_CLASS(SparseGridRamificationTopology,SparseGridTopology);

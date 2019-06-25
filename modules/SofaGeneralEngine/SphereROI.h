@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_SPHEREROI_H
 #define SOFA_COMPONENT_ENGINE_SPHEREROI_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 
 
@@ -180,8 +180,8 @@ template<> void SphereROI<defaulttype::Rigid3Types>::doUpdate();
 
 
 #if  !defined(SOFA_COMPONENT_ENGINE_SPHEREROI_CPP)
-extern template class SOFA_GENERAL_ENGINE_API SphereROI<defaulttype::Vec3Types>;
-extern template class SOFA_GENERAL_ENGINE_API SphereROI<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API SphereROI<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API SphereROI<defaulttype::Rigid3Types>;
  
 #endif
 

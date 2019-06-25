@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ANIMATIONLOOP_MULTISTEPANIMATIONLOOP_H
 #define SOFA_COMPONENT_ANIMATIONLOOP_MULTISTEPANIMATIONLOOP_H
-#include "config.h"
+#include <SofaGeneralAnimationLoop/config.h>
 
 #include <sofa/core/behavior/BaseAnimationLoop.h>
 #include <sofa/simulation/CollisionAnimationLoop.h>
@@ -35,7 +35,7 @@ namespace component
 namespace animationloop
 {
 
-class SOFA_GENERAL_ANIMATION_LOOP_API MultiStepAnimationLoop : public sofa::simulation::CollisionAnimationLoop
+class SOFA_SOFAGENERALANIMATIONLOOP_API MultiStepAnimationLoop : public sofa::simulation::CollisionAnimationLoop
 {
 public:
     typedef sofa::simulation::CollisionAnimationLoop Inherit;

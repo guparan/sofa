@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_QUATTORIGIDENGINE_H
 #define SOFA_COMPONENT_ENGINE_QUATTORIGIDENGINE_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 #include <sofa/core/DataEngine.h>
 #include <sofa/helper/vector.h>
@@ -87,7 +87,7 @@ public:
 };
 
 #if  !defined(QUATTORIGIDENGINE_CPP)
-extern template class SOFA_GENERAL_ENGINE_API QuatToRigidEngine<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API QuatToRigidEngine<defaulttype::Vec3Types>;
  
 #endif
 

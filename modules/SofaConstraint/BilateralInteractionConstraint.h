@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONSTRAINTSET_BILATERALINTERACTIONCONSTRAINT_H
 #define SOFA_COMPONENT_CONSTRAINTSET_BILATERALINTERACTIONCONSTRAINT_H
-#include "config.h"
+#include <SofaConstraint/config.h>
 
 #include <sofa/core/behavior/PairInteractionConstraint.h>
 #include <sofa/core/behavior/MechanicalState.h>
@@ -200,8 +200,8 @@ void BilateralInteractionConstraint<Rigid3Types>::addContact(Deriv /*norm*/,
 
 
 #if !defined(SOFA_COMPONENT_CONSTRAINTSET_BILATERALINTERACTIONCONSTRAINT_CPP)
-extern template class SOFA_CONSTRAINT_API BilateralInteractionConstraint< Vec3Types >;
-extern template class SOFA_CONSTRAINT_API BilateralInteractionConstraint< Rigid3Types >;
+extern template class SOFA_SOFACONSTRAINT_API BilateralInteractionConstraint< Vec3Types >;
+extern template class SOFA_SOFACONSTRAINT_API BilateralInteractionConstraint< Rigid3Types >;
 #endif
 
 } // namespace bilateralinteractionconstraint

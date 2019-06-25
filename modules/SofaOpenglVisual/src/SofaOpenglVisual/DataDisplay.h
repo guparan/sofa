@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_VISUALMODEL_DATADISPLAY_H
 #define SOFA_COMPONENT_VISUALMODEL_DATADISPLAY_H
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <sofa/core/visual/VisualModel.h>
 #include <sofa/core/visual/VisualParams.h>
@@ -40,7 +40,7 @@ namespace component
 namespace visualmodel
 {
 
-class SOFA_OPENGL_VISUAL_API DataDisplay : public core::visual::VisualModel, public ExtVec3State
+class SOFA_SOFAOPENGLVISUAL_API DataDisplay : public core::visual::VisualModel, public ExtVec3State
 {
 public:
     SOFA_CLASS2(DataDisplay, core::visual::VisualModel, ExtVec3State);

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef LENGTHCONTAINER_H_
 #define LENGTHCONTAINER_H_
-#include "config.h"
+#include <SofaGeneralSimpleFem/config.h>
 
 namespace sofa
 {

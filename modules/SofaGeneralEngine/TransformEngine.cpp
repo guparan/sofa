@@ -42,13 +42,13 @@ int TransformEngineClass = core::RegisterObject("Transform position of 3d points
         .add< TransformEngine<defaulttype::ExtVec3fTypes> >()
         ;
 
-template class SOFA_GENERAL_ENGINE_API TransformEngine<defaulttype::Vec1Types>;
-template class SOFA_GENERAL_ENGINE_API TransformEngine<defaulttype::Vec2Types>;
-template class SOFA_GENERAL_ENGINE_API TransformEngine<defaulttype::Vec3Types>;
-template class SOFA_GENERAL_ENGINE_API TransformEngine<defaulttype::Rigid2Types>;
-template class SOFA_GENERAL_ENGINE_API TransformEngine<defaulttype::Rigid3Types>;
+template class SOFA_SOFAGENERALENGINE_API TransformEngine<defaulttype::Vec1Types>;
+template class SOFA_SOFAGENERALENGINE_API TransformEngine<defaulttype::Vec2Types>;
+template class SOFA_SOFAGENERALENGINE_API TransformEngine<defaulttype::Vec3Types>;
+template class SOFA_SOFAGENERALENGINE_API TransformEngine<defaulttype::Rigid2Types>;
+template class SOFA_SOFAGENERALENGINE_API TransformEngine<defaulttype::Rigid3Types>;
  
-template class SOFA_GENERAL_ENGINE_API TransformEngine<defaulttype::ExtVec3fTypes>;
+template class SOFA_SOFAGENERALENGINE_API TransformEngine<defaulttype::ExtVec3fTypes>;
 
 
 } // namespace constraint

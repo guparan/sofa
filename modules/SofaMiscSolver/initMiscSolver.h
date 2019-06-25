@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_SOLVER_INIT_H
 #define SOFA_COMPONENT_MISC_SOLVER_INIT_H
-#include "config.h"
+#include <SofaMiscSolver/config.h>
 
 namespace sofa
 {
@@ -29,7 +29,7 @@ namespace sofa
 namespace component
 {
 
-void SOFA_MISC_SOLVER_API initMiscSolver();
+void SOFA_SOFAMISCSOLVER_API initMiscSolver();
 
 } // namespace component
 

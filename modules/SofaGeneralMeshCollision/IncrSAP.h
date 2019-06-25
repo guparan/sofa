@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_INCRSAP_H
 #define SOFA_COMPONENT_COLLISION_INCRSAP_H
-#include "config.h"
+#include <SofaGeneralMeshCollision/config.h>
 
 #include <sofa/core/collision/BroadPhaseDetection.h>
 #include <sofa/core/collision/NarrowPhaseDetection.h>
@@ -61,7 +61,7 @@ class EndPointID;
   *The between end poinsts (_min, _max) and the field cube is that cube is always updated whereas
   *_min and _max are stored values of the cube end points at previous time step.
   */
-class SOFA_GENERAL_MESH_COLLISION_API ISAPBox{
+class SOFA_SOFAGENERALMESHCOLLISION_API ISAPBox{
 public:
     ISAPBox(){}
 
@@ -156,7 +156,7 @@ public:
   *Implementation of incremental sweep and prune. i.e. collision are stored and updated which should speed up
   *the collision detection compared to the DirectSAP.
   */
-class SOFA_GENERAL_MESH_COLLISION_API IncrSAP :
+class SOFA_SOFAGENERALMESHCOLLISION_API IncrSAP :
     public core::collision::BroadPhaseDetection,
     public core::collision::NarrowPhaseDetection
 {

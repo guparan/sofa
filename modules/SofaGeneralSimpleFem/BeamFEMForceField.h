@@ -27,7 +27,7 @@
 #include <SofaBaseTopology/TopologyData.h>
 #include <SofaEigen2Solver/EigenSparseMatrix.h>
 
-#include "config.h"
+#include <SofaGeneralSimpleFem/config.h>
 
 
 namespace sofa
@@ -227,7 +227,7 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_BEAMFEMFORCEFIELD_CPP)
-extern template class SOFA_GENERAL_SIMPLE_FEM_API BeamFEMForceField<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAGENERALSIMPLEFEM_API BeamFEMForceField<defaulttype::Rigid3Types>;
 #endif
 
 }

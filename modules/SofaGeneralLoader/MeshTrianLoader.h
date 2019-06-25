@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LOADER_MESHTRIANLOADER_H
 #define SOFA_COMPONENT_LOADER_MESHTRIANLOADER_H
-#include "config.h"
+#include <SofaGeneralLoader/config.h>
 
 #include <sofa/core/loader/MeshLoader.h>
 
@@ -41,7 +41,7 @@ namespace loader
 /// nombre de faces
 ///liste de toutes les faces ex 1 2 3 0 0 0 les 3 derniers chiffres ne sont pas utilises pour le moment
 
-class SOFA_GENERAL_LOADER_API MeshTrianLoader : public sofa::core::loader::MeshLoader
+class SOFA_SOFAGENERALLOADER_API MeshTrianLoader : public sofa::core::loader::MeshLoader
 {
 public:
     SOFA_CLASS(MeshTrianLoader,sofa::core::loader::MeshLoader);

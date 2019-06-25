@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_REMOVEPRIMITIVEPERFORMER_H
 #define SOFA_COMPONENT_COLLISION_REMOVEPRIMITIVEPERFORMER_H
-#include "config.h"
+#include <SofaUserInteraction/config.h>
 
 #include <SofaUserInteraction/InteractionPerformer.h>
 #include <SofaUserInteraction/TopologicalChangeManager.h>
@@ -67,7 +67,7 @@ protected:
 /** Class to perform removing of topological elements (either one element or a an area) and handling topological mapping
   */
 template <class DataTypes>
-class SOFA_USER_INTERACTION_API RemovePrimitivePerformer: public       TInteractionPerformer<DataTypes>, public RemovePrimitivePerformerConfiguration
+class SOFA_SOFAUSERINTERACTION_API RemovePrimitivePerformer: public       TInteractionPerformer<DataTypes>, public RemovePrimitivePerformerConfiguration
 {
     typedef typename DataTypes::Real               Real;
     typedef typename DataTypes::Coord              Coord;
@@ -142,7 +142,7 @@ private:
 };
 
 #if  !defined(SOFA_COMPONENT_COLLISION_REMOVEPRIMITIVEPERFORMER_CPP)
-extern template class SOFA_USER_INTERACTION_API RemovePrimitivePerformer<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAUSERINTERACTION_API RemovePrimitivePerformer<defaulttype::Vec3Types>;
 
 #endif
 

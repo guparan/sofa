@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_CENTERPOINTTOPOLOGICALMAPPING_H
 #define SOFA_COMPONENT_TOPOLOGY_CENTERPOINTTOPOLOGICALMAPPING_H
-#include "config.h"
+#include <SofaTopologyMapping/config.h>
 
 #include <sofa/core/BaseMapping.h>
 #include <sofa/core/topology/TopologicalMapping.h>
@@ -45,7 +45,7 @@ namespace topology
  *
 */
 
-class SOFA_TOPOLOGY_MAPPING_API CenterPointTopologicalMapping : public sofa::core::topology::TopologicalMapping
+class SOFA_SOFATOPOLOGYMAPPING_API CenterPointTopologicalMapping : public sofa::core::topology::TopologicalMapping
 {
 public:
     SOFA_CLASS(CenterPointTopologicalMapping,sofa::core::topology::TopologicalMapping);

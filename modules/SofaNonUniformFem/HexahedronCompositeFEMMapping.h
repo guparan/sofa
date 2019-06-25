@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_HexahedronCompositeFEMMapping_H
 #define SOFA_COMPONENT_MAPPING_HexahedronCompositeFEMMapping_H
-#include "config.h"
+#include <SofaNonUniformFem/config.h>
 
 //#include <sofa/core/behavior/MechanicalState.h>
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef INDEXVALUEMAPPER_H_
 #define INDEXVALUEMAPPER_H_
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 
 
@@ -82,7 +82,7 @@ public:
 };
 
 #if  !defined(INDEXVALUEMAPPER_CPP_)
-extern template class SOFA_GENERAL_ENGINE_API IndexValueMapper<sofa::defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API IndexValueMapper<sofa::defaulttype::Vec3Types>;
  
 #endif
 

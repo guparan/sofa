@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_GENERAL_OBJECT_INTERACTION_INIT_H
 #define SOFA_COMPONENT_GENERAL_OBJECT_INTERACTION_INIT_H
-#include "config.h"
+#include <SofaGeneralObjectInteraction/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_GENERAL_OBJECT_INTERACTION_API initGeneralObjectInteraction();
+void SOFA_SOFAGENERALOBJECTINTERACTION_API initGeneralObjectInteraction();
 
 } // namespace component
 

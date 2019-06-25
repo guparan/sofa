@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MISC_MAPPING_INIT_H
 #define SOFA_COMPONENT_MISC_MAPPING_INIT_H
-#include "config.h"
+#include <SofaMiscMapping/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_MISC_MAPPING_API initMiscMapping();
+void SOFA_SOFAMISCMAPPING_API initMiscMapping();
 
 } // namespace component
 

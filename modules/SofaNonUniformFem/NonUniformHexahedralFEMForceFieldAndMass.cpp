@@ -42,7 +42,7 @@ int NonUniformHexahedralFEMForceFieldAndMassClass = core::RegisterObject("Non un
 
         ;
 
-template class SOFA_NON_UNIFORM_FEM_API NonUniformHexahedralFEMForceFieldAndMass<Vec3Types>;
+template class SOFA_SOFANONUNIFORMFEM_API NonUniformHexahedralFEMForceFieldAndMass<Vec3Types>;
 
 
 } // namespace forcefield

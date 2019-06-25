@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_OGLGRID_H
 #define SOFA_OGLGRID_H
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <sofa/core/visual/VisualModel.h>
 #include <sofa/defaulttype/RGBAColor.h>

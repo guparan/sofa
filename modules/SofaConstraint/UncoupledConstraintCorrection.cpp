@@ -43,7 +43,7 @@ namespace constraintset
 using namespace sofa::defaulttype;
 
 template<>
-SOFA_CONSTRAINT_API UncoupledConstraintCorrection< sofa::defaulttype::Rigid3Types >::UncoupledConstraintCorrection(sofa::core::behavior::MechanicalState<sofa::defaulttype::Rigid3Types> *mm)
+SOFA_SOFACONSTRAINT_API UncoupledConstraintCorrection< sofa::defaulttype::Rigid3Types >::UncoupledConstraintCorrection(sofa::core::behavior::MechanicalState<sofa::defaulttype::Rigid3Types> *mm)
     : Inherit(mm)
     , compliance(initData(&compliance, "compliance", "Rigid compliance value: 1st value for translations, 6 others for upper-triangular part of symmetric 3x3 rotation compliance matrix"))
     , defaultCompliance(initData(&defaultCompliance, (Real)0.00001, "defaultCompliance", "Default compliance value for new dof or if all should have the same (in which case compliance vector should be empty)"))
@@ -57,7 +57,7 @@ SOFA_CONSTRAINT_API UncoupledConstraintCorrection< sofa::defaulttype::Rigid3Type
 }
 
 template<>
-SOFA_CONSTRAINT_API void UncoupledConstraintCorrection< defaulttype::Rigid3Types >::init()
+SOFA_SOFACONSTRAINT_API void UncoupledConstraintCorrection< defaulttype::Rigid3Types >::init()
 {
     Inherit::init();
 
@@ -141,7 +141,7 @@ SOFA_CONSTRAINT_API void UncoupledConstraintCorrection< defaulttype::Rigid3Types
 
 
 template<>
-SOFA_CONSTRAINT_API void UncoupledConstraintCorrection< defaulttype::Rigid3Types >::getComplianceMatrix(defaulttype::BaseMatrix *m) const
+SOFA_SOFACONSTRAINT_API void UncoupledConstraintCorrection< defaulttype::Rigid3Types >::getComplianceMatrix(defaulttype::BaseMatrix *m) const
 {
     const VecReal& comp = compliance.getValue();
     const unsigned int dimension = defaulttype::DataTypeInfo<Deriv>::size();
@@ -186,10 +186,10 @@ int UncoupledConstraintCorrectionClass = core::RegisterObject("Component computi
 
         ;
 
-template class SOFA_CONSTRAINT_API UncoupledConstraintCorrection< Vec1Types >;
-template class SOFA_CONSTRAINT_API UncoupledConstraintCorrection< Vec2Types >;
-template class SOFA_CONSTRAINT_API UncoupledConstraintCorrection< Vec3Types >;
-template class SOFA_CONSTRAINT_API UncoupledConstraintCorrection< Rigid3Types >;
+template class SOFA_SOFACONSTRAINT_API UncoupledConstraintCorrection< Vec1Types >;
+template class SOFA_SOFACONSTRAINT_API UncoupledConstraintCorrection< Vec2Types >;
+template class SOFA_SOFACONSTRAINT_API UncoupledConstraintCorrection< Vec3Types >;
+template class SOFA_SOFACONSTRAINT_API UncoupledConstraintCorrection< Rigid3Types >;
 
 
 } // namespace constraintset

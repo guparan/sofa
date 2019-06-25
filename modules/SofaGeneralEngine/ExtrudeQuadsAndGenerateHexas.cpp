@@ -40,7 +40,7 @@ int ExtrudeQuadsAndGenerateHexasClass = core::RegisterObject("This engine extrud
  
         ;
 
-template class SOFA_GENERAL_ENGINE_API ExtrudeQuadsAndGenerateHexas<Vec3Types>;
+template class SOFA_SOFAGENERALENGINE_API ExtrudeQuadsAndGenerateHexas<Vec3Types>;
  
 
 

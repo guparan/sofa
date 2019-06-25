@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_HAUSDORFFDISTANCE_H
 #define SOFA_COMPONENT_ENGINE_HAUSDORFFDISTANCE_H
-#include "config.h"
+#include <SofaGeneralEngine/config.h>
 
 #include <sofa/core/DataEngine.h>
 #include <sofa/core/objectmodel/BaseObject.h>
@@ -98,11 +98,11 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_HAUSDORFFDISTANCE_CPP)
-extern template class SOFA_GENERAL_ENGINE_API HausdorffDistance<defaulttype::Vec1Types>;
-extern template class SOFA_GENERAL_ENGINE_API HausdorffDistance<defaulttype::Vec2Types>;
-extern template class SOFA_GENERAL_ENGINE_API HausdorffDistance<defaulttype::Vec3Types>;
-extern template class SOFA_GENERAL_ENGINE_API HausdorffDistance<defaulttype::Rigid2Types>;
-extern template class SOFA_GENERAL_ENGINE_API HausdorffDistance<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API HausdorffDistance<defaulttype::Vec1Types>;
+extern template class SOFA_SOFAGENERALENGINE_API HausdorffDistance<defaulttype::Vec2Types>;
+extern template class SOFA_SOFAGENERALENGINE_API HausdorffDistance<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAGENERALENGINE_API HausdorffDistance<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFAGENERALENGINE_API HausdorffDistance<defaulttype::Rigid3Types>;
  
 #endif
 

@@ -27,7 +27,7 @@
  */
 #ifndef SOFA_COMPONENT_VISUALMANAGER_SECONDARY_PASS_H
 #define SOFA_COMPONENT_VISUALMANAGER_SECONDARY_PASS_H
-#include "config.h"
+#include <SofaOpenglVisual/config.h>
 
 #include <SofaOpenglVisual/VisualManagerPass.h>
 #include <sofa/core/objectmodel/DataFileName.h>
@@ -46,7 +46,7 @@ namespace visualmodel
  *  \brief Render pass element: render the relevant tagged objects in a FBO
  */
 
-class SOFA_OPENGL_VISUAL_API VisualManagerSecondaryPass : public component::visualmodel::VisualManagerPass
+class SOFA_SOFAOPENGLVISUAL_API VisualManagerSecondaryPass : public component::visualmodel::VisualManagerPass
 {
 public:
     SOFA_CLASS(VisualManagerSecondaryPass, component::visualmodel::VisualManagerPass);

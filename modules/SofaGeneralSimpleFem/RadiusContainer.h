@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef RADIUSCONTAINER_H_
 #define RADIUSCONTAINER_H_
-#include "config.h"
+#include <SofaGeneralSimpleFem/config.h>
 
 #include <sofa/core/objectmodel/BaseObject.h>
 

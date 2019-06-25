@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_INTERACTIONFORCEFIELD_PLANEFORCEFIELD_H
 #define SOFA_COMPONENT_INTERACTIONFORCEFIELD_PLANEFORCEFIELD_H
-#include "config.h"
+#include <SofaBoundaryCondition/config.h>
 
 #include <sofa/core/behavior/ForceField.h>
 #include <sofa/core/behavior/MechanicalState.h>
@@ -139,11 +139,11 @@ public:
 
 
 #if  !defined(SOFA_COMPONENT_INTERACTIONFORCEFIELD_PLANEFORCEFIELD_CPP)
-extern template class SOFA_BOUNDARY_CONDITION_API PlaneForceField<defaulttype::Vec3Types>;
-extern template class SOFA_BOUNDARY_CONDITION_API PlaneForceField<defaulttype::Vec2Types>;
-extern template class SOFA_BOUNDARY_CONDITION_API PlaneForceField<defaulttype::Vec1Types>;
-extern template class SOFA_BOUNDARY_CONDITION_API PlaneForceField<defaulttype::Vec6Types>;
-extern template class SOFA_BOUNDARY_CONDITION_API PlaneForceField<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API PlaneForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API PlaneForceField<defaulttype::Vec2Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API PlaneForceField<defaulttype::Vec1Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API PlaneForceField<defaulttype::Vec6Types>;
+extern template class SOFA_SOFABOUNDARYCONDITION_API PlaneForceField<defaulttype::Rigid3Types>;
 
 #endif
 
