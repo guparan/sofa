@@ -85,7 +85,6 @@ list(APPEND CIMG_CFLAGS -Dcimg_no_system_calls)
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 
 target_compile_options(${PROJECT_NAME} PUBLIC ${CIMG_CFLAGS})
-target_compile_options(${PROJECT_NAME} PRIVATE "-DSOFA_BUILD_CIMGPLUGIN")
 target_link_libraries(${PROJECT_NAME} SofaCore ${EXTERNAL_LIBS})
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CImg_INCLUDE_DIRS}>")

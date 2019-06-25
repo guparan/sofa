@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaNonUniformFem)
 
 set(HEADER_FILES
-    config.h
     initNonUniformFEM.h
     )
 
@@ -57,7 +56,5 @@ target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimpleFem SofaGeneralSimpleFem 
 if(SOFA_HAVE_NEWMAT)
     target_link_libraries(${PROJECT_NAME} PUBLIC SofaDenseSolver)
 endif()
-set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_NON_UNIFORM_FEM")
-set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 
 sofa_install_targets(SofaAdvanced ${PROJECT_NAME} "SofaAdvanced/${PROJECT_NAME}")

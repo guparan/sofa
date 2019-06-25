@@ -4,7 +4,6 @@ project(SofaHaptics VERSION 1.0 LANGUAGES CXX)
 find_package(SofaGeneral REQUIRED) # To have SofaConstraint
 
 set(HEADER_FILES
-    src/SofaHaptics/config.h
     src/SofaHaptics/initHaptics.h
     src/SofaHaptics/ForceFeedback.h
     src/SofaHaptics/LCPForceFeedback.h
@@ -29,7 +28,6 @@ set(EXTRA_FILES
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${EXTRA_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaConstraint)
 target_compile_definitions(${PROJECT_NAME} PRIVATE COMPILE_FLAGS "-DSOFA_BUILD_SOFAHAPTICS")
-target_compile_definitions(${PROJECT_NAME} PUBLIC COMPILE_FLAGS "-DSOFA_HAVE_SOFAHAPTICS")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
 
 sofa_generate_package(NAME ${PROJECT_NAME}

@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.1)
 project(ARTrack)
 
 add_subdirectory(extlibs/ARTrackLib ARTrackLib)
-set_target_properties(ARTrackLib PROPERTIES DEBUG_POSTFIX "_d")
 
 set(HEADER_FILES
     ARTrackController.h
@@ -22,7 +21,6 @@ find_package(ARTrackLib REQUIRED)
 find_package(SofaGeneral REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
-set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_ARTRACKPLUGIN")
 target_link_libraries(${PROJECT_NAME} SofaUserInteraction SofaGeneralRigid)
 target_link_libraries(${PROJECT_NAME} ARTrackLib)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/..")

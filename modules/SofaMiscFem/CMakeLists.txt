@@ -6,7 +6,6 @@ find_package(Newmat)
 set(SOFA_HAVE_NEWMAT ${Newmat_FOUND})
 
 set(HEADER_FILES
-    config.h
     initMiscFEM.h
     )
 
@@ -66,8 +65,5 @@ target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimpleFem)
 if(SOFA_HAVE_NEWMAT)
     target_link_libraries(${PROJECT_NAME} PUBLIC newmat)
 endif()
-set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "_d")
-set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_MISC_FEM")
-set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 
 sofa_install_targets(SofaMisc ${PROJECT_NAME} "SofaMisc/${PROJECT_NAME}")

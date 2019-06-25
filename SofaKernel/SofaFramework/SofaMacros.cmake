@@ -477,13 +477,30 @@ macro(sofa_install_targets package_name the_targets include_install_dir)
             PUBLIC_HEADER DESTINATION "include/${include_install_dir}" COMPONENT headers
             )
 
-    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/config.h.in")
-        configure_file("${CMAKE_CURRENT_SOURCE_DIR}/config.h.in" "${CMAKE_BINARY_DIR}/include/${package_name}/config.h")
-        install(FILES "${CMAKE_BINARY_DIR}/include/${package_name}/config.h" DESTINATION "include/${include_install_dir}")
-    endif()
-
-    # non-flat headers install (if no PUBLIC_HEADER and include_install_dir specified)
     foreach(target ${the_targets})
+        string(TOUPPER ${target} target_upper)
+
+        get_target_property(has_config_h ${target} SOURCES)
+        list(FILTER has_config_h INCLUDE REGEX "^.*\/config.h$")
+        if(NOT has_config_h AND EXISTS ${SOFA_CONFIG_TEMPLATE})
+            set(CONFIG_PACKAGE_NAME ${target}) # used by config.h.in
+            set(CONFIG_PACKAGE_NAME_UPPER ${target_upper}) # used by config.h.in
+            configure_file(${SOFA_CONFIG_TEMPLATE} "${CMAKE_BINARY_DIR}/include/${package_name}/${the_targets}/config.h")
+#            message("configure_file(${SOFA_CONFIG_TEMPLATE} ${CMAKE_BINARY_DIR}/include/${package_name}/${the_targets}/config.h)")
+            install(FILES "${CMAKE_BINARY_DIR}/include/${package_name}/${the_targets}/config.h" DESTINATION "include/${include_install_dir}")
+        endif()
+
+        target_compile_definitions(${target} PRIVATE "-DSOFA_BUILD_${target_upper}")
+        target_compile_definitions(${target} PUBLIC  "-DSOFA_HAVE_${target_upper}")
+        set(version ${${target}_VERSION})
+        if(version)
+            set_target_properties(${target} PROPERTIES VERSION "${version}")
+        elseif(SofaFramework_VERSION)
+            set_target_properties(${target} PROPERTIES VERSION "${SofaFramework_VERSION}")
+        endif()
+        set_target_properties(${target} PROPERTIES DEBUG_POSTFIX "_d")
+
+        # non-flat headers install (if no PUBLIC_HEADER and include_install_dir specified)
         get_target_property(public_header ${target} PUBLIC_HEADER)
         if("${public_header}" STREQUAL "public_header-NOTFOUND" AND NOT "${include_install_dir}" STREQUAL "")
             set(optional_argv3 "${ARGV3}")

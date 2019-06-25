@@ -326,7 +326,6 @@ if(MiniFlowVR_FOUND)
     target_link_libraries(${PROJECT_NAME} miniFlowVR)
 endif()
 
-set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 
 if(SOFACUDA_CUBLAS)
     cuda_add_cublas_to_target(${PROJECT_NAME})

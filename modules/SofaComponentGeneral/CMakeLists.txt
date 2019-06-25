@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaComponentGeneral)
 
 set(HEADER_FILES
-    config.h
     initComponentGeneral.h
     )
 
@@ -15,8 +14,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     SofaGeneralAnimationLoop SofaGeneralDeformable SofaGeneralExplicitOdeSolver SofaGeneralImplicitOdeSolver SofaGeneralLinearSolver SofaGeneralLoader
     SofaGeneralMeshCollision SofaGeneralObjectInteraction SofaGeneralRigid SofaGeneralSimpleFem SofaGeneralTopology  SofaGeneralVisual SofaBoundaryCondition
     SofaConstraint SofaGeneralEngine SofaGraphComponent SofaTopologyMapping SofaUserInteraction SofaValidation)
-set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_COMPONENT_GENERAL")
-set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 
 if(SOFA_HAVE_NEWMAT)
     target_link_libraries(${PROJECT_NAME} PUBLIC SofaDenseSolver)

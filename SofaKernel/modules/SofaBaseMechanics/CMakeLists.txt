@@ -41,7 +41,6 @@ set(HEADER_FILES
     SubsetMapping.inl
     UniformMass.h
     UniformMass.inl
-    config.h
     initBaseMechanics.h
 )
 
@@ -72,6 +71,5 @@ set(SOURCE_FILES
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} SofaBaseTopology)
-set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_BASE_MECHANICS")
 
 sofa_install_targets(SofaBase ${PROJECT_NAME} "SofaBase/${PROJECT_NAME}")

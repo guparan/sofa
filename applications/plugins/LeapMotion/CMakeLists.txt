@@ -41,8 +41,6 @@ target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${LEAPMOTIO
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${LEAP_INCLUDE_DIR}>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>")
 
-set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_LEAPMOTION")
-set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${LEAPMOTION_VERSION})
 
 target_link_libraries(${PROJECT_NAME} SofaHelper SofaOpenglVisual SofaUserInteraction ${LEAP_LIBRARY})
 

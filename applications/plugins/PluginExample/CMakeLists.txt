@@ -36,7 +36,6 @@ qt5_wrap_cpp(MOCCED_HEADER_FILES ${HEADER_FILES_TO_MOC})
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES_TO_MOC} ${MOCCED_HEADER_FILES} ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
 
 # Set define dllimport/dllexport mechanism on Windows.
-set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_PLUGINEXAMPLE")
 
 # Link the plugin library to its dependencies (other libraries).
 target_link_libraries(${PROJECT_NAME} SofaGuiQt)

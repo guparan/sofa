@@ -19,9 +19,19 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#ifndef SOFANONUNIFORMFEM_CONFIG_H
-#define SOFANONUNIFORMFEM_CONFIG_H
 
-#include <SofaAdvanced/config.h>
+/* HELLO */
+
+#ifndef @CONFIG_PACKAGE_NAME_UPPER@_CONFIG_H
+#define @CONFIG_PACKAGE_NAME_UPPER@_CONFIG_H
+
+#include <sofa/config/sharedlibrary_defines.h>
+
+#ifdef SOFA_BUILD_@CONFIG_PACKAGE_NAME_UPPER@
+#  define SOFA_TARGET @CONFIG_PACKAGE_NAME@
+#  define SOFA_@CONFIG_PACKAGE_NAME_UPPER@_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#else
+#  define SOFA_@CONFIG_PACKAGE_NAME_UPPER@_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#endif
 
 #endif

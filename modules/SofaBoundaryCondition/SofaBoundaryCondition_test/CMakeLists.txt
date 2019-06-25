@@ -27,8 +27,7 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} SofaGTestMain SofaTest SceneCreator)
 
 if(SofaSparseSolver_FOUND)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSOFA_HAVE_SOFASPARSESOLVER")
-endif()
+    endif()
 
 
 

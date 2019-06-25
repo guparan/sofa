@@ -13,8 +13,7 @@ add_subdirectory(tinyxml)
 add_subdirectory(json)
 
 foreach(target ${EXTLIBS_TARGETS})
-    set_target_properties(${target} PROPERTIES DEBUG_POSTFIX "_d")
-    set_target_properties(${target} PROPERTIES FOLDER "SofaExtlibs")
+        set_target_properties(${target} PROPERTIES FOLDER "SofaExtlibs")
 endforeach()
 
 # C++11

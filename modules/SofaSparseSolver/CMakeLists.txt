@@ -10,7 +10,6 @@ find_package(CSparse QUIET)
 
 # Config
 set(HEADER_FILES
-    src/SofaSparseSolver/config.h
     )
 set(SOURCE_FILES
     src/SofaSparseSolver/initSparseSolver.cpp
@@ -59,18 +58,15 @@ add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaBaseLinearSolver SofaGeneralLinearSolver SofaImplicitOdeSolver SofaSimpleFem)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSOFA_BUILD_SOFASPARSESOLVER")
-target_compile_definitions(${PROJECT_NAME} PUBLIC "-DSOFA_HAVE_SOFASPARSESOLVER")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>")
 
 if(Metis_FOUND)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSOFA_HAVE_METIS")
-    target_link_libraries(${PROJECT_NAME} PUBLIC metis)
+        target_link_libraries(${PROJECT_NAME} PUBLIC metis)
 endif()
 
 if(CSparse_FOUND)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSOFA_HAVE_CSPARSE")
-    target_link_libraries(${PROJECT_NAME} PUBLIC csparse)
+        target_link_libraries(${PROJECT_NAME} PUBLIC csparse)
 endif()
 
 sofa_generate_package(NAME SofaSparseSolver VERSION ${PROJECT_VERSION} TARGETS SofaSparseSolver

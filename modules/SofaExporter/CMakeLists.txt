@@ -4,7 +4,6 @@ project(SofaExporter VERSION 1.0 LANGUAGES CXX)
 find_package(SofaSimulation REQUIRED) # SofaGeneralLinearSolver
 
 set(HEADER_FILES
-    src/SofaExporter/config.h
     src/SofaExporter/initExporter.h
     )
 
@@ -45,7 +44,6 @@ list(APPEND SOURCE_FILES
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${EXTRA_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationTree)
 target_compile_definitions(${PROJECT_NAME} PRIVATE COMPILE_FLAGS "-DSOFA_BUILD_EXPORTER")
-target_compile_definitions(${PROJECT_NAME} PUBLIC COMPILE_FLAGS "-DSOFA_HAVE_SOFAEXPORTER")
 
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")

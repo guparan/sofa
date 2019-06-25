@@ -34,7 +34,6 @@ if("${CMAKE_BUILD_TYPE}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$") # no need f
     endif()
 endif()
 
-target_compile_options(${PROJECT_NAME} PRIVATE "-DSOFA_BUILD_DIFFUSIONSOLVER")
 target_link_libraries(${PROJECT_NAME} CImgPlugin)
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include>")

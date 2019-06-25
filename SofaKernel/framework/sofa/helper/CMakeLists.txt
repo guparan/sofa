@@ -359,7 +359,5 @@ set(SOFAHELPER_COMPILE_FLAGS "-DSOFA_BUILD_HELPER")
 set_property(SOURCE system/PluginManager.cpp APPEND PROPERTY COMPILE_DEFINITIONS_DEBUG "SOFA_LIBSUFFIX=_d" )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "${SOFAHELPER_COMPILE_FLAGS}")
-set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "_d")
-set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${SOFAFRAMEWORK_VERSION}")
 
 sofa_install_targets(SofaFramework ${PROJECT_NAME} "SofaFramework/sofa/helper")

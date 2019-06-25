@@ -166,6 +166,10 @@ endforeach()
 configure_file("config.h.in" "${CMAKE_BINARY_DIR}/include/sofa/config.h")
 install(FILES "${CMAKE_BINARY_DIR}/include/sofa/config.h" DESTINATION "include/${PROJECT_NAME}/sofa" COMPONENT headers)
 
+# Generic config.h configurable by any module
+file(COPY "config_template.h.in" DESTINATION "${CMAKE_BINARY_DIR}/include/SofaFramework/sofa/config")
+install(FILES "config_template.h.in" DESTINATION "include/${PROJECT_NAME}/sofa/config" COMPONENT headers)
+
 ## Version
 set(SOFAFRAMEWORK_VERSION "${Sofa_VERSION}")
 set(SOFA_VERSION_STR "\"${Sofa_VERSION}\"")

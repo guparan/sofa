@@ -19,7 +19,6 @@ set(README_FILES
 )
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
-set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_HAPTIONPLUGIN")
 target_link_libraries(${PROJECT_NAME} SofaHaptics SofaOpenglVisual)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/..")
 

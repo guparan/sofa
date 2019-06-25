@@ -247,7 +247,6 @@ if(SOFAGUI_QGLVIEWER)
     target_link_libraries(${PROJECT_NAME} PUBLIC QGLViewer)
 endif()
 
-set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_SOFAGUIQT")
 
 sofa_install_targets(SofaGui SofaGuiQt "SofaGui/sofa/gui/qt")
 

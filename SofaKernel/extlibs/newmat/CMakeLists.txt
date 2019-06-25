@@ -47,7 +47,6 @@ if(NOT DEFINED SOFA_WITH_DOUBLE)
 else()
     target_compile_definitions(${PROJECT_NAME} PUBLIC "USING_DOUBLE")
 endif()
-set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 
 # The code must be relocatable if we want to link a shared library against it
 if("x${CMAKE_CXX_COMPILER_ID}" STREQUAL "xGNU" OR "x${CMAKE_CXX_COMPILER_ID}" STREQUAL "xClang")
