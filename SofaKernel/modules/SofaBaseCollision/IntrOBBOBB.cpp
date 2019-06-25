@@ -31,7 +31,7 @@ namespace collision{
 //----------------------------------------------------------------------------
 // Explicit instantiation.
 //----------------------------------------------------------------------------
-template class SOFA_BASE_COLLISION_API TIntrOBBOBB<defaulttype::Rigid3Types>;
+template class SOFA_SOFABASECOLLISION_API TIntrOBBOBB<defaulttype::Rigid3Types>;
 
 //----------------------------------------------------------------------------
 

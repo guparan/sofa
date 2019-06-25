@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COMMON_INIT_H
 #define SOFA_COMPONENT_COMMON_INIT_H
-#include "config.h"
+#include <SofaComponentCommon/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_COMPONENT_COMMON_API initComponentCommon();
+void SOFA_SOFACOMPONENTCOMMON_API initComponentCommon();
 
 } // namespace component
 

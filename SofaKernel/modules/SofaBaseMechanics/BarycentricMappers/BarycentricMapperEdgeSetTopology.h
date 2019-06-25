@@ -87,8 +87,8 @@ protected:
 };
 
 #if !defined(SOFA_COMPONENT_MAPPING_BARYCENTRICMAPPEREDGESETTOPOLOGY_CPP)
-extern template class SOFA_BASE_MECHANICS_API BarycentricMapperEdgeSetTopology< Vec3dTypes, Vec3dTypes>;
-extern template class SOFA_BASE_MECHANICS_API BarycentricMapperEdgeSetTopology< Vec3dTypes, ExtVec3Types>;
+extern template class SOFA_SOFABASEMECHANICS_API BarycentricMapperEdgeSetTopology< Vec3dTypes, Vec3dTypes>;
+extern template class SOFA_SOFABASEMECHANICS_API BarycentricMapperEdgeSetTopology< Vec3dTypes, ExtVec3Types>;
 
 
 #endif

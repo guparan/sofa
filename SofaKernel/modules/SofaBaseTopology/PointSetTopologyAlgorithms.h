@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_POINTSETTOPOLOGYALGORITHMS_H
 #define SOFA_COMPONENT_TOPOLOGY_POINTSETTOPOLOGYALGORITHMS_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <sofa/core/topology/BaseTopology.h>
 #include <sofa/helper/vector.h>
@@ -82,11 +82,11 @@ private:
 };
 
 #if  !defined(SOFA_COMPONENT_TOPOLOGY_POINTSETTOPOLOGYALGORITHMS_CPP)
-extern template class SOFA_BASE_TOPOLOGY_API PointSetTopologyAlgorithms<defaulttype::Vec3Types>;
-extern template class SOFA_BASE_TOPOLOGY_API PointSetTopologyAlgorithms<defaulttype::Vec2Types>;
-extern template class SOFA_BASE_TOPOLOGY_API PointSetTopologyAlgorithms<defaulttype::Vec1Types>;
-extern template class SOFA_BASE_TOPOLOGY_API PointSetTopologyAlgorithms<defaulttype::Rigid3Types>;
-extern template class SOFA_BASE_TOPOLOGY_API PointSetTopologyAlgorithms<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API PointSetTopologyAlgorithms<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API PointSetTopologyAlgorithms<defaulttype::Vec2Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API PointSetTopologyAlgorithms<defaulttype::Vec1Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API PointSetTopologyAlgorithms<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API PointSetTopologyAlgorithms<defaulttype::Rigid2Types>;
 
 
 #endif

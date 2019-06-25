@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_QUADSETGEOMETRYALGORITHMS_H
 #define SOFA_COMPONENT_TOPOLOGY_QUADSETGEOMETRYALGORITHMS_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/EdgeSetGeometryAlgorithms.h>
 
@@ -135,11 +135,11 @@ template< class Real>
 inline Real areaProduct(const defaulttype::Vec<1,Real>& , const defaulttype::Vec<1,Real>&  );
 
 #if  !defined(SOFA_COMPONENT_TOPOLOGY_QUADSETGEOMETRYALGORITHMS_CPP)
-extern template class SOFA_BASE_TOPOLOGY_API QuadSetGeometryAlgorithms<defaulttype::Vec3Types>;
-extern template class SOFA_BASE_TOPOLOGY_API QuadSetGeometryAlgorithms<defaulttype::Vec2Types>;
-extern template class SOFA_BASE_TOPOLOGY_API QuadSetGeometryAlgorithms<defaulttype::Vec1Types>;
-//extern template class SOFA_BASE_TOPOLOGY_API QuadSetGeometryAlgorithms<defaulttype::Rigid3Types>;
-//extern template class SOFA_BASE_TOPOLOGY_API QuadSetGeometryAlgorithms<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API QuadSetGeometryAlgorithms<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API QuadSetGeometryAlgorithms<defaulttype::Vec2Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API QuadSetGeometryAlgorithms<defaulttype::Vec1Types>;
+//extern template class SOFA_SOFABASETOPOLOGY_API QuadSetGeometryAlgorithms<defaulttype::Rigid3Types>;
+//extern template class SOFA_SOFABASETOPOLOGY_API QuadSetGeometryAlgorithms<defaulttype::Rigid2Types>;
 
 
 #endif

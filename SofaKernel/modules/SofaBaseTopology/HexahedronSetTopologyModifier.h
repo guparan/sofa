@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_HEXAHEDRONSETTOPOLOGYMODIFIER_H
 #define SOFA_COMPONENT_TOPOLOGY_HEXAHEDRONSETTOPOLOGYMODIFIER_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/QuadSetTopologyModifier.h>
 
@@ -37,7 +37,7 @@ class HexahedronSetTopologyContainer;
 /**
 * A class that modifies the topology by adding and removing hexahedra
 */
-class SOFA_BASE_TOPOLOGY_API HexahedronSetTopologyModifier : public QuadSetTopologyModifier
+class SOFA_SOFABASETOPOLOGY_API HexahedronSetTopologyModifier : public QuadSetTopologyModifier
 {
 public:
     SOFA_CLASS(HexahedronSetTopologyModifier,QuadSetTopologyModifier);

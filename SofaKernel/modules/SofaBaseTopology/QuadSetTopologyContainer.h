@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_QUADSETTOPOLOGYCONTAINER_H
 #define SOFA_COMPONENT_TOPOLOGY_QUADSETTOPOLOGYCONTAINER_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/EdgeSetTopologyContainer.h>
 
@@ -37,7 +37,7 @@ class QuadSetTopologyModifier;
 
 /** Object that stores a set of quads and provides access
 to each quad and its edges and vertices */
-class SOFA_BASE_TOPOLOGY_API QuadSetTopologyContainer : public EdgeSetTopologyContainer
+class SOFA_SOFABASETOPOLOGY_API QuadSetTopologyContainer : public EdgeSetTopologyContainer
 {
     friend class QuadSetTopologyModifier;
 

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_CONFIGURATIONSETTING_BACKGROUND_H
 #define SOFA_COMPONENT_CONFIGURATIONSETTING_BACKGROUND_H
-#include "config.h"
+#include <SofaBaseVisual/config.h>
 
 #include <sofa/core/objectmodel/ConfigurationSetting.h>
 #include <sofa/core/objectmodel/DataFileName.h>
@@ -38,7 +38,7 @@ namespace configurationsetting
 {
 
 ///Class for the configuration of background settings.
-class SOFA_BASE_VISUAL_API BackgroundSetting: public core::objectmodel::ConfigurationSetting
+class SOFA_SOFABASEVISUAL_API BackgroundSetting: public core::objectmodel::ConfigurationSetting
 {
 public:
     SOFA_CLASS(BackgroundSetting,core::objectmodel::ConfigurationSetting);  ///< Sofa macro to define typedef.

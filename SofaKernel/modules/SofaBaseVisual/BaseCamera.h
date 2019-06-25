@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_VISUALMODEL_BASECAMERA_H
 #define SOFA_COMPONENT_VISUALMODEL_BASECAMERA_H
-#include "config.h"
+#include <SofaBaseVisual/config.h>
 
 #include <sofa/core/objectmodel/BaseObject.h>
 #include <sofa/defaulttype/Vec.h>
@@ -43,7 +43,7 @@ namespace component
 namespace visualmodel
 {
 
-class SOFA_BASE_VISUAL_API BaseCamera : public core::objectmodel::BaseObject
+class SOFA_SOFABASEVISUAL_API BaseCamera : public core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(BaseCamera, core::objectmodel::BaseObject);

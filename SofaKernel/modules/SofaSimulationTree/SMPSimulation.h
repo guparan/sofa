@@ -43,7 +43,7 @@ class MainLoopTask;
 Defines how the scene is inited at the beginning, and updated at each time step.
 Derives from BaseObject in order to model the parameters as Datas, which makes their edition easy in the GUI.
 */
-class SOFA_SIMULATION_TREE_API SMPSimulation: public Simulation
+class SOFA_SOFASIMULATIONTREE_API SMPSimulation: public Simulation
 {
 private:
     Iterative::Multigraph<MainLoopTask> *multiGraph;

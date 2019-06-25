@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LOADER_INIT_H
 #define SOFA_COMPONENT_LOADER_INIT_H
-#include "config.h"
+#include <SofaLoader/config.h>
 
 
 namespace sofa
@@ -31,7 +31,7 @@ namespace component
 {
 
 
-void SOFA_LOADER_API initLoader();
+void SOFA_SOFALOADER_API initLoader();
 
 } // namespace component
 

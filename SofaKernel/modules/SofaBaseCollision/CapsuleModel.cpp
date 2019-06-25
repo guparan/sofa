@@ -46,8 +46,8 @@ int CapsuleModelClass = core::RegisterObject("Collision model which represents a
 //.addAlias("CapsuleSet")
         ;
 
-template class SOFA_BASE_COLLISION_API TCapsule<defaulttype::Vec3Types>;
-template class SOFA_BASE_COLLISION_API TCapsuleModel<defaulttype::Vec3Types>;
+template class SOFA_SOFABASECOLLISION_API TCapsule<defaulttype::Vec3Types>;
+template class SOFA_SOFABASECOLLISION_API TCapsuleModel<defaulttype::Vec3Types>;
 
 
 

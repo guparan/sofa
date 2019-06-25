@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_ANGULARSPRINGFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_ANGULARSPRINGFORCEFIELD_H
-#include "config.h"
+#include <SofaDeformable/config.h>
 
 #include <sofa/core/behavior/ForceField.h>
 #include <sofa/core/objectmodel/Data.h>
@@ -111,8 +111,8 @@ protected :
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_AngularSpringForceField_CPP)
 
-extern template class SOFA_DEFORMABLE_API AngularSpringForceField<sofa::defaulttype::Rigid3Types>;
-//extern template class SOFA_DEFORMABLE_API AngularSpringForceField<Rigid2Types>;
+extern template class SOFA_SOFADEFORMABLE_API AngularSpringForceField<sofa::defaulttype::Rigid3Types>;
+//extern template class SOFA_SOFADEFORMABLE_API AngularSpringForceField<Rigid2Types>;
 
 
 #endif

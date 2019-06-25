@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_DISCRETEINTERSECTION_H
 #define SOFA_COMPONENT_COLLISION_DISCRETEINTERSECTION_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <sofa/core/collision/Intersection.h>
 #include <sofa/core/collision/IntersectorFactory.h>
@@ -35,7 +35,7 @@ namespace component
 
 namespace collision
 {
-class SOFA_BASE_COLLISION_API DiscreteIntersection : public core::collision::Intersection, public core::collision::BaseIntersector
+class SOFA_SOFABASECOLLISION_API DiscreteIntersection : public core::collision::Intersection, public core::collision::BaseIntersector
 {
 public:
     SOFA_CLASS(DiscreteIntersection,sofa::core::collision::Intersection);
@@ -71,7 +71,7 @@ namespace core
 namespace collision
 {
 #if  !defined(SOFA_COMPONENT_COLLISION_DISCRETEINTERSECTION_CPP)
-extern template class SOFA_BASE_COLLISION_API IntersectorFactory<component::collision::DiscreteIntersection>;
+extern template class SOFA_SOFABASECOLLISION_API IntersectorFactory<component::collision::DiscreteIntersection>;
 #endif
 }
 }

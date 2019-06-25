@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MASS_DIAGONALMASS_H
 #define SOFA_COMPONENT_MASS_DIAGONALMASS_H
-#include "config.h"
+#include <SofaBaseMechanics/config.h>
 
 
 
@@ -396,11 +396,11 @@ defaulttype::Vector6 DiagonalMass<defaulttype::Rigid3Types,defaulttype::Rigid3Ma
 
 
 #if  !defined(SOFA_COMPONENT_MASS_DIAGONALMASS_CPP)
-extern template class SOFA_BASE_MECHANICS_API DiagonalMass<defaulttype::Vec3Types,double>;
-extern template class SOFA_BASE_MECHANICS_API DiagonalMass<defaulttype::Vec2Types,double>;
-extern template class SOFA_BASE_MECHANICS_API DiagonalMass<defaulttype::Vec1Types,double>;
-extern template class SOFA_BASE_MECHANICS_API DiagonalMass<defaulttype::Rigid3Types,defaulttype::Rigid3Mass>;
-extern template class SOFA_BASE_MECHANICS_API DiagonalMass<defaulttype::Rigid2Types,defaulttype::Rigid2Mass>;
+extern template class SOFA_SOFABASEMECHANICS_API DiagonalMass<defaulttype::Vec3Types,double>;
+extern template class SOFA_SOFABASEMECHANICS_API DiagonalMass<defaulttype::Vec2Types,double>;
+extern template class SOFA_SOFABASEMECHANICS_API DiagonalMass<defaulttype::Vec1Types,double>;
+extern template class SOFA_SOFABASEMECHANICS_API DiagonalMass<defaulttype::Rigid3Types,defaulttype::Rigid3Mass>;
+extern template class SOFA_SOFABASEMECHANICS_API DiagonalMass<defaulttype::Rigid2Types,defaulttype::Rigid2Mass>;
 
 #endif
 

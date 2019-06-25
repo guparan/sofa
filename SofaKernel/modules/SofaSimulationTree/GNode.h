@@ -38,7 +38,7 @@ namespace tree
 
 /** Define the structure of the scene. Contains (as pointer lists) Component objects and children GNode objects.
  */
-class SOFA_SIMULATION_TREE_API GNode : public simulation::Node
+class SOFA_SOFASIMULATIONTREE_API GNode : public simulation::Node
 {
 public:
     typedef Node::DisplayFlags DisplayFlags;

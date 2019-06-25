@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_GRIDTOPOLOGY_H
 #define SOFA_COMPONENT_TOPOLOGY_GRIDTOPOLOGY_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/MeshTopology.h>
 #include <sofa/core/DataEngine.h>
@@ -48,7 +48,7 @@ enum class Grid_dimension
 /** \brief
  * Define a regular grid topology, with no spatial information.
   */
-class SOFA_BASE_TOPOLOGY_API GridTopology : public MeshTopology
+class SOFA_SOFABASETOPOLOGY_API GridTopology : public MeshTopology
 {
 
 public:

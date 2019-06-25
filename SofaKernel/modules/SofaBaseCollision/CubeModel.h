@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_CUBEMODEL_H
 #define SOFA_COMPONENT_COLLISION_CUBEMODEL_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <sofa/core/CollisionModel.h>
 #include <SofaBaseMechanics/MechanicalObject.h>
@@ -52,7 +52,7 @@ public:
     const std::pair<Cube,Cube>& subcells() const;
 };
 
-class SOFA_BASE_COLLISION_API CubeModel : public core::CollisionModel
+class SOFA_SOFABASECOLLISION_API CubeModel : public core::CollisionModel
 {
 public:
     SOFA_CLASS(CubeModel,sofa::core::CollisionModel);

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_BASEPROXIMITYINTERSECTION_H
 #define SOFA_COMPONENT_COLLISION_BASEPROXIMITYINTERSECTION_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <SofaBaseCollision/DiscreteIntersection.h>
 #include <SofaBaseCollision/BaseIntTool.h>
@@ -35,7 +35,7 @@ namespace component
 namespace collision
 {
 
-class SOFA_BASE_COLLISION_API BaseProximityIntersection : public DiscreteIntersection
+class SOFA_SOFABASECOLLISION_API BaseProximityIntersection : public DiscreteIntersection
 {
 public:
     SOFA_ABSTRACT_CLASS(BaseProximityIntersection,DiscreteIntersection);

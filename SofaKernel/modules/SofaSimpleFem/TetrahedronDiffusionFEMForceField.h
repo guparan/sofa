@@ -24,7 +24,7 @@
 
 
 
-#include "config.h"
+#include <SofaSimpleFem/config.h>
 
 #include <sofa/core/behavior/ForceField.h>
 #include <sofa/helper/fixed_array.h>
@@ -165,9 +165,9 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_TETRAHEDRONDIFFUSIONFEMFORCEFIELD_CPP)
-extern template class SOFA_SIMPLE_FEM_API TetrahedronDiffusionFEMForceField<Vec1Types>;
-extern template class SOFA_SIMPLE_FEM_API TetrahedronDiffusionFEMForceField<Vec2Types>;
-extern template class SOFA_SIMPLE_FEM_API TetrahedronDiffusionFEMForceField<Vec3Types>;
+extern template class SOFA_SOFASIMPLEFEM_API TetrahedronDiffusionFEMForceField<Vec1Types>;
+extern template class SOFA_SOFASIMPLEFEM_API TetrahedronDiffusionFEMForceField<Vec2Types>;
+extern template class SOFA_SOFASIMPLEFEM_API TetrahedronDiffusionFEMForceField<Vec3Types>;
  
 #endif
 

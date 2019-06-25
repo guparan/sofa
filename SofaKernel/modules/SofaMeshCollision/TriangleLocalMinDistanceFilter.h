@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_TRIANGLELOCALMINDISTANCEFILTER_H
 #define SOFA_COMPONENT_COLLISION_TRIANGLELOCALMINDISTANCEFILTER_H
-#include "config.h"
+#include <SofaMeshCollision/config.h>
 
 #include <SofaMeshCollision/LocalMinDistanceFilter.h>
 #include <SofaMeshCollision/LineLocalMinDistanceFilter.h>
@@ -96,7 +96,7 @@ protected:
 /**
  * @brief
  */
-class SOFA_MESH_COLLISION_API TriangleLocalMinDistanceFilter : public LocalMinDistanceFilter
+class SOFA_SOFAMESHCOLLISION_API TriangleLocalMinDistanceFilter : public LocalMinDistanceFilter
 {
 public:
     SOFA_CLASS(TriangleLocalMinDistanceFilter, LocalMinDistanceFilter);

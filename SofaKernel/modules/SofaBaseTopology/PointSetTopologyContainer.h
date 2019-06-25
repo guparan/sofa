@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_POINTSETTOPOLOGYCONTAINER_H
 #define SOFA_COMPONENT_TOPOLOGY_POINTSETTOPOLOGYCONTAINER_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <sofa/helper/vector.h>
 #include <sofa/defaulttype/VecTypes.h>
@@ -43,7 +43,7 @@ class PointSetTopologyModifier;
 
 /** The container class that stores a set of points and provides access
 to each point. This set of point may be a subset of the DOF of the mechanical model */
-class SOFA_BASE_TOPOLOGY_API PointSetTopologyContainer : public core::topology::TopologyContainer
+class SOFA_SOFABASETOPOLOGY_API PointSetTopologyContainer : public core::topology::TopologyContainer
 {
 public:
     SOFA_CLASS(PointSetTopologyContainer,core::topology::TopologyContainer);

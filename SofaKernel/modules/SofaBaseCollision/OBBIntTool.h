@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef OBBINTTOOL_H
 #define OBBINTTOOL_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <SofaBaseCollision/OBBModel.h>
 #include <SofaBaseCollision/IntrOBBOBB.h>
@@ -32,7 +32,7 @@ namespace sofa{
 namespace component{
 namespace collision{
 
-class SOFA_BASE_COLLISION_API OBBIntTool{
+class SOFA_SOFABASECOLLISION_API OBBIntTool{
 public:
     typedef sofa::helper::vector<sofa::core::collision::DetectionOutput> OutputVector;
     typedef sofa::core::collision::DetectionOutput DetectionOutput;

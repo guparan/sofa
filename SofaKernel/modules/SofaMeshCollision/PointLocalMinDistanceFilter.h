@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_POINTLOCALMINDISTANCEFILTER_H
 #define SOFA_COMPONENT_COLLISION_POINTLOCALMINDISTANCEFILTER_H
-#include "config.h"
+#include <SofaMeshCollision/config.h>
 
 #include <SofaMeshCollision/LocalMinDistanceFilter.h>
 #include <SofaMeshCollision/PointModel.h>
@@ -43,7 +43,7 @@ namespace collision
 /**
  * @brief LocalMinDistance cone information class for a Point collision primitive.
  */
-class SOFA_MESH_COLLISION_API PointInfo : public InfoFilter //< Point >
+class SOFA_SOFAMESHCOLLISION_API PointInfo : public InfoFilter //< Point >
 {
 public:
     typedef std::vector< std::pair< sofa::defaulttype::Vector3, double > > TDataContainer;
@@ -96,7 +96,7 @@ protected:
 /**
  * @brief
  */
-class SOFA_MESH_COLLISION_API PointLocalMinDistanceFilter : public LocalMinDistanceFilter
+class SOFA_SOFAMESHCOLLISION_API PointLocalMinDistanceFilter : public LocalMinDistanceFilter
 {
 public:
     SOFA_CLASS(PointLocalMinDistanceFilter,LocalMinDistanceFilter);

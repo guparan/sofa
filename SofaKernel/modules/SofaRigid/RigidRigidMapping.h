@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_RIGIDRIGIDMAPPING_H
 #define SOFA_COMPONENT_MAPPING_RIGIDRIGIDMAPPING_H
-#include "config.h"
+#include <SofaRigid/config.h>
 
 #include <sofa/core/Mapping.h>
 #include <sofa/core/objectmodel/DataFileName.h>
@@ -131,7 +131,7 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_MAPPING_RIGIDRIGIDMAPPING_CPP)
-extern template class SOFA_RIGID_API RigidRigidMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::Rigid3Types >;
+extern template class SOFA_SOFARIGID_API RigidRigidMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::Rigid3Types >;
 #endif
 
 } // namespace mapping

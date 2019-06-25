@@ -24,7 +24,7 @@
 // Copyright: See COPYING file that comes with this distribution
 #ifndef SOFA_COMPONENT_INTERACTIONFORCEFIELD_SPRINGFORCEFIELD_H
 #define SOFA_COMPONENT_INTERACTIONFORCEFIELD_SPRINGFORCEFIELD_H
-#include "config.h"
+#include <SofaDeformable/config.h>
 
 #include <sofa/core/behavior/PairInteractionForceField.h>
 #include <sofa/core/behavior/MechanicalState.h>
@@ -210,12 +210,12 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_SPRINGFORCEFIELD_CPP)
-extern template class SOFA_DEFORMABLE_API LinearSpring<double>;
-extern template class SOFA_DEFORMABLE_API SpringForceField<defaulttype::Vec3Types>;
-extern template class SOFA_DEFORMABLE_API SpringForceField<defaulttype::Vec2Types>;
-extern template class SOFA_DEFORMABLE_API SpringForceField<defaulttype::Vec1Types>;
-extern template class SOFA_DEFORMABLE_API SpringForceField<defaulttype::Vec6Types>;
-extern template class SOFA_DEFORMABLE_API SpringForceField<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFADEFORMABLE_API LinearSpring<double>;
+extern template class SOFA_SOFADEFORMABLE_API SpringForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFADEFORMABLE_API SpringForceField<defaulttype::Vec2Types>;
+extern template class SOFA_SOFADEFORMABLE_API SpringForceField<defaulttype::Vec1Types>;
+extern template class SOFA_SOFADEFORMABLE_API SpringForceField<defaulttype::Vec6Types>;
+extern template class SOFA_SOFADEFORMABLE_API SpringForceField<defaulttype::Rigid3Types>;
 #endif
 
 } // namespace interactionforcefield

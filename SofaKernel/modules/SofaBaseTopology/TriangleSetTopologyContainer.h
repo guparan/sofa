@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_TRIANGLESETTOPOLOGYCONTAINER_H
 #define SOFA_COMPONENT_TOPOLOGY_TRIANGLESETTOPOLOGYCONTAINER_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/EdgeSetTopologyContainer.h>
 
@@ -39,7 +39,7 @@ class TriangleSetTopologyModifier;
 /*! \class TriangleSetTopologyContainer
 \brief: Object that stores a set of triangles and provides access
 to each triangle and its edges and vertices */
-class SOFA_BASE_TOPOLOGY_API TriangleSetTopologyContainer : public EdgeSetTopologyContainer
+class SOFA_SOFABASETOPOLOGY_API TriangleSetTopologyContainer : public EdgeSetTopologyContainer
 {
     friend class TriangleSetTopologyModifier;
 

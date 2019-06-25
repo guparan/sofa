@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_BRUTEFORCEDETECTION_H
 #define SOFA_COMPONENT_COLLISION_BRUTEFORCEDETECTION_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <sofa/core/collision/BroadPhaseDetection.h>
 #include <sofa/core/collision/NarrowPhaseDetection.h>
@@ -40,7 +40,7 @@ namespace collision
 {
 
 
-class SOFA_BASE_COLLISION_API MirrorIntersector : public core::collision::ElementIntersector
+class SOFA_SOFABASECOLLISION_API MirrorIntersector : public core::collision::ElementIntersector
 {
 public:
     core::collision::ElementIntersector* intersector;
@@ -78,7 +78,7 @@ public:
 };
 
 
-class SOFA_BASE_COLLISION_API BruteForceDetection :
+class SOFA_SOFABASECOLLISION_API BruteForceDetection :
     public core::collision::BroadPhaseDetection,
     public core::collision::NarrowPhaseDetection
 {

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_RIGIDMAPPING_H
 #define SOFA_COMPONENT_MAPPING_RIGIDMAPPING_H
-#include "config.h"
+#include <SofaRigid/config.h>
 
 #include <sofa/core/Mapping.h>
 #include <sofa/core/objectmodel/DataFileName.h>
@@ -182,9 +182,9 @@ const defaulttype::BaseMatrix* RigidMapping< sofa::defaulttype::Rigid2Types, sof
 
 
 #if  !defined(SOFA_COMPONENT_MAPPING_RIGIDMAPPING_CPP)
-extern template class SOFA_RIGID_API RigidMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::Vec3dTypes >;
-extern template class SOFA_RIGID_API RigidMapping< sofa::defaulttype::Rigid2Types, sofa::defaulttype::Vec2Types >;
-extern template class SOFA_RIGID_API RigidMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::ExtVec3Types >;
+extern template class SOFA_SOFARIGID_API RigidMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::Vec3dTypes >;
+extern template class SOFA_SOFARIGID_API RigidMapping< sofa::defaulttype::Rigid2Types, sofa::defaulttype::Vec2Types >;
+extern template class SOFA_SOFARIGID_API RigidMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::ExtVec3Types >;
 
 
 

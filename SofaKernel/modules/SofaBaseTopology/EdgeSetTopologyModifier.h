@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_EDGESETTOPOLOGYMODIFIER_H
 #define SOFA_COMPONENT_TOPOLOGY_EDGESETTOPOLOGYMODIFIER_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/PointSetTopologyModifier.h>
 
@@ -39,7 +39,7 @@ class EdgeSetTopologyContainer;
 /**
  * A class that can apply basic transformations on a set of edges.
  */
-class SOFA_BASE_TOPOLOGY_API EdgeSetTopologyModifier : public PointSetTopologyModifier
+class SOFA_SOFABASETOPOLOGY_API EdgeSetTopologyModifier : public PointSetTopologyModifier
 {
 public:
     SOFA_CLASS(EdgeSetTopologyModifier,PointSetTopologyModifier);

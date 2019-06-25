@@ -19,7 +19,7 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#include "config.h"
+#include <SofaLoader/config.h>
 
 #include <SofaLoader/BaseVTKReader.h>
 #include <SofaLoader/BaseVTKReader.inl>

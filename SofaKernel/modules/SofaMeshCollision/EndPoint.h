@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef ENDPOINT_H
 #define ENDPOINT_H
-#include "config.h"
+#include <SofaMeshCollision/config.h>
 
 #include <iostream>
 #include <cstdio>

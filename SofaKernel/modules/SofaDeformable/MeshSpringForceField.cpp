@@ -44,9 +44,9 @@ int MeshSpringForceFieldClass = core::RegisterObject("Spring force field acting 
 
         ;
 
-template class SOFA_DEFORMABLE_API MeshSpringForceField<Vec3Types>;
-template class SOFA_DEFORMABLE_API MeshSpringForceField<Vec2Types>;
-template class SOFA_DEFORMABLE_API MeshSpringForceField<Vec1Types>;
+template class SOFA_SOFADEFORMABLE_API MeshSpringForceField<Vec3Types>;
+template class SOFA_SOFADEFORMABLE_API MeshSpringForceField<Vec2Types>;
+template class SOFA_SOFADEFORMABLE_API MeshSpringForceField<Vec1Types>;
 
 } // namespace interactionforcefield
 

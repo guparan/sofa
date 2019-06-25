@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_RESTSHAPESPRINGFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_RESTSHAPESPRINGFORCEFIELD_H
-#include "config.h"
+#include <SofaDeformable/config.h>
 
 #include <sofa/defaulttype/RGBAColor.h>
 
@@ -144,9 +144,9 @@ private :
 };
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_RESTSHAPESPRINGSFORCEFIELD_CPP)
-extern template class SOFA_DEFORMABLE_API RestShapeSpringsForceField<sofa::defaulttype::Vec3Types>;
-extern template class SOFA_DEFORMABLE_API RestShapeSpringsForceField<sofa::defaulttype::Vec1Types>;
-extern template class SOFA_DEFORMABLE_API RestShapeSpringsForceField<sofa::defaulttype::Rigid3Types>;
+extern template class SOFA_SOFADEFORMABLE_API RestShapeSpringsForceField<sofa::defaulttype::Vec3Types>;
+extern template class SOFA_SOFADEFORMABLE_API RestShapeSpringsForceField<sofa::defaulttype::Vec1Types>;
+extern template class SOFA_SOFADEFORMABLE_API RestShapeSpringsForceField<sofa::defaulttype::Rigid3Types>;
 #endif
 
 } // namespace forcefield

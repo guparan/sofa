@@ -57,7 +57,7 @@ class HexahedronSetTopologyModifier;
 
 
 /** a class that stores a set of hexahedra and provides access with adjacent quads, edges and vertices */
-class SOFA_BASE_TOPOLOGY_API HexahedronSetTopologyContainer : public QuadSetTopologyContainer
+class SOFA_SOFABASETOPOLOGY_API HexahedronSetTopologyContainer : public QuadSetTopologyContainer
 {
     friend class HexahedronSetTopologyModifier;
 

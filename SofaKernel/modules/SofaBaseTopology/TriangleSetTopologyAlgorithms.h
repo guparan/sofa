@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_TRIANGLESETTOPOLOGYALGORITHMS_H
 #define SOFA_COMPONENT_TOPOLOGY_TRIANGLESETTOPOLOGYALGORITHMS_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/EdgeSetTopologyAlgorithms.h>
 
@@ -155,11 +155,11 @@ private:
 
 
 #if !defined(SOFA_COMPONENT_TOPOLOGY_TRIANGLESETTOPOLOGYALGORITHMS_CPP)
-extern template class SOFA_BASE_TOPOLOGY_API TriangleSetTopologyAlgorithms<defaulttype::Vec3Types>;
-extern template class SOFA_BASE_TOPOLOGY_API TriangleSetTopologyAlgorithms<defaulttype::Vec2Types>;
-extern template class SOFA_BASE_TOPOLOGY_API TriangleSetTopologyAlgorithms<defaulttype::Vec1Types>;
-//extern template class SOFA_BASE_TOPOLOGY_API TriangleSetTopologyAlgorithms<defaulttype::Rigid3Types>;
-//extern template class SOFA_BASE_TOPOLOGY_API TriangleSetTopologyAlgorithms<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API TriangleSetTopologyAlgorithms<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API TriangleSetTopologyAlgorithms<defaulttype::Vec2Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API TriangleSetTopologyAlgorithms<defaulttype::Vec1Types>;
+//extern template class SOFA_SOFABASETOPOLOGY_API TriangleSetTopologyAlgorithms<defaulttype::Rigid3Types>;
+//extern template class SOFA_SOFABASETOPOLOGY_API TriangleSetTopologyAlgorithms<defaulttype::Rigid2Types>;
 
 
 #endif

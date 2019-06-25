@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_NEWPROXIMITYINTERSECTION_H
 #define SOFA_COMPONENT_COLLISION_NEWPROXIMITYINTERSECTION_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <SofaBaseCollision/BaseProximityIntersection.h>
 
@@ -34,7 +34,7 @@ namespace component
 namespace collision
 {
 
-class SOFA_BASE_COLLISION_API NewProximityIntersection : public BaseProximityIntersection
+class SOFA_SOFABASECOLLISION_API NewProximityIntersection : public BaseProximityIntersection
 {
 public:
     SOFA_CLASS(NewProximityIntersection,BaseProximityIntersection);
@@ -61,7 +61,7 @@ namespace core
 namespace collision
 {
 #if  !defined(SOFA_COMPONENT_COLLISION_NEWPROXIMITYINTERSECTION_CPP)
-extern template class SOFA_BASE_COLLISION_API IntersectorFactory<component::collision::NewProximityIntersection>;
+extern template class SOFA_SOFABASECOLLISION_API IntersectorFactory<component::collision::NewProximityIntersection>;
 #endif
 }
 }

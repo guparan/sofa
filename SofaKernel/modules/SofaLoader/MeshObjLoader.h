@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LOADER_MESHOBJLOADER_H
 #define SOFA_COMPONENT_LOADER_MESHOBJLOADER_H
-#include "config.h"
+#include <SofaLoader/config.h>
 
 #include <sofa/core/loader/MeshLoader.h>
 #include <sofa/helper/SVector.h>
@@ -36,7 +36,7 @@ namespace component
 namespace loader
 {
 
-class SOFA_LOADER_API MeshObjLoader : public sofa::core::loader::MeshLoader
+class SOFA_SOFALOADER_API MeshObjLoader : public sofa::core::loader::MeshLoader
 {
 public:
     enum FaceType { EDGE, TRIANGLE, QUAD, NBFACETYPE };

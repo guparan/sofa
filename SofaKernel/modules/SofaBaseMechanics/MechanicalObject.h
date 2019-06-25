@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MECHANICALOBJECT_H
 #define SOFA_COMPONENT_MECHANICALOBJECT_H
-#include "config.h"
+#include <SofaBaseMechanics/config.h>
 
 #include <sofa/core/behavior/MechanicalState.h>
 #include <sofa/core/topology/BaseMeshTopology.h>
@@ -456,30 +456,30 @@ protected :
 
 };
 
-template<> SOFA_BASE_MECHANICS_API
+template<> SOFA_SOFABASEMECHANICS_API
 void MechanicalObject<defaulttype::Rigid3Types>::applyRotation (const defaulttype::Quat q);
 
-template<> SOFA_BASE_MECHANICS_API
+template<> SOFA_SOFABASEMECHANICS_API
 void MechanicalObject<defaulttype::Rigid3Types>::addFromBaseVectorSameSize(core::VecId dest, const defaulttype::BaseVector* src, unsigned int &offset );
 
 
-template<> SOFA_BASE_MECHANICS_API
+template<> SOFA_SOFABASEMECHANICS_API
 void MechanicalObject<defaulttype::Rigid3Types>::addFromBaseVectorDifferentSize(core::VecId dest, const defaulttype::BaseVector* src, unsigned int &offset );
 
 
-template<> SOFA_BASE_MECHANICS_API
+template<> SOFA_SOFABASEMECHANICS_API
 void MechanicalObject<defaulttype::Rigid3Types>::draw(const core::visual::VisualParams* vparams);
 
 
 
 
 #if  !defined(SOFA_COMPONENT_CONTAINER_MECHANICALOBJECT_CPP)
-extern template class SOFA_BASE_MECHANICS_API MechanicalObject<defaulttype::Vec3Types>;
-extern template class SOFA_BASE_MECHANICS_API MechanicalObject<defaulttype::Vec2Types>;
-extern template class SOFA_BASE_MECHANICS_API MechanicalObject<defaulttype::Vec1Types>;
-extern template class SOFA_BASE_MECHANICS_API MechanicalObject<defaulttype::Vec6Types>;
-extern template class SOFA_BASE_MECHANICS_API MechanicalObject<defaulttype::Rigid3Types>;
-extern template class SOFA_BASE_MECHANICS_API MechanicalObject<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFABASEMECHANICS_API MechanicalObject<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABASEMECHANICS_API MechanicalObject<defaulttype::Vec2Types>;
+extern template class SOFA_SOFABASEMECHANICS_API MechanicalObject<defaulttype::Vec1Types>;
+extern template class SOFA_SOFABASEMECHANICS_API MechanicalObject<defaulttype::Vec6Types>;
+extern template class SOFA_SOFABASEMECHANICS_API MechanicalObject<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASEMECHANICS_API MechanicalObject<defaulttype::Rigid2Types>;
 
 #endif
 

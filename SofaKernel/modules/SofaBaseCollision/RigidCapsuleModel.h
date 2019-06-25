@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_RIGIDCAPSULEMODEL_H
 #define SOFA_COMPONENT_COLLISION_RIGIDCAPSULEMODEL_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <sofa/core/CollisionModel.h>
 #include <SofaBaseMechanics/MechanicalObject.h>
@@ -199,8 +199,8 @@ typedef TCapsuleModel<sofa::defaulttype::Rigid3Types> RigidCapsuleModel;
 typedef TCapsule<sofa::defaulttype::Rigid3Types> RigidCapsule;
 
 #if  !defined(SOFA_COMPONENT_COLLISION_RIGIDCAPSULEMODEL_CPP)
-extern template class SOFA_BASE_COLLISION_API TCapsule<defaulttype::Rigid3Types>;
-extern template class SOFA_BASE_COLLISION_API TCapsuleModel<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASECOLLISION_API TCapsule<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASECOLLISION_API TCapsuleModel<defaulttype::Rigid3Types>;
 
 #endif
 

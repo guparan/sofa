@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LINEARSOLVER_FULLVECTOR_H
 #define SOFA_COMPONENT_LINEARSOLVER_FULLVECTOR_H
-#include "config.h"
+#include <SofaBaseLinearSolver/config.h>
 
 #include <sofa/defaulttype/BaseVector.h>
 #include <sofa/helper/rmath.h>
@@ -318,13 +318,13 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_LINEARSOLVER_FULLVECTOR_CPP)
-//extern template class SOFA_BASE_LINEAR_SOLVER_API FullVector<bool>;
+//extern template class SOFA_SOFABASELINEARSOLVER_API FullVector<bool>;
 #endif
 
-template<> SOFA_BASE_LINEAR_SOLVER_API void FullVector<bool>::set(Index i, SReal v);
-template<> SOFA_BASE_LINEAR_SOLVER_API void FullVector<bool>::add(Index i, SReal v);
-template<> SOFA_BASE_LINEAR_SOLVER_API bool FullVector<bool>::dot(const FullVector<Real>& a) const;
-template<> SOFA_BASE_LINEAR_SOLVER_API double FullVector<bool>::norm() const;
+template<> SOFA_SOFABASELINEARSOLVER_API void FullVector<bool>::set(Index i, SReal v);
+template<> SOFA_SOFABASELINEARSOLVER_API void FullVector<bool>::add(Index i, SReal v);
+template<> SOFA_SOFABASELINEARSOLVER_API bool FullVector<bool>::dot(const FullVector<Real>& a) const;
+template<> SOFA_SOFABASELINEARSOLVER_API double FullVector<bool>::norm() const;
 
 } // namespace linearsolver
 

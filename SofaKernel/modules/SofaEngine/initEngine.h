@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_INIT_H
 #define SOFA_COMPONENT_ENGINE_INIT_H
-#include "config.h"
+#include <SofaEngine/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_ENGINE_API initEngine();
+void SOFA_SOFAENGINE_API initEngine();
 
 } // namespace component
 

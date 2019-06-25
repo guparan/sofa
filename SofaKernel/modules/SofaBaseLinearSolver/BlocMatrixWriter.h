@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LINEARSOLVER_BLOCMATRIXWRITER_H
 #define SOFA_COMPONENT_LINEARSOLVER_BLOCMATRIXWRITER_H
-#include "config.h"
+#include <SofaBaseLinearSolver/config.h>
 
 #include <sofa/defaulttype/VecTypes.h>
 #include <sofa/defaulttype/Mat.h>

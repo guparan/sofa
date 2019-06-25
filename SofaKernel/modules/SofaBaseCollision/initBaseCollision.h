@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_BASE_COLLISION_INIT_H
 #define SOFA_COMPONENT_BASE_COLLISION_INIT_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_BASE_COLLISION_API initBaseCollision();
+void SOFA_SOFABASECOLLISION_API initBaseCollision();
 
 } // namespace component
 

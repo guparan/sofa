@@ -44,8 +44,8 @@ int BarycentricMappingClass = core::RegisterObject("Mapping using barycentric co
 
         ;
 
-template class SOFA_BASE_MECHANICS_API BarycentricMapping< Vec3dTypes, Vec3dTypes >;
-template class SOFA_BASE_MECHANICS_API BarycentricMapping< Vec3dTypes, ExtVec3Types >;
+template class SOFA_SOFABASEMECHANICS_API BarycentricMapping< Vec3dTypes, Vec3dTypes >;
+template class SOFA_SOFABASEMECHANICS_API BarycentricMapping< Vec3dTypes, ExtVec3Types >;
 
 
 

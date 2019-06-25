@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_CONTACT_LISTENER_H
 #define SOFA_CONTACT_LISTENER_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <sofa/core/objectmodel/BaseObject.h>
 #include <sofa/core/collision/Contact.h>
@@ -40,7 +40,7 @@ namespace collision
 // forward declaration
 class NarrowPhaseDetection;
 
-class SOFA_BASE_COLLISION_API ContactListener : public virtual core::objectmodel::BaseObject
+class SOFA_SOFABASECOLLISION_API ContactListener : public virtual core::objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(ContactListener, core::objectmodel::BaseObject);

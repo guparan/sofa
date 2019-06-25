@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_POINTMODEL_H
 #define SOFA_COMPONENT_COLLISION_POINTMODEL_H
-#include "config.h"
+#include <SofaMeshCollision/config.h>
 
 #include <sofa/core/CollisionModel.h>
 #include <SofaMeshCollision/LocalMinDistanceFilter.h>
@@ -81,7 +81,7 @@ public:
 };
 
 template<class TDataTypes>
-class SOFA_MESH_COLLISION_API PointCollisionModel : public core::CollisionModel
+class SOFA_SOFAMESHCOLLISION_API PointCollisionModel : public core::CollisionModel
 {
 public:
     SOFA_CLASS(SOFA_TEMPLATE(PointCollisionModel, TDataTypes), core::CollisionModel);
@@ -219,7 +219,7 @@ typedef PointCollisionModel<sofa::defaulttype::Vec3Types> PointModel;
 typedef TPoint<sofa::defaulttype::Vec3Types> Point;
 
 #if  !defined(SOFA_COMPONENT_COLLISION_POINTMODEL_CPP)
-extern template class SOFA_MESH_COLLISION_API PointCollisionModel<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAMESHCOLLISION_API PointCollisionModel<defaulttype::Vec3Types>;
 
 #endif
 

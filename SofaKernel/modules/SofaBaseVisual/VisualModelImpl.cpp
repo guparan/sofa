@@ -1966,9 +1966,9 @@ void VisualModelImpl::exportOBJ(std::string name, std::ostream* out, std::ostrea
     tindex+=nbt;
 }
 
-//template class SOFA_BASE_VISUAL_API VisualModelPointHandler< ResizableExtVector<ExtVec3fTypes::Coord> >;
-template class SOFA_BASE_VISUAL_API VisualModelPointHandler< ResizableExtVector<VisualModelImpl::Coord> >;
-template class SOFA_BASE_VISUAL_API VisualModelPointHandler< ResizableExtVector<VisualModelImpl::TexCoord> >;
+//template class SOFA_SOFABASEVISUAL_API VisualModelPointHandler< ResizableExtVector<ExtVec3fTypes::Coord> >;
+template class SOFA_SOFABASEVISUAL_API VisualModelPointHandler< ResizableExtVector<VisualModelImpl::Coord> >;
+template class SOFA_SOFABASEVISUAL_API VisualModelPointHandler< ResizableExtVector<VisualModelImpl::TexCoord> >;
 
 } // namespace visualmodel
 

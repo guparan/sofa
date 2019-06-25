@@ -40,7 +40,7 @@ namespace core
 {
     namespace collision
     {
-        template class SOFA_BASE_COLLISION_API IntersectorFactory<component::collision::DiscreteIntersection>;
+        template class SOFA_SOFABASECOLLISION_API IntersectorFactory<component::collision::DiscreteIntersection>;
     }
 }
 

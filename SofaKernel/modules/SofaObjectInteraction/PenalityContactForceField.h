@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_INTERACTIONFORCEFIELD_PENALITYCONTACTFORCEFIELD_H
 #define SOFA_COMPONENT_INTERACTIONFORCEFIELD_PENALITYCONTACTFORCEFIELD_H
-#include "config.h"
+#include <SofaObjectInteraction/config.h>
 
 #include <sofa/core/behavior/PairInteractionForceField.h>
 #include <sofa/core/behavior/MechanicalState.h>
@@ -134,7 +134,7 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_INTERACTIONFORCEFIELD_PENALITYCONTACTFORCEFIELD_CPP)
-extern template class SOFA_OBJECT_INTERACTION_API PenalityContactForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAOBJECTINTERACTION_API PenalityContactForceField<defaulttype::Vec3Types>;
 
 #endif
 

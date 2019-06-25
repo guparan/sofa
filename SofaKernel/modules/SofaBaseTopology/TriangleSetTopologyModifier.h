@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_TRIANGLESETTOPOLOGYMODIFIER_H
 #define SOFA_COMPONENT_TOPOLOGY_TRIANGLESETTOPOLOGYMODIFIER_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/EdgeSetTopologyModifier.h>
 
@@ -37,7 +37,7 @@ class TriangleSetTopologyContainer;
 /**
  * A class that modifies the topology by adding and removing triangles
  */
-class SOFA_BASE_TOPOLOGY_API TriangleSetTopologyModifier : public EdgeSetTopologyModifier
+class SOFA_SOFABASETOPOLOGY_API TriangleSetTopologyModifier : public EdgeSetTopologyModifier
 {
 public:
     SOFA_CLASS(TriangleSetTopologyModifier,EdgeSetTopologyModifier);

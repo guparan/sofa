@@ -44,20 +44,20 @@ namespace xml
 {
 
 #ifdef SOFA_XML_PARSER_TINYXML
-SOFA_SIMULATION_COMMON_API BaseElement* processXMLLoading(const char *filename, const TiXmlDocument &doc, bool fromMem=false);
+SOFA_SOFASIMULATIONCOMMON_API BaseElement* processXMLLoading(const char *filename, const TiXmlDocument &doc, bool fromMem=false);
 #endif
 #ifdef SOFA_XML_PARSER_LIBXML
-SOFA_SIMULATION_COMMON_API BaseElement* processXMLLoading(const char *filename, const xmlDocPtr &doc, bool fromMem=false);
+SOFA_SOFASIMULATIONCOMMON_API BaseElement* processXMLLoading(const char *filename, const xmlDocPtr &doc, bool fromMem=false);
 #endif
 
-SOFA_SIMULATION_COMMON_API BaseElement* loadFromFile(const char *filename);
+SOFA_SOFASIMULATIONCOMMON_API BaseElement* loadFromFile(const char *filename);
 
-SOFA_SIMULATION_COMMON_API BaseElement* loadFromMemory(const char *filename, const char *data, unsigned int size );
+SOFA_SOFASIMULATIONCOMMON_API BaseElement* loadFromMemory(const char *filename, const char *data, unsigned int size );
 
 
-SOFA_SIMULATION_COMMON_API bool save(const char *filename, BaseElement* root);
+SOFA_SOFASIMULATIONCOMMON_API bool save(const char *filename, BaseElement* root);
 
-extern int SOFA_SIMULATION_COMMON_API numDefault;
+extern int SOFA_SOFASIMULATIONCOMMON_API numDefault;
 
 } // namespace xml
 

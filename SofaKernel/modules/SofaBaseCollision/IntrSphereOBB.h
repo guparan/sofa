@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_INTRSPHEREOBB_H
 #define SOFA_COMPONENT_COLLISION_INTRSPHEREOBB_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <SofaBaseCollision/SphereModel.h>
 #include <SofaBaseCollision/OBBModel.h>
@@ -70,8 +70,8 @@ private:
 typedef TIntrSphereOBB<defaulttype::Vec3Types,defaulttype::Rigid3Types> IntrSphereOBB;
 
 #if  !defined(SOFA_COMPONENT_COLLISION_INTRSPHEREOBB_CPP)
-extern template class SOFA_BASE_COLLISION_API TIntrSphereOBB<defaulttype::Vec3Types,defaulttype::Rigid3Types>;
-extern template class SOFA_BASE_COLLISION_API TIntrSphereOBB<defaulttype::Rigid3Types,defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASECOLLISION_API TIntrSphereOBB<defaulttype::Vec3Types,defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASECOLLISION_API TIntrSphereOBB<defaulttype::Rigid3Types,defaulttype::Rigid3Types>;
 
 #endif
 

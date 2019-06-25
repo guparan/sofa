@@ -27,7 +27,7 @@
 #define SOFA_INFOCOMPONENT_H
 
 #include <sofa/core/objectmodel/BaseObject.h>
-#include "config.h"
+#include <SofaComponentBase/config.h>
 
 namespace sofa
 {
@@ -44,7 +44,7 @@ using sofa::core::objectmodel::BaseObject ;
 
 /// Despite this component does absolutely nothin... it is very usefull as it can be used to
 /// retain information scene graph.
-class SOFA_COMPONENT_BASE_API InfoComponent : public BaseObject
+class SOFA_SOFACOMPONENTBASE_API InfoComponent : public BaseObject
 {
 public:
     SOFA_CLASS(InfoComponent, BaseObject);

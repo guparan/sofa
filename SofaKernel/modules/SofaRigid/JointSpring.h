@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_JOINTSPRING_H
 #define SOFA_JOINTSPRING_H
-#include "config.h"
+#include <SofaRigid/config.h>
 
 namespace sofa
 {
@@ -218,7 +218,7 @@ public:
 };
 
 #if  !defined(SOFA_JOINTSPRING_CPP)
-extern template class SOFA_RIGID_API JointSpring<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFARIGID_API JointSpring<defaulttype::Rigid3Types>;
 #endif
 
 } // namespace interactionforcefield

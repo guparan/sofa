@@ -22,7 +22,7 @@
 #ifndef SOFA_MAKEDATAALIASCOMPONENT_H
 #define SOFA_MAKEDATAALIASCOMPONENT_H
 
-#include "config.h"
+#include <SofaComponentBase/config.h>
 
 #include <sofa/core/objectmodel/BaseObjectDescription.h>
 #include <sofa/core/objectmodel/BaseObject.h>
@@ -43,7 +43,7 @@ namespace makedataaliascomponent
 {
 
 /// A component to add alias to other components.
-class SOFA_COMPONENT_BASE_API MakeDataAliasComponent : public core::objectmodel::BaseObject
+class SOFA_SOFACOMPONENTBASE_API MakeDataAliasComponent : public core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(MakeDataAliasComponent, core::objectmodel::BaseObject);

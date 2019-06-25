@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_RAYTRIANGLEINTERSECTION_H
 #define SOFA_COMPONENT_RAYTRIANGLEINTERSECTION_H
-#include "config.h"
+#include <SofaMeshCollision/config.h>
 
 #include <SofaMeshCollision/Triangle.h>
 
@@ -37,7 +37,7 @@ namespace collision
 
 /// this class computes if a Triangle P intersects a line segment
 
-class SOFA_MESH_COLLISION_API RayTriangleIntersection
+class SOFA_SOFAMESHCOLLISION_API RayTriangleIntersection
 {
 public:
     RayTriangleIntersection(); // start a Proximity solver

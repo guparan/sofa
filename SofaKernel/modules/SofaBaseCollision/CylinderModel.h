@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_CYLINDERMODEL_H
 #define SOFA_COMPONENT_COLLISION_CYLINDERMODEL_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <sofa/core/CollisionModel.h>
 #include <SofaBaseMechanics/MechanicalObject.h>
@@ -178,8 +178,8 @@ typedef TCylinderModel<sofa::defaulttype::Rigid3Types> CylinderModel;
 typedef TCylinder<sofa::defaulttype::Rigid3Types> Cylinder;
 
 #if  !defined(SOFA_COMPONENT_COLLISION_CYLINDERMODEL_CPP)
-extern template class SOFA_BASE_COLLISION_API TCylinder<defaulttype::Rigid3Types>;
-extern template class SOFA_BASE_COLLISION_API TCylinderModel<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASECOLLISION_API TCylinder<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASECOLLISION_API TCylinderModel<defaulttype::Rigid3Types>;
 #endif
 
 } // namespace collision

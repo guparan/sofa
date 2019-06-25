@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef COLLISIONPM_H
 #define COLLISIONPM_H
-#include "config.h"
+#include <SofaMeshCollision/config.h>
 
 #include <sofa/core/CollisionElement.h>
 #include <sofa/core/collision/Intersection.h>

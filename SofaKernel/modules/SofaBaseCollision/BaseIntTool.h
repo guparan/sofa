@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef BASEINTTOOL_H
 #define BASEINTTOOL_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <SofaBaseCollision/CubeModel.h>
 #include <SofaBaseCollision/CapsuleIntTool.h>
@@ -34,7 +34,7 @@ namespace component
 namespace collision
 {
 
-class SOFA_BASE_COLLISION_API BaseIntTool : public CapsuleIntTool,public OBBIntTool{
+class SOFA_SOFABASECOLLISION_API BaseIntTool : public CapsuleIntTool,public OBBIntTool{
 public:
     typedef sofa::helper::vector<sofa::core::collision::DetectionOutput> OutputVector;
 

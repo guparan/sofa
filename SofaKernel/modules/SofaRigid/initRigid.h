@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_RIGID_INIT_H
 #define SOFA_COMPONENT_RIGID_INIT_H
-#include "config.h"
+#include <SofaRigid/config.h>
 
 
 namespace sofa
@@ -31,7 +31,7 @@ namespace component
 {
 
 
-void SOFA_RIGID_API initRigid();
+void SOFA_SOFARIGID_API initRigid();
 
 } // namespace component
 

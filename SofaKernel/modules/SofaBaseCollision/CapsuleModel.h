@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_CAPSULEMODEL_H
 #define SOFA_COMPONENT_COLLISION_CAPSULEMODEL_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <sofa/core/CollisionModel.h>
 #include <SofaBaseMechanics/MechanicalObject.h>
@@ -197,8 +197,8 @@ typedef TCapsuleModel<sofa::defaulttype::Vec3Types> CapsuleModel;
 typedef TCapsule<sofa::defaulttype::Vec3Types> Capsule;
 
 #if  !defined(SOFA_COMPONENT_COLLISION_CAPSULEMODEL_CPP)
-extern template class SOFA_BASE_COLLISION_API TCapsule<defaulttype::Vec3Types>;
-extern template class SOFA_BASE_COLLISION_API TCapsuleModel<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABASECOLLISION_API TCapsule<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABASECOLLISION_API TCapsuleModel<defaulttype::Vec3Types>;
 
 #endif
 

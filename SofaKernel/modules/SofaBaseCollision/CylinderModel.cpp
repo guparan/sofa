@@ -43,8 +43,8 @@ int RigidCylinderModelClass = core::RegisterObject("Collision model which repres
         .addAlias("CylinderModel")
         ;
 
-template class SOFA_BASE_COLLISION_API TCylinder<defaulttype::Rigid3Types>;
-template class SOFA_BASE_COLLISION_API TCylinderModel<defaulttype::Rigid3Types>;
+template class SOFA_SOFABASECOLLISION_API TCylinder<defaulttype::Rigid3Types>;
+template class SOFA_SOFABASECOLLISION_API TCylinderModel<defaulttype::Rigid3Types>;
 
 
 

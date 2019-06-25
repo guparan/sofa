@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_BASE_LINEAR_SOLVER_INIT_H
 #define SOFA_COMPONENT_BASE_LINEAR_SOLVER_INIT_H
-#include "config.h"
+#include <SofaBaseLinearSolver/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_BASE_LINEAR_SOLVER_API initBaseLinearSolver();
+void SOFA_SOFABASELINEARSOLVER_API initBaseLinearSolver();
 
 } // namespace component
 

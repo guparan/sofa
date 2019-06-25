@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_BARYCENTRICMAPPING_H
 #define SOFA_COMPONENT_MAPPING_BARYCENTRICMAPPING_H
-#include "config.h"
+#include <SofaBaseMechanics/config.h>
 
 #include <SofaEigen2Solver/EigenSparseMatrix.h>
 
@@ -123,8 +123,8 @@ private:
 };
 
 #if !defined(SOFA_COMPONENT_MAPPING_BARYCENTRICMAPPING_CPP)
-extern template class SOFA_BASE_MECHANICS_API BarycentricMapping< Vec3dTypes, Vec3dTypes >;
-extern template class SOFA_BASE_MECHANICS_API BarycentricMapping< Vec3dTypes, ExtVec3Types >;
+extern template class SOFA_SOFABASEMECHANICS_API BarycentricMapping< Vec3dTypes, Vec3dTypes >;
+extern template class SOFA_SOFABASEMECHANICS_API BarycentricMapping< Vec3dTypes, ExtVec3Types >;
 
 
 #endif

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_VISUALMODEL_VISUALMODELIMPL_H
 #define SOFA_COMPONENT_VISUALMODEL_VISUALMODELIMPL_H
-#include "config.h"
+#include <SofaBaseVisual/config.h>
 
 #include <sofa/core/State.h>
 #include <sofa/core/visual/VisualModel.h>
@@ -48,7 +48,7 @@ namespace visualmodel
 
 using sofa::core::objectmodel::Data ;
 
-class SOFA_BASE_VISUAL_API ExtVec3State : public core::State< sofa::defaulttype::ExtVec3Types >
+class SOFA_SOFABASEVISUAL_API ExtVec3State : public core::State< sofa::defaulttype::ExtVec3Types >
 {
 public:
     topology::PointData< sofa::defaulttype::ResizableExtVector<Coord> > m_positions; ///< Vertices coordinates
@@ -81,7 +81,7 @@ public:
  *
  */
 
-class SOFA_BASE_VISUAL_API VisualModelImpl : public core::visual::VisualModel, public ExtVec3State //, public RigidState
+class SOFA_SOFABASEVISUAL_API VisualModelImpl : public core::visual::VisualModel, public ExtVec3State //, public RigidState
 {
 public:
     SOFA_CLASS2(VisualModelImpl, core::visual::VisualModel, ExtVec3State);

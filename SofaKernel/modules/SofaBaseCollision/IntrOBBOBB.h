@@ -24,7 +24,7 @@
 
 #ifndef SOFA_COMPONENT_COLLISION_INTROBBOBB_H
 #define SOFA_COMPONENT_COLLISION_INTROBBOBB_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <SofaBaseCollision/Intersector.h>
 #include <SofaBaseCollision/OBBModel.h>
@@ -91,7 +91,7 @@ private:
 typedef TIntrOBBOBB<sofa::defaulttype::RigidTypes> IntrOBBOBB;
 
 #if  !defined(SOFA_COMPONENT_COLLISION_INTROBBOBB_CPP)
-extern template class SOFA_BASE_COLLISION_API TIntrOBBOBB<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASECOLLISION_API TIntrOBBOBB<defaulttype::Rigid3Types>;
 
 #endif
 

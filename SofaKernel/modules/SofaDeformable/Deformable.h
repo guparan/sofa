@@ -25,9 +25,9 @@
 #include <sofa/helper/system/config.h>
 
 #ifdef SOFA_BUILD_DEFORMABLE
-#  define SOFA_DEFORMABLE_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#  define SOFA_SOFADEFORMABLE_API SOFA_EXPORT_DYNAMIC_LIBRARY
 #else
-#  define SOFA_DEFORMABLE_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#  define SOFA_SOFADEFORMABLE_API SOFA_IMPORT_DYNAMIC_LIBRARY
 #endif
 
 namespace sofa
@@ -41,7 +41,7 @@ namespace graph
 
 /// @brief Initialize the SofaSimulationGraph library, as well as its
 /// dependencies: SofaSimulationCommon, SofaCore, SofaDefaultType, SofaHelper.
-void SOFA_SIMULATION_GRAPH_API init();
+void SOFA_SOFADEFORMABLE_API init();
 
 } // namespace graph
 

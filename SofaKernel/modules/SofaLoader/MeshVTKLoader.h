@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LOADER_MeshVTKLoader_H
 #define SOFA_COMPONENT_LOADER_MeshVTKLoader_H
-#include "config.h"
+#include <SofaLoader/config.h>
 
 #include <sofa/core/objectmodel/BaseData.h>
 #include <sofa/core/loader/MeshLoader.h>
@@ -47,7 +47,7 @@ using basevtkreader::BaseVTKReader ;
 
 /// Format doc: http://www.vtk.org/VTK/img/file-formats.pdf
 /// http://www.cacr.caltech.edu/~slombey/asci/vtk/vtk_formats.simple.html
-class SOFA_LOADER_API MeshVTKLoader : public sofa::core::loader::MeshLoader
+class SOFA_SOFALOADER_API MeshVTKLoader : public sofa::core::loader::MeshLoader
 {
 
 public:

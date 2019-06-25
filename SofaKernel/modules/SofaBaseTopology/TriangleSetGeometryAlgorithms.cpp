@@ -40,13 +40,13 @@ int TriangleSetGeometryAlgorithmsClass = core::RegisterObject("Triangle set geom
 
         ;
 
-template class SOFA_BASE_TOPOLOGY_API TriangleSetGeometryAlgorithms<Vec3Types>;
-template class SOFA_BASE_TOPOLOGY_API TriangleSetGeometryAlgorithms<Vec2Types>;
-template class SOFA_BASE_TOPOLOGY_API TriangleSetGeometryAlgorithms<Vec1Types>;
+template class SOFA_SOFABASETOPOLOGY_API TriangleSetGeometryAlgorithms<Vec3Types>;
+template class SOFA_SOFABASETOPOLOGY_API TriangleSetGeometryAlgorithms<Vec2Types>;
+template class SOFA_SOFABASETOPOLOGY_API TriangleSetGeometryAlgorithms<Vec1Types>;
 
 
 
-void SOFA_BASE_TOPOLOGY_API snapping_test_triangle(double epsilon, double alpha0, double alpha1, double alpha2,
+void SOFA_SOFABASETOPOLOGY_API snapping_test_triangle(double epsilon, double alpha0, double alpha1, double alpha2,
         bool& is_snap_0, bool& is_snap_1, bool& is_snap_2)
 {
     is_snap_0=false;
@@ -70,7 +70,7 @@ void SOFA_BASE_TOPOLOGY_API snapping_test_triangle(double epsilon, double alpha0
     }
 }
 
-void SOFA_BASE_TOPOLOGY_API snapping_test_edge(double epsilon,	double alpha0, double alpha1,
+void SOFA_SOFABASETOPOLOGY_API snapping_test_edge(double epsilon,	double alpha0, double alpha1,
         bool& is_snap_0, bool& is_snap_1)
 {
     is_snap_0=false;

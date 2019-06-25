@@ -39,7 +39,7 @@ Base class for the Visitors which deal with GNodes specifically rather than Node
 
     @author The SOFA team </www.sofa-framework.org>
 */
-class SOFA_SIMULATION_TREE_API GNodeVisitor : public Visitor
+class SOFA_SOFASIMULATIONTREE_API GNodeVisitor : public Visitor
 {
 public:
     GNodeVisitor(const sofa::core::ExecParams* params);

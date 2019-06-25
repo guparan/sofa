@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_TETRAHEDRONSETTOPOLOGYCONTAINER_H
 #define SOFA_COMPONENT_TOPOLOGY_TETRAHEDRONSETTOPOLOGYCONTAINER_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/TriangleSetTopologyContainer.h>
 
@@ -38,7 +38,7 @@ class TetrahedronSetTopologyModifier;
 
 
 /** a class that stores a set of tetrahedra and provides access with adjacent triangles, edges and vertices */
-class SOFA_BASE_TOPOLOGY_API TetrahedronSetTopologyContainer : public TriangleSetTopologyContainer
+class SOFA_SOFABASETOPOLOGY_API TetrahedronSetTopologyContainer : public TriangleSetTopologyContainer
 {
     friend class TetrahedronSetTopologyModifier;
 

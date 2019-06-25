@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_SUBSETMAPPING_H
 #define SOFA_COMPONENT_MAPPING_SUBSETMAPPING_H
-#include "config.h"
+#include <SofaBaseMechanics/config.h>
 
 
 #include <sofa/core/Mapping.h>
@@ -144,10 +144,10 @@ protected:
 
 #if  !defined(SOFA_COMPONENT_MAPPING_SUBSETMAPPING_CPP)
 
-extern template class SOFA_BASE_MECHANICS_API SubsetMapping< sofa::defaulttype::Vec3dTypes, sofa::defaulttype::Vec3dTypes >;
-extern template class SOFA_BASE_MECHANICS_API SubsetMapping< sofa::defaulttype::Vec1Types, sofa::defaulttype::Vec1Types >;
-extern template class SOFA_BASE_MECHANICS_API SubsetMapping< sofa::defaulttype::Vec3dTypes, sofa::defaulttype::ExtVec3Types >;
-extern template class SOFA_BASE_MECHANICS_API SubsetMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::Rigid3Types >;
+extern template class SOFA_SOFABASEMECHANICS_API SubsetMapping< sofa::defaulttype::Vec3dTypes, sofa::defaulttype::Vec3dTypes >;
+extern template class SOFA_SOFABASEMECHANICS_API SubsetMapping< sofa::defaulttype::Vec1Types, sofa::defaulttype::Vec1Types >;
+extern template class SOFA_SOFABASEMECHANICS_API SubsetMapping< sofa::defaulttype::Vec3dTypes, sofa::defaulttype::ExtVec3Types >;
+extern template class SOFA_SOFABASEMECHANICS_API SubsetMapping< sofa::defaulttype::Rigid3Types, sofa::defaulttype::Rigid3Types >;
 
 
 

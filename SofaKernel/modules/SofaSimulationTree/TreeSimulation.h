@@ -41,7 +41,7 @@ namespace tree
 Defines how the scene is inited at the beginning, and updated at each time step.
 Derives from BaseObject in order to model the parameters as Datas, which makes their edition easy in the GUI.
  */
-class SOFA_SIMULATION_TREE_API TreeSimulation: public Simulation
+class SOFA_SOFASIMULATIONTREE_API TreeSimulation: public Simulation
 {
 public:
     SOFA_CLASS(TreeSimulation, Simulation);
@@ -62,7 +62,7 @@ public:
 /** Get the (unique) simulation which controls the scene.
 Automatically creates one if no Simulation has been set.
  */
-SOFA_SIMULATION_TREE_API Simulation* getSimulation();
+SOFA_SOFASIMULATIONTREE_API Simulation* getSimulation();
 } // namespace tree
 
 } // namespace simulation

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_BASE_MECHANICS_INIT_H
 #define SOFA_COMPONENT_BASE_MECHANICS_INIT_H
-#include "config.h"
+#include <SofaBaseMechanics/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_BASE_MECHANICS_API initBaseMechanics();
+void SOFA_SOFABASEMECHANICS_API initBaseMechanics();
 
 } // namespace component
 

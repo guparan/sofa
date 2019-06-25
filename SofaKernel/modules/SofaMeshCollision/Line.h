@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_LINE_H
 #define SOFA_COMPONENT_COLLISION_LINE_H
-#include "config.h"
+#include <SofaMeshCollision/config.h>
 
 #include <SofaMeshCollision/LineModel.h>
 

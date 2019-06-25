@@ -26,7 +26,7 @@
 #ifndef SOFA_MESSAGEHANDLERCOMPONENT_H
 #define SOFA_MESSAGEHANDLERCOMPONENT_H
 
-#include "config.h"
+#include <SofaComponentBase/config.h>
 
 #include <sofa/core/objectmodel/BaseObjectDescription.h>
 #include <sofa/core/objectmodel/BaseObject.h>
@@ -53,7 +53,7 @@ namespace logging
 {
 
 /// A sofa component to add a MessageHandler to the main logger
-class SOFA_COMPONENT_BASE_API MessageHandlerComponent : public core::objectmodel::BaseObject
+class SOFA_SOFACOMPONENTBASE_API MessageHandlerComponent : public core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(MessageHandlerComponent, core::objectmodel::BaseObject);
@@ -74,7 +74,7 @@ public:
 
 
 /// A sofa component to add a FileMessageHandlerComponent to the main logger
-class SOFA_COMPONENT_BASE_API FileMessageHandlerComponent : public core::objectmodel::BaseObject
+class SOFA_SOFACOMPONENTBASE_API FileMessageHandlerComponent : public core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(FileMessageHandlerComponent, core::objectmodel::BaseObject) ;

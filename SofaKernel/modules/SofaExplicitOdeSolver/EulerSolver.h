@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ODESOLVER_EULERSOLVER_H
 #define SOFA_COMPONENT_ODESOLVER_EULERSOLVER_H
-#include "config.h"
+#include <SofaExplicitOdeSolver/config.h>
 
 #include <sofa/core/behavior/OdeSolver.h>
 
@@ -39,7 +39,7 @@ namespace odesolver
  If true (the default), the symplectic variant of Euler's method is applied:
  If false, the basic Euler's method is applied (less robust)
  */
-class SOFA_EXPLICIT_ODE_SOLVER_API EulerSolver : public sofa::core::behavior::OdeSolver
+class SOFA_SOFAEXPLICITODESOLVER_API EulerSolver : public sofa::core::behavior::OdeSolver
 {
 public:
     SOFA_CLASS(EulerSolver, sofa::core::behavior::OdeSolver);

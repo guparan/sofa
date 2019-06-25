@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_TRIANGLESETGEOMETRYALGORITHMS_H
 #define SOFA_COMPONENT_TOPOLOGY_TRIANGLESETGEOMETRYALGORITHMS_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/EdgeSetGeometryAlgorithms.h>
 #include <sofa/defaulttype/Vec.h>
@@ -313,11 +313,11 @@ bool is_point_in_halfplane(const sofa::defaulttype::Vec<3,Real>& p,
         const sofa::defaulttype::Vec<3,Real>& c,
         unsigned int ind_p0, unsigned int ind_p1, unsigned int ind_p2);
 
-void SOFA_BASE_TOPOLOGY_API snapping_test_triangle(double epsilon,
+void SOFA_SOFABASETOPOLOGY_API snapping_test_triangle(double epsilon,
         double alpha0, double alpha1, double alpha2,
         bool& is_snap_0, bool& is_snap_1, bool& is_snap_2);
 
-void SOFA_BASE_TOPOLOGY_API snapping_test_edge(double epsilon,
+void SOFA_SOFABASETOPOLOGY_API snapping_test_edge(double epsilon,
         double alpha0, double alpha1,
         bool& is_snap_0, bool& is_snap_1);
 
@@ -331,11 +331,11 @@ template< class Real>
 inline Real areaProduct(const defaulttype::Vec<1,Real>& , const defaulttype::Vec<1,Real>&  );
 
 #if  !defined(SOFA_COMPONENT_TOPOLOGY_TRIANGLESETGEOMETRYALGORITHMS_CPP)
-extern template class SOFA_BASE_TOPOLOGY_API TriangleSetGeometryAlgorithms<defaulttype::Vec3Types>;
-extern template class SOFA_BASE_TOPOLOGY_API TriangleSetGeometryAlgorithms<defaulttype::Vec2Types>;
-extern template class SOFA_BASE_TOPOLOGY_API TriangleSetGeometryAlgorithms<defaulttype::Vec1Types>;
-//extern template class SOFA_BASE_TOPOLOGY_API TriangleSetGeometryAlgorithms<defaulttype::Rigid3Types>;
-//extern template class SOFA_BASE_TOPOLOGY_API TriangleSetGeometryAlgorithms<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API TriangleSetGeometryAlgorithms<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API TriangleSetGeometryAlgorithms<defaulttype::Vec2Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API TriangleSetGeometryAlgorithms<defaulttype::Vec1Types>;
+//extern template class SOFA_SOFABASETOPOLOGY_API TriangleSetGeometryAlgorithms<defaulttype::Rigid3Types>;
+//extern template class SOFA_SOFABASETOPOLOGY_API TriangleSetGeometryAlgorithms<defaulttype::Rigid2Types>;
 
 
 #endif

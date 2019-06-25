@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LINEARSOLVER_DIAGONALMATRIX_H
 #define SOFA_COMPONENT_LINEARSOLVER_DIAGONALMATRIX_H
-#include "config.h"
+#include <SofaBaseLinearSolver/config.h>
 
 #include "MatrixExpr.h"
 #include <SofaBaseLinearSolver/matrix_bloc_traits.h>

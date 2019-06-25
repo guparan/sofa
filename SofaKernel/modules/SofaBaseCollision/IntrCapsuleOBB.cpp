@@ -33,8 +33,8 @@ namespace collision{
 //----------------------------------------------------------------------------
 // Explicit instantiation.
 //----------------------------------------------------------------------------
-template class SOFA_BASE_COLLISION_API TIntrCapsuleOBB<Vec3Types,Rigid3Types>;
-template class SOFA_BASE_COLLISION_API TIntrCapsuleOBB<Rigid3Types,Rigid3Types>;
+template class SOFA_SOFABASECOLLISION_API TIntrCapsuleOBB<Vec3Types,Rigid3Types>;
+template class SOFA_SOFABASECOLLISION_API TIntrCapsuleOBB<Rigid3Types,Rigid3Types>;
 
 //----------------------------------------------------------------------------
 

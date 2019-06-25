@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_LINEMODEL_H
 #define SOFA_COMPONENT_COLLISION_LINEMODEL_H
-#include "config.h"
+#include <SofaMeshCollision/config.h>
 
 #include <sofa/core/CollisionModel.h>
 #include <sofa/core/objectmodel/BaseObject.h>
@@ -91,7 +91,7 @@ public:
 };
 
 template<class TDataTypes>
-class SOFA_MESH_COLLISION_API LineCollisionModel : public core::CollisionModel
+class SOFA_SOFAMESHCOLLISION_API LineCollisionModel : public core::CollisionModel
 {
 public :
     SOFA_CLASS(SOFA_TEMPLATE(LineCollisionModel, TDataTypes), core::CollisionModel);
@@ -277,7 +277,7 @@ typedef LineCollisionModel<sofa::defaulttype::Vec3Types> LineModel;
 typedef TLine<sofa::defaulttype::Vec3Types> Line;
 
 #if  !defined(SOFA_COMPONENT_COLLISION_LINEMODEL_CPP)
-extern template class SOFA_MESH_COLLISION_API LineCollisionModel<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAMESHCOLLISION_API LineCollisionModel<defaulttype::Vec3Types>;
 
 #endif
 

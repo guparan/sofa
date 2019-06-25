@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_IMPLICIT_ODE_SOLVER_INIT_H
 #define SOFA_COMPONENT_IMPLICIT_ODE_SOLVER_INIT_H
-#include "config.h"
+#include <SofaImplicitOdeSolver/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_IMPLICIT_ODE_SOLVER_API initImplicitODESolver();
+void SOFA_SOFAIMPLICITODESOLVER_API initImplicitODESolver();
 
 } // namespace component
 

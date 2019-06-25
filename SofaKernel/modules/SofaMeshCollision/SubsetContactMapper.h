@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_SUBSETCONTACTMAPPER_H
 #define SOFA_COMPONENT_COLLISION_SUBSETCONTACTMAPPER_H
-#include "config.h"
+#include <SofaMeshCollision/config.h>
 
 #include <sofa/helper/system/config.h>
 #include <sofa/helper/Factory.h>

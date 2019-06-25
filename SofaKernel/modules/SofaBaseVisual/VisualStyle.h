@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_VISUALMODEL_VISUALSTYLE_H
 #define SOFA_COMPONENT_VISUALMODEL_VISUALSTYLE_H
-#include "config.h"
+#include <SofaBaseVisual/config.h>
 
 #include <sofa/core/visual/VisualModel.h>
 #include <sofa/core/visual/DisplayFlags.h>
@@ -59,7 +59,7 @@ namespace visualmodel
 *   showNormals hideNormals
 *   showWireframe hideWireframe
 */
-class SOFA_BASE_VISUAL_API VisualStyle : public sofa::core::visual::VisualModel
+class SOFA_SOFABASEVISUAL_API VisualStyle : public sofa::core::visual::VisualModel
 {
 public:
     SOFA_CLASS(VisualStyle,sofa::core::visual::VisualModel);
@@ -78,7 +78,7 @@ protected:
     DisplayFlags backupFlags;
 };
 
-SOFA_BASE_VISUAL_API helper::WriteAccessor<sofa::core::visual::DisplayFlags> addVisualStyle( simulation::Node::SPtr node );
+SOFA_SOFABASEVISUAL_API helper::WriteAccessor<sofa::core::visual::DisplayFlags> addVisualStyle( simulation::Node::SPtr node );
 
 
 } // visual

@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LOADER_BASEVTKREADER_H
 #define SOFA_COMPONENT_LOADER_BASEVTKREADER_H
-#include "config.h"
+#include <SofaLoader/config.h>
 
 #include <string>
 #include <istream>

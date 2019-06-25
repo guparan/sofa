@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_BASE_TOPOLOGY_INIT_H
 #define SOFA_COMPONENT_BASE_TOPOLOGY_INIT_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 namespace sofa
 {
@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_BASE_TOPOLOGY_API initBaseTopology();
+void SOFA_SOFABASETOPOLOGY_API initBaseTopology();
 
 } // namespace component
 

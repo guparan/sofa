@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_LINELOCALMINDISTANCEFILTER_H
 #define SOFA_COMPONENT_COLLISION_LINELOCALMINDISTANCEFILTER_H
-#include "config.h"
+#include <SofaMeshCollision/config.h>
 
 #include <SofaMeshCollision/LineModel.h>
 #include <SofaMeshCollision/LocalMinDistanceFilter.h>
@@ -102,7 +102,7 @@ protected:
 /**
  * @brief
  */
-class SOFA_MESH_COLLISION_API LineLocalMinDistanceFilter : public LocalMinDistanceFilter
+class SOFA_SOFAMESHCOLLISION_API LineLocalMinDistanceFilter : public LocalMinDistanceFilter
 {
 public:
     SOFA_CLASS(LineLocalMinDistanceFilter,sofa::component::collision::LocalMinDistanceFilter);

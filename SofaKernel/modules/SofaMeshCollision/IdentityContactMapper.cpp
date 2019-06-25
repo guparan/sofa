@@ -36,8 +36,8 @@ using namespace defaulttype;
 ContactMapperCreator< ContactMapper<SphereModel> > SphereContactMapperClass("default",true);
 ContactMapperCreator< ContactMapper<PointModel> > PointContactMapperClass("default",true);
 
-template class SOFA_MESH_COLLISION_API ContactMapper<SphereModel, sofa::defaulttype::Vec3Types>;
-template class SOFA_MESH_COLLISION_API ContactMapper<PointModel, sofa::defaulttype::Vec3Types>;
+template class SOFA_SOFAMESHCOLLISION_API ContactMapper<SphereModel, sofa::defaulttype::Vec3Types>;
+template class SOFA_SOFAMESHCOLLISION_API ContactMapper<PointModel, sofa::defaulttype::Vec3Types>;
 
 } // namespace collision
 

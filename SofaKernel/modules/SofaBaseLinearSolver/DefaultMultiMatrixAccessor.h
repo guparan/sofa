@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_LINEARSOLVER_DEFAULTMULTIMATRIXACCESSOR_H
 #define SOFA_COMPONENT_LINEARSOLVER_DEFAULTMULTIMATRIXACCESSOR_H
-#include "config.h"
+#include <SofaBaseLinearSolver/config.h>
 
 #include <sofa/simulation/MechanicalVisitor.h>
 #include <sofa/core/behavior/LinearSolver.h>
@@ -57,7 +57,7 @@ namespace linearsolver
 
 
 
-class SOFA_BASE_LINEAR_SOLVER_API DefaultMultiMatrixAccessor : public sofa::core::behavior::MultiMatrixAccessor
+class SOFA_SOFABASELINEARSOLVER_API DefaultMultiMatrixAccessor : public sofa::core::behavior::MultiMatrixAccessor
 {
 public:
     DefaultMultiMatrixAccessor();
@@ -159,7 +159,7 @@ protected:
  * To be able to creat  CompressedRowSparseMatrix, it is needle to know about block format of relied to the
  * size of DOF of mapped Mechanical state and input-output Mechanical State of the mapping
  * */
-class SOFA_BASE_LINEAR_SOLVER_API CRSMultiMatrixAccessor : public DefaultMultiMatrixAccessor
+class SOFA_SOFABASELINEARSOLVER_API CRSMultiMatrixAccessor : public DefaultMultiMatrixAccessor
 {
 public:
     CRSMultiMatrixAccessor() : DefaultMultiMatrixAccessor() {}

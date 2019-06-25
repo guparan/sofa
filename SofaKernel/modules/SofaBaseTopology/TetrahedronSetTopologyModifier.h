@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_TETRAHEDRONSETTOPOLOGYMODIFIER_H
 #define SOFA_COMPONENT_TOPOLOGY_TETRAHEDRONSETTOPOLOGYMODIFIER_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/TriangleSetTopologyModifier.h>
 
@@ -39,7 +39,7 @@ class TetrahedronSetTopologyContainer;
 /**
 * A class that modifies the topology by adding and removing tetrahedra
 */
-class SOFA_BASE_TOPOLOGY_API TetrahedronSetTopologyModifier : public TriangleSetTopologyModifier
+class SOFA_SOFABASETOPOLOGY_API TetrahedronSetTopologyModifier : public TriangleSetTopologyModifier
 {
 public:
     SOFA_CLASS(TetrahedronSetTopologyModifier,TriangleSetTopologyModifier);

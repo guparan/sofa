@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_MESHTOPOLOGY_H
 #define SOFA_COMPONENT_TOPOLOGY_MESHTOPOLOGY_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <cstdlib>
 #include <string>
@@ -45,7 +45,7 @@ class MeshTopology;
 
 
 
-class SOFA_BASE_TOPOLOGY_API MeshTopology : public core::topology::BaseMeshTopology
+class SOFA_SOFABASETOPOLOGY_API MeshTopology : public core::topology::BaseMeshTopology
 {
 public:
     SOFA_CLASS(MeshTopology,core::topology::BaseMeshTopology);

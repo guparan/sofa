@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ENGINE_BOXROI_H
 #define SOFA_COMPONENT_ENGINE_BOXROI_H
-#include "config.h"
+#include <SofaEngine/config.h>
 
 
 
@@ -214,9 +214,9 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_ENGINE_BOXROI_CPP)
-extern template class SOFA_ENGINE_API BoxROI<defaulttype::Vec3Types>;
-extern template class SOFA_ENGINE_API BoxROI<defaulttype::Rigid3Types>;
-extern template class SOFA_ENGINE_API BoxROI<defaulttype::Vec6Types>;
+extern template class SOFA_SOFAENGINE_API BoxROI<defaulttype::Vec3Types>;
+extern template class SOFA_SOFAENGINE_API BoxROI<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFAENGINE_API BoxROI<defaulttype::Vec6Types>;
  
 #endif
 

@@ -22,7 +22,7 @@
 
 #ifndef SOFA_COMPONENT_COLLISION_OBBMODEL_H
 #define SOFA_COMPONENT_COLLISION_OBBMODEL_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <sofa/core/CollisionModel.h>
 #include <SofaBaseMechanics/MechanicalObject.h>
@@ -281,8 +281,8 @@ typedef TOBBModel<sofa::defaulttype::Rigid3Types> OBBModel;
 typedef TOBB<sofa::defaulttype::Rigid3Types> OBB;
 
 #if  !defined(SOFA_COMPONENT_COLLISION_OBBMODEL_CPP)
-extern template class SOFA_BASE_COLLISION_API TOBB<defaulttype::Rigid3Types>;
-extern template class SOFA_BASE_COLLISION_API TOBBModel<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASECOLLISION_API TOBB<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASECOLLISION_API TOBBModel<defaulttype::Rigid3Types>;
 
 #endif
 

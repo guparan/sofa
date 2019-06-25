@@ -26,10 +26,10 @@ namespace sofa{
 namespace component{
 namespace collision{
 
-template struct SOFA_MESH_COLLISION_API IntrUtil<TTriangle<defaulttype::Vec3Types> >;
-template class SOFA_MESH_COLLISION_API FindContactSet<TTriangle<defaulttype::Vec3Types>,TOBB<defaulttype::Rigid3Types> >;
-template class SOFA_MESH_COLLISION_API IntrAxis<TTriangle<defaulttype::Vec3Types>,TOBB<defaulttype::Rigid3Types> >;
-template struct SOFA_MESH_COLLISION_API IntrConfigManager<TTriangle<defaulttype::Vec3Types> >;
+template struct SOFA_SOFAMESHCOLLISION_API IntrUtil<TTriangle<defaulttype::Vec3Types> >;
+template class SOFA_SOFAMESHCOLLISION_API FindContactSet<TTriangle<defaulttype::Vec3Types>,TOBB<defaulttype::Rigid3Types> >;
+template class SOFA_SOFAMESHCOLLISION_API IntrAxis<TTriangle<defaulttype::Vec3Types>,TOBB<defaulttype::Rigid3Types> >;
+template struct SOFA_SOFAMESHCOLLISION_API IntrConfigManager<TTriangle<defaulttype::Vec3Types> >;
 
 
 

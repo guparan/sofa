@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_QUADSETTOPOLOGYALGORITHMS_H
 #define SOFA_COMPONENT_TOPOLOGY_QUADSETTOPOLOGYALGORITHMS_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/EdgeSetTopologyAlgorithms.h>
 
@@ -64,11 +64,11 @@ private:
 };
 
 #if  !defined(SOFA_COMPONENT_TOPOLOGY_QUADSETTOPOLOGYALGORITHMS_CPP)
-extern template class SOFA_BASE_TOPOLOGY_API QuadSetTopologyAlgorithms<defaulttype::Vec3Types>;
-extern template class SOFA_BASE_TOPOLOGY_API QuadSetTopologyAlgorithms<defaulttype::Vec2Types>;
-extern template class SOFA_BASE_TOPOLOGY_API QuadSetTopologyAlgorithms<defaulttype::Vec1Types>;
-//extern template class SOFA_BASE_TOPOLOGY_API QuadSetTopologyAlgorithms<defaulttype::Rigid3Types>;
-//extern template class SOFA_BASE_TOPOLOGY_API QuadSetTopologyAlgorithms<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API QuadSetTopologyAlgorithms<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API QuadSetTopologyAlgorithms<defaulttype::Vec2Types>;
+extern template class SOFA_SOFABASETOPOLOGY_API QuadSetTopologyAlgorithms<defaulttype::Vec1Types>;
+//extern template class SOFA_SOFABASETOPOLOGY_API QuadSetTopologyAlgorithms<defaulttype::Rigid3Types>;
+//extern template class SOFA_SOFABASETOPOLOGY_API QuadSetTopologyAlgorithms<defaulttype::Rigid2Types>;
 
 
 #endif

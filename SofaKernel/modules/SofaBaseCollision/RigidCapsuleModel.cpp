@@ -44,8 +44,8 @@ int RigidCapsuleModelClass = core::RegisterObject("Collision model which represe
 //.addAlias("CapsuleSet")
         ;
 
-template class SOFA_BASE_COLLISION_API TCapsule<defaulttype::Rigid3Types>;
-template class SOFA_BASE_COLLISION_API TCapsuleModel<defaulttype::Rigid3Types>;
+template class SOFA_SOFABASECOLLISION_API TCapsule<defaulttype::Rigid3Types>;
+template class SOFA_SOFABASECOLLISION_API TCapsuleModel<defaulttype::Rigid3Types>;
 
 
 

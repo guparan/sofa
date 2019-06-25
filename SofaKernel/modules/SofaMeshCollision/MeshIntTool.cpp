@@ -32,17 +32,17 @@ using namespace sofa::defaulttype;
 using namespace sofa::core::collision;
 
 
-template SOFA_MESH_COLLISION_API int MeshIntTool::computeIntersection(TCapsule<Vec3Types>& cap, Point& pnt,SReal alarmDist,SReal contactDist,OutputVector* contacts);
-template SOFA_MESH_COLLISION_API int MeshIntTool::doCapPointInt(TCapsule<Vec3Types>& cap, const Vector3& q,SReal alarmDist,SReal contactDist,OutputVector* contacts);
-template SOFA_MESH_COLLISION_API int MeshIntTool::computeIntersection(TCapsule<Vec3Types>& cap, Line& lin,SReal alarmDist,SReal contactDist,OutputVector* contacts);
-template SOFA_MESH_COLLISION_API int MeshIntTool::doCapLineInt(TCapsule<Vec3Types>& cap,const Vector3 & q1,const Vector3 & q2,SReal alarmDist,SReal contactDist,OutputVector* contacts,bool ignore_p1,bool ignore_p2);
-template SOFA_MESH_COLLISION_API int MeshIntTool::computeIntersection(TCapsule<Vec3Types>& cap, Triangle& tri,SReal alarmDist,SReal contactDist,OutputVector* contacts);
+template SOFA_SOFAMESHCOLLISION_API int MeshIntTool::computeIntersection(TCapsule<Vec3Types>& cap, Point& pnt,SReal alarmDist,SReal contactDist,OutputVector* contacts);
+template SOFA_SOFAMESHCOLLISION_API int MeshIntTool::doCapPointInt(TCapsule<Vec3Types>& cap, const Vector3& q,SReal alarmDist,SReal contactDist,OutputVector* contacts);
+template SOFA_SOFAMESHCOLLISION_API int MeshIntTool::computeIntersection(TCapsule<Vec3Types>& cap, Line& lin,SReal alarmDist,SReal contactDist,OutputVector* contacts);
+template SOFA_SOFAMESHCOLLISION_API int MeshIntTool::doCapLineInt(TCapsule<Vec3Types>& cap,const Vector3 & q1,const Vector3 & q2,SReal alarmDist,SReal contactDist,OutputVector* contacts,bool ignore_p1,bool ignore_p2);
+template SOFA_SOFAMESHCOLLISION_API int MeshIntTool::computeIntersection(TCapsule<Vec3Types>& cap, Triangle& tri,SReal alarmDist,SReal contactDist,OutputVector* contacts);
 
-template SOFA_MESH_COLLISION_API int MeshIntTool::computeIntersection(TCapsule<Rigid3Types>& cap, Point& pnt,SReal alarmDist,SReal contactDist,OutputVector* contacts);
-template SOFA_MESH_COLLISION_API int MeshIntTool::doCapPointInt(TCapsule<Rigid3Types>& cap, const Vector3& q,SReal alarmDist,SReal contactDist,OutputVector* contacts);
-template SOFA_MESH_COLLISION_API int MeshIntTool::computeIntersection(TCapsule<Rigid3Types>& cap, Line& lin,SReal alarmDist,SReal contactDist,OutputVector* contacts);
-template SOFA_MESH_COLLISION_API int MeshIntTool::doCapLineInt(TCapsule<Rigid3Types>& cap,const Vector3 & q1,const Vector3 & q2,SReal alarmDist,SReal contactDist,OutputVector* contacts,bool ignore_p1,bool ignore_p2);
-template SOFA_MESH_COLLISION_API int MeshIntTool::computeIntersection(TCapsule<Rigid3Types>& cap, Triangle& tri,SReal alarmDist,SReal contactDist,OutputVector* contacts);
+template SOFA_SOFAMESHCOLLISION_API int MeshIntTool::computeIntersection(TCapsule<Rigid3Types>& cap, Point& pnt,SReal alarmDist,SReal contactDist,OutputVector* contacts);
+template SOFA_SOFAMESHCOLLISION_API int MeshIntTool::doCapPointInt(TCapsule<Rigid3Types>& cap, const Vector3& q,SReal alarmDist,SReal contactDist,OutputVector* contacts);
+template SOFA_SOFAMESHCOLLISION_API int MeshIntTool::computeIntersection(TCapsule<Rigid3Types>& cap, Line& lin,SReal alarmDist,SReal contactDist,OutputVector* contacts);
+template SOFA_SOFAMESHCOLLISION_API int MeshIntTool::doCapLineInt(TCapsule<Rigid3Types>& cap,const Vector3 & q1,const Vector3 & q2,SReal alarmDist,SReal contactDist,OutputVector* contacts,bool ignore_p1,bool ignore_p2);
+template SOFA_SOFAMESHCOLLISION_API int MeshIntTool::computeIntersection(TCapsule<Rigid3Types>& cap, Triangle& tri,SReal alarmDist,SReal contactDist,OutputVector* contacts);
 
 int MeshIntTool::doCapLineInt(const Vector3 & p1,const Vector3 & p2,SReal cap_rad,
                          const Vector3 & q1, const Vector3 & q2,SReal alarmDist,SReal contactDist,OutputVector *contacts, bool ignore_p1, bool ignore_p2){
@@ -477,7 +477,7 @@ void MeshIntTool::triangleBaryCoords(const Vector3& to_be_projected,const Vector
     }
 }
 
-class SOFA_MESH_COLLISION_API MeshIntTool;
+class SOFA_SOFAMESHCOLLISION_API MeshIntTool;
 
 }
 }

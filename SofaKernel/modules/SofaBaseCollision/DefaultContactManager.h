@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_DEFAULTCONTACTMANAGER_H
 #define SOFA_COMPONENT_COLLISION_DEFAULTCONTACTMANAGER_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <sofa/core/collision/ContactManager.h>
 #include <sofa/simulation/Node.h>
@@ -38,7 +38,7 @@ namespace component
 namespace collision
 {
 
-class SOFA_BASE_COLLISION_API DefaultContactManager : public core::collision::ContactManager
+class SOFA_SOFABASECOLLISION_API DefaultContactManager : public core::collision::ContactManager
 {
 public :
     SOFA_CLASS(DefaultContactManager,sofa::core::collision::ContactManager);

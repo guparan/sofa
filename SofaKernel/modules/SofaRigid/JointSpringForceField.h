@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_INTERACTIONFORCEFIELD_JOINTSPRINGFORCEFIELD_H
 #define SOFA_COMPONENT_INTERACTIONFORCEFIELD_JOINTSPRINGFORCEFIELD_H
-#include "config.h"
+#include <SofaRigid/config.h>
 
 #include <sofa/core/objectmodel/DataFileName.h>
 
@@ -173,8 +173,8 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_JOINTSPRINGFORCEFIELD_CPP)
-extern template class SOFA_RIGID_API JointSpring<defaulttype::Rigid3Types>;
-extern template class SOFA_RIGID_API JointSpringForceField<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFARIGID_API JointSpring<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFARIGID_API JointSpringForceField<defaulttype::Rigid3Types>;
 
 #endif
 } // namespace interactionforcefield

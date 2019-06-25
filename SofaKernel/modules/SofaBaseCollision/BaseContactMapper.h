@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_BASECONTACTMAPPER_H
 #define SOFA_COMPONENT_COLLISION_BASECONTACTMAPPER_H
-#include "config.h"
+#include <SofaBaseCollision/config.h>
 
 #include <sofa/helper/Factory.h>
 #include <sofa/core/CollisionModel.h>
@@ -47,7 +47,7 @@ namespace component
 namespace collision
 {
 
-class SOFA_BASE_COLLISION_API GenerateStringID
+class SOFA_SOFABASECOLLISION_API GenerateStringID
 {
 public :
     static const int length {15};
@@ -139,8 +139,8 @@ public:
 };
 
 #if !defined(SOFA_COMPONENT_COLLISION_BASECONTACTMAPPER_CPP)
-extern template class SOFA_BASE_COLLISION_API BaseContactMapper<defaulttype::Vec3Types>;
-extern template class SOFA_BASE_COLLISION_API BaseContactMapper<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFABASECOLLISION_API BaseContactMapper<defaulttype::Vec3Types>;
+extern template class SOFA_SOFABASECOLLISION_API BaseContactMapper<defaulttype::Rigid3Types>;
 
 #endif
 
@@ -151,9 +151,9 @@ extern template class SOFA_BASE_COLLISION_API BaseContactMapper<defaulttype::Rig
 #if !defined(SOFA_COMPONENT_COLLISION_BASECONTACTMAPPER_CPP)
 namespace helper
 {
-//extern template class SOFA_BASE_COLLISION_API Factory< std::string, sofa::component::collision::BaseContactMapper<defaulttype::Vec2Types>, core::CollisionModel* >;
-extern template class SOFA_BASE_COLLISION_API Factory< std::string, sofa::component::collision::BaseContactMapper<defaulttype::Vec3Types>, core::CollisionModel* >;
-extern template class SOFA_BASE_COLLISION_API Factory< std::string, sofa::component::collision::BaseContactMapper<defaulttype::Rigid3Types>, core::CollisionModel* >;
+//extern template class SOFA_SOFABASECOLLISION_API Factory< std::string, sofa::component::collision::BaseContactMapper<defaulttype::Vec2Types>, core::CollisionModel* >;
+extern template class SOFA_SOFABASECOLLISION_API Factory< std::string, sofa::component::collision::BaseContactMapper<defaulttype::Vec3Types>, core::CollisionModel* >;
+extern template class SOFA_SOFABASECOLLISION_API Factory< std::string, sofa::component::collision::BaseContactMapper<defaulttype::Rigid3Types>, core::CollisionModel* >;
 } // namespace helper
 #endif
 

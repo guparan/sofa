@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_EDGESETTOPOLOGYCONTAINER_H
 #define SOFA_COMPONENT_TOPOLOGY_EDGESETTOPOLOGYCONTAINER_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <SofaBaseTopology/PointSetTopologyContainer.h>
 
@@ -36,7 +36,7 @@ namespace topology
 
 
 /** a class that stores a set of edges  and provides access to the adjacency between points and edges */
-class SOFA_BASE_TOPOLOGY_API EdgeSetTopologyContainer : public PointSetTopologyContainer
+class SOFA_SOFABASETOPOLOGY_API EdgeSetTopologyContainer : public PointSetTopologyContainer
 {
     friend class EdgeSetTopologyModifier;
 

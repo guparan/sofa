@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_VISUALMODEL_INTERACTIVECAMERA_H
 #define SOFA_COMPONENT_VISUALMODEL_INTERACTIVECAMERA_H
-#include "config.h"
+#include <SofaBaseVisual/config.h>
 
 #include <SofaBaseVisual/BaseCamera.h>
 #include <sofa/helper/gl/Trackball.h>
@@ -38,7 +38,7 @@ namespace component
 namespace visualmodel
 {
 
-class SOFA_BASE_VISUAL_API InteractiveCamera : public BaseCamera
+class SOFA_SOFABASEVISUAL_API InteractiveCamera : public BaseCamera
 {
 public:
     SOFA_CLASS(InteractiveCamera, BaseCamera);

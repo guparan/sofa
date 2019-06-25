@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_NUMERICALINTEGRATIONDESCRIPTOR_H
 #define SOFA_COMPONENT_TOPOLOGY_NUMERICALINTEGRATIONDESCRIPTOR_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <sofa/defaulttype/Vec.h>
 #include <map>
@@ -73,9 +73,9 @@ public:
 };
 
 #if  !defined(SOFA_COMPONENT_TOPOLOGY_NUMERICALINTEGRATIONDESCRIPTOR_CPP)
-extern template class SOFA_BASE_TOPOLOGY_API NumericalIntegrationDescriptor<double, 4>;
-extern template class SOFA_BASE_TOPOLOGY_API NumericalIntegrationDescriptor<double, 3>;
-extern template class SOFA_BASE_TOPOLOGY_API NumericalIntegrationDescriptor<double, 1>;
+extern template class SOFA_SOFABASETOPOLOGY_API NumericalIntegrationDescriptor<double, 4>;
+extern template class SOFA_SOFABASETOPOLOGY_API NumericalIntegrationDescriptor<double, 3>;
+extern template class SOFA_SOFABASETOPOLOGY_API NumericalIntegrationDescriptor<double, 1>;
 
 #endif
 

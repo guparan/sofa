@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_VISUALMODEL_CAMERA_H
 #define SOFA_COMPONENT_VISUALMODEL_CAMERA_H
-#include "config.h"
+#include <SofaBaseVisual/config.h>
 
 #include <SofaBaseVisual/BaseCamera.h>
 
@@ -34,7 +34,7 @@ namespace component
 namespace visualmodel
 {
 
-class SOFA_BASE_VISUAL_API Camera : public BaseCamera
+class SOFA_SOFABASEVISUAL_API Camera : public BaseCamera
 {
 public:
     SOFA_CLASS(Camera, BaseCamera);

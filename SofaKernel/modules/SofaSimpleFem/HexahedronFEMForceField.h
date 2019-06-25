@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_FORCEFIELD_HEXAHEDRONFEMFORCEFIELD_H
 #define SOFA_COMPONENT_FORCEFIELD_HEXAHEDRONFEMFORCEFIELD_H
-#include "config.h"
+#include <SofaSimpleFem/config.h>
 
 #include <sofa/core/behavior/ForceField.h>
 #include <sofa/core/topology/BaseMeshTopology.h>
@@ -232,7 +232,7 @@ protected:
 };
 
 #if  !defined(SOFA_COMPONENT_FORCEFIELD_HEXAHEDRONFEMFORCEFIELD_CPP)
-extern template class SOFA_SIMPLE_FEM_API HexahedronFEMForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFASIMPLEFEM_API HexahedronFEMForceField<defaulttype::Vec3Types>;
 
 #endif
 

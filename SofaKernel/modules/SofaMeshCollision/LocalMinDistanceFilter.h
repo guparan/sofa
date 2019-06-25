@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_COLLISION_LOCALMINDISTANCEFILTER_H
 #define SOFA_COMPONENT_COLLISION_LOCALMINDISTANCEFILTER_H
-#include "config.h"
+#include <SofaMeshCollision/config.h>
 
 #include <sofa/core/objectmodel/BaseObject.h>
 #include <sofa/defaulttype/VecTypes.h>
@@ -41,7 +41,7 @@ class LocalMinDistanceFilter;
 /**
  * @brief LocalMinDistance cone information class for an unique collision primitive.
  */
-class SOFA_MESH_COLLISION_API InfoFilter
+class SOFA_SOFAMESHCOLLISION_API InfoFilter
 {
 public:
     /**
@@ -119,7 +119,7 @@ protected:
  * It also manages an history of computed cones that allows faster computation for an already tested collision
  * primitive.
  */
-class SOFA_MESH_COLLISION_API LocalMinDistanceFilter : public virtual core::objectmodel::BaseObject
+class SOFA_SOFAMESHCOLLISION_API LocalMinDistanceFilter : public virtual core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(LocalMinDistanceFilter,sofa::core::objectmodel::BaseObject);
@@ -205,7 +205,7 @@ private:
 /**
  * @brief
  */
-class SOFA_MESH_COLLISION_API EmptyFilter
+class SOFA_SOFAMESHCOLLISION_API EmptyFilter
 {
 public:
     /**

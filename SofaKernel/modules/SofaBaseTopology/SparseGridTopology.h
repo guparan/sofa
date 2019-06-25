@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_TOPOLOGY_SPARSEGRIDTOPOLOGY_H
 #define SOFA_COMPONENT_TOPOLOGY_SPARSEGRIDTOPOLOGY_H
-#include "config.h"
+#include <SofaBaseTopology/config.h>
 
 #include <string>
 
@@ -49,7 +49,7 @@ namespace topology
  * Valid cells are tagged by a Type BOUNDARY or INSIDE
  * WARNING: the corresponding node in the XML file has to be placed BEFORE the MechanicalObject node, in order to excute its init() before the MechanicalObject one in order to be able to give dofs
  */
-class SOFA_BASE_TOPOLOGY_API SparseGridTopology : public MeshTopology
+class SOFA_SOFABASETOPOLOGY_API SparseGridTopology : public MeshTopology
 {
 public:
     SOFA_CLASS(SparseGridTopology,MeshTopology);
