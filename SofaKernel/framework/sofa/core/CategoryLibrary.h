@@ -40,7 +40,7 @@ typedef sofa::core::ObjectFactory::Creator    Creator;
  *  This Interface is used for the Modeler mainly.
  *
  */
-class SOFA_CORE_API CategoryLibrary
+class SOFA_SOFACORE_API CategoryLibrary
 {
 public:
     typedef std::vector< ComponentLibrary* > VecComponent;

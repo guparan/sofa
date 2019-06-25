@@ -33,7 +33,7 @@ namespace helper
 {
 
 ///@brief Split one string by a given delimiter and returns that into a std::vector
-std::vector<std::string> SOFA_HELPER_API split(const std::string& s, char delimiter);
+std::vector<std::string> SOFA_SOFAHELPER_API split(const std::string& s, char delimiter);
 
 ///@brief Join a std::vector into a single string, separated by the provided delimiter.
 ///
@@ -52,18 +52,18 @@ std::string join(std::vector<T>& elems, S& delim) {
     return ss.str();
 }
 ///@brief returns a copy of the string given in argument.
-SOFA_HELPER_API char* getAStringCopy(const char *c);
+SOFA_SOFAHELPER_API char* getAStringCopy(const char *c);
 
 ///@brief replace all occurence of "search" by the "replace" string.
-SOFA_HELPER_API void replaceAll(std::string& str,
+SOFA_SOFAHELPER_API void replaceAll(std::string& str,
                                 const std::string& search,
                                 const std::string& replace);
 
 ///@brief returns true if the prefix if located at the beginning of the "full" string.
-SOFA_HELPER_API bool starts_with(const std::string& prefix, const std::string& full);
+SOFA_SOFAHELPER_API bool starts_with(const std::string& prefix, const std::string& full);
 
 ///@brief returns true if the suffix if located at the end of the "full" string.
-SOFA_HELPER_API bool ends_with(const std::string& suffix, const std::string& full);
+SOFA_SOFAHELPER_API bool ends_with(const std::string& suffix, const std::string& full);
 
 } // namespace helper
 

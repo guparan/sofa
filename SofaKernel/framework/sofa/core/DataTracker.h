@@ -41,7 +41,7 @@ namespace core
     /// BaseData::isDirty() checks whether or not the data is up-to-date with its
     /// parent values while DataTracker::hasChanged(myData) checks whether the data
     /// has been modified since it has last been checked 
-    struct SOFA_CORE_API DataTracker
+    struct SOFA_SOFACORE_API DataTracker
     {
         /// select a Data to track to be able to check
         /// if it was dirtied since the previous clean.
@@ -76,7 +76,7 @@ namespace core
 
 
     /// A DDGNode with trackable input Data (containing a DataTracker)
-    class SOFA_CORE_API DataTrackerDDGNode : public core::objectmodel::DDGNode
+    class SOFA_SOFACORE_API DataTrackerDDGNode : public core::objectmodel::DDGNode
     {
     public:
 
@@ -160,7 +160,7 @@ namespace core
     ///      // A read access is possible, in that case, be careful the cleanDirty is called before the read-access
     /// }
     ///
-    class SOFA_CORE_API DataTrackerEngine : public DataTrackerDDGNode
+    class SOFA_SOFACORE_API DataTrackerEngine : public DataTrackerDDGNode
     {
     public:
         /// set the update function to call

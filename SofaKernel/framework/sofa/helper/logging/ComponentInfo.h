@@ -46,7 +46,7 @@ namespace logging
 /// A component info object have a sender method to return the name string identifying the
 /// sender of a message.
 ///
-struct SOFA_HELPER_API ComponentInfo
+struct SOFA_SOFAHELPER_API ComponentInfo
 {
 public:
     ComponentInfo() ;

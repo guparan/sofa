@@ -36,7 +36,7 @@ namespace core
 namespace visual
 {
 
-class SOFA_CORE_API DrawToolGL : public DrawTool
+class SOFA_SOFACORE_API DrawToolGL : public DrawTool
 {
 
 public:

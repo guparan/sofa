@@ -50,7 +50,7 @@ class NarrowPhaseDetection;
  * @brief Pipeline component gather list of collision models and control the sequence of computations
 */
 
-class SOFA_CORE_API Pipeline : public virtual sofa::core::objectmodel::BaseObject
+class SOFA_SOFACORE_API Pipeline : public virtual sofa::core::objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(Pipeline, sofa::core::objectmodel::BaseObject);

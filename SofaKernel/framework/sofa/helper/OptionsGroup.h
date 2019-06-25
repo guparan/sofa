@@ -45,7 +45,7 @@ namespace helper
  *
  */
 
-class SOFA_HELPER_API OptionsGroup
+class SOFA_SOFAHELPER_API OptionsGroup
 {
 public :
 

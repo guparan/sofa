@@ -42,7 +42,7 @@ namespace simulation
  */
 
 /// Abstract interface of a scene loader
-class SOFA_SIMULATION_CORE_API SceneLoader
+class SOFA_SOFASIMULATION_API SceneLoader
 {
 public:
     typedef std::vector<std::string> ExtensionList;
@@ -124,7 +124,7 @@ protected:
 };
 
 
-class SOFA_SIMULATION_CORE_API SceneLoaderFactory
+class SOFA_SOFASIMULATION_API SceneLoaderFactory
 {
 
 public:

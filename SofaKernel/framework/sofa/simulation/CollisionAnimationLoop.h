@@ -51,7 +51,7 @@ namespace simulation
  */
 
 
-class SOFA_SIMULATION_CORE_API CollisionAnimationLoop : public sofa::core::behavior::BaseAnimationLoop
+class SOFA_SOFASIMULATION_API CollisionAnimationLoop : public sofa::core::behavior::BaseAnimationLoop
 {
 public:
     typedef sofa::core::behavior::BaseAnimationLoop Inherit;

@@ -52,7 +52,7 @@ namespace system
 ///
 /// A path is considered as a concatenation of directories separated by : on linux / mac and ; on windows
 // A small utility class to temporarly set the current directory to the same as a specified file
-class SOFA_HELPER_API FileRepository
+class SOFA_SOFAHELPER_API FileRepository
 {
 public:
 
@@ -154,8 +154,8 @@ protected:
     static bool findFileIn(std::string& filename, const std::string& path);
 };
 
-extern SOFA_HELPER_API FileRepository DataRepository; ///< Default repository
-extern SOFA_HELPER_API FileRepository PluginRepository; ///< Default repository
+extern SOFA_SOFAHELPER_API FileRepository DataRepository; ///< Default repository
+extern SOFA_SOFAHELPER_API FileRepository PluginRepository; ///< Default repository
 
 } // namespace system
 

@@ -41,7 +41,7 @@ class BaseData;
  *  \brief Abstract base class for Data.
  *
  */
-class SOFA_CORE_API BaseData : public DDGNode
+class SOFA_SOFACORE_API BaseData : public DDGNode
 {
 public:
     /// Flags that describe some properties of a Data, and that can be OR'd together.

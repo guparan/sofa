@@ -34,7 +34,7 @@ namespace simulation
 class Node;
 
 /// Generic API to handle mutations of the graph
-class SOFA_SIMULATION_CORE_API MutationListener
+class SOFA_SOFASIMULATION_API MutationListener
 {
   public:
     virtual ~MutationListener();

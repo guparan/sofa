@@ -34,7 +34,7 @@ namespace helper
 namespace io
 {
 
-class SOFA_HELPER_API MeshTopologyLoader
+class SOFA_SOFAHELPER_API MeshTopologyLoader
 {
 public:
     MeshTopologyLoader():m_mesh(NULL) {}

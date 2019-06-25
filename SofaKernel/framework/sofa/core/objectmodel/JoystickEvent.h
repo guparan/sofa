@@ -50,7 +50,7 @@ namespace objectmodel
 *
 *
 */
-class SOFA_CORE_API JoystickEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFACORE_API JoystickEvent : public sofa::core::objectmodel::Event
 {
 public:
 
@@ -60,7 +60,7 @@ public:
      * @brief	Implements an event that notifies about axis positions (like analog controls of a joystick).
      * 			The axis position is normalized so values are always in the range [-1, 1].
      */
-    class SOFA_CORE_API AxisEvent
+    class SOFA_SOFACORE_API AxisEvent
     {
     public:
         /**
@@ -110,7 +110,7 @@ public:
     /**
      * @brief Implements the button event for joysticks
      */
-    class SOFA_CORE_API ButtonEvent
+    class SOFA_SOFACORE_API ButtonEvent
     {
     public:
         /**
@@ -144,7 +144,7 @@ public:
     /**
      * @brief Implements an event notifiying changes about a directionnal hat on a device (like a joystick).
      */
-    class SOFA_CORE_API HatEvent
+    class SOFA_SOFACORE_API HatEvent
     {
     public:
         /**

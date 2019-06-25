@@ -32,7 +32,7 @@ namespace defaulttype
 static bool s_initialized = false;
 static bool s_cleanedUp = false;
 
-SOFA_DEFAULTTYPE_API void init()
+SOFA_SOFADEFAULTTYPE_API void init()
 {
     if (!s_initialized)
     {
@@ -41,12 +41,12 @@ SOFA_DEFAULTTYPE_API void init()
     }
 }
 
-SOFA_DEFAULTTYPE_API bool isInitialized()
+SOFA_SOFADEFAULTTYPE_API bool isInitialized()
 {
     return s_initialized;
 }
 
-SOFA_DEFAULTTYPE_API void cleanup()
+SOFA_SOFADEFAULTTYPE_API void cleanup()
 {
     if (!s_cleanedUp)
     {
@@ -55,7 +55,7 @@ SOFA_DEFAULTTYPE_API void cleanup()
     }
 }
 
-SOFA_DEFAULTTYPE_API bool isCleanedUp()
+SOFA_SOFADEFAULTTYPE_API bool isCleanedUp()
 {
     return s_cleanedUp;
 }

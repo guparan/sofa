@@ -40,7 +40,7 @@ namespace simulation
 namespace common
 {
 
-class SOFA_SIMULATION_CORE_API VectorOperations : public sofa::core::behavior::BaseVectorOperations
+class SOFA_SOFASIMULATION_API VectorOperations : public sofa::core::behavior::BaseVectorOperations
 {
 public:
 

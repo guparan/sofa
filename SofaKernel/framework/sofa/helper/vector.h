@@ -48,15 +48,15 @@ namespace sofa
 namespace helper
 {
 
-void SOFA_HELPER_API vector_access_failure(const void* vec, unsigned size, unsigned i, const std::type_info& type);
+void SOFA_SOFAHELPER_API vector_access_failure(const void* vec, unsigned size, unsigned i, const std::type_info& type);
 
 /// Convert the string 's' into an unsigned int. The error are reported in msg & numErrors
 /// is incremented.
-int SOFA_HELPER_API getInteger(const std::string& s, std::stringstream& msg, unsigned int& numErrors) ;
+int SOFA_SOFAHELPER_API getInteger(const std::string& s, std::stringstream& msg, unsigned int& numErrors) ;
 
 /// Convert the string 's' into an unsigned int. The error are reported in msg & numErrors
 /// is incremented.
-unsigned int SOFA_HELPER_API getUnsignedInteger(const std::string& s, std::stringstream& msg, unsigned int& numErrors) ;
+unsigned int SOFA_SOFAHELPER_API getUnsignedInteger(const std::string& s, std::stringstream& msg, unsigned int& numErrors) ;
 
 
 template <class T, class MemoryManager = CPUMemoryManager<T> >
@@ -67,7 +67,7 @@ class vector;
 ///  - string serialization (making it usable in Data)
 ///  - operator[] is checking if the index is within the bounds in debug
 template <class T>
-class SOFA_HELPER_API vector<T, CPUMemoryManager<T> > : public std::vector<T, std::allocator<T> >
+class SOFA_SOFAHELPER_API vector<T, CPUMemoryManager<T> > : public std::vector<T, std::allocator<T> >
 {
 public:
     typedef CPUMemoryManager<T> memory_manager;

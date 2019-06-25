@@ -32,7 +32,7 @@ namespace sofa
 namespace simulation
 {
 
-class SOFA_SIMULATION_CORE_API CopyAspectVisitor : public Visitor
+class SOFA_SOFASIMULATION_API CopyAspectVisitor : public Visitor
 {
 public:
     CopyAspectVisitor(const core::ExecParams* params, int destAspect, int srcAspect);

@@ -88,7 +88,6 @@ set(HEADER_FILES
     system/SetDirectory.h
     system/SofaOStream.h
     system/atomic.h
-    system/config.h
     system/console.h
     system/console_internal.h
     system/gl.h

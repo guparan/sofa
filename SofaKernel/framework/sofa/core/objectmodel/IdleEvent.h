@@ -37,7 +37,7 @@ namespace objectmodel
     @author Damien Marchal
     @brief This event is propagated along the objects hierarchy at regular interval.
 */
-class SOFA_CORE_API IdleEvent : public Event
+class SOFA_SOFACORE_API IdleEvent : public Event
 {
 public:
     IdleEvent();

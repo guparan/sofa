@@ -145,7 +145,7 @@ public:
         const MechanicalParams* mparams, const helper::vector< OutDataVecDeriv*>& dataVecOutVel,
         const helper::vector<const In1DataVecDeriv*>& dataVecIn1Vel,
         const helper::vector<const In2DataVecDeriv*>& dataVecIn2Vel)
-#ifdef SOFA_DEPRECATE_OLD_API
+#ifdef SOFA_SOFACORE_API
         = 0;
 #else
     {
@@ -171,7 +171,7 @@ public:
     virtual void applyJ(const helper::vector< OutVecDeriv*>& /* outDeriv */,
             const helper::vector<const In1VecDeriv*>& /* inDeriv1 */,
             const helper::vector<const In2VecDeriv*>& /* inDeriv2 */) {}
-#endif //SOFA_DEPRECATE_OLD_API
+#endif //SOFA_SOFACORE_API
 
     /// ApplyJT (Force)///
     /// Apply the mapping to Force vectors.
@@ -318,13 +318,13 @@ protected:
 
 #if  !defined(SOFA_CORE_MULTI2MAPPING_CPP)
 
-extern template class SOFA_CORE_API Multi2Mapping< defaulttype::Vec1Types, defaulttype::Rigid3Types, defaulttype::Rigid3Types >;
-extern template class SOFA_CORE_API Multi2Mapping< defaulttype::Vec3Types, defaulttype::Rigid3Types, defaulttype::Vec3Types >;
-extern template class SOFA_CORE_API Multi2Mapping< defaulttype::Vec3Types, defaulttype::Rigid3Types, defaulttype::Rigid3Types >;
-extern template class SOFA_CORE_API Multi2Mapping< defaulttype::Vec3Types, defaulttype::Vec3Types, defaulttype::Vec3Types >;
-extern template class SOFA_CORE_API Multi2Mapping< defaulttype::Vec1Types, defaulttype::Vec3Types, defaulttype::Rigid3Types >;
-extern template class SOFA_CORE_API Multi2Mapping< defaulttype::Vec1Types, defaulttype::Rigid3Types, defaulttype::Vec3Types >;
-extern template class SOFA_CORE_API Multi2Mapping< defaulttype::Vec1Types, defaulttype::Vec1Types, defaulttype::Rigid3Types >;
+extern template class SOFA_SOFACORE_API Multi2Mapping< defaulttype::Vec1Types, defaulttype::Rigid3Types, defaulttype::Rigid3Types >;
+extern template class SOFA_SOFACORE_API Multi2Mapping< defaulttype::Vec3Types, defaulttype::Rigid3Types, defaulttype::Vec3Types >;
+extern template class SOFA_SOFACORE_API Multi2Mapping< defaulttype::Vec3Types, defaulttype::Rigid3Types, defaulttype::Rigid3Types >;
+extern template class SOFA_SOFACORE_API Multi2Mapping< defaulttype::Vec3Types, defaulttype::Vec3Types, defaulttype::Vec3Types >;
+extern template class SOFA_SOFACORE_API Multi2Mapping< defaulttype::Vec1Types, defaulttype::Vec3Types, defaulttype::Rigid3Types >;
+extern template class SOFA_SOFACORE_API Multi2Mapping< defaulttype::Vec1Types, defaulttype::Rigid3Types, defaulttype::Vec3Types >;
+extern template class SOFA_SOFACORE_API Multi2Mapping< defaulttype::Vec1Types, defaulttype::Vec1Types, defaulttype::Rigid3Types >;
 
 
 

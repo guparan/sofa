@@ -33,7 +33,7 @@ namespace sofa
 namespace core
 {
 
-class SOFA_CORE_API ParallelCollisionModel : public CollisionModel
+class SOFA_SOFACORE_API ParallelCollisionModel : public CollisionModel
 {
 public:
 

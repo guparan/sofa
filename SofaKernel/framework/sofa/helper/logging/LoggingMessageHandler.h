@@ -62,7 +62,7 @@ using std::vector ;
 ///
 /// You can also see the \see LogMessage for example of use
 ///
-class SOFA_HELPER_API LoggingMessageHandler : public MessageHandler
+class SOFA_SOFAHELPER_API LoggingMessageHandler : public MessageHandler
 {
 public:
     LoggingMessageHandler() ;
@@ -93,7 +93,7 @@ private:
 ///
 /// \see LoggingMessageHandler
 ///
-class SOFA_HELPER_API MainLoggingMessageHandler
+class SOFA_SOFAHELPER_API MainLoggingMessageHandler
 {
 public:
     static LoggingMessageHandler& getInstance() ;
@@ -102,7 +102,7 @@ public:
     static const vector<Message>& getMessages() ;
 };
 
-class SOFA_HELPER_API LogMessage
+class SOFA_SOFAHELPER_API LogMessage
 {
 public:
     LogMessage() {

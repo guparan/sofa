@@ -57,7 +57,7 @@ namespace countingmessagehandler
 /// User interested in having a singleton of this class should have a look
 /// at \see MainCountingMessageHandler.
 ///
-class SOFA_HELPER_API CountingMessageHandler : public MessageHandler
+class SOFA_SOFAHELPER_API CountingMessageHandler : public MessageHandler
 {
 public:
     CountingMessageHandler() ;
@@ -78,7 +78,7 @@ private:
 ///
 /// \see CountingMessageHandler
 ///
-class SOFA_HELPER_API MainCountingMessageHandler
+class SOFA_SOFAHELPER_API MainCountingMessageHandler
 {
 public:
     static CountingMessageHandler& getInstance() ;

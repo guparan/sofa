@@ -37,7 +37,7 @@ namespace objectmodel
  *  \brief A Tag is a string (internally converted to an integer), attached to objects in order to define subsets to process by specific visitors.
  *
  */
-class SOFA_CORE_API Tag
+class SOFA_SOFACORE_API Tag
 {
 public:
 
@@ -80,7 +80,7 @@ protected:
     int id;
 };
 
-class SOFA_CORE_API TagSet : public std::set<Tag>
+class SOFA_SOFACORE_API TagSet : public std::set<Tag>
 {
 public:
     TagSet() {}

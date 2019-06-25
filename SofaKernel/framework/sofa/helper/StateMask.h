@@ -60,7 +60,7 @@ namespace helper
 
 #ifdef SOFA_USE_MASK
 
-class SOFA_HELPER_API StateMask
+class SOFA_SOFAHELPER_API StateMask
 {
 
 public:
@@ -139,7 +139,7 @@ protected:
 
 #else
 
-class SOFA_HELPER_API StateMask
+class SOFA_SOFAHELPER_API StateMask
 {
 
 public:

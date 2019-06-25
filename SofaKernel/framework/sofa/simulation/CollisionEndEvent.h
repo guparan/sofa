@@ -36,7 +36,7 @@ namespace simulation
 /**
   Event fired by CollisionVisitor after performing the collision detection step.
 */
-class SOFA_SIMULATION_CORE_API CollisionEndEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFASIMULATION_API CollisionEndEvent : public sofa::core::objectmodel::Event
 {
 public:
 

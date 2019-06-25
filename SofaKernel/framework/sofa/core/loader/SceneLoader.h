@@ -34,7 +34,7 @@ namespace core
 namespace loader
 {
 
-class SOFA_CORE_API SceneLoader : public virtual BaseLoader
+class SOFA_SOFACORE_API SceneLoader : public virtual BaseLoader
 {
 public:
     SOFA_ABSTRACT_CLASS(SceneLoader, BaseLoader);

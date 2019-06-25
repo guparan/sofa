@@ -39,7 +39,7 @@ namespace io
 /// Inherit from this class and override the virtual methods to you fill your
 /// structures from the SphereLoader events.
 /// @see SphereLoader for an example of use.
-class SOFA_HELPER_API SphereLoaderDataHook
+class SOFA_SOFAHELPER_API SphereLoaderDataHook
 {
 public:
     virtual ~SphereLoaderDataHook(){}
@@ -63,7 +63,7 @@ public:
     virtual void addSphere(const SReal /*px*/, const SReal /*py*/, const SReal /*pz*/, const SReal /*r*/) {}
 };
 
-class SOFA_HELPER_API SphereLoader
+class SOFA_SOFAHELPER_API SphereLoader
 {
 public:
     /// @brief Call this method to load a Sphere files.

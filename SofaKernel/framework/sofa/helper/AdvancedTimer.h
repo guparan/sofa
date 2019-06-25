@@ -149,7 +149,7 @@ public:
     StepData() : level(0), num(0), numIt(0), tstart(0), tmin(0), tmax(0), ttotal(0), ttotal2(0), lastIt(-1), lastTime(0) {}
 };
 
-class SOFA_HELPER_API AdvancedTimer
+class SOFA_SOFAHELPER_API AdvancedTimer
 {
 public:
 
@@ -158,7 +158,7 @@ public:
     {
     public:
         /** Internal class used to generate IDs. */
-        class SOFA_HELPER_API IdFactory : public Base
+        class SOFA_SOFAHELPER_API IdFactory : public Base
         {
         protected:
 
@@ -504,10 +504,10 @@ public:
 };
 
 #if  !defined(SOFA_HELPER_ADVANCEDTIMER_CPP)
-extern template class SOFA_HELPER_API AdvancedTimer::Id<AdvancedTimer::Timer>;
-extern template class SOFA_HELPER_API AdvancedTimer::Id<AdvancedTimer::Step>;
-extern template class SOFA_HELPER_API AdvancedTimer::Id<AdvancedTimer::Obj>;
-extern template class SOFA_HELPER_API AdvancedTimer::Id<AdvancedTimer::Val>;
+extern template class SOFA_SOFAHELPER_API AdvancedTimer::Id<AdvancedTimer::Timer>;
+extern template class SOFA_SOFAHELPER_API AdvancedTimer::Id<AdvancedTimer::Step>;
+extern template class SOFA_SOFAHELPER_API AdvancedTimer::Id<AdvancedTimer::Obj>;
+extern template class SOFA_SOFAHELPER_API AdvancedTimer::Id<AdvancedTimer::Val>;
 #endif
 
 

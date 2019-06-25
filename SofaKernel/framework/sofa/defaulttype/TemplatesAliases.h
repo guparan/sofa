@@ -47,7 +47,7 @@ typedef std::pair<std::string, bool> TemplateAlias;
  *  \see RegisterTemplateAlias for how new aliases should be registered.
  *
  */
-class SOFA_DEFAULTTYPE_API TemplateAliases
+class SOFA_SOFADEFAULTTYPE_API TemplateAliases
 {
 public:
 	/// Add an alias for a template
@@ -72,7 +72,7 @@ public:
  *  \endcode
  *
  */
-class SOFA_DEFAULTTYPE_API RegisterTemplateAlias
+class SOFA_SOFADEFAULTTYPE_API RegisterTemplateAlias
 {
 public:
     /// Register an alias

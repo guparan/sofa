@@ -81,7 +81,7 @@ class GtestMessageFrame;
 ///    EXPECT_MSG_NOEMIT(Error) as a more 'good looking' version of
 ///
 /// sofa::helper::logging::MessageAsTestFailure failure(sofa::helper::logging::Message::Error, __FILE__, __LINE__);
-class SOFA_HELPER_API MessageAsTestFailure
+class SOFA_SOFAHELPER_API MessageAsTestFailure
 {
 public:
     MessageAsTestFailure(Message::Type t,
@@ -99,7 +99,7 @@ private:
 ///    EXPECT_MSG_EMIT(Error) as a more 'good looking' version of
 ///
 /// sofa::helper::logging::ExpectMessage failure(sofa::helper::logging::Message::Error, __FILE__, __LINE__);
-class SOFA_HELPER_API ExpectMessage
+class SOFA_SOFAHELPER_API ExpectMessage
 {
 public:
     ExpectMessage(Message::Type t,
@@ -117,7 +117,7 @@ private:
 ///    IGNORE_MSG(Error) as a more 'good looking' version of
 ///
 /// sofa::helper::logging::IgnoreMessage ignore(sofa::helper::logging::Message::Error);
-class SOFA_HELPER_API IgnoreMessage
+class SOFA_SOFAHELPER_API IgnoreMessage
 {
 public:
     IgnoreMessage(Message::Type t) ;
@@ -130,7 +130,7 @@ private:
 /// Inherited from MessageHandler, this handler must be installed to have the testing subsystem
 /// working. By default it is added in Sofa_test but if you are not inheriting from Sofa_test
 /// you have to install it manually.
-class SOFA_HELPER_API MainGtestMessageHandler
+class SOFA_SOFAHELPER_API MainGtestMessageHandler
 {
 public:
     static MessageHandler* getInstance() ;

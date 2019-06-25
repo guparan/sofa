@@ -36,7 +36,7 @@ namespace simulation
 
 /// Cactus Stack implementation of LocalStorage.
 /// See http://www.nist.gov/dads/HTML/cactusstack.html
-class SOFA_SIMULATION_CORE_API CactusStackStorage : public simulation::LocalStorage
+class SOFA_SOFASIMULATION_API CactusStackStorage : public simulation::LocalStorage
 {
 protected:
     CactusStackStorage* up; ///< This point to the parent stack

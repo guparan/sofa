@@ -59,7 +59,7 @@ public:
 };
 
 // \brief The goal of this class is to unify the way we access files in Sofa and to be able to change this way, transparently, according to the need of the end-user application
-class SOFA_HELPER_API BaseFileAccess
+class SOFA_SOFAHELPER_API BaseFileAccess
 {
 public:
     static void SetDefaultCreator(); // \warning: Should be called only from the end-user application to avoid undesired FileAccess overriding

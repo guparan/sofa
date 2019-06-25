@@ -40,7 +40,7 @@ namespace io
 {
 
 // \brief Allow reading and writing into a file.
-class SOFA_HELPER_API FileAccess : public BaseFileAccess
+class SOFA_SOFAHELPER_API FileAccess : public BaseFileAccess
 {
     friend class FileAccessCreator<FileAccess>;
 

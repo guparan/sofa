@@ -41,12 +41,12 @@ namespace logging
 
 /// Raise an exception each time a error message is processed.
 /// Useful for automatic examples that only detects crashes!
-class SOFA_HELPER_API ExceptionMessageHandler : public MessageHandler
+class SOFA_SOFAHELPER_API ExceptionMessageHandler : public MessageHandler
 {
 public:
 
     /// the exception raised by an error Message
-    struct SOFA_HELPER_API ErrorMessageException: public std::exception
+    struct SOFA_SOFAHELPER_API ErrorMessageException: public std::exception
     {
         ErrorMessageException(/*could take some parameters to get Message's infos*/){}
 

@@ -30,9 +30,9 @@
 
 #  include <GL/glew.h>
 
-extern SOFA_HELPER_API const char* GetGlExtensionsList();
+extern SOFA_SOFAHELPER_API const char* GetGlExtensionsList();
 
-extern SOFA_HELPER_API bool CanUseGlExtension(const std::string& ext);
+extern SOFA_SOFAHELPER_API bool CanUseGlExtension(const std::string& ext);
 
 #endif // SOFA_NO_OPENGL
 

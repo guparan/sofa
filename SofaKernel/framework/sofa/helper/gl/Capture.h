@@ -37,7 +37,7 @@ namespace helper
 namespace gl
 {
 
-class SOFA_HELPER_API Capture
+class SOFA_SOFAHELPER_API Capture
 {
 protected:
     std::string prefix;

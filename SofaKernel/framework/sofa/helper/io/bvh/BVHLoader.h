@@ -43,7 +43,7 @@ namespace bvh
 *	This files describe a hierarchical articulated model and also an associated motion
 *	see http://www.cs.wisc.edu/graphics/Courses/cs-838-1999/Jeff/BVH.html for the file format specification
 */
-class SOFA_HELPER_API BVHLoader
+class SOFA_SOFAHELPER_API BVHLoader
 {
 public:
     BVHLoader() {};

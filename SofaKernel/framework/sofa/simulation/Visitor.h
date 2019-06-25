@@ -45,7 +45,7 @@ namespace simulation
 class LocalStorage;
 
 /// Base class for visitors propagated recursively through the scenegraph
-class SOFA_SIMULATION_CORE_API Visitor
+class SOFA_SOFASIMULATION_API Visitor
 {
 public:
 

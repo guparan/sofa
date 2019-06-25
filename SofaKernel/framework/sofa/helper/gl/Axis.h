@@ -43,7 +43,7 @@ namespace helper
 namespace gl
 {
 
-class SOFA_HELPER_API Axis
+class SOFA_SOFAHELPER_API Axis
 {
 public:
     typedef sofa::defaulttype::Vector3 Vector3;

@@ -41,7 +41,7 @@ namespace behavior
  *  For implicit integration schemes, it must also compute the derivative
  *  ( df, given a displacement dx ).
  */
-class SOFA_CORE_API BaseInteractionForceField : public BaseForceField
+class SOFA_SOFACORE_API BaseInteractionForceField : public BaseForceField
 {
 public:
     SOFA_ABSTRACT_CLASS(BaseInteractionForceField, BaseForceField);

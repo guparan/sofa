@@ -40,7 +40,7 @@ The user only gives strings to define the subsets, and an id is given back and i
 The id is the index of the string in the "tagsList" vector
 */
 
-class SOFA_HELPER_API TagFactory
+class SOFA_SOFAHELPER_API TagFactory
 {
 protected:
 

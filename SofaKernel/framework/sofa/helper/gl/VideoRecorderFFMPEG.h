@@ -40,7 +40,7 @@ namespace helper
 namespace gl
 {
 
-    class SOFA_HELPER_API VideoRecorderFFMPEG
+    class SOFA_SOFAHELPER_API VideoRecorderFFMPEG
     {
     protected:
     

@@ -39,12 +39,12 @@ class Plugin;
  * This class manages a collection of plugins: loading, unloading,
  * initialization, etc
  */
-class SOFA_CORE_API PluginManager
+class SOFA_SOFACORE_API PluginManager
 {
 public:
 
     /// An entry corresponding to a plugin that in loaded in the PluginManager.
-    struct SOFA_CORE_API LoadedPlugin {
+    struct SOFA_SOFACORE_API LoadedPlugin {
         /// A pointer to the Plugin object.
         sofa::core::Plugin *plugin;
         /// The handle to the plugin's library

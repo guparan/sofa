@@ -50,7 +50,7 @@ class ConstraintSolver;
 /**
  *  \brief Component computing constraint forces within a simulated body using the compliance method.
  */
-class SOFA_CORE_API BaseConstraintCorrection : public virtual objectmodel::BaseObject
+class SOFA_SOFACORE_API BaseConstraintCorrection : public virtual objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(BaseConstraintCorrection, objectmodel::BaseObject);

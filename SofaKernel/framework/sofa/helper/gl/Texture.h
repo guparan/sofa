@@ -37,7 +37,7 @@ namespace helper
 namespace gl
 {
 
-class SOFA_HELPER_API Texture
+class SOFA_SOFAHELPER_API Texture
 {
 private:
     io::Image *image;

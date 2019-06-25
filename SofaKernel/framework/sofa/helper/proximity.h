@@ -36,7 +36,7 @@ namespace helper
 //------------------
 // this class computes the shortest distance between a triangle P and a triangle Q
 //-----------------------------------------------------------------------------
-class SOFA_HELPER_API DistanceTriTri
+class SOFA_SOFAHELPER_API DistanceTriTri
 {
 public:
     DistanceTriTri(); // start a Proximity solver
@@ -63,7 +63,7 @@ private:
 //------------------
 // this class compute the shortest distance between a triangle and a segment
 //-----------------------------------------------------------------------------
-class SOFA_HELPER_API DistanceSegTri
+class SOFA_SOFAHELPER_API DistanceSegTri
 {
 public:
     DistanceSegTri(); // start a Proximity solver
@@ -94,7 +94,7 @@ private:
 //------------------
 // this class compute the shortest distance between a triangle and a Point
 //-----------------------------------------------------------------------------
-class SOFA_HELPER_API DistancePointTri
+class SOFA_SOFAHELPER_API DistancePointTri
 {
 public:
     DistancePointTri(); // start a Proximity solver

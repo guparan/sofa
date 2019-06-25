@@ -58,7 +58,7 @@ namespace objectmodel
  *
  * \author Jeremie Allard
  */
-class SOFA_CORE_API BaseNode : public virtual Base
+class SOFA_SOFACORE_API BaseNode : public virtual Base
 {
 public:
     SOFA_ABSTRACT_CLASS(BaseNode, Base);

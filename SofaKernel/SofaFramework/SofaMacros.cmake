@@ -482,10 +482,11 @@ macro(sofa_install_targets package_name the_targets include_install_dir)
 
         get_target_property(has_config_h ${target} SOURCES)
         list(FILTER has_config_h INCLUDE REGEX "^.*\/config.h$")
+#        list(FILTER has_config_h EXCLUDE REGEX "^system\/config.h$") # exception for SofaHelper
         if(NOT has_config_h AND EXISTS ${SOFA_CONFIG_TEMPLATE})
             set(CONFIG_PACKAGE_NAME ${target}) # used by config.h.in
             set(CONFIG_PACKAGE_NAME_UPPER ${target_upper}) # used by config.h.in
-            configure_file(${SOFA_CONFIG_TEMPLATE} "${CMAKE_BINARY_DIR}/include/${package_name}/${the_targets}/config.h")
+            configure_file(${SOFA_CONFIG_TEMPLATE} "${CMAKE_BINARY_DIR}/include/${include_install_dir}/config.h")
 #            message("configure_file(${SOFA_CONFIG_TEMPLATE} ${CMAKE_BINARY_DIR}/include/${package_name}/${the_targets}/config.h)")
             install(FILES "${CMAKE_BINARY_DIR}/include/${package_name}/${the_targets}/config.h" DESTINATION "include/${include_install_dir}")
         endif()

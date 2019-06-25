@@ -85,7 +85,7 @@ namespace helper
 namespace gl
 {
 
-class SOFA_HELPER_API Trackball
+class SOFA_SOFAHELPER_API Trackball
 {
 public:
 // 	typedef Quater<double> Quaternion;

@@ -36,7 +36,7 @@ namespace simulation
 class Visitor;
 
 /// Abstract class defining custom schedule of action execution through the graph.
-class SOFA_SIMULATION_CORE_API VisitorScheduler : public virtual core::objectmodel::BaseObject
+class SOFA_SOFASIMULATION_API VisitorScheduler : public virtual core::objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(VisitorScheduler, core::objectmodel::BaseObject);

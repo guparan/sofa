@@ -58,7 +58,7 @@ private:
 };
 
 #endif
-class SOFA_CORE_API CallContext
+class SOFA_SOFACORE_API CallContext
 {
 
 public:

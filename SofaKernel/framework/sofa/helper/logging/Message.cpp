@@ -74,7 +74,7 @@ Message& Message::operator=( const Message& msg )
     return *this;
 }
 
-const SOFA_HELPER_API std::string toString(const Message::Type type)
+const SOFA_SOFAHELPER_API std::string toString(const Message::Type type)
 {
     switch (type) {
     case Message::Advice:
@@ -128,7 +128,7 @@ bool Message::empty() const
 
 template<>
 
-SOFA_HELPER_API Message& Message::operator<<(const FileInfo::SPtr &fi)
+SOFA_SOFAHELPER_API Message& Message::operator<<(const FileInfo::SPtr &fi)
 {
     m_fileInfo = fi;
     return *this;

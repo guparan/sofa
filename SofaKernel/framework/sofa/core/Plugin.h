@@ -58,11 +58,11 @@ namespace core
 {
 
 
-class SOFA_CORE_API Plugin
+class SOFA_SOFACORE_API Plugin
 {
 public:
 
-    struct SOFA_CORE_API ComponentEntry
+    struct SOFA_SOFACORE_API ComponentEntry
     {
         /// The name of the class or class template.
         std::string name;
@@ -88,7 +88,7 @@ public:
     typedef std::map<std::string, ComponentEntry> ComponentEntryMap;
 
 
-    class SOFA_CORE_API RegisterObject
+    class SOFA_SOFACORE_API RegisterObject
     {
     private:
         sofa::core::Plugin& m_plugin;

@@ -129,7 +129,7 @@ struct FixedPower2Size
  * This is a lock-free single-producer single-consumer implementation of a
  * circular queue matching the ThreadAccessPolicy of CircularQueue.
  */
-class SOFA_HELPER_API OneThreadPerEnd
+class SOFA_SOFAHELPER_API OneThreadPerEnd
 {
 public:
 
@@ -166,7 +166,7 @@ protected:
  * implementation of a circular queue matching the ThreadAccessPolicy of CircularQueue.
  * @note maxCapacity parameters MUST always be a power of 2.
  */
-class SOFA_HELPER_API ManyThreadsPerEnd
+class SOFA_SOFAHELPER_API ManyThreadsPerEnd
 {
 public:
 

@@ -38,7 +38,7 @@ const SReal g_minDeltaErrorRatio = .1;
 
 /** @brief Base class for Sofa test fixtures.
   */
-class SOFA_HELPER_API BaseTest : public ::testing::Test
+class SOFA_SOFAHELPER_API BaseTest : public ::testing::Test
 {
 public:
     /// To prevent that you simply need to add the line

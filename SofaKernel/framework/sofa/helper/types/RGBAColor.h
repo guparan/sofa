@@ -44,7 +44,7 @@ using sofa::helper::fixed_array ;
 /**
  *  \brief encode a 4 RGBA component color
  */
-class SOFA_HELPER_API RGBAColor : public fixed_array<float, 4>
+class SOFA_SOFAHELPER_API RGBAColor : public fixed_array<float, 4>
 {
 public:
     static RGBAColor fromString(const std::string& str) ;
@@ -98,8 +98,8 @@ public:
         return false;
     }
 
-    friend SOFA_HELPER_API std::ostream& operator<<(std::ostream& i, const RGBAColor& t) ;
-    friend SOFA_HELPER_API std::istream& operator>>(std::istream& i, RGBAColor& t) ;
+    friend SOFA_SOFAHELPER_API std::ostream& operator<<(std::ostream& i, const RGBAColor& t) ;
+    friend SOFA_SOFAHELPER_API std::istream& operator>>(std::istream& i, RGBAColor& t) ;
 
 public:
     RGBAColor() ;

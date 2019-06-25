@@ -31,7 +31,7 @@ namespace sofa
 namespace defaulttype
 {
 
-class SOFA_DEFAULTTYPE_API BoundingBox
+class SOFA_SOFADEFAULTTYPE_API BoundingBox
 {
 
 public:
@@ -115,7 +115,7 @@ public:
 
 
 /// bounding rectangle
-class SOFA_DEFAULTTYPE_API BoundingBox2D
+class SOFA_SOFADEFAULTTYPE_API BoundingBox2D
 {
 
 public:
@@ -187,7 +187,7 @@ protected:
 
 
 /// bounding interval
-class SOFA_DEFAULTTYPE_API BoundingBox1D
+class SOFA_SOFADEFAULTTYPE_API BoundingBox1D
 {
 
 public:

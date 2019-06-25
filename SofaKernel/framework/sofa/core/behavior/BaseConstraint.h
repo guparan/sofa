@@ -39,7 +39,7 @@ namespace behavior
  *  \brief Object computing a constraint resolution within a Gauss-Seidel algorithm
  */
 
-class SOFA_CORE_API ConstraintResolution
+class SOFA_SOFACORE_API ConstraintResolution
 {
 public:
     ConstraintResolution(unsigned int nbLines, double tolerance = 0.0);
@@ -107,7 +107,7 @@ private:
  *  see the InteractionConstraint class).
  *
  */
-class SOFA_CORE_API BaseConstraint : public BaseConstraintSet
+class SOFA_SOFACORE_API BaseConstraint : public BaseConstraintSet
 {
 public:
     SOFA_ABSTRACT_CLASS(BaseConstraint, BaseConstraintSet);

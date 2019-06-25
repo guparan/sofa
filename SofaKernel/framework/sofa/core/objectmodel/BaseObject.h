@@ -66,7 +66,7 @@ enum class ComponentState {
  *  It is able to process events, if listening enabled (default is false).
  *
  */
-class SOFA_CORE_API BaseObject : public virtual Base
+class SOFA_SOFACORE_API BaseObject : public virtual Base
 {
 public:
     SOFA_CLASS(BaseObject, Base);

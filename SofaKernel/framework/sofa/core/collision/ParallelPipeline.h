@@ -36,7 +36,7 @@ namespace core
 namespace collision
 {
 
-class SOFA_CORE_API ParallelPipeline : public virtual Pipeline
+class SOFA_SOFACORE_API ParallelPipeline : public virtual Pipeline
 {
 protected:
 

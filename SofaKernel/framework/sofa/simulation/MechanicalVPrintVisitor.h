@@ -39,7 +39,7 @@ namespace simulation
 
 
 /** Print a vector */
-class SOFA_SIMULATION_CORE_API MechanicalVPrintVisitor : public Visitor
+class SOFA_SOFASIMULATION_API MechanicalVPrintVisitor : public Visitor
 {
 public:
     MechanicalVPrintVisitor(const core::ExecParams* params,
@@ -54,7 +54,7 @@ protected:
 
 
 /** Print a vector with an elapsed time, useful to compare convergence in odeSolver in function of time */
-class SOFA_SIMULATION_CORE_API MechanicalVPrintWithElapsedTimeVisitor : public Visitor
+class SOFA_SOFASIMULATION_API MechanicalVPrintWithElapsedTimeVisitor : public Visitor
 {
 protected:
     sofa::core::ConstMultiVecId v_;
@@ -70,7 +70,7 @@ public:
 
 
 
-class SOFA_SIMULATION_CORE_API DofPrintVisitor : public Visitor
+class SOFA_SOFASIMULATION_API DofPrintVisitor : public Visitor
 {
 public:
     DofPrintVisitor(const core::ExecParams* params,

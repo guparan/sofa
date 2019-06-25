@@ -34,7 +34,7 @@ namespace objectmodel
 
 /// Specialization for reading strings
 template<>
-bool SOFA_CORE_API TData<std::string>::read( const std::string& str )
+bool SOFA_SOFACORE_API TData<std::string>::read( const std::string& str )
 {
     virtualSetValue(str);
     return true;
@@ -42,7 +42,7 @@ bool SOFA_CORE_API TData<std::string>::read( const std::string& str )
 
 /// Specialization for reading booleans
 template<>
-bool SOFA_CORE_API TData<bool>::read( const std::string& str )
+bool SOFA_SOFACORE_API TData<bool>::read( const std::string& str )
 {
     if (str.empty())
         return false;
@@ -59,12 +59,12 @@ bool SOFA_CORE_API TData<bool>::read( const std::string& str )
     return true;
 }
 
-template class SOFA_CORE_API TData< std::string >;
-template class SOFA_CORE_API Data< std::string >;
-template class SOFA_CORE_API TData< sofa::helper::vector<std::string> >;
-template class SOFA_CORE_API Data< sofa::helper::vector<std::string> >;
-template class SOFA_CORE_API TData< bool >;
-template class SOFA_CORE_API Data< bool >;
+template class SOFA_SOFACORE_API TData< std::string >;
+template class SOFA_SOFACORE_API Data< std::string >;
+template class SOFA_SOFACORE_API TData< sofa::helper::vector<std::string> >;
+template class SOFA_SOFACORE_API Data< sofa::helper::vector<std::string> >;
+template class SOFA_SOFACORE_API TData< bool >;
+template class SOFA_SOFACORE_API Data< bool >;
 
 } // objectmodel
 

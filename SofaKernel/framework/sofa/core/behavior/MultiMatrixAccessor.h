@@ -38,7 +38,7 @@ namespace behavior
 /// associated with a given MechanicalState or pair of MechanicalState
 /// (for interaction forces and mappings).
 ///
-class SOFA_CORE_API MultiMatrixAccessor
+class SOFA_SOFACORE_API MultiMatrixAccessor
 {
 public:
     virtual ~MultiMatrixAccessor();

@@ -34,7 +34,7 @@ namespace core
 
 
 /// Class gathering parameters use by mechanical components methods, and transmitted by mechanical visitors
-class SOFA_CORE_API MechanicalParams : public sofa::core::ExecParams
+class SOFA_SOFACORE_API MechanicalParams : public sofa::core::ExecParams
 {
 public:
 

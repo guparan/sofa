@@ -40,7 +40,7 @@ namespace logging
 
 class Message;
 
-class SOFA_HELPER_API ClangStyleMessageFormatter : public MessageFormatter
+class SOFA_SOFAHELPER_API ClangStyleMessageFormatter : public MessageFormatter
 {
 public:
     static inline ClangStyleMessageFormatter &getInstance ()

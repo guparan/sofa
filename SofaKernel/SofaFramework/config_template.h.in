@@ -20,12 +20,10 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 
-/* HELLO */
-
 #ifndef @CONFIG_PACKAGE_NAME_UPPER@_CONFIG_H
 #define @CONFIG_PACKAGE_NAME_UPPER@_CONFIG_H
 
-#include <sofa/config/sharedlibrary_defines.h>
+#include <sofa/config.h>
 
 #ifdef SOFA_BUILD_@CONFIG_PACKAGE_NAME_UPPER@
 #  define SOFA_TARGET @CONFIG_PACKAGE_NAME@

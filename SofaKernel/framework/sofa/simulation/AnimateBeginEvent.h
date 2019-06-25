@@ -46,7 +46,7 @@ namespace simulation
   Event fired by Simulation::animate() before computing a new animation step.
   @author Jeremie Allard
 */
-class SOFA_SIMULATION_CORE_API AnimateBeginEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFASIMULATION_API AnimateBeginEvent : public sofa::core::objectmodel::Event
 {
 public:
 

@@ -105,12 +105,12 @@ void TopologyElementHandler<Point>::ApplyTopologyChange(const EMoved_Removing* /
                                          << " (it should not even exist!)" ;
 }
 
-template class SOFA_CORE_API TopologyElementHandler<Point>;
-template class SOFA_CORE_API TopologyElementHandler<Edge>;
-template class SOFA_CORE_API TopologyElementHandler<Triangle>;
-template class SOFA_CORE_API TopologyElementHandler<Quad>;
-template class SOFA_CORE_API TopologyElementHandler<Tetrahedron>;
-template class SOFA_CORE_API TopologyElementHandler<Hexahedron>;
+template class SOFA_SOFACORE_API TopologyElementHandler<Point>;
+template class SOFA_SOFACORE_API TopologyElementHandler<Edge>;
+template class SOFA_SOFACORE_API TopologyElementHandler<Triangle>;
+template class SOFA_SOFACORE_API TopologyElementHandler<Quad>;
+template class SOFA_SOFACORE_API TopologyElementHandler<Tetrahedron>;
+template class SOFA_SOFACORE_API TopologyElementHandler<Hexahedron>;
 
 } // namespace topology
 

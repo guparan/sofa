@@ -39,7 +39,7 @@ namespace core
  *  This Interface is used for the Modeler mainly.
  *
  */
-class SOFA_CORE_API SofaLibrary
+class SOFA_SOFACORE_API SofaLibrary
 {
 public:
     typedef std::vector< CategoryLibrary* > VecCategory;

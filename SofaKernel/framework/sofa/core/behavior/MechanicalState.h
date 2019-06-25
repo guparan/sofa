@@ -221,13 +221,13 @@ public:
 };
 
 #if  !defined(SOFA_CORE_BEHAVIOR_MECHANICALSTATE_CPP)
-extern template class SOFA_CORE_API MechanicalState<defaulttype::Vec3dTypes>;
-extern template class SOFA_CORE_API MechanicalState<defaulttype::Vec2Types>;
-extern template class SOFA_CORE_API MechanicalState<defaulttype::Vec1Types>;
-extern template class SOFA_CORE_API MechanicalState<defaulttype::Vec6Types>;
-extern template class SOFA_CORE_API MechanicalState<defaulttype::Rigid3Types>;
-extern template class SOFA_CORE_API MechanicalState<defaulttype::Rigid2Types>;
-extern template class SOFA_CORE_API MechanicalState<defaulttype::ExtVec3Types>;
+extern template class SOFA_SOFACORE_API MechanicalState<defaulttype::Vec3dTypes>;
+extern template class SOFA_SOFACORE_API MechanicalState<defaulttype::Vec2Types>;
+extern template class SOFA_SOFACORE_API MechanicalState<defaulttype::Vec1Types>;
+extern template class SOFA_SOFACORE_API MechanicalState<defaulttype::Vec6Types>;
+extern template class SOFA_SOFACORE_API MechanicalState<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFACORE_API MechanicalState<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFACORE_API MechanicalState<defaulttype::ExtVec3Types>;
 
 
 #endif

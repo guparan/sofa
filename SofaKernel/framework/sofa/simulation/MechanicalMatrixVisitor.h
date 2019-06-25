@@ -50,7 +50,7 @@ namespace simulation
 
 
 /** Compute the size of a mechanical matrix (mass or stiffness) of the whole scene */
-class SOFA_SIMULATION_CORE_API MechanicalGetMatrixDimensionVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalGetMatrixDimensionVisitor : public BaseMechanicalVisitor
 {
 public:
     unsigned int * const nbRow;
@@ -92,7 +92,7 @@ public:
 };
 
 /** Compute the size of a mechanical matrix (mass or stiffness) of the whole scene */
-class SOFA_SIMULATION_CORE_API MechanicalGetConstraintJacobianVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalGetConstraintJacobianVisitor : public BaseMechanicalVisitor
 {
 public:
     const core::ConstraintParams* cparams;
@@ -121,7 +121,7 @@ public:
 };
 
 /** Apply the motion correction computed from constraint force influence  */
-class SOFA_SIMULATION_CORE_API MechanicalIntegrateConstraintsVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalIntegrateConstraintsVisitor : public BaseMechanicalVisitor
 {
 public:
 
@@ -192,7 +192,7 @@ public:
 
 
 /** Accumulate the entries of a mechanical matrix (mass or stiffness) of the whole scene */
-class SOFA_SIMULATION_CORE_API MechanicalAddMBK_ToMatrixVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalAddMBK_ToMatrixVisitor : public MechanicalVisitor
 {
 public:
     const sofa::core::behavior::MultiMatrixAccessor* matrix;
@@ -243,7 +243,7 @@ public:
 };
 
 /** Accumulate the entries of a mechanical matrix (mass or stiffness) of the whole scene ONLY ON THE subMatrixIndex */
-class SOFA_SIMULATION_CORE_API MechanicalAddSubMBK_ToMatrixVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalAddSubMBK_ToMatrixVisitor : public MechanicalVisitor
 {
 public:
     const sofa::core::behavior::MultiMatrixAccessor* matrix;
@@ -288,7 +288,7 @@ public:
     }
 };
 
-class SOFA_SIMULATION_CORE_API MechanicalMultiVectorToBaseVectorVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalMultiVectorToBaseVectorVisitor : public BaseMechanicalVisitor
 {
 public:
     sofa::core::ConstMultiVecId src;
@@ -322,7 +322,7 @@ public:
     }
 };
 
-class SOFA_SIMULATION_CORE_API MechanicalMultiVectorPeqBaseVectorVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalMultiVectorPeqBaseVectorVisitor : public BaseMechanicalVisitor
 {
 public:
     sofa::defaulttype::BaseVector *src;
@@ -356,7 +356,7 @@ public:
     }
 };
 
-class SOFA_SIMULATION_CORE_API MechanicalMultiVectorFromBaseVectorVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalMultiVectorFromBaseVectorVisitor : public BaseMechanicalVisitor
 {
 public:
     sofa::defaulttype::BaseVector *src;

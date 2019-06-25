@@ -39,7 +39,7 @@ namespace objectmodel
 /**
 * @brief Generic Event class to send a message through the simulation graph.
 */
-class SOFA_CORE_API ScriptEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFACORE_API ScriptEvent : public sofa::core::objectmodel::Event
 {
 public:
 

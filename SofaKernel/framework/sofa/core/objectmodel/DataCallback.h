@@ -65,7 +65,7 @@ using sofa::core::objectmodel::DDGNode;
 ///
 ///   a.setValue(5);       /// should print: "sum is 5"
 ///   b.setValue(6);       /// should print: "sum is 11"
-class SOFA_CORE_API DataCallback : public DDGNode
+class SOFA_SOFACORE_API DataCallback : public DDGNode
 {
 public:
     /// Create a DataCallback object associated with multiple Data.

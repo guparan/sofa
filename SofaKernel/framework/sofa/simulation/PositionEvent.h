@@ -34,7 +34,7 @@ namespace simulation
 /**
   Event modify the position of model
 */
-class SOFA_SIMULATION_CORE_API PositionEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFASIMULATION_API PositionEvent : public sofa::core::objectmodel::Event
 {
 public:
 

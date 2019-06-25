@@ -28,7 +28,7 @@ namespace sofa
 namespace defaulttype
 {
 
-template class SOFA_DEFAULTTYPE_API SolidTypes<double>;
+template class SOFA_SOFADEFAULTTYPE_API SolidTypes<double>;
 
 
 }// defaulttype

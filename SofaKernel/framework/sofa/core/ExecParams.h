@@ -42,7 +42,7 @@ enum { SOFA_DATA_MAX_ASPECTS = 1 };
 #endif
 
 /// Class gathering parameters use by most components methods, and transmitted by all visitors
-class SOFA_CORE_API ExecParams
+class SOFA_SOFACORE_API ExecParams
 {
 public:
 
@@ -60,7 +60,7 @@ private:
 
     static std::atomic<int> g_nbThreads;
 
-    class SOFA_CORE_API ExecParamsThreadStorage
+    class SOFA_SOFACORE_API ExecParamsThreadStorage
     {
     public:
         /// Mode of execution requested

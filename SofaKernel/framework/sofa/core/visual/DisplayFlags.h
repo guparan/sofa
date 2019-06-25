@@ -34,7 +34,7 @@ namespace core
 namespace visual
 {
 
-struct SOFA_CORE_API tristate
+struct SOFA_SOFACORE_API tristate
 {
     enum state_t { false_value, true_value, neutral_value } state;
     tristate(bool b):state(b==true ? true_value : false_value )
@@ -93,7 +93,7 @@ inline tristate difference_tristate(const tristate& previous, const tristate& cu
     return current;
 }
 
-class SOFA_CORE_API FlagTreeItem
+class SOFA_SOFACORE_API FlagTreeItem
 {
 protected:
     // Creating a case insensitive "find" function for map
@@ -184,7 +184,7 @@ protected:
 * |  |--wireframe
 * |  |--normals
 */
-class SOFA_CORE_API DisplayFlags
+class SOFA_SOFACORE_API DisplayFlags
 {
 public:
     DisplayFlags();
@@ -236,8 +236,8 @@ public:
 
     bool isNeutral() const;
 
-    friend SOFA_CORE_API DisplayFlags merge_displayFlags(const DisplayFlags& previous, const DisplayFlags& current);
-    friend SOFA_CORE_API DisplayFlags difference_displayFlags(const DisplayFlags& parent, const DisplayFlags& child);
+    friend SOFA_SOFACORE_API DisplayFlags merge_displayFlags(const DisplayFlags& previous, const DisplayFlags& current);
+    friend SOFA_SOFACORE_API DisplayFlags difference_displayFlags(const DisplayFlags& parent, const DisplayFlags& child);
 protected:
     FlagTreeItem m_root;
 
@@ -266,8 +266,8 @@ protected:
     FlagTreeItem m_showNormals;
 };
 
-SOFA_CORE_API DisplayFlags merge_displayFlags(const DisplayFlags& previous, const DisplayFlags& current);
-SOFA_CORE_API DisplayFlags difference_displayFlags(const DisplayFlags& parent, const DisplayFlags& child);
+SOFA_SOFACORE_API DisplayFlags merge_displayFlags(const DisplayFlags& previous, const DisplayFlags& current);
+SOFA_SOFACORE_API DisplayFlags difference_displayFlags(const DisplayFlags& parent, const DisplayFlags& child);
 
 }
 

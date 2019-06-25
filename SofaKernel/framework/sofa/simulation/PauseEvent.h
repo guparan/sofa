@@ -34,7 +34,7 @@ namespace simulation
 /**
   Event fired when needed to stop the animation.
 */
-class SOFA_SIMULATION_CORE_API PauseEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFASIMULATION_API PauseEvent : public sofa::core::objectmodel::Event
 {
 public:
 

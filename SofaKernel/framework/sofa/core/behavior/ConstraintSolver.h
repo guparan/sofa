@@ -43,7 +43,7 @@ class BaseConstraintCorrection;
  The parameters are defined in class ConstraintParams.
  *
  */
-class SOFA_CORE_API ConstraintSolver : public virtual objectmodel::BaseObject
+class SOFA_SOFACORE_API ConstraintSolver : public virtual objectmodel::BaseObject
 {
 public:
 

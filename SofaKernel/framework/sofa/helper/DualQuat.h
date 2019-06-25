@@ -38,7 +38,7 @@ namespace helper
 {
 
 template<class real>
-class SOFA_HELPER_API DualQuatCoord3
+class SOFA_SOFAHELPER_API DualQuatCoord3
 {
     typedef real value_type;
     typedef sofa::defaulttype::Vec<3,real> Pos;
@@ -268,8 +268,8 @@ typedef DualQuatCoord3<double> DualQuatCoordd; ///< alias
 typedef DualQuatCoord3<float> DualQuatCoordf; ///< alias
 
 #if  !defined(SOFA_HELPER_DUALQUAT_CPP)
-extern template class SOFA_HELPER_API DualQuatCoord3<double>;
-extern template class SOFA_HELPER_API DualQuatCoord3<float>;
+extern template class SOFA_SOFAHELPER_API DualQuatCoord3<double>;
+extern template class SOFA_SOFAHELPER_API DualQuatCoord3<float>;
 #endif
 
 } // namespace helper

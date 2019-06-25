@@ -32,7 +32,7 @@ namespace simulation
 {
 
 
-class SOFA_SIMULATION_CORE_API InitGnuplotVisitor : public simulation::Visitor
+class SOFA_SOFASIMULATION_API InitGnuplotVisitor : public simulation::Visitor
 {
 public:
     std::string gnuplotDirectory;
@@ -51,7 +51,7 @@ public:
     const char* getClassName() const override { return "InitGnuplotVisitor"; }
 };
 
-class SOFA_SIMULATION_CORE_API ExportGnuplotVisitor : public simulation::Visitor
+class SOFA_SOFASIMULATION_API ExportGnuplotVisitor : public simulation::Visitor
 {
 public:
     ExportGnuplotVisitor(const core::ExecParams* params, SReal time);

@@ -44,7 +44,7 @@ namespace behavior
 * @param correction           right hand term of the equation: corresponds to a correction we have to apply to the system
 * @param constraintId         actual index of the line corresponding to the constraint equation in the whole system: can be different from idx
 **/
-struct  SOFA_CORE_API ConstraintEquation
+struct  SOFA_SOFACORE_API ConstraintEquation
 {
     int idx;
     SReal correction;
@@ -62,7 +62,7 @@ struct  SOFA_CORE_API ConstraintEquation
  * @see ConstraintEquation
  * @see ConstOrder
  **/
-class SOFA_CORE_API  ConstraintGroup
+class SOFA_SOFACORE_API  ConstraintGroup
 {
     typedef sofa::helper::vector< ConstraintEquation > VecEquations;
 public:
@@ -132,7 +132,7 @@ protected:
  *        They can be constraint on acceleration, velocity, or position.
  *        They can be grouped or individual. The resolution is then done in the OdeSolver.
  **/
-class SOFA_CORE_API BaseLMConstraint: public BaseConstraintSet
+class SOFA_SOFACORE_API BaseLMConstraint: public BaseConstraintSet
 {
 public:
     SOFA_ABSTRACT_CLASS(BaseLMConstraint, BaseConstraintSet);

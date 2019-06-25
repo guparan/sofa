@@ -37,7 +37,7 @@ namespace helper
 namespace io
 {
 
-class SOFA_HELPER_API ImageDDS : public Image
+class SOFA_SOFAHELPER_API ImageDDS : public Image
 {
 public:
     ImageDDS ()

@@ -50,10 +50,10 @@ enum TopologyObjectType
 };
 
 
-SOFA_CORE_API TopologyObjectType parseTopologyObjectTypeFromString(const std::string& s);
-SOFA_CORE_API std::string parseTopologyObjectTypeToString(TopologyObjectType t);
+SOFA_SOFACORE_API TopologyObjectType parseTopologyObjectTypeFromString(const std::string& s);
+SOFA_SOFACORE_API std::string parseTopologyObjectTypeToString(TopologyObjectType t);
 
-class SOFA_CORE_API Topology : public virtual core::objectmodel::BaseObject
+class SOFA_SOFACORE_API Topology : public virtual core::objectmodel::BaseObject
 {
 public:
     /// Topology global typedefs

@@ -32,7 +32,7 @@ namespace topology
 {
 
 
-class SOFA_CORE_API BaseTopologyObject : public virtual core::objectmodel::BaseObject
+class SOFA_SOFACORE_API BaseTopologyObject : public virtual core::objectmodel::BaseObject
 {
 public:
     SOFA_CLASS(BaseTopologyObject, core::objectmodel::BaseObject);

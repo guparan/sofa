@@ -55,7 +55,7 @@ namespace objectmodel
  *
  * @author Francois Faure
  */
-class SOFA_CORE_API Event
+class SOFA_SOFACORE_API Event
 {
 public:
     Event();

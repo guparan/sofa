@@ -34,7 +34,7 @@ namespace helper
 namespace io
 {
 
-class SOFA_HELPER_API TriangleLoader
+class SOFA_SOFAHELPER_API TriangleLoader
 {
 public:
     virtual ~TriangleLoader() {}

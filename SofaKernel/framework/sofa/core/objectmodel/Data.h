@@ -593,12 +593,12 @@ bool TData<T>::updateFromParentValue(const BaseData* parent)
 
 #if  !defined(SOFA_CORE_OBJECTMODEL_DATA_CPP)
 
-extern template class SOFA_CORE_API TData< std::string >;
-extern template class SOFA_CORE_API Data< std::string >;
-extern template class SOFA_CORE_API TData< sofa::helper::vector<std::string> >;
-extern template class SOFA_CORE_API Data< sofa::helper::vector<std::string> >;
-extern template class SOFA_CORE_API TData< bool >;
-extern template class SOFA_CORE_API Data< bool >;
+extern template class SOFA_SOFACORE_API TData< std::string >;
+extern template class SOFA_SOFACORE_API Data< std::string >;
+extern template class SOFA_SOFACORE_API TData< sofa::helper::vector<std::string> >;
+extern template class SOFA_SOFACORE_API Data< sofa::helper::vector<std::string> >;
+extern template class SOFA_SOFACORE_API TData< bool >;
+extern template class SOFA_SOFACORE_API Data< bool >;
 
 #endif
 

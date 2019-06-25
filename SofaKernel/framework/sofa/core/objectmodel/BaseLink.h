@@ -45,7 +45,7 @@ class BaseObjectDescription;
  *  \brief Abstract base class for all links in the scene grapn, independently of their type.
  *
  */
-class SOFA_CORE_API BaseLink
+class SOFA_SOFACORE_API BaseLink
 {
 public:
     enum LinkFlagsEnum

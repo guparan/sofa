@@ -46,7 +46,7 @@ namespace behavior
 *  see the InteractionConstraint class).
 *
 */
-class SOFA_CORE_API BaseProjectiveConstraintSet : public virtual objectmodel::BaseObject
+class SOFA_SOFACORE_API BaseProjectiveConstraintSet : public virtual objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(BaseProjectiveConstraintSet, objectmodel::BaseObject);

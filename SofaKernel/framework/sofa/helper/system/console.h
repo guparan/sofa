@@ -166,10 +166,10 @@ using enableStd = typename std::enable_if<
 /// anything.  Passing Auto means that styled output will be used for the stream
 /// only if it hasn't been redirected (on Unix only).
 /// By default, colors are enabled if supported (auto).
-SOFA_HELPER_API void setStatus(Status status) noexcept ;
-SOFA_HELPER_API Status getStatus() noexcept ;
+SOFA_SOFAHELPER_API void setStatus(Status status) noexcept ;
+SOFA_SOFAHELPER_API Status getStatus() noexcept ;
 
-SOFA_HELPER_API size_t getColumnCount() ;
+SOFA_SOFAHELPER_API size_t getColumnCount() ;
 
 /// to use stream operator with a styled output on any system
 template <typename T>

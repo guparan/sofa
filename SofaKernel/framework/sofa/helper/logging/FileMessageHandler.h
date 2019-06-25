@@ -44,7 +44,7 @@ class MessageFormatter;
 /// The formatting can be customize by passing a different MessageFormatter in the constructor.
 /// Example of use:
 ///     MessageDispatcher::addHandler(new FileMessageHandler("myfile.log"));
-class SOFA_HELPER_API FileMessageHandler : public MessageHandler
+class SOFA_SOFAHELPER_API FileMessageHandler : public MessageHandler
 {
 public:
     FileMessageHandler(const char* filename,MessageFormatter* formatter = nullptr);

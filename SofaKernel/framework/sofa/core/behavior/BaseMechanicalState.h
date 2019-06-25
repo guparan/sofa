@@ -70,7 +70,7 @@ namespace behavior
  *  in this body.
  *
  */
-class SOFA_CORE_API BaseMechanicalState : public virtual BaseState
+class SOFA_SOFACORE_API BaseMechanicalState : public virtual BaseState
 {
 public:
     SOFA_ABSTRACT_CLASS(BaseMechanicalState, BaseState);

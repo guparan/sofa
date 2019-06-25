@@ -45,7 +45,7 @@ class Base;
  *  All classes deriving from Base should use the SOFA_CLASS macro within their declaration.
  *
  */
-class SOFA_CORE_API BaseClass
+class SOFA_SOFACORE_API BaseClass
 {
 protected:
     BaseClass();

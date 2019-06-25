@@ -238,12 +238,12 @@ protected:
 };
 
 #if  !defined(SOFA_CORE_BEHAVIOR_FORCEFIELD_CPP)
-extern template class SOFA_CORE_API ForceField<defaulttype::Vec3Types>;
-extern template class SOFA_CORE_API ForceField<defaulttype::Vec2Types>;
-extern template class SOFA_CORE_API ForceField<defaulttype::Vec1Types>;
-extern template class SOFA_CORE_API ForceField<defaulttype::Vec6Types>;
-extern template class SOFA_CORE_API ForceField<defaulttype::Rigid3Types>;
-extern template class SOFA_CORE_API ForceField<defaulttype::Rigid2Types>;
+extern template class SOFA_SOFACORE_API ForceField<defaulttype::Vec3Types>;
+extern template class SOFA_SOFACORE_API ForceField<defaulttype::Vec2Types>;
+extern template class SOFA_SOFACORE_API ForceField<defaulttype::Vec1Types>;
+extern template class SOFA_SOFACORE_API ForceField<defaulttype::Vec6Types>;
+extern template class SOFA_SOFACORE_API ForceField<defaulttype::Rigid3Types>;
+extern template class SOFA_SOFACORE_API ForceField<defaulttype::Rigid2Types>;
 
 
 #endif

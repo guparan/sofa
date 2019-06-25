@@ -37,7 +37,7 @@ namespace io
 namespace bvh
 {
 
-class SOFA_HELPER_API BVHChannels
+class SOFA_SOFAHELPER_API BVHChannels
 {
 public:
     BVHChannels(unsigned int _size)

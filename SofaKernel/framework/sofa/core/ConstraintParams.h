@@ -35,7 +35,7 @@ namespace core
 /// Class gathering parameters use by constraint components methods, and transmitted by visitors
 /// read the velocity and position
 /// and where the 
-class SOFA_CORE_API ConstraintParams : public sofa::core::ExecParams
+class SOFA_SOFACORE_API ConstraintParams : public sofa::core::ExecParams
 {
 public:
 

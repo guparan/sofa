@@ -41,7 +41,7 @@ namespace system
 namespace thread
 {
 
-enum SOFA_HELPER_API TraceLevel
+enum SOFA_SOFAHELPER_API TraceLevel
 {
     TRACE_DEBUG   = 0,
     TRACE_INFO    = 1,
@@ -49,7 +49,7 @@ enum SOFA_HELPER_API TraceLevel
     TRACE_WARNING = 3,
 };
 
-class SOFA_HELPER_API Trace
+class SOFA_SOFAHELPER_API Trace
 {
     static int mTraceLevel;
     static int mNbInstance;
@@ -61,7 +61,7 @@ public:
 };
 
 
-class SOFA_HELPER_API TraceProfile
+class SOFA_SOFAHELPER_API TraceProfile
 {
 public:
     int index;

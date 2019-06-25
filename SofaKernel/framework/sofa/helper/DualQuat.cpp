@@ -31,8 +31,8 @@ namespace helper
 {
 
 // instanciate the classes
-template class SOFA_HELPER_API DualQuatCoord3<double>;
-template class SOFA_HELPER_API DualQuatCoord3<float>;
+template class SOFA_SOFAHELPER_API DualQuatCoord3<double>;
+template class SOFA_SOFAHELPER_API DualQuatCoord3<float>;
 
 } // namespace helper
 

@@ -28,8 +28,8 @@ namespace sofa
 namespace helper
 {
 
-template class SOFA_HELPER_API Decompose<double>;
-template class SOFA_HELPER_API Decompose<float>;
+template class SOFA_SOFAHELPER_API Decompose<double>;
+template class SOFA_SOFAHELPER_API Decompose<float>;
 
 } // namespace helper
 

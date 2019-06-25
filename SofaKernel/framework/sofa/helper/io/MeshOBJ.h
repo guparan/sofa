@@ -34,7 +34,7 @@ namespace helper
 namespace io
 {
 
-class SOFA_HELPER_API MeshOBJ : public Mesh
+class SOFA_SOFAHELPER_API MeshOBJ : public Mesh
 {
 public:
 

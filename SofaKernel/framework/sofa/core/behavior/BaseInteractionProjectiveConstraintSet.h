@@ -40,7 +40,7 @@ namespace behavior
  *  bodies given their current positions and velocities.
  *
  */
-class SOFA_CORE_API BaseInteractionProjectiveConstraintSet : public BaseProjectiveConstraintSet
+class SOFA_SOFACORE_API BaseInteractionProjectiveConstraintSet : public BaseProjectiveConstraintSet
 {
 public:
     SOFA_ABSTRACT_CLASS(BaseInteractionProjectiveConstraintSet, BaseProjectiveConstraintSet);

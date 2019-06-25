@@ -36,7 +36,7 @@ namespace system
 {
 class PluginManager;
 
-class SOFA_HELPER_API Plugin
+class SOFA_SOFAHELPER_API Plugin
 {
     friend class PluginManager;
 public:
@@ -129,7 +129,7 @@ private:
 
 };
 
-class SOFA_HELPER_API PluginManager
+class SOFA_SOFAHELPER_API PluginManager
 {
 public:
     typedef std::map<std::string, Plugin > PluginMap;

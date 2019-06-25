@@ -44,7 +44,7 @@ namespace testing {
 /** @brief Helper functions to compare scalars, vectors, matrices, etc.
   */
 template <typename _Real=SReal>
-struct SOFA_HELPER_API NumericTest : public virtual BaseTest
+struct SOFA_SOFAHELPER_API NumericTest : public virtual BaseTest
 {
     NumericTest() {}
 
@@ -314,7 +314,7 @@ void EXPECT_MAT_NEAR(sofa::defaulttype::Mat<L,C,real> const& expected, sofa::def
 } /// namespace sofa
 
 
-extern template struct SOFA_HELPER_API sofa::helper::testing::NumericTest<double>;
+extern template struct SOFA_SOFAHELPER_API sofa::helper::testing::NumericTest<double>;
 
 
 #endif // SOFA_HELPER_NUMERICTEST_H

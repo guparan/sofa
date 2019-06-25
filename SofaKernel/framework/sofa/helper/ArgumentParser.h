@@ -52,7 +52,7 @@ This object parses arguments from a command line or from an input stream.
 */
 
 
-class SOFA_HELPER_API ArgumentParser
+class SOFA_SOFAHELPER_API ArgumentParser
 {
 
 

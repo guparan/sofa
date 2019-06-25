@@ -40,7 +40,7 @@ namespace io
 {
 
 // \brief Abstract representation of a file (could be on disk, memory, network, etc.)
-class SOFA_HELPER_API File
+class SOFA_SOFAHELPER_API File
 {
 public:
     File();

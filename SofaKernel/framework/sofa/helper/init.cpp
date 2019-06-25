@@ -35,7 +35,7 @@ namespace helper
 static bool s_initialized = false;
 static bool s_cleanedUp = false;
 
-SOFA_HELPER_API void init()
+SOFA_SOFAHELPER_API void init()
 {
     if (!s_initialized)
     {
@@ -43,12 +43,12 @@ SOFA_HELPER_API void init()
     }
 }
 
-SOFA_HELPER_API bool isInitialized()
+SOFA_SOFAHELPER_API bool isInitialized()
 {
     return s_initialized;
 }
 
-SOFA_HELPER_API void cleanup()
+SOFA_SOFAHELPER_API void cleanup()
 {
     if (!s_cleanedUp)
     {
@@ -56,19 +56,19 @@ SOFA_HELPER_API void cleanup()
     }
 }
 
-SOFA_HELPER_API bool isCleanedUp()
+SOFA_SOFAHELPER_API bool isCleanedUp()
 {
     return s_cleanedUp;
 }
 
-SOFA_HELPER_API void printUninitializedLibraryWarning(const std::string& library,
+SOFA_SOFAHELPER_API void printUninitializedLibraryWarning(const std::string& library,
                                                       const std::string& initFunction)
 {
     msg_warning(library) << "the library has not been initialized ("
               << initFunction << " has never been called, see sofa/helper/init.h)";
 }
 
-SOFA_HELPER_API void printLibraryNotCleanedUpWarning(const std::string& library,
+SOFA_SOFAHELPER_API void printLibraryNotCleanedUpWarning(const std::string& library,
                                                      const std::string& cleanupFunction)
 {
     msg_warning(library) << "the library has not been cleaned up ("

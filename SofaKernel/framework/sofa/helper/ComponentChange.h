@@ -35,7 +35,7 @@ namespace helper
 namespace lifecycle
 {
 
-class SOFA_HELPER_API ComponentChange
+class SOFA_SOFAHELPER_API ComponentChange
 {
 public:
     ComponentChange() {}
@@ -50,7 +50,7 @@ public:
     const std::string& getMessage() { return m_message; }
 };
 
-class SOFA_HELPER_API Deprecated : public ComponentChange
+class SOFA_SOFAHELPER_API Deprecated : public ComponentChange
 {
 public:
     Deprecated(std::string sinceVersion, std::string untilVersion) {
@@ -65,7 +65,7 @@ public:
     }
 };
 
-class SOFA_HELPER_API Pluginized : public ComponentChange
+class SOFA_SOFAHELPER_API Pluginized : public ComponentChange
 {
 public:
     Pluginized(std::string sinceVersion, std::string plugin) {
@@ -77,7 +77,7 @@ public:
     }
 };
 
-class SOFA_HELPER_API Removed : public ComponentChange
+class SOFA_SOFAHELPER_API Removed : public ComponentChange
 {
 public:
     Removed(std::string  sinceVersion, std::string atVersion) {
@@ -91,8 +91,8 @@ public:
     }
 };
 
-extern SOFA_HELPER_API std::map< std::string, Deprecated > deprecatedComponents;
-extern SOFA_HELPER_API std::map< std::string, ComponentChange > uncreatableComponents;
+extern SOFA_SOFAHELPER_API std::map< std::string, Deprecated > deprecatedComponents;
+extern SOFA_SOFAHELPER_API std::map< std::string, ComponentChange > uncreatableComponents;
 
 } // namespace lifecycle
 } // namespace helper

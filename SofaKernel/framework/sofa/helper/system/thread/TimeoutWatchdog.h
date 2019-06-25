@@ -40,7 +40,7 @@ namespace thread
 /**
  * Instances of this class prevents the current program from running longer than a specified duration.
  */
-class SOFA_HELPER_API TimeoutWatchdog
+class SOFA_SOFAHELPER_API TimeoutWatchdog
 {
 public:
     /// Default constructor.

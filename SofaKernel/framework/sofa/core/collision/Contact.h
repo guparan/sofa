@@ -52,7 +52,7 @@ namespace collision
  *
  * - Contact object dynamically appears in the scenegraph
  */
-class SOFA_CORE_API Contact : public virtual objectmodel::BaseObject
+class SOFA_SOFACORE_API Contact : public virtual objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(Contact, objectmodel::BaseObject);
@@ -86,7 +86,7 @@ public:
     class Factory : public helper::Factory< std::string, Contact, std::pair<std::pair<core::CollisionModel*,core::CollisionModel*>,Intersection*>, Contact::SPtr >
     {
     public:
-        static Factory SOFA_CORE_API *getInstance();
+        static Factory SOFA_SOFACORE_API *getInstance();
 
         static ObjectPtr CreateObject(Key key, Argument arg)
         {

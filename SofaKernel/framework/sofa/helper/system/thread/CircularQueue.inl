@@ -94,22 +94,22 @@ unsigned CircularQueue<T, StoragePolicy, ThreadAccessPolicy>::pop(OutputIterator
 
 
 
-inline SOFA_HELPER_API OneThreadPerEnd::OneThreadPerEnd()
+inline SOFA_SOFAHELPER_API OneThreadPerEnd::OneThreadPerEnd()
     : head(0), tail(0)
 {
 }
 
-inline SOFA_HELPER_API bool OneThreadPerEnd::isEmpty(unsigned /*maxSize*/) const
+inline SOFA_SOFAHELPER_API bool OneThreadPerEnd::isEmpty(unsigned /*maxSize*/) const
 {
     return head == tail;
 }
 
-inline SOFA_HELPER_API bool OneThreadPerEnd::isFull(unsigned maxSize) const
+inline SOFA_SOFAHELPER_API bool OneThreadPerEnd::isFull(unsigned maxSize) const
 {
     return (tail+1) % maxSize == head;
 }
 
-inline SOFA_HELPER_API unsigned OneThreadPerEnd::size(unsigned maxSize) const
+inline SOFA_SOFAHELPER_API unsigned OneThreadPerEnd::size(unsigned maxSize) const
 {
     unsigned h = head;
     unsigned t = tail;
@@ -235,27 +235,27 @@ unsigned OneThreadPerEnd::pop(T array[], unsigned maxSize, unsigned /*maxCapacit
 
 
 
-inline SOFA_HELPER_API ManyThreadsPerEnd::ManyThreadsPerEnd()
+inline SOFA_SOFAHELPER_API ManyThreadsPerEnd::ManyThreadsPerEnd()
     : head(0), tail(0)
 {
 }
 
-inline SOFA_HELPER_API bool ManyThreadsPerEnd::isEmpty(unsigned /*maxSize*/) const
+inline SOFA_SOFAHELPER_API bool ManyThreadsPerEnd::isEmpty(unsigned /*maxSize*/) const
 {
     return head == tail;
 }
 
-inline SOFA_HELPER_API bool ManyThreadsPerEnd::isFull(unsigned maxSize) const
+inline SOFA_SOFAHELPER_API bool ManyThreadsPerEnd::isFull(unsigned maxSize) const
 {
     return tail-head >= (int)maxSize;
 }
 
-inline SOFA_HELPER_API unsigned ManyThreadsPerEnd::size(unsigned /*maxSize*/) const
+inline SOFA_SOFAHELPER_API unsigned ManyThreadsPerEnd::size(unsigned /*maxSize*/) const
 {
     return tail - head;
 }
 
-inline SOFA_HELPER_API void ManyThreadsPerEnd::init(AtomicInt array[], int maxCapacity)
+inline SOFA_SOFAHELPER_API void ManyThreadsPerEnd::init(AtomicInt array[], int maxCapacity)
 {
     for(int i = 0; i < maxCapacity; ++i)
     {
@@ -263,7 +263,7 @@ inline SOFA_HELPER_API void ManyThreadsPerEnd::init(AtomicInt array[], int maxCa
     }
 }
 
-inline SOFA_HELPER_API bool ManyThreadsPerEnd::pop(AtomicInt array[], int maxSize, int maxCapacity, AtomicInt& item, bool /*clear*/)
+inline SOFA_SOFAHELPER_API bool ManyThreadsPerEnd::pop(AtomicInt array[], int maxSize, int maxCapacity, AtomicInt& item, bool /*clear*/)
 {
     if(isEmpty(maxSize))
     {
@@ -289,7 +289,7 @@ inline SOFA_HELPER_API bool ManyThreadsPerEnd::pop(AtomicInt array[], int maxSiz
     return true;
 }
 
-inline SOFA_HELPER_API bool ManyThreadsPerEnd::push(AtomicInt array[], int maxSize, int maxCapacity, const AtomicInt& item)
+inline SOFA_SOFAHELPER_API bool ManyThreadsPerEnd::push(AtomicInt array[], int maxSize, int maxCapacity, const AtomicInt& item)
 {
     if(isFull(maxSize))
     {
@@ -314,7 +314,7 @@ inline SOFA_HELPER_API bool ManyThreadsPerEnd::push(AtomicInt array[], int maxSi
     return true;
 }
 
-inline SOFA_HELPER_API unsigned ManyThreadsPerEnd::skip(AtomicInt array[], int maxSize, int maxCapacity, unsigned outmaxsize, bool clear)
+inline SOFA_SOFAHELPER_API unsigned ManyThreadsPerEnd::skip(AtomicInt array[], int maxSize, int maxCapacity, unsigned outmaxsize, bool clear)
 {
     // NOT OPTIMIZED
     unsigned outsize = 0;

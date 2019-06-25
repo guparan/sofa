@@ -35,7 +35,7 @@ namespace helper
 
 namespace io
 {
-class SOFA_HELPER_API Image
+class SOFA_SOFAHELPER_API Image
 {
 public:
     enum DataType
@@ -155,7 +155,7 @@ private:
 } // namespace io
 
 #if  !defined(SOFA_HELPER_IO_IMAGE_CPP)
-extern template class SOFA_HELPER_API Factory<std::string, io::Image, std::string>;
+extern template class SOFA_SOFAHELPER_API Factory<std::string, io::Image, std::string>;
 #endif
 
 } // namespace helper

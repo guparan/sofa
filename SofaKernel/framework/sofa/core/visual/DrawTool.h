@@ -43,7 +43,7 @@ namespace visual
  *
  */
 
-class SOFA_CORE_API DrawTool
+class SOFA_SOFACORE_API DrawTool
 {
 
 public:

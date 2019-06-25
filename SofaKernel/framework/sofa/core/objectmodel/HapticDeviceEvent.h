@@ -37,7 +37,7 @@ namespace objectmodel
 /**
  * @brief This event notifies about haptic device interaction.
  */
-class SOFA_CORE_API HapticDeviceEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFACORE_API HapticDeviceEvent : public sofa::core::objectmodel::Event
 {
 public:
 

@@ -34,7 +34,7 @@ namespace helper
 namespace gl
 {
 
-class SOFA_HELPER_API Transformation
+class SOFA_SOFAHELPER_API Transformation
 {
 public:
     SReal			translation[3];

@@ -183,7 +183,7 @@ static std::istream& trimInitialSpaces(std::istream& in)
 }
 
 
-SOFA_HELPER_API std::istream& operator>>(std::istream& in, RGBAColor& t)
+SOFA_SOFAHELPER_API std::istream& operator>>(std::istream& in, RGBAColor& t)
 {
     float r=0.0,g=0.0, b=0.0, a=1.0;
 
@@ -261,7 +261,7 @@ SOFA_HELPER_API std::istream& operator>>(std::istream& in, RGBAColor& t)
 
 
 /// Write to an output stream
-SOFA_HELPER_API std::ostream& operator << ( std::ostream& out, const RGBAColor& v )
+SOFA_SOFAHELPER_API std::ostream& operator << ( std::ostream& out, const RGBAColor& v )
 {
     for( int i=0; i<3; ++i )
         out<<v[i]<<" ";

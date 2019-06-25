@@ -36,7 +36,7 @@ namespace helper
 namespace io
 {
 
-class SOFA_HELPER_API ImageRAW : public Image
+class SOFA_SOFAHELPER_API ImageRAW : public Image
 {
 public:
     ImageRAW ();

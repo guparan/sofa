@@ -24,7 +24,7 @@
 
 #include <cstddef>                  /// For size_t
 #include <string>                   /// For std::string
-#include <sofa/helper/helper.h>     /// For SOFA_HELPER_API
+#include <sofa/helper/helper.h>     /// For SOFA_SOFAHELPER_API
 #include <sofa/helper/system/config.h> /// For SOFA_UNUSED
 
 
@@ -47,7 +47,7 @@ namespace io
 /// in the Xsp file format.
 ///
 /// @see XspLoader for an example of use.
-class SOFA_HELPER_API XspLoaderDataHook
+class SOFA_SOFAHELPER_API XspLoaderDataHook
 {
 public:
     /// @brief Destructor, does nothing special
@@ -94,7 +94,7 @@ public:
     virtual void addVectorSpring(size_t m1, size_t m2, SReal ks, SReal kd, SReal initpos, SReal /*restx*/, SReal /*resty*/, SReal /*restz*/) { addSpring(m1, m2, ks, kd, initpos); }
 };
 
-class SOFA_HELPER_API XspLoader
+class SOFA_SOFAHELPER_API XspLoader
 {
 public:
     /// @brief Call this method to load an XspFile.

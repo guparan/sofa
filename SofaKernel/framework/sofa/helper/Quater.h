@@ -36,7 +36,7 @@ namespace helper
 {
 
 template<class Real>
-class SOFA_HELPER_API Quater
+class SOFA_SOFAHELPER_API Quater
 {
 private:
     Real _q[4];
@@ -352,8 +352,8 @@ public:
 //typedef Quater<double> Quaternion; ///< alias
 
 #if  !defined(SOFA_HELPER_QUATER_CPP)
-extern template class SOFA_HELPER_API Quater<double>;
-extern template class SOFA_HELPER_API Quater<float>;
+extern template class SOFA_SOFAHELPER_API Quater<double>;
+extern template class SOFA_SOFAHELPER_API Quater<float>;
 #endif
 
 } // namespace helper

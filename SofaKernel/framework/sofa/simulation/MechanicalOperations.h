@@ -39,7 +39,7 @@ namespace simulation
 namespace common
 {
 
-class SOFA_SIMULATION_CORE_API MechanicalOperations
+class SOFA_SOFASIMULATION_API MechanicalOperations
 {
 public:
     core::MechanicalParams mparams;

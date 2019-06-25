@@ -41,7 +41,7 @@ namespace logging
 
 class Message;
 
-class SOFA_HELPER_API MessageFormatter
+class SOFA_SOFAHELPER_API MessageFormatter
 {
 public:
     virtual void formatMessage(const Message& m,std::ostream& out) = 0 ;

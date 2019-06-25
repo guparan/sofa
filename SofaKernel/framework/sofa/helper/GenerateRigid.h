@@ -36,7 +36,7 @@ namespace helper
 {
 
 /// base function to compute center of mass, mass and inertia tensor from a mesh
-void SOFA_HELPER_API generateRigid( defaulttype::Rigid3Mass& mass, defaulttype::Vector3& center, const helper::io::Mesh* mesh );
+void SOFA_SOFAHELPER_API generateRigid( defaulttype::Rigid3Mass& mass, defaulttype::Vector3& center, const helper::io::Mesh* mesh );
 
 /// user friendly function to compute center of mass, mass and inertia tensor from a mesh, a density, a scale and a rotation
 void generateRigid(defaulttype::Rigid3Mass& mass, defaulttype::Vector3& center, io::Mesh *mesh
@@ -46,7 +46,7 @@ void generateRigid(defaulttype::Rigid3Mass& mass, defaulttype::Vector3& center, 
                                   );
 
 /// user friendly function to compute center of mass, mass and inertia tensor from a mesh file, a density, a scale and a rotation
-bool SOFA_HELPER_API generateRigid( defaulttype::Rigid3Mass& mass, defaulttype::Vector3& center, const std::string& meshFilename
+bool SOFA_SOFAHELPER_API generateRigid( defaulttype::Rigid3Mass& mass, defaulttype::Vector3& center, const std::string& meshFilename
                                   , SReal density
                                   , const defaulttype::Vector3& scale = defaulttype::Vector3(1,1,1)
                                   , const defaulttype::Vector3& rotation /*Euler angles*/ = defaulttype::Vector3(0,0,0)
@@ -64,7 +64,7 @@ struct GenerateRigidInfo
 };
 
 /// user friendly function to compute rigid info from a mesh, a density, a scale
-void SOFA_HELPER_API generateRigid( GenerateRigidInfo& res
+void SOFA_SOFAHELPER_API generateRigid( GenerateRigidInfo& res
                                   , io::Mesh *mesh
                                   , std::string const& meshName
                                   , SReal density
@@ -73,7 +73,7 @@ void SOFA_HELPER_API generateRigid( GenerateRigidInfo& res
                                   );
 
 /// user friendly function to compute rigid info from a mesh file, a density, a scale
-bool SOFA_HELPER_API generateRigid( GenerateRigidInfo& res
+bool SOFA_SOFAHELPER_API generateRigid( GenerateRigidInfo& res
                                   , const std::string& meshFilename
                                   , SReal density
                                   , const defaulttype::Vector3& scale = defaulttype::Vector3(1,1,1)

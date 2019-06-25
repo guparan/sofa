@@ -43,7 +43,7 @@ class MessageHandler;
 
 /// static interface to manage the list of MessageHandlers
 /// that process the Messages
-class SOFA_HELPER_API MessageDispatcher
+class SOFA_SOFAHELPER_API MessageDispatcher
 {
 
 public:
@@ -51,7 +51,7 @@ public:
         /// a utility interface to automatically process a Message
         /// at the end of scope of the LoggerStream variable
         /// (processed by all the handlers of the MessageDispatcher)
-        class SOFA_HELPER_API LoggerStream
+        class SOFA_SOFAHELPER_API LoggerStream
         {
 
         public:
@@ -81,7 +81,7 @@ public:
         };
 
         /// @internal to be able to redirect Messages to nowhere
-        class SOFA_HELPER_API NullLoggerStream
+        class SOFA_SOFAHELPER_API NullLoggerStream
         {
         public:
             template<typename T> inline const NullLoggerStream& operator<<(const T& /*v*/) const { return *this; }

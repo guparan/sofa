@@ -35,19 +35,19 @@ namespace core
 
 /// @brief Initialize the SofaSimulationCore library, as well as its
 /// dependencies: SofaCore, SofaDefaultType, SofaHelper.
-SOFA_SIMULATION_CORE_API void init();
+SOFA_SOFASIMULATION_API void init();
 
 /// @brief Return true if and only if the SofaSimulationCore library has been
 /// initialized.
-SOFA_SIMULATION_CORE_API bool isInitialized();
+SOFA_SOFASIMULATION_API bool isInitialized();
 
 /// @brief Clean up the resources used by the SofaSimulationCore library, as
 /// well as its dependencies: SofaCore, SofaDefaultType, SofaHelper.
-SOFA_SIMULATION_CORE_API void cleanup();
+SOFA_SOFASIMULATION_API void cleanup();
 
 /// @brief Return true if and only if the SofaSimulationCore library has been
 /// cleaned up.
-SOFA_SIMULATION_CORE_API bool isCleanedUp();
+SOFA_SOFASIMULATION_API bool isCleanedUp();
 
 } // namespace core
 

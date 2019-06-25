@@ -38,7 +38,7 @@ using sofa::defaulttype::Vec;
 using sofa::defaulttype::Vector3;
 using sofa::helper::vector;
 
-class SOFA_HELPER_API MarchingCubeUtility
+class SOFA_SOFAHELPER_API MarchingCubeUtility
 {
 public:
     typedef unsigned int PointID;
@@ -226,9 +226,9 @@ private:
     Vector3 verticesTranslation;
 };
 
-extern SOFA_HELPER_API const int MarchingCubeEdgeTable[256];
-extern SOFA_HELPER_API const int MarchingCubeFaceTable[256];
-extern SOFA_HELPER_API const int MarchingCubeTriTable[256][16];
+extern SOFA_SOFAHELPER_API const int MarchingCubeEdgeTable[256];
+extern SOFA_SOFAHELPER_API const int MarchingCubeFaceTable[256];
+extern SOFA_SOFAHELPER_API const int MarchingCubeTriTable[256][16];
 } // namespace helper
 } // namespace sofa
 

@@ -103,7 +103,7 @@ namespace simulation
 
    @author The SOFA team </www.sofa-framework.org>
  */
-class SOFA_SIMULATION_CORE_API Node : public sofa::core::objectmodel::BaseNode, public sofa::core::objectmodel::Context
+class SOFA_SOFASIMULATION_API Node : public sofa::core::objectmodel::BaseNode, public sofa::core::objectmodel::Context
 {
 
 public:

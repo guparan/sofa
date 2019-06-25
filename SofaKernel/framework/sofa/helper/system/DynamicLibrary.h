@@ -38,12 +38,12 @@ namespace system
 /**
    @brief Wrapper around the dynamic library facilities of the operating system.
 */
-class SOFA_HELPER_API DynamicLibrary
+class SOFA_SOFAHELPER_API DynamicLibrary
 {
 public:
 
     /// A handle to a dynamic library.
-    class SOFA_HELPER_API Handle {
+    class SOFA_SOFAHELPER_API Handle {
         friend class DynamicLibrary;
     public:
         /// Default constructor: invalid handle.

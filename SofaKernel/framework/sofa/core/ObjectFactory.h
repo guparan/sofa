@@ -46,7 +46,7 @@ namespace core
  */
 
 typedef std::function<void(sofa::core::objectmodel::Base*, sofa::core::objectmodel::BaseObjectDescription*)> OnCreateCallback ;
-class SOFA_CORE_API ObjectFactory
+class SOFA_SOFACORE_API ObjectFactory
 {
 public:
 
@@ -255,7 +255,7 @@ public:
  *  \endcode
  *
  */
-class SOFA_CORE_API RegisterObject
+class SOFA_SOFACORE_API RegisterObject
 {
 protected:
     /// Class entry being constructed

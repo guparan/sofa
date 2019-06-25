@@ -52,7 +52,7 @@ namespace behavior
  *  (some computations can be executed in parallel).
  *
  */
-class SOFA_CORE_API OdeSolver : public virtual objectmodel::BaseObject
+class SOFA_SOFACORE_API OdeSolver : public virtual objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(OdeSolver, objectmodel::BaseObject);

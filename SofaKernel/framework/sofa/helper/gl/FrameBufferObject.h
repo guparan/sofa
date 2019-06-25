@@ -43,7 +43,7 @@ namespace helper
 namespace gl
 {
 
-struct SOFA_HELPER_API fboParameters
+struct SOFA_SOFAHELPER_API fboParameters
 {
     GLint  depthInternalformat; // GL_DEPTHCOMPONENT16 GL_DEPTHCOMPONENT24...
     GLint  colorInternalformat; // GL_RGB8, GL_RGB16...
@@ -59,7 +59,7 @@ struct SOFA_HELPER_API fboParameters
     }
 };
 
-class SOFA_HELPER_API FrameBufferObject
+class SOFA_SOFAHELPER_API FrameBufferObject
 {
 private:
     GLint m_defaultWindowFramebufferID;

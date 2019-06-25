@@ -54,14 +54,14 @@ using std::string ;
 /// the monitoring to happens in an hidden thread you can implement it
 /// externally.
 ///
-class SOFA_HELPER_API FileEventListener
+class SOFA_SOFAHELPER_API FileEventListener
 {
 public:
     virtual ~FileEventListener() {}
     virtual void fileHasChanged(const std::string& filename) = 0;
 };
 
-class SOFA_HELPER_API FileMonitor
+class SOFA_SOFAHELPER_API FileMonitor
 {
 public:
     /// @brief add a new filepath to monitor and a listener to be triggered

@@ -30,7 +30,7 @@ namespace sofa
 namespace helper
 {
 
-class SOFA_HELPER_API BackTrace
+class SOFA_SOFAHELPER_API BackTrace
 {
 public:
     /// Dump current backtrace to stderr.

@@ -41,7 +41,7 @@ class Message;
 
 ///
 /// This class is a MessageHandler that simply do nothing with the message.
-class SOFA_HELPER_API SilentMessageHandler : public MessageHandler
+class SOFA_SOFAHELPER_API SilentMessageHandler : public MessageHandler
 {
 public:
     void process(Message& /*m*/) override;

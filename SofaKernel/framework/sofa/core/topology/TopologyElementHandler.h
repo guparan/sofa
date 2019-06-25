@@ -43,7 +43,7 @@ namespace topology
 * happen (non exhaustive list: Edges added, removed, fused, renumbered).
 */
 template<class TopologyElementType>
-class SOFA_CORE_API TopologyElementHandler : public sofa::core::topology::TopologyHandler
+class SOFA_SOFACORE_API TopologyElementHandler : public sofa::core::topology::TopologyHandler
 {
 public:
 

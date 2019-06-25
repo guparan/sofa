@@ -33,7 +33,7 @@ namespace core
 namespace loader
 {
 
-bool SOFA_CORE_API canLoad(const char* filename);
+bool SOFA_SOFACORE_API canLoad(const char* filename);
 
 BaseLoader::BaseLoader(): m_filename(initData(&m_filename,"filename","Filename of the object"))
 {

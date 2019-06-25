@@ -164,11 +164,12 @@ foreach(NAME ${SOFA_BUILD_OPTIONS_SRC})
 endforeach()
 
 configure_file("config.h.in" "${CMAKE_BINARY_DIR}/include/sofa/config.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/sofa/config.h" DESTINATION "include/${PROJECT_NAME}/sofa" COMPONENT headers)
+install(FILES "${CMAKE_BINARY_DIR}/include/sofa/config.h" DESTINATION "include/SofaFramework/sofa" COMPONENT headers)
 
 # Generic config.h configurable by any module
-file(COPY "config_template.h.in" DESTINATION "${CMAKE_BINARY_DIR}/include/SofaFramework/sofa/config")
-install(FILES "config_template.h.in" DESTINATION "include/${PROJECT_NAME}/sofa/config" COMPONENT headers)
+set(SOFA_CONFIG_TEMPLATE "${CMAKE_BINARY_DIR}/include/SofaFramework/sofa/config/config_template.h.in") # used by SofaFramework subdirectories
+file(COPY "config_template.h.in" DESTINATION "${CMAKE_BINARY_DIR}/include/SofaFramework/sofa/config") # used by all modules
+install(FILES "config_template.h.in" DESTINATION "include/${PROJECT_NAME}/sofa/config" COMPONENT headers) # used in install
 
 ## Version
 set(SOFAFRAMEWORK_VERSION "${Sofa_VERSION}")
@@ -214,6 +215,7 @@ endif()
 
 set(SOFAFRAMEWORK_TARGETS SofaCore SofaDefaultType SofaHelper)
 foreach(TARGET ${SOFAFRAMEWORK_TARGETS})
+    target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include/${PROJECT_NAME}>")
     target_include_directories(${TARGET} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
 endforeach()
 

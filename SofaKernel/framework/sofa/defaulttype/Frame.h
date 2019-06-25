@@ -42,7 +42,7 @@ The product F1F2 can be seen as a frame displacement F1 starting from the refere
 
 \author Francois Faure, INRIA-UJF, 2006
 */
-class SOFA_DEFAULTTYPE_API Frame
+class SOFA_SOFADEFAULTTYPE_API Frame
 {
 public:
     typedef Vec<3,SReal> Vec3;

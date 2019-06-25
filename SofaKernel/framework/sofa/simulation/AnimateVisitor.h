@@ -41,7 +41,7 @@ namespace sofa
 namespace simulation
 {
 
-class SOFA_SIMULATION_CORE_API AnimateVisitor : public Visitor
+class SOFA_SOFASIMULATION_API AnimateVisitor : public Visitor
 {
 
 protected :

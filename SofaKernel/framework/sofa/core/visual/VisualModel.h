@@ -49,7 +49,7 @@ class VisualParams;
  *  Most VisualModel are bound by a Mapping to a BehaviorModel or
  *  MechanicalState.
  */
-class SOFA_CORE_API VisualModel : public virtual objectmodel::BaseObject
+class SOFA_SOFACORE_API VisualModel : public virtual objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(VisualModel, objectmodel::BaseObject);

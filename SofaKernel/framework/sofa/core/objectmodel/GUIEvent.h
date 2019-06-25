@@ -38,7 +38,7 @@ namespace objectmodel
 /**
  * @brief This event notifies about GUI interaction.
  */
-class SOFA_CORE_API GUIEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFACORE_API GUIEvent : public sofa::core::objectmodel::Event
 {
 public:
 

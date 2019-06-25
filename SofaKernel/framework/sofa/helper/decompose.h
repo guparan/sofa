@@ -378,20 +378,20 @@ private:
 }; // class Decompose
 
 template<>
-SOFA_HELPER_API inline float Decompose<float>::zeroTolerance()
+SOFA_SOFAHELPER_API inline float Decompose<float>::zeroTolerance()
 {
     return 1e-6f;
 }
 
 template<>
-SOFA_HELPER_API inline double Decompose<double>::zeroTolerance()
+SOFA_SOFAHELPER_API inline double Decompose<double>::zeroTolerance()
 {
     return 1e-8;
 }
 
 #if  !defined(SOFA_BUILD_HELPER)
-extern template class SOFA_HELPER_API Decompose<double>;
-extern template class SOFA_HELPER_API Decompose<float>;
+extern template class SOFA_SOFAHELPER_API Decompose<double>;
+extern template class SOFA_SOFAHELPER_API Decompose<float>;
 #endif
 
 } // namespace helper

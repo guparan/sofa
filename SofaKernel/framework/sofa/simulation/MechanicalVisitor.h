@@ -60,7 +60,7 @@ The default behavior of the fwd* and bwd* is to do nothing.
 Derived actions typically overload these methods to implement the desired processing.
 
 */
-class SOFA_SIMULATION_CORE_API BaseMechanicalVisitor : public Visitor
+class SOFA_SOFASIMULATION_API BaseMechanicalVisitor : public Visitor
 {
 
 protected:
@@ -387,7 +387,7 @@ protected:
 #endif
 };
 
-class SOFA_SIMULATION_CORE_API MechanicalVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalVisitor : public BaseMechanicalVisitor
 {
 
 protected:
@@ -402,7 +402,7 @@ public:
 };
 
 /** Compute the total number of DOFs */
-class SOFA_SIMULATION_CORE_API MechanicalGetDimensionVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalGetDimensionVisitor : public MechanicalVisitor
 {
 public:
     MechanicalGetDimensionVisitor(const core::MechanicalParams* mparams, SReal* result)
@@ -435,7 +435,7 @@ public:
 /** Find the first available index for a VecId
 */
 template <sofa::core::VecType vtype>
-class SOFA_SIMULATION_CORE_API MechanicalVAvailVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalVAvailVisitor : public BaseMechanicalVisitor
 {
 public:
     typedef sofa::core::TVecId<vtype,sofa::core::V_WRITE> MyVecId;
@@ -477,7 +477,7 @@ public:
  *
  */
 template< sofa::core::VecType vtype >
-class SOFA_SIMULATION_CORE_API MechanicalVInitVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalVInitVisitor : public BaseMechanicalVisitor
 {
 public:
     typedef sofa::core::TMultiVecId<vtype,sofa::core::V_WRITE> DestMultiVecId;
@@ -541,7 +541,7 @@ public:
 /** Reserve an auxiliary vector identified by a symbolic constant.
 */
 template <sofa::core::VecType vtype>
-class SOFA_SIMULATION_CORE_API MechanicalVAllocVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalVAllocVisitor : public BaseMechanicalVisitor
 {
 public:
     typedef sofa::core::TMultiVecId<vtype, sofa::core::V_WRITE> MyMultiVecId;
@@ -578,7 +578,7 @@ public:
  *
  */
 template< sofa::core::VecType vtype >
-class SOFA_SIMULATION_CORE_API MechanicalVReallocVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalVReallocVisitor : public BaseMechanicalVisitor
 {
 public:
     typedef sofa::core::TMultiVecId<vtype,sofa::core::V_WRITE> DestMultiVecId;
@@ -646,7 +646,7 @@ protected:
 
 /** Free an auxiliary vector identified by a symbolic constant */
 template< sofa::core::VecType vtype >
-class SOFA_SIMULATION_CORE_API MechanicalVFreeVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalVFreeVisitor : public BaseMechanicalVisitor
 {
 public:
     typedef sofa::core::TMultiVecId<vtype,sofa::core::V_WRITE> MyMultiVecId;
@@ -683,7 +683,7 @@ public:
 
 /** Perform a vector operation v=a+b*f
 */
-class SOFA_SIMULATION_CORE_API MechanicalVOpVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalVOpVisitor : public BaseMechanicalVisitor
 {
 public:
     sofa::core::MultiVecId v;
@@ -744,7 +744,7 @@ public:
 *  This is used to compute in on steps operations such as $v = v + a*dt, x = x + v*dt$.
 *  Note that if the result vector appears inside the expression, it must be the first operand.
 */
-class SOFA_SIMULATION_CORE_API MechanicalVMultiOpVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalVMultiOpVisitor : public BaseMechanicalVisitor
 {
 public:
     typedef core::behavior::BaseMechanicalState::VMultiOp VMultiOp;
@@ -799,7 +799,7 @@ protected:
 };
 
 /** Compute the dot product of two vectors */
-class SOFA_SIMULATION_CORE_API MechanicalVDotVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalVDotVisitor : public BaseMechanicalVisitor
 {
 public:
     sofa::core::ConstMultiVecId a;
@@ -848,7 +848,7 @@ public:
  * Note that the 2-norm is more efficiently computed using the square root of the dot product.
  * @author Francois Faure, 2013
  */
-class SOFA_SIMULATION_CORE_API MechanicalVNormVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalVNormVisitor : public BaseMechanicalVisitor
 {
     SReal accum; ///< accumulate value before computing its root
 public:
@@ -893,7 +893,7 @@ This action does not modify the state (i.e. positions and velocities) of the obj
 It is typically applied before a MechanicalComputeDfVisitor, in order to compute the df corresponding to a given dx (i.e. apply stiffness).
 Dx is propagated to all the layers through the mappings.
 */
-class SOFA_SIMULATION_CORE_API MechanicalPropagateDxVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalPropagateDxVisitor : public MechanicalVisitor
 {
 public:
     sofa::core::MultiVecDerivId dx;
@@ -944,7 +944,7 @@ public:
 
 /** Same as MechanicalPropagateDxVisitor followed by MechanicalResetForceVisitor
 */
-class SOFA_SIMULATION_CORE_API MechanicalPropagateDxAndResetForceVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalPropagateDxAndResetForceVisitor : public MechanicalVisitor
 {
 public:
     sofa::core::MultiVecDerivId dx,f;
@@ -990,7 +990,7 @@ MechanicalPropagatePositionAndResetForceVisitor.
 Use MechanicalProjectPositionVisitor before this visitor if projection
 is needed.
 */
-class SOFA_SIMULATION_CORE_API MechanicalPropagateOnlyPositionAndResetForceVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalPropagateOnlyPositionAndResetForceVisitor : public MechanicalVisitor
 {
 public:
     sofa::core::MultiVecCoordId x;
@@ -1030,7 +1030,7 @@ public:
 Typically used in implicit integration solved by a Conjugate Gradient algorithm.
 Note that if a dx vector is given, it is used and propagated by the mappings, Otherwise the current value is used.
 */
-class SOFA_SIMULATION_CORE_API MechanicalAddMDxVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalAddMDxVisitor : public MechanicalVisitor
 {
 public:
     sofa::core::MultiVecDerivId res;
@@ -1070,7 +1070,7 @@ public:
 
 /** Compute accelerations generated by given forces
 */
-class SOFA_SIMULATION_CORE_API MechanicalAccFromFVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalAccFromFVisitor : public MechanicalVisitor
 {
 public:
     sofa::core::MultiVecDerivId a;
@@ -1104,7 +1104,7 @@ public:
 #endif
 };
 
-class SOFA_SIMULATION_CORE_API MechanicalProjectJacobianMatrixVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalProjectJacobianMatrixVisitor : public MechanicalVisitor
 {
 public:
     sofa::core::MultiMatrixDerivId cId;
@@ -1137,7 +1137,7 @@ public:
 #endif
 };
 
-class SOFA_SIMULATION_CORE_API MechanicalProjectVelocityVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalProjectVelocityVisitor : public MechanicalVisitor
 {
 public:
     SReal t;
@@ -1175,7 +1175,7 @@ public:
 #endif
 };
 
-class SOFA_SIMULATION_CORE_API MechanicalProjectPositionVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalProjectPositionVisitor : public MechanicalVisitor
 {
 public:
     SReal t;
@@ -1213,7 +1213,7 @@ public:
 #endif
 };
 
-class SOFA_SIMULATION_CORE_API MechanicalProjectPositionAndVelocityVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalProjectPositionAndVelocityVisitor : public MechanicalVisitor
 {
 public:
     double t;
@@ -1264,7 +1264,7 @@ MechanicalPropagatePositionVisitor.
 Use MechanicalProjectPositionVisitor before this visitor if projection
 is needed.
 */
-class SOFA_SIMULATION_CORE_API MechanicalPropagateOnlyPositionVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalPropagateOnlyPositionVisitor : public MechanicalVisitor
 {
 public:
     SReal t;
@@ -1318,7 +1318,7 @@ MechanicalPropagatePositionAndVelocityVisitor.
 Use MechanicalProjectPositionAndVelocityVisitor before this visitor if
 projection is needed.
 */
-class SOFA_SIMULATION_CORE_API MechanicalPropagateOnlyPositionAndVelocityVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalPropagateOnlyPositionAndVelocityVisitor : public MechanicalVisitor
 {
 public:
     SReal currentTime;
@@ -1369,7 +1369,7 @@ MechanicalPropagateVelocityVisitor.
 Use MechanicalProjectVelocityVisitor before this visitor if projection
 is needed.
 */
-class SOFA_SIMULATION_CORE_API MechanicalPropagateOnlyVelocityVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalPropagateOnlyVelocityVisitor : public MechanicalVisitor
 {
 public:
     SReal currentTime;
@@ -1410,7 +1410,7 @@ public:
 /**
 * @brief Visitor class used to set positions and velocities of the top level MechanicalStates of the hierarchy.
 */
-class SOFA_SIMULATION_CORE_API MechanicalSetPositionAndVelocityVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalSetPositionAndVelocityVisitor : public MechanicalVisitor
 {
 public:
     SReal t;
@@ -1447,7 +1447,7 @@ public:
 /** Reset the force in all the MechanicalModel
 This action is typically applied before accumulating all the forces.
 */
-class SOFA_SIMULATION_CORE_API MechanicalResetForceVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalResetForceVisitor : public BaseMechanicalVisitor
 {
 public:
     sofa::core::MultiVecDerivId res;
@@ -1490,7 +1490,7 @@ public:
 /** Accumulate the forces (internal and interactions).
 This action is typically called after a MechanicalResetForceVisitor.
 */
-class SOFA_SIMULATION_CORE_API MechanicalComputeForceVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalComputeForceVisitor : public MechanicalVisitor
 {
 public:
     sofa::core::MultiVecDerivId res;
@@ -1540,7 +1540,7 @@ public:
 /** Compute the variation of force corresponding to a variation of position.
 This action is typically called after a MechanicalPropagateDxVisitor.
 */
-class SOFA_SIMULATION_CORE_API MechanicalComputeDfVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalComputeDfVisitor : public MechanicalVisitor
 {
 public:
     sofa::core::MultiVecDerivId res;
@@ -1595,7 +1595,7 @@ public:
 /** Compute the mapping geometric stiffness matrices.
 This action must be call before BaseMapping::getK()
 */
-class SOFA_SIMULATION_CORE_API MechanicalComputeGeometricStiffness : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalComputeGeometricStiffness : public MechanicalVisitor
 {
 public:
     sofa::core::ConstMultiVecDerivId childForce;
@@ -1636,7 +1636,7 @@ Typically used in implicit integration solved by a Conjugate Gradient algorithm.
 The current value of the dx vector is used.
 This action is typically called after a MechanicalPropagateDxAndResetForceVisitor.
 */
-class SOFA_SIMULATION_CORE_API MechanicalAddMBKdxVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalAddMBKdxVisitor : public MechanicalVisitor
 {
     sofa::core::MechanicalParams mparamsWithoutStiffness;
 public:
@@ -1679,7 +1679,7 @@ public:
 
 
 
-class SOFA_SIMULATION_CORE_API MechanicalResetConstraintVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalResetConstraintVisitor : public BaseMechanicalVisitor
 {
 public:
     //VecId res;
@@ -1722,7 +1722,7 @@ private:
 };
 
 
-class SOFA_SIMULATION_CORE_API MechanicalWriteLMConstraint : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalWriteLMConstraint : public BaseMechanicalVisitor
 {
 public:
     MechanicalWriteLMConstraint(const sofa::core::ExecParams * params)
@@ -1778,7 +1778,7 @@ protected:
 
 /// Call each BaseConstraintSet to build the Jacobian matrices and accumulate it through the mappings up to the independant DOFs
 /// @deprecated use MechanicalBuildConstraintMatrix followed by MechanicalAccumulateMatrixDeriv
-class SOFA_SIMULATION_CORE_API MechanicalAccumulateConstraint : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalAccumulateConstraint : public BaseMechanicalVisitor
 {
 public:
     MechanicalAccumulateConstraint(const sofa::core::ConstraintParams* _cparams,
@@ -1827,7 +1827,7 @@ protected:
 };
 
 /// Call each BaseConstraintSet to build the Jacobian matrices
-class SOFA_SIMULATION_CORE_API MechanicalBuildConstraintMatrix : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalBuildConstraintMatrix : public BaseMechanicalVisitor
 {
 public:
     MechanicalBuildConstraintMatrix(const sofa::core::ConstraintParams* _cparams,
@@ -1874,7 +1874,7 @@ protected:
 };
 
 /// Accumulate Jacobian matrices through the mappings up to the independant DOFs
-class SOFA_SIMULATION_CORE_API MechanicalAccumulateMatrixDeriv : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalAccumulateMatrixDeriv : public BaseMechanicalVisitor
 {
 public:
     MechanicalAccumulateMatrixDeriv(const sofa::core::ConstraintParams* _cparams,
@@ -1927,7 +1927,7 @@ protected:
 /** Apply the constraints as filters to the given vector.
 This works for simple independent constraints, like maintaining a fixed point.
 */
-class SOFA_SIMULATION_CORE_API MechanicalApplyConstraintsVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalApplyConstraintsVisitor : public MechanicalVisitor
 {
 public:
     sofa::core::MultiVecDerivId res;
@@ -1969,7 +1969,7 @@ public:
 
 /** Visitor used to prepare a time integration step. Typically, does nothing.
 */
-class SOFA_SIMULATION_CORE_API MechanicalBeginIntegrationVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalBeginIntegrationVisitor : public BaseMechanicalVisitor
 {
 public:
     SReal dt;
@@ -2006,7 +2006,7 @@ public:
 
 /** Visitor applied after a time step has been applied. Does typically nothing.
 */
-class SOFA_SIMULATION_CORE_API MechanicalEndIntegrationVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalEndIntegrationVisitor : public BaseMechanicalVisitor
 {
 public:
     SReal dt;
@@ -2044,7 +2044,7 @@ public:
 
 /** Visitor used to do a time integration step using OdeSolvers
 */
-class SOFA_SIMULATION_CORE_API MechanicalIntegrationVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalIntegrationVisitor : public BaseMechanicalVisitor
 {
 public:
     SReal dt;
@@ -2082,7 +2082,7 @@ public:
 /** Accumulate only the contact forces computed in applyContactForce.
 This action is typically called after a MechanicalResetForceVisitor.
 */
-class SOFA_SIMULATION_CORE_API MechanicalComputeContactForceVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalComputeContactForceVisitor : public MechanicalVisitor
 {
 public:
     sofa::core::MultiVecDerivId res;
@@ -2118,7 +2118,7 @@ public:
 /** Add dt*mass*Gravity to the velocity
 This is called if the mass wants to be added separately to the mm from the other forces
 */
-class SOFA_SIMULATION_CORE_API MechanicalAddSeparateGravityVisitor : public MechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalAddSeparateGravityVisitor : public MechanicalVisitor
 {
 public:
     sofa::core::MultiVecDerivId res;
@@ -2151,7 +2151,7 @@ public:
 *  A mechanical particle is defined as a 2D or 3D, position or rigid DOF
 *  which is linked to the free mechanical DOFs by mechanical mappings
 */
-class SOFA_SIMULATION_CORE_API MechanicalPickParticlesVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalPickParticlesVisitor : public BaseMechanicalVisitor
 {
 public:
     defaulttype::Vec3d rayOrigin, rayDirection;
@@ -2189,7 +2189,7 @@ public:
 *  A mechanical particle is defined as a 2D or 3D, position or rigid DOF
 *  which is linked to the free mechanical DOFs by mechanical mappings
 */
-class SOFA_SIMULATION_CORE_API MechanicalPickParticlesWithTagsVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalPickParticlesWithTagsVisitor : public BaseMechanicalVisitor
 {
 public:
 	defaulttype::Vec3d rayOrigin, rayDirection;
@@ -2230,7 +2230,7 @@ private:
 
 
 /** Get vector size */
-class SOFA_SIMULATION_CORE_API MechanicalVSizeVisitor : public BaseMechanicalVisitor
+class SOFA_SOFASIMULATION_API MechanicalVSizeVisitor : public BaseMechanicalVisitor
 {
 public:
     sofa::core::ConstMultiVecId v;

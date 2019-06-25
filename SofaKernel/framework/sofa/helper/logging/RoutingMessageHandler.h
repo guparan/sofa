@@ -56,7 +56,7 @@ typedef bool (*FilterFunction) (Message&) ;
 /// at \see MainRoutingMessageHandler.
 ///
 ///
-class SOFA_HELPER_API RoutingMessageHandler : public MessageHandler
+class SOFA_SOFAHELPER_API RoutingMessageHandler : public MessageHandler
 {
 public:
     RoutingMessageHandler() ;
@@ -82,7 +82,7 @@ private:
 ///
 /// \see RoutingMessageHandler
 ///
-class SOFA_HELPER_API MainRoutingMessageHandler
+class SOFA_SOFAHELPER_API MainRoutingMessageHandler
 {
 public:
     static RoutingMessageHandler& getInstance() ;

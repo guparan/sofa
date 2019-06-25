@@ -33,7 +33,7 @@ namespace helper
 {
 
 /// @brief Contains possibly useful functions, that don't fit anywhere else.
-class SOFA_HELPER_API Utils
+class SOFA_SOFAHELPER_API Utils
 {
 public:
 

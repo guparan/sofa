@@ -40,7 +40,7 @@ namespace objectmodel
  *  \brief Implementation of BaseContext, storing all shared parameters in Datas.
  *
  */
-class SOFA_CORE_API Context : public BaseContext
+class SOFA_SOFACORE_API Context : public BaseContext
 {
 public:
     SOFA_CLASS(Context, BaseContext);

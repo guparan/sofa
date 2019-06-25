@@ -49,11 +49,11 @@ Base types for the ArticulatedSolid: position, orientation, velocity, angular ve
 @author François Faure, INRIA-UJF, 2006
 */
 
-class SOFA_DEFAULTTYPE_API Transform;
+class SOFA_SOFADEFAULTTYPE_API Transform;
 
 
 template< class R=float >
-class SOFA_DEFAULTTYPE_API SolidTypes
+class SOFA_SOFADEFAULTTYPE_API SolidTypes
 {
 public:
     typedef R Real;
@@ -71,7 +71,7 @@ public:
     /** A spatial vector.
     When representing a velocity, lineVec is the angular velocity and freeVec is the linear velocity.
     When representing a spatial force, lineVec is the force and freeVec is the torque. */
-    class SOFA_DEFAULTTYPE_API SpatialVector
+    class SOFA_SOFADEFAULTTYPE_API SpatialVector
     {
     public:
         Vec lineVec;
@@ -215,7 +215,7 @@ public:
 
 
     */
-    class SOFA_DEFAULTTYPE_API Transform
+    class SOFA_SOFADEFAULTTYPE_API Transform
     {
     public:
         /// The default constructor does not initialize the transform
@@ -349,7 +349,7 @@ public:
     };
 
 
-    class SOFA_DEFAULTTYPE_API RigidInertia
+    class SOFA_SOFADEFAULTTYPE_API RigidInertia
     {
     public:
         Real m;  ///< mass
@@ -368,7 +368,7 @@ public:
         }
     };
 
-    class SOFA_DEFAULTTYPE_API ArticulatedInertia
+    class SOFA_SOFADEFAULTTYPE_API ArticulatedInertia
     {
     public:
         Mat M;
@@ -417,7 +417,7 @@ public:
 };
 
 #if !defined(SOFA_DEFAULTTYPE_SOLIDTYPES_CPP)
-extern template class SOFA_DEFAULTTYPE_API SolidTypes<double>;
+extern template class SOFA_SOFADEFAULTTYPE_API SolidTypes<double>;
 
 #endif
 

@@ -33,7 +33,7 @@ namespace sofa
 namespace simulation
 {
 
-class SOFA_SIMULATION_CORE_API PipelineImpl : public sofa::core::collision::Pipeline
+class SOFA_SOFASIMULATION_API PipelineImpl : public sofa::core::collision::Pipeline
 {
 
 protected:

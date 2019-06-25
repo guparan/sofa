@@ -32,19 +32,19 @@ namespace defaulttype
 
 /// @brief Initialize the SofaDefaultType library, as well as it dependency:
 /// SofaHelper.
-SOFA_DEFAULTTYPE_API void init();
+SOFA_SOFADEFAULTTYPE_API void init();
 
 /// @brief Return true if and only if the SofaDefaultType library has been
 /// initialized.
-SOFA_DEFAULTTYPE_API bool isInitialized();
+SOFA_SOFADEFAULTTYPE_API bool isInitialized();
 
 /// @brief Clean up the resources used by the SofaDefaultType library, as well
 /// as its dependency: SofaHelper.
-SOFA_DEFAULTTYPE_API void cleanup();
+SOFA_SOFADEFAULTTYPE_API void cleanup();
 
 /// @brief Return true if and only if the SofaDefaultType library has been cleaned
 /// up.
-SOFA_DEFAULTTYPE_API bool isCleanedUp();
+SOFA_SOFADEFAULTTYPE_API bool isCleanedUp();
 
 } // namespace defaulttype
 

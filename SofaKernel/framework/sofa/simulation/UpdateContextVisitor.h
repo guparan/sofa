@@ -38,7 +38,7 @@ class VisualParams;
 namespace simulation
 {
 
-class SOFA_SIMULATION_CORE_API UpdateContextVisitor : public Visitor
+class SOFA_SOFASIMULATION_API UpdateContextVisitor : public Visitor
 {
 public:
     UpdateContextVisitor(const core::ExecParams* params)
@@ -59,7 +59,7 @@ protected:
     Node* startingNode;
 };
 
-class SOFA_SIMULATION_CORE_API UpdateSimulationContextVisitor : public UpdateContextVisitor
+class SOFA_SOFASIMULATION_API UpdateSimulationContextVisitor : public UpdateContextVisitor
 {
 public:
     UpdateSimulationContextVisitor(const core::ExecParams* params)
@@ -71,7 +71,7 @@ public:
     const char* getClassName() const override { return "UpdateSimulationContextVisitor"; }
 };
 
-class SOFA_SIMULATION_CORE_API UpdateVisualContextVisitor : public UpdateContextVisitor
+class SOFA_SOFASIMULATION_API UpdateVisualContextVisitor : public UpdateContextVisitor
 {
 public:
     UpdateVisualContextVisitor(const sofa::core::visual::VisualParams* vparams);

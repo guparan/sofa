@@ -38,7 +38,7 @@ namespace objectmodel
  *  \brief Data specialized to store filenames, potentially relative to the current directory at the time it was specified.
  *
  */
-class SOFA_CORE_API DataFileName : public sofa::core::objectmodel::Data<std::string>
+class SOFA_SOFACORE_API DataFileName : public sofa::core::objectmodel::Data<std::string>
 {
 public:
     typedef sofa::core::objectmodel::Data<std::string> Inherit;
@@ -132,7 +132,7 @@ private:
 
 
 
-class SOFA_CORE_API DataFileNameVector : public sofa::core::objectmodel::Data< sofa::helper::SVector<std::string> >
+class SOFA_SOFACORE_API DataFileNameVector : public sofa::core::objectmodel::Data< sofa::helper::SVector<std::string> >
 {
 public:
     typedef sofa::core::objectmodel::Data<sofa::helper::SVector<std::string> > Inherit;

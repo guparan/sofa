@@ -39,7 +39,7 @@ namespace objectmodel
  *  Event indicating that a child node is being detached from the scene.
  *  Any reference to ony of its descendant (such as active contacts) should be removed.
 */
-class SOFA_CORE_API DetachNodeEvent : public Event
+class SOFA_SOFACORE_API DetachNodeEvent : public Event
 {
 public:
 

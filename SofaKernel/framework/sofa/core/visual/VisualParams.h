@@ -58,7 +58,7 @@ enum
 };
 
 /// Class gathering parameters used by visual components and by the draw method of each component. Transmitted by visitors
-class SOFA_CORE_API VisualParams : public ExecParams
+class SOFA_SOFACORE_API VisualParams : public ExecParams
 {
 public:
 	typedef sofa::helper::fixed_array<int, 4> Viewport;

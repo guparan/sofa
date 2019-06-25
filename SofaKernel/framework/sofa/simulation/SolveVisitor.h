@@ -36,7 +36,7 @@ namespace simulation
 /** Used by the animation loop: send the solve signal to the others solvers
 
  */
-class SOFA_SIMULATION_CORE_API SolveVisitor : public Visitor
+class SOFA_SOFASIMULATION_API SolveVisitor : public Visitor
 {
 public:
     SolveVisitor(const sofa::core::ExecParams* params, SReal _dt) : Visitor(params), dt(_dt), x(core::VecCoordId::position()),

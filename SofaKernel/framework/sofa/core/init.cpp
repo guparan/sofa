@@ -33,7 +33,7 @@ namespace core
 static bool s_initialized = false;
 static bool s_cleanedUp = false;
 
-SOFA_CORE_API void init()
+SOFA_SOFACORE_API void init()
 {
     if (!s_initialized)
     {
@@ -42,12 +42,12 @@ SOFA_CORE_API void init()
     }
 }
 
-SOFA_CORE_API bool isInitialized()
+SOFA_SOFACORE_API bool isInitialized()
 {
     return s_initialized;
 }
 
-SOFA_CORE_API void cleanup()
+SOFA_SOFACORE_API void cleanup()
 {
     if (!s_cleanedUp)
     {
@@ -56,7 +56,7 @@ SOFA_CORE_API void cleanup()
     }
 }
 
-SOFA_CORE_API bool isCleanedUp()
+SOFA_SOFACORE_API bool isCleanedUp()
 {
     return s_cleanedUp;
 }

@@ -51,7 +51,7 @@ bool isValidEncoding(const std::string& s)
 }
 
 
-SOFA_DEFAULTTYPE_API std::istream& operator>>(std::istream& i, RGBAColor& t)
+SOFA_SOFADEFAULTTYPE_API std::istream& operator>>(std::istream& i, RGBAColor& t)
 {
     std::string s;
     std::getline(i, s);

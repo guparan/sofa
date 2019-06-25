@@ -52,7 +52,7 @@ typedef ULONGLONG ctime_t;
 typedef unsigned long long ctime_t;
 #endif
 
-class SOFA_HELPER_API CTime
+class SOFA_SOFAHELPER_API CTime
 {
 public:
     //volatile causes: "warning: type qualifiers ignored on function return type" on GCC 4.3

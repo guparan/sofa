@@ -52,7 +52,7 @@ namespace logging
 /// emitted.
 /// A message also contains a ComponentInfo which can be used to provide additional details
 /// about the emitter's context.
-class SOFA_HELPER_API Message
+class SOFA_SOFAHELPER_API Message
 {
 public:
     /// possible levels of messages (ordered)
@@ -101,10 +101,10 @@ protected:
 };
 
 
-template<> SOFA_HELPER_API Message& Message::operator<<(const FileInfo::SPtr &fi) ;
+template<> SOFA_SOFAHELPER_API Message& Message::operator<<(const FileInfo::SPtr &fi) ;
 
-SOFA_HELPER_API std::ostream& operator<< (std::ostream&, const Message&) ;
-SOFA_HELPER_API const std::string toString(const Message::Type type) ;
+SOFA_SOFAHELPER_API std::ostream& operator<< (std::ostream&, const Message&) ;
+SOFA_SOFAHELPER_API const std::string toString(const Message::Type type) ;
 
 } // logging
 } // helper

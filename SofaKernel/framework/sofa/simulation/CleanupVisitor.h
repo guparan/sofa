@@ -31,7 +31,7 @@ namespace simulation
 {
 
 
-class SOFA_SIMULATION_CORE_API CleanupVisitor : public Visitor
+class SOFA_SOFASIMULATION_API CleanupVisitor : public Visitor
 {
 public:
     CleanupVisitor(const core::ExecParams* params ) :Visitor(params) {}

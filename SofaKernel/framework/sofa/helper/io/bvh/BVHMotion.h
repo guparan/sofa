@@ -37,7 +37,7 @@ namespace io
 namespace bvh
 {
 
-class SOFA_HELPER_API BVHMotion
+class SOFA_SOFAHELPER_API BVHMotion
 {
 public:
     BVHMotion()

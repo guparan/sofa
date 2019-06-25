@@ -38,7 +38,7 @@ namespace helper
 namespace logging
 {
 
-class SOFA_HELPER_API ClangMessageHandler : public MessageHandler
+class SOFA_SOFAHELPER_API ClangMessageHandler : public MessageHandler
 {
 public:
     void process(Message &m) override ;

@@ -53,7 +53,7 @@ public:
  *  \brief Abstract base to manage data dependencies. BaseData and DataEngine inherites from this class
  *
  */
-class SOFA_CORE_API DDGNode
+class SOFA_SOFACORE_API DDGNode
 {
 public:
 

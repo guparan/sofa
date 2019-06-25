@@ -34,7 +34,7 @@ namespace simulation
 
 
 /// Specialized VisitorScheduler for parallel implementations.
-class SOFA_SIMULATION_CORE_API ParallelVisitorScheduler : public simulation::VisitorScheduler
+class SOFA_SOFASIMULATION_API ParallelVisitorScheduler : public simulation::VisitorScheduler
 {
 public:
     ParallelVisitorScheduler(bool propagate=false);

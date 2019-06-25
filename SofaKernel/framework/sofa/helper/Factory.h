@@ -40,13 +40,13 @@ namespace helper
 class NoArgument {} ;
 
 /// Decode the type's name to a more readable form if possible
-std::string SOFA_HELPER_API gettypename(const std::type_info& t);
+std::string SOFA_SOFAHELPER_API gettypename(const std::type_info& t);
 
 /// Log classes registered in the factory
-void SOFA_HELPER_API logFactoryRegister(std::string baseclass, std::string classname, std::string key, bool multi);
+void SOFA_SOFAHELPER_API logFactoryRegister(std::string baseclass, std::string classname, std::string key, bool multi);
 
 /// Print factory log
-void SOFA_HELPER_API printFactoryLog(std::ostream& out = std::cout);
+void SOFA_SOFAHELPER_API printFactoryLog(std::ostream& out = std::cout);
 
 template <class Object, class Argument = NoArgument, class ObjectPtr = Object*>
 class BaseCreator

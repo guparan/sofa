@@ -94,7 +94,7 @@ public:
 ///
 /// This class uses the new ClassInfo metaclass to be able to recognize derived classes. So it is no longer necessary
 /// to register all derived collision models (i.e. an intersector registered for RayModel will also be used for RayPickIntersector).
-class SOFA_CORE_API IntersectorMap
+class SOFA_SOFACORE_API IntersectorMap
 {
     typedef std::map<std::pair<helper::TypeInfo, helper::TypeInfo>, ElementIntersector*> InternalMap;
     typedef InternalMap::key_type MapKey;
@@ -129,7 +129,7 @@ protected:
 /** @brief Given 2 collision elements, test if an intersection is possible (for bounding volumes), or compute intersection points if any
 */
 
-class SOFA_CORE_API Intersection : public virtual objectmodel::BaseObject
+class SOFA_SOFACORE_API Intersection : public virtual objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(Intersection, objectmodel::BaseObject);

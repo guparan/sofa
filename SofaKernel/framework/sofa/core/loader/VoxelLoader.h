@@ -35,7 +35,7 @@ namespace loader
 {
 
 
-class SOFA_CORE_API VoxelLoader : public sofa::core::loader::BaseLoader
+class SOFA_SOFACORE_API VoxelLoader : public sofa::core::loader::BaseLoader
 {
 public:
     SOFA_ABSTRACT_CLASS(VoxelLoader,BaseLoader);

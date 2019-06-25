@@ -45,7 +45,7 @@ class Base;
  *  This default implementation simply stores an attributes map and does not support any hierarchy.
  *
  */
-class SOFA_CORE_API BaseObjectDescription
+class SOFA_SOFACORE_API BaseObjectDescription
 {
 public:
     class Attribute

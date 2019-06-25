@@ -44,7 +44,7 @@ namespace defaulttype
 ///
 /// Note that accessing values using this class is rather slow and should only be used in codes where the
 /// provided genericity is necessary.
-class SOFA_DEFAULTTYPE_API BaseMatrix
+class SOFA_SOFADEFAULTTYPE_API BaseMatrix
 {
 public:
     typedef BaseVector::Index Index;

@@ -43,7 +43,7 @@ namespace helper
 namespace gl
 {
 
-class SOFA_HELPER_API Cylinder
+class SOFA_SOFAHELPER_API Cylinder
 {
 public:
     typedef sofa::defaulttype::Vector3 Vector3;

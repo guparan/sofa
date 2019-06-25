@@ -41,7 +41,7 @@ namespace core
 namespace topology
 {
 
-class SOFA_CORE_API BaseMeshTopology : public core::topology::Topology
+class SOFA_SOFACORE_API BaseMeshTopology : public core::topology::Topology
 {
 public:
     SOFA_ABSTRACT_CLASS(BaseMeshTopology, core::topology::Topology);

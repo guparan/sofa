@@ -84,47 +84,47 @@ enum TopologyChangeType
     TOPOLOGYCHANGE_LASTID      ///< user defined topology changes can start here
 };
 
-SOFA_CORE_API TopologyChangeType parseTopologyChangeTypeFromString(const std::string& s);
-SOFA_CORE_API std::string parseTopologyChangeTypeToString(TopologyChangeType t);
+SOFA_SOFACORE_API TopologyChangeType parseTopologyChangeTypeFromString(const std::string& s);
+SOFA_SOFACORE_API std::string parseTopologyChangeTypeToString(TopologyChangeType t);
 
 // forward declarations
-class SOFA_CORE_API TopologyChange;
-class SOFA_CORE_API EndingEvent;
-class SOFA_CORE_API PointsIndicesSwap;
-class SOFA_CORE_API PointsAdded;
-class SOFA_CORE_API PointsRemoved;
-class SOFA_CORE_API PointsMoved;
-class SOFA_CORE_API PointsRenumbering;
-class SOFA_CORE_API EdgesIndicesSwap;
-class SOFA_CORE_API EdgesAdded;
-class SOFA_CORE_API EdgesRemoved;
-class SOFA_CORE_API EdgesMoved_Removing;
-class SOFA_CORE_API EdgesMoved_Adding;
-class SOFA_CORE_API EdgesRenumbering;
-class SOFA_CORE_API TrianglesIndicesSwap;
-class SOFA_CORE_API TrianglesAdded;
-class SOFA_CORE_API TrianglesRemoved;
-class SOFA_CORE_API TrianglesMoved_Removing;
-class SOFA_CORE_API TrianglesMoved_Adding;
-class SOFA_CORE_API TrianglesRenumbering;
-class SOFA_CORE_API TetrahedraIndicesSwap;
-class SOFA_CORE_API TetrahedraAdded;
-class SOFA_CORE_API TetrahedraRemoved;
-class SOFA_CORE_API TetrahedraMoved_Removing;
-class SOFA_CORE_API TetrahedraMoved_Adding;
-class SOFA_CORE_API TetrahedraRenumbering;
-class SOFA_CORE_API QuadsIndicesSwap;
-class SOFA_CORE_API QuadsAdded;
-class SOFA_CORE_API QuadsRemoved;
-class SOFA_CORE_API QuadsMoved_Removing;
-class SOFA_CORE_API QuadsMoved_Adding;
-class SOFA_CORE_API QuadsRenumbering;
-class SOFA_CORE_API HexahedraIndicesSwap;
-class SOFA_CORE_API HexahedraAdded;
-class SOFA_CORE_API HexahedraRemoved;
-class SOFA_CORE_API HexahedraMoved_Removing;
-class SOFA_CORE_API HexahedraMoved_Adding;
-class SOFA_CORE_API HexahedraRenumbering;
+class SOFA_SOFACORE_API TopologyChange;
+class SOFA_SOFACORE_API EndingEvent;
+class SOFA_SOFACORE_API PointsIndicesSwap;
+class SOFA_SOFACORE_API PointsAdded;
+class SOFA_SOFACORE_API PointsRemoved;
+class SOFA_SOFACORE_API PointsMoved;
+class SOFA_SOFACORE_API PointsRenumbering;
+class SOFA_SOFACORE_API EdgesIndicesSwap;
+class SOFA_SOFACORE_API EdgesAdded;
+class SOFA_SOFACORE_API EdgesRemoved;
+class SOFA_SOFACORE_API EdgesMoved_Removing;
+class SOFA_SOFACORE_API EdgesMoved_Adding;
+class SOFA_SOFACORE_API EdgesRenumbering;
+class SOFA_SOFACORE_API TrianglesIndicesSwap;
+class SOFA_SOFACORE_API TrianglesAdded;
+class SOFA_SOFACORE_API TrianglesRemoved;
+class SOFA_SOFACORE_API TrianglesMoved_Removing;
+class SOFA_SOFACORE_API TrianglesMoved_Adding;
+class SOFA_SOFACORE_API TrianglesRenumbering;
+class SOFA_SOFACORE_API TetrahedraIndicesSwap;
+class SOFA_SOFACORE_API TetrahedraAdded;
+class SOFA_SOFACORE_API TetrahedraRemoved;
+class SOFA_SOFACORE_API TetrahedraMoved_Removing;
+class SOFA_SOFACORE_API TetrahedraMoved_Adding;
+class SOFA_SOFACORE_API TetrahedraRenumbering;
+class SOFA_SOFACORE_API QuadsIndicesSwap;
+class SOFA_SOFACORE_API QuadsAdded;
+class SOFA_SOFACORE_API QuadsRemoved;
+class SOFA_SOFACORE_API QuadsMoved_Removing;
+class SOFA_SOFACORE_API QuadsMoved_Adding;
+class SOFA_SOFACORE_API QuadsRenumbering;
+class SOFA_SOFACORE_API HexahedraIndicesSwap;
+class SOFA_SOFACORE_API HexahedraAdded;
+class SOFA_SOFACORE_API HexahedraRemoved;
+class SOFA_SOFACORE_API HexahedraMoved_Removing;
+class SOFA_SOFACORE_API HexahedraMoved_Adding;
+class SOFA_SOFACORE_API HexahedraRenumbering;
 
 
 
@@ -142,8 +142,8 @@ struct TopologyElemID
     Topology::ElemID index;
 };
 
-SOFA_CORE_API std::ostream& operator << (std::ostream& out, const TopologyElemID& d);
-SOFA_CORE_API std::istream& operator >> (std::istream& in, TopologyElemID& d);
+SOFA_SOFACORE_API std::ostream& operator << (std::ostream& out, const TopologyElemID& d);
+SOFA_SOFACORE_API std::istream& operator >> (std::istream& in, TopologyElemID& d);
 
 /// Topology change informations related to the ancestor topology element of a point
 struct PointAncestorElem
@@ -163,8 +163,8 @@ struct PointAncestorElem
     LocalCoords localCoords;
 };
 
-SOFA_CORE_API std::ostream& operator << (std::ostream& out, const PointAncestorElem& d);
-SOFA_CORE_API std::istream& operator >> (std::istream& in, PointAncestorElem& d);
+SOFA_SOFACORE_API std::ostream& operator << (std::ostream& out, const PointAncestorElem& d);
+SOFA_SOFACORE_API std::istream& operator >> (std::istream& in, PointAncestorElem& d);
 
 /// Topology change informations related to the ancestor topology element of an edge
 template<int NV>
@@ -193,9 +193,9 @@ struct ElemAncestorElem
 };
 
 template<int NV>
-SOFA_CORE_API std::ostream& operator << (std::ostream& out, const ElemAncestorElem<NV>& d);
+SOFA_SOFACORE_API std::ostream& operator << (std::ostream& out, const ElemAncestorElem<NV>& d);
 template<int NV>
-SOFA_CORE_API std::istream& operator >> (std::istream& in, ElemAncestorElem<NV>& d);
+SOFA_SOFACORE_API std::istream& operator >> (std::istream& in, ElemAncestorElem<NV>& d);
 
 typedef ElemAncestorElem<2> EdgeAncestorElem;
 typedef ElemAncestorElem<3> TriangleAncestorElem;
@@ -329,7 +329,7 @@ struct TopologyChangeElementInfo<Topology::Hexahedron>
 * Classes inheriting from this one describe a given topolopy change (e.g. RemovedPoint, AddedEdge, etc).
 * The exact type of topology change is given by member changeType.
 */
-class SOFA_CORE_API TopologyChange
+class SOFA_SOFACORE_API TopologyChange
 {
 public:
     /** \ brief Destructor.
@@ -379,7 +379,7 @@ protected:
 };
 
 /** notifies the end for the current sequence of topological change events */
-class SOFA_CORE_API EndingEvent : public core::topology::TopologyChange
+class SOFA_SOFACORE_API EndingEvent : public core::topology::TopologyChange
 {
 public:
     EndingEvent()
@@ -396,7 +396,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** indicates that the indices of two points are being swapped */
-class SOFA_CORE_API PointsIndicesSwap : public core::topology::TopologyChange
+class SOFA_SOFACORE_API PointsIndicesSwap : public core::topology::TopologyChange
 {
 public:
     PointsIndicesSwap(const Topology::PointID i1,const Topology::PointID i2) : core::topology::TopologyChange(core::topology::POINTSINDICESSWAP)
@@ -413,7 +413,7 @@ public:
 
 
 /** indicates that some points were added */
-class SOFA_CORE_API PointsAdded : public core::topology::TopologyChange
+class SOFA_SOFACORE_API PointsAdded : public core::topology::TopologyChange
 {
 public:
 
@@ -475,7 +475,7 @@ public:
 
 
 /** indicates that some points are about to be removed */
-class SOFA_CORE_API PointsRemoved : public core::topology::TopologyChange
+class SOFA_SOFACORE_API PointsRemoved : public core::topology::TopologyChange
 {
 public:
     PointsRemoved(const sofa::helper::vector<Topology::PointID>& _vArray) : core::topology::TopologyChange(core::topology::POINTSREMOVED),
@@ -492,7 +492,7 @@ public:
 
 
 /** indicates that the indices of all points have been renumbered */
-class SOFA_CORE_API PointsRenumbering : public core::topology::TopologyChange
+class SOFA_SOFACORE_API PointsRenumbering : public core::topology::TopologyChange
 {
 public:
 
@@ -518,7 +518,7 @@ public:
 
 
 /** indicates that some points were moved */
-class SOFA_CORE_API PointsMoved : public core::topology::TopologyChange
+class SOFA_SOFACORE_API PointsMoved : public core::topology::TopologyChange
 {
 public:
 
@@ -548,7 +548,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** indicates that the indices of two edges are being swapped */
-class SOFA_CORE_API EdgesIndicesSwap : public core::topology::TopologyChange
+class SOFA_SOFACORE_API EdgesIndicesSwap : public core::topology::TopologyChange
 {
 public:
     EdgesIndicesSwap(const Topology::EdgeID i1,const Topology::EdgeID i2) : core::topology::TopologyChange(core::topology::EDGESINDICESSWAP)
@@ -565,7 +565,7 @@ public:
 
 
 /** indicates that some edges were added */
-class SOFA_CORE_API EdgesAdded : public core::topology::TopologyChange
+class SOFA_SOFACORE_API EdgesAdded : public core::topology::TopologyChange
 {
 public:
     EdgesAdded(const size_t nE) : core::topology::TopologyChange(core::topology::EDGESADDED),
@@ -647,7 +647,7 @@ public:
 
 
 /** indicates that some edges are about to be removed */
-class SOFA_CORE_API EdgesRemoved : public core::topology::TopologyChange
+class SOFA_SOFACORE_API EdgesRemoved : public core::topology::TopologyChange
 {
 public:
     EdgesRemoved(const sofa::helper::vector<Topology::EdgeID> _eArray) : core::topology::TopologyChange(core::topology::EDGESREMOVED),
@@ -674,7 +674,7 @@ public:
 /** indicates that some edges are about to be moved (i.e one or both of their vertices have just been moved)
  * EdgesMoved_Removing First part, remove element concerned to force object to recompute global state with current positions
  */
-class SOFA_CORE_API EdgesMoved_Removing : public core::topology::TopologyChange
+class SOFA_SOFACORE_API EdgesMoved_Removing : public core::topology::TopologyChange
 {
 public:
     EdgesMoved_Removing (const sofa::helper::vector< Topology::EdgeID >& edgeShell) : core::topology::TopologyChange (core::topology::EDGESMOVED_REMOVING),
@@ -693,7 +693,7 @@ public:
 /** indicates that some edges are about to be moved (i.e one or both of their vertices have just been moved)
  * EdgesMoved_Adding Second part, recompute state of all elements previously removed, with new positions points
  */
-class SOFA_CORE_API EdgesMoved_Adding : public core::topology::TopologyChange
+class SOFA_SOFACORE_API EdgesMoved_Adding : public core::topology::TopologyChange
 {
 public:
     EdgesMoved_Adding (const sofa::helper::vector< Topology::EdgeID >& edgeShell,
@@ -714,7 +714,7 @@ public:
 
 
 /** indicates that the indices of all points have been renumbered */
-class SOFA_CORE_API EdgesRenumbering : public core::topology::TopologyChange
+class SOFA_SOFACORE_API EdgesRenumbering : public core::topology::TopologyChange
 {
 public:
     EdgesRenumbering() : core::topology::TopologyChange(core::topology::EDGESRENUMBERING)
@@ -745,7 +745,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** indicates that the indices of two Triangles are being swapped */
-class SOFA_CORE_API TrianglesIndicesSwap : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TrianglesIndicesSwap : public core::topology::TopologyChange
 {
 public:
     TrianglesIndicesSwap(const Topology::TriangleID i1,const Topology::TriangleID i2) : core::topology::TopologyChange(core::topology::TRIANGLESINDICESSWAP)
@@ -762,7 +762,7 @@ public:
 
 
 /** indicates that some triangles were added */
-class SOFA_CORE_API TrianglesAdded : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TrianglesAdded : public core::topology::TopologyChange
 {
 public:
     TrianglesAdded(const size_t nT) : core::topology::TopologyChange(core::topology::TRIANGLESADDED),
@@ -838,7 +838,7 @@ public:
 
 
 /** indicates that some triangles are about to be removed */
-class SOFA_CORE_API TrianglesRemoved : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TrianglesRemoved : public core::topology::TopologyChange
 {
 public:
     TrianglesRemoved(const sofa::helper::vector<Topology::TriangleID> _tArray) : core::topology::TopologyChange(core::topology::TRIANGLESREMOVED),
@@ -870,7 +870,7 @@ protected:
 /** indicates that some triangles are about to be moved (i.e some/all of their vertices have just been moved)
  * TrianglesMoved_Removing First part, remove element concerned to force object to recompute global state with current positions
  */
-class SOFA_CORE_API TrianglesMoved_Removing : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TrianglesMoved_Removing : public core::topology::TopologyChange
 {
 public:
     TrianglesMoved_Removing (const sofa::helper::vector< Topology::TriangleID >& triangleShell)
@@ -890,7 +890,7 @@ public:
 /** indicates that some triangles are about to be moved (i.e some/all of their vertices have just been moved)
  * TrianglesMoved_Adding Second part, recompute state of all elements previously removed, with new positions points
  */
-class SOFA_CORE_API TrianglesMoved_Adding : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TrianglesMoved_Adding : public core::topology::TopologyChange
 {
 public:
     TrianglesMoved_Adding (const sofa::helper::vector< Topology::TriangleID >& triangleShell,
@@ -911,7 +911,7 @@ public:
 
 
 /** indicates that the indices of all points have been renumbered */
-class SOFA_CORE_API TrianglesRenumbering : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TrianglesRenumbering : public core::topology::TopologyChange
 {
 public:
 
@@ -942,7 +942,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** indicates that the indices of two Quads are being swapped */
-class SOFA_CORE_API QuadsIndicesSwap : public core::topology::TopologyChange
+class SOFA_SOFACORE_API QuadsIndicesSwap : public core::topology::TopologyChange
 {
 public:
     QuadsIndicesSwap(const Topology::QuadID i1,const Topology::QuadID i2) : core::topology::TopologyChange(core::topology::QUADSINDICESSWAP)
@@ -959,7 +959,7 @@ public:
 
 
 /** indicates that some quads were added */
-class SOFA_CORE_API QuadsAdded : public core::topology::TopologyChange
+class SOFA_SOFACORE_API QuadsAdded : public core::topology::TopologyChange
 {
 public:
     QuadsAdded(const size_t nT) : core::topology::TopologyChange(core::topology::QUADSADDED),
@@ -1035,7 +1035,7 @@ public:
 
 
 /** indicates that some quads are about to be removed */
-class SOFA_CORE_API QuadsRemoved : public core::topology::TopologyChange
+class SOFA_SOFACORE_API QuadsRemoved : public core::topology::TopologyChange
 {
 public:
     QuadsRemoved(const sofa::helper::vector<Topology::QuadID> _qArray) : core::topology::TopologyChange(core::topology::QUADSREMOVED),
@@ -1067,7 +1067,7 @@ protected:
 /** indicates that some quads are about to be moved (i.e some/all of their vertices have just been moved)
  * QuadsMoved_Removing First part, remove element concerned to force object to recompute global state with current positions
  */
-class SOFA_CORE_API QuadsMoved_Removing : public core::topology::TopologyChange
+class SOFA_SOFACORE_API QuadsMoved_Removing : public core::topology::TopologyChange
 {
 public:
     QuadsMoved_Removing (const sofa::helper::vector< Topology::QuadID >& quadShell) : core::topology::TopologyChange (core::topology::QUADSMOVED_REMOVING),
@@ -1086,7 +1086,7 @@ public:
 /** indicates that some quads are about to be moved (i.e some/all of their vertices have just been moved)
  * QuadsMoved_Adding Second part, recompute state of all elements previously removed, with new positions points
  */
-class SOFA_CORE_API QuadsMoved_Adding : public core::topology::TopologyChange
+class SOFA_SOFACORE_API QuadsMoved_Adding : public core::topology::TopologyChange
 {
 public:
     QuadsMoved_Adding (const sofa::helper::vector< Topology::QuadID >& quadShell,
@@ -1107,7 +1107,7 @@ public:
 
 
 /** indicates that the indices of all points have been renumbered */
-class SOFA_CORE_API QuadsRenumbering : public core::topology::TopologyChange
+class SOFA_SOFACORE_API QuadsRenumbering : public core::topology::TopologyChange
 {
 public:
 
@@ -1138,7 +1138,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** indicates that the indices of two Tetrahedra are being swapped */
-class SOFA_CORE_API TetrahedraIndicesSwap : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TetrahedraIndicesSwap : public core::topology::TopologyChange
 {
 public:
     TetrahedraIndicesSwap(const Topology::TetrahedronID i1,const Topology::TetrahedronID i2) : core::topology::TopologyChange(core::topology::TETRAHEDRAINDICESSWAP)
@@ -1155,7 +1155,7 @@ public:
 
 
 /** indicates that some tetrahedra were added */
-class SOFA_CORE_API TetrahedraAdded : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TetrahedraAdded : public core::topology::TopologyChange
 {
 public:
     TetrahedraAdded(const size_t nT) : core::topology::TopologyChange(core::topology::TETRAHEDRAADDED),
@@ -1225,7 +1225,7 @@ public:
 };
 
 /** indicates that some tetrahedra are about to be removed */
-class SOFA_CORE_API TetrahedraRemoved : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TetrahedraRemoved : public core::topology::TopologyChange
 {
 public:
     TetrahedraRemoved(const sofa::helper::vector<Topology::TetrahedronID> _tArray)
@@ -1253,7 +1253,7 @@ public:
 /** indicates that some tetrahedra are about to be moved (i.e some/all of their vertices have just been moved)
  * TetrahedraMoved_Removing First part, remove element concerned to force object to recompute global state with current positions
  */
-class SOFA_CORE_API TetrahedraMoved_Removing : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TetrahedraMoved_Removing : public core::topology::TopologyChange
 {
 public:
     TetrahedraMoved_Removing (const sofa::helper::vector< Topology::TetrahedronID >& tetrahedronShell)
@@ -1273,7 +1273,7 @@ public:
 /** indicates that some tetrahedra are about to be moved (i.e some/all of their vertices have just been moved)
  * TetrahedraMoved_Adding Second part, recompute state of all elements previously removed, with new positions points
  */
-class SOFA_CORE_API TetrahedraMoved_Adding : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TetrahedraMoved_Adding : public core::topology::TopologyChange
 {
 public:
     TetrahedraMoved_Adding (const sofa::helper::vector< Topology::TetrahedronID >& tetrahedronShell,
@@ -1294,7 +1294,7 @@ public:
 
 
 /** indicates that the indices of all points have been renumbered */
-class SOFA_CORE_API TetrahedraRenumbering : public core::topology::TopologyChange
+class SOFA_SOFACORE_API TetrahedraRenumbering : public core::topology::TopologyChange
 {
 public:
 
@@ -1326,7 +1326,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** indicates that the indices of two Hexahedra are being swapped */
-class SOFA_CORE_API HexahedraIndicesSwap : public core::topology::TopologyChange
+class SOFA_SOFACORE_API HexahedraIndicesSwap : public core::topology::TopologyChange
 {
 public:
     HexahedraIndicesSwap(const Topology::HexahedronID i1,const Topology::HexahedronID i2) : core::topology::TopologyChange(core::topology::HEXAHEDRAINDICESSWAP)
@@ -1343,7 +1343,7 @@ public:
 
 
 /** indicates that some hexahedra were added */
-class SOFA_CORE_API HexahedraAdded : public core::topology::TopologyChange
+class SOFA_SOFACORE_API HexahedraAdded : public core::topology::TopologyChange
 {
 public:
     HexahedraAdded(const size_t nT) : core::topology::TopologyChange(core::topology::HEXAHEDRAADDED),
@@ -1408,7 +1408,7 @@ public:
 };
 
 /** indicates that some hexahedra are about to be removed */
-class SOFA_CORE_API HexahedraRemoved : public core::topology::TopologyChange
+class SOFA_SOFACORE_API HexahedraRemoved : public core::topology::TopologyChange
 {
 public:
     HexahedraRemoved(const sofa::helper::vector<Topology::HexahedronID> _tArray)
@@ -1436,7 +1436,7 @@ public:
 /** indicates that some hexahedra are about to be moved (i.e some/all of their vertices have just been moved)
  * HexahedraMoved_Removing First part, remove element concerned to force object to recompute global state with current positions
  */
-class SOFA_CORE_API HexahedraMoved_Removing : public core::topology::TopologyChange
+class SOFA_SOFACORE_API HexahedraMoved_Removing : public core::topology::TopologyChange
 {
 public:
     HexahedraMoved_Removing (const sofa::helper::vector< Topology::HexahedronID >& hexahedronShell)
@@ -1456,7 +1456,7 @@ public:
 /** indicates that some hexahedra are about to be moved (i.e some/all of their vertices have just been moved)
  * HexahedraMoved_Adding Second part, recompute state of all elements previously removed, with new positions points
  */
-class SOFA_CORE_API HexahedraMoved_Adding : public core::topology::TopologyChange
+class SOFA_SOFACORE_API HexahedraMoved_Adding : public core::topology::TopologyChange
 {
 public:
     HexahedraMoved_Adding (const sofa::helper::vector< Topology::HexahedronID >& hexahedronShell,
@@ -1477,7 +1477,7 @@ public:
 
 
 /** indicates that the indices of all points have been renumbered */
-class SOFA_CORE_API HexahedraRenumbering : public core::topology::TopologyChange
+class SOFA_SOFACORE_API HexahedraRenumbering : public core::topology::TopologyChange
 {
 public:
 

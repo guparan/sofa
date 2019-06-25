@@ -38,7 +38,7 @@ namespace objectmodel
  *  \brief Base class for all the configuration settings of SOFA
  *
  */
-class SOFA_CORE_API ConfigurationSetting: public BaseObject
+class SOFA_SOFACORE_API ConfigurationSetting: public BaseObject
 {
 public:
     SOFA_CLASS(ConfigurationSetting, BaseObject);

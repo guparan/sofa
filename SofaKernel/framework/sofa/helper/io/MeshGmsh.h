@@ -34,7 +34,7 @@ namespace helper
 namespace io
 {
 
-class SOFA_HELPER_API MeshGmsh : public Mesh
+class SOFA_SOFAHELPER_API MeshGmsh : public Mesh
 {
 public:
 

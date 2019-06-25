@@ -40,7 +40,7 @@ typedef sofa::core::ObjectFactory::ClassEntry ClassEntry;
  *  This Interface is used for the Modeler mainly.
  *
  */
-class SOFA_CORE_API ComponentLibrary
+class SOFA_SOFACORE_API ComponentLibrary
 {
 public:
     ComponentLibrary(const std::string& componentName, const std::string& categoryName, ClassEntry::SPtr entry, const std::vector< std::string >& exampleFiles);

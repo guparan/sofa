@@ -35,9 +35,9 @@ namespace helper
 namespace gl
 {
 
-SOFA_HELPER_API void glfntInit(void);
-SOFA_HELPER_API void glfntWriteBitmap(float x,float y,char *s);
-SOFA_HELPER_API void glfntClose(void);
+SOFA_SOFAHELPER_API void glfntInit(void);
+SOFA_SOFAHELPER_API void glfntWriteBitmap(float x,float y,char *s);
+SOFA_SOFAHELPER_API void glfntClose(void);
 
 } // namespace gl
 

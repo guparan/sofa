@@ -33,7 +33,7 @@ namespace helper
 ///
 /// Note this is a quick&dirty implementation and it could be improved
 template<>
-SOFA_HELPER_API std::istream& SVector<std::string>::read( std::istream& in )
+SOFA_SOFAHELPER_API std::istream& SVector<std::string>::read( std::istream& in )
 {
     this->clear();
 
@@ -115,7 +115,7 @@ SOFA_HELPER_API std::istream& SVector<std::string>::read( std::istream& in )
 }
 
 template<>
-SOFA_HELPER_API std::ostream& SVector<std::string>::write( std::ostream& os ) const
+SOFA_SOFAHELPER_API std::ostream& SVector<std::string>::write( std::ostream& os ) const
 {
     if ( !this->empty() )
     {

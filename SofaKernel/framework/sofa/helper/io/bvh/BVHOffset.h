@@ -36,7 +36,7 @@ namespace io
 namespace bvh
 {
 
-class SOFA_HELPER_API BVHOffset
+class SOFA_SOFAHELPER_API BVHOffset
 {
 public:
     BVHOffset(double _x, double _y, double _z)

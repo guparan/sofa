@@ -34,7 +34,7 @@ namespace helper {
 namespace system {
 
 
-class SOFA_HELPER_API Locale
+class SOFA_SOFAHELPER_API Locale
 {
 public:
     static std::string getCategoryName(int category);
@@ -42,7 +42,7 @@ public:
 
 
 /// RAII class to modify the locale temporarily.
-class SOFA_HELPER_API TemporaryLocale
+class SOFA_SOFAHELPER_API TemporaryLocale
 {
 private:
     int m_category;

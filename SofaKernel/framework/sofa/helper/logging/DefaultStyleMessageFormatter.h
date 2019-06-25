@@ -45,7 +45,7 @@ class Message;
 /// have a look at RichStyleMessageFormatter.
 /// Example:
 ///           [ERROR] ClassName(instanceName): this is a message printed somewhere.
-class SOFA_HELPER_API DefaultStyleMessageFormatter : public MessageFormatter
+class SOFA_SOFAHELPER_API DefaultStyleMessageFormatter : public MessageFormatter
 {
 public:
     static inline MessageFormatter &getInstance ()

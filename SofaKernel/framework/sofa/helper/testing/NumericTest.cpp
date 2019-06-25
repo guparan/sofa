@@ -22,5 +22,5 @@
 
 #include "NumericTest.h"
 
-template struct SOFA_HELPER_API sofa::helper::testing::NumericTest<double>;
+template struct SOFA_SOFAHELPER_API sofa::helper::testing::NumericTest<double>;
 

@@ -44,8 +44,8 @@ class AspectBuffer;
 
 using AspectRef = sptr<Aspect>;
 
-SOFA_CORE_API void intrusive_ptr_add_ref(Aspect* b);
-SOFA_CORE_API void intrusive_ptr_release(Aspect* b);
+SOFA_SOFACORE_API void intrusive_ptr_add_ref(Aspect* b);
+SOFA_SOFACORE_API void intrusive_ptr_release(Aspect* b);
 
 /**
  * This class represents an allocated aspect.
@@ -53,7 +53,7 @@ SOFA_CORE_API void intrusive_ptr_release(Aspect* b);
  * aspect ownership to the caller.
  * It is safe to use this class from several threads.
  */
-class SOFA_CORE_API Aspect
+class SOFA_SOFACORE_API Aspect
 {
 public:
 
@@ -85,7 +85,7 @@ private:
  * This class is responsible for managing the pool of available aspects numbers.
  * It is safe to use this class from several thread.
  */
-class SOFA_CORE_API AspectPool
+class SOFA_SOFACORE_API AspectPool
 {
 public:
     AspectPool();
@@ -138,7 +138,7 @@ private:
  * such that only the most up to date aspect is kept, and the previous one is reused to send
  * the next update. This is similar to triple buffering.
  */
-class SOFA_CORE_API AspectBuffer
+class SOFA_SOFACORE_API AspectBuffer
 {
 public:
     AspectBuffer(AspectPool& pool);

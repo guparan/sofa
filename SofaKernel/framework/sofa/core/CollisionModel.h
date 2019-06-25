@@ -62,7 +62,7 @@ class VisualParams;
  *    to the final elements)
  *
  */
-class SOFA_CORE_API CollisionModel : public virtual objectmodel::BaseObject
+class SOFA_SOFACORE_API CollisionModel : public virtual objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(CollisionModel, objectmodel::BaseObject);

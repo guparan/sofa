@@ -35,7 +35,7 @@ namespace simulation
 
 
 /// Compute collision reset, detection and response in one step
-class SOFA_SIMULATION_CORE_API CollisionVisitor : public Visitor
+class SOFA_SOFASIMULATION_API CollisionVisitor : public Visitor
 {
 public:
     CollisionVisitor(const core::ExecParams* params) :Visitor(params) , m_primitiveTestCount(0) {}
@@ -57,7 +57,7 @@ private:
 };
 
 /// Remove collision response from last step
-class SOFA_SIMULATION_CORE_API CollisionResetVisitor : public CollisionVisitor
+class SOFA_SOFASIMULATION_API CollisionResetVisitor : public CollisionVisitor
 {
 
 public:
@@ -67,7 +67,7 @@ public:
 };
 
 /// Compute collision detection
-class SOFA_SIMULATION_CORE_API CollisionDetectionVisitor : public CollisionVisitor
+class SOFA_SOFASIMULATION_API CollisionDetectionVisitor : public CollisionVisitor
 {
 public:
     CollisionDetectionVisitor(const core::ExecParams* params) :CollisionVisitor(params) {}
@@ -76,7 +76,7 @@ public:
 };
 
 /// Compute collision response
-class SOFA_SIMULATION_CORE_API CollisionResponseVisitor : public CollisionVisitor
+class SOFA_SOFASIMULATION_API CollisionResponseVisitor : public CollisionVisitor
 {
 public:
     CollisionResponseVisitor(const core::ExecParams* params) :CollisionVisitor(params) {}

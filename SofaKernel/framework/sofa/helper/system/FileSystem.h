@@ -43,7 +43,7 @@ namespace system
 ///
 /// This set of functions is not meant to be complete, but it can be completed
 /// if need be.
-class SOFA_HELPER_API FileSystem
+class SOFA_SOFAHELPER_API FileSystem
 {
 public:
 

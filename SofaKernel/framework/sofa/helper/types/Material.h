@@ -36,7 +36,7 @@ namespace helper
 namespace types
 {
 
-class SOFA_HELPER_API Material
+class SOFA_SOFAHELPER_API Material
 {
 public:
     std::string 	name;		        /* name of material */
@@ -58,8 +58,8 @@ public:
 
     void setColor(float r, float g, float b, float a) ;
 
-    friend SOFA_HELPER_API std::ostream& operator << (std::ostream& out, const Material& m ) ;
-    friend SOFA_HELPER_API std::istream& operator >> (std::istream& in, Material &m ) ;
+    friend SOFA_SOFAHELPER_API std::ostream& operator << (std::ostream& out, const Material& m ) ;
+    friend SOFA_SOFAHELPER_API std::istream& operator >> (std::istream& in, Material &m ) ;
     Material() ;
     Material(const Material& mat) ;
 };

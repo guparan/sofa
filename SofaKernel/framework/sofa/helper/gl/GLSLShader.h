@@ -76,7 +76,7 @@ namespace helper
 namespace gl
 {
 
-class SOFA_HELPER_API GLSLShader
+class SOFA_SOFAHELPER_API GLSLShader
 {
 public:
 

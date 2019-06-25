@@ -119,7 +119,7 @@ namespace objectmodel
  *  All classes deriving from Base should use the SOFA_CLASS macro within their declaration (see BaseClass.h).
  *
  */
-class SOFA_CORE_API Base
+class SOFA_SOFACORE_API Base
 {
 public:
 
@@ -568,7 +568,7 @@ namespace logging
     inline bool notMuted(const sofa::core::objectmodel::Base* t){ return t->notMuted(); }
     inline bool notMuted(sofa::core::objectmodel::Base* t){ return t->notMuted(); }
 
-    class SOFA_CORE_API SofaComponentInfo : public ComponentInfo
+    class SOFA_SOFACORE_API SofaComponentInfo : public ComponentInfo
     {
     public:
         const sofa::core::objectmodel::Base* m_component ;

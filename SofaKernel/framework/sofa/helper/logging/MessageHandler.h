@@ -40,7 +40,7 @@ namespace logging
 
 class Message;
 
-class SOFA_HELPER_API MessageHandler
+class SOFA_SOFAHELPER_API MessageHandler
 {
 public:
     virtual ~MessageHandler(){}

@@ -38,14 +38,14 @@ namespace helper
 int cptid = 0;
 #endif
 
-void SOFA_HELPER_API vector_access_failure(const void* vec, unsigned size, unsigned i, const std::type_info& type)
+void SOFA_SOFAHELPER_API vector_access_failure(const void* vec, unsigned size, unsigned i, const std::type_info& type)
 {
     msg_error("vector") << "in vector<"<<gettypename(type)<<"> " << std::hex << (long)vec << std::dec << " size " << size << " : invalid index " << (int)i;
     BackTrace::dump();
     assert(i < size);
 }
 
-void SOFA_HELPER_API vector_access_failure(const void* vec, unsigned size, unsigned i, const std::type_info& type, const char* tindex)
+void SOFA_SOFAHELPER_API vector_access_failure(const void* vec, unsigned size, unsigned i, const std::type_info& type, const char* tindex)
 {
     msg_error("vector") << "in vector<"<<gettypename(type)<<", integer_id<"<<tindex<<"> > " << std::hex << (long)vec << std::dec << " size " << size << " : invalid index " << (int)i;
     BackTrace::dump();
@@ -54,7 +54,7 @@ void SOFA_HELPER_API vector_access_failure(const void* vec, unsigned size, unsig
 
 /// Convert the string 's' into an unsigned int. The error are reported in msg & numErrors
 /// is incremented.
-int SOFA_HELPER_API getInteger(const std::string& s, std::stringstream& msg, unsigned int& numErrors)
+int SOFA_SOFAHELPER_API getInteger(const std::string& s, std::stringstream& msg, unsigned int& numErrors)
 {
     const char* attrstr=s.c_str();
     char* end=nullptr;
@@ -77,7 +77,7 @@ int SOFA_HELPER_API getInteger(const std::string& s, std::stringstream& msg, uns
 
 /// Convert the string 's' into an unsigned int. The error are reported in msg & numErrors
 /// is incremented.
-unsigned int SOFA_HELPER_API getUnsignedInteger(const std::string& s, std::stringstream& msg, unsigned int& numErrors)
+unsigned int SOFA_SOFAHELPER_API getUnsignedInteger(const std::string& s, std::stringstream& msg, unsigned int& numErrors)
 {
     const char* attrstr=s.c_str();
     char* end=nullptr;

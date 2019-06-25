@@ -39,7 +39,7 @@ namespace visual
  *
  *
  */
-class SOFA_CORE_API Shader : public virtual objectmodel::BaseObject
+class SOFA_SOFACORE_API Shader : public virtual objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(Shader, objectmodel::BaseObject);
@@ -69,7 +69,7 @@ public:
 /**
  *  \brief A basic interface to define an element to be used with a Shader.
  */
-class SOFA_CORE_API ShaderElement: public virtual objectmodel::BaseObject
+class SOFA_SOFACORE_API ShaderElement: public virtual objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(ShaderElement, objectmodel::BaseObject);

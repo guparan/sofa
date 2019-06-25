@@ -34,7 +34,7 @@ namespace simulation
 /**
   Event fired by IntegrateVisitor after performing the integrate detection step.
 */
-class SOFA_SIMULATION_CORE_API IntegrateEndEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFASIMULATION_API IntegrateEndEvent : public sofa::core::objectmodel::Event
 {
 public:
 

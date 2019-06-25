@@ -39,7 +39,7 @@ namespace io
 {
     using namespace sofa::core::topology;
 
-class SOFA_HELPER_API Mesh
+class SOFA_SOFAHELPER_API Mesh
 {    
 public:
     

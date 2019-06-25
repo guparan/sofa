@@ -37,7 +37,7 @@ namespace helper
 namespace system
 {
 
-class SOFA_HELPER_API PipeProcess
+class SOFA_SOFAHELPER_API PipeProcess
 {
 public:
     virtual ~PipeProcess();

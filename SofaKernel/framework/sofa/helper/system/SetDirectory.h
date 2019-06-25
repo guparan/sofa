@@ -36,7 +36,7 @@ namespace system
 {
 
 // A small utility class to temporarly set the current directory to the same as a specified file
-class SOFA_HELPER_API SetDirectory
+class SOFA_SOFAHELPER_API SetDirectory
 {
 public:
     std::string previousDir;

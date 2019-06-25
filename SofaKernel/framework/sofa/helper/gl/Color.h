@@ -45,7 +45,7 @@ namespace helper
 namespace gl
 {
 
-class SOFA_HELPER_API Color
+class SOFA_SOFAHELPER_API Color
 {
 public:
     static void set(const sofa::helper::types::RGBAColor& color) ;

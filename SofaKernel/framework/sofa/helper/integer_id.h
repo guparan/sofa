@@ -204,7 +204,7 @@ public:
 
 };
 
-void SOFA_HELPER_API vector_access_failure(const void* vec, unsigned size, unsigned i, const std::type_info& type, const char* tindex);
+void SOFA_SOFAHELPER_API vector_access_failure(const void* vec, unsigned size, unsigned i, const std::type_info& type, const char* tindex);
 
 template <class T, class TIndex, bool CheckIndices =
 #ifdef SOFA_VECTOR_ACCESS_FAILURE

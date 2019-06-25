@@ -37,7 +37,7 @@ namespace simulation
     Defines how the scene is inited at the beginning, and updated at each time step.
     Derives from Base in order to use smart pointers and model the parameters as Datas, which makes their edition easy in the GUI.
  */
-class SOFA_SIMULATION_CORE_API Simulation: public virtual sofa::core::objectmodel::Base
+class SOFA_SOFASIMULATION_API Simulation: public virtual sofa::core::objectmodel::Base
 {
 public:
     SOFA_CLASS(Simulation, sofa::core::objectmodel::Base);
@@ -131,12 +131,12 @@ public:
 };
 
 /// Set the (unique) simulation which controls the scene
-SOFA_SIMULATION_CORE_API void setSimulation(Simulation* s);
+SOFA_SOFASIMULATION_API void setSimulation(Simulation* s);
 
 /** Get the (unique) simulation which controls the scene.
     Automatically creates one if no Simulation has been set.
  */
-SOFA_SIMULATION_CORE_API Simulation* getSimulation();
+SOFA_SOFASIMULATION_API Simulation* getSimulation();
 
 } // namespace simulation
 

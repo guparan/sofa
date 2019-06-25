@@ -37,7 +37,7 @@ namespace sofa
 namespace helper
 {
     
-class SOFA_HELPER_API ColorMap 
+class SOFA_SOFAHELPER_API ColorMap 
 {
 public:
 

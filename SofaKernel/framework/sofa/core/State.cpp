@@ -30,16 +30,16 @@ namespace core
 
 using namespace sofa::defaulttype;
 
-template class SOFA_CORE_API State<Vec3dTypes>;
-template class SOFA_CORE_API State<Vec2Types>;
-template class SOFA_CORE_API State<Vec1Types>;
-template class SOFA_CORE_API State<Vec6Types>;
-template class SOFA_CORE_API State<Rigid3Types>;
-template class SOFA_CORE_API State<Rigid2Types>;
-template class SOFA_CORE_API State<ExtVec3Types>;
+template class SOFA_SOFACORE_API State<Vec3dTypes>;
+template class SOFA_SOFACORE_API State<Vec2Types>;
+template class SOFA_SOFACORE_API State<Vec1Types>;
+template class SOFA_SOFACORE_API State<Vec6Types>;
+template class SOFA_SOFACORE_API State<Rigid3Types>;
+template class SOFA_SOFACORE_API State<Rigid2Types>;
+template class SOFA_SOFACORE_API State<ExtVec3Types>;
 
 
-template class SOFA_CORE_API State<ExtVec3fTypes>;
+template class SOFA_SOFACORE_API State<ExtVec3fTypes>;
 
 
 } // namespace core

@@ -50,7 +50,7 @@ namespace helper
 
 /// Generate Random number
 /// based on random functions from OpenBSD
-class SOFA_HELPER_API RandomGenerator
+class SOFA_SOFAHELPER_API RandomGenerator
 {
 private:
 
