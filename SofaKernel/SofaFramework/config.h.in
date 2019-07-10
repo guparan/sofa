@@ -19,8 +19,8 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#ifndef SOFA_CONFIG_H
-#define SOFA_CONFIG_H
+#ifndef SOFA_MASTERCONFIG_H
+#define SOFA_MASTERCONFIG_H
 
 #include <sofa/config/sharedlibrary_defines.h>
 #include <sofa/config/build_option_dump_visitor.h>
@@ -51,7 +51,7 @@
 
 #cmakedefine SOFA_HAVE_BOOST_PROGRAM_OPTIONS
 
-#cmakedefine SOFA_HAVE_TINYXML
+//#cmakedefine SOFA_HAVE_TINYXML
 
 #cmakedefine DETECTIONOUTPUT_FREEMOTION
 
@@ -198,4 +198,4 @@ typedef double SReal;
 #endif
 */
 
-#endif
+#endif // SOFA_MASTERCONFIG_H

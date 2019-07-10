@@ -22,7 +22,6 @@
 #ifndef SOFA_HAPTICS_HAPTICS_H
 #define SOFA_HAPTICS_HAPTICS_H
 
-#include <sofa/helper/system/config.h>
 
 #ifdef SOFA_BUILD_HAPTICS
 #  define SOFA_SOFAHAPTICS_API SOFA_EXPORT_DYNAMIC_LIBRARY

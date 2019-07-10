@@ -22,7 +22,7 @@
 #ifndef MultiThreadingTask_h__
 #define MultiThreadingTask_h__
 
-#include <sofa/config.h>
+#include <sofa/simulation/config.h>
 
 #include <atomic>
 #include <mutex>
@@ -35,7 +35,7 @@ namespace sofa
         
         
         /** Task class interface    */
-        class SOFA_SOFASIMULATION_API Task
+        class SOFA_SOFASIMULATIONCORE_API Task
         {
         public:
             
@@ -128,7 +128,7 @@ namespace sofa
         /**  Base class to implement a CPU task
          *   all the tasks running on the CPU should inherits from this class
          */
-        class SOFA_SOFASIMULATION_API CpuTask : public Task
+        class SOFA_SOFASIMULATIONCORE_API CpuTask : public Task
         {
         public:
             
@@ -179,7 +179,7 @@ namespace sofa
         
         // This task is called once by each thread used by the TasScheduler
         // this is useful to initialize the thread specific variables
-        class SOFA_SOFASIMULATION_API ThreadSpecificTask : public CpuTask
+        class SOFA_SOFASIMULATIONCORE_API ThreadSpecificTask : public CpuTask
         {
             
         public:

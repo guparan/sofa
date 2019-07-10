@@ -22,6 +22,6 @@
 #ifndef SOFA_SIMULATION_TREE_TREE_H
 #define SOFA_SIMULATION_TREE_TREE_H
 
-#include <sofa/simulation/config.h>
+#include <SofaSimulationTree/config.h>
 
 #endif

@@ -22,7 +22,6 @@
 #ifndef SOFA_BASE_VISUAL_BASE_VISUAL_H
 #define SOFA_BASE_VISUAL_BASE_VISUAL_H
 
-#include <sofa/helper/system/config.h>
 #include <sofa/core/Plugin.h>
 
 #ifdef SOFA_BUILD_BASE_VISUAL

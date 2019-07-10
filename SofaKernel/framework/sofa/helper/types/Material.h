@@ -23,7 +23,7 @@
 #ifndef SOFA_HELPER_TYPES_MATERIAL_H_
 #define SOFA_HELPER_TYPES_MATERIAL_H_
 
-#include <sofa/core/core.h>
+#include <sofa/core/config.h>
 #include <sofa/defaulttype/RGBAColor.h>
 #include <sofa/core/objectmodel/DataFileName.h>
 

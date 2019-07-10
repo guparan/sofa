@@ -22,7 +22,7 @@
 #ifndef SOFA_SIMULATION_VISITOR_H
 #define SOFA_SIMULATION_VISITOR_H
 
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 #include <sofa/simulation/Node.h>
 #include <sofa/simulation/LocalStorage.h>
 
@@ -45,7 +45,7 @@ namespace simulation
 class LocalStorage;
 
 /// Base class for visitors propagated recursively through the scenegraph
-class SOFA_SOFASIMULATION_API Visitor
+class SOFA_SOFASIMULATIONCORE_API Visitor
 {
 public:
 

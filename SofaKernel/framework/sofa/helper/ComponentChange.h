@@ -22,6 +22,7 @@
 #ifndef SOFA_HELPER_COMPONENTCHANGE_H
 #define SOFA_HELPER_COMPONENTCHANGE_H
 
+#include <sofa/helper/config.h>
 #include <string>
 #include <vector>
 #include <map>

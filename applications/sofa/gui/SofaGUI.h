@@ -22,7 +22,6 @@
 #ifndef SOFA_GUI_SOFAGUI_H
 #define SOFA_GUI_SOFAGUI_H
 
-#include <sofa/helper/system/config.h>
 
 #ifdef SOFA_BUILD_SOFAGUI
 #	define SOFA_SOFAGUI_API SOFA_EXPORT_DYNAMIC_LIBRARY

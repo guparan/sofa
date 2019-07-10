@@ -22,7 +22,7 @@
 #ifndef SOFA_SIMULATION_SCENELOADERFACTORY_H
 #define SOFA_SIMULATION_SCENELOADERFACTORY_H
 
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 #include <sofa/simulation/Node.h>
 #include <sofa/helper/system/SetDirectory.h>
 
@@ -42,7 +42,7 @@ namespace simulation
  */
 
 /// Abstract interface of a scene loader
-class SOFA_SOFASIMULATION_API SceneLoader
+class SOFA_SOFASIMULATIONCORE_API SceneLoader
 {
 public:
     typedef std::vector<std::string> ExtensionList;
@@ -124,7 +124,7 @@ protected:
 };
 
 
-class SOFA_SOFASIMULATION_API SceneLoaderFactory
+class SOFA_SOFASIMULATIONCORE_API SceneLoaderFactory
 {
 
 public:

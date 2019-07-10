@@ -159,12 +159,12 @@ set(SOFA_BUILD_OPTIONS_SRC
         build_option_bbox.h
     )
 foreach(NAME ${SOFA_BUILD_OPTIONS_SRC})
-    configure_file("${NAME}.in" "${CMAKE_BINARY_DIR}/include/sofa/config/${NAME}")
-    install(FILES "${CMAKE_BINARY_DIR}/include/sofa/config/${NAME}" DESTINATION "include/${PROJECT_NAME}/sofa/config" COMPONENT headers)
+    configure_file("${NAME}.in" "${CMAKE_BINARY_DIR}/include/SofaFramework/sofa/config/${NAME}")
+    install(FILES "${CMAKE_BINARY_DIR}/include/SofaFramework/sofa/config/${NAME}" DESTINATION "include/${PROJECT_NAME}/sofa/config" COMPONENT headers)
 endforeach()
 
-configure_file("config.h.in" "${CMAKE_BINARY_DIR}/include/sofa/config.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/sofa/config.h" DESTINATION "include/SofaFramework/sofa" COMPONENT headers)
+configure_file("config.h.in" "${CMAKE_BINARY_DIR}/include/SofaFramework/sofa/config.h")
+install(FILES "${CMAKE_BINARY_DIR}/include/SofaFramework/sofa/config.h" DESTINATION "include/SofaFramework/sofa" COMPONENT headers)
 
 # Generic config.h configurable by any module
 set(SOFA_CONFIG_TEMPLATE "${CMAKE_BINARY_DIR}/include/SofaFramework/sofa/config/config_template.h.in") # used by SofaFramework subdirectories
@@ -175,15 +175,15 @@ install(FILES "config_template.h.in" DESTINATION "include/${PROJECT_NAME}/sofa/c
 set(SOFAFRAMEWORK_VERSION "${Sofa_VERSION}")
 set(SOFA_VERSION_STR "\"${Sofa_VERSION}\"")
 set(SOFA_VERSION "${Sofa_VERSION_MAJOR}${Sofa_VERSION_MINOR}${Sofa_VERSION_PATCH}")
-configure_file(../framework/sofa/version.h.in "${CMAKE_BINARY_DIR}/include/sofa/version.h")
-install(FILES "${CMAKE_BINARY_DIR}/include/sofa/version.h" DESTINATION include/${PROJECT_NAME}/sofa COMPONENT headers)
+configure_file(../framework/sofa/version.h.in "${CMAKE_BINARY_DIR}/include/SofaFramework/sofa/version.h")
+install(FILES "${CMAKE_BINARY_DIR}/include/SofaFramework/sofa/version.h" DESTINATION include/${PROJECT_NAME}/sofa COMPONENT headers)
 
 
 ## Subdirectories
 add_subdirectory(../framework/sofa/helper ${CMAKE_CURRENT_BINARY_DIR}/SofaHelper)
 add_subdirectory(../framework/sofa/defaulttype ${CMAKE_CURRENT_BINARY_DIR}/SofaDefaultType)
 add_subdirectory(../framework/sofa/core ${CMAKE_CURRENT_BINARY_DIR}/SofaCore)
-add_subdirectory(../framework/sofa/simulation ${CMAKE_CURRENT_BINARY_DIR}/SofaSimulationCore)
+#add_subdirectory(../framework/sofa/simulation ${CMAKE_CURRENT_BINARY_DIR}/../SofaSimulation/SofaSimulationCore)
 if(SOFA_BUILD_TESTS)
     add_subdirectory(../framework/framework_test ${CMAKE_CURRENT_BINARY_DIR}/framework_test)
 endif()
@@ -192,7 +192,7 @@ endif()
 set_target_properties(SofaHelper PROPERTIES FOLDER "SofaFramework")
 set_target_properties(SofaDefaultType PROPERTIES FOLDER "SofaFramework")
 set_target_properties(SofaCore PROPERTIES FOLDER "SofaFramework")
-set_target_properties(SofaSimulationCore PROPERTIES FOLDER "SofaFramework")
+#set_target_properties(SofaSimulationCore PROPERTIES FOLDER "SofaFramework")
 
 # NDEBUG preprocessor macro
 if(WIN32 OR APPLE)
@@ -216,7 +216,9 @@ endif()
 set(SOFAFRAMEWORK_TARGETS SofaCore SofaDefaultType SofaHelper)
 foreach(TARGET ${SOFAFRAMEWORK_TARGETS})
     target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include/${PROJECT_NAME}>")
+    target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include/SofaSimulation>")
     target_include_directories(${TARGET} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
+    target_include_directories(${TARGET} PUBLIC "$<INSTALL_INTERFACE:include/SofaSimulation>")
 endforeach()
 
 ## CMake package configurations files

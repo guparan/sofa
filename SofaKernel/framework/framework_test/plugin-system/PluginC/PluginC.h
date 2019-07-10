@@ -22,7 +22,6 @@
 #ifndef PLUGINC_H
 #define PLUGINC_H
 
-#include <sofa/helper/system/config.h>
 
 #ifdef SOFA_BUILD_PLUGINC
 #define SOFA_PluginC_API SOFA_EXPORT_DYNAMIC_LIBRARY

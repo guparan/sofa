@@ -34,7 +34,7 @@
 #define SOFA_SIMULATION_UPDATEMAPPINGENDEVENT_H
 
 #include <sofa/core/objectmodel/Event.h>
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 
 namespace sofa
 {
@@ -46,7 +46,7 @@ namespace simulation
   Event fired by Simulation::animate() after computing a new animation step.
   @author Jeremie Allard
 */
-class SOFA_SOFASIMULATION_API UpdateMappingEndEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFASIMULATIONCORE_API UpdateMappingEndEvent : public sofa::core::objectmodel::Event
 {
 public:
 

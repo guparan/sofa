@@ -35,7 +35,7 @@ namespace simulation
 {
 
 
-class SOFA_SOFASIMULATION_API XMLPrintVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API XMLPrintVisitor : public Visitor
 {
 protected:
     std::ostream& m_out;

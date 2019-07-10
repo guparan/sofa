@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(SofaGeneralVisual)
 
+find_package(SofaBase)
+
 set(HEADER_FILES
     initGeneralVisual.h
     )

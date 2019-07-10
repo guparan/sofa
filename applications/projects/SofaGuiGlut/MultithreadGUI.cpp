@@ -20,7 +20,6 @@
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
 #include "MultithreadGUI.h"
-#include <sofa/helper/system/config.h>
 #include <sofa/helper/system/FileRepository.h>
 //#include <sofa/helper/system/thread/CircularQueue.inl>
 #include <sofa/simulation/CopyAspectVisitor.h>

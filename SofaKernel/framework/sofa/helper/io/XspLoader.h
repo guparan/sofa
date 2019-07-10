@@ -24,8 +24,7 @@
 
 #include <cstddef>                  /// For size_t
 #include <string>                   /// For std::string
-#include <sofa/helper/helper.h>     /// For SOFA_SOFAHELPER_API
-#include <sofa/helper/system/config.h> /// For SOFA_UNUSED
+#include <sofa/helper/config.h>     /// For SOFA_SOFAHELPER_API /// For SOFA_UNUSED
 
 
 namespace sofa

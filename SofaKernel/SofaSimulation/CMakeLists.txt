@@ -8,11 +8,13 @@ find_package(SofaFramework REQUIRED)
 set(SOFASIMULATION_VERSION ${SofaFramework_VERSION})
 
 ## Subdirectories
+add_subdirectory(../framework/sofa/simulation ${CMAKE_CURRENT_BINARY_DIR}/SofaSimulationCore)
 add_subdirectory(../modules/SofaSimulationCommon ${CMAKE_CURRENT_BINARY_DIR}/SofaSimulationCommon)
 add_subdirectory(../modules/SofaSimulationTree ${CMAKE_CURRENT_BINARY_DIR}/SofaSimulationTree)
 add_subdirectory(../modules/SofaSimulationGraph ${CMAKE_CURRENT_BINARY_DIR}/SofaSimulationGraph)
 
 set(SOFASIMULATION_TARGETS
+    SofaSimulationCore
     SofaSimulationCommon
     SofaSimulationGraph
     SofaSimulationTree
@@ -20,7 +22,7 @@ set(SOFASIMULATION_TARGETS
 
 foreach(TARGET ${SOFASIMULATION_TARGETS})
     target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../modules>")
-    target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>") # For sofa/simulation/config.h
+    target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>")
     target_include_directories(${TARGET} PUBLIC "$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include/${PROJECT_NAME}>")
     target_include_directories(${TARGET} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
     set_target_properties(${TARGET} PROPERTIES FOLDER SofaSimulation) # IDE folder

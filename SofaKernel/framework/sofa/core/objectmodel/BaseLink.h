@@ -23,7 +23,7 @@
 #define SOFA_CORE_OBJECTMODEL_BASELINK_H
 
 #include <sofa/helper/fixed_array.h>
-#include <sofa/core/core.h>
+#include <sofa/core/config.h>
 #include <sofa/core/ExecParams.h>
 #include <string>
 

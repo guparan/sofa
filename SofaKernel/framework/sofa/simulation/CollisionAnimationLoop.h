@@ -26,7 +26,7 @@
 #include <sofa/core/objectmodel/BaseObject.h>
 #include <sofa/core/behavior/BaseAnimationLoop.h>
 #include <sofa/core/ExecParams.h>
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 #include <sofa/simulation/Simulation.h>
 #include <sofa/simulation/Node.h>
 #include <sofa/simulation/Visitor.h>
@@ -51,7 +51,7 @@ namespace simulation
  */
 
 
-class SOFA_SOFASIMULATION_API CollisionAnimationLoop : public sofa::core::behavior::BaseAnimationLoop
+class SOFA_SOFASIMULATIONCORE_API CollisionAnimationLoop : public sofa::core::behavior::BaseAnimationLoop
 {
 public:
     typedef sofa::core::behavior::BaseAnimationLoop Inherit;

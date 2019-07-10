@@ -30,7 +30,7 @@ namespace sofa
 namespace simulation
 {
 
-class SOFA_SOFASIMULATION_API DeleteVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API DeleteVisitor : public Visitor
 {
 public:
     DeleteVisitor(const core::ExecParams* params) : Visitor(params) {}

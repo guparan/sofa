@@ -34,4 +34,10 @@ set(SOURCE_FILES
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaCore SofaSimulationCore)
 
+if(TinyXML_FOUND)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC "-DSOFA_XML_PARSER_TINYXML")
+else()
+    target_compile_definitions(${PROJECT_NAME} PUBLIC "-DSOFA_XML_PARSER_LIBXML")
+endif()
+
 sofa_install_targets(SofaSimulation ${PROJECT_NAME} "SofaSimulation/${PROJECT_NAME}")

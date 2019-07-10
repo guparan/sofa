@@ -19,42 +19,9 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#include <SofaDenseSolver/initDenseSolver.h>
+#ifndef SOFA_HELPER_SYSTEM_CONFIG_H
+#define SOFA_HELPER_SYSTEM_CONFIG_H
 
+#include <sofa/config.h>
 
-
-#include <SofaBaseLinearSolver/MatrixLinearSolver.inl>
-#include "NewMatMatrix.h"
-#include "NewMatVector.h"
-
-
-namespace sofa
-{
-
-namespace component
-{
-
-namespace linearsolver
-{
-
-// template specialization on specific matrix types
-
-template class SOFA_SOFADENSESOLVER_API MatrixLinearSolver< NewMatMatrix, NewMatVector >;
-template class SOFA_SOFADENSESOLVER_API MatrixLinearSolver< NewMatSymmetricMatrix, NewMatVector >;
-template class SOFA_SOFADENSESOLVER_API MatrixLinearSolver< NewMatBandMatrix, NewMatVector >;
-template class SOFA_SOFADENSESOLVER_API MatrixLinearSolver< NewMatSymmetricBandMatrix, NewMatVector >;
-}
-
-
-void initDenseSolver()
-{
-    static bool first = true;
-    if (first)
-    {
-        first = false;
-    }
-}
-
-} // namespace component
-
-} // namespace sofa
+#endif

@@ -23,7 +23,7 @@
 #define SOFA_SIMULATION_INTEGRATEBEGINEVENT_H
 
 #include <sofa/core/objectmodel/Event.h>
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 
 namespace sofa
 {
@@ -34,7 +34,7 @@ namespace simulation
 /**
   Event fired by IntegrateVisitor before performing the integrate detection step.
 */
-class SOFA_SOFASIMULATION_API IntegrateBeginEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFASIMULATIONCORE_API IntegrateBeginEvent : public sofa::core::objectmodel::Event
 {
 public:
 

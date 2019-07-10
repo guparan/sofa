@@ -23,7 +23,7 @@
 #define SOFA_SIMULATION_COLLISIONBEGINEVENT_H
 
 #include <sofa/core/objectmodel/Event.h>
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 
 namespace sofa
 {
@@ -34,7 +34,7 @@ namespace simulation
 /**
   Event fired by CollisionVisitor before performing the collision detection step.
 */
-class SOFA_SOFASIMULATION_API CollisionBeginEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFASIMULATIONCORE_API CollisionBeginEvent : public sofa::core::objectmodel::Event
 {
 public:
 

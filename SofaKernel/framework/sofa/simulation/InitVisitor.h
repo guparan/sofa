@@ -39,7 +39,7 @@ namespace simulation
     Backward: OdeSolver::bwdInit()
 
     */
-class SOFA_SOFASIMULATION_API InitVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API InitVisitor : public Visitor
 {
 
 public:

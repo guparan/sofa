@@ -24,7 +24,6 @@
 
 #include <functional>
 #include <sofa/core/objectmodel/BaseData.h>
-#include <sofa/simulation/Node.h>
 
 namespace sofa
 {

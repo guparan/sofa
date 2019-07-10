@@ -33,7 +33,7 @@ namespace sofa
         
         
         
-        class SOFA_SOFASIMULATION_API InitPerThreadDataTask : public CpuTask
+        class SOFA_SOFASIMULATIONCORE_API InitPerThreadDataTask : public CpuTask
         {
             
         public:
@@ -52,7 +52,7 @@ namespace sofa
         
         
         // thread storage initialization
-        SOFA_SOFASIMULATION_API void initThreadLocalData();
+        SOFA_SOFASIMULATIONCORE_API void initThreadLocalData();
         
         
         

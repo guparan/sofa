@@ -23,7 +23,6 @@
 #define SOFA_COMPONENT_FORCEFIELD_CONSTANTFORCEFIELD_INL
 
 #include <SofaBoundaryCondition/ConstantForceField.h>
-#include <sofa/helper/system/config.h>
 #include <cassert>
 #include <iostream>
 #include <sofa/simulation/Simulation.h>

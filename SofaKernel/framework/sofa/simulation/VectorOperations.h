@@ -23,7 +23,7 @@
 #define SOFA_SIMULATION_CORE_VECTOROPERATIONS_H
 
 #include <sofa/core/behavior/BaseVectorOperations.h>
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 #include <sofa/simulation/VisitorExecuteFunc.h>
 
 namespace sofa
@@ -40,7 +40,7 @@ namespace simulation
 namespace common
 {
 
-class SOFA_SOFASIMULATION_API VectorOperations : public sofa::core::behavior::BaseVectorOperations
+class SOFA_SOFASIMULATIONCORE_API VectorOperations : public sofa::core::behavior::BaseVectorOperations
 {
 public:
 

@@ -31,7 +31,7 @@ namespace sofa
 namespace simulation
 {
 
-class SOFA_SOFASIMULATION_API VelocityThresholdVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API VelocityThresholdVisitor : public Visitor
 {
 public:
     Visitor::Result processNodeTopDown(simulation::Node* node) override;

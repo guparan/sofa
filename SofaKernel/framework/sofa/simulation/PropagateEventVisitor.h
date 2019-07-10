@@ -49,7 +49,7 @@ Propagation is done top-down until the event is handled.
 
 	@author The SOFA team </www.sofa-framework.org>
 */
-class SOFA_SOFASIMULATION_API PropagateEventVisitor : public sofa::simulation::Visitor
+class SOFA_SOFASIMULATIONCORE_API PropagateEventVisitor : public sofa::simulation::Visitor
 {
 public:
     PropagateEventVisitor(const core::ExecParams* params, sofa::core::objectmodel::Event* e);

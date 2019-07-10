@@ -23,7 +23,7 @@
 #define SOFA_SIMULATION_PAUSEEVENT_H
 
 #include <sofa/core/objectmodel/Event.h>
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 
 namespace sofa
 {
@@ -34,7 +34,7 @@ namespace simulation
 /**
   Event fired when needed to stop the animation.
 */
-class SOFA_SOFASIMULATION_API PauseEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFASIMULATIONCORE_API PauseEvent : public sofa::core::objectmodel::Event
 {
 public:
 

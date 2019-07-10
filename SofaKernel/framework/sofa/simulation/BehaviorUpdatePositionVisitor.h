@@ -36,7 +36,7 @@ namespace simulation
 /** Update the position of a new simulation step
 
  */
-class SOFA_SOFASIMULATION_API BehaviorUpdatePositionVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API BehaviorUpdatePositionVisitor : public Visitor
 {
 
 public:

@@ -23,7 +23,7 @@
 #define SOFA_SIMULATION_CORE_MUTATIONLISTENER_H
 
 #include <sofa/core/objectmodel/BaseObject.h>
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 
 namespace sofa
 {
@@ -34,7 +34,7 @@ namespace simulation
 class Node;
 
 /// Generic API to handle mutations of the graph
-class SOFA_SOFASIMULATION_API MutationListener
+class MutationListener
 {
   public:
     virtual ~MutationListener();

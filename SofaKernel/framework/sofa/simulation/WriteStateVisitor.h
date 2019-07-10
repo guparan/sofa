@@ -44,7 +44,7 @@ namespace sofa
 namespace simulation
 {
 
-class SOFA_SOFASIMULATION_API WriteStateVisitor: public Visitor
+class SOFA_SOFASIMULATIONCORE_API WriteStateVisitor: public Visitor
 {
 public:
     WriteStateVisitor( const sofa::core::ExecParams* params, std::ostream& out );

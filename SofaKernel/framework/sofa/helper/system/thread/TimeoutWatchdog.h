@@ -25,7 +25,7 @@
 
 #ifdef SOFA_HAVE_BOOST
 
-#include <sofa/helper/helper.h>
+#include <sofa/helper/config.h>
 #include <boost/thread/thread.hpp>
 
 namespace sofa

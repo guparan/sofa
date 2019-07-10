@@ -22,7 +22,7 @@
 #ifndef SOFA_SIMULATION_TREE_CACTUSSTACKSTORAGE_H
 #define SOFA_SIMULATION_TREE_CACTUSSTACKSTORAGE_H
 
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 #include <sofa/simulation/LocalStorage.h>
 #include <stack>
 
@@ -36,7 +36,7 @@ namespace simulation
 
 /// Cactus Stack implementation of LocalStorage.
 /// See http://www.nist.gov/dads/HTML/cactusstack.html
-class SOFA_SOFASIMULATION_API CactusStackStorage : public simulation::LocalStorage
+class SOFA_SOFASIMULATIONCORE_API CactusStackStorage : public simulation::LocalStorage
 {
 protected:
     CactusStackStorage* up; ///< This point to the parent stack

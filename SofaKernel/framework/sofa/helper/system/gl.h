@@ -24,8 +24,7 @@
 
 #ifndef SOFA_NO_OPENGL
 
-#include <sofa/helper/helper.h>
-#include <sofa/helper/system/config.h>
+#include <sofa/helper/config.h>
 #include <string>
 
 #  include <GL/glew.h>

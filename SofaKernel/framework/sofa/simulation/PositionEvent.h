@@ -23,7 +23,7 @@
 #define SOFA_SIMULATION_POSITIONEVENT_H
 
 #include <sofa/core/objectmodel/Event.h>
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 
 namespace sofa
 {
@@ -34,7 +34,7 @@ namespace simulation
 /**
   Event modify the position of model
 */
-class SOFA_SOFASIMULATION_API PositionEvent : public sofa::core::objectmodel::Event
+class SOFA_SOFASIMULATIONCORE_API PositionEvent : public sofa::core::objectmodel::Event
 {
 public:
 

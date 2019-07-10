@@ -23,7 +23,7 @@
 #define SOFA_SIMULATION_VISITORSCHEDULER_H
 
 #include <sofa/core/objectmodel/BaseObject.h>
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 #include "ClassSystem.h"
 
 namespace sofa
@@ -36,7 +36,7 @@ namespace simulation
 class Visitor;
 
 /// Abstract class defining custom schedule of action execution through the graph.
-class SOFA_SOFASIMULATION_API VisitorScheduler : public virtual core::objectmodel::BaseObject
+class SOFA_SOFASIMULATIONCORE_API VisitorScheduler : public virtual core::objectmodel::BaseObject
 {
 public:
     SOFA_ABSTRACT_CLASS(VisitorScheduler, core::objectmodel::BaseObject);

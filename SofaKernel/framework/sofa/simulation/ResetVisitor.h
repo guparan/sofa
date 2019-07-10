@@ -33,7 +33,7 @@ namespace sofa
 namespace simulation
 {
 
-class SOFA_SOFASIMULATION_API ResetVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API ResetVisitor : public Visitor
 {
 public:
     ResetVisitor(const core::ExecParams* params) : Visitor(params) {}
@@ -48,7 +48,7 @@ public:
     const char* getClassName() const override { return "ResetVisitor"; }
 };
 
-class SOFA_SOFASIMULATION_API StoreResetStateVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API StoreResetStateVisitor : public Visitor
 {
 public:
     StoreResetStateVisitor(const core::ExecParams* params) : Visitor(params) {}

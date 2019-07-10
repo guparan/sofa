@@ -30,7 +30,7 @@ namespace component
 {
 
 
-void SOFA_EIGEN2_SOLVER_API initEigen2Solver();
+void SOFA_SOFAEIGEN2SOLVER_API initEigen2Solver();
 
 } // namespace component
 

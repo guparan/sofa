@@ -21,8 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_SIMULATION_INSTRUMENTACTION_H
 #define SOFA_SIMULATION_INSTRUMENTACTION_H
-
-
+#include <SofaSimulationCommon/config.h>
 
 #include <sofa/simulation/Visitor.h>
 #include <sofa/defaulttype/Vec.h>

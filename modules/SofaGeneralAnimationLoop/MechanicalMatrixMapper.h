@@ -21,6 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_ANIMATIONLOOP_MECHANICALMATRIXMAPPER_H
 #define SOFA_COMPONENT_ANIMATIONLOOP_MECHANICALMATRIXMAPPER_H
+#include <SofaGeneralAnimationLoop/config.h>
 
 #include <sofa/core/behavior/MixedInteractionForceField.h>
 #include <sofa/core/behavior/MechanicalState.h>
@@ -29,7 +30,6 @@
 #include <sofa/core/MechanicalParams.h>
 #include <SofaBaseLinearSolver/CompressedRowSparseMatrix.h>
 #include <SofaBaseLinearSolver/DefaultMultiMatrixAccessor.h>
-#include <SofaMiscMapping/config.h>
 
 #include <sofa/core/topology/BaseMeshTopology.h>
 

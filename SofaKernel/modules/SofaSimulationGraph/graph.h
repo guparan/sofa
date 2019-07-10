@@ -22,6 +22,6 @@
 #ifndef SOFA_SIMULATION_GRAPH_GRAPH_H
 #define SOFA_SIMULATION_GRAPH_GRAPH_H
 
-#include <sofa/simulation/config.h>
+#include <SofaSimulationGraph/config.h>
 
 #endif

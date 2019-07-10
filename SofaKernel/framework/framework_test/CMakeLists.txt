@@ -44,7 +44,7 @@ endif(NOT SOFA_NO_OPENGL)
 
 #Plugin tests
 #add_subdirectory(plugin-system) ## TODO: check if deprecated or... ?
-add_subdirectory(plugins)
+#add_subdirectory(plugins)
 
 include_directories(${gtest_SOURCE_DIR}/include)
 

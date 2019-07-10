@@ -23,7 +23,6 @@
 #define SOFA_COMPONENT_LINEARSOLVER_EIGENMATRIXMANIPULATOR_H
 #include <SofaEigen2Solver/config.h>
 
-#include <sofa/helper/system/config.h>
 #include <sofa/helper/vector.h>
 
 #include <Eigen/Core>
@@ -47,7 +46,7 @@ typedef Eigen::Matrix<SReal, Eigen::Dynamic, 1>       VectorEigen;
 
 struct LMatrixManipulator;
 
-struct SOFA_EIGEN2_SOLVER_API LLineManipulator
+struct SOFA_SOFAEIGEN2SOLVER_API LLineManipulator
 {
     typedef std::pair<unsigned int, SReal> LineCombination;
     typedef helper::vector< LineCombination > InternalData;
@@ -81,7 +80,7 @@ protected:
     InternalData _data;
 };
 
-struct SOFA_EIGEN2_SOLVER_API LMatrixManipulator
+struct SOFA_SOFAEIGEN2SOLVER_API LMatrixManipulator
 {
     void init(const SparseMatrixEigen& L);
 

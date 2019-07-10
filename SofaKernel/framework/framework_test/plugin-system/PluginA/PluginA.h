@@ -22,7 +22,6 @@
 #ifndef PLUGINA_H
 #define PLUGINA_H
 
-#include <sofa/helper/system/config.h>
 
 #include <sofa/core/objectmodel/BaseObject.h>
 

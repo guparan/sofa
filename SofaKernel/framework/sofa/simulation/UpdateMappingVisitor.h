@@ -33,7 +33,7 @@ namespace simulation
 
 /// propagating position and velocity through non-mechanical mappings
 /// (while MechanicalPropagateOnlyPositionAndVelocityVisitor is propagating mechanical mappings)
-class SOFA_SOFASIMULATION_API UpdateMappingVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API UpdateMappingVisitor : public Visitor
 {
 public:
     UpdateMappingVisitor(const sofa::core::ExecParams* params) : Visitor(params) {}

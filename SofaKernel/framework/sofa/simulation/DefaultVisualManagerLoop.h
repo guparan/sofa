@@ -24,7 +24,7 @@
 
 #include <sofa/core/visual/VisualLoop.h>
 #include <sofa/core/objectmodel/BaseObject.h>
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 #include <sofa/simulation/Node.h>
 
 namespace sofa {
@@ -46,7 +46,7 @@ namespace simulation
  *
  */
 
-class SOFA_SOFASIMULATION_API DefaultVisualManagerLoop : public sofa::core::visual::VisualLoop
+class SOFA_SOFASIMULATIONCORE_API DefaultVisualManagerLoop : public sofa::core::visual::VisualLoop
 {
 public:
     typedef sofa::core::visual::VisualLoop Inherit;

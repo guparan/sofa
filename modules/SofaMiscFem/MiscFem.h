@@ -22,7 +22,6 @@
 #ifndef SOFA_MISC_FEM_MISC_FEM_H
 #define SOFA_MISC_FEM_MISC_FEM_H
 
-#include <sofa/helper/system/config.h>
 
 #ifdef SOFA_BUILD_MISC_FEM
 #  define SOFA_SOFAMISCFEM_API SOFA_EXPORT_DYNAMIC_LIBRARY

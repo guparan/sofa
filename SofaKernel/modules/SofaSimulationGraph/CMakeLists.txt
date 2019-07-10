@@ -25,6 +25,7 @@ endif()
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationCommon)
+target_compile_definitions(${PROJECT_NAME} PUBLIC "-DSOFA_HAVE_DAG")
 
 sofa_install_targets(SofaSimulation ${PROJECT_NAME} "SofaSimulation/${PROJECT_NAME}")
 

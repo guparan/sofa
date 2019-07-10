@@ -21,7 +21,6 @@
 ******************************************************************************/
 #include <iostream>
 
-#include <sofa/helper/system/config.h>
 
 #ifdef SOFA_BUILD_PLUGINMONITOR
 # define SOFA_PLUGINMONITOR_API SOFA_EXPORT_DYNAMIC_LIBRARY

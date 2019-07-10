@@ -22,7 +22,6 @@
 #ifndef PLUGINF_H
 #define PLUGINF_H
 
-#include <sofa/helper/system/config.h>
 
 #include <sofa/core/objectmodel/BaseObject.h>
 

@@ -31,7 +31,6 @@
 #include <sofa/core/objectmodel/AspectPool.h>
 //#include <sofa/helper/system/thread/CircularQueue.h>
 
-#include <sofa/helper/system/config.h>
 #include <sofa/defaulttype/Vec.h>
 #include <sofa/defaulttype/Quat.h>
 #include <sofa/helper/gl/Texture.h>

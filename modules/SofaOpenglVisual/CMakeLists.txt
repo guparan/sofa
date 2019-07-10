@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.1)
 project(SofaOpenglVisual VERSION 1.0 LANGUAGES CXX)
 
+find_package(SofaFramework)
+
 set(EXTRA_FILES
     README.md
-    SofaOpenglVisualConfig.cmake.in
 )
-
 
 list(APPEND HEADER_FILES
     src/SofaOpenglVisual/initOpenGLVisual.h

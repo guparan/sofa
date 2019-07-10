@@ -31,7 +31,7 @@ namespace sofa
 namespace simulation
 {
 
-class SOFA_SOFASIMULATION_API DeactivationVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API DeactivationVisitor : public Visitor
 {
 public:
 

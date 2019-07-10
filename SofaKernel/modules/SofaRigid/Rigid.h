@@ -22,7 +22,6 @@
 #ifndef SOFA_RIGID_RIGID_H
 #define SOFA_RIGID_RIGID_H
 
-#include <sofa/helper/system/config.h>
 
 #ifdef SOFA_BUILD_RIGID
 #  define SOFA_SOFARIGID_API SOFA_EXPORT_DYNAMIC_LIBRARY

@@ -66,7 +66,7 @@
 #include <sofa/core/loader/BaseLoader.h>
 #include <sofa/core/objectmodel/Event.h>
 
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 #include <sofa/simulation/MutationListener.h>
 #include <sofa/simulation/VisitorScheduler.h>
 
@@ -103,7 +103,7 @@ namespace simulation
 
    @author The SOFA team </www.sofa-framework.org>
  */
-class SOFA_SOFASIMULATION_API Node : public sofa::core::objectmodel::BaseNode, public sofa::core::objectmodel::Context
+class SOFA_SOFASIMULATIONCORE_API Node : public sofa::core::objectmodel::BaseNode, public sofa::core::objectmodel::Context
 {
 
 public:

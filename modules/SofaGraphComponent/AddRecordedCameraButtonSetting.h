@@ -25,7 +25,6 @@
 
 #include <sofa/core/objectmodel/ConfigurationSetting.h>
 #include <SofaGraphComponent/MouseButtonSetting.h>
-#include <SofaGeneralVisual/RecordedCamera.h>
 
 namespace sofa
 {

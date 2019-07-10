@@ -31,7 +31,6 @@
 #include <sofa/core/topology/TopologyChange.h>
 #include <sofa/simulation/Simulation.h>
 #include <sofa/helper/io/XspLoader.h>
-#include <sofa/helper/system/config.h>
 #include <cassert>
 #include <iostream>
 #include <fstream>

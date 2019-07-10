@@ -22,7 +22,6 @@
 #ifndef SOFA_GENERAL_VISUAL_GENERAL_VISUAL_H
 #define SOFA_GENERAL_VISUAL_GENERAL_VISUAL_H
 
-#include <sofa/helper/system/config.h>
 #include <sofa/core/Plugin.h>
 
 #ifdef SOFA_BUILD_GENERAL_VISUAL

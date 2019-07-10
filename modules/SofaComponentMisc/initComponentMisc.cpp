@@ -19,7 +19,6 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#include <sofa/helper/system/config.h>
 #include <SofaComponentMisc/initComponentMisc.h>
 #include <SofaMiscTopology/initMiscTopology.h>
 #include <SofaMiscMapping/initMiscMapping.h>

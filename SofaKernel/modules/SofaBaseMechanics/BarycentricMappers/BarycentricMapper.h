@@ -21,7 +21,7 @@
 ******************************************************************************/
 #ifndef SOFA_COMPONENT_MAPPING_BARYCENTRICMAPPER_H
 #define SOFA_COMPONENT_MAPPING_BARYCENTRICMAPPER_H
-
+#include <SofaBaseMechanics/config.h>
 #include <sofa/core/Mapping.h>
 #include <SofaBaseLinearSolver/CompressedRowSparseMatrix.h>
 #include <sofa/core/topology/BaseMeshTopology.h>

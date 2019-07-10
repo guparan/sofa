@@ -48,7 +48,7 @@ namespace simulation
 {
 
 
-class SOFA_SOFASIMULATION_API VisualVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API VisualVisitor : public Visitor
 {
 public:
     VisualVisitor(core::visual::VisualParams* params)
@@ -78,7 +78,7 @@ protected:
     core::visual::VisualParams* vparams;
 };
 
-class SOFA_SOFASIMULATION_API VisualDrawVisitor : public VisualVisitor
+class SOFA_SOFASIMULATIONCORE_API VisualDrawVisitor : public VisualVisitor
 {
 public:
     bool hasShader;
@@ -98,7 +98,7 @@ public:
 #endif
 };
 
-class SOFA_SOFASIMULATION_API VisualUpdateVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API VisualUpdateVisitor : public Visitor
 {
 public:
     VisualUpdateVisitor(const core::ExecParams* params) : Visitor(params) {}
@@ -109,7 +109,7 @@ public:
     const char* getClassName() const override { return "VisualUpdateVisitor"; }
 };
 
-class SOFA_SOFASIMULATION_API VisualInitVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API VisualInitVisitor : public Visitor
 {
 public:
     VisualInitVisitor(const core::ExecParams* params):Visitor(params) {}
@@ -121,7 +121,7 @@ public:
 
 
 
-class SOFA_SOFASIMULATION_API VisualComputeBBoxVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API VisualComputeBBoxVisitor : public Visitor
 {
 public:
     SReal minBBox[3];
@@ -144,7 +144,7 @@ public:
 };
 
 
-class SOFA_SOFASIMULATION_API VisualClearVisitor : public VisualVisitor
+class SOFA_SOFASIMULATIONCORE_API VisualClearVisitor : public VisualVisitor
 {
 public:
     VisualClearVisitor(core::visual::VisualParams* params) : VisualVisitor(params)

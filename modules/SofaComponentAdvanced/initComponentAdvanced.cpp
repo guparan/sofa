@@ -19,7 +19,6 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#include <sofa/helper/system/config.h>
 #include <SofaComponentAdvanced/initComponentAdvanced.h>
 #include <SofaNonUniformFem/initNonUniformFEM.h>
 

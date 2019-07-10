@@ -22,7 +22,7 @@
 #ifndef SOFA_SIMULATION_CORE_INIT_H
 #define SOFA_SIMULATION_CORE_INIT_H
 
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 
 namespace sofa
 {
@@ -35,19 +35,19 @@ namespace core
 
 /// @brief Initialize the SofaSimulationCore library, as well as its
 /// dependencies: SofaCore, SofaDefaultType, SofaHelper.
-SOFA_SOFASIMULATION_API void init();
+SOFA_SOFASIMULATIONCORE_API void init();
 
 /// @brief Return true if and only if the SofaSimulationCore library has been
 /// initialized.
-SOFA_SOFASIMULATION_API bool isInitialized();
+SOFA_SOFASIMULATIONCORE_API bool isInitialized();
 
 /// @brief Clean up the resources used by the SofaSimulationCore library, as
 /// well as its dependencies: SofaCore, SofaDefaultType, SofaHelper.
-SOFA_SOFASIMULATION_API void cleanup();
+SOFA_SOFASIMULATIONCORE_API void cleanup();
 
 /// @brief Return true if and only if the SofaSimulationCore library has been
 /// cleaned up.
-SOFA_SOFASIMULATION_API bool isCleanedUp();
+SOFA_SOFASIMULATIONCORE_API bool isCleanedUp();
 
 } // namespace core
 

@@ -22,7 +22,6 @@
 #ifndef SOFA_CORE_PLUGIN_H
 #define SOFA_CORE_PLUGIN_H
 
-#include <sofa/helper/system/config.h>
 
 #define SOFA_PLUGIN(PluginClass)				\
 public: 							\
@@ -49,7 +48,7 @@ public: 							\
     }
 
 
-#include <sofa/core/core.h>
+#include <sofa/core/config.h>
 
 
 namespace sofa

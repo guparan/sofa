@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.1)
 
 project(SofaFrameworkExtra_test)
 
+find_package(SofaBase)
+
 set(SOURCE_FILES
     core/TrackedData_test.cpp
     core/objectmodel/BaseContext_test.cpp

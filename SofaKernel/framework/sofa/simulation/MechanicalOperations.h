@@ -22,7 +22,7 @@
 #ifndef SOFA_SIMULATION_CORE_MECHANICALOPERATIONS_H
 #define SOFA_SIMULATION_CORE_MECHANICALOPERATIONS_H
 
-#include <sofa/simulation/simulationcore.h>
+#include <sofa/simulation/config.h>
 #include <sofa/core/objectmodel/BaseContext.h>
 #include <sofa/core/MultiVecId.h>
 #include <sofa/core/MechanicalParams.h>
@@ -39,7 +39,7 @@ namespace simulation
 namespace common
 {
 
-class SOFA_SOFASIMULATION_API MechanicalOperations
+class SOFA_SOFASIMULATIONCORE_API MechanicalOperations
 {
 public:
     core::MechanicalParams mparams;

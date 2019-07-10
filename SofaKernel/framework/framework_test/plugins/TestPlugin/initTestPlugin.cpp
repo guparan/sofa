@@ -22,10 +22,17 @@
 #include <TestPlugin/TestPlugin.h>
 
 extern "C" {
+    SOFA_TESTPLUGIN_API void initExternalModule();
+    SOFA_TESTPLUGIN_API const char* getModuleName();
+    SOFA_TESTPLUGIN_API const char* getModuleVersion();
+    SOFA_TESTPLUGIN_API const char* getModuleLicense();
+    SOFA_TESTPLUGIN_API const char* getModuleDescription();
+    SOFA_TESTPLUGIN_API const char* getModuleComponentList();
+}
 
 static int counter = 0;
 
-SOFA_TESTPLUGIN_API void initExternalModule()
+void initExternalModule()
 {
     static bool first = true;
 
@@ -36,31 +43,29 @@ SOFA_TESTPLUGIN_API void initExternalModule()
     counter++;
 }
 
-SOFA_TESTPLUGIN_API const char* getModuleName()
+const char* getModuleName()
 {
     return "TestPlugin";
 }
 
-SOFA_TESTPLUGIN_API const char* getModuleVersion()
+const char* getModuleVersion()
 {
     return "0.7";
 }
 
-SOFA_TESTPLUGIN_API const char* getModuleLicense()
+const char* getModuleLicense()
 {
     return "LicenseTest";
 }
 
-SOFA_TESTPLUGIN_API const char* getModuleDescription()
+const char* getModuleDescription()
 {
     return "Description of the Test Plugin";
 }
 
-SOFA_TESTPLUGIN_API const char* getModuleComponentList()
+const char* getModuleComponentList()
 {
     return "ComponentA, ComponentB";
 }
-
-} // extern "C"
 
 

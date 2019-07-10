@@ -35,7 +35,7 @@ namespace sofa
 namespace simulation
 {
 
-class SOFA_SOFASIMULATION_API ExportOBJVisitor : public Visitor
+class SOFA_SOFASIMULATIONCORE_API ExportOBJVisitor : public Visitor
 {
 public:
     std::ostream* out;

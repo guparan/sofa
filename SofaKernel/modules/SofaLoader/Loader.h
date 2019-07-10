@@ -22,7 +22,6 @@
 #ifndef SOFA_LOADER_LOADER_H
 #define SOFA_LOADER_LOADER_H
 
-#include <sofa/helper/system/config.h>
 
 #ifdef SOFA_BUILD_LOADER
 #  define SOFA_SOFALOADER_API SOFA_EXPORT_DYNAMIC_LIBRARY

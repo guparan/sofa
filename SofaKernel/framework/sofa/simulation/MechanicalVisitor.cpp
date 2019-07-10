@@ -1617,16 +1617,16 @@ std::string MechanicalWriteLMConstraint::getInfos() const
 
 
 
-template class SOFA_SOFASIMULATION_API MechanicalVAvailVisitor<V_COORD>;
-template class SOFA_SOFASIMULATION_API MechanicalVAvailVisitor<V_DERIV>;
-template class SOFA_SOFASIMULATION_API MechanicalVAllocVisitor<V_COORD>;
-template class SOFA_SOFASIMULATION_API MechanicalVAllocVisitor<V_DERIV>;
-template class SOFA_SOFASIMULATION_API MechanicalVReallocVisitor<V_COORD>;
-template class SOFA_SOFASIMULATION_API MechanicalVReallocVisitor<V_DERIV>;
-template class SOFA_SOFASIMULATION_API MechanicalVFreeVisitor<V_COORD>;
-template class SOFA_SOFASIMULATION_API MechanicalVFreeVisitor<V_DERIV>;
-template class SOFA_SOFASIMULATION_API MechanicalVInitVisitor<V_COORD>;
-template class SOFA_SOFASIMULATION_API MechanicalVInitVisitor<V_DERIV>;
+template class SOFA_SOFASIMULATIONCORE_API MechanicalVAvailVisitor<V_COORD>;
+template class SOFA_SOFASIMULATIONCORE_API MechanicalVAvailVisitor<V_DERIV>;
+template class SOFA_SOFASIMULATIONCORE_API MechanicalVAllocVisitor<V_COORD>;
+template class SOFA_SOFASIMULATIONCORE_API MechanicalVAllocVisitor<V_DERIV>;
+template class SOFA_SOFASIMULATIONCORE_API MechanicalVReallocVisitor<V_COORD>;
+template class SOFA_SOFASIMULATIONCORE_API MechanicalVReallocVisitor<V_DERIV>;
+template class SOFA_SOFASIMULATIONCORE_API MechanicalVFreeVisitor<V_COORD>;
+template class SOFA_SOFASIMULATIONCORE_API MechanicalVFreeVisitor<V_DERIV>;
+template class SOFA_SOFASIMULATIONCORE_API MechanicalVInitVisitor<V_COORD>;
+template class SOFA_SOFASIMULATIONCORE_API MechanicalVInitVisitor<V_DERIV>;
 
 
 } // namespace simulation
