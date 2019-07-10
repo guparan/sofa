@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(SofaSimpleFem)
 
+find_package(SofaBase)
+
 set(HEADER_FILES
     HexahedronFEMForceField.h
     HexahedronFEMForceField.inl

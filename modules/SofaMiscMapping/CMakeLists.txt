@@ -36,8 +36,8 @@ list(APPEND HEADER_FILES
     SquareMapping.inl
     SubsetMultiMapping.h
     SubsetMultiMapping.inl
-    TubularMapping.h
-    TubularMapping.inl
+#    TubularMapping.h
+#    TubularMapping.inl
     VoidMapping.h
     )
 list(APPEND SOURCE_FILES
@@ -53,7 +53,7 @@ list(APPEND SOURCE_FILES
     SquareDistanceMapping.cpp
     SquareMapping.cpp
     SubsetMultiMapping.cpp
-    TubularMapping.cpp
+#    TubularMapping.cpp
     VoidMapping.cpp
     )
 

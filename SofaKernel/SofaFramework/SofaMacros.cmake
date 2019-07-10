@@ -480,15 +480,24 @@ macro(sofa_install_targets package_name the_targets include_install_dir)
     foreach(target ${the_targets})
         string(TOUPPER ${target} target_upper)
 
-        get_target_property(has_config_h ${target} SOURCES)
-        list(FILTER has_config_h INCLUDE REGEX "^.*\/config.h$")
-        list(FILTER has_config_h EXCLUDE REGEX "^system\/config.h$") # exception for sofa/helper/system/config.h
-        if(NOT has_config_h AND EXISTS ${SOFA_CONFIG_TEMPLATE})
-            set(CONFIG_PACKAGE_NAME ${target}) # used by config.h.in
-            set(CONFIG_PACKAGE_NAME_UPPER ${target_upper}) # used by config.h.in
-            configure_file(${SOFA_CONFIG_TEMPLATE} "${CMAKE_BINARY_DIR}/include/${include_install_dir}/config.h")
-#            message("${target}: configure_file(${SOFA_CONFIG_TEMPLATE} ${CMAKE_BINARY_DIR}/include/${include_install_dir}/config.h)")
-            install(FILES "${CMAKE_BINARY_DIR}/include/${package_name}/${the_targets}/config.h" DESTINATION "include/${include_install_dir}")
+        if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/config.h")
+            install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/config.h" DESTINATION "include/${include_install_dir}")
+        elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/config.h.in")
+            message("${target} has config.h.in")
+            configure_file("${CMAKE_CURRENT_SOURCE_DIR}/config.h.in" "${CMAKE_BINARY_DIR}/include/${include_install_dir}/config.h")
+            install(FILES "${CMAKE_BINARY_DIR}/include/${package_name}/${target}/config.h" DESTINATION "include/${include_install_dir}")
+        elseif(EXISTS ${SOFA_CONFIG_TEMPLATE}) # use default config.h
+    #        get_target_property(has_config_h ${target} SOURCES)
+    #        list(FILTER has_config_h INCLUDE REGEX "config\\.h$")
+    #        list(FILTER has_config_h INCLUDE REGEX "config\\.h\\.in$")
+    #        list(FILTER has_config_h EXCLUDE REGEX "^system\\/config.h$") # ignore sofa/helper/system/config.h
+    #        if(NOT has_config_h AND EXISTS ${SOFA_CONFIG_TEMPLATE})
+                set(CONFIG_PACKAGE_NAME ${target}) # used by SOFA_CONFIG_TEMPLATE
+                set(CONFIG_PACKAGE_NAME_UPPER ${target_upper}) # used by SOFA_CONFIG_TEMPLATE
+                configure_file(${SOFA_CONFIG_TEMPLATE} "${CMAKE_BINARY_DIR}/include/${include_install_dir}/config.h")
+    #            message("${target}: configure_file(${SOFA_CONFIG_TEMPLATE} ${CMAKE_BINARY_DIR}/include/${include_install_dir}/config.h)")
+                install(FILES "${CMAKE_BINARY_DIR}/include/${package_name}/${target}/config.h" DESTINATION "include/${include_install_dir}")
+    #        endif()
         endif()
 
         target_compile_definitions(${target} PRIVATE "-DSOFA_BUILD_${target_upper}")

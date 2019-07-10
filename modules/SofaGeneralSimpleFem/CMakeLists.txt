@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(SofaGeneralSimpleFem)
 
+find_package(SofaCommon)
+
 set(HEADER_FILES
     initGeneralSimpleFEM.h
     )
