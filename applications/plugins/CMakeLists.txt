@@ -6,7 +6,7 @@ sofa_add_plugin(CImgPlugin CImgPlugin ON) # ON by default and first as it is use
 sofa_add_plugin(SofaEulerianFluid SofaEulerianFluid)
 sofa_add_plugin(SofaSphFluid SofaSphFluid)
 sofa_add_plugin(SofaMiscCollision SofaMiscCollision ON) # Contains DefaultCollisionGroupManager
-sofa_add_plugin(SofaDistanceGrid SofaDistanceGrid)
+sofa_add_plugin(SofaDistanceGrid SofaDistanceGrid) # Depends on SofaMiscCollision
 sofa_add_plugin(SofaImplicitField SofaImplicitField)
 sofa_add_plugin(SofaVolumetricData SofaVolumetricData) # Depends on SofaDistanceGrid and SofaImplicitField
 sofa_add_plugin(MultiThreading MultiThreading)

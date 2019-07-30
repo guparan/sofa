@@ -29,7 +29,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}"
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "_d")
 
 if(Metis_FOUND)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSOFA_HAVE_METIS")
+    target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSCENECREATOR_HAVE_METIS")
 endif()
 
 ## Install rules for the library; CMake package configurations files

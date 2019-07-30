@@ -57,21 +57,24 @@ endif()
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaBaseLinearSolver SofaGeneralLinearSolver SofaImplicitOdeSolver SofaSimpleFem)
+if(Metis_FOUND)
+    target_link_libraries(${PROJECT_NAME} PRIVATE metis)
+    # Forwarding include dirs of privately-linked external library
+    get_target_property(extlib_include_dirs metis INCLUDE_DIRECTORIES)
+    target_include_directories(${PROJECT_NAME} PUBLIC ${extlib_include_dirs})
+endif()
+if(CSparse_FOUND)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSOFASPARSESOLVER_HAVE_CSPARSE")
+    target_link_libraries(${PROJECT_NAME} PRIVATE csparse)
+    # Forwarding include dirs of privately-linked external library
+    get_target_property(extlib_include_dirs csparse INCLUDE_DIRECTORIES)
+    target_include_directories(${PROJECT_NAME} PUBLIC ${extlib_include_dirs})
+endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSOFA_BUILD_SOFASPARSESOLVER")
 target_compile_definitions(${PROJECT_NAME} PUBLIC "-DSOFA_HAVE_SOFASPARSESOLVER")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>")
-
-if(Metis_FOUND)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSOFA_HAVE_METIS")
-    target_link_libraries(${PROJECT_NAME} PUBLIC metis)
-endif()
-
-if(CSparse_FOUND)
-    target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSOFA_HAVE_CSPARSE")
-    target_link_libraries(${PROJECT_NAME} PUBLIC csparse)
-endif()
 
 sofa_generate_package(NAME SofaSparseSolver VERSION ${PROJECT_VERSION} TARGETS SofaSparseSolver
     INCLUDE_SOURCE_DIR "src/SofaSparseSolver"

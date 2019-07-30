@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(runSofa)
 
+find_package(Boost COMPONENTS program_options)
+
 set(RESOURCE_FILES
     resources/docs/runsofa.html
     )
@@ -37,9 +39,10 @@ endif()
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC "CONFIG_PLUGIN_FILENAME=${_configPluginFileName}")
 target_compile_definitions(${PROJECT_NAME} PUBLIC "DEFAULT_CONFIG_PLUGIN_FILENAME=${_defaultConfigPluginFileName}")
-target_link_libraries(${PROJECT_NAME} SofaComponentAdvanced SofaComponentMisc)
-target_link_libraries(${PROJECT_NAME} SofaSimulationGraph)
-target_link_libraries(${PROJECT_NAME} SofaGuiMain)
+target_link_libraries(${PROJECT_NAME} PUBLIC SofaComponentAdvanced SofaComponentMisc)
+target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationGraph)
+target_link_libraries(${PROJECT_NAME} PUBLIC SofaGuiMain)
+target_link_libraries(${PROJECT_NAME} PRIVATE Boost::program_options)
 
 if(SOFA_BUILD_TESTS)
     find_package(SofaTest QUIET)

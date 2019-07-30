@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(SofaGuiQt)
 
+find_package(Boost COMPONENTS program_options)
+
 set(MOC_HEADER_FILES
     AddObject.h
     DataFilenameWidget.h
@@ -148,7 +150,7 @@ if(SOFAGUI_QGLVIEWER)
     list(APPEND SOURCE_FILES viewer/qgl/QtGLViewer.cpp)
 endif()
 
-# QChart
+# QtCharts
 find_package(Qt5 COMPONENTS Charts QUIET)
 if (Qt5Charts_FOUND)
     list(APPEND MOC_HEADER_FILES SofaWindowProfiler.h)
@@ -162,11 +164,7 @@ else()
     message("-- SofaGuiQt: QtCharts not found, SofaWindowProfiler will not be built.")
 endif()
 
-
 set(QT_USE_IMPORTED_TARGETS 1)
-
-find_package(FFMPEGexec QUIET)
-
 find_package(Qt5 COMPONENTS Core QUIET)
 
 if(Qt5Core_FOUND)
@@ -254,11 +252,18 @@ endif()
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaGuiCommon SofaBaseVisual SofaLoader SofaMiscForceField)
 target_link_libraries(${PROJECT_NAME} PUBLIC ${EXT_QT_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PRIVATE Boost::program_options)
 if(SOFAGUI_ENABLE_QWT)
-    target_link_libraries(${PROJECT_NAME} PUBLIC qwt)
+    target_link_libraries(${PROJECT_NAME} PRIVATE qwt)
 endif()
 if(SOFAGUI_QGLVIEWER)
-    target_link_libraries(${PROJECT_NAME} PUBLIC QGLViewer)
+    target_link_libraries(${PROJECT_NAME} PRIVATE QGLViewer)
+endif()
+if(NOT SOFA_NO_OPENGL)
+    find_package(OpenGL)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_LIBRARIES})
+    find_package(GLEW)
+    target_link_libraries(${PROJECT_NAME} PRIVATE GLEW::GLEW)
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_SOFAGUIQT")
