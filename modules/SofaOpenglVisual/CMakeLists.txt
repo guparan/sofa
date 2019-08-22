@@ -80,6 +80,12 @@ set(EXTRA_FILES
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${EXTRA_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaBaseVisual SofaSimulationCommon)
+if(NOT SOFA_NO_OPENGL)
+    find_package(OpenGL)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_LIBRARIES})
+    find_package(GLEW)
+    target_link_libraries(${PROJECT_NAME} PRIVATE GLEW::GLEW)
+endif()
 target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSOFA_BUILD_SOFAOPENGLVISUAL")
 target_compile_definitions(${PROJECT_NAME} PUBLIC "-DSOFA_HAVE_SOFAOPENGLVISUAL")
 target_include_directories(${PROJECT_NAME} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>")

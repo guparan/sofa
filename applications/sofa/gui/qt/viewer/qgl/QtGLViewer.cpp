@@ -80,16 +80,19 @@ QGLFormat QtGLViewer::setupGLFormat(const unsigned int nbMSAASamples)
 
     if(nbMSAASamples > 1)
     {
+        std::cout <<"QGLViewer: Set multisampling anti-aliasing (MSSA) with " << nbMSAASamples << " samples." << std::endl;
         f.setSampleBuffers(true);
         f.setSamples(nbMSAASamples);
     }
 
     if(!SOFA_GUI_VSYNC)
     {
-        QSurfaceFormat format;
-        format.setSwapInterval(0);
-        QSurfaceFormat::setDefaultFormat(format);
+        f.setSwapInterval(0); // disable vertical refresh sync
     }
+
+    //f.setVersion(3,2);
+    f.setProfile(QGLFormat::OpenGLContextProfile::CompatibilityProfile);
+    f.setDoubleBuffer(true);
 
     return f;
 }

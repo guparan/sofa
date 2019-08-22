@@ -14,14 +14,10 @@ endif()
 
 include(SofaMacros)
 
-find_package(TinyXML REQUIRED)
-
 set(SOFA_HAVE_ZLIB "@SOFA_HAVE_ZLIB@")
 set(SOFA_HAVE_GLEW "@SOFA_HAVE_GLEW@")
 set(SOFA_HAVE_BOOST "@SOFA_HAVE_BOOST@")
 set(SOFA_HAVE_GTEST "@SOFA_HAVE_GTEST@")
-
-set(SOFA_BUILD_METIS "@SOFA_BUILD_METIS@")
 
 set(SOFA_NO_OPENGL "@SOFA_NO_OPENGL@")
 
@@ -31,19 +27,20 @@ set(SOFA_WITH_DEVTOOLS "@SOFA_WITH_DEVTOOLS@")
 set(SOFA_WITH_THREADING "@SOFA_WITH_THREADING@")
 set(SOFA_WITH_DEPRECATED_COMPONENTS "@SOFA_WITH_DEPRECATED_COMPONENTS@")
 
-if(SOFA_HAVE_GTEST)
-    find_package(GTest CONFIG REQUIRED)
+# Find dependency headers
+if(NOT WIN32)
+    # Windows binaries already contain these headers in WinDepPack (publicly exposed by SofaHelper)
+    if(SOFA_HAVE_ZLIB)
+        find_package(ZLIB QUIET REQUIRED)
+    endif()
+    if(NOT SOFA_NO_OPENGL)
+        find_package(OpenGL QUIET REQUIRED)
+    endif()
+    if(SOFA_HAVE_GLEW)
+        find_package(GLEW QUIET REQUIRED)
+    endif()
 endif()
-
-if(SOFA_HAVE_ZLIB)
-    find_package(ZLIB REQUIRED)
-endif()
-
-if(SOFA_HAVE_GLEW)
-    find_package(GLEW REQUIRED)
-endif()
-
-if(SOFA_HAVE_BOOST)
+if(SOFA_HAVE_BOOST) # Boost headers are not provided by SOFA
     find_package(Boost QUIET REQUIRED system filesystem program_options OPTIONAL_COMPONENTS date_time thread)
 endif()
 

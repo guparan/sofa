@@ -24,7 +24,7 @@
 
 #include <sofa/config.h>
 
-#ifdef SOFA_HAVE_SOFADISTANCEGRID
+#ifdef SOFA_BUILD_SOFADISTANCEGRID
 #  define SOFA_TARGET SofaDistanceGrid
 #  define SOFA_SOFADISTANCEGRID_API SOFA_EXPORT_DYNAMIC_LIBRARY
 #else

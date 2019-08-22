@@ -1,0 +1,4 @@
+
+--- NEW SESSION: 31/07/2019 09:47:59 ---
+/Snake/linear_solver.threshold = -0.72
+/Snake/cg_odesolver.vdamping = 0.66

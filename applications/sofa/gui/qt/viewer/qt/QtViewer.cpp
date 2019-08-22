@@ -106,12 +106,13 @@ QSurfaceFormat QtViewer::setupGLFormat(const unsigned int nbMSAASamples)
         f.setSwapInterval(0); // disable vertical refresh sync
     }
 
-    int vmajor = 3, vminor = 2;
-    f.setVersion(vmajor,vminor);
+    //int vmajor = 3, vminor = 2;
+    //f.setVersion(vmajor,vminor);
     f.setProfile(QSurfaceFormat::CompatibilityProfile);
 
     f.setSwapBehavior(QSurfaceFormat::DoubleBuffer);
 
+    std::cout << "QtViewer: version = " << f.majorVersion() << "." << f.minorVersion() << std::endl;
     return f;
 }
 #else

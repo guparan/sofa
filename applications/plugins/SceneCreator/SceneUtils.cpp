@@ -41,11 +41,11 @@ using sofa::helper::system::DataRepository ;
 #include <sofa/core/ObjectFactory.h>
 using sofa::core::ObjectFactory ;
 
-#ifdef SOFA_HAVE_METIS
+#ifdef SCENECREATOR_HAVE_METIS
 #define ARE_METIS_FEATURE_ENABLED true
 #else
 #define ARE_METIS_FEATURE_ENABLED false
-#endif //
+#endif // SCENECREATOR_HAVE_METIS
 
 namespace sofa
 {

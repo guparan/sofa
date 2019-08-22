@@ -42,18 +42,26 @@ set(EXTRA_FILES
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${EXTRA_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaMeshCollision SofaMiscCollision ${SOFAADVANCED_DEPENDENCY_LINK})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaUserInteraction)
+if(NOT SOFA_NO_OPENGL)
+    # Needed by DistanceGridCollisionModel
+    find_package(OpenGL)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_LIBRARIES})
+endif()
 
-set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_HAVE_SOFADISTANCEGRID")
+target_compile_definitions(${PROJECT_NAME} PRIVATE "-DSOFA_BUILD_SOFADISTANCEGRID")
+target_compile_definitions(${PROJECT_NAME} PUBLIC "-DSOFA_HAVE_SOFADISTANCEGRID")
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER "${HEADER_FILES}")
 
 find_package(MiniFlowVR QUIET)
 if(MiniFlowVR_FOUND)
-    set(SOFADISTANCEGRID_WITH_MINIFLOWVR TRUE)
-    add_definitions("-DSOFA_HAVE_MINIFLOWVR")
-    target_link_libraries(${PROJECT_NAME} PUBLIC miniFlowVR)
-    message(STATUS "SofaDistanceGrid: MiniFlowVR enabled.")
+    set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFADISTANCEGRID_HAVE_MINIFLOWVR")
+    target_link_libraries(${PROJECT_NAME} PRIVATE miniFlowVR)
+    # Forwarding include dirs of privately-linked external library
+    get_target_property(extlib_include_dirs miniFlowVR INCLUDE_DIRECTORIES)
+    target_include_directories(${PROJECT_NAME} PUBLIC ${extlib_include_dirs})
+    message(STATUS "SofaDistanceGrid: MiniFlowVR found.")
 else()
-    message(STATUS "SofaDistanceGrid: MiniFlowVR disabled. therefore some features will not be compiled.")
+    message(STATUS "SofaDistanceGrid: MiniFlowVR not found, some features will not be compiled.")
 endif()
 
 

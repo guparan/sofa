@@ -17,7 +17,7 @@ set(README_FILES PluginSensableEmulation.txt)
 find_package(SofaHaptics REQUIRED)
 find_package(SofaOpenglVisual REQUIRED)
 find_package(Boost QUIET COMPONENTS thread REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS})
+include_directories(${Boost_INCLUDE_DIR})
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${README_FILES})
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-DSOFA_BUILD_SENSABLEEMULATIONPLUGIN")

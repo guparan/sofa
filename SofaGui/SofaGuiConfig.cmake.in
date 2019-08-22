@@ -14,15 +14,14 @@ set(SOFA_GUI_QGLVIEWER @SOFA_GUI_QGLVIEWER@)
 set(SOFA_GUI_NATIVE_MENU @SOFA_GUI_NATIVE_MENU@)
 set(SOFA_QT5 @SOFA_QT5@)
 
-if(SOFA_HAVE_QT)
-    set(QT_USE_IMPORTED_TARGETS 1)
-    if(SOFA_QT5)
-        find_package(Qt5 QUIET REQUIRED COMPONENTS Core Gui OpenGL Xml)
-    endif()
+set(SOFAGUIQT_HAS_QTCHARTS @Qt5Charts_FOUND@)
 
-    if (SOFA_GUI_QGLVIEWER)
-        find_package(QGLViewer REQUIRED)
-    endif()
+# Find dependency headers
+if(SOFA_HAVE_QT) # Qt headers are not provided by SOFA
+    find_package(Qt5 QUIET REQUIRED Core Gui OpenGL)
+endif()
+if(SOFAGUIQT_HAS_QTCHARTS)
+    find_package(Qt5 QUIET REQUIRED Charts)
 endif()
 
 foreach(target @SOFAGUI_TARGETS@)

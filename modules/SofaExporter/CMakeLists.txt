@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.1)
 project(SofaExporter VERSION 1.0 LANGUAGES CXX)
 
 find_package(SofaSimulation REQUIRED)
+find_package(ZLIB REQUIRED)
 
 set(HEADER_FILES
     src/SofaExporter/config.h
@@ -58,6 +59,7 @@ endif()
 
 add_library(${PROJECT_NAME} SHARED ${HEADER_FILES} ${SOURCE_FILES} ${EXTRA_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC SofaSimulationTree)
+target_link_libraries(${PROJECT_NAME} PRIVATE ZLIB::ZLIB)
 if(SofaPython_FOUND)
 target_link_libraries(${PROJECT_NAME} PRIVATE SofaPython)
 endif()

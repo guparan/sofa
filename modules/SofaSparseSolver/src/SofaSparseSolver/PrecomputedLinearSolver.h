@@ -99,7 +99,7 @@ public:
     void invert(TMatrix& M) override;
     void setSystemMBKMatrix(const core::MechanicalParams* mparams) override;
     void loadMatrix(TMatrix& M);
-#ifdef SOFA_HAVE_CSPARSE
+#ifdef SOFASPARSESOLVER_HAVE_CSPARSE
     void loadMatrixWithCSparse(TMatrix& M);
 #endif
     bool addJMInvJt(defaulttype::BaseMatrix* result, defaulttype::BaseMatrix* J, double fact) override;
