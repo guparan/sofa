@@ -161,6 +161,108 @@ macro(sofa_add_application directory app_name)
 endmacro()
 
 
+# sofa_option
+# Wrapper of option() function to add inheritance between options.
+# CHILD_OF <parent_option> : set parent_option as parent. If parent_option is defined and OFF, this option will be hidden.
+function(sofa_option)
+    set(oneValueArgs CHILD_OF)
+    cmake_parse_arguments("ARG" "${optionArgs}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
+    
+    # Clean parameters
+    set(params ${ARGN})
+    list(FIND params "CHILD_OF" child_of_index)
+    if(child_of_index GREATER -1)
+        list(REMOVE_AT params ${child_of_index}) # remove "CHILD_OF"
+        math(EXPR VAR "${child_of_index}+1")
+        list(REMOVE_AT params ${child_of_index}) # remove value of "CHILD_OF"
+    endif()
+    
+    # Reset hidden options
+    list(GET params 0 optionName)
+    if(DEFINED ${optionName})
+        get_property(optionHelpString CACHE "${optionName}" PROPERTY HELPSTRING)
+        set(${optionName} ${${optionName}} CACHE BOOL ${optionHelpString} FORCE)
+    else()
+        option(${params})
+    endif()
+    
+    # If a parent string was given, add this to parent children
+    if(ARG_CHILD_OF)
+        set(parentOption ${ARG_CHILD_OF})
+        if(${parentOption}_child_options)
+            list(APPEND ${parentOption}_child_options ${optionName})
+        else()
+            set(${parentOption}_child_options ${optionName})
+        endif()
+        list(REMOVE_DUPLICATES ${parentOption}_child_options)
+        set(${parentOption}_child_options ${${parentOption}_child_options} CACHE INTERNAL "")
+    else()
+        # No CHILD_OF means that this option may be a parent
+        set(parentOption ${optionName})
+    endif()
+    
+    # If parent option exists but is OFF, hide its children
+    if(DEFINED ${parentOption} AND NOT ${parentOption})
+        hide_child_options(${parentOption})
+    endif()
+endfunction()
+
+# sofa_cmake_dependent_option
+# Wrapper of cmake_dependent_option() function to add inheritance between dependent options.
+# CHILD_OF <parent_option> : set parent_option as parent. If parent_option is defined and OFF, this option will be hidden.
+function(sofa_cmake_dependent_option)
+    set(oneValueArgs CHILD_OF)
+    cmake_parse_arguments("ARG" "${optionArgs}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
+    
+    # Clean parameters
+    set(params ${ARGN})
+    list(FIND params "CHILD_OF" child_of_index)
+    if(child_of_index GREATER -1)
+        list(REMOVE_AT params ${child_of_index}) # remove "CHILD_OF"
+        math(EXPR VAR "${child_of_index}+1")
+        list(REMOVE_AT params ${child_of_index}) # remove value of "CHILD_OF"
+    endif()
+    
+    # Reset hidden options
+    list(GET params 0 optionName)
+    if(DEFINED ${optionName})
+        get_property(optionHelpString CACHE "${optionName}" PROPERTY HELPSTRING)
+        set(${optionName} ${${optionName}} CACHE BOOL ${optionHelpString} FORCE)
+    else()
+        cmake_dependent_option(${params})
+    endif()
+    
+    # If a parent string was given, add this to parent children
+    if(ARG_CHILD_OF)
+        set(parentOption ${ARG_CHILD_OF})
+        if(${parentOption}_child_options)
+            list(APPEND ${parentOption}_child_options ${optionName})
+        else()
+            set(${parentOption}_child_options ${optionName})
+        endif()
+        list(REMOVE_DUPLICATES ${parentOption}_child_options)
+        set(${parentOption}_child_options ${${parentOption}_child_options} CACHE INTERNAL "")
+    else()
+        # No CHILD_OF means that this option may be a parent
+        set(parentOption ${optionName})
+    endif()
+    
+    # If parent option exists but is OFF, hide its children
+    if(DEFINED ${parentOption} AND NOT ${parentOption})
+        hide_child_options(${parentOption})
+    endif()
+endfunction()
+
+function(hide_child_options parentOption)
+    foreach(child_option ${${parentOption}_child_options})
+        message("Hide ${child_option}")
+        get_property(optionHelpString CACHE "${child_option}" PROPERTY HELPSTRING)
+        set(${child_option} ${${child_option}} CACHE INTERNAL ${optionHelpString})
+        hide_child_options(${child_option})
+    endforeach()
+endfunction()
+
+
 ### External projects management
 # Thanks to http://crascit.com/2015/07/25/cmake-gtest/
 #
@@ -986,6 +1088,34 @@ function(debug_print_target_properties tgt)
         if (propval)
             get_target_property(propval ${tgt} ${prop})
             message ("${tgt} ${prop} = ${propval}")
+        endif()
+    endforeach(prop)
+endfunction()
+
+
+function(debug_print_variable_properties var)
+    execute_process(COMMAND cmake --help-property-list OUTPUT_VARIABLE CMAKE_PROPERTY_LIST)
+
+    # Convert command output into a CMake list
+    STRING(REGEX REPLACE ";" "\\\\;" CMAKE_PROPERTY_LIST "${CMAKE_PROPERTY_LIST}")
+    STRING(REGEX REPLACE "\n" ";" CMAKE_PROPERTY_LIST "${CMAKE_PROPERTY_LIST}")
+
+    if(NOT DEFINED ${var})
+      message("There is no variable named '${var}'")
+      return()
+    endif()
+
+    foreach(prop ${CMAKE_PROPERTY_LIST})
+        string(REPLACE "<CONFIG>" "${CMAKE_BUILD_TYPE}" prop ${prop})
+        # Fix https://stackoverflow.com/questions/32197663/how-can-i-remove-the-the-location-property-may-not-be-read-from-target-error-i
+        if(prop STREQUAL "LOCATION" OR prop MATCHES "^LOCATION_" OR prop MATCHES "_LOCATION$")
+            continue()
+        endif()
+        # message ("Checking ${prop}")
+        get_property(propval CACHE ${var} PROPERTY ${prop} SET)
+        if (propval)
+            get_property(propval CACHE "${var}" PROPERTY ${prop})
+            message ("${var} ${prop} = ${propval}")
         endif()
     endforeach(prop)
 endfunction()

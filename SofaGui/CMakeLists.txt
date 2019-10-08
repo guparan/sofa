@@ -26,7 +26,7 @@ add_subdirectory(../applications/sofa/gui/SofaGuiCommon ${CMAKE_CURRENT_BINARY_D
 list(APPEND SOFAGUI_TARGETS SofaGuiCommon)
 
 ## SofaGuiQt
-option(SOFAGUI_QT "Compile the Qt GUI" ON)
+sofa_option(SOFAGUI_QT "Compile the Qt GUI" ON)
 if(SOFAGUI_QT)
     list(APPEND SOFAGUI_TARGETS SofaGuiQt)
     add_subdirectory(../applications/sofa/gui/qt ${CMAKE_CURRENT_BINARY_DIR}/SofaGuiQt)

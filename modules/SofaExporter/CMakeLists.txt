@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.6)
 project(SofaExporter VERSION 1.0 LANGUAGES CXX)
 
 find_package(SofaSimulation REQUIRED)
@@ -82,7 +82,7 @@ sofa_generate_package(
 
 # Tests
 # If SOFA_BUILD_TESTS exists and is OFF, then these tests will be auto-disabled
-cmake_dependent_option(SOFAEXPORTER_BUILD_TESTS "Compile the automatic tests" ON "SOFA_BUILD_TESTS OR NOT DEFINED SOFA_BUILD_TESTS" OFF)
+sofa_cmake_dependent_option(SOFAEXPORTER_BUILD_TESTS "Compile the automatic tests" ON "SOFA_BUILD_TESTS OR NOT DEFINED SOFA_BUILD_TESTS" OFF CHILD_OF MODULE_SOFAEXPORTER)
 if(SOFAEXPORTER_BUILD_TESTS)
     enable_testing()
     add_subdirectory(SofaExporter_test)

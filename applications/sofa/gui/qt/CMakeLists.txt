@@ -20,11 +20,11 @@ endif()
 if(NOT SOFA_NO_OPENGL)
     # QtViewer
     # TODO: rename SOFAGUI_QTVIEWER into SOFAGUIQT_ENABLE_QTVIEWER
-    option(SOFAGUI_QTVIEWER "Compile the QtViewer for the Qt GUI" ON)
+    sofa_option(SOFAGUI_QTVIEWER "Compile the QtViewer for the Qt GUI" ON CHILD_OF SOFAGUI_QT)
 
     # QGLViewer
     # TODO: rename SOFAGUI_QGLVIEWER into SOFAGUIQT_ENABLE_QGLVIEWER
-    option(SOFAGUI_QGLVIEWER "Compile the QGLViewer for the Qt GUI" ON)
+    sofa_option(SOFAGUI_QGLVIEWER "Compile the QGLViewer for the Qt GUI" ON CHILD_OF SOFAGUI_QT)
     if(SOFAGUI_QGLVIEWER)
         find_package(QGLViewer QUIET)
         if(NOT QGLViewer_FOUND)
@@ -40,7 +40,7 @@ sofa_set_01(SOFAGUIQT_HAVE_QGLVIEWER VALUE ${SOFAGUI_QGLVIEWER} BOTH_SCOPES)
 
 # QWT
 # TODO: rename SOFAGUI_ENABLE_QWT into SOFAGUIQT_ENABLE_QWT
-option(SOFAGUI_ENABLE_QWT "Enable QWT for Qt GUIs")
+sofa_option(SOFAGUI_ENABLE_QWT "Enable QWT for Qt GUIs" CHILD_OF SOFAGUI_QT)
 sofa_set_01(SOFAGUIQT_HAVE_QWT VALUE ${SOFAGUI_ENABLE_QWT} BOTH_SCOPES) # see SofaGuiQt.h.in
 if(SOFAGUI_ENABLE_QWT)
     message("Qwt activated")
@@ -52,7 +52,7 @@ endif()
 
 # VSync
 # TODO: rename SOFAGUI_ENABLE_VSYNC into SOFAGUIQT_ENABLE_VSYNC
-option(SOFAGUI_ENABLE_VSYNC "Enable vertical refresh sync" OFF)
+sofa_option(SOFAGUI_ENABLE_VSYNC "Enable vertical refresh sync" OFF CHILD_OF SOFAGUI_QT)
 sofa_set_01(SOFAGUIQT_ENABLE_VSYNC_ VALUE ${SOFAGUI_ENABLE_VSYNC}) # see SofaGuiQt.h.in
 
 # Qt native menu
@@ -61,7 +61,7 @@ set(DEFAULT_SOFAGUI_ENABLE_NATIVE_MENU ON)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     set(DEFAULT_SOFAGUI_ENABLE_NATIVE_MENU OFF)
 endif()
-option(SOFAGUI_ENABLE_NATIVE_MENU "Enable Qt to use the operating system's native menu for the Qt GUI" ${DEFAULT_SOFAGUI_ENABLE_NATIVE_MENU})
+sofa_option(SOFAGUI_ENABLE_NATIVE_MENU "Enable Qt to use the operating system's native menu for the Qt GUI" ${DEFAULT_SOFAGUI_ENABLE_NATIVE_MENU} CHILD_OF SOFAGUI_QT)
 
 set(MOC_HEADER_FILES
     AddObject.h
