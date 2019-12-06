@@ -33,14 +33,19 @@ jobs:
         run: |
           docker run hello-world
           
+      - name: hello_world_windows
+        container: windows:1809
+        run: |
+          echo Hello World
+          
       - name: hello_world_advanced
         run: |
-          docker run mcr.microsoft.com/windows:1909 cmd.exe /s /c echo Hello World
+          docker run mcr.microsoft.com/windows:1809 cmd.exe /s /c echo Hello World
           
       - name: hello_world_advanced2
         run: |
           docker run --user $(id -u):$(id -g) --network=host -v $(pwd):$(pwd) \
-          mcr.microsoft.com/windows:1909 cmd.exe /s /c echo Hello World
+          mcr.microsoft.com/windows:1809 cmd.exe /s /c echo Hello World
       
       # when running on a self-hosted vm with preinstalled deps this dependency step is not necessary of course...:
       - name: configure
