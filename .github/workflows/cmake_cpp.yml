@@ -3,10 +3,10 @@ name: CMake/C++ CI
 on:
   push:
     branches:
-      - master
+      - testing_actions
   pull_request:
     branches:
-      - master
+      - testing_actions
 
 jobs:
 #  install-dependencies:
@@ -27,7 +27,20 @@ jobs:
     runs-on: windows-latest
     steps:
       # Chechout the project's repo:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v1 
+      
+      - name: hello_world
+        run: |
+          docker run hello-world
+          
+      - name: hello_world_advanced
+        run: |
+          docker run mcr.microsoft.com/windows:1909 cmd.exe /s /c echo Hello World
+          
+      - name: hello_world_advanced2
+        run: |
+          docker run --user $(id -u):$(id -g) --network=host -v $(pwd):$(pwd) \
+          mcr.microsoft.com/windows:1909 cmd.exe /s /c echo Hello World
       
       # when running on a self-hosted vm with preinstalled deps this dependency step is not necessary of course...:
       - name: configure
