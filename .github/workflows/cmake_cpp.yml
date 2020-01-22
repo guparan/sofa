@@ -21,12 +21,13 @@ jobs:
 #            sudo apt install -y libboost-atomic-dev libboost-all-dev
 #            sudo apt install -y python2.7-dev python-numpy python-scipy
 #            sudo apt install -y libpng-dev libjpeg-dev libtiff-dev zlib1g-dev libglew-dev
-  run_in_container:
-    runs-on: windows-latest
-    container:
-      image: windows:1806
-    steps:
-      - run: echo Hello World
+
+#  run_in_container:
+#    runs-on: windows-latest
+#    container:
+#      image: windows:1806
+#    steps:
+#      - run: echo Hello World
 
   build:
 #    needs: [install-dependencies]
@@ -44,6 +45,8 @@ jobs:
         run: |
           docker run mcr.microsoft.com/windows/nanoserver:1809 cmd.exe /s /c dir c:
           docker images
+          dir c:
+          fsutil volume diskfree c:
           
       #- name: hello_world_advanced2
       #  run: |
