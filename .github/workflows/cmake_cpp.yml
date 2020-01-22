@@ -42,12 +42,12 @@ jobs:
 
       - name: hello_world_advanced
         run: |
-          docker run mcr.microsoft.com/windows:1809 cmd.exe /s /c echo Hello World
+          docker run mcr.microsoft.com/windows/nanoserver:1809 cmd.exe /s /c fsutil volume diskfree c:
           
-      - name: hello_world_advanced2
-        run: |
-          docker run --user $(id -u):$(id -g) --network=host -v $(pwd):$(pwd) \
-          mcr.microsoft.com/windows:1809 cmd.exe /s /c echo Hello World
+      #- name: hello_world_advanced2
+      #  run: |
+      #    docker run --user $(id -u):$(id -g) --network=host -v $(pwd):$(pwd) \
+      #    mcr.microsoft.com/windows:1809 cmd.exe /s /c echo Hello World
       
       # when running on a self-hosted vm with preinstalled deps this dependency step is not necessary of course...:
       - name: configure
