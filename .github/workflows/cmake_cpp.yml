@@ -42,7 +42,8 @@ jobs:
 
       - name: hello_world_advanced
         run: |
-          docker run mcr.microsoft.com/windows/nanoserver:1809 cmd.exe /s /c fsutil volume diskfree c:
+          docker run mcr.microsoft.com/windows/nanoserver:1809 cmd.exe /s /c dir c:
+          docker images
           
       #- name: hello_world_advanced2
       #  run: |
