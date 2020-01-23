@@ -41,9 +41,23 @@ jobs:
         run: |
           docker run hello-world
 
-      - name: hello_world_advanced
+      - name: nanoserver
         run: |
           docker run mcr.microsoft.com/windows/nanoserver:1809 cmd.exe /s /c dir c:
+          docker images
+          dir c:
+          fsutil volume diskfree c:
+          
+      - name: servercore
+        run: |
+          docker run mcr.microsoft.com/windows/servercore:1809 cmd.exe /s /c dir c:
+          docker images
+          dir c:
+          fsutil volume diskfree c:
+          
+      - name: windows
+        run: |
+          docker run mcr.microsoft.com/windows:1809 cmd.exe /s /c dir c:
           docker images
           dir c:
           fsutil volume diskfree c:
@@ -54,30 +68,30 @@ jobs:
       #    mcr.microsoft.com/windows:1809 cmd.exe /s /c echo Hello World
       
       # when running on a self-hosted vm with preinstalled deps this dependency step is not necessary of course...:
-      - name: configure
-        run: |
-          mkdir build
-          cd build
-          cmake .. -G Ninja -DSOFA_BUILD_METIS=ON -DPLUGIN_SOFASPARSESOLVER=ON -DPLUGIN_SOFAPYTHON=ON
+      #- name: configure
+      #  run: |
+      #    mkdir build
+      #    cd build
+      #    cmake .. -G Ninja -DSOFA_BUILD_METIS=ON -DPLUGIN_SOFASPARSESOLVER=ON -DPLUGIN_SOFAPYTHON=ON
           
-      - name: build
-        run: |
-          cd build
-          ninja
+      #- name: build
+      #  run: |
+      #    cd build
+      #    ninja
           
-      - name: install
-        run: |
-          cd build
-          ninja install
+      #- name: install
+      #  run: |
+      #    cd build
+      #    ninja install
           
-  run-tests:
-    needs: [build]
-    runs-on: windows-latest
-    steps:
-      - name: run-tests
-        run: |
-          cd build/bin
-          for f in *_test*
-          do
-            ./$f
-          done
+#  run-tests:
+#    needs: [build]
+#    runs-on: windows-latest
+#    steps:
+#      - name: run-tests
+#        run: |
+#          cd build/bin
+#          for f in *_test*
+#          do
+#            ./$f
+#          done
