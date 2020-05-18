@@ -1,6 +1,6 @@
 /******************************************************************************
-*                 SOFA, Simulation Open-Framework Architecture                *
-*                    (c) 2006 INRIA, USTL, UJF, CNRS, MGH                     *
+*       SOFA, Simulation Open-Framework Architecture, development version     *
+*                (c) 2006-2019 INRIA, USTL, UJF, CNRS, MGH                    *
 *                                                                             *
 * This program is free software; you can redistribute it and/or modify it     *
 * under the terms of the GNU Lesser General Public License as published by    *
@@ -19,19 +19,25 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#ifndef SOFAMISCCOLLISION_CONFIG_H
-#define SOFAMISCCOLLISION_CONFIG_H
+#include <SofaGui/initSofaGui.h>
 
-#include <SofaBase/config.h>
 
-#cmakedefine01 SOFAMISCCOLLISION_HAVE_SOFASPHFLUID
-#cmakedefine01 SOFAMISCCOLLISION_HAVE_SOFADISTANCEGRID
+namespace sofa
+{
 
-#ifdef SOFA_BUILD_MISC_COLLISION
-#  define SOFA_TARGET SofaMiscCollision
-#  define SOFA_MISC_COLLISION_API SOFA_EXPORT_DYNAMIC_LIBRARY
-#else
-#  define SOFA_MISC_COLLISION_API SOFA_IMPORT_DYNAMIC_LIBRARY
-#endif
+namespace gui
+{
 
-#endif
+
+void initSofaGui()
+{
+    static bool first = true;
+    if (first)
+    {
+        first = false;
+    }
+}
+
+} // namespace gui
+
+} // namespace sofa

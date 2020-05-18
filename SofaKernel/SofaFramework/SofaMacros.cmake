@@ -109,11 +109,6 @@ macro(sofa_add_generic directory name type)
         if(${option})
             message("Adding ${type_lower} ${name}")
             add_subdirectory(${directory})
-            #Check if the target has been successfully added
-            if(TARGET ${name})
-                set_target_properties(${name} PROPERTIES FOLDER ${type}s) # IDE folder
-                set_target_properties(${name} PROPERTIES DEBUG_POSTFIX "_d")
-            endif()
         endif()
 
         # Add current target in the internal list only if not present already
@@ -201,7 +196,7 @@ function(sofa_add_generic_external directory name type)
     option(${fetch_enabled} "Fetch/update ${name} repository." ${active})
 
     # Setup fetch directory
-    set(fetched_dir "${CMAKE_BINARY_DIR}/external_directories/fetched/${name}" )
+    set(fetched_dir "${CMAKE_CURRENT_BINARY_DIR}/external_directories/fetched/${name}" )
 
     # Fetch
     if(${fetch_enabled})
@@ -314,7 +309,7 @@ macro(sofa_install_pythonscripts)
     endforeach()
 
     ## Python configuration file (build tree)
-    file(WRITE "${CMAKE_BINARY_DIR}/etc/sofa/python.d/${ARG_PLUGIN_NAME}"
+    file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/etc/sofa/python.d/${ARG_PLUGIN_NAME}"
          "${CMAKE_CURRENT_SOURCE_DIR}/${ARG_PYTHONSCRIPTS_SOURCE_DIR}")
     ## Python configuration file (install tree)
      file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/installed-SofaPython-config"
@@ -561,10 +556,12 @@ macro(sofa_install_targets package_name the_targets include_install_dir)
             BUNDLE DESTINATION "../../.." COMPONENT applications
             )
 
-    # non-flat headers install (if no PUBLIC_HEADER and include_install_dir specified)
     foreach(target ${the_targets})
         set(version ${${target}_VERSION})
         string(TOUPPER "${package_name}" package_name_upper)
+
+        # Default target properties
+        set_target_properties(${target} PROPERTIES DEBUG_POSTFIX "_d")
         if(version VERSION_GREATER "0.0")
             set_target_properties(${target} PROPERTIES VERSION "${version}")
         elseif(target MATCHES "^Sofa" AND NOT PLUGIN_${package_name_upper} AND Sofa_VERSION)
@@ -572,70 +569,70 @@ macro(sofa_install_targets package_name the_targets include_install_dir)
             set_target_properties(${target} PROPERTIES VERSION "${Sofa_VERSION}")
         endif()
 
+        # Find, configure and install *.h.in files
         get_target_property(target_sources ${target} SOURCES)
-        #list(FILTER ${target_sources} INCLUDE REGEX ".*\.h\.in$") # CMake >= 3.6
-        foreach(filepath ${target_sources})
-            if("${filepath}" MATCHES "\\.*\\.h\\.in$")
-                get_filename_component(filename ${filepath} NAME_WE)
+        list(FILTER target_sources INCLUDE REGEX ".*\.h\.in$") # keep only *.h.in files
+        foreach(file_to_configure ${target_sources})
+            get_filename_component(filename ${file_to_configure} NAME_WE)
+            get_filename_component(filedir  ${file_to_configure} DIRECTORY)
 
-                set(configure_dir "${CMAKE_BINARY_DIR}/include/${include_install_dir}")
-                if("${package_name}" STREQUAL "${target}")
-                    # target is a plugin
-                    string(REPLACE "${target}/${target}" "${target}" configure_dir "${configure_dir}")
-                else()
-                    # target is an old module
-                    string(REPLACE "include/${package_name}" "include" configure_dir "${configure_dir}")
-                endif()
+            string(REGEX REPLACE "^src/" "" configure_subdir "${filedir}")
+            set(configure_dir "${CMAKE_CURRENT_BINARY_DIR}/include/${configure_subdir}")
+            message("${target}: configure output = ${configure_dir}/${filename}.h")
 
-                configure_file("${filepath}" "${configure_dir}/${filename}.h")
-                install(FILES "${configure_dir}/${filename}.h" DESTINATION "include/${include_install_dir}")
-            endif()
+            configure_file("${file_to_configure}" "${configure_dir}/${filename}.h")
+            install(FILES "${configure_dir}/${filename}.h"
+                    DESTINATION "include/${include_install_dir}"
+                    COMPONENT headers)
         endforeach()
 
+        # Find and install headers
+        # non-flat headers install (if PUBLIC_HEADER is not set and include_install_dir is not empty)
         get_target_property(public_header ${target} PUBLIC_HEADER)
         if("${public_header}" STREQUAL "public_header-NOTFOUND" AND NOT "${include_install_dir}" STREQUAL "")
+            set(include_source_dir "${CMAKE_CURRENT_SOURCE_DIR}")
             set(optional_argv3 "${ARGV3}")
-            if(optional_argv3)
+            if(optional_argv3 AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${optional_argv3}")
                 # ARGV3 is a non-breaking additional argument to handle INCLUDE_SOURCE_DIR (see sofa_generate_package)
                 # TODO: add a real argument "include_source_dir" to this macro
-                set(include_source_dir "${ARGV3}")
+                set(include_source_dir "${CMAKE_CURRENT_SOURCE_DIR}/${optional_argv3}")
             endif()
-            if(NOT include_source_dir)
-                set(include_source_dir "${CMAKE_CURRENT_SOURCE_DIR}")
-            elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${include_source_dir}")
-                # will be true if include_source_dir is empty
-                set(include_source_dir "${CMAKE_CURRENT_SOURCE_DIR}/${include_source_dir}")
-            endif()
-            #message("${target}: ${include_source_dir} -> include/${include_install_dir}")
-            file(GLOB_RECURSE header_files "${include_source_dir}/*.h" "${include_source_dir}/*.inl")
-            foreach(header ${header_files})
-                file(RELATIVE_PATH path_from_package "${include_source_dir}" "${header}")
-                get_filename_component(dir_from_package ${path_from_package} DIRECTORY)
+
+            get_target_property(target_sources ${target} SOURCES)
+            list(FILTER target_sources INCLUDE REGEX ".*(\.h|\.inl)$") # keep only *.h and *.inl files
+            foreach(header ${target_sources})
+                get_filename_component(header_dir ${header} DIRECTORY)
                 install(FILES ${header}
-                        DESTINATION "include/${include_install_dir}/${dir_from_package}"
+                        DESTINATION "include/${include_install_dir}/${header_dir}"
                         COMPONENT headers)
             endforeach()
         endif()
     endforeach()
 
-    ## Default install rules for resources
+    ## Install examples and scenes
     set(example_install_dir "share/sofa/examples/${package_name}")
     set(optional_argv4 "${ARGV4}")
     if(optional_argv4)
-        # ARGV3 is a non-breaking additional argument to handle EXAMPLE_INSTALL_DIR (see sofa_generate_package)
+        # ARGV4 is a non-breaking additional argument to handle EXAMPLE_INSTALL_DIR (see sofa_generate_package)
         # TODO: add a real argument "example_install_dir" to this macro
         set(example_install_dir "${optional_argv4}")
     endif()
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/examples")
-        install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/examples/" DESTINATION "${example_install_dir}" COMPONENT resources)
+        install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/examples/"
+                DESTINATION "${example_install_dir}"
+                COMPONENT resources)
     endif()
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/scenes")
-        install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/scenes/" DESTINATION "${example_install_dir}" COMPONENT resources)
+        install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/scenes/"
+                DESTINATION "${example_install_dir}"
+                COMPONENT resources)
     endif()
 
     # RELOCATABLE optional arg
     set(optional_argv5 "${ARGV5}")
     if(optional_argv5)
+        # ARGV5 is a non-breaking additional argument to handle RELOCATABLE (see sofa_generate_package)
+        # TODO: add a real argument "relocatable" to this macro
         sofa_set_install_relocatable(${package_name} ${optional_argv5})
     endif()
 endmacro()
@@ -713,8 +710,8 @@ endfunction()
 #
 # Create CMake package configuration files
 # - In the build tree:
-#   - ${CMAKE_BINARY_DIR}/cmake/FooConfig.cmake
-#   - ${CMAKE_BINARY_DIR}/cmake/FooConfigVersion.cmake
+#   - ${CMAKE_CURRENT_BINARY_DIR}/cmake/FooConfig.cmake
+#   - ${CMAKE_CURRENT_BINARY_DIR}/cmake/FooConfigVersion.cmake
 # - In the install tree:
 #   - lib/cmake/Foo/FooConfigVersion.cmake
 #   - lib/cmake/Foo/FooConfig.cmake
@@ -737,22 +734,23 @@ endfunction()
 #
 # check_required_components(Foo Qux)
 macro(sofa_write_package_config_files package_name version)
-    ## <package_name>Targets.cmake
+    # <package_name>Targets.cmake
     install(EXPORT ${package_name}Targets DESTINATION "lib/cmake/${package_name}" COMPONENT headers)
 
-    ## <package_name>ConfigVersion.cmake
+    # <package_name>ConfigVersion.cmake
     set(filename ${package_name}ConfigVersion.cmake)
     write_basic_package_version_file(${filename} VERSION ${version} COMPATIBILITY ExactVersion)
-    configure_file("${CMAKE_CURRENT_BINARY_DIR}/${filename}" "${CMAKE_BINARY_DIR}/cmake/${filename}" COPYONLY)
+#    configure_file("${CMAKE_CURRENT_BINARY_DIR}/${filename}" "${CMAKE_BINARY_DIR}/cmake/${filename}" COPYONLY)
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${filename}" DESTINATION "lib/cmake/${package_name}" COMPONENT headers)
 
-    ### <package_name>Config.cmake
+    # <package_name>Config.cmake
     configure_package_config_file(
         ${package_name}Config.cmake.in
-        "${CMAKE_BINARY_DIR}/cmake/${package_name}Config.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/cmake/${package_name}Config.cmake"
         INSTALL_DESTINATION "lib/cmake/${package_name}"
         )
-    install(FILES "${CMAKE_BINARY_DIR}/cmake/${package_name}Config.cmake" DESTINATION "lib/cmake/${package_name}" COMPONENT headers)
+    configure_file("${CMAKE_CURRENT_BINARY_DIR}/cmake/${package_name}Config.cmake" "${CMAKE_BINARY_DIR}/cmake/${package_name}Config.cmake" COPYONLY)
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/cmake/${package_name}Config.cmake" DESTINATION "lib/cmake/${package_name}" COMPONENT headers)
 endmacro()
 
 
