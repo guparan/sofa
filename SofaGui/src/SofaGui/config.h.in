@@ -19,15 +19,23 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
-#ifndef SOFA_VERSION_H
-#define SOFA_VERSION_H
+#ifndef SOFAGUI_CONFIG_H
+#define SOFAGUI_CONFIG_H
 
-#cmakedefine SOFA_VERSION_STR @SOFA_VERSION_STR@
+#include <sofa/config.h>
 
-// We use version numbers based on the date: yy.mm.p (year, month, patch).
-// - SOFA_VERSION / 10000 is the year number
-// - SOFA_VERSION / 100 % 100 is the month number
-// - SOFA_VERSION % 100 is the patch number
-#cmakedefine SOFA_VERSION @SOFA_VERSION@
+#cmakedefine01 SOFAGUI_HAVE_SOFAHEADLESSRECORDER
+
+#cmakedefine01 SOFAGUI_HAVE_SOFAGUIQT
+
+#cmakedefine SOFA_GUI_QT_OPENGL
+
+
+#ifdef SOFA_BUILD_SOFAGUI
+#   define SOFA_TARGET SofaGui
+#	define SOFA_SOFAGUI_API SOFA_EXPORT_DYNAMIC_LIBRARY
+#else
+#	define SOFA_SOFAGUI_API SOFA_IMPORT_DYNAMIC_LIBRARY
+#endif
 
 #endif

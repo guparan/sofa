@@ -22,6 +22,9 @@
 #ifndef SOFA_SIMULATION_GRAPH_GRAPH_H
 #define SOFA_SIMULATION_GRAPH_GRAPH_H
 
-#include <sofa/simulation/config.h>
+// Backward compatibility header
+// Will be removed at v20.12
+
+#include <SofaSimulationGraph/config.h>
 
 #endif
