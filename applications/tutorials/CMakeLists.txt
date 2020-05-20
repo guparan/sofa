@@ -15,5 +15,4 @@ set(SOFATUTORIALS_TARGETS
 
 foreach(TARGET ${SOFATUTORIALS_TARGETS})
     add_subdirectory(${TARGET})
-    set_target_properties(${TARGET} PROPERTIES FOLDER SofaTutorials) # IDE folder
 endforeach()

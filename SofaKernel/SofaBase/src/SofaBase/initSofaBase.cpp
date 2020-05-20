@@ -19,6 +19,8 @@
 *                                                                             *
 * Contact information: contact@sofa-framework.org                             *
 ******************************************************************************/
+#include "initSofaBase.h"
+
 #include <sofa/helper/system/config.h>
 #include <SofaBase/initSofaBase.h>
 #include <SofaBaseTopology/initBaseTopology.h>
