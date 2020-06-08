@@ -511,9 +511,62 @@ macro(sofa_find_package name)
     if(find_package_args)
         list(REMOVE_ITEM find_package_args "BOTH_SCOPES")
     endif()
-    find_package(${name} ${find_package_args})
+    set(find_package_quiet_args ${ARGN})
+    if(find_package_quiet_args)
+        list(REMOVE_ITEM find_package_quiet_args 
+            "BOTH_SCOPES"
+            "QUIET"
+            "REQUIRED"
+            "EXACT"
+            "CONFIG"
+            "NO_MODULE"
+            "MODULE"
+            )
+    endif()
+
     string(TOUPPER ${name} name_upper)
+    string(TOLOWER ${name} name_lower)
     string(TOUPPER ${PROJECT_NAME} project_upper)
+    
+    set(first_component "NO_COMPONENTS_ARG")
+    if(ARG_COMPONENTS)
+        list(GET ARG_COMPONENTS 0 first_component)
+    elseif(ARG_OPTIONAL_COMPONENTS)
+        list(GET ARG_OPTIONAL_COMPONENTS 0 first_component)
+    endif()
+    
+    if("MODULE" IN_LIST find_package_args OR 
+       "NO_MODULE" IN_LIST find_package_args OR 
+       "CONFIG" IN_LIST find_package_args)
+        # Mode set by user
+        message("${PROJECT_NAME}: ${name}: Mode set by user")
+        find_package(${name} ${find_package_args})
+    else()
+        # No mode, use our find order
+        set(${name}_FOUND FALSE)
+        set(${name_upper}_FOUND FALSE)
+        set(${name_lower}_FOUND FALSE)
+        # message("find_package(${name} ${find_package_quiet_args} QUIET CONFIG)")
+        find_package(${name} ${find_package_quiet_args} QUIET CONFIG) # Try in Config mode first
+        if(${name}_FOUND OR ${name_upper}_FOUND OR ${name_lower}_FOUND OR TARGET ${name}::${first_component})
+            message("${PROJECT_NAME}: ${name}: found in CONFIG mode")
+            # message("find_package(${name} ${find_package_args} CONFIG)")
+            find_package(${name} ${find_package_args} CONFIG)
+        else()
+            # message("find_package(${name} ${find_package_quiet_args} QUIET MODULE)")
+            find_package(${name} ${find_package_quiet_args} QUIET MODULE) # Then try in Module mode
+            if(${name}_FOUND OR ${name_upper}_FOUND OR ${name_lower}_FOUND OR TARGET ${name}::${first_component})
+                message("${PROJECT_NAME}: ${name}: found in MODULE mode")
+                # message("find_package(${name} ${find_package_args} MODULE)")
+                find_package(${name} ${find_package_args} MODULE)
+            else()
+                message("${PROJECT_NAME}: ${name}: not found, FALLBACK")
+                # message("find_package(${name}Sofa ${find_package_args})")
+                find_package(${name}Sofa ${find_package_args}) # Fallback: custom mode
+            endif()
+        endif()
+    endif()
+
     set(scopes "") # nothing = current scope only
     if(ARG_BOTH_SCOPES)
         set(scopes "BOTH_SCOPES")
@@ -528,7 +581,7 @@ macro(sofa_find_package name)
             endif()
         endforeach()
     else()
-        if(${name}_FOUND OR ${name_upper}_FOUND)
+        if(${name}_FOUND OR ${name_upper}_FOUND OR ${name_lower}_FOUND)
             sofa_set_01(${project_upper}_HAVE_${name_upper} VALUE TRUE ${scopes})
         else()
             sofa_set_01(${project_upper}_HAVE_${name_upper} VALUE FALSE ${scopes})
