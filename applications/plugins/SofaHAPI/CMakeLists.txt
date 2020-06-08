@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.12)
 project(SofaHAPI)
 
 if(${CMAKE_VERSION} VERSION_GREATER "3.11.4")

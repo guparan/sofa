@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.12)
 project(SofaHelper)
 
 # DEPENDENCIES
@@ -24,8 +24,17 @@ endif()
 if(SOFA_BUILD_TESTS)
     sofa_find_package(GTest CONFIG BOTH_SCOPES)
 endif()
+
+
 # Eigen (header only)
-find_package(Eigen3 REQUIRED)
+cmake_policy(GET CMP0074 CMP0074)
+message("CMP0074 = ${CMP0074}")
+message("MyTestModule_ROOT = ${MyTestModule_ROOT}")
+message("NO_PACKAGE_ROOT_PATH = ${NO_PACKAGE_ROOT_PATH}")
+message("NO_DEFAULT_PATH = ${NO_DEFAULT_PATH}")
+find_package(MyTestModule MODULE REQUIRED)
+
+
 # Json (header only) needed by AdvancedTimer
 sofa_find_package(Json 3.1.2 REQUIRED BOTH_SCOPES)
 

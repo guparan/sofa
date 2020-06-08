@@ -1,5 +1,8 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.12)
 project(SofaAssimp)
+
+cmake_policy(SET CMP0074 NEW)
+cmake_policy(SET CMP0057 NEW)
 
 set(ASSIMP_PLUGIN_MAJOR_VERSION 0)
 set(ASSIMP_PLUGIN_MINOR_VERSION 1)
@@ -22,7 +25,9 @@ set(README_FILES README_AssimpPlugin.txt)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
 ### Dependencies
-find_package(Assimp REQUIRED)
+sofa_find_package(Assimp REQUIRED)
+
+debug_print_target_properties(assimp::assimp)
 
 include_directories( ${ASSIMP_INCLUDE_DIR})
 
