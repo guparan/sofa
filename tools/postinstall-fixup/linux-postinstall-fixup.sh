@@ -13,6 +13,11 @@ else
     usage; exit 1
 fi
 
+# Adapt INSTALL_DIR to IFW install
+if [ -d "$INSTALL_DIR/packages/Runtime/data" ]; then
+    INSTALL_DIR="$INSTALL_DIR/packages/Runtime/data"
+fi
+
 # Keep plugin_list as short as possible
 echo "" > "$INSTALL_DIR/lib/plugin_list.conf"
 disabled_plugins='plugins_ignored_by_default'
@@ -101,12 +106,7 @@ get-lib-deps-assoc() {
         grep -v "$base_dir" | # remove deps already satisfied locally
         cut -c2- | # remove tabulation at beggining of each line
         sed -e 's/ (.*//g' | # keep only "libname => libpath"
-        sort | uniq > "$output.alldeps"
-
-    direct_deps="$(readelf -d $libs | grep NEEDED | sort | uniq | sed -e 's:.*\[\(.*\)\].*:\1:g')"
-    for dep in $direct_deps; do
-        grep "$dep" "$output.alldeps" >> "$output"
-    done
+        sort | uniq > "$output"
 
     # Try to fix "not found" dependencies
     grep "not found" "$output" | while read line; do
@@ -115,7 +115,7 @@ get-lib-deps-assoc() {
         # try with ldd
         for lib in $libs; do
             #echo "RUN CMD: ldd $lib | grep \"$libname\" | head -n 1 | cut -c2- | sed -e 's/ (.*//g' | sed -e 's/.* => //g'"
-            libpath="$( ldd $lib | grep "$libname" | head -n 1 | cut -c2- | sed -e 's/ (.*//g' | sed -e 's/.* => //g' )"
+            libpath="$( ldd $lib | grep "$libname" | sed -e 's/ (.*//g' | sort | head -n 1 | cut -c2- | sed -e 's/.* => //g' )"
             #echo "[ldd] libpath = $libpath"
             if [ -e "$libpath" ]; then
                 echo "      $libname found by ldd at $libpath"
@@ -138,8 +138,6 @@ get-lib-deps-assoc() {
             echo "      $libname was not found"
         fi
     done
-
-    rm -f "$output.alldeps"
 }
 
 
