@@ -118,7 +118,7 @@ get-lib-deps-assoc() {
             libpath="$( ldd $lib | grep "$libname" | sed -e 's/ (.*//g' | sort | head -n 1 | cut -c2- | sed -e 's/.* => //g' )"
             #echo "[ldd] libpath = $libpath"
             if [ -e "$libpath" ]; then
-                echo "      $libname found by ldd at $libpath"
+                echo_debug "      $libname found by ldd at $libpath"
                 sed -i 's:'"$libname"'.* not found.*:'"$libname"' => '"$libpath"':g' "$output"
                 found="true"
                 break
@@ -129,7 +129,7 @@ get-lib-deps-assoc() {
             libpath="$(grep "$libname" "$build_deps_file" | head -n 1 | sed -e 's/.* => //g')"
             #echo "[build_deps_file] libpath = $libpath"
             if [ -e "$libpath" ]; then
-                echo "      $libname found by build_deps_file at $libpath"
+                echo_debug "      $libname found by build_deps_file at $libpath"
                 sed -i 's/$libname.* not found.*/$libname => $libpath/g' "$output"
                 found="true"
             fi
@@ -144,25 +144,24 @@ get-lib-deps-assoc() {
 # Write dependencies to OUTPUT_TMP as "<lib-name> => <lib-path>" (from ldd output)
 echo "  Listing dependencies of:"
 echo "    - SOFA"
-get-lib-deps-assoc "$BUILD_DIR" "deps-build_SOFA.tmp"
-get-lib-deps-assoc "$INSTALL_DIR" "deps_SOFA.tmp" "deps-build_SOFA.tmp"
+get-lib-deps-assoc "$BUILD_DIR" "postinstall_deps_SOFA-build.tmp"
+get-lib-deps-assoc "$INSTALL_DIR" "postinstall_deps_SOFA.tmp" "postinstall_deps_SOFA-build.tmp"
 for plugin in $INSTALL_DIR/plugins/*; do
     if [ -d "$plugin" ]; then
         plugin_name="$(basename "$plugin")"
         echo "    - $plugin_name"
-        get-lib-deps-assoc "$plugin" "deps_${plugin_name}.tmp" "deps-build_SOFA.tmp"
+        get-lib-deps-assoc "$plugin" "postinstall_deps_plugin_${plugin_name}.tmp" "postinstall_deps_SOFA-build.tmp"
     fi
 done
 echo "  Done."
 
 
 # Copy libs
-for deps_file in deps_*.tmp; do
-    target="$(echo $deps_file | sed -e 's/deps_\(.*\).tmp/\1/g')"
-    if [[ "$target" == "SOFA" ]]; then
-        target="lib"
-    else
-        target="plugins/$target/lib"
+for deps_file in postinstall_deps_SOFA.tmp postinstall_deps_plugin_*.tmp; do
+    target="lib"
+    if [[ "$deps_file" == "postinstall_deps_plugin_"* ]]; then
+        plugin_name="$(echo $deps_file | sed -e 's/postinstall_deps_plugin_\(.*\).tmp/\1/g')"
+        target="plugins/$plugin_name/lib"
     fi
     echo_debug "-------------------------------"
     echo_debug "target = $target"
@@ -177,6 +176,11 @@ for deps_file in deps_*.tmp; do
         group_dirname=""
         for lib_name in $lib_names; do
             echo_debug "    lib_name = $lib_name"
+            if [[ "$target" != "lib" ]] && [[ -e "$INSTALL_DIR/lib/$lib_name" ]]; then
+                # do not copy into plugins the libs that are already in SOFA/lib
+                echo_debug "    $lib_name is already in $INSTALL_DIR/lib"
+                continue
+            fi
             # take first path found for the dep lib (paths are sorted so "/a/b/c" comes before "not found")
             if [[ "$group" == "libQt" ]] && [ -e "$QT_LIB_DIR/$lib_name" ]; then
                 lib_path="$QT_LIB_DIR/$lib_name"
@@ -228,8 +232,8 @@ if [ -x "$(command -v patchelf)" ]; then
 else
     echo "    WARNING: patchelf command not found, RPATH fixing skipped."
 fi
-echo "  Done."
+echo "  Fixing RPATH: done."
 
-echo "Done."
-rm -f "deps_*.tmp"
+echo "Fixing up libs: done."
+rm -f postinstall_deps_*
 exit 0
