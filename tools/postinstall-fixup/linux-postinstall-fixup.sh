@@ -75,6 +75,18 @@ if [ -d "$QT_DIR" ]; then
     fi
 fi
 
+# Generate RCC file for dynamic qt.conf loading
+# see SofaPython3/bindings/SofaGui/src/SofaPython3/SofaGui/Module_SofaGui.cpp
+if [ -e "$QT_DATA_DIR/bin/rcc" ] && [ -e "$INSTALL_DIR/bin/qt.conf" ]; then
+    echo '<!DOCTYPE RCC>
+          <RCC version="1.0">
+            <qresource prefix="/qt/etc/">
+              <file>qt.conf</file>
+            </qresource>
+          </RCC>' > "$INSTALL_DIR/bin/qt.conf.qrc"
+    $QT_DATA_DIR/bin/rcc "$INSTALL_DIR/bin/qt.conf.qrc" -binary -o "$INSTALL_DIR/bin/qt.conf.rcc"
+fi
+
 echo_debug() {
     if [ -n "$DEBUG" ] && [ "$DEBUG" -gt 0 ]; then
         echo $*
